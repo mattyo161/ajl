@@ -1,0 +1,5 @@
+[tools]
+aws = "latest"
+uv = "latest"
+yq = "latest"
+jq = "latest"
