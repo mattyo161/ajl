@@ -1,0 +1,13 @@
+[project]
+name = "ajl"
+version = "0.1.0"
+description = "AWS JSON Line a streaming cli for the AWS API"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "boto3>=1.40.12",
+    "colorama>=0.4.6",
+    "joblib>=1.5.1",
+    "ruff>=0.12.9",
+    "tqdm>=4.67.1",
+]
