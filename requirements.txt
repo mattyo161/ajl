@@ -1,0 +1,7 @@
+colorama
+tqdm
+joblib
+orjson
+jsonlines
+case-converter
+pyyaml
