@@ -1,0 +1,3089 @@
+{
+  "metadata": {
+    "apiVersion": "2012-08-10",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "dynamodb",
+    "jsonVersion": "1.0",
+    "protocol": "json",
+    "protocols": [
+      "json"
+    ],
+    "serviceAbbreviation": "DynamoDB",
+    "serviceFullName": "Amazon DynamoDB",
+    "serviceId": "DynamoDB",
+    "signatureVersion": "v4",
+    "targetPrefix": "DynamoDB_20120810",
+    "uid": "dynamodb-2012-08-10"
+  },
+  "name": "dynamodb",
+  "operations": {
+    "BatchExecuteStatement": {
+      "input": {
+        "markers": [],
+        "members": {
+          "ReturnConsumedCapacity": {
+            "name": "ReturnConsumedCapacity",
+            "shape_name": "ReturnConsumedCapacity",
+            "type": "string"
+          },
+          "Statements": {
+            "name": "Statements",
+            "shape_name": "PartiQLBatchRequest",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Statements"
+        ]
+      },
+      "name": "BatchExecuteStatement",
+      "output": {
+        "lists": {
+          "ConsumedCapacity": {
+            "all_fields": [
+              "CapacityUnits",
+              "GlobalSecondaryIndexes",
+              "LocalSecondaryIndexes",
+              "ReadCapacityUnits",
+              "Table",
+              "TableName",
+              "WriteCapacityUnits"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": [
+              "TableName"
+            ]
+          },
+          "Responses": {
+            "all_fields": [
+              "Error",
+              "Item",
+              "TableName"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": [
+              "TableName"
+            ]
+          }
+        },
+        "markers": [],
+        "members": {
+          "ConsumedCapacity": {
+            "name": "ConsumedCapacity",
+            "shape_name": "ConsumedCapacityMultiple",
+            "type": "list"
+          },
+          "Responses": {
+            "name": "Responses",
+            "shape_name": "PartiQLBatchResponse",
+            "type": "list"
+          }
+        }
+      }
+    },
+    "BatchGetItem": {
+      "input": {
+        "markers": [],
+        "members": {
+          "RequestItems": {
+            "name": "RequestItems",
+            "shape_name": "BatchGetRequestMap",
+            "type": "map"
+          },
+          "ReturnConsumedCapacity": {
+            "name": "ReturnConsumedCapacity",
+            "shape_name": "ReturnConsumedCapacity",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RequestItems"
+        ]
+      },
+      "name": "BatchGetItem",
+      "output": {
+        "lists": {
+          "ConsumedCapacity": {
+            "all_fields": [
+              "CapacityUnits",
+              "GlobalSecondaryIndexes",
+              "LocalSecondaryIndexes",
+              "ReadCapacityUnits",
+              "Table",
+              "TableName",
+              "WriteCapacityUnits"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": [
+              "TableName"
+            ]
+          }
+        },
+        "markers": [],
+        "members": {
+          "ConsumedCapacity": {
+            "name": "ConsumedCapacity",
+            "shape_name": "ConsumedCapacityMultiple",
+            "type": "list"
+          },
+          "Responses": {
+            "name": "Responses",
+            "shape_name": "BatchGetResponseMap",
+            "type": "map"
+          },
+          "UnprocessedKeys": {
+            "name": "UnprocessedKeys",
+            "shape_name": "BatchGetRequestMap",
+            "type": "map"
+          }
+        }
+      }
+    },
+    "BatchWriteItem": {
+      "input": {
+        "markers": [],
+        "members": {
+          "RequestItems": {
+            "name": "RequestItems",
+            "shape_name": "BatchWriteItemRequestMap",
+            "type": "map"
+          },
+          "ReturnConsumedCapacity": {
+            "name": "ReturnConsumedCapacity",
+            "shape_name": "ReturnConsumedCapacity",
+            "type": "string"
+          },
+          "ReturnItemCollectionMetrics": {
+            "name": "ReturnItemCollectionMetrics",
+            "shape_name": "ReturnItemCollectionMetrics",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RequestItems"
+        ]
+      },
+      "name": "BatchWriteItem",
+      "output": {
+        "lists": {
+          "ConsumedCapacity": {
+            "all_fields": [
+              "CapacityUnits",
+              "GlobalSecondaryIndexes",
+              "LocalSecondaryIndexes",
+              "ReadCapacityUnits",
+              "Table",
+              "TableName",
+              "WriteCapacityUnits"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": [
+              "TableName"
+            ]
+          }
+        },
+        "markers": [],
+        "members": {
+          "ConsumedCapacity": {
+            "name": "ConsumedCapacity",
+            "shape_name": "ConsumedCapacityMultiple",
+            "type": "list"
+          },
+          "ItemCollectionMetrics": {
+            "name": "ItemCollectionMetrics",
+            "shape_name": "ItemCollectionMetricsPerTable",
+            "type": "map"
+          },
+          "UnprocessedItems": {
+            "name": "UnprocessedItems",
+            "shape_name": "BatchWriteItemRequestMap",
+            "type": "map"
+          }
+        }
+      }
+    },
+    "CreateBackup": {
+      "input": {
+        "markers": [],
+        "members": {
+          "BackupName": {
+            "name": "BackupName",
+            "shape_name": "BackupName",
+            "type": "string"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableName",
+          "BackupName"
+        ]
+      },
+      "name": "CreateBackup",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "BackupDetails": {
+            "name": "BackupDetails",
+            "shape_name": "BackupDetails",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "CreateGlobalTable": {
+      "input": {
+        "markers": [],
+        "members": {
+          "GlobalTableName": {
+            "name": "GlobalTableName",
+            "shape_name": "TableName",
+            "type": "string"
+          },
+          "ReplicationGroup": {
+            "name": "ReplicationGroup",
+            "shape_name": "ReplicaList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "GlobalTableName",
+          "ReplicationGroup"
+        ]
+      },
+      "name": "CreateGlobalTable",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "GlobalTableDescription": {
+            "name": "GlobalTableDescription",
+            "shape_name": "GlobalTableDescription",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "CreateTable": {
+      "input": {
+        "markers": [],
+        "members": {
+          "AttributeDefinitions": {
+            "name": "AttributeDefinitions",
+            "shape_name": "AttributeDefinitions",
+            "type": "list"
+          },
+          "BillingMode": {
+            "name": "BillingMode",
+            "shape_name": "BillingMode",
+            "type": "string"
+          },
+          "DeletionProtectionEnabled": {
+            "name": "DeletionProtectionEnabled",
+            "shape_name": "DeletionProtectionEnabled",
+            "type": "boolean"
+          },
+          "GlobalSecondaryIndexes": {
+            "name": "GlobalSecondaryIndexes",
+            "shape_name": "GlobalSecondaryIndexList",
+            "type": "list"
+          },
+          "KeySchema": {
+            "name": "KeySchema",
+            "shape_name": "KeySchema",
+            "type": "list"
+          },
+          "LocalSecondaryIndexes": {
+            "name": "LocalSecondaryIndexes",
+            "shape_name": "LocalSecondaryIndexList",
+            "type": "list"
+          },
+          "OnDemandThroughput": {
+            "name": "OnDemandThroughput",
+            "shape_name": "OnDemandThroughput",
+            "type": "structure"
+          },
+          "ProvisionedThroughput": {
+            "name": "ProvisionedThroughput",
+            "shape_name": "ProvisionedThroughput",
+            "type": "structure"
+          },
+          "ResourcePolicy": {
+            "name": "ResourcePolicy",
+            "shape_name": "ResourcePolicy",
+            "type": "string"
+          },
+          "SSESpecification": {
+            "name": "SSESpecification",
+            "shape_name": "SSESpecification",
+            "type": "structure"
+          },
+          "StreamSpecification": {
+            "name": "StreamSpecification",
+            "shape_name": "StreamSpecification",
+            "type": "structure"
+          },
+          "TableClass": {
+            "name": "TableClass",
+            "shape_name": "TableClass",
+            "type": "string"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "AttributeDefinitions",
+          "TableName",
+          "KeySchema"
+        ]
+      },
+      "name": "CreateTable",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "TableDescription": {
+            "name": "TableDescription",
+            "shape_name": "TableDescription",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "DeleteBackup": {
+      "input": {
+        "markers": [],
+        "members": {
+          "BackupArn": {
+            "name": "BackupArn",
+            "shape_name": "BackupArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupArn"
+        ]
+      },
+      "name": "DeleteBackup",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "BackupDescription": {
+            "name": "BackupDescription",
+            "shape_name": "BackupDescription",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "DeleteItem": {
+      "input": {
+        "markers": [],
+        "members": {
+          "ConditionExpression": {
+            "name": "ConditionExpression",
+            "shape_name": "ConditionExpression",
+            "type": "string"
+          },
+          "ConditionalOperator": {
+            "name": "ConditionalOperator",
+            "shape_name": "ConditionalOperator",
+            "type": "string"
+          },
+          "Expected": {
+            "name": "Expected",
+            "shape_name": "ExpectedAttributeMap",
+            "type": "map"
+          },
+          "ExpressionAttributeNames": {
+            "name": "ExpressionAttributeNames",
+            "shape_name": "ExpressionAttributeNameMap",
+            "type": "map"
+          },
+          "ExpressionAttributeValues": {
+            "name": "ExpressionAttributeValues",
+            "shape_name": "ExpressionAttributeValueMap",
+            "type": "map"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "Key",
+            "type": "map"
+          },
+          "ReturnConsumedCapacity": {
+            "name": "ReturnConsumedCapacity",
+            "shape_name": "ReturnConsumedCapacity",
+            "type": "string"
+          },
+          "ReturnItemCollectionMetrics": {
+            "name": "ReturnItemCollectionMetrics",
+            "shape_name": "ReturnItemCollectionMetrics",
+            "type": "string"
+          },
+          "ReturnValues": {
+            "name": "ReturnValues",
+            "shape_name": "ReturnValue",
+            "type": "string"
+          },
+          "ReturnValuesOnConditionCheckFailure": {
+            "name": "ReturnValuesOnConditionCheckFailure",
+            "shape_name": "ReturnValuesOnConditionCheckFailure",
+            "type": "string"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableName",
+          "Key"
+        ]
+      },
+      "name": "DeleteItem",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "AttributeMap",
+            "type": "map"
+          },
+          "ConsumedCapacity": {
+            "name": "ConsumedCapacity",
+            "shape_name": "ConsumedCapacity",
+            "type": "structure"
+          },
+          "ItemCollectionMetrics": {
+            "name": "ItemCollectionMetrics",
+            "shape_name": "ItemCollectionMetrics",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "DeleteResourcePolicy": {
+      "input": {
+        "markers": [],
+        "members": {
+          "ExpectedRevisionId": {
+            "name": "ExpectedRevisionId",
+            "shape_name": "PolicyRevisionId",
+            "type": "string"
+          },
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArnString",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      },
+      "name": "DeleteResourcePolicy",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "RevisionId": {
+            "name": "RevisionId",
+            "shape_name": "PolicyRevisionId",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DeleteTable": {
+      "input": {
+        "markers": [],
+        "members": {
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableName"
+        ]
+      },
+      "name": "DeleteTable",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "TableDescription": {
+            "name": "TableDescription",
+            "shape_name": "TableDescription",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "DescribeBackup": {
+      "input": {
+        "markers": [],
+        "members": {
+          "BackupArn": {
+            "name": "BackupArn",
+            "shape_name": "BackupArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupArn"
+        ]
+      },
+      "name": "DescribeBackup",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "BackupDescription": {
+            "name": "BackupDescription",
+            "shape_name": "BackupDescription",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "DescribeContinuousBackups": {
+      "input": {
+        "markers": [],
+        "members": {
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableName"
+        ]
+      },
+      "name": "DescribeContinuousBackups",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "ContinuousBackupsDescription": {
+            "name": "ContinuousBackupsDescription",
+            "shape_name": "ContinuousBackupsDescription",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "DescribeContributorInsights": {
+      "input": {
+        "markers": [],
+        "members": {
+          "IndexName": {
+            "name": "IndexName",
+            "shape_name": "IndexName",
+            "type": "string"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableName"
+        ]
+      },
+      "name": "DescribeContributorInsights",
+      "output": {
+        "lists": {
+          "ContributorInsightsRuleList": {
+            "all_fields": [],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [],
+        "members": {
+          "ContributorInsightsRuleList": {
+            "name": "ContributorInsightsRuleList",
+            "shape_name": "ContributorInsightsRuleList",
+            "type": "list"
+          },
+          "ContributorInsightsStatus": {
+            "name": "ContributorInsightsStatus",
+            "shape_name": "ContributorInsightsStatus",
+            "type": "string"
+          },
+          "FailureException": {
+            "name": "FailureException",
+            "shape_name": "FailureException",
+            "type": "structure"
+          },
+          "IndexName": {
+            "name": "IndexName",
+            "shape_name": "IndexName",
+            "type": "string"
+          },
+          "LastUpdateDateTime": {
+            "name": "LastUpdateDateTime",
+            "shape_name": "LastUpdateDateTime",
+            "type": "timestamp"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableName",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DescribeEndpoints": {
+      "input": {
+        "markers": [],
+        "members": {},
+        "required": null
+      },
+      "name": "DescribeEndpoints",
+      "output": {
+        "lists": {
+          "Endpoints": {
+            "all_fields": [
+              "Address",
+              "CachePeriodInMinutes"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [],
+        "members": {
+          "Endpoints": {
+            "name": "Endpoints",
+            "shape_name": "Endpoints",
+            "type": "list"
+          }
+        }
+      }
+    },
+    "DescribeExport": {
+      "input": {
+        "markers": [],
+        "members": {
+          "ExportArn": {
+            "name": "ExportArn",
+            "shape_name": "ExportArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ExportArn"
+        ]
+      },
+      "name": "DescribeExport",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "ExportDescription": {
+            "name": "ExportDescription",
+            "shape_name": "ExportDescription",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "DescribeGlobalTable": {
+      "input": {
+        "markers": [],
+        "members": {
+          "GlobalTableName": {
+            "name": "GlobalTableName",
+            "shape_name": "TableName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GlobalTableName"
+        ]
+      },
+      "name": "DescribeGlobalTable",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "GlobalTableDescription": {
+            "name": "GlobalTableDescription",
+            "shape_name": "GlobalTableDescription",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "DescribeGlobalTableSettings": {
+      "input": {
+        "markers": [],
+        "members": {
+          "GlobalTableName": {
+            "name": "GlobalTableName",
+            "shape_name": "TableName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GlobalTableName"
+        ]
+      },
+      "name": "DescribeGlobalTableSettings",
+      "output": {
+        "lists": {
+          "ReplicaSettings": {
+            "all_fields": [
+              "RegionName",
+              "ReplicaBillingModeSummary",
+              "ReplicaGlobalSecondaryIndexSettings",
+              "ReplicaProvisionedReadCapacityAutoScalingSettings",
+              "ReplicaProvisionedReadCapacityUnits",
+              "ReplicaProvisionedWriteCapacityAutoScalingSettings",
+              "ReplicaProvisionedWriteCapacityUnits",
+              "ReplicaStatus",
+              "ReplicaTableClassSummary"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": [
+              "RegionName"
+            ]
+          }
+        },
+        "markers": [],
+        "members": {
+          "GlobalTableName": {
+            "name": "GlobalTableName",
+            "shape_name": "TableName",
+            "type": "string"
+          },
+          "ReplicaSettings": {
+            "name": "ReplicaSettings",
+            "shape_name": "ReplicaSettingsDescriptionList",
+            "type": "list"
+          }
+        }
+      }
+    },
+    "DescribeImport": {
+      "input": {
+        "markers": [],
+        "members": {
+          "ImportArn": {
+            "name": "ImportArn",
+            "shape_name": "ImportArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ImportArn"
+        ]
+      },
+      "name": "DescribeImport",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "ImportTableDescription": {
+            "name": "ImportTableDescription",
+            "shape_name": "ImportTableDescription",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "DescribeKinesisStreamingDestination": {
+      "input": {
+        "markers": [],
+        "members": {
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableName"
+        ]
+      },
+      "name": "DescribeKinesisStreamingDestination",
+      "output": {
+        "lists": {
+          "KinesisDataStreamDestinations": {
+            "all_fields": [
+              "ApproximateCreationDateTimePrecision",
+              "DestinationStatus",
+              "DestinationStatusDescription",
+              "StreamArn"
+            ],
+            "arn_fields": [
+              "StreamArn"
+            ],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [],
+        "members": {
+          "KinesisDataStreamDestinations": {
+            "name": "KinesisDataStreamDestinations",
+            "shape_name": "KinesisDataStreamDestinations",
+            "type": "list"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableName",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DescribeLimits": {
+      "input": {
+        "markers": [],
+        "members": {},
+        "required": null
+      },
+      "name": "DescribeLimits",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "AccountMaxReadCapacityUnits": {
+            "name": "AccountMaxReadCapacityUnits",
+            "shape_name": "PositiveLongObject",
+            "type": "long"
+          },
+          "AccountMaxWriteCapacityUnits": {
+            "name": "AccountMaxWriteCapacityUnits",
+            "shape_name": "PositiveLongObject",
+            "type": "long"
+          },
+          "TableMaxReadCapacityUnits": {
+            "name": "TableMaxReadCapacityUnits",
+            "shape_name": "PositiveLongObject",
+            "type": "long"
+          },
+          "TableMaxWriteCapacityUnits": {
+            "name": "TableMaxWriteCapacityUnits",
+            "shape_name": "PositiveLongObject",
+            "type": "long"
+          }
+        }
+      }
+    },
+    "DescribeTable": {
+      "input": {
+        "markers": [],
+        "members": {
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableName"
+        ]
+      },
+      "name": "DescribeTable",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "Table": {
+            "name": "Table",
+            "shape_name": "TableDescription",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "DescribeTableReplicaAutoScaling": {
+      "input": {
+        "markers": [],
+        "members": {
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableName"
+        ]
+      },
+      "name": "DescribeTableReplicaAutoScaling",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "TableAutoScalingDescription": {
+            "name": "TableAutoScalingDescription",
+            "shape_name": "TableAutoScalingDescription",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "DescribeTimeToLive": {
+      "input": {
+        "markers": [],
+        "members": {
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableName"
+        ]
+      },
+      "name": "DescribeTimeToLive",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "TimeToLiveDescription": {
+            "name": "TimeToLiveDescription",
+            "shape_name": "TimeToLiveDescription",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "DisableKinesisStreamingDestination": {
+      "input": {
+        "markers": [],
+        "members": {
+          "EnableKinesisStreamingConfiguration": {
+            "name": "EnableKinesisStreamingConfiguration",
+            "shape_name": "EnableKinesisStreamingConfiguration",
+            "type": "structure"
+          },
+          "StreamArn": {
+            "name": "StreamArn",
+            "shape_name": "StreamArn",
+            "type": "string"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableName",
+          "StreamArn"
+        ]
+      },
+      "name": "DisableKinesisStreamingDestination",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "DestinationStatus": {
+            "name": "DestinationStatus",
+            "shape_name": "DestinationStatus",
+            "type": "string"
+          },
+          "EnableKinesisStreamingConfiguration": {
+            "name": "EnableKinesisStreamingConfiguration",
+            "shape_name": "EnableKinesisStreamingConfiguration",
+            "type": "structure"
+          },
+          "StreamArn": {
+            "name": "StreamArn",
+            "shape_name": "StreamArn",
+            "type": "string"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableName",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EnableKinesisStreamingDestination": {
+      "input": {
+        "markers": [],
+        "members": {
+          "EnableKinesisStreamingConfiguration": {
+            "name": "EnableKinesisStreamingConfiguration",
+            "shape_name": "EnableKinesisStreamingConfiguration",
+            "type": "structure"
+          },
+          "StreamArn": {
+            "name": "StreamArn",
+            "shape_name": "StreamArn",
+            "type": "string"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableName",
+          "StreamArn"
+        ]
+      },
+      "name": "EnableKinesisStreamingDestination",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "DestinationStatus": {
+            "name": "DestinationStatus",
+            "shape_name": "DestinationStatus",
+            "type": "string"
+          },
+          "EnableKinesisStreamingConfiguration": {
+            "name": "EnableKinesisStreamingConfiguration",
+            "shape_name": "EnableKinesisStreamingConfiguration",
+            "type": "structure"
+          },
+          "StreamArn": {
+            "name": "StreamArn",
+            "shape_name": "StreamArn",
+            "type": "string"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableName",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ExecuteStatement": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "ConsistentRead": {
+            "name": "ConsistentRead",
+            "shape_name": "ConsistentRead",
+            "type": "boolean"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "PositiveIntegerObject",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PartiQLNextToken",
+            "type": "string"
+          },
+          "Parameters": {
+            "name": "Parameters",
+            "shape_name": "PreparedStatementParameters",
+            "type": "list"
+          },
+          "ReturnConsumedCapacity": {
+            "name": "ReturnConsumedCapacity",
+            "shape_name": "ReturnConsumedCapacity",
+            "type": "string"
+          },
+          "ReturnValuesOnConditionCheckFailure": {
+            "name": "ReturnValuesOnConditionCheckFailure",
+            "shape_name": "ReturnValuesOnConditionCheckFailure",
+            "type": "string"
+          },
+          "Statement": {
+            "name": "Statement",
+            "shape_name": "PartiQLStatement",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Statement"
+        ]
+      },
+      "name": "ExecuteStatement",
+      "output": {
+        "lists": {
+          "Items": {
+            "all_fields": [],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "ConsumedCapacity": {
+            "name": "ConsumedCapacity",
+            "shape_name": "ConsumedCapacity",
+            "type": "structure"
+          },
+          "Items": {
+            "name": "Items",
+            "shape_name": "ItemList",
+            "type": "list"
+          },
+          "LastEvaluatedKey": {
+            "name": "LastEvaluatedKey",
+            "shape_name": "Key",
+            "type": "map"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PartiQLNextToken",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ExecuteTransaction": {
+      "input": {
+        "markers": [
+          "ClientRequestToken"
+        ],
+        "members": {
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "ReturnConsumedCapacity": {
+            "name": "ReturnConsumedCapacity",
+            "shape_name": "ReturnConsumedCapacity",
+            "type": "string"
+          },
+          "TransactStatements": {
+            "name": "TransactStatements",
+            "shape_name": "ParameterizedStatements",
+            "type": "list"
+          }
+        },
+        "required": [
+          "TransactStatements"
+        ]
+      },
+      "name": "ExecuteTransaction",
+      "output": {
+        "lists": {
+          "ConsumedCapacity": {
+            "all_fields": [
+              "CapacityUnits",
+              "GlobalSecondaryIndexes",
+              "LocalSecondaryIndexes",
+              "ReadCapacityUnits",
+              "Table",
+              "TableName",
+              "WriteCapacityUnits"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": [
+              "TableName"
+            ]
+          },
+          "Responses": {
+            "all_fields": [
+              "Item"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [],
+        "members": {
+          "ConsumedCapacity": {
+            "name": "ConsumedCapacity",
+            "shape_name": "ConsumedCapacityMultiple",
+            "type": "list"
+          },
+          "Responses": {
+            "name": "Responses",
+            "shape_name": "ItemResponseList",
+            "type": "list"
+          }
+        }
+      }
+    },
+    "ExportTableToPointInTime": {
+      "input": {
+        "markers": [
+          "ClientToken"
+        ],
+        "members": {
+          "ClientToken": {
+            "name": "ClientToken",
+            "shape_name": "ClientToken",
+            "type": "string"
+          },
+          "ExportFormat": {
+            "name": "ExportFormat",
+            "shape_name": "ExportFormat",
+            "type": "string"
+          },
+          "ExportTime": {
+            "name": "ExportTime",
+            "shape_name": "ExportTime",
+            "type": "timestamp"
+          },
+          "ExportType": {
+            "name": "ExportType",
+            "shape_name": "ExportType",
+            "type": "string"
+          },
+          "IncrementalExportSpecification": {
+            "name": "IncrementalExportSpecification",
+            "shape_name": "IncrementalExportSpecification",
+            "type": "structure"
+          },
+          "S3Bucket": {
+            "name": "S3Bucket",
+            "shape_name": "S3Bucket",
+            "type": "string"
+          },
+          "S3BucketOwner": {
+            "name": "S3BucketOwner",
+            "shape_name": "S3BucketOwner",
+            "type": "string"
+          },
+          "S3Prefix": {
+            "name": "S3Prefix",
+            "shape_name": "S3Prefix",
+            "type": "string"
+          },
+          "S3SseAlgorithm": {
+            "name": "S3SseAlgorithm",
+            "shape_name": "S3SseAlgorithm",
+            "type": "string"
+          },
+          "S3SseKmsKeyId": {
+            "name": "S3SseKmsKeyId",
+            "shape_name": "S3SseKmsKeyId",
+            "type": "string"
+          },
+          "TableArn": {
+            "name": "TableArn",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableArn",
+          "S3Bucket"
+        ]
+      },
+      "name": "ExportTableToPointInTime",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "ExportDescription": {
+            "name": "ExportDescription",
+            "shape_name": "ExportDescription",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "GetItem": {
+      "input": {
+        "markers": [],
+        "members": {
+          "AttributesToGet": {
+            "name": "AttributesToGet",
+            "shape_name": "AttributeNameList",
+            "type": "list"
+          },
+          "ConsistentRead": {
+            "name": "ConsistentRead",
+            "shape_name": "ConsistentRead",
+            "type": "boolean"
+          },
+          "ExpressionAttributeNames": {
+            "name": "ExpressionAttributeNames",
+            "shape_name": "ExpressionAttributeNameMap",
+            "type": "map"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "Key",
+            "type": "map"
+          },
+          "ProjectionExpression": {
+            "name": "ProjectionExpression",
+            "shape_name": "ProjectionExpression",
+            "type": "string"
+          },
+          "ReturnConsumedCapacity": {
+            "name": "ReturnConsumedCapacity",
+            "shape_name": "ReturnConsumedCapacity",
+            "type": "string"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableName",
+          "Key"
+        ]
+      },
+      "name": "GetItem",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "ConsumedCapacity": {
+            "name": "ConsumedCapacity",
+            "shape_name": "ConsumedCapacity",
+            "type": "structure"
+          },
+          "Item": {
+            "name": "Item",
+            "shape_name": "AttributeMap",
+            "type": "map"
+          }
+        }
+      }
+    },
+    "GetResourcePolicy": {
+      "input": {
+        "markers": [],
+        "members": {
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArnString",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      },
+      "name": "GetResourcePolicy",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "ResourcePolicy",
+            "type": "string"
+          },
+          "RevisionId": {
+            "name": "RevisionId",
+            "shape_name": "PolicyRevisionId",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ImportTable": {
+      "input": {
+        "markers": [
+          "ClientToken"
+        ],
+        "members": {
+          "ClientToken": {
+            "name": "ClientToken",
+            "shape_name": "ClientToken",
+            "type": "string"
+          },
+          "InputCompressionType": {
+            "name": "InputCompressionType",
+            "shape_name": "InputCompressionType",
+            "type": "string"
+          },
+          "InputFormat": {
+            "name": "InputFormat",
+            "shape_name": "InputFormat",
+            "type": "string"
+          },
+          "InputFormatOptions": {
+            "name": "InputFormatOptions",
+            "shape_name": "InputFormatOptions",
+            "type": "structure"
+          },
+          "S3BucketSource": {
+            "name": "S3BucketSource",
+            "shape_name": "S3BucketSource",
+            "type": "structure"
+          },
+          "TableCreationParameters": {
+            "name": "TableCreationParameters",
+            "shape_name": "TableCreationParameters",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "S3BucketSource",
+          "InputFormat",
+          "TableCreationParameters"
+        ]
+      },
+      "name": "ImportTable",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "ImportTableDescription": {
+            "name": "ImportTableDescription",
+            "shape_name": "ImportTableDescription",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "ListBackups": {
+      "input": {
+        "markers": [],
+        "members": {
+          "BackupType": {
+            "name": "BackupType",
+            "shape_name": "BackupTypeFilter",
+            "type": "string"
+          },
+          "ExclusiveStartBackupArn": {
+            "name": "ExclusiveStartBackupArn",
+            "shape_name": "BackupArn",
+            "type": "string"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "BackupsInputLimit",
+            "type": "integer"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          },
+          "TimeRangeLowerBound": {
+            "name": "TimeRangeLowerBound",
+            "shape_name": "TimeRangeLowerBound",
+            "type": "timestamp"
+          },
+          "TimeRangeUpperBound": {
+            "name": "TimeRangeUpperBound",
+            "shape_name": "TimeRangeUpperBound",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      },
+      "name": "ListBackups",
+      "output": {
+        "lists": {
+          "BackupSummaries": {
+            "all_fields": [
+              "BackupArn",
+              "BackupCreationDateTime",
+              "BackupExpiryDateTime",
+              "BackupName",
+              "BackupSizeBytes",
+              "BackupStatus",
+              "BackupType",
+              "TableArn",
+              "TableId",
+              "TableName"
+            ],
+            "arn_fields": [
+              "BackupArn",
+              "TableArn"
+            ],
+            "id_fields": [
+              "TableId"
+            ],
+            "name_fields": [
+              "BackupName",
+              "TableName"
+            ]
+          }
+        },
+        "markers": [],
+        "members": {
+          "BackupSummaries": {
+            "name": "BackupSummaries",
+            "shape_name": "BackupSummaries",
+            "type": "list"
+          },
+          "LastEvaluatedBackupArn": {
+            "name": "LastEvaluatedBackupArn",
+            "shape_name": "BackupArn",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ListContributorInsights": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "ListContributorInsightsLimit",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextTokenString",
+            "type": "string"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListContributorInsights",
+      "output": {
+        "lists": {
+          "ContributorInsightsSummaries": {
+            "all_fields": [
+              "ContributorInsightsStatus",
+              "IndexName",
+              "TableName"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": [
+              "IndexName",
+              "TableName"
+            ]
+          }
+        },
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "ContributorInsightsSummaries": {
+            "name": "ContributorInsightsSummaries",
+            "shape_name": "ContributorInsightsSummaries",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextTokenString",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ListExports": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "ListExportsMaxLimit",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "ExportNextToken",
+            "type": "string"
+          },
+          "TableArn": {
+            "name": "TableArn",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListExports",
+      "output": {
+        "lists": {
+          "ExportSummaries": {
+            "all_fields": [
+              "ExportArn",
+              "ExportStatus",
+              "ExportType"
+            ],
+            "arn_fields": [
+              "ExportArn"
+            ],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "ExportSummaries": {
+            "name": "ExportSummaries",
+            "shape_name": "ExportSummaries",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "ExportNextToken",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ListGlobalTables": {
+      "input": {
+        "markers": [],
+        "members": {
+          "ExclusiveStartGlobalTableName": {
+            "name": "ExclusiveStartGlobalTableName",
+            "shape_name": "TableName",
+            "type": "string"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "PositiveIntegerObject",
+            "type": "integer"
+          },
+          "RegionName": {
+            "name": "RegionName",
+            "shape_name": "RegionName",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListGlobalTables",
+      "output": {
+        "lists": {
+          "GlobalTables": {
+            "all_fields": [
+              "GlobalTableName",
+              "ReplicationGroup"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": [
+              "GlobalTableName"
+            ]
+          }
+        },
+        "markers": [],
+        "members": {
+          "GlobalTables": {
+            "name": "GlobalTables",
+            "shape_name": "GlobalTableList",
+            "type": "list"
+          },
+          "LastEvaluatedGlobalTableName": {
+            "name": "LastEvaluatedGlobalTableName",
+            "shape_name": "TableName",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ListImports": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "ImportNextToken",
+            "type": "string"
+          },
+          "PageSize": {
+            "name": "PageSize",
+            "shape_name": "ListImportsMaxLimit",
+            "type": "integer"
+          },
+          "TableArn": {
+            "name": "TableArn",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListImports",
+      "output": {
+        "lists": {
+          "ImportSummaryList": {
+            "all_fields": [
+              "CloudWatchLogGroupArn",
+              "EndTime",
+              "ImportArn",
+              "ImportStatus",
+              "InputFormat",
+              "S3BucketSource",
+              "StartTime",
+              "TableArn"
+            ],
+            "arn_fields": [
+              "CloudWatchLogGroupArn",
+              "ImportArn",
+              "TableArn"
+            ],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "ImportSummaryList": {
+            "name": "ImportSummaryList",
+            "shape_name": "ImportSummaryList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "ImportNextToken",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ListTables": {
+      "input": {
+        "markers": [],
+        "members": {
+          "ExclusiveStartTableName": {
+            "name": "ExclusiveStartTableName",
+            "shape_name": "TableName",
+            "type": "string"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "ListTablesInputLimit",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "ListTables",
+      "output": {
+        "lists": {
+          "TableNames": {
+            "all_fields": [],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [],
+        "members": {
+          "LastEvaluatedTableName": {
+            "name": "LastEvaluatedTableName",
+            "shape_name": "TableName",
+            "type": "string"
+          },
+          "TableNames": {
+            "name": "TableNames",
+            "shape_name": "TableNameList",
+            "type": "list"
+          }
+        }
+      }
+    },
+    "ListTagsOfResource": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextTokenString",
+            "type": "string"
+          },
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArnString",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      },
+      "name": "ListTagsOfResource",
+      "output": {
+        "lists": {
+          "Tags": {
+            "all_fields": [
+              "Key",
+              "Value"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextTokenString",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        }
+      }
+    },
+    "PutItem": {
+      "input": {
+        "markers": [],
+        "members": {
+          "ConditionExpression": {
+            "name": "ConditionExpression",
+            "shape_name": "ConditionExpression",
+            "type": "string"
+          },
+          "ConditionalOperator": {
+            "name": "ConditionalOperator",
+            "shape_name": "ConditionalOperator",
+            "type": "string"
+          },
+          "Expected": {
+            "name": "Expected",
+            "shape_name": "ExpectedAttributeMap",
+            "type": "map"
+          },
+          "ExpressionAttributeNames": {
+            "name": "ExpressionAttributeNames",
+            "shape_name": "ExpressionAttributeNameMap",
+            "type": "map"
+          },
+          "ExpressionAttributeValues": {
+            "name": "ExpressionAttributeValues",
+            "shape_name": "ExpressionAttributeValueMap",
+            "type": "map"
+          },
+          "Item": {
+            "name": "Item",
+            "shape_name": "PutItemInputAttributeMap",
+            "type": "map"
+          },
+          "ReturnConsumedCapacity": {
+            "name": "ReturnConsumedCapacity",
+            "shape_name": "ReturnConsumedCapacity",
+            "type": "string"
+          },
+          "ReturnItemCollectionMetrics": {
+            "name": "ReturnItemCollectionMetrics",
+            "shape_name": "ReturnItemCollectionMetrics",
+            "type": "string"
+          },
+          "ReturnValues": {
+            "name": "ReturnValues",
+            "shape_name": "ReturnValue",
+            "type": "string"
+          },
+          "ReturnValuesOnConditionCheckFailure": {
+            "name": "ReturnValuesOnConditionCheckFailure",
+            "shape_name": "ReturnValuesOnConditionCheckFailure",
+            "type": "string"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableName",
+          "Item"
+        ]
+      },
+      "name": "PutItem",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "AttributeMap",
+            "type": "map"
+          },
+          "ConsumedCapacity": {
+            "name": "ConsumedCapacity",
+            "shape_name": "ConsumedCapacity",
+            "type": "structure"
+          },
+          "ItemCollectionMetrics": {
+            "name": "ItemCollectionMetrics",
+            "shape_name": "ItemCollectionMetrics",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "PutResourcePolicy": {
+      "input": {
+        "markers": [],
+        "members": {
+          "ConfirmRemoveSelfResourceAccess": {
+            "name": "ConfirmRemoveSelfResourceAccess",
+            "shape_name": "ConfirmRemoveSelfResourceAccess",
+            "type": "boolean"
+          },
+          "ExpectedRevisionId": {
+            "name": "ExpectedRevisionId",
+            "shape_name": "PolicyRevisionId",
+            "type": "string"
+          },
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "ResourcePolicy",
+            "type": "string"
+          },
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArnString",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn",
+          "Policy"
+        ]
+      },
+      "name": "PutResourcePolicy",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "RevisionId": {
+            "name": "RevisionId",
+            "shape_name": "PolicyRevisionId",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Query": {
+      "input": {
+        "markers": [],
+        "members": {
+          "AttributesToGet": {
+            "name": "AttributesToGet",
+            "shape_name": "AttributeNameList",
+            "type": "list"
+          },
+          "ConditionalOperator": {
+            "name": "ConditionalOperator",
+            "shape_name": "ConditionalOperator",
+            "type": "string"
+          },
+          "ConsistentRead": {
+            "name": "ConsistentRead",
+            "shape_name": "ConsistentRead",
+            "type": "boolean"
+          },
+          "ExclusiveStartKey": {
+            "name": "ExclusiveStartKey",
+            "shape_name": "Key",
+            "type": "map"
+          },
+          "ExpressionAttributeNames": {
+            "name": "ExpressionAttributeNames",
+            "shape_name": "ExpressionAttributeNameMap",
+            "type": "map"
+          },
+          "ExpressionAttributeValues": {
+            "name": "ExpressionAttributeValues",
+            "shape_name": "ExpressionAttributeValueMap",
+            "type": "map"
+          },
+          "FilterExpression": {
+            "name": "FilterExpression",
+            "shape_name": "ConditionExpression",
+            "type": "string"
+          },
+          "IndexName": {
+            "name": "IndexName",
+            "shape_name": "IndexName",
+            "type": "string"
+          },
+          "KeyConditionExpression": {
+            "name": "KeyConditionExpression",
+            "shape_name": "KeyExpression",
+            "type": "string"
+          },
+          "KeyConditions": {
+            "name": "KeyConditions",
+            "shape_name": "KeyConditions",
+            "type": "map"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "PositiveIntegerObject",
+            "type": "integer"
+          },
+          "ProjectionExpression": {
+            "name": "ProjectionExpression",
+            "shape_name": "ProjectionExpression",
+            "type": "string"
+          },
+          "QueryFilter": {
+            "name": "QueryFilter",
+            "shape_name": "FilterConditionMap",
+            "type": "map"
+          },
+          "ReturnConsumedCapacity": {
+            "name": "ReturnConsumedCapacity",
+            "shape_name": "ReturnConsumedCapacity",
+            "type": "string"
+          },
+          "ScanIndexForward": {
+            "name": "ScanIndexForward",
+            "shape_name": "BooleanObject",
+            "type": "boolean"
+          },
+          "Select": {
+            "name": "Select",
+            "shape_name": "Select",
+            "type": "string"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableName"
+        ]
+      },
+      "name": "Query",
+      "output": {
+        "lists": {
+          "Items": {
+            "all_fields": [],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [],
+        "members": {
+          "ConsumedCapacity": {
+            "name": "ConsumedCapacity",
+            "shape_name": "ConsumedCapacity",
+            "type": "structure"
+          },
+          "Count": {
+            "name": "Count",
+            "shape_name": "Integer",
+            "type": "integer"
+          },
+          "Items": {
+            "name": "Items",
+            "shape_name": "ItemList",
+            "type": "list"
+          },
+          "LastEvaluatedKey": {
+            "name": "LastEvaluatedKey",
+            "shape_name": "Key",
+            "type": "map"
+          },
+          "ScannedCount": {
+            "name": "ScannedCount",
+            "shape_name": "Integer",
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "RestoreTableFromBackup": {
+      "input": {
+        "markers": [],
+        "members": {
+          "BackupArn": {
+            "name": "BackupArn",
+            "shape_name": "BackupArn",
+            "type": "string"
+          },
+          "BillingModeOverride": {
+            "name": "BillingModeOverride",
+            "shape_name": "BillingMode",
+            "type": "string"
+          },
+          "GlobalSecondaryIndexOverride": {
+            "name": "GlobalSecondaryIndexOverride",
+            "shape_name": "GlobalSecondaryIndexList",
+            "type": "list"
+          },
+          "LocalSecondaryIndexOverride": {
+            "name": "LocalSecondaryIndexOverride",
+            "shape_name": "LocalSecondaryIndexList",
+            "type": "list"
+          },
+          "OnDemandThroughputOverride": {
+            "name": "OnDemandThroughputOverride",
+            "shape_name": "OnDemandThroughput",
+            "type": "structure"
+          },
+          "ProvisionedThroughputOverride": {
+            "name": "ProvisionedThroughputOverride",
+            "shape_name": "ProvisionedThroughput",
+            "type": "structure"
+          },
+          "SSESpecificationOverride": {
+            "name": "SSESpecificationOverride",
+            "shape_name": "SSESpecification",
+            "type": "structure"
+          },
+          "TargetTableName": {
+            "name": "TargetTableName",
+            "shape_name": "TableName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TargetTableName",
+          "BackupArn"
+        ]
+      },
+      "name": "RestoreTableFromBackup",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "TableDescription": {
+            "name": "TableDescription",
+            "shape_name": "TableDescription",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "RestoreTableToPointInTime": {
+      "input": {
+        "markers": [],
+        "members": {
+          "BillingModeOverride": {
+            "name": "BillingModeOverride",
+            "shape_name": "BillingMode",
+            "type": "string"
+          },
+          "GlobalSecondaryIndexOverride": {
+            "name": "GlobalSecondaryIndexOverride",
+            "shape_name": "GlobalSecondaryIndexList",
+            "type": "list"
+          },
+          "LocalSecondaryIndexOverride": {
+            "name": "LocalSecondaryIndexOverride",
+            "shape_name": "LocalSecondaryIndexList",
+            "type": "list"
+          },
+          "OnDemandThroughputOverride": {
+            "name": "OnDemandThroughputOverride",
+            "shape_name": "OnDemandThroughput",
+            "type": "structure"
+          },
+          "ProvisionedThroughputOverride": {
+            "name": "ProvisionedThroughputOverride",
+            "shape_name": "ProvisionedThroughput",
+            "type": "structure"
+          },
+          "RestoreDateTime": {
+            "name": "RestoreDateTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "SSESpecificationOverride": {
+            "name": "SSESpecificationOverride",
+            "shape_name": "SSESpecification",
+            "type": "structure"
+          },
+          "SourceTableArn": {
+            "name": "SourceTableArn",
+            "shape_name": "TableArn",
+            "type": "string"
+          },
+          "SourceTableName": {
+            "name": "SourceTableName",
+            "shape_name": "TableName",
+            "type": "string"
+          },
+          "TargetTableName": {
+            "name": "TargetTableName",
+            "shape_name": "TableName",
+            "type": "string"
+          },
+          "UseLatestRestorableTime": {
+            "name": "UseLatestRestorableTime",
+            "shape_name": "BooleanObject",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "TargetTableName"
+        ]
+      },
+      "name": "RestoreTableToPointInTime",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "TableDescription": {
+            "name": "TableDescription",
+            "shape_name": "TableDescription",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "Scan": {
+      "input": {
+        "markers": [],
+        "members": {
+          "AttributesToGet": {
+            "name": "AttributesToGet",
+            "shape_name": "AttributeNameList",
+            "type": "list"
+          },
+          "ConditionalOperator": {
+            "name": "ConditionalOperator",
+            "shape_name": "ConditionalOperator",
+            "type": "string"
+          },
+          "ConsistentRead": {
+            "name": "ConsistentRead",
+            "shape_name": "ConsistentRead",
+            "type": "boolean"
+          },
+          "ExclusiveStartKey": {
+            "name": "ExclusiveStartKey",
+            "shape_name": "Key",
+            "type": "map"
+          },
+          "ExpressionAttributeNames": {
+            "name": "ExpressionAttributeNames",
+            "shape_name": "ExpressionAttributeNameMap",
+            "type": "map"
+          },
+          "ExpressionAttributeValues": {
+            "name": "ExpressionAttributeValues",
+            "shape_name": "ExpressionAttributeValueMap",
+            "type": "map"
+          },
+          "FilterExpression": {
+            "name": "FilterExpression",
+            "shape_name": "ConditionExpression",
+            "type": "string"
+          },
+          "IndexName": {
+            "name": "IndexName",
+            "shape_name": "IndexName",
+            "type": "string"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "PositiveIntegerObject",
+            "type": "integer"
+          },
+          "ProjectionExpression": {
+            "name": "ProjectionExpression",
+            "shape_name": "ProjectionExpression",
+            "type": "string"
+          },
+          "ReturnConsumedCapacity": {
+            "name": "ReturnConsumedCapacity",
+            "shape_name": "ReturnConsumedCapacity",
+            "type": "string"
+          },
+          "ScanFilter": {
+            "name": "ScanFilter",
+            "shape_name": "FilterConditionMap",
+            "type": "map"
+          },
+          "Segment": {
+            "name": "Segment",
+            "shape_name": "ScanSegment",
+            "type": "integer"
+          },
+          "Select": {
+            "name": "Select",
+            "shape_name": "Select",
+            "type": "string"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          },
+          "TotalSegments": {
+            "name": "TotalSegments",
+            "shape_name": "ScanTotalSegments",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "TableName"
+        ]
+      },
+      "name": "Scan",
+      "output": {
+        "lists": {
+          "Items": {
+            "all_fields": [],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [],
+        "members": {
+          "ConsumedCapacity": {
+            "name": "ConsumedCapacity",
+            "shape_name": "ConsumedCapacity",
+            "type": "structure"
+          },
+          "Count": {
+            "name": "Count",
+            "shape_name": "Integer",
+            "type": "integer"
+          },
+          "Items": {
+            "name": "Items",
+            "shape_name": "ItemList",
+            "type": "list"
+          },
+          "LastEvaluatedKey": {
+            "name": "LastEvaluatedKey",
+            "shape_name": "Key",
+            "type": "map"
+          },
+          "ScannedCount": {
+            "name": "ScannedCount",
+            "shape_name": "Integer",
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "TagResource": {
+      "input": {
+        "markers": [],
+        "members": {
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArnString",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceArn",
+          "Tags"
+        ]
+      },
+      "name": "TagResource",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "TransactGetItems": {
+      "input": {
+        "markers": [],
+        "members": {
+          "ReturnConsumedCapacity": {
+            "name": "ReturnConsumedCapacity",
+            "shape_name": "ReturnConsumedCapacity",
+            "type": "string"
+          },
+          "TransactItems": {
+            "name": "TransactItems",
+            "shape_name": "TransactGetItemList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "TransactItems"
+        ]
+      },
+      "name": "TransactGetItems",
+      "output": {
+        "lists": {
+          "ConsumedCapacity": {
+            "all_fields": [
+              "CapacityUnits",
+              "GlobalSecondaryIndexes",
+              "LocalSecondaryIndexes",
+              "ReadCapacityUnits",
+              "Table",
+              "TableName",
+              "WriteCapacityUnits"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": [
+              "TableName"
+            ]
+          },
+          "Responses": {
+            "all_fields": [
+              "Item"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [],
+        "members": {
+          "ConsumedCapacity": {
+            "name": "ConsumedCapacity",
+            "shape_name": "ConsumedCapacityMultiple",
+            "type": "list"
+          },
+          "Responses": {
+            "name": "Responses",
+            "shape_name": "ItemResponseList",
+            "type": "list"
+          }
+        }
+      }
+    },
+    "TransactWriteItems": {
+      "input": {
+        "markers": [
+          "ClientRequestToken"
+        ],
+        "members": {
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "ReturnConsumedCapacity": {
+            "name": "ReturnConsumedCapacity",
+            "shape_name": "ReturnConsumedCapacity",
+            "type": "string"
+          },
+          "ReturnItemCollectionMetrics": {
+            "name": "ReturnItemCollectionMetrics",
+            "shape_name": "ReturnItemCollectionMetrics",
+            "type": "string"
+          },
+          "TransactItems": {
+            "name": "TransactItems",
+            "shape_name": "TransactWriteItemList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "TransactItems"
+        ]
+      },
+      "name": "TransactWriteItems",
+      "output": {
+        "lists": {
+          "ConsumedCapacity": {
+            "all_fields": [
+              "CapacityUnits",
+              "GlobalSecondaryIndexes",
+              "LocalSecondaryIndexes",
+              "ReadCapacityUnits",
+              "Table",
+              "TableName",
+              "WriteCapacityUnits"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": [
+              "TableName"
+            ]
+          }
+        },
+        "markers": [],
+        "members": {
+          "ConsumedCapacity": {
+            "name": "ConsumedCapacity",
+            "shape_name": "ConsumedCapacityMultiple",
+            "type": "list"
+          },
+          "ItemCollectionMetrics": {
+            "name": "ItemCollectionMetrics",
+            "shape_name": "ItemCollectionMetricsPerTable",
+            "type": "map"
+          }
+        }
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "markers": [],
+        "members": {
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArnString",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "TagKeyList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceArn",
+          "TagKeys"
+        ]
+      },
+      "name": "UntagResource",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "UpdateContinuousBackups": {
+      "input": {
+        "markers": [],
+        "members": {
+          "PointInTimeRecoverySpecification": {
+            "name": "PointInTimeRecoverySpecification",
+            "shape_name": "PointInTimeRecoverySpecification",
+            "type": "structure"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableName",
+          "PointInTimeRecoverySpecification"
+        ]
+      },
+      "name": "UpdateContinuousBackups",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "ContinuousBackupsDescription": {
+            "name": "ContinuousBackupsDescription",
+            "shape_name": "ContinuousBackupsDescription",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "UpdateContributorInsights": {
+      "input": {
+        "markers": [],
+        "members": {
+          "ContributorInsightsAction": {
+            "name": "ContributorInsightsAction",
+            "shape_name": "ContributorInsightsAction",
+            "type": "string"
+          },
+          "IndexName": {
+            "name": "IndexName",
+            "shape_name": "IndexName",
+            "type": "string"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableName",
+          "ContributorInsightsAction"
+        ]
+      },
+      "name": "UpdateContributorInsights",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "ContributorInsightsStatus": {
+            "name": "ContributorInsightsStatus",
+            "shape_name": "ContributorInsightsStatus",
+            "type": "string"
+          },
+          "IndexName": {
+            "name": "IndexName",
+            "shape_name": "IndexName",
+            "type": "string"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableName",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UpdateGlobalTable": {
+      "input": {
+        "markers": [],
+        "members": {
+          "GlobalTableName": {
+            "name": "GlobalTableName",
+            "shape_name": "TableName",
+            "type": "string"
+          },
+          "ReplicaUpdates": {
+            "name": "ReplicaUpdates",
+            "shape_name": "ReplicaUpdateList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "GlobalTableName",
+          "ReplicaUpdates"
+        ]
+      },
+      "name": "UpdateGlobalTable",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "GlobalTableDescription": {
+            "name": "GlobalTableDescription",
+            "shape_name": "GlobalTableDescription",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "UpdateGlobalTableSettings": {
+      "input": {
+        "markers": [],
+        "members": {
+          "GlobalTableBillingMode": {
+            "name": "GlobalTableBillingMode",
+            "shape_name": "BillingMode",
+            "type": "string"
+          },
+          "GlobalTableGlobalSecondaryIndexSettingsUpdate": {
+            "name": "GlobalTableGlobalSecondaryIndexSettingsUpdate",
+            "shape_name": "GlobalTableGlobalSecondaryIndexSettingsUpdateList",
+            "type": "list"
+          },
+          "GlobalTableName": {
+            "name": "GlobalTableName",
+            "shape_name": "TableName",
+            "type": "string"
+          },
+          "GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate": {
+            "name": "GlobalTableProvisionedWriteCapacityAutoScalingSettingsUpdate",
+            "shape_name": "AutoScalingSettingsUpdate",
+            "type": "structure"
+          },
+          "GlobalTableProvisionedWriteCapacityUnits": {
+            "name": "GlobalTableProvisionedWriteCapacityUnits",
+            "shape_name": "PositiveLongObject",
+            "type": "long"
+          },
+          "ReplicaSettingsUpdate": {
+            "name": "ReplicaSettingsUpdate",
+            "shape_name": "ReplicaSettingsUpdateList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "GlobalTableName"
+        ]
+      },
+      "name": "UpdateGlobalTableSettings",
+      "output": {
+        "lists": {
+          "ReplicaSettings": {
+            "all_fields": [
+              "RegionName",
+              "ReplicaBillingModeSummary",
+              "ReplicaGlobalSecondaryIndexSettings",
+              "ReplicaProvisionedReadCapacityAutoScalingSettings",
+              "ReplicaProvisionedReadCapacityUnits",
+              "ReplicaProvisionedWriteCapacityAutoScalingSettings",
+              "ReplicaProvisionedWriteCapacityUnits",
+              "ReplicaStatus",
+              "ReplicaTableClassSummary"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": [
+              "RegionName"
+            ]
+          }
+        },
+        "markers": [],
+        "members": {
+          "GlobalTableName": {
+            "name": "GlobalTableName",
+            "shape_name": "TableName",
+            "type": "string"
+          },
+          "ReplicaSettings": {
+            "name": "ReplicaSettings",
+            "shape_name": "ReplicaSettingsDescriptionList",
+            "type": "list"
+          }
+        }
+      }
+    },
+    "UpdateItem": {
+      "input": {
+        "markers": [],
+        "members": {
+          "AttributeUpdates": {
+            "name": "AttributeUpdates",
+            "shape_name": "AttributeUpdates",
+            "type": "map"
+          },
+          "ConditionExpression": {
+            "name": "ConditionExpression",
+            "shape_name": "ConditionExpression",
+            "type": "string"
+          },
+          "ConditionalOperator": {
+            "name": "ConditionalOperator",
+            "shape_name": "ConditionalOperator",
+            "type": "string"
+          },
+          "Expected": {
+            "name": "Expected",
+            "shape_name": "ExpectedAttributeMap",
+            "type": "map"
+          },
+          "ExpressionAttributeNames": {
+            "name": "ExpressionAttributeNames",
+            "shape_name": "ExpressionAttributeNameMap",
+            "type": "map"
+          },
+          "ExpressionAttributeValues": {
+            "name": "ExpressionAttributeValues",
+            "shape_name": "ExpressionAttributeValueMap",
+            "type": "map"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "Key",
+            "type": "map"
+          },
+          "ReturnConsumedCapacity": {
+            "name": "ReturnConsumedCapacity",
+            "shape_name": "ReturnConsumedCapacity",
+            "type": "string"
+          },
+          "ReturnItemCollectionMetrics": {
+            "name": "ReturnItemCollectionMetrics",
+            "shape_name": "ReturnItemCollectionMetrics",
+            "type": "string"
+          },
+          "ReturnValues": {
+            "name": "ReturnValues",
+            "shape_name": "ReturnValue",
+            "type": "string"
+          },
+          "ReturnValuesOnConditionCheckFailure": {
+            "name": "ReturnValuesOnConditionCheckFailure",
+            "shape_name": "ReturnValuesOnConditionCheckFailure",
+            "type": "string"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          },
+          "UpdateExpression": {
+            "name": "UpdateExpression",
+            "shape_name": "UpdateExpression",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableName",
+          "Key"
+        ]
+      },
+      "name": "UpdateItem",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "AttributeMap",
+            "type": "map"
+          },
+          "ConsumedCapacity": {
+            "name": "ConsumedCapacity",
+            "shape_name": "ConsumedCapacity",
+            "type": "structure"
+          },
+          "ItemCollectionMetrics": {
+            "name": "ItemCollectionMetrics",
+            "shape_name": "ItemCollectionMetrics",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "UpdateKinesisStreamingDestination": {
+      "input": {
+        "markers": [],
+        "members": {
+          "StreamArn": {
+            "name": "StreamArn",
+            "shape_name": "StreamArn",
+            "type": "string"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          },
+          "UpdateKinesisStreamingConfiguration": {
+            "name": "UpdateKinesisStreamingConfiguration",
+            "shape_name": "UpdateKinesisStreamingConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "TableName",
+          "StreamArn"
+        ]
+      },
+      "name": "UpdateKinesisStreamingDestination",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "DestinationStatus": {
+            "name": "DestinationStatus",
+            "shape_name": "DestinationStatus",
+            "type": "string"
+          },
+          "StreamArn": {
+            "name": "StreamArn",
+            "shape_name": "StreamArn",
+            "type": "string"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableName",
+            "type": "string"
+          },
+          "UpdateKinesisStreamingConfiguration": {
+            "name": "UpdateKinesisStreamingConfiguration",
+            "shape_name": "UpdateKinesisStreamingConfiguration",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "UpdateTable": {
+      "input": {
+        "markers": [],
+        "members": {
+          "AttributeDefinitions": {
+            "name": "AttributeDefinitions",
+            "shape_name": "AttributeDefinitions",
+            "type": "list"
+          },
+          "BillingMode": {
+            "name": "BillingMode",
+            "shape_name": "BillingMode",
+            "type": "string"
+          },
+          "DeletionProtectionEnabled": {
+            "name": "DeletionProtectionEnabled",
+            "shape_name": "DeletionProtectionEnabled",
+            "type": "boolean"
+          },
+          "GlobalSecondaryIndexUpdates": {
+            "name": "GlobalSecondaryIndexUpdates",
+            "shape_name": "GlobalSecondaryIndexUpdateList",
+            "type": "list"
+          },
+          "OnDemandThroughput": {
+            "name": "OnDemandThroughput",
+            "shape_name": "OnDemandThroughput",
+            "type": "structure"
+          },
+          "ProvisionedThroughput": {
+            "name": "ProvisionedThroughput",
+            "shape_name": "ProvisionedThroughput",
+            "type": "structure"
+          },
+          "ReplicaUpdates": {
+            "name": "ReplicaUpdates",
+            "shape_name": "ReplicationGroupUpdateList",
+            "type": "list"
+          },
+          "SSESpecification": {
+            "name": "SSESpecification",
+            "shape_name": "SSESpecification",
+            "type": "structure"
+          },
+          "StreamSpecification": {
+            "name": "StreamSpecification",
+            "shape_name": "StreamSpecification",
+            "type": "structure"
+          },
+          "TableClass": {
+            "name": "TableClass",
+            "shape_name": "TableClass",
+            "type": "string"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableName"
+        ]
+      },
+      "name": "UpdateTable",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "TableDescription": {
+            "name": "TableDescription",
+            "shape_name": "TableDescription",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "UpdateTableReplicaAutoScaling": {
+      "input": {
+        "markers": [],
+        "members": {
+          "GlobalSecondaryIndexUpdates": {
+            "name": "GlobalSecondaryIndexUpdates",
+            "shape_name": "GlobalSecondaryIndexAutoScalingUpdateList",
+            "type": "list"
+          },
+          "ProvisionedWriteCapacityAutoScalingUpdate": {
+            "name": "ProvisionedWriteCapacityAutoScalingUpdate",
+            "shape_name": "AutoScalingSettingsUpdate",
+            "type": "structure"
+          },
+          "ReplicaUpdates": {
+            "name": "ReplicaUpdates",
+            "shape_name": "ReplicaAutoScalingUpdateList",
+            "type": "list"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TableName"
+        ]
+      },
+      "name": "UpdateTableReplicaAutoScaling",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "TableAutoScalingDescription": {
+            "name": "TableAutoScalingDescription",
+            "shape_name": "TableAutoScalingDescription",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "UpdateTimeToLive": {
+      "input": {
+        "markers": [],
+        "members": {
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "TableArn",
+            "type": "string"
+          },
+          "TimeToLiveSpecification": {
+            "name": "TimeToLiveSpecification",
+            "shape_name": "TimeToLiveSpecification",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "TableName",
+          "TimeToLiveSpecification"
+        ]
+      },
+      "name": "UpdateTimeToLive",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "TimeToLiveSpecification": {
+            "name": "TimeToLiveSpecification",
+            "shape_name": "TimeToLiveSpecification",
+            "type": "structure"
+          }
+        }
+      }
+    }
+  }
+}
