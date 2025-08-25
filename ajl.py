@@ -3,6 +3,7 @@ import boto3
 import json
 import datetime
 import orjson
+import jq
 import jsonlines
 import os
 import argparse
@@ -33,24 +34,19 @@ def strip_metadata(response):
 def process_response(response: object, client: str, operation: str):
     operation_kebab = caseconverter.kebabcase(operation)
     operation_pascal = caseconverter.pascalcase(operation)
-    operation_filepath = os.path.join("models",client,"operations","json",operation_pascal + ".json")
+    operation_filepath = os.path.join("models", f"{client}.json")
     if operation_kebab.startswith("describe-") or operation_kebab.startswith("list-"):
-        print(f"reading config file {operation_filepath}", file=sys.stderr)
-        list_objects = [operation_pascal.replace("Describe", "").replace("List", "")]
         if os.path.exists(operation_filepath):
+            print(f"reading config file {operation_filepath}", file=sys.stderr)
             with open(operation_filepath, 'r') as operation_file:
                 operation_config = json.load(operation_file)
-            for property, shape in operation_config["output"]["members"].items():
-                if shape["type"] == "list":
-                    list_objects.append(property)
-        print(f"list_objects={list_objects}; response_keys={response.keys()}", file=sys.stderr)
-        for property in set(list_objects):
-            print(f"Getting {property} from response", file=sys.stderr)
-            if property in response:
-                print(f"outputing property {property}", file=sys.stderr)
-                for entry in response[property]:
-                    print(json.dumps(entry, indent=None, cls=JSONEncoder))
-
+        # check if there is custom jq to run for the output
+        custom_jq = operation_config["operations"][operation_pascal]["output"]["jq"]
+        print(f"custom_jq={custom_jq}", file=sys.stderr)
+        if custom_jq:
+            print(jq.compile(custom_jq).input_text(json.dumps(response, indent=None, cls=JSONEncoder)).text())
+        else:
+            print(json.dumps(response, indent=None, cls=JSONEncoder))
 
 
 PROFILE = os.environ.get("AWS_PROFILE", os.environ.get("AWS_DEFAULT_PROFILE", None))
@@ -68,7 +64,7 @@ options = args[0]
 extra_params = args[1]
 profile = options.profile or PROFILE
 region = options.region or REGION
-print(f"profile={profile}; region={region}; args={args}")
+print(f"profile={profile}; region={region}; args={args}", file=sys.stderr)
 
 
 # https://ben11kehoe.medium.com/boto3-sessions-and-why-you-should-use-them-9b094eb5ca8e
@@ -83,6 +79,28 @@ if len(extra_params) > 0 and extra_params[0][0] != '-':
     client_name = extra_params.pop(0)
 if len(extra_params) > 0 and extra_params[0][0] != '-':
     operation_name = caseconverter.snakecase(extra_params.pop(0))
+
+extra_options = {}
+last_key = None
+key = None
+while len(extra_params) > 0:
+    if extra_params[0][0:2] == '--':
+        key = caseconverter.pascalcase(extra_params.pop(0)[2:])
+        last_key = None
+    elif len(key) > 0:
+        extra_options[key] = extra_params.pop(0)
+        last_key = key
+        key = None
+    elif last_key:
+        # Then should we turn this into an array
+        if not isinstance(extra_options[key], list):
+            # turn it into a list
+            extra_options[key] = [extra_options[key]]
+        extra_options[key].append(extra_params.pop(0))
+    else:
+        print(f"Param Warning: Not sure what to do with param {extra_params.pop(0)}", file=sys.stderr)
+
+print(f"extra_params={extra_params}, extra_options={extra_options}; last_key={last_key}; key={key}", file=sys.stderr)
 
 reader_pointer = None
 if options.params_json:
@@ -118,14 +136,16 @@ if reader_pointer:
         # Close the reader (which also closes sys.stdin)
         if 'reader' in locals() and reader:
             reader.close()
-
 else:
-    print(f"service={client_name}; operation={operation_name}")
+    print(f"service={client_name}; operation={operation_name};", file=sys.stderr)
     client = sess.client(client_name)
     cmd = getattr(client, operation_name)
     ## Need to figure out how to get the rest of the params to be passed as JSON
     ## This is where the kebabcase `--input-param-name` needs to be converted to the `InputParamName` that the API requires
-    resp = cmd()
-    process_response(response=resp, client=client_name, operation=operation_name)
-    print(json.dumps(strip_metadata(resp), cls=JSONEncoder, indent=2, sort_keys=True))
+    resp = cmd(**extra_options)
+    try:
+        process_response(response=resp, client=client_name, operation=operation_name)
+    except Exception as e:
+        print(e, file=sys.stderr)
+        print(json.dumps(resp, indent=None, cls=JSONEncoder))
 
