@@ -1,0 +1,6835 @@
+{
+  "metadata": {
+    "apiVersion": "2006-03-01",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "checksumFormat": "md5",
+    "endpointPrefix": "s3",
+    "globalEndpoint": "s3.amazonaws.com",
+    "protocol": "rest-xml",
+    "protocols": [
+      "rest-xml"
+    ],
+    "serviceAbbreviation": "Amazon S3",
+    "serviceFullName": "Amazon Simple Storage Service",
+    "serviceId": "S3",
+    "signatureVersion": "s3",
+    "uid": "s3-2006-03-01"
+  },
+  "name": "s3",
+  "operations": {
+    "AbortMultipartUpload": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "UploadId": {
+            "name": "UploadId",
+            "shape_name": "MultipartUploadId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key",
+          "UploadId"
+        ]
+      },
+      "name": "AbortMultipartUpload",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CompleteMultipartUpload": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumCRC32": {
+            "name": "ChecksumCRC32",
+            "shape_name": "ChecksumCRC32",
+            "type": "string"
+          },
+          "ChecksumCRC32C": {
+            "name": "ChecksumCRC32C",
+            "shape_name": "ChecksumCRC32C",
+            "type": "string"
+          },
+          "ChecksumSHA1": {
+            "name": "ChecksumSHA1",
+            "shape_name": "ChecksumSHA1",
+            "type": "string"
+          },
+          "ChecksumSHA256": {
+            "name": "ChecksumSHA256",
+            "shape_name": "ChecksumSHA256",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "MultipartUpload": {
+            "name": "MultipartUpload",
+            "shape_name": "CompletedMultipartUpload",
+            "type": "structure"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "SSECustomerAlgorithm": {
+            "name": "SSECustomerAlgorithm",
+            "shape_name": "SSECustomerAlgorithm",
+            "type": "string"
+          },
+          "SSECustomerKey": {
+            "name": "SSECustomerKey",
+            "shape_name": "SSECustomerKey",
+            "type": "string"
+          },
+          "SSECustomerKeyMD5": {
+            "name": "SSECustomerKeyMD5",
+            "shape_name": "SSECustomerKeyMD5",
+            "type": "string"
+          },
+          "UploadId": {
+            "name": "UploadId",
+            "shape_name": "MultipartUploadId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key",
+          "UploadId"
+        ]
+      },
+      "name": "CompleteMultipartUpload",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "BucketKeyEnabled": {
+            "name": "BucketKeyEnabled",
+            "shape_name": "BucketKeyEnabled",
+            "type": "boolean"
+          },
+          "ChecksumCRC32": {
+            "name": "ChecksumCRC32",
+            "shape_name": "ChecksumCRC32",
+            "type": "string"
+          },
+          "ChecksumCRC32C": {
+            "name": "ChecksumCRC32C",
+            "shape_name": "ChecksumCRC32C",
+            "type": "string"
+          },
+          "ChecksumSHA1": {
+            "name": "ChecksumSHA1",
+            "shape_name": "ChecksumSHA1",
+            "type": "string"
+          },
+          "ChecksumSHA256": {
+            "name": "ChecksumSHA256",
+            "shape_name": "ChecksumSHA256",
+            "type": "string"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "ETag",
+            "type": "string"
+          },
+          "Expiration": {
+            "name": "Expiration",
+            "shape_name": "Expiration",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "Location",
+            "type": "string"
+          },
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          },
+          "SSEKMSKeyId": {
+            "name": "SSEKMSKeyId",
+            "shape_name": "SSEKMSKeyId",
+            "type": "string"
+          },
+          "ServerSideEncryption": {
+            "name": "ServerSideEncryption",
+            "shape_name": "ServerSideEncryption",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CopyObject": {
+      "input": {
+        "markers": [],
+        "members": {
+          "ACL": {
+            "name": "ACL",
+            "shape_name": "ObjectCannedACL",
+            "type": "string"
+          },
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "BucketKeyEnabled": {
+            "name": "BucketKeyEnabled",
+            "shape_name": "BucketKeyEnabled",
+            "type": "boolean"
+          },
+          "CacheControl": {
+            "name": "CacheControl",
+            "shape_name": "CacheControl",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ContentDisposition": {
+            "name": "ContentDisposition",
+            "shape_name": "ContentDisposition",
+            "type": "string"
+          },
+          "ContentEncoding": {
+            "name": "ContentEncoding",
+            "shape_name": "ContentEncoding",
+            "type": "string"
+          },
+          "ContentLanguage": {
+            "name": "ContentLanguage",
+            "shape_name": "ContentLanguage",
+            "type": "string"
+          },
+          "ContentType": {
+            "name": "ContentType",
+            "shape_name": "ContentType",
+            "type": "string"
+          },
+          "CopySource": {
+            "name": "CopySource",
+            "shape_name": "CopySource",
+            "type": "string"
+          },
+          "CopySourceIfMatch": {
+            "name": "CopySourceIfMatch",
+            "shape_name": "CopySourceIfMatch",
+            "type": "string"
+          },
+          "CopySourceIfModifiedSince": {
+            "name": "CopySourceIfModifiedSince",
+            "shape_name": "CopySourceIfModifiedSince",
+            "type": "timestamp"
+          },
+          "CopySourceIfNoneMatch": {
+            "name": "CopySourceIfNoneMatch",
+            "shape_name": "CopySourceIfNoneMatch",
+            "type": "string"
+          },
+          "CopySourceIfUnmodifiedSince": {
+            "name": "CopySourceIfUnmodifiedSince",
+            "shape_name": "CopySourceIfUnmodifiedSince",
+            "type": "timestamp"
+          },
+          "CopySourceSSECustomerAlgorithm": {
+            "name": "CopySourceSSECustomerAlgorithm",
+            "shape_name": "CopySourceSSECustomerAlgorithm",
+            "type": "string"
+          },
+          "CopySourceSSECustomerKey": {
+            "name": "CopySourceSSECustomerKey",
+            "shape_name": "CopySourceSSECustomerKey",
+            "type": "string"
+          },
+          "CopySourceSSECustomerKeyMD5": {
+            "name": "CopySourceSSECustomerKeyMD5",
+            "shape_name": "CopySourceSSECustomerKeyMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "ExpectedSourceBucketOwner": {
+            "name": "ExpectedSourceBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Expires": {
+            "name": "Expires",
+            "shape_name": "Expires",
+            "type": "timestamp"
+          },
+          "GrantFullControl": {
+            "name": "GrantFullControl",
+            "shape_name": "GrantFullControl",
+            "type": "string"
+          },
+          "GrantRead": {
+            "name": "GrantRead",
+            "shape_name": "GrantRead",
+            "type": "string"
+          },
+          "GrantReadACP": {
+            "name": "GrantReadACP",
+            "shape_name": "GrantReadACP",
+            "type": "string"
+          },
+          "GrantWriteACP": {
+            "name": "GrantWriteACP",
+            "shape_name": "GrantWriteACP",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "Metadata": {
+            "name": "Metadata",
+            "shape_name": "Metadata",
+            "type": "map"
+          },
+          "MetadataDirective": {
+            "name": "MetadataDirective",
+            "shape_name": "MetadataDirective",
+            "type": "string"
+          },
+          "ObjectLockLegalHoldStatus": {
+            "name": "ObjectLockLegalHoldStatus",
+            "shape_name": "ObjectLockLegalHoldStatus",
+            "type": "string"
+          },
+          "ObjectLockMode": {
+            "name": "ObjectLockMode",
+            "shape_name": "ObjectLockMode",
+            "type": "string"
+          },
+          "ObjectLockRetainUntilDate": {
+            "name": "ObjectLockRetainUntilDate",
+            "shape_name": "ObjectLockRetainUntilDate",
+            "type": "timestamp"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "SSECustomerAlgorithm": {
+            "name": "SSECustomerAlgorithm",
+            "shape_name": "SSECustomerAlgorithm",
+            "type": "string"
+          },
+          "SSECustomerKey": {
+            "name": "SSECustomerKey",
+            "shape_name": "SSECustomerKey",
+            "type": "string"
+          },
+          "SSECustomerKeyMD5": {
+            "name": "SSECustomerKeyMD5",
+            "shape_name": "SSECustomerKeyMD5",
+            "type": "string"
+          },
+          "SSEKMSEncryptionContext": {
+            "name": "SSEKMSEncryptionContext",
+            "shape_name": "SSEKMSEncryptionContext",
+            "type": "string"
+          },
+          "SSEKMSKeyId": {
+            "name": "SSEKMSKeyId",
+            "shape_name": "SSEKMSKeyId",
+            "type": "string"
+          },
+          "ServerSideEncryption": {
+            "name": "ServerSideEncryption",
+            "shape_name": "ServerSideEncryption",
+            "type": "string"
+          },
+          "StorageClass": {
+            "name": "StorageClass",
+            "shape_name": "StorageClass",
+            "type": "string"
+          },
+          "Tagging": {
+            "name": "Tagging",
+            "shape_name": "TaggingHeader",
+            "type": "string"
+          },
+          "TaggingDirective": {
+            "name": "TaggingDirective",
+            "shape_name": "TaggingDirective",
+            "type": "string"
+          },
+          "WebsiteRedirectLocation": {
+            "name": "WebsiteRedirectLocation",
+            "shape_name": "WebsiteRedirectLocation",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "CopySource",
+          "Key"
+        ]
+      },
+      "name": "CopyObject",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "BucketKeyEnabled": {
+            "name": "BucketKeyEnabled",
+            "shape_name": "BucketKeyEnabled",
+            "type": "boolean"
+          },
+          "CopyObjectResult": {
+            "name": "CopyObjectResult",
+            "shape_name": "CopyObjectResult",
+            "type": "structure"
+          },
+          "CopySourceVersionId": {
+            "name": "CopySourceVersionId",
+            "shape_name": "CopySourceVersionId",
+            "type": "string"
+          },
+          "Expiration": {
+            "name": "Expiration",
+            "shape_name": "Expiration",
+            "type": "string"
+          },
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          },
+          "SSECustomerAlgorithm": {
+            "name": "SSECustomerAlgorithm",
+            "shape_name": "SSECustomerAlgorithm",
+            "type": "string"
+          },
+          "SSECustomerKeyMD5": {
+            "name": "SSECustomerKeyMD5",
+            "shape_name": "SSECustomerKeyMD5",
+            "type": "string"
+          },
+          "SSEKMSEncryptionContext": {
+            "name": "SSEKMSEncryptionContext",
+            "shape_name": "SSEKMSEncryptionContext",
+            "type": "string"
+          },
+          "SSEKMSKeyId": {
+            "name": "SSEKMSKeyId",
+            "shape_name": "SSEKMSKeyId",
+            "type": "string"
+          },
+          "ServerSideEncryption": {
+            "name": "ServerSideEncryption",
+            "shape_name": "ServerSideEncryption",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CreateBucket": {
+      "input": {
+        "markers": [],
+        "members": {
+          "ACL": {
+            "name": "ACL",
+            "shape_name": "BucketCannedACL",
+            "type": "string"
+          },
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "CreateBucketConfiguration": {
+            "name": "CreateBucketConfiguration",
+            "shape_name": "CreateBucketConfiguration",
+            "type": "structure"
+          },
+          "GrantFullControl": {
+            "name": "GrantFullControl",
+            "shape_name": "GrantFullControl",
+            "type": "string"
+          },
+          "GrantRead": {
+            "name": "GrantRead",
+            "shape_name": "GrantRead",
+            "type": "string"
+          },
+          "GrantReadACP": {
+            "name": "GrantReadACP",
+            "shape_name": "GrantReadACP",
+            "type": "string"
+          },
+          "GrantWrite": {
+            "name": "GrantWrite",
+            "shape_name": "GrantWrite",
+            "type": "string"
+          },
+          "GrantWriteACP": {
+            "name": "GrantWriteACP",
+            "shape_name": "GrantWriteACP",
+            "type": "string"
+          },
+          "ObjectLockEnabledForBucket": {
+            "name": "ObjectLockEnabledForBucket",
+            "shape_name": "ObjectLockEnabledForBucket",
+            "type": "boolean"
+          },
+          "ObjectOwnership": {
+            "name": "ObjectOwnership",
+            "shape_name": "ObjectOwnership",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "CreateBucket",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "Location": {
+            "name": "Location",
+            "shape_name": "Location",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CreateMultipartUpload": {
+      "input": {
+        "markers": [],
+        "members": {
+          "ACL": {
+            "name": "ACL",
+            "shape_name": "ObjectCannedACL",
+            "type": "string"
+          },
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "BucketKeyEnabled": {
+            "name": "BucketKeyEnabled",
+            "shape_name": "BucketKeyEnabled",
+            "type": "boolean"
+          },
+          "CacheControl": {
+            "name": "CacheControl",
+            "shape_name": "CacheControl",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ContentDisposition": {
+            "name": "ContentDisposition",
+            "shape_name": "ContentDisposition",
+            "type": "string"
+          },
+          "ContentEncoding": {
+            "name": "ContentEncoding",
+            "shape_name": "ContentEncoding",
+            "type": "string"
+          },
+          "ContentLanguage": {
+            "name": "ContentLanguage",
+            "shape_name": "ContentLanguage",
+            "type": "string"
+          },
+          "ContentType": {
+            "name": "ContentType",
+            "shape_name": "ContentType",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Expires": {
+            "name": "Expires",
+            "shape_name": "Expires",
+            "type": "timestamp"
+          },
+          "GrantFullControl": {
+            "name": "GrantFullControl",
+            "shape_name": "GrantFullControl",
+            "type": "string"
+          },
+          "GrantRead": {
+            "name": "GrantRead",
+            "shape_name": "GrantRead",
+            "type": "string"
+          },
+          "GrantReadACP": {
+            "name": "GrantReadACP",
+            "shape_name": "GrantReadACP",
+            "type": "string"
+          },
+          "GrantWriteACP": {
+            "name": "GrantWriteACP",
+            "shape_name": "GrantWriteACP",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "Metadata": {
+            "name": "Metadata",
+            "shape_name": "Metadata",
+            "type": "map"
+          },
+          "ObjectLockLegalHoldStatus": {
+            "name": "ObjectLockLegalHoldStatus",
+            "shape_name": "ObjectLockLegalHoldStatus",
+            "type": "string"
+          },
+          "ObjectLockMode": {
+            "name": "ObjectLockMode",
+            "shape_name": "ObjectLockMode",
+            "type": "string"
+          },
+          "ObjectLockRetainUntilDate": {
+            "name": "ObjectLockRetainUntilDate",
+            "shape_name": "ObjectLockRetainUntilDate",
+            "type": "timestamp"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "SSECustomerAlgorithm": {
+            "name": "SSECustomerAlgorithm",
+            "shape_name": "SSECustomerAlgorithm",
+            "type": "string"
+          },
+          "SSECustomerKey": {
+            "name": "SSECustomerKey",
+            "shape_name": "SSECustomerKey",
+            "type": "string"
+          },
+          "SSECustomerKeyMD5": {
+            "name": "SSECustomerKeyMD5",
+            "shape_name": "SSECustomerKeyMD5",
+            "type": "string"
+          },
+          "SSEKMSEncryptionContext": {
+            "name": "SSEKMSEncryptionContext",
+            "shape_name": "SSEKMSEncryptionContext",
+            "type": "string"
+          },
+          "SSEKMSKeyId": {
+            "name": "SSEKMSKeyId",
+            "shape_name": "SSEKMSKeyId",
+            "type": "string"
+          },
+          "ServerSideEncryption": {
+            "name": "ServerSideEncryption",
+            "shape_name": "ServerSideEncryption",
+            "type": "string"
+          },
+          "StorageClass": {
+            "name": "StorageClass",
+            "shape_name": "StorageClass",
+            "type": "string"
+          },
+          "Tagging": {
+            "name": "Tagging",
+            "shape_name": "TaggingHeader",
+            "type": "string"
+          },
+          "WebsiteRedirectLocation": {
+            "name": "WebsiteRedirectLocation",
+            "shape_name": "WebsiteRedirectLocation",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key"
+        ]
+      },
+      "name": "CreateMultipartUpload",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "AbortDate": {
+            "name": "AbortDate",
+            "shape_name": "AbortDate",
+            "type": "timestamp"
+          },
+          "AbortRuleId": {
+            "name": "AbortRuleId",
+            "shape_name": "AbortRuleId",
+            "type": "string"
+          },
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "BucketKeyEnabled": {
+            "name": "BucketKeyEnabled",
+            "shape_name": "BucketKeyEnabled",
+            "type": "boolean"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          },
+          "SSECustomerAlgorithm": {
+            "name": "SSECustomerAlgorithm",
+            "shape_name": "SSECustomerAlgorithm",
+            "type": "string"
+          },
+          "SSECustomerKeyMD5": {
+            "name": "SSECustomerKeyMD5",
+            "shape_name": "SSECustomerKeyMD5",
+            "type": "string"
+          },
+          "SSEKMSEncryptionContext": {
+            "name": "SSEKMSEncryptionContext",
+            "shape_name": "SSEKMSEncryptionContext",
+            "type": "string"
+          },
+          "SSEKMSKeyId": {
+            "name": "SSEKMSKeyId",
+            "shape_name": "SSEKMSKeyId",
+            "type": "string"
+          },
+          "ServerSideEncryption": {
+            "name": "ServerSideEncryption",
+            "shape_name": "ServerSideEncryption",
+            "type": "string"
+          },
+          "UploadId": {
+            "name": "UploadId",
+            "shape_name": "MultipartUploadId",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CreateSession": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "SessionMode": {
+            "name": "SessionMode",
+            "shape_name": "SessionMode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "CreateSession",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "Credentials": {
+            "name": "Credentials",
+            "shape_name": "SessionCredentials",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "DeleteBucket": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "DeleteBucket",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "DeleteBucketAnalyticsConfiguration": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "AnalyticsId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Id"
+        ]
+      },
+      "name": "DeleteBucketAnalyticsConfiguration",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "DeleteBucketCors": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "DeleteBucketCors",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "DeleteBucketEncryption": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "DeleteBucketEncryption",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "DeleteBucketIntelligentTieringConfiguration": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "IntelligentTieringId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Id"
+        ]
+      },
+      "name": "DeleteBucketIntelligentTieringConfiguration",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "DeleteBucketInventoryConfiguration": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "InventoryId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Id"
+        ]
+      },
+      "name": "DeleteBucketInventoryConfiguration",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "DeleteBucketLifecycle": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "DeleteBucketLifecycle",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "DeleteBucketMetricsConfiguration": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "MetricsId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Id"
+        ]
+      },
+      "name": "DeleteBucketMetricsConfiguration",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "DeleteBucketOwnershipControls": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "DeleteBucketOwnershipControls",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "DeleteBucketPolicy": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "DeleteBucketPolicy",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "DeleteBucketReplication": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "DeleteBucketReplication",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "DeleteBucketTagging": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "DeleteBucketTagging",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "DeleteBucketWebsite": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "DeleteBucketWebsite",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "DeleteObject": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "BypassGovernanceRetention": {
+            "name": "BypassGovernanceRetention",
+            "shape_name": "BypassGovernanceRetention",
+            "type": "boolean"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "MFA": {
+            "name": "MFA",
+            "shape_name": "MFA",
+            "type": "string"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key"
+        ]
+      },
+      "name": "DeleteObject",
+      "output": {
+        "lists": {},
+        "markers": [
+          "DeleteMarker"
+        ],
+        "members": {
+          "DeleteMarker": {
+            "name": "DeleteMarker",
+            "shape_name": "DeleteMarker",
+            "type": "boolean"
+          },
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DeleteObjectTagging": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key"
+        ]
+      },
+      "name": "DeleteObjectTagging",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DeleteObjects": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "BypassGovernanceRetention": {
+            "name": "BypassGovernanceRetention",
+            "shape_name": "BypassGovernanceRetention",
+            "type": "boolean"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "Delete": {
+            "name": "Delete",
+            "shape_name": "Delete",
+            "type": "structure"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "MFA": {
+            "name": "MFA",
+            "shape_name": "MFA",
+            "type": "string"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Delete"
+        ]
+      },
+      "name": "DeleteObjects",
+      "output": {
+        "lists": {
+          "Deleted": {
+            "all_fields": [
+              "DeleteMarker",
+              "DeleteMarkerVersionId",
+              "Key",
+              "VersionId"
+            ],
+            "arn_fields": [],
+            "id_fields": [
+              "DeleteMarkerVersionId",
+              "VersionId"
+            ],
+            "name_fields": []
+          },
+          "Errors": {
+            "all_fields": [
+              "Code",
+              "Key",
+              "Message",
+              "VersionId"
+            ],
+            "arn_fields": [],
+            "id_fields": [
+              "VersionId"
+            ],
+            "name_fields": []
+          }
+        },
+        "markers": [],
+        "members": {
+          "Deleted": {
+            "name": "Deleted",
+            "shape_name": "DeletedObjects",
+            "type": "list"
+          },
+          "Errors": {
+            "name": "Errors",
+            "shape_name": "Errors",
+            "type": "list"
+          },
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DeletePublicAccessBlock": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "DeletePublicAccessBlock",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "GetBucketAccelerateConfiguration": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "GetBucketAccelerateConfiguration",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "BucketAccelerateStatus",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GetBucketAcl": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "GetBucketAcl",
+      "output": {
+        "lists": {
+          "Grants": {
+            "all_fields": [
+              "Grantee",
+              "Permission"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [],
+        "members": {
+          "Grants": {
+            "name": "Grants",
+            "shape_name": "Grants",
+            "type": "list"
+          },
+          "Owner": {
+            "name": "Owner",
+            "shape_name": "Owner",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "GetBucketAnalyticsConfiguration": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "AnalyticsId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Id"
+        ]
+      },
+      "name": "GetBucketAnalyticsConfiguration",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "AnalyticsConfiguration": {
+            "name": "AnalyticsConfiguration",
+            "shape_name": "AnalyticsConfiguration",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "GetBucketCors": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "GetBucketCors",
+      "output": {
+        "lists": {
+          "CORSRules": {
+            "all_fields": [
+              "AllowedHeaders",
+              "AllowedMethods",
+              "AllowedOrigins",
+              "ExposeHeaders",
+              "ID",
+              "MaxAgeSeconds"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [],
+        "members": {
+          "CORSRules": {
+            "name": "CORSRules",
+            "shape_name": "CORSRules",
+            "type": "list"
+          }
+        }
+      }
+    },
+    "GetBucketEncryption": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "GetBucketEncryption",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "ServerSideEncryptionConfiguration": {
+            "name": "ServerSideEncryptionConfiguration",
+            "shape_name": "ServerSideEncryptionConfiguration",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "GetBucketIntelligentTieringConfiguration": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "IntelligentTieringId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Id"
+        ]
+      },
+      "name": "GetBucketIntelligentTieringConfiguration",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "IntelligentTieringConfiguration": {
+            "name": "IntelligentTieringConfiguration",
+            "shape_name": "IntelligentTieringConfiguration",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "GetBucketInventoryConfiguration": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "InventoryId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Id"
+        ]
+      },
+      "name": "GetBucketInventoryConfiguration",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "InventoryConfiguration": {
+            "name": "InventoryConfiguration",
+            "shape_name": "InventoryConfiguration",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "GetBucketLifecycle": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "GetBucketLifecycle",
+      "output": {
+        "lists": {
+          "Rules": {
+            "all_fields": [
+              "AbortIncompleteMultipartUpload",
+              "Expiration",
+              "ID",
+              "NoncurrentVersionExpiration",
+              "NoncurrentVersionTransition",
+              "Prefix",
+              "Status",
+              "Transition"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [],
+        "members": {
+          "Rules": {
+            "name": "Rules",
+            "shape_name": "Rules",
+            "type": "list"
+          }
+        }
+      }
+    },
+    "GetBucketLifecycleConfiguration": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "GetBucketLifecycleConfiguration",
+      "output": {
+        "lists": {
+          "Rules": {
+            "all_fields": [
+              "AbortIncompleteMultipartUpload",
+              "Expiration",
+              "Filter",
+              "ID",
+              "NoncurrentVersionExpiration",
+              "NoncurrentVersionTransitions",
+              "Prefix",
+              "Status",
+              "Transitions"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [],
+        "members": {
+          "Rules": {
+            "name": "Rules",
+            "shape_name": "LifecycleRules",
+            "type": "list"
+          }
+        }
+      }
+    },
+    "GetBucketLocation": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "GetBucketLocation",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "LocationConstraint": {
+            "name": "LocationConstraint",
+            "shape_name": "BucketLocationConstraint",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GetBucketLogging": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "GetBucketLogging",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "LoggingEnabled": {
+            "name": "LoggingEnabled",
+            "shape_name": "LoggingEnabled",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "GetBucketMetricsConfiguration": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "MetricsId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Id"
+        ]
+      },
+      "name": "GetBucketMetricsConfiguration",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "MetricsConfiguration": {
+            "name": "MetricsConfiguration",
+            "shape_name": "MetricsConfiguration",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "GetBucketNotification": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "GetBucketNotification",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "CloudFunctionConfiguration": {
+            "name": "CloudFunctionConfiguration",
+            "shape_name": "CloudFunctionConfiguration",
+            "type": "structure"
+          },
+          "QueueConfiguration": {
+            "name": "QueueConfiguration",
+            "shape_name": "QueueConfigurationDeprecated",
+            "type": "structure"
+          },
+          "TopicConfiguration": {
+            "name": "TopicConfiguration",
+            "shape_name": "TopicConfigurationDeprecated",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "GetBucketNotificationConfiguration": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "GetBucketNotificationConfiguration",
+      "output": {
+        "lists": {
+          "LambdaFunctionConfigurations": {
+            "all_fields": [
+              "Events",
+              "Filter",
+              "Id",
+              "LambdaFunctionArn"
+            ],
+            "arn_fields": [
+              "LambdaFunctionArn"
+            ],
+            "id_fields": [
+              "Id"
+            ],
+            "name_fields": []
+          },
+          "QueueConfigurations": {
+            "all_fields": [
+              "Events",
+              "Filter",
+              "Id",
+              "QueueArn"
+            ],
+            "arn_fields": [
+              "QueueArn"
+            ],
+            "id_fields": [
+              "Id"
+            ],
+            "name_fields": []
+          },
+          "TopicConfigurations": {
+            "all_fields": [
+              "Events",
+              "Filter",
+              "Id",
+              "TopicArn"
+            ],
+            "arn_fields": [
+              "TopicArn"
+            ],
+            "id_fields": [
+              "Id"
+            ],
+            "name_fields": []
+          }
+        },
+        "markers": [],
+        "members": {
+          "EventBridgeConfiguration": {
+            "name": "EventBridgeConfiguration",
+            "shape_name": "EventBridgeConfiguration",
+            "type": "structure"
+          },
+          "LambdaFunctionConfigurations": {
+            "name": "LambdaFunctionConfigurations",
+            "shape_name": "LambdaFunctionConfigurationList",
+            "type": "list"
+          },
+          "QueueConfigurations": {
+            "name": "QueueConfigurations",
+            "shape_name": "QueueConfigurationList",
+            "type": "list"
+          },
+          "TopicConfigurations": {
+            "name": "TopicConfigurations",
+            "shape_name": "TopicConfigurationList",
+            "type": "list"
+          }
+        }
+      }
+    },
+    "GetBucketOwnershipControls": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "GetBucketOwnershipControls",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "OwnershipControls": {
+            "name": "OwnershipControls",
+            "shape_name": "OwnershipControls",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "GetBucketPolicy": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "GetBucketPolicy",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "Policy",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GetBucketPolicyStatus": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "GetBucketPolicyStatus",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "PolicyStatus": {
+            "name": "PolicyStatus",
+            "shape_name": "PolicyStatus",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "GetBucketReplication": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "GetBucketReplication",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "ReplicationConfiguration": {
+            "name": "ReplicationConfiguration",
+            "shape_name": "ReplicationConfiguration",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "GetBucketRequestPayment": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "GetBucketRequestPayment",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "Payer": {
+            "name": "Payer",
+            "shape_name": "Payer",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GetBucketTagging": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "GetBucketTagging",
+      "output": {
+        "lists": {
+          "TagSet": {
+            "all_fields": [
+              "Key",
+              "Value"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [],
+        "members": {
+          "TagSet": {
+            "name": "TagSet",
+            "shape_name": "TagSet",
+            "type": "list"
+          }
+        }
+      }
+    },
+    "GetBucketVersioning": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "GetBucketVersioning",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "MFADelete": {
+            "name": "MFADelete",
+            "shape_name": "MFADeleteStatus",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "BucketVersioningStatus",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GetBucketWebsite": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "GetBucketWebsite",
+      "output": {
+        "lists": {
+          "RoutingRules": {
+            "all_fields": [
+              "Condition",
+              "Redirect"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [],
+        "members": {
+          "ErrorDocument": {
+            "name": "ErrorDocument",
+            "shape_name": "ErrorDocument",
+            "type": "structure"
+          },
+          "IndexDocument": {
+            "name": "IndexDocument",
+            "shape_name": "IndexDocument",
+            "type": "structure"
+          },
+          "RedirectAllRequestsTo": {
+            "name": "RedirectAllRequestsTo",
+            "shape_name": "RedirectAllRequestsTo",
+            "type": "structure"
+          },
+          "RoutingRules": {
+            "name": "RoutingRules",
+            "shape_name": "RoutingRules",
+            "type": "list"
+          }
+        }
+      }
+    },
+    "GetObject": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumMode": {
+            "name": "ChecksumMode",
+            "shape_name": "ChecksumMode",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "IfMatch",
+            "type": "string"
+          },
+          "IfModifiedSince": {
+            "name": "IfModifiedSince",
+            "shape_name": "IfModifiedSince",
+            "type": "timestamp"
+          },
+          "IfNoneMatch": {
+            "name": "IfNoneMatch",
+            "shape_name": "IfNoneMatch",
+            "type": "string"
+          },
+          "IfUnmodifiedSince": {
+            "name": "IfUnmodifiedSince",
+            "shape_name": "IfUnmodifiedSince",
+            "type": "timestamp"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "PartNumber": {
+            "name": "PartNumber",
+            "shape_name": "PartNumber",
+            "type": "integer"
+          },
+          "Range": {
+            "name": "Range",
+            "shape_name": "Range",
+            "type": "string"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "ResponseCacheControl": {
+            "name": "ResponseCacheControl",
+            "shape_name": "ResponseCacheControl",
+            "type": "string"
+          },
+          "ResponseContentDisposition": {
+            "name": "ResponseContentDisposition",
+            "shape_name": "ResponseContentDisposition",
+            "type": "string"
+          },
+          "ResponseContentEncoding": {
+            "name": "ResponseContentEncoding",
+            "shape_name": "ResponseContentEncoding",
+            "type": "string"
+          },
+          "ResponseContentLanguage": {
+            "name": "ResponseContentLanguage",
+            "shape_name": "ResponseContentLanguage",
+            "type": "string"
+          },
+          "ResponseContentType": {
+            "name": "ResponseContentType",
+            "shape_name": "ResponseContentType",
+            "type": "string"
+          },
+          "ResponseExpires": {
+            "name": "ResponseExpires",
+            "shape_name": "ResponseExpires",
+            "type": "timestamp"
+          },
+          "SSECustomerAlgorithm": {
+            "name": "SSECustomerAlgorithm",
+            "shape_name": "SSECustomerAlgorithm",
+            "type": "string"
+          },
+          "SSECustomerKey": {
+            "name": "SSECustomerKey",
+            "shape_name": "SSECustomerKey",
+            "type": "string"
+          },
+          "SSECustomerKeyMD5": {
+            "name": "SSECustomerKeyMD5",
+            "shape_name": "SSECustomerKeyMD5",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key"
+        ]
+      },
+      "name": "GetObject",
+      "output": {
+        "lists": {},
+        "markers": [
+          "DeleteMarker"
+        ],
+        "members": {
+          "AcceptRanges": {
+            "name": "AcceptRanges",
+            "shape_name": "AcceptRanges",
+            "type": "string"
+          },
+          "Body": {
+            "name": "Body",
+            "shape_name": "Body",
+            "type": "blob"
+          },
+          "BucketKeyEnabled": {
+            "name": "BucketKeyEnabled",
+            "shape_name": "BucketKeyEnabled",
+            "type": "boolean"
+          },
+          "CacheControl": {
+            "name": "CacheControl",
+            "shape_name": "CacheControl",
+            "type": "string"
+          },
+          "ChecksumCRC32": {
+            "name": "ChecksumCRC32",
+            "shape_name": "ChecksumCRC32",
+            "type": "string"
+          },
+          "ChecksumCRC32C": {
+            "name": "ChecksumCRC32C",
+            "shape_name": "ChecksumCRC32C",
+            "type": "string"
+          },
+          "ChecksumSHA1": {
+            "name": "ChecksumSHA1",
+            "shape_name": "ChecksumSHA1",
+            "type": "string"
+          },
+          "ChecksumSHA256": {
+            "name": "ChecksumSHA256",
+            "shape_name": "ChecksumSHA256",
+            "type": "string"
+          },
+          "ContentDisposition": {
+            "name": "ContentDisposition",
+            "shape_name": "ContentDisposition",
+            "type": "string"
+          },
+          "ContentEncoding": {
+            "name": "ContentEncoding",
+            "shape_name": "ContentEncoding",
+            "type": "string"
+          },
+          "ContentLanguage": {
+            "name": "ContentLanguage",
+            "shape_name": "ContentLanguage",
+            "type": "string"
+          },
+          "ContentLength": {
+            "name": "ContentLength",
+            "shape_name": "ContentLength",
+            "type": "long"
+          },
+          "ContentRange": {
+            "name": "ContentRange",
+            "shape_name": "ContentRange",
+            "type": "string"
+          },
+          "ContentType": {
+            "name": "ContentType",
+            "shape_name": "ContentType",
+            "type": "string"
+          },
+          "DeleteMarker": {
+            "name": "DeleteMarker",
+            "shape_name": "DeleteMarker",
+            "type": "boolean"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "ETag",
+            "type": "string"
+          },
+          "Expiration": {
+            "name": "Expiration",
+            "shape_name": "Expiration",
+            "type": "string"
+          },
+          "Expires": {
+            "name": "Expires",
+            "shape_name": "Expires",
+            "type": "timestamp"
+          },
+          "LastModified": {
+            "name": "LastModified",
+            "shape_name": "LastModified",
+            "type": "timestamp"
+          },
+          "Metadata": {
+            "name": "Metadata",
+            "shape_name": "Metadata",
+            "type": "map"
+          },
+          "MissingMeta": {
+            "name": "MissingMeta",
+            "shape_name": "MissingMeta",
+            "type": "integer"
+          },
+          "ObjectLockLegalHoldStatus": {
+            "name": "ObjectLockLegalHoldStatus",
+            "shape_name": "ObjectLockLegalHoldStatus",
+            "type": "string"
+          },
+          "ObjectLockMode": {
+            "name": "ObjectLockMode",
+            "shape_name": "ObjectLockMode",
+            "type": "string"
+          },
+          "ObjectLockRetainUntilDate": {
+            "name": "ObjectLockRetainUntilDate",
+            "shape_name": "ObjectLockRetainUntilDate",
+            "type": "timestamp"
+          },
+          "PartsCount": {
+            "name": "PartsCount",
+            "shape_name": "PartsCount",
+            "type": "integer"
+          },
+          "ReplicationStatus": {
+            "name": "ReplicationStatus",
+            "shape_name": "ReplicationStatus",
+            "type": "string"
+          },
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          },
+          "Restore": {
+            "name": "Restore",
+            "shape_name": "Restore",
+            "type": "string"
+          },
+          "SSECustomerAlgorithm": {
+            "name": "SSECustomerAlgorithm",
+            "shape_name": "SSECustomerAlgorithm",
+            "type": "string"
+          },
+          "SSECustomerKeyMD5": {
+            "name": "SSECustomerKeyMD5",
+            "shape_name": "SSECustomerKeyMD5",
+            "type": "string"
+          },
+          "SSEKMSKeyId": {
+            "name": "SSEKMSKeyId",
+            "shape_name": "SSEKMSKeyId",
+            "type": "string"
+          },
+          "ServerSideEncryption": {
+            "name": "ServerSideEncryption",
+            "shape_name": "ServerSideEncryption",
+            "type": "string"
+          },
+          "StorageClass": {
+            "name": "StorageClass",
+            "shape_name": "StorageClass",
+            "type": "string"
+          },
+          "TagCount": {
+            "name": "TagCount",
+            "shape_name": "TagCount",
+            "type": "integer"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          },
+          "WebsiteRedirectLocation": {
+            "name": "WebsiteRedirectLocation",
+            "shape_name": "WebsiteRedirectLocation",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GetObjectAcl": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key"
+        ]
+      },
+      "name": "GetObjectAcl",
+      "output": {
+        "lists": {
+          "Grants": {
+            "all_fields": [
+              "Grantee",
+              "Permission"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [],
+        "members": {
+          "Grants": {
+            "name": "Grants",
+            "shape_name": "Grants",
+            "type": "list"
+          },
+          "Owner": {
+            "name": "Owner",
+            "shape_name": "Owner",
+            "type": "structure"
+          },
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GetObjectAttributes": {
+      "input": {
+        "markers": [
+          "PartNumberMarker"
+        ],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "MaxParts": {
+            "name": "MaxParts",
+            "shape_name": "MaxParts",
+            "type": "integer"
+          },
+          "ObjectAttributes": {
+            "name": "ObjectAttributes",
+            "shape_name": "ObjectAttributesList",
+            "type": "list"
+          },
+          "PartNumberMarker": {
+            "name": "PartNumberMarker",
+            "shape_name": "PartNumberMarker",
+            "type": "integer"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "SSECustomerAlgorithm": {
+            "name": "SSECustomerAlgorithm",
+            "shape_name": "SSECustomerAlgorithm",
+            "type": "string"
+          },
+          "SSECustomerKey": {
+            "name": "SSECustomerKey",
+            "shape_name": "SSECustomerKey",
+            "type": "string"
+          },
+          "SSECustomerKeyMD5": {
+            "name": "SSECustomerKeyMD5",
+            "shape_name": "SSECustomerKeyMD5",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key",
+          "ObjectAttributes"
+        ]
+      },
+      "name": "GetObjectAttributes",
+      "output": {
+        "lists": {},
+        "markers": [
+          "DeleteMarker"
+        ],
+        "members": {
+          "Checksum": {
+            "name": "Checksum",
+            "shape_name": "Checksum",
+            "type": "structure"
+          },
+          "DeleteMarker": {
+            "name": "DeleteMarker",
+            "shape_name": "DeleteMarker",
+            "type": "boolean"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "ETag",
+            "type": "string"
+          },
+          "LastModified": {
+            "name": "LastModified",
+            "shape_name": "LastModified",
+            "type": "timestamp"
+          },
+          "ObjectParts": {
+            "name": "ObjectParts",
+            "shape_name": "GetObjectAttributesParts",
+            "type": "structure"
+          },
+          "ObjectSize": {
+            "name": "ObjectSize",
+            "shape_name": "ObjectSize",
+            "type": "long"
+          },
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          },
+          "StorageClass": {
+            "name": "StorageClass",
+            "shape_name": "StorageClass",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GetObjectLegalHold": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key"
+        ]
+      },
+      "name": "GetObjectLegalHold",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "LegalHold": {
+            "name": "LegalHold",
+            "shape_name": "ObjectLockLegalHold",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "GetObjectLockConfiguration": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "GetObjectLockConfiguration",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "ObjectLockConfiguration": {
+            "name": "ObjectLockConfiguration",
+            "shape_name": "ObjectLockConfiguration",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "GetObjectRetention": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key"
+        ]
+      },
+      "name": "GetObjectRetention",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "Retention": {
+            "name": "Retention",
+            "shape_name": "ObjectLockRetention",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "GetObjectTagging": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key"
+        ]
+      },
+      "name": "GetObjectTagging",
+      "output": {
+        "lists": {
+          "TagSet": {
+            "all_fields": [
+              "Key",
+              "Value"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [],
+        "members": {
+          "TagSet": {
+            "name": "TagSet",
+            "shape_name": "TagSet",
+            "type": "list"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GetObjectTorrent": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key"
+        ]
+      },
+      "name": "GetObjectTorrent",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "Body": {
+            "name": "Body",
+            "shape_name": "Body",
+            "type": "blob"
+          },
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "GetPublicAccessBlock": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "GetPublicAccessBlock",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "PublicAccessBlockConfiguration": {
+            "name": "PublicAccessBlockConfiguration",
+            "shape_name": "PublicAccessBlockConfiguration",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "HeadBucket": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "HeadBucket",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "AccessPointAlias": {
+            "name": "AccessPointAlias",
+            "shape_name": "AccessPointAlias",
+            "type": "boolean"
+          },
+          "BucketLocationName": {
+            "name": "BucketLocationName",
+            "shape_name": "BucketLocationName",
+            "type": "string"
+          },
+          "BucketLocationType": {
+            "name": "BucketLocationType",
+            "shape_name": "LocationType",
+            "type": "string"
+          },
+          "BucketRegion": {
+            "name": "BucketRegion",
+            "shape_name": "Region",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "HeadObject": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumMode": {
+            "name": "ChecksumMode",
+            "shape_name": "ChecksumMode",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "IfMatch",
+            "type": "string"
+          },
+          "IfModifiedSince": {
+            "name": "IfModifiedSince",
+            "shape_name": "IfModifiedSince",
+            "type": "timestamp"
+          },
+          "IfNoneMatch": {
+            "name": "IfNoneMatch",
+            "shape_name": "IfNoneMatch",
+            "type": "string"
+          },
+          "IfUnmodifiedSince": {
+            "name": "IfUnmodifiedSince",
+            "shape_name": "IfUnmodifiedSince",
+            "type": "timestamp"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "PartNumber": {
+            "name": "PartNumber",
+            "shape_name": "PartNumber",
+            "type": "integer"
+          },
+          "Range": {
+            "name": "Range",
+            "shape_name": "Range",
+            "type": "string"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "ResponseCacheControl": {
+            "name": "ResponseCacheControl",
+            "shape_name": "ResponseCacheControl",
+            "type": "string"
+          },
+          "ResponseContentDisposition": {
+            "name": "ResponseContentDisposition",
+            "shape_name": "ResponseContentDisposition",
+            "type": "string"
+          },
+          "ResponseContentEncoding": {
+            "name": "ResponseContentEncoding",
+            "shape_name": "ResponseContentEncoding",
+            "type": "string"
+          },
+          "ResponseContentLanguage": {
+            "name": "ResponseContentLanguage",
+            "shape_name": "ResponseContentLanguage",
+            "type": "string"
+          },
+          "ResponseContentType": {
+            "name": "ResponseContentType",
+            "shape_name": "ResponseContentType",
+            "type": "string"
+          },
+          "ResponseExpires": {
+            "name": "ResponseExpires",
+            "shape_name": "ResponseExpires",
+            "type": "timestamp"
+          },
+          "SSECustomerAlgorithm": {
+            "name": "SSECustomerAlgorithm",
+            "shape_name": "SSECustomerAlgorithm",
+            "type": "string"
+          },
+          "SSECustomerKey": {
+            "name": "SSECustomerKey",
+            "shape_name": "SSECustomerKey",
+            "type": "string"
+          },
+          "SSECustomerKeyMD5": {
+            "name": "SSECustomerKeyMD5",
+            "shape_name": "SSECustomerKeyMD5",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key"
+        ]
+      },
+      "name": "HeadObject",
+      "output": {
+        "lists": {},
+        "markers": [
+          "DeleteMarker"
+        ],
+        "members": {
+          "AcceptRanges": {
+            "name": "AcceptRanges",
+            "shape_name": "AcceptRanges",
+            "type": "string"
+          },
+          "ArchiveStatus": {
+            "name": "ArchiveStatus",
+            "shape_name": "ArchiveStatus",
+            "type": "string"
+          },
+          "BucketKeyEnabled": {
+            "name": "BucketKeyEnabled",
+            "shape_name": "BucketKeyEnabled",
+            "type": "boolean"
+          },
+          "CacheControl": {
+            "name": "CacheControl",
+            "shape_name": "CacheControl",
+            "type": "string"
+          },
+          "ChecksumCRC32": {
+            "name": "ChecksumCRC32",
+            "shape_name": "ChecksumCRC32",
+            "type": "string"
+          },
+          "ChecksumCRC32C": {
+            "name": "ChecksumCRC32C",
+            "shape_name": "ChecksumCRC32C",
+            "type": "string"
+          },
+          "ChecksumSHA1": {
+            "name": "ChecksumSHA1",
+            "shape_name": "ChecksumSHA1",
+            "type": "string"
+          },
+          "ChecksumSHA256": {
+            "name": "ChecksumSHA256",
+            "shape_name": "ChecksumSHA256",
+            "type": "string"
+          },
+          "ContentDisposition": {
+            "name": "ContentDisposition",
+            "shape_name": "ContentDisposition",
+            "type": "string"
+          },
+          "ContentEncoding": {
+            "name": "ContentEncoding",
+            "shape_name": "ContentEncoding",
+            "type": "string"
+          },
+          "ContentLanguage": {
+            "name": "ContentLanguage",
+            "shape_name": "ContentLanguage",
+            "type": "string"
+          },
+          "ContentLength": {
+            "name": "ContentLength",
+            "shape_name": "ContentLength",
+            "type": "long"
+          },
+          "ContentType": {
+            "name": "ContentType",
+            "shape_name": "ContentType",
+            "type": "string"
+          },
+          "DeleteMarker": {
+            "name": "DeleteMarker",
+            "shape_name": "DeleteMarker",
+            "type": "boolean"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "ETag",
+            "type": "string"
+          },
+          "Expiration": {
+            "name": "Expiration",
+            "shape_name": "Expiration",
+            "type": "string"
+          },
+          "Expires": {
+            "name": "Expires",
+            "shape_name": "Expires",
+            "type": "timestamp"
+          },
+          "LastModified": {
+            "name": "LastModified",
+            "shape_name": "LastModified",
+            "type": "timestamp"
+          },
+          "Metadata": {
+            "name": "Metadata",
+            "shape_name": "Metadata",
+            "type": "map"
+          },
+          "MissingMeta": {
+            "name": "MissingMeta",
+            "shape_name": "MissingMeta",
+            "type": "integer"
+          },
+          "ObjectLockLegalHoldStatus": {
+            "name": "ObjectLockLegalHoldStatus",
+            "shape_name": "ObjectLockLegalHoldStatus",
+            "type": "string"
+          },
+          "ObjectLockMode": {
+            "name": "ObjectLockMode",
+            "shape_name": "ObjectLockMode",
+            "type": "string"
+          },
+          "ObjectLockRetainUntilDate": {
+            "name": "ObjectLockRetainUntilDate",
+            "shape_name": "ObjectLockRetainUntilDate",
+            "type": "timestamp"
+          },
+          "PartsCount": {
+            "name": "PartsCount",
+            "shape_name": "PartsCount",
+            "type": "integer"
+          },
+          "ReplicationStatus": {
+            "name": "ReplicationStatus",
+            "shape_name": "ReplicationStatus",
+            "type": "string"
+          },
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          },
+          "Restore": {
+            "name": "Restore",
+            "shape_name": "Restore",
+            "type": "string"
+          },
+          "SSECustomerAlgorithm": {
+            "name": "SSECustomerAlgorithm",
+            "shape_name": "SSECustomerAlgorithm",
+            "type": "string"
+          },
+          "SSECustomerKeyMD5": {
+            "name": "SSECustomerKeyMD5",
+            "shape_name": "SSECustomerKeyMD5",
+            "type": "string"
+          },
+          "SSEKMSKeyId": {
+            "name": "SSEKMSKeyId",
+            "shape_name": "SSEKMSKeyId",
+            "type": "string"
+          },
+          "ServerSideEncryption": {
+            "name": "ServerSideEncryption",
+            "shape_name": "ServerSideEncryption",
+            "type": "string"
+          },
+          "StorageClass": {
+            "name": "StorageClass",
+            "shape_name": "StorageClass",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          },
+          "WebsiteRedirectLocation": {
+            "name": "WebsiteRedirectLocation",
+            "shape_name": "WebsiteRedirectLocation",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ListBucketAnalyticsConfigurations": {
+      "input": {
+        "markers": [
+          "ContinuationToken"
+        ],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ContinuationToken": {
+            "name": "ContinuationToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "ListBucketAnalyticsConfigurations",
+      "output": {
+        "lists": {
+          "AnalyticsConfigurationList": {
+            "all_fields": [
+              "Filter",
+              "Id",
+              "StorageClassAnalysis"
+            ],
+            "arn_fields": [],
+            "id_fields": [
+              "Id"
+            ],
+            "name_fields": []
+          }
+        },
+        "markers": [
+          "ContinuationToken",
+          "NextContinuationToken"
+        ],
+        "members": {
+          "AnalyticsConfigurationList": {
+            "name": "AnalyticsConfigurationList",
+            "shape_name": "AnalyticsConfigurationList",
+            "type": "list"
+          },
+          "ContinuationToken": {
+            "name": "ContinuationToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "IsTruncated",
+            "type": "boolean"
+          },
+          "NextContinuationToken": {
+            "name": "NextContinuationToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ListBucketIntelligentTieringConfigurations": {
+      "input": {
+        "markers": [
+          "ContinuationToken"
+        ],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ContinuationToken": {
+            "name": "ContinuationToken",
+            "shape_name": "Token",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "ListBucketIntelligentTieringConfigurations",
+      "output": {
+        "lists": {
+          "IntelligentTieringConfigurationList": {
+            "all_fields": [
+              "Filter",
+              "Id",
+              "Status",
+              "Tierings"
+            ],
+            "arn_fields": [],
+            "id_fields": [
+              "Id"
+            ],
+            "name_fields": []
+          }
+        },
+        "markers": [
+          "ContinuationToken",
+          "NextContinuationToken"
+        ],
+        "members": {
+          "ContinuationToken": {
+            "name": "ContinuationToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "IntelligentTieringConfigurationList": {
+            "name": "IntelligentTieringConfigurationList",
+            "shape_name": "IntelligentTieringConfigurationList",
+            "type": "list"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "IsTruncated",
+            "type": "boolean"
+          },
+          "NextContinuationToken": {
+            "name": "NextContinuationToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ListBucketInventoryConfigurations": {
+      "input": {
+        "markers": [
+          "ContinuationToken"
+        ],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ContinuationToken": {
+            "name": "ContinuationToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "ListBucketInventoryConfigurations",
+      "output": {
+        "lists": {
+          "InventoryConfigurationList": {
+            "all_fields": [
+              "Destination",
+              "Filter",
+              "Id",
+              "IncludedObjectVersions",
+              "IsEnabled",
+              "OptionalFields",
+              "Schedule"
+            ],
+            "arn_fields": [],
+            "id_fields": [
+              "Id"
+            ],
+            "name_fields": []
+          }
+        },
+        "markers": [
+          "ContinuationToken",
+          "NextContinuationToken"
+        ],
+        "members": {
+          "ContinuationToken": {
+            "name": "ContinuationToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "InventoryConfigurationList": {
+            "name": "InventoryConfigurationList",
+            "shape_name": "InventoryConfigurationList",
+            "type": "list"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "IsTruncated",
+            "type": "boolean"
+          },
+          "NextContinuationToken": {
+            "name": "NextContinuationToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ListBucketMetricsConfigurations": {
+      "input": {
+        "markers": [
+          "ContinuationToken"
+        ],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ContinuationToken": {
+            "name": "ContinuationToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "ListBucketMetricsConfigurations",
+      "output": {
+        "lists": {
+          "MetricsConfigurationList": {
+            "all_fields": [
+              "Filter",
+              "Id"
+            ],
+            "arn_fields": [],
+            "id_fields": [
+              "Id"
+            ],
+            "name_fields": []
+          }
+        },
+        "markers": [
+          "ContinuationToken",
+          "NextContinuationToken"
+        ],
+        "members": {
+          "ContinuationToken": {
+            "name": "ContinuationToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "IsTruncated",
+            "type": "boolean"
+          },
+          "MetricsConfigurationList": {
+            "name": "MetricsConfigurationList",
+            "shape_name": "MetricsConfigurationList",
+            "type": "list"
+          },
+          "NextContinuationToken": {
+            "name": "NextContinuationToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ListBuckets": {
+      "input": {
+        "markers": [],
+        "members": {},
+        "required": null
+      },
+      "name": "ListBuckets",
+      "output": {
+        "jq": ".Buckets//[]|.[]",
+        "lists": {
+          "Buckets": {
+            "all_fields": [
+              "CreationDate",
+              "Name"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": [
+              "Name"
+            ]
+          }
+        },
+        "markers": [],
+        "members": {
+          "Buckets": {
+            "name": "Buckets",
+            "shape_name": "Buckets",
+            "type": "list"
+          },
+          "Owner": {
+            "name": "Owner",
+            "shape_name": "Owner",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "ListDirectoryBuckets": {
+      "input": {
+        "markers": [
+          "ContinuationToken"
+        ],
+        "members": {
+          "ContinuationToken": {
+            "name": "ContinuationToken",
+            "shape_name": "DirectoryBucketToken",
+            "type": "string"
+          },
+          "MaxDirectoryBuckets": {
+            "name": "MaxDirectoryBuckets",
+            "shape_name": "MaxDirectoryBuckets",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "ListDirectoryBuckets",
+      "output": {
+        "lists": {
+          "Buckets": {
+            "all_fields": [
+              "CreationDate",
+              "Name"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": [
+              "Name"
+            ]
+          }
+        },
+        "markers": [
+          "ContinuationToken"
+        ],
+        "members": {
+          "Buckets": {
+            "name": "Buckets",
+            "shape_name": "Buckets",
+            "type": "list"
+          },
+          "ContinuationToken": {
+            "name": "ContinuationToken",
+            "shape_name": "DirectoryBucketToken",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ListMultipartUploads": {
+      "input": {
+        "markers": [
+          "KeyMarker",
+          "UploadIdMarker"
+        ],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "Delimiter": {
+            "name": "Delimiter",
+            "shape_name": "Delimiter",
+            "type": "string"
+          },
+          "EncodingType": {
+            "name": "EncodingType",
+            "shape_name": "EncodingType",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "KeyMarker": {
+            "name": "KeyMarker",
+            "shape_name": "KeyMarker",
+            "type": "string"
+          },
+          "MaxUploads": {
+            "name": "MaxUploads",
+            "shape_name": "MaxUploads",
+            "type": "integer"
+          },
+          "Prefix": {
+            "name": "Prefix",
+            "shape_name": "Prefix",
+            "type": "string"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "UploadIdMarker": {
+            "name": "UploadIdMarker",
+            "shape_name": "UploadIdMarker",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "ListMultipartUploads",
+      "output": {
+        "lists": {
+          "CommonPrefixes": {
+            "all_fields": [
+              "Prefix"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          },
+          "Uploads": {
+            "all_fields": [
+              "ChecksumAlgorithm",
+              "Initiated",
+              "Initiator",
+              "Key",
+              "Owner",
+              "StorageClass",
+              "UploadId"
+            ],
+            "arn_fields": [],
+            "id_fields": [
+              "UploadId"
+            ],
+            "name_fields": []
+          }
+        },
+        "markers": [
+          "KeyMarker",
+          "NextKeyMarker",
+          "NextUploadIdMarker",
+          "UploadIdMarker"
+        ],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "CommonPrefixes": {
+            "name": "CommonPrefixes",
+            "shape_name": "CommonPrefixList",
+            "type": "list"
+          },
+          "Delimiter": {
+            "name": "Delimiter",
+            "shape_name": "Delimiter",
+            "type": "string"
+          },
+          "EncodingType": {
+            "name": "EncodingType",
+            "shape_name": "EncodingType",
+            "type": "string"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "IsTruncated",
+            "type": "boolean"
+          },
+          "KeyMarker": {
+            "name": "KeyMarker",
+            "shape_name": "KeyMarker",
+            "type": "string"
+          },
+          "MaxUploads": {
+            "name": "MaxUploads",
+            "shape_name": "MaxUploads",
+            "type": "integer"
+          },
+          "NextKeyMarker": {
+            "name": "NextKeyMarker",
+            "shape_name": "NextKeyMarker",
+            "type": "string"
+          },
+          "NextUploadIdMarker": {
+            "name": "NextUploadIdMarker",
+            "shape_name": "NextUploadIdMarker",
+            "type": "string"
+          },
+          "Prefix": {
+            "name": "Prefix",
+            "shape_name": "Prefix",
+            "type": "string"
+          },
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          },
+          "UploadIdMarker": {
+            "name": "UploadIdMarker",
+            "shape_name": "UploadIdMarker",
+            "type": "string"
+          },
+          "Uploads": {
+            "name": "Uploads",
+            "shape_name": "MultipartUploadList",
+            "type": "list"
+          }
+        }
+      }
+    },
+    "ListObjectVersions": {
+      "input": {
+        "markers": [
+          "KeyMarker",
+          "VersionIdMarker"
+        ],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "Delimiter": {
+            "name": "Delimiter",
+            "shape_name": "Delimiter",
+            "type": "string"
+          },
+          "EncodingType": {
+            "name": "EncodingType",
+            "shape_name": "EncodingType",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "KeyMarker": {
+            "name": "KeyMarker",
+            "shape_name": "KeyMarker",
+            "type": "string"
+          },
+          "MaxKeys": {
+            "name": "MaxKeys",
+            "shape_name": "MaxKeys",
+            "type": "integer"
+          },
+          "OptionalObjectAttributes": {
+            "name": "OptionalObjectAttributes",
+            "shape_name": "OptionalObjectAttributesList",
+            "type": "list"
+          },
+          "Prefix": {
+            "name": "Prefix",
+            "shape_name": "Prefix",
+            "type": "string"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "VersionIdMarker": {
+            "name": "VersionIdMarker",
+            "shape_name": "VersionIdMarker",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "ListObjectVersions",
+      "output": {
+        "jq": "{Bucket: .Name} as $all | {Delimiter} as $prefix_only | ($all + $prefix_only + (.CommonPrefixes//[]|.[])), ($all + (.Versions//[]|.[]))",
+        "lists": {
+          "CommonPrefixes": {
+            "all_fields": [
+              "Prefix"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          },
+          "DeleteMarkers": {
+            "all_fields": [
+              "IsLatest",
+              "Key",
+              "LastModified",
+              "Owner",
+              "VersionId"
+            ],
+            "arn_fields": [],
+            "id_fields": [
+              "VersionId"
+            ],
+            "name_fields": []
+          },
+          "Versions": {
+            "all_fields": [
+              "ChecksumAlgorithm",
+              "ETag",
+              "IsLatest",
+              "Key",
+              "LastModified",
+              "Owner",
+              "RestoreStatus",
+              "Size",
+              "StorageClass",
+              "VersionId"
+            ],
+            "arn_fields": [],
+            "id_fields": [
+              "VersionId"
+            ],
+            "name_fields": []
+          }
+        },
+        "markers": [
+          "DeleteMarkers",
+          "KeyMarker",
+          "NextKeyMarker",
+          "NextVersionIdMarker",
+          "VersionIdMarker"
+        ],
+        "members": {
+          "CommonPrefixes": {
+            "name": "CommonPrefixes",
+            "shape_name": "CommonPrefixList",
+            "type": "list"
+          },
+          "DeleteMarkers": {
+            "name": "DeleteMarkers",
+            "shape_name": "DeleteMarkers",
+            "type": "list"
+          },
+          "Delimiter": {
+            "name": "Delimiter",
+            "shape_name": "Delimiter",
+            "type": "string"
+          },
+          "EncodingType": {
+            "name": "EncodingType",
+            "shape_name": "EncodingType",
+            "type": "string"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "IsTruncated",
+            "type": "boolean"
+          },
+          "KeyMarker": {
+            "name": "KeyMarker",
+            "shape_name": "KeyMarker",
+            "type": "string"
+          },
+          "MaxKeys": {
+            "name": "MaxKeys",
+            "shape_name": "MaxKeys",
+            "type": "integer"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "NextKeyMarker": {
+            "name": "NextKeyMarker",
+            "shape_name": "NextKeyMarker",
+            "type": "string"
+          },
+          "NextVersionIdMarker": {
+            "name": "NextVersionIdMarker",
+            "shape_name": "NextVersionIdMarker",
+            "type": "string"
+          },
+          "Prefix": {
+            "name": "Prefix",
+            "shape_name": "Prefix",
+            "type": "string"
+          },
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          },
+          "VersionIdMarker": {
+            "name": "VersionIdMarker",
+            "shape_name": "VersionIdMarker",
+            "type": "string"
+          },
+          "Versions": {
+            "name": "Versions",
+            "shape_name": "ObjectVersionList",
+            "type": "list"
+          }
+        }
+      }
+    },
+    "ListObjects": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "Delimiter": {
+            "name": "Delimiter",
+            "shape_name": "Delimiter",
+            "type": "string"
+          },
+          "EncodingType": {
+            "name": "EncodingType",
+            "shape_name": "EncodingType",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "MaxKeys": {
+            "name": "MaxKeys",
+            "shape_name": "MaxKeys",
+            "type": "integer"
+          },
+          "OptionalObjectAttributes": {
+            "name": "OptionalObjectAttributes",
+            "shape_name": "OptionalObjectAttributesList",
+            "type": "list"
+          },
+          "Prefix": {
+            "name": "Prefix",
+            "shape_name": "Prefix",
+            "type": "string"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "ListObjects",
+      "output": {
+        "jq": "{Bucket: .Name} as $all | {Delimiter} as $prefix_only | ($all + $prefix_only + (.CommonPrefixes//[]|.[])), ($all + .Contents//[]|.[]))",
+        "lists": {
+          "CommonPrefixes": {
+            "all_fields": [
+              "Prefix"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          },
+          "Contents": {
+            "all_fields": [
+              "ChecksumAlgorithm",
+              "ETag",
+              "Key",
+              "LastModified",
+              "Owner",
+              "RestoreStatus",
+              "Size",
+              "StorageClass"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [
+          "Marker",
+          "NextMarker"
+        ],
+        "members": {
+          "CommonPrefixes": {
+            "name": "CommonPrefixes",
+            "shape_name": "CommonPrefixList",
+            "type": "list"
+          },
+          "Contents": {
+            "name": "Contents",
+            "shape_name": "ObjectList",
+            "type": "list"
+          },
+          "Delimiter": {
+            "name": "Delimiter",
+            "shape_name": "Delimiter",
+            "type": "string"
+          },
+          "EncodingType": {
+            "name": "EncodingType",
+            "shape_name": "EncodingType",
+            "type": "string"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "IsTruncated",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "MaxKeys": {
+            "name": "MaxKeys",
+            "shape_name": "MaxKeys",
+            "type": "integer"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          },
+          "Prefix": {
+            "name": "Prefix",
+            "shape_name": "Prefix",
+            "type": "string"
+          },
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ListObjectsV2": {
+      "input": {
+        "markers": [
+          "ContinuationToken"
+        ],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ContinuationToken": {
+            "name": "ContinuationToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "Delimiter": {
+            "name": "Delimiter",
+            "shape_name": "Delimiter",
+            "type": "string"
+          },
+          "EncodingType": {
+            "name": "EncodingType",
+            "shape_name": "EncodingType",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "FetchOwner": {
+            "name": "FetchOwner",
+            "shape_name": "FetchOwner",
+            "type": "boolean"
+          },
+          "MaxKeys": {
+            "name": "MaxKeys",
+            "shape_name": "MaxKeys",
+            "type": "integer"
+          },
+          "OptionalObjectAttributes": {
+            "name": "OptionalObjectAttributes",
+            "shape_name": "OptionalObjectAttributesList",
+            "type": "list"
+          },
+          "Prefix": {
+            "name": "Prefix",
+            "shape_name": "Prefix",
+            "type": "string"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "StartAfter": {
+            "name": "StartAfter",
+            "shape_name": "StartAfter",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "ListObjectsV2",
+      "output": {
+        "jq": "{Bucket: .Name} as $all | {Delimiter} as $prefix_only | ($all + $prefix_only + (.CommonPrefixes//[]|.[])), ($all + .Contents//[]|.[]))",
+        "lists": {
+          "CommonPrefixes": {
+            "all_fields": [
+              "Prefix"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          },
+          "Contents": {
+            "all_fields": [
+              "ChecksumAlgorithm",
+              "ETag",
+              "Key",
+              "LastModified",
+              "Owner",
+              "RestoreStatus",
+              "Size",
+              "StorageClass"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [
+          "ContinuationToken",
+          "NextContinuationToken"
+        ],
+        "members": {
+          "CommonPrefixes": {
+            "name": "CommonPrefixes",
+            "shape_name": "CommonPrefixList",
+            "type": "list"
+          },
+          "Contents": {
+            "name": "Contents",
+            "shape_name": "ObjectList",
+            "type": "list"
+          },
+          "ContinuationToken": {
+            "name": "ContinuationToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "Delimiter": {
+            "name": "Delimiter",
+            "shape_name": "Delimiter",
+            "type": "string"
+          },
+          "EncodingType": {
+            "name": "EncodingType",
+            "shape_name": "EncodingType",
+            "type": "string"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "IsTruncated",
+            "type": "boolean"
+          },
+          "KeyCount": {
+            "name": "KeyCount",
+            "shape_name": "KeyCount",
+            "type": "integer"
+          },
+          "MaxKeys": {
+            "name": "MaxKeys",
+            "shape_name": "MaxKeys",
+            "type": "integer"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "NextContinuationToken": {
+            "name": "NextContinuationToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Prefix": {
+            "name": "Prefix",
+            "shape_name": "Prefix",
+            "type": "string"
+          },
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          },
+          "StartAfter": {
+            "name": "StartAfter",
+            "shape_name": "StartAfter",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ListParts": {
+      "input": {
+        "markers": [
+          "PartNumberMarker"
+        ],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "MaxParts": {
+            "name": "MaxParts",
+            "shape_name": "MaxParts",
+            "type": "integer"
+          },
+          "PartNumberMarker": {
+            "name": "PartNumberMarker",
+            "shape_name": "PartNumberMarker",
+            "type": "integer"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "SSECustomerAlgorithm": {
+            "name": "SSECustomerAlgorithm",
+            "shape_name": "SSECustomerAlgorithm",
+            "type": "string"
+          },
+          "SSECustomerKey": {
+            "name": "SSECustomerKey",
+            "shape_name": "SSECustomerKey",
+            "type": "string"
+          },
+          "SSECustomerKeyMD5": {
+            "name": "SSECustomerKeyMD5",
+            "shape_name": "SSECustomerKeyMD5",
+            "type": "string"
+          },
+          "UploadId": {
+            "name": "UploadId",
+            "shape_name": "MultipartUploadId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key",
+          "UploadId"
+        ]
+      },
+      "name": "ListParts",
+      "output": {
+        "lists": {
+          "Parts": {
+            "all_fields": [
+              "ChecksumCRC32",
+              "ChecksumCRC32C",
+              "ChecksumSHA1",
+              "ChecksumSHA256",
+              "ETag",
+              "LastModified",
+              "PartNumber",
+              "Size"
+            ],
+            "arn_fields": [],
+            "id_fields": [],
+            "name_fields": []
+          }
+        },
+        "markers": [
+          "NextPartNumberMarker",
+          "PartNumberMarker"
+        ],
+        "members": {
+          "AbortDate": {
+            "name": "AbortDate",
+            "shape_name": "AbortDate",
+            "type": "timestamp"
+          },
+          "AbortRuleId": {
+            "name": "AbortRuleId",
+            "shape_name": "AbortRuleId",
+            "type": "string"
+          },
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "Initiator": {
+            "name": "Initiator",
+            "shape_name": "Initiator",
+            "type": "structure"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "IsTruncated",
+            "type": "boolean"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "MaxParts": {
+            "name": "MaxParts",
+            "shape_name": "MaxParts",
+            "type": "integer"
+          },
+          "NextPartNumberMarker": {
+            "name": "NextPartNumberMarker",
+            "shape_name": "NextPartNumberMarker",
+            "type": "integer"
+          },
+          "Owner": {
+            "name": "Owner",
+            "shape_name": "Owner",
+            "type": "structure"
+          },
+          "PartNumberMarker": {
+            "name": "PartNumberMarker",
+            "shape_name": "PartNumberMarker",
+            "type": "integer"
+          },
+          "Parts": {
+            "name": "Parts",
+            "shape_name": "Parts",
+            "type": "list"
+          },
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          },
+          "StorageClass": {
+            "name": "StorageClass",
+            "shape_name": "StorageClass",
+            "type": "string"
+          },
+          "UploadId": {
+            "name": "UploadId",
+            "shape_name": "MultipartUploadId",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PutBucketAccelerateConfiguration": {
+      "input": {
+        "markers": [],
+        "members": {
+          "AccelerateConfiguration": {
+            "name": "AccelerateConfiguration",
+            "shape_name": "AccelerateConfiguration",
+            "type": "structure"
+          },
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "AccelerateConfiguration"
+        ]
+      },
+      "name": "PutBucketAccelerateConfiguration",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "PutBucketAcl": {
+      "input": {
+        "markers": [],
+        "members": {
+          "ACL": {
+            "name": "ACL",
+            "shape_name": "BucketCannedACL",
+            "type": "string"
+          },
+          "AccessControlPolicy": {
+            "name": "AccessControlPolicy",
+            "shape_name": "AccessControlPolicy",
+            "type": "structure"
+          },
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "GrantFullControl": {
+            "name": "GrantFullControl",
+            "shape_name": "GrantFullControl",
+            "type": "string"
+          },
+          "GrantRead": {
+            "name": "GrantRead",
+            "shape_name": "GrantRead",
+            "type": "string"
+          },
+          "GrantReadACP": {
+            "name": "GrantReadACP",
+            "shape_name": "GrantReadACP",
+            "type": "string"
+          },
+          "GrantWrite": {
+            "name": "GrantWrite",
+            "shape_name": "GrantWrite",
+            "type": "string"
+          },
+          "GrantWriteACP": {
+            "name": "GrantWriteACP",
+            "shape_name": "GrantWriteACP",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "PutBucketAcl",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "PutBucketAnalyticsConfiguration": {
+      "input": {
+        "markers": [],
+        "members": {
+          "AnalyticsConfiguration": {
+            "name": "AnalyticsConfiguration",
+            "shape_name": "AnalyticsConfiguration",
+            "type": "structure"
+          },
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "AnalyticsId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Id",
+          "AnalyticsConfiguration"
+        ]
+      },
+      "name": "PutBucketAnalyticsConfiguration",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "PutBucketCors": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "CORSConfiguration": {
+            "name": "CORSConfiguration",
+            "shape_name": "CORSConfiguration",
+            "type": "structure"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "CORSConfiguration"
+        ]
+      },
+      "name": "PutBucketCors",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "PutBucketEncryption": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "ServerSideEncryptionConfiguration": {
+            "name": "ServerSideEncryptionConfiguration",
+            "shape_name": "ServerSideEncryptionConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Bucket",
+          "ServerSideEncryptionConfiguration"
+        ]
+      },
+      "name": "PutBucketEncryption",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "PutBucketIntelligentTieringConfiguration": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "IntelligentTieringId",
+            "type": "string"
+          },
+          "IntelligentTieringConfiguration": {
+            "name": "IntelligentTieringConfiguration",
+            "shape_name": "IntelligentTieringConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Id",
+          "IntelligentTieringConfiguration"
+        ]
+      },
+      "name": "PutBucketIntelligentTieringConfiguration",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "PutBucketInventoryConfiguration": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "InventoryId",
+            "type": "string"
+          },
+          "InventoryConfiguration": {
+            "name": "InventoryConfiguration",
+            "shape_name": "InventoryConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Id",
+          "InventoryConfiguration"
+        ]
+      },
+      "name": "PutBucketInventoryConfiguration",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "PutBucketLifecycle": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "LifecycleConfiguration": {
+            "name": "LifecycleConfiguration",
+            "shape_name": "LifecycleConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "PutBucketLifecycle",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "PutBucketLifecycleConfiguration": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "LifecycleConfiguration": {
+            "name": "LifecycleConfiguration",
+            "shape_name": "BucketLifecycleConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "PutBucketLifecycleConfiguration",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "PutBucketLogging": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "BucketLoggingStatus": {
+            "name": "BucketLoggingStatus",
+            "shape_name": "BucketLoggingStatus",
+            "type": "structure"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "BucketLoggingStatus"
+        ]
+      },
+      "name": "PutBucketLogging",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "PutBucketMetricsConfiguration": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "MetricsId",
+            "type": "string"
+          },
+          "MetricsConfiguration": {
+            "name": "MetricsConfiguration",
+            "shape_name": "MetricsConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Id",
+          "MetricsConfiguration"
+        ]
+      },
+      "name": "PutBucketMetricsConfiguration",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "PutBucketNotification": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "NotificationConfiguration": {
+            "name": "NotificationConfiguration",
+            "shape_name": "NotificationConfigurationDeprecated",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Bucket",
+          "NotificationConfiguration"
+        ]
+      },
+      "name": "PutBucketNotification",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "PutBucketNotificationConfiguration": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "NotificationConfiguration": {
+            "name": "NotificationConfiguration",
+            "shape_name": "NotificationConfiguration",
+            "type": "structure"
+          },
+          "SkipDestinationValidation": {
+            "name": "SkipDestinationValidation",
+            "shape_name": "SkipValidation",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "Bucket",
+          "NotificationConfiguration"
+        ]
+      },
+      "name": "PutBucketNotificationConfiguration",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "PutBucketOwnershipControls": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "OwnershipControls": {
+            "name": "OwnershipControls",
+            "shape_name": "OwnershipControls",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Bucket",
+          "OwnershipControls"
+        ]
+      },
+      "name": "PutBucketOwnershipControls",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "PutBucketPolicy": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ConfirmRemoveSelfBucketAccess": {
+            "name": "ConfirmRemoveSelfBucketAccess",
+            "shape_name": "ConfirmRemoveSelfBucketAccess",
+            "type": "boolean"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "Policy",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Policy"
+        ]
+      },
+      "name": "PutBucketPolicy",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "PutBucketReplication": {
+      "input": {
+        "markers": [
+          "Token"
+        ],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "ReplicationConfiguration": {
+            "name": "ReplicationConfiguration",
+            "shape_name": "ReplicationConfiguration",
+            "type": "structure"
+          },
+          "Token": {
+            "name": "Token",
+            "shape_name": "ObjectLockToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "ReplicationConfiguration"
+        ]
+      },
+      "name": "PutBucketReplication",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "PutBucketRequestPayment": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "RequestPaymentConfiguration": {
+            "name": "RequestPaymentConfiguration",
+            "shape_name": "RequestPaymentConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Bucket",
+          "RequestPaymentConfiguration"
+        ]
+      },
+      "name": "PutBucketRequestPayment",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "PutBucketTagging": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Tagging": {
+            "name": "Tagging",
+            "shape_name": "Tagging",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Tagging"
+        ]
+      },
+      "name": "PutBucketTagging",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "PutBucketVersioning": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "MFA": {
+            "name": "MFA",
+            "shape_name": "MFA",
+            "type": "string"
+          },
+          "VersioningConfiguration": {
+            "name": "VersioningConfiguration",
+            "shape_name": "VersioningConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Bucket",
+          "VersioningConfiguration"
+        ]
+      },
+      "name": "PutBucketVersioning",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "PutBucketWebsite": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "WebsiteConfiguration": {
+            "name": "WebsiteConfiguration",
+            "shape_name": "WebsiteConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Bucket",
+          "WebsiteConfiguration"
+        ]
+      },
+      "name": "PutBucketWebsite",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "PutObject": {
+      "input": {
+        "markers": [],
+        "members": {
+          "ACL": {
+            "name": "ACL",
+            "shape_name": "ObjectCannedACL",
+            "type": "string"
+          },
+          "Body": {
+            "name": "Body",
+            "shape_name": "Body",
+            "type": "blob"
+          },
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "BucketKeyEnabled": {
+            "name": "BucketKeyEnabled",
+            "shape_name": "BucketKeyEnabled",
+            "type": "boolean"
+          },
+          "CacheControl": {
+            "name": "CacheControl",
+            "shape_name": "CacheControl",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ChecksumCRC32": {
+            "name": "ChecksumCRC32",
+            "shape_name": "ChecksumCRC32",
+            "type": "string"
+          },
+          "ChecksumCRC32C": {
+            "name": "ChecksumCRC32C",
+            "shape_name": "ChecksumCRC32C",
+            "type": "string"
+          },
+          "ChecksumSHA1": {
+            "name": "ChecksumSHA1",
+            "shape_name": "ChecksumSHA1",
+            "type": "string"
+          },
+          "ChecksumSHA256": {
+            "name": "ChecksumSHA256",
+            "shape_name": "ChecksumSHA256",
+            "type": "string"
+          },
+          "ContentDisposition": {
+            "name": "ContentDisposition",
+            "shape_name": "ContentDisposition",
+            "type": "string"
+          },
+          "ContentEncoding": {
+            "name": "ContentEncoding",
+            "shape_name": "ContentEncoding",
+            "type": "string"
+          },
+          "ContentLanguage": {
+            "name": "ContentLanguage",
+            "shape_name": "ContentLanguage",
+            "type": "string"
+          },
+          "ContentLength": {
+            "name": "ContentLength",
+            "shape_name": "ContentLength",
+            "type": "long"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ContentType": {
+            "name": "ContentType",
+            "shape_name": "ContentType",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Expires": {
+            "name": "Expires",
+            "shape_name": "Expires",
+            "type": "timestamp"
+          },
+          "GrantFullControl": {
+            "name": "GrantFullControl",
+            "shape_name": "GrantFullControl",
+            "type": "string"
+          },
+          "GrantRead": {
+            "name": "GrantRead",
+            "shape_name": "GrantRead",
+            "type": "string"
+          },
+          "GrantReadACP": {
+            "name": "GrantReadACP",
+            "shape_name": "GrantReadACP",
+            "type": "string"
+          },
+          "GrantWriteACP": {
+            "name": "GrantWriteACP",
+            "shape_name": "GrantWriteACP",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "Metadata": {
+            "name": "Metadata",
+            "shape_name": "Metadata",
+            "type": "map"
+          },
+          "ObjectLockLegalHoldStatus": {
+            "name": "ObjectLockLegalHoldStatus",
+            "shape_name": "ObjectLockLegalHoldStatus",
+            "type": "string"
+          },
+          "ObjectLockMode": {
+            "name": "ObjectLockMode",
+            "shape_name": "ObjectLockMode",
+            "type": "string"
+          },
+          "ObjectLockRetainUntilDate": {
+            "name": "ObjectLockRetainUntilDate",
+            "shape_name": "ObjectLockRetainUntilDate",
+            "type": "timestamp"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "SSECustomerAlgorithm": {
+            "name": "SSECustomerAlgorithm",
+            "shape_name": "SSECustomerAlgorithm",
+            "type": "string"
+          },
+          "SSECustomerKey": {
+            "name": "SSECustomerKey",
+            "shape_name": "SSECustomerKey",
+            "type": "string"
+          },
+          "SSECustomerKeyMD5": {
+            "name": "SSECustomerKeyMD5",
+            "shape_name": "SSECustomerKeyMD5",
+            "type": "string"
+          },
+          "SSEKMSEncryptionContext": {
+            "name": "SSEKMSEncryptionContext",
+            "shape_name": "SSEKMSEncryptionContext",
+            "type": "string"
+          },
+          "SSEKMSKeyId": {
+            "name": "SSEKMSKeyId",
+            "shape_name": "SSEKMSKeyId",
+            "type": "string"
+          },
+          "ServerSideEncryption": {
+            "name": "ServerSideEncryption",
+            "shape_name": "ServerSideEncryption",
+            "type": "string"
+          },
+          "StorageClass": {
+            "name": "StorageClass",
+            "shape_name": "StorageClass",
+            "type": "string"
+          },
+          "Tagging": {
+            "name": "Tagging",
+            "shape_name": "TaggingHeader",
+            "type": "string"
+          },
+          "WebsiteRedirectLocation": {
+            "name": "WebsiteRedirectLocation",
+            "shape_name": "WebsiteRedirectLocation",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key"
+        ]
+      },
+      "name": "PutObject",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "BucketKeyEnabled": {
+            "name": "BucketKeyEnabled",
+            "shape_name": "BucketKeyEnabled",
+            "type": "boolean"
+          },
+          "ChecksumCRC32": {
+            "name": "ChecksumCRC32",
+            "shape_name": "ChecksumCRC32",
+            "type": "string"
+          },
+          "ChecksumCRC32C": {
+            "name": "ChecksumCRC32C",
+            "shape_name": "ChecksumCRC32C",
+            "type": "string"
+          },
+          "ChecksumSHA1": {
+            "name": "ChecksumSHA1",
+            "shape_name": "ChecksumSHA1",
+            "type": "string"
+          },
+          "ChecksumSHA256": {
+            "name": "ChecksumSHA256",
+            "shape_name": "ChecksumSHA256",
+            "type": "string"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "ETag",
+            "type": "string"
+          },
+          "Expiration": {
+            "name": "Expiration",
+            "shape_name": "Expiration",
+            "type": "string"
+          },
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          },
+          "SSECustomerAlgorithm": {
+            "name": "SSECustomerAlgorithm",
+            "shape_name": "SSECustomerAlgorithm",
+            "type": "string"
+          },
+          "SSECustomerKeyMD5": {
+            "name": "SSECustomerKeyMD5",
+            "shape_name": "SSECustomerKeyMD5",
+            "type": "string"
+          },
+          "SSEKMSEncryptionContext": {
+            "name": "SSEKMSEncryptionContext",
+            "shape_name": "SSEKMSEncryptionContext",
+            "type": "string"
+          },
+          "SSEKMSKeyId": {
+            "name": "SSEKMSKeyId",
+            "shape_name": "SSEKMSKeyId",
+            "type": "string"
+          },
+          "ServerSideEncryption": {
+            "name": "ServerSideEncryption",
+            "shape_name": "ServerSideEncryption",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PutObjectAcl": {
+      "input": {
+        "markers": [],
+        "members": {
+          "ACL": {
+            "name": "ACL",
+            "shape_name": "ObjectCannedACL",
+            "type": "string"
+          },
+          "AccessControlPolicy": {
+            "name": "AccessControlPolicy",
+            "shape_name": "AccessControlPolicy",
+            "type": "structure"
+          },
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "GrantFullControl": {
+            "name": "GrantFullControl",
+            "shape_name": "GrantFullControl",
+            "type": "string"
+          },
+          "GrantRead": {
+            "name": "GrantRead",
+            "shape_name": "GrantRead",
+            "type": "string"
+          },
+          "GrantReadACP": {
+            "name": "GrantReadACP",
+            "shape_name": "GrantReadACP",
+            "type": "string"
+          },
+          "GrantWrite": {
+            "name": "GrantWrite",
+            "shape_name": "GrantWrite",
+            "type": "string"
+          },
+          "GrantWriteACP": {
+            "name": "GrantWriteACP",
+            "shape_name": "GrantWriteACP",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key"
+        ]
+      },
+      "name": "PutObjectAcl",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PutObjectLegalHold": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "LegalHold": {
+            "name": "LegalHold",
+            "shape_name": "ObjectLockLegalHold",
+            "type": "structure"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key"
+        ]
+      },
+      "name": "PutObjectLegalHold",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PutObjectLockConfiguration": {
+      "input": {
+        "markers": [
+          "Token"
+        ],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "ObjectLockConfiguration": {
+            "name": "ObjectLockConfiguration",
+            "shape_name": "ObjectLockConfiguration",
+            "type": "structure"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "Token": {
+            "name": "Token",
+            "shape_name": "ObjectLockToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket"
+        ]
+      },
+      "name": "PutObjectLockConfiguration",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PutObjectRetention": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "BypassGovernanceRetention": {
+            "name": "BypassGovernanceRetention",
+            "shape_name": "BypassGovernanceRetention",
+            "type": "boolean"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "Retention": {
+            "name": "Retention",
+            "shape_name": "ObjectLockRetention",
+            "type": "structure"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key"
+        ]
+      },
+      "name": "PutObjectRetention",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PutObjectTagging": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "Tagging": {
+            "name": "Tagging",
+            "shape_name": "Tagging",
+            "type": "structure"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key",
+          "Tagging"
+        ]
+      },
+      "name": "PutObjectTagging",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PutPublicAccessBlock": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "PublicAccessBlockConfiguration": {
+            "name": "PublicAccessBlockConfiguration",
+            "shape_name": "PublicAccessBlockConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Bucket",
+          "PublicAccessBlockConfiguration"
+        ]
+      },
+      "name": "PutPublicAccessBlock",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    },
+    "RestoreObject": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "RestoreRequest": {
+            "name": "RestoreRequest",
+            "shape_name": "RestoreRequest",
+            "type": "structure"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key"
+        ]
+      },
+      "name": "RestoreObject",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          },
+          "RestoreOutputPath": {
+            "name": "RestoreOutputPath",
+            "shape_name": "RestoreOutputPath",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SelectObjectContent": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Expression": {
+            "name": "Expression",
+            "shape_name": "Expression",
+            "type": "string"
+          },
+          "ExpressionType": {
+            "name": "ExpressionType",
+            "shape_name": "ExpressionType",
+            "type": "string"
+          },
+          "InputSerialization": {
+            "name": "InputSerialization",
+            "shape_name": "InputSerialization",
+            "type": "structure"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "OutputSerialization": {
+            "name": "OutputSerialization",
+            "shape_name": "OutputSerialization",
+            "type": "structure"
+          },
+          "RequestProgress": {
+            "name": "RequestProgress",
+            "shape_name": "RequestProgress",
+            "type": "structure"
+          },
+          "SSECustomerAlgorithm": {
+            "name": "SSECustomerAlgorithm",
+            "shape_name": "SSECustomerAlgorithm",
+            "type": "string"
+          },
+          "SSECustomerKey": {
+            "name": "SSECustomerKey",
+            "shape_name": "SSECustomerKey",
+            "type": "string"
+          },
+          "SSECustomerKeyMD5": {
+            "name": "SSECustomerKeyMD5",
+            "shape_name": "SSECustomerKeyMD5",
+            "type": "string"
+          },
+          "ScanRange": {
+            "name": "ScanRange",
+            "shape_name": "ScanRange",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key",
+          "Expression",
+          "ExpressionType",
+          "InputSerialization",
+          "OutputSerialization"
+        ]
+      },
+      "name": "SelectObjectContent",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "Payload": {
+            "name": "Payload",
+            "shape_name": "SelectObjectContentEventStream",
+            "type": "structure"
+          }
+        }
+      }
+    },
+    "UploadPart": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Body": {
+            "name": "Body",
+            "shape_name": "Body",
+            "type": "blob"
+          },
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "ChecksumCRC32": {
+            "name": "ChecksumCRC32",
+            "shape_name": "ChecksumCRC32",
+            "type": "string"
+          },
+          "ChecksumCRC32C": {
+            "name": "ChecksumCRC32C",
+            "shape_name": "ChecksumCRC32C",
+            "type": "string"
+          },
+          "ChecksumSHA1": {
+            "name": "ChecksumSHA1",
+            "shape_name": "ChecksumSHA1",
+            "type": "string"
+          },
+          "ChecksumSHA256": {
+            "name": "ChecksumSHA256",
+            "shape_name": "ChecksumSHA256",
+            "type": "string"
+          },
+          "ContentLength": {
+            "name": "ContentLength",
+            "shape_name": "ContentLength",
+            "type": "long"
+          },
+          "ContentMD5": {
+            "name": "ContentMD5",
+            "shape_name": "ContentMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "PartNumber": {
+            "name": "PartNumber",
+            "shape_name": "PartNumber",
+            "type": "integer"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "SSECustomerAlgorithm": {
+            "name": "SSECustomerAlgorithm",
+            "shape_name": "SSECustomerAlgorithm",
+            "type": "string"
+          },
+          "SSECustomerKey": {
+            "name": "SSECustomerKey",
+            "shape_name": "SSECustomerKey",
+            "type": "string"
+          },
+          "SSECustomerKeyMD5": {
+            "name": "SSECustomerKeyMD5",
+            "shape_name": "SSECustomerKeyMD5",
+            "type": "string"
+          },
+          "UploadId": {
+            "name": "UploadId",
+            "shape_name": "MultipartUploadId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "Key",
+          "PartNumber",
+          "UploadId"
+        ]
+      },
+      "name": "UploadPart",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "BucketKeyEnabled": {
+            "name": "BucketKeyEnabled",
+            "shape_name": "BucketKeyEnabled",
+            "type": "boolean"
+          },
+          "ChecksumCRC32": {
+            "name": "ChecksumCRC32",
+            "shape_name": "ChecksumCRC32",
+            "type": "string"
+          },
+          "ChecksumCRC32C": {
+            "name": "ChecksumCRC32C",
+            "shape_name": "ChecksumCRC32C",
+            "type": "string"
+          },
+          "ChecksumSHA1": {
+            "name": "ChecksumSHA1",
+            "shape_name": "ChecksumSHA1",
+            "type": "string"
+          },
+          "ChecksumSHA256": {
+            "name": "ChecksumSHA256",
+            "shape_name": "ChecksumSHA256",
+            "type": "string"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "ETag",
+            "type": "string"
+          },
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          },
+          "SSECustomerAlgorithm": {
+            "name": "SSECustomerAlgorithm",
+            "shape_name": "SSECustomerAlgorithm",
+            "type": "string"
+          },
+          "SSECustomerKeyMD5": {
+            "name": "SSECustomerKeyMD5",
+            "shape_name": "SSECustomerKeyMD5",
+            "type": "string"
+          },
+          "SSEKMSKeyId": {
+            "name": "SSEKMSKeyId",
+            "shape_name": "SSEKMSKeyId",
+            "type": "string"
+          },
+          "ServerSideEncryption": {
+            "name": "ServerSideEncryption",
+            "shape_name": "ServerSideEncryption",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "UploadPartCopy": {
+      "input": {
+        "markers": [],
+        "members": {
+          "Bucket": {
+            "name": "Bucket",
+            "shape_name": "BucketName",
+            "type": "string"
+          },
+          "CopySource": {
+            "name": "CopySource",
+            "shape_name": "CopySource",
+            "type": "string"
+          },
+          "CopySourceIfMatch": {
+            "name": "CopySourceIfMatch",
+            "shape_name": "CopySourceIfMatch",
+            "type": "string"
+          },
+          "CopySourceIfModifiedSince": {
+            "name": "CopySourceIfModifiedSince",
+            "shape_name": "CopySourceIfModifiedSince",
+            "type": "timestamp"
+          },
+          "CopySourceIfNoneMatch": {
+            "name": "CopySourceIfNoneMatch",
+            "shape_name": "CopySourceIfNoneMatch",
+            "type": "string"
+          },
+          "CopySourceIfUnmodifiedSince": {
+            "name": "CopySourceIfUnmodifiedSince",
+            "shape_name": "CopySourceIfUnmodifiedSince",
+            "type": "timestamp"
+          },
+          "CopySourceRange": {
+            "name": "CopySourceRange",
+            "shape_name": "CopySourceRange",
+            "type": "string"
+          },
+          "CopySourceSSECustomerAlgorithm": {
+            "name": "CopySourceSSECustomerAlgorithm",
+            "shape_name": "CopySourceSSECustomerAlgorithm",
+            "type": "string"
+          },
+          "CopySourceSSECustomerKey": {
+            "name": "CopySourceSSECustomerKey",
+            "shape_name": "CopySourceSSECustomerKey",
+            "type": "string"
+          },
+          "CopySourceSSECustomerKeyMD5": {
+            "name": "CopySourceSSECustomerKeyMD5",
+            "shape_name": "CopySourceSSECustomerKeyMD5",
+            "type": "string"
+          },
+          "ExpectedBucketOwner": {
+            "name": "ExpectedBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "ExpectedSourceBucketOwner": {
+            "name": "ExpectedSourceBucketOwner",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Key": {
+            "name": "Key",
+            "shape_name": "ObjectKey",
+            "type": "string"
+          },
+          "PartNumber": {
+            "name": "PartNumber",
+            "shape_name": "PartNumber",
+            "type": "integer"
+          },
+          "RequestPayer": {
+            "name": "RequestPayer",
+            "shape_name": "RequestPayer",
+            "type": "string"
+          },
+          "SSECustomerAlgorithm": {
+            "name": "SSECustomerAlgorithm",
+            "shape_name": "SSECustomerAlgorithm",
+            "type": "string"
+          },
+          "SSECustomerKey": {
+            "name": "SSECustomerKey",
+            "shape_name": "SSECustomerKey",
+            "type": "string"
+          },
+          "SSECustomerKeyMD5": {
+            "name": "SSECustomerKeyMD5",
+            "shape_name": "SSECustomerKeyMD5",
+            "type": "string"
+          },
+          "UploadId": {
+            "name": "UploadId",
+            "shape_name": "MultipartUploadId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Bucket",
+          "CopySource",
+          "Key",
+          "PartNumber",
+          "UploadId"
+        ]
+      },
+      "name": "UploadPartCopy",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {
+          "BucketKeyEnabled": {
+            "name": "BucketKeyEnabled",
+            "shape_name": "BucketKeyEnabled",
+            "type": "boolean"
+          },
+          "CopyPartResult": {
+            "name": "CopyPartResult",
+            "shape_name": "CopyPartResult",
+            "type": "structure"
+          },
+          "CopySourceVersionId": {
+            "name": "CopySourceVersionId",
+            "shape_name": "CopySourceVersionId",
+            "type": "string"
+          },
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          },
+          "SSECustomerAlgorithm": {
+            "name": "SSECustomerAlgorithm",
+            "shape_name": "SSECustomerAlgorithm",
+            "type": "string"
+          },
+          "SSECustomerKeyMD5": {
+            "name": "SSECustomerKeyMD5",
+            "shape_name": "SSECustomerKeyMD5",
+            "type": "string"
+          },
+          "SSEKMSKeyId": {
+            "name": "SSEKMSKeyId",
+            "shape_name": "SSEKMSKeyId",
+            "type": "string"
+          },
+          "ServerSideEncryption": {
+            "name": "ServerSideEncryption",
+            "shape_name": "ServerSideEncryption",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "WriteGetObjectResponse": {
+      "input": {
+        "markers": [
+          "DeleteMarker",
+          "RequestToken"
+        ],
+        "members": {
+          "AcceptRanges": {
+            "name": "AcceptRanges",
+            "shape_name": "AcceptRanges",
+            "type": "string"
+          },
+          "Body": {
+            "name": "Body",
+            "shape_name": "Body",
+            "type": "blob"
+          },
+          "BucketKeyEnabled": {
+            "name": "BucketKeyEnabled",
+            "shape_name": "BucketKeyEnabled",
+            "type": "boolean"
+          },
+          "CacheControl": {
+            "name": "CacheControl",
+            "shape_name": "CacheControl",
+            "type": "string"
+          },
+          "ChecksumCRC32": {
+            "name": "ChecksumCRC32",
+            "shape_name": "ChecksumCRC32",
+            "type": "string"
+          },
+          "ChecksumCRC32C": {
+            "name": "ChecksumCRC32C",
+            "shape_name": "ChecksumCRC32C",
+            "type": "string"
+          },
+          "ChecksumSHA1": {
+            "name": "ChecksumSHA1",
+            "shape_name": "ChecksumSHA1",
+            "type": "string"
+          },
+          "ChecksumSHA256": {
+            "name": "ChecksumSHA256",
+            "shape_name": "ChecksumSHA256",
+            "type": "string"
+          },
+          "ContentDisposition": {
+            "name": "ContentDisposition",
+            "shape_name": "ContentDisposition",
+            "type": "string"
+          },
+          "ContentEncoding": {
+            "name": "ContentEncoding",
+            "shape_name": "ContentEncoding",
+            "type": "string"
+          },
+          "ContentLanguage": {
+            "name": "ContentLanguage",
+            "shape_name": "ContentLanguage",
+            "type": "string"
+          },
+          "ContentLength": {
+            "name": "ContentLength",
+            "shape_name": "ContentLength",
+            "type": "long"
+          },
+          "ContentRange": {
+            "name": "ContentRange",
+            "shape_name": "ContentRange",
+            "type": "string"
+          },
+          "ContentType": {
+            "name": "ContentType",
+            "shape_name": "ContentType",
+            "type": "string"
+          },
+          "DeleteMarker": {
+            "name": "DeleteMarker",
+            "shape_name": "DeleteMarker",
+            "type": "boolean"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "ETag",
+            "type": "string"
+          },
+          "ErrorCode": {
+            "name": "ErrorCode",
+            "shape_name": "ErrorCode",
+            "type": "string"
+          },
+          "ErrorMessage": {
+            "name": "ErrorMessage",
+            "shape_name": "ErrorMessage",
+            "type": "string"
+          },
+          "Expiration": {
+            "name": "Expiration",
+            "shape_name": "Expiration",
+            "type": "string"
+          },
+          "Expires": {
+            "name": "Expires",
+            "shape_name": "Expires",
+            "type": "timestamp"
+          },
+          "LastModified": {
+            "name": "LastModified",
+            "shape_name": "LastModified",
+            "type": "timestamp"
+          },
+          "Metadata": {
+            "name": "Metadata",
+            "shape_name": "Metadata",
+            "type": "map"
+          },
+          "MissingMeta": {
+            "name": "MissingMeta",
+            "shape_name": "MissingMeta",
+            "type": "integer"
+          },
+          "ObjectLockLegalHoldStatus": {
+            "name": "ObjectLockLegalHoldStatus",
+            "shape_name": "ObjectLockLegalHoldStatus",
+            "type": "string"
+          },
+          "ObjectLockMode": {
+            "name": "ObjectLockMode",
+            "shape_name": "ObjectLockMode",
+            "type": "string"
+          },
+          "ObjectLockRetainUntilDate": {
+            "name": "ObjectLockRetainUntilDate",
+            "shape_name": "ObjectLockRetainUntilDate",
+            "type": "timestamp"
+          },
+          "PartsCount": {
+            "name": "PartsCount",
+            "shape_name": "PartsCount",
+            "type": "integer"
+          },
+          "ReplicationStatus": {
+            "name": "ReplicationStatus",
+            "shape_name": "ReplicationStatus",
+            "type": "string"
+          },
+          "RequestCharged": {
+            "name": "RequestCharged",
+            "shape_name": "RequestCharged",
+            "type": "string"
+          },
+          "RequestRoute": {
+            "name": "RequestRoute",
+            "shape_name": "RequestRoute",
+            "type": "string"
+          },
+          "RequestToken": {
+            "name": "RequestToken",
+            "shape_name": "RequestToken",
+            "type": "string"
+          },
+          "Restore": {
+            "name": "Restore",
+            "shape_name": "Restore",
+            "type": "string"
+          },
+          "SSECustomerAlgorithm": {
+            "name": "SSECustomerAlgorithm",
+            "shape_name": "SSECustomerAlgorithm",
+            "type": "string"
+          },
+          "SSECustomerKeyMD5": {
+            "name": "SSECustomerKeyMD5",
+            "shape_name": "SSECustomerKeyMD5",
+            "type": "string"
+          },
+          "SSEKMSKeyId": {
+            "name": "SSEKMSKeyId",
+            "shape_name": "SSEKMSKeyId",
+            "type": "string"
+          },
+          "ServerSideEncryption": {
+            "name": "ServerSideEncryption",
+            "shape_name": "ServerSideEncryption",
+            "type": "string"
+          },
+          "StatusCode": {
+            "name": "StatusCode",
+            "shape_name": "GetObjectResponseStatusCode",
+            "type": "integer"
+          },
+          "StorageClass": {
+            "name": "StorageClass",
+            "shape_name": "StorageClass",
+            "type": "string"
+          },
+          "TagCount": {
+            "name": "TagCount",
+            "shape_name": "TagCount",
+            "type": "integer"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "ObjectVersionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RequestRoute",
+          "RequestToken"
+        ]
+      },
+      "name": "WriteGetObjectResponse",
+      "output": {
+        "lists": {},
+        "markers": [],
+        "members": {}
+      }
+    }
+  }
+}
