@@ -11,3 +11,62 @@ This command will clone the aws-go-sdk repository into a `.temp` directory and t
 ```shell
 ./aws-model-extraction.sh
 ```
+
+## Generate Model JSON for ajl
+
+```shell
+files=(
+../.temp/aws-models/s3/s3-api.json
+)
+for file in "${files[@]}"; do
+cat ../.temp/aws-models/s3/s3-api.json \
+| jq -r '
+[
+    .operations |
+    to_entries[] |
+    {
+        key, 
+        value: {
+            name: .key,
+            input: {
+                required: .value.input.required,
+                members: (
+                    .value.input.members |
+                    [   
+                        .//{} | # <- Make sure that `null` input is supported as empty map
+                        to_entries[] |
+                        {
+                            key,
+                            value: {
+                                type: .value.type,
+                                name: .key,
+                                shape_name: .value.shape_name
+                            }
+                        }
+                    ] | from_entries
+                )
+            },
+            output: {
+                members: (
+                    .value.output.members |
+                    [   
+                        .//{} | # <- Make sure that `null` input is supported as empty map
+                        to_entries[] |
+                        {
+                            key,
+                            value: {
+                                type: .value.type,
+                                name: .key,
+                                shape_name: .value.shape_name
+                            }
+                        }
+                    ] | from_entries
+                )
+            }
+        }
+    }
+] | from_entries 
+' \
+> "${file%.*}-model.json"
+done
+```

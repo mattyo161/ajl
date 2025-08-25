@@ -11,25 +11,27 @@ else
   (cd "${SDK_DIR}" && git clone https://github.com/aws/aws-sdk-go.git)
 fi
 
-# MODELS_DIR is where all raw json api models will be extracted to for analysis
-MODELS_DIR="${SCRIPT_DIR}/../.temp/aws-models"
-[[ ! -d "${MODELS_DIR}" ]] && mkdir -p "${MODELS_DIR}"
+# TMP_MODELS_DIR is where all raw json api models will be extracted to for analysis
+TMP_MODELS_DIR="${SCRIPT_DIR}/../.temp/aws-models"
+[[ ! -d "${TMP_MODELS_DIR}" ]] && mkdir -p "${TMP_MODELS_DIR}"
 
 
 # Build a list of API json files to parse
 apis=(
-  $(find "${SDK_DIR}/aws-sdk-go/models/apis/" -type f -name "api*.json" | sort)
+#  $(find "${SDK_DIR}/aws-sdk-go/models/apis/" -type f -name "api*.json" | sort)
   # Uncomment if there are just a few that you want to test with
-#  $(find aws-sdk-go/models/apis/ec2 -type f -name "api*.json" | sort)
-#  $(find aws-sdk-go/models/apis/rds -type f -name "api*.json" | sort)
-#  $(find aws-sdk-go/models/apis/s3 -type f -name "api*.json" | sort)
+#  $(find "${SDK_DIR}/aws-sdk-go/models/apis/ec2" -type f -name "api*.json" | sort)
+#  $(find "${SDK_DIR}/aws-sdk-go/models/apis/rds" -type f -name "api*.json" | sort)
+#  $(find "${SDK_DIR}/aws-sdk-go/models/apis/s3" -type f -name "api*.json" | sort)
+  $(find "${SDK_DIR}/aws-sdk-go/models/apis/ssm" -type f -name "api*.json" | sort)
+  $(find "${SDK_DIR}/aws-sdk-go/models/apis/dynamodb" -type f -name "api*.json" | sort)
 )
 
 function main() {
   for api in "${apis[@]}"; do
     # we want to get the 3rd folder from the right, to do that we reverse the string, cut the folder and rev back
     export api_client="$(rev <<< "${api}" | cut -d / -f 3 | rev)"
-    api_dir="${MODELS_DIR}/${api_client}"
+    api_dir="${TMP_MODELS_DIR}/${api_client}"
     [[ ! -d "${api_dir}" ]] && mkdir -p "${api_dir}"
     # save original api file
     cat "${api}" \
@@ -62,6 +64,14 @@ function main() {
       ;
       def dependency_sort: reduce .value.requires[] as $r ({(.key): false}; .[$r] = true)
       ;
+      # Do some clean up to fix issues with circular references
+      if ($ENV["api_client"] == "ssm") then (
+        # remove circular reference
+        del(.shapes.OpsAggregator.members.Aggregators, .shapes.InventoryAggregator.members.Aggregators)
+      ) elif ($ENV["api_client"] == "dynamodb") then (
+        # remove circular reference
+        del(.shapes.AttributeValue.members.M, .shapes.AttributeValue.members.L)
+      ) end |
       # make sure that shapes are defined before they are used
       {version, metadata, shapes} * . | .shapes |= (
         [ to_entries[] |
