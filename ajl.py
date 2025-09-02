@@ -54,6 +54,7 @@ REGION = os.environ.get("AWS_REGION", os.environ.get("AWS_DEFAULT_REGION", "us-e
 
 generic_parser = argparse.ArgumentParser(add_help=False)
 generic_parser.add_argument('--profile', type=str)
+generic_parser.add_argument('--no-parse', action='store_true', default=False)
 generic_parser.add_argument('--region', type=str)
 generic_parser.add_argument('--params-json', type=str)
 
@@ -144,7 +145,10 @@ else:
     ## This is where the kebabcase `--input-param-name` needs to be converted to the `InputParamName` that the API requires
     resp = cmd(**extra_options)
     try:
-        process_response(response=resp, client=client_name, operation=operation_name)
+        if options.no_parse:
+            print(json.dumps(resp, indent=None, cls=JSONEncoder))
+        else:
+            process_response(response=resp, client=client_name, operation=operation_name)
     except Exception as e:
         print(e, file=sys.stderr)
         print(json.dumps(resp, indent=None, cls=JSONEncoder))
