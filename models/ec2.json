@@ -15107,6 +15107,7 @@
       },
       "name": "DescribeInstances",
       "output": {
+        "jq": "# Save the reservation details to $reservation\n.Reservations[] | {ReservationId, OwnerId, RequesterId, Groups} as $reservation |\n# Output each instance and then append the Reservation details at the end \n.Instances[] |\n# Convert Tags to a Map\n.Tags = (.Tags//[] | from_entries) |\n# Add common properties\n{\n  Id: .InstanceId,\n  Name: .Tags.Name//\"\",\n  Arn: \"arn:\\($partition//\"aws\"):ec2:\\(.Region//$region//\"oops\"):\\($reservation.OwnerId//$account//\"\"):instance/\\(.InstanceId)\",\n  Reservation: $reservation\n} + .",
         "lists": {
           "Reservations": {
             "all_fields": [
