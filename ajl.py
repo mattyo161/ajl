@@ -31,20 +31,20 @@ def strip_metadata(response):
     return {key:value for key, value in response.items() if key != 'ResponseMetadata'}
 
 
-def process_response(response: object, client: str, operation: str):
+def process_response(response: object, client: str, operation: str, account: str=None, region: str=None, partition: str=None ):
     operation_kebab = caseconverter.kebabcase(operation)
     operation_pascal = caseconverter.pascalcase(operation)
     operation_filepath = os.path.join("models", f"{client}.json")
+    if os.path.exists(operation_filepath):
+        print(f"reading config file {operation_filepath}", file=sys.stderr)
+        with open(operation_filepath, 'r') as operation_file:
+            operation_config = json.load(operation_file)
     if operation_kebab.startswith("describe-") or operation_kebab.startswith("list-"):
-        if os.path.exists(operation_filepath):
-            print(f"reading config file {operation_filepath}", file=sys.stderr)
-            with open(operation_filepath, 'r') as operation_file:
-                operation_config = json.load(operation_file)
         # check if there is custom jq to run for the output
         custom_jq = operation_config["operations"][operation_pascal]["output"]["jq"]
         print(f"custom_jq={custom_jq}", file=sys.stderr)
         if custom_jq:
-            print(jq.compile(custom_jq).input_text(json.dumps(response, indent=None, cls=JSONEncoder)).text())
+            print(jq.compile(custom_jq, args={"account": account, "partition": partition, "region": region}).input_text(json.dumps(response, indent=None, cls=JSONEncoder)).text())
         else:
             print(json.dumps(response, indent=None, cls=JSONEncoder))
 
@@ -101,7 +101,7 @@ while len(extra_params) > 0:
     else:
         print(f"Param Warning: Not sure what to do with param {extra_params.pop(0)}", file=sys.stderr)
 
-print(f"extra_params={extra_params}, extra_options={extra_options}; last_key={last_key}; key={key}", file=sys.stderr)
+print(f"options={options}; extra_params={extra_params}, extra_options={extra_options}; last_key={last_key}; key={key}", file=sys.stderr)
 
 reader_pointer = None
 if options.params_json:
@@ -148,8 +148,8 @@ else:
         if options.no_parse:
             print(json.dumps(resp, indent=None, cls=JSONEncoder))
         else:
-            process_response(response=resp, client=client_name, operation=operation_name)
+            process_response(response=resp, client=client_name, operation=operation_name, partition=client.meta.partition, region=client.meta.region_name)
     except Exception as e:
         print(e, file=sys.stderr)
-        print(json.dumps(resp, indent=None, cls=JSONEncoder))
+        # print(json.dumps(resp, indent=None, cls=JSONEncoder))
 
