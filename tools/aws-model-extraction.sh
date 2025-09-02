@@ -65,6 +65,45 @@ function main() {
       def dependency_sort: reduce .value.requires[] as $r ({(.key): false}; .[$r] = true)
       ;
       # Do some clean up to fix issues with circular references
+# ---
+#more to clean up
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:34 .temp/aws-models/amplifyuibuilder/amplifyuibuilder-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:35 .temp/aws-models/appsync/appsync-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:35 .temp/aws-models/athena/athena-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:35 .temp/aws-models/bedrock-agent-runtime/bedrock-agent-runtime-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:35 .temp/aws-models/ce/ce-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:36 .temp/aws-models/connect/connect-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:36 .temp/aws-models/connectcases/connectcases-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:36 .temp/aws-models/datazone/datazone-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:36 .temp/aws-models/deadline/deadline-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:36 .temp/aws-models/dynamodb/dynamodb-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:36 .temp/aws-models/elasticmapreduce/elasticmapreduce-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:36 .temp/aws-models/emr-containers/emr-containers-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:36 .temp/aws-models/emr-serverless/emr-serverless-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:36 .temp/aws-models/freetier/freetier-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:36 .temp/aws-models/fsx/fsx-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:36 .temp/aws-models/glue/glue-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:37 .temp/aws-models/iotfleetwise/iotfleetwise-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:37 .temp/aws-models/iotsitewise/iotsitewise-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:37 .temp/aws-models/iottwinmaker/iottwinmaker-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:37 .temp/aws-models/kendra/kendra-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:37 .temp/aws-models/mediaconvert/mediaconvert-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:37 .temp/aws-models/models.lex.v2/models.lex.v2-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:37 .temp/aws-models/organizations/organizations-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:37 .temp/aws-models/pi/pi-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:38 .temp/aws-models/qapps/qapps-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:38 .temp/aws-models/qbusiness/qbusiness-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:38 .temp/aws-models/qconnect/qconnect-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:38 .temp/aws-models/quicksight/quicksight-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:38 .temp/aws-models/rds-data/rds-data-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:38 .temp/aws-models/runtime.lex.v2/runtime.lex.v2-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:38 .temp/aws-models/sagemaker/sagemaker-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:38 .temp/aws-models/ssm/ssm-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:38 .temp/aws-models/streams.dynamodb/streams.dynamodb-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:38 .temp/aws-models/timestream-query/timestream-query-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:38 .temp/aws-models/verifiedpermissions/verifiedpermissions-api.json
+#-rw-r--r--@ 1 matt  staff         0 Aug 24 15:38 .temp/aws-models/wafv2/wafv2-api.json
+# ---
       if ($ENV["api_client"] == "ssm") then (
         # remove circular reference
         del(.shapes.OpsAggregator.members.Aggregators, .shapes.InventoryAggregator.members.Aggregators)
