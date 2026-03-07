@@ -4376,7 +4376,7 @@
       },
       "name": "ListObjectsV2",
       "output": {
-        "jq": "{Bucket: .Name} as $all | {Delimiter} as $prefix_only | ($all + $prefix_only + (.CommonPrefixes//[]|.[])), ($all + .Contents//[]|.[]))",
+        "jq": "{Bucket: .Name} as $all | {Delimiter} as $prefix_only | ($all + $prefix_only + (.CommonPrefixes//[]|.[])), ($all + (.Contents//[]|.[]))",
         "lists": {
           "CommonPrefixes": {
             "all_fields": [
