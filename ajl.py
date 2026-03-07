@@ -39,14 +39,15 @@ def process_response(response: object, client: str, operation: str, account: str
         print(f"reading config file {operation_filepath}", file=sys.stderr)
         with open(operation_filepath, 'r') as operation_file:
             operation_config = json.load(operation_file)
-    if operation_kebab.startswith("describe-") or operation_kebab.startswith("list-"):
-        # check if there is custom jq to run for the output
-        custom_jq = operation_config["operations"][operation_pascal]["output"]["jq"]
-        print(f"custom_jq={custom_jq}", file=sys.stderr)
-        if custom_jq:
-            print(jq.compile(custom_jq, args={"account": account, "partition": partition, "region": region}).input_text(json.dumps(response, indent=None, cls=JSONEncoder)).text())
-        else:
-            print(json.dumps(response, indent=None, cls=JSONEncoder))
+    # check if there is custom jq to run for the output
+    config = operation_config
+    custom_jq = operation_config["operations"][operation_pascal]["output"]["jq"]
+    print(f"custom_jq={custom_jq}", file=sys.stderr)
+
+    if custom_jq:
+        print(jq.compile(custom_jq, args={"account": account, "partition": partition, "region": region}).input_text(json.dumps(response, indent=None, cls=JSONEncoder)).text())
+    else:
+        print(json.dumps(response, indent=None, cls=JSONEncoder))
 
 
 PROFILE = os.environ.get("AWS_PROFILE", os.environ.get("AWS_DEFAULT_PROFILE", None))
