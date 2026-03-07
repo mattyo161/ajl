@@ -1384,6 +1384,7 @@
       },
       "name": "DescribeActivations",
       "output": {
+        "jq": ".ActivationList[] | {Id: .ActivationId, Name: .Tags.Name//.ActivationId} + .",
         "lists": {
           "ActivationList": {
             "all_fields": [
@@ -1503,6 +1504,7 @@
       },
       "name": "DescribeAssociationExecutionTargets",
       "output": {
+        "jq": ".AssociationExecutionTargets[] | {Id: .ExecutionId} + .",
         "lists": {
           "AssociationExecutionTargets": {
             "all_fields": [
@@ -1575,6 +1577,7 @@
       },
       "name": "DescribeAssociationExecutions",
       "output": {
+        "jq": ".AssociationExecutions[]",
         "lists": {
           "AssociationExecutions": {
             "all_fields": [
@@ -1640,6 +1643,7 @@
       },
       "name": "DescribeAutomationExecutions",
       "output": {
+        "jq": ".AutomationExecutionMetadataList[] | {Id: .AutomationExecutionId} + .",
         "lists": {
           "AutomationExecutionMetadataList": {
             "all_fields": [
@@ -1744,6 +1748,7 @@
       },
       "name": "DescribeAutomationStepExecutions",
       "output": {
+        "jq": ".StepExecutions[]",
         "lists": {
           "StepExecutions": {
             "all_fields": [
@@ -1824,6 +1829,7 @@
       },
       "name": "DescribeAvailablePatches",
       "output": {
+        "jq": ".Patches[]",
         "lists": {
           "Patches": {
             "all_fields": [
@@ -1948,6 +1954,7 @@
       },
       "name": "DescribeDocumentPermission",
       "output": {
+        "jq": ".AccountSharingInfoList[]",
         "lists": {
           "AccountIds": {
             "all_fields": [],
@@ -2017,6 +2024,7 @@
       },
       "name": "DescribeEffectiveInstanceAssociations",
       "output": {
+        "jq": ".Associations[]",
         "lists": {
           "Associations": {
             "all_fields": [
@@ -2078,6 +2086,7 @@
       },
       "name": "DescribeEffectivePatchesForPatchBaseline",
       "output": {
+        "jq": ".EffectivePatches[]",
         "lists": {
           "EffectivePatches": {
             "all_fields": [
@@ -2134,6 +2143,7 @@
       },
       "name": "DescribeInstanceAssociationsStatus",
       "output": {
+        "jq": ".InstanceAssociationStatusInfos[]",
         "lists": {
           "InstanceAssociationStatusInfos": {
             "all_fields": [
@@ -2209,6 +2219,7 @@
       },
       "name": "DescribeInstanceInformation",
       "output": {
+        "jq": ".InstanceInformationList[]",
         "lists": {
           "InstanceInformationList": {
             "all_fields": [
@@ -2292,6 +2303,7 @@
       },
       "name": "DescribeInstancePatchStates",
       "output": {
+        "jq": ".InstancePatchStates[]",
         "lists": {
           "InstancePatchStates": {
             "all_fields": [
@@ -2377,6 +2389,7 @@
       },
       "name": "DescribeInstancePatchStatesForPatchGroup",
       "output": {
+        "jq": ".InstancePatchStates[]",
         "lists": {
           "InstancePatchStates": {
             "all_fields": [
@@ -2462,6 +2475,7 @@
       },
       "name": "DescribeInstancePatches",
       "output": {
+        "jq": ".Patches[]",
         "lists": {
           "Patches": {
             "all_fields": [
@@ -2528,6 +2542,7 @@
       },
       "name": "DescribeInstanceProperties",
       "output": {
+        "jq": ".InstanceProperties[]",
         "lists": {
           "InstanceProperties": {
             "all_fields": [
@@ -2615,6 +2630,7 @@
       },
       "name": "DescribeInventoryDeletions",
       "output": {
+        "jq": ".InventoryDelitions[] | {Id: .DeletionId} + .",
         "lists": {
           "InventoryDeletions": {
             "all_fields": [
@@ -2691,6 +2707,7 @@
       },
       "name": "DescribeMaintenanceWindowExecutionTaskInvocations",
       "output": {
+        "jq": ".WindowExecutionTaskInvocationIdentities[]",
         "lists": {
           "WindowExecutionTaskInvocationIdentities": {
             "all_fields": [
@@ -2768,6 +2785,7 @@
       },
       "name": "DescribeMaintenanceWindowExecutionTasks",
       "output": {
+        "jq": ".WindowExecutionTaskIdentities[]",
         "lists": {
           "WindowExecutionTaskIdentities": {
             "all_fields": [
@@ -2842,6 +2860,7 @@
       },
       "name": "DescribeMaintenanceWindowExecutions",
       "output": {
+        "jq": ".WindowExecutions[]",
         "lists": {
           "WindowExecutions": {
             "all_fields": [
@@ -2918,6 +2937,7 @@
       },
       "name": "DescribeMaintenanceWindowSchedule",
       "output": {
+        "jq": ".ScheduledWindowExecutions[]",
         "lists": {
           "ScheduledWindowExecutions": {
             "all_fields": [
@@ -2984,6 +3004,7 @@
       },
       "name": "DescribeMaintenanceWindowTargets",
       "output": {
+        "jq": ".Targets[]",
         "lists": {
           "Targets": {
             "all_fields": [
@@ -3055,6 +3076,7 @@
       },
       "name": "DescribeMaintenanceWindowTasks",
       "output": {
+        "jq": ".Tasks[] | {Arn: .TaskArn, Id: .WindowTaskId} + .",
         "lists": {
           "Tasks": {
             "all_fields": [
@@ -3130,6 +3152,7 @@
       },
       "name": "DescribeMaintenanceWindows",
       "output": {
+        "jq": ".WindowIdentities[] | {Id: .WindowId} + .",
         "lists": {
           "WindowIdentities": {
             "all_fields": [
@@ -3206,6 +3229,7 @@
       },
       "name": "DescribeMaintenanceWindowsForTarget",
       "output": {
+        "jq": ".WindowIdentities[]",
         "lists": {
           "WindowIdentities": {
             "all_fields": [
@@ -3264,6 +3288,7 @@
       },
       "name": "DescribeOpsItems",
       "output": {
+        "jq": ".OpsItemSummaries[]",
         "lists": {
           "OpsItemSummaries": {
             "all_fields": [
@@ -3345,6 +3370,7 @@
       },
       "name": "DescribeParameters",
       "output": {
+        "jq": ".Parameters[] | {Arn: .ARN} + . | del(.ARN)",
         "lists": {
           "Parameters": {
             "all_fields": [
@@ -3413,6 +3439,7 @@
       },
       "name": "DescribePatchBaselines",
       "output": {
+        "jq": ".BaselineIdentities[]",
         "lists": {
           "BaselineIdentities": {
             "all_fields": [
@@ -3556,6 +3583,7 @@
       },
       "name": "DescribePatchGroups",
       "output": {
+        "jq": ".Mappings[]",
         "lists": {
           "Mappings": {
             "all_fields": [
@@ -3623,6 +3651,7 @@
       },
       "name": "DescribePatchProperties",
       "output": {
+        "jq": ".Properties[]",
         "lists": {
           "Properties": {
             "all_fields": [],
@@ -3681,6 +3710,7 @@
       },
       "name": "DescribeSessions",
       "output": {
+        "jq": ".Sessions[]",
         "lists": {
           "Sessions": {
             "all_fields": [
@@ -4220,6 +4250,7 @@
       },
       "name": "GetInventory",
       "output": {
+        "jq": ".Entities[]",
         "lists": {
           "Entities": {
             "all_fields": [
@@ -4286,6 +4317,7 @@
       },
       "name": "GetInventorySchema",
       "output": {
+        "jq": ".Schemas[]",
         "lists": {
           "Schemas": {
             "all_fields": [
@@ -4934,6 +4966,7 @@
       },
       "name": "GetOpsSummary",
       "output": {
+        "jq": ".Entities[]",
         "lists": {
           "Entities": {
             "all_fields": [
@@ -5029,6 +5062,7 @@
       },
       "name": "GetParameterHistory",
       "output": {
+        "jq": ".Parameters[]",
         "lists": {
           "Parameters": {
             "all_fields": [
@@ -5093,6 +5127,7 @@
       },
       "name": "GetParameters",
       "output": {
+        "jq": ".Parameters[] | {Arn: .ARN} + . | del(.ARN)",
         "lists": {
           "InvalidParameters": {
             "all_fields": [],
@@ -5177,6 +5212,7 @@
       },
       "name": "GetParametersByPath",
       "output": {
+        "jq": ".Parameters[] | {Arn: .ARN} + . | del(.ARN)",
         "lists": {
           "Parameters": {
             "all_fields": [
@@ -5412,6 +5448,7 @@
       },
       "name": "GetResourcePolicies",
       "output": {
+        "jq": ".Policies[]",
         "lists": {
           "Policies": {
             "all_fields": [
@@ -5548,6 +5585,7 @@
       },
       "name": "ListAssociationVersions",
       "output": {
+        "jq": ".AssociationVersions[]",
         "lists": {
           "AssociationVersions": {
             "all_fields": [
@@ -5625,6 +5663,7 @@
       },
       "name": "ListAssociations",
       "output": {
+        "jq": ".Associations[]",
         "lists": {
           "Associations": {
             "all_fields": [
