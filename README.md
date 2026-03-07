@@ -11,3 +11,23 @@ The `Tags` property will be a map of all the tags for the given resource. Many A
 Using `ajl` I have found performance compared to `aws-cli` to be amazingly fast. Performance versus making direct calls to the boto3 is likely comparable, with perhaps some slight overhead due to conversion of the output data to JSON line, however the streaming benefits, the ability to make calls with simple JSON objects, did I mention it will support profiles & regions in your calls so a single command can process many accounts and regions.
 
 My hope is that putting this out into the community there will be opportunities to take this concept much further then the general PoCs that I have been messing with over the years working with AWS.
+
+## Publishing with `uv`
+
+```shell
+uv init 
+uv add requests
+uv add --dev pytest
+uv build
+uv publish --index testpypy --token ****
+```
+
+```shell
+cd /temp
+mkdir test
+cd test
+
+uv venv
+uv pip install -i https://test.pypi.org/simple/ ajl
+
+```
