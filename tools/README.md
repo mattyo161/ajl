@@ -70,3 +70,27 @@ cat ../.temp/aws-models/s3/s3-api.json \
 > "${file%.*}-model.json"
 done
 ```
+
+## Generate model files from botocore (preferred)
+
+Generates `src/ajl/models/<service>.json` straight from the service
+definitions bundled with the installed boto3 — no git clone or network
+needed, and the input member types always match what the client accepts:
+
+```shell
+uv run python tools/generate-model.py lambda iam sns ...
+uv run python tools/generate-model.py --all-existing   # regenerate everything
+```
+
+Always run `tools/apply-resource-configs.py` afterwards to re-apply the
+curated output shaping.
+
+## Re-apply ajl resource configs
+
+Regenerating the model files wipes the curated output shaping. Re-apply the
+declarative `output.resources` configs and hand-written `output.jq` programs
+with:
+
+```shell
+python3 tools/apply-resource-configs.py
+```
