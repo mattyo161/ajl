@@ -1,0 +1,215 @@
+import io
+import json
+
+import pytest
+
+from ajl.main import (
+    Emitter,
+    Runner,
+    coerce_param,
+    coerce_params,
+    dumps,
+    parse_extra_options,
+    run_operation,
+    shape_page,
+)
+
+
+def test_parse_extra_options_kebab_to_pascal():
+    options = parse_extra_options(["--bucket-name", "my-bucket", "--max-results", "5"])
+    assert options == {"BucketName": "my-bucket", "MaxResults": "5"}
+
+
+def test_parse_extra_options_flags_and_multivalue():
+    options = parse_extra_options(["--dry-run", "--instance-ids", "i-1", "i-2"])
+    assert options == {"DryRun": True, "InstanceIds": ["i-1", "i-2"]}
+
+
+def test_coerce_param_types():
+    assert coerce_param("5", {"type": "integer"}) == 5
+    assert coerce_param("true", {"type": "boolean"}) is True
+    assert coerce_param('[{"Name":"vpc-id","Values":["vpc-1"]}]', {"type": "list"}) == [
+        {"Name": "vpc-id", "Values": ["vpc-1"]}
+    ]
+    assert coerce_param("solo", {"type": "list"}) == ["solo"]
+    assert coerce_param("plain", {"type": "string"}) == "plain"
+    assert coerce_param("plain", None) == "plain"
+    assert coerce_param('{"A":1}', None) == {"A": 1}
+
+
+def test_coerce_params_uses_model_and_filters():
+    # ec2 DescribeInstances: MaxResults is an integer member
+    params = coerce_params({"MaxResults": "5"}, "ec2", "DescribeInstances")
+    assert params == {"MaxResults": 5}
+    # filter_to_input drops fields a previous ajl stage added
+    params = coerce_params(
+        {"Bucket": "b", "Prefix": "p/", "Type": "s3:prefix", "Arn": "arn:...", "Tags": {}},
+        "s3",
+        "ListObjectsV2",
+        filter_to_input=True,
+    )
+    assert params == {"Bucket": "b", "Prefix": "p/"}
+
+
+def test_dumps_handles_datetime():
+    import datetime
+
+    line = dumps({"When": datetime.datetime(2026, 7, 13, 12, 0, 0)})
+    assert json.loads(line)["When"].startswith("2026-07-13T12:00:00")
+
+
+class FakePaginator:
+    def __init__(self, pages):
+        self.pages = pages
+
+    def paginate(self, **params):
+        yield from self.pages
+
+
+class FakeMeta:
+    partition = "aws"
+    region_name = "us-east-1"
+
+
+class FakeClient:
+    """Duck-typed boto3 client for run_operation tests."""
+
+    meta = FakeMeta()
+
+    def __init__(self, pages, paginate=True):
+        self.pages = pages
+        self._paginate = paginate
+
+    def can_paginate(self, operation):
+        return self._paginate
+
+    def get_paginator(self, operation):
+        return FakePaginator(self.pages)
+
+    def __getattr__(self, name):
+        pages = iter(self.pages)
+
+        def call(**params):
+            return next(pages)
+
+        return call
+
+
+class Options:
+    no_parse = False
+    no_paginate = False
+    max_items = None
+    fetch_tags = False
+    workers = 1
+    verbose = False
+
+
+def make_runner(client):
+    runner = Runner(default_region="us-east-1")
+    key = runner.session_key()
+    runner._clients[(key, "ec2")] = client
+    runner._accounts[key] = "123456789012"
+    return runner, key
+
+
+def collect_emitted(runner, key, client, options=None):
+    out = io.StringIO()
+    emitter = Emitter(stream=out)
+    run_operation(runner, emitter, options or Options(), "ec2", "describe-vpcs", {}, key)
+    return [json.loads(line) for line in out.getvalue().splitlines()]
+
+
+def test_run_operation_paginated_and_normalized():
+    pages = [
+        {"Vpcs": [{"VpcId": "vpc-1", "OwnerId": "1", "Tags": [{"Key": "Name", "Value": "main"}]}]},
+        {"Vpcs": [{"VpcId": "vpc-2", "OwnerId": "1"}]},
+    ]
+    client = FakeClient(pages)
+    runner, key = make_runner(client)
+    records = collect_emitted(runner, key, client)
+    assert [r["Id"] for r in records] == ["vpc-1", "vpc-2"]
+    assert records[0]["Type"] == "ec2:vpc"
+    assert records[0]["Name"] == "main"
+    assert records[0]["Arn"] == "arn:aws:ec2:us-east-1:1:vpc/vpc-1"
+    assert records[0]["Tags"] == {"Name": "main"}
+
+
+def test_run_operation_max_items():
+    pages = [{"Vpcs": [{"VpcId": f"vpc-{i}", "OwnerId": "1"} for i in range(10)]}]
+    client = FakeClient(pages)
+    runner, key = make_runner(client)
+    options = Options()
+    options.max_items = 3
+    records = collect_emitted(runner, key, client, options)
+    assert len(records) == 3
+
+
+def test_shape_page_jq_escape_hatch_ec2_instances():
+    page = {
+        "Reservations": [
+            {
+                "ReservationId": "r-1",
+                "OwnerId": "111122223333",
+                "Instances": [
+                    {"InstanceId": "i-1", "Tags": [{"Key": "Name", "Value": "web"}]}
+                ],
+            }
+        ]
+    }
+    from ajl.modelconfig import get_operation_config
+
+    runner = Runner(default_region="us-east-1")
+    key = runner.session_key()
+    runner._accounts[key] = "111122223333"
+    context = {"partition": "aws", "region": "us-east-1", "account": "111122223333"}
+    records = list(shape_page(page, get_operation_config("ec2", "DescribeInstances"), context, runner, key))
+    assert len(records) == 1
+    record = records[0]
+    assert record["Type"] == "ec2:instance"
+    assert record["Id"] == "i-1"
+    assert record["Name"] == "web"
+    assert record["Arn"] == "arn:aws:ec2:us-east-1:111122223333:instance/i-1"
+    assert record["Tags"] == {"Name": "web"}
+    assert record["Reservation"]["ReservationId"] == "r-1"
+
+
+def test_shape_page_default_single_list_unwrap():
+    runner = Runner(default_region="us-east-1")
+    records = list(
+        shape_page({"Widgets": [{"A": 1}], "NextToken": "t"}, None, {}, runner, runner.session_key())
+    )
+    assert records == [{"A": 1}]
+
+
+def _shape_with_model(service, operation, page):
+    from ajl.modelconfig import get_operation_config
+
+    runner = Runner(default_region="us-east-1")
+    key = runner.session_key()
+    runner._accounts[key] = "111122223333"
+    context = {"partition": "aws", "region": "us-east-1", "account": "111122223333"}
+    return list(shape_page(page, get_operation_config(service, operation), context, runner, key))
+
+
+def test_shape_page_sqs_list_queues_jq():
+    page = {"QueueUrls": ["https://sqs.us-east-1.amazonaws.com/111122223333/my-queue"]}
+    (record,) = _shape_with_model("sqs", "ListQueues", page)
+    assert record["Type"] == "sqs:queue"
+    assert record["Id"] == "my-queue"
+    assert record["Arn"] == "arn:aws:sqs:us-east-1:111122223333:my-queue"
+    assert record["QueueUrl"] == page["QueueUrls"][0]
+
+
+def test_shape_page_route53_hosted_zones_jq():
+    page = {"HostedZones": [{"Id": "/hostedzone/Z0432432", "Name": "example.com."}]}
+    (record,) = _shape_with_model("route53", "ListHostedZones", page)
+    assert record["Id"] == "Z0432432"
+    assert record["Arn"] == "arn:aws:route53:::hostedzone/Z0432432"
+
+
+def test_shape_page_ecs_scalar_arn_list():
+    page = {"clusterArns": ["arn:aws:ecs:us-east-1:111122223333:cluster/prod"]}
+    (record,) = _shape_with_model("ecs", "ListClusters", page)
+    assert record["Type"] == "ecs:cluster"
+    assert record["Id"] == "prod"
+    assert record["Arn"] == page["clusterArns"][0]
