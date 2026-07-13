@@ -1,0 +1,4822 @@
+{
+  "metadata": {
+    "apiVersion": "2018-11-15",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "backup",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceFullName": "AWS Backup",
+    "serviceId": "Backup",
+    "signatureVersion": "v4",
+    "uid": "backup-2018-11-15"
+  },
+  "name": "backup",
+  "operations": {
+    "AssociateBackupVaultMpaApprovalTeam": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "MpaApprovalTeamArn": {
+            "name": "MpaApprovalTeamArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "RequesterComment": {
+            "name": "RequesterComment",
+            "shape_name": "RequesterComment",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName",
+          "MpaApprovalTeamArn"
+        ]
+      },
+      "name": "AssociateBackupVaultMpaApprovalTeam",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CancelLegalHold": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CancelDescription": {
+            "name": "CancelDescription",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "LegalHoldId": {
+            "name": "LegalHoldId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "RetainRecordInDays": {
+            "name": "RetainRecordInDays",
+            "shape_name": "Long",
+            "type": "long"
+          }
+        },
+        "required": [
+          "LegalHoldId",
+          "CancelDescription"
+        ]
+      },
+      "name": "CancelLegalHold",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateBackupPlan": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupPlan": {
+            "name": "BackupPlan",
+            "shape_name": "BackupPlanInput",
+            "type": "structure"
+          },
+          "BackupPlanTags": {
+            "name": "BackupPlanTags",
+            "shape_name": "Tags",
+            "type": "map"
+          },
+          "CreatorRequestId": {
+            "name": "CreatorRequestId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupPlan"
+        ]
+      },
+      "name": "CreateBackupPlan",
+      "output": {
+        "markers": null,
+        "members": {
+          "AdvancedBackupSettings": {
+            "name": "AdvancedBackupSettings",
+            "shape_name": "AdvancedBackupSettings",
+            "type": "list"
+          },
+          "BackupPlanArn": {
+            "name": "BackupPlanArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "BackupPlanId": {
+            "name": "BackupPlanId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "CreationDate": {
+            "name": "CreationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateBackupSelection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupPlanId": {
+            "name": "BackupPlanId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "BackupSelection": {
+            "name": "BackupSelection",
+            "shape_name": "BackupSelection",
+            "type": "structure"
+          },
+          "CreatorRequestId": {
+            "name": "CreatorRequestId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupPlanId",
+          "BackupSelection"
+        ]
+      },
+      "name": "CreateBackupSelection",
+      "output": {
+        "markers": null,
+        "members": {
+          "BackupPlanId": {
+            "name": "BackupPlanId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "CreationDate": {
+            "name": "CreationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "SelectionId": {
+            "name": "SelectionId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateBackupVault": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "BackupVaultTags": {
+            "name": "BackupVaultTags",
+            "shape_name": "Tags",
+            "type": "map"
+          },
+          "CreatorRequestId": {
+            "name": "CreatorRequestId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "EncryptionKeyArn": {
+            "name": "EncryptionKeyArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName"
+        ]
+      },
+      "name": "CreateBackupVault",
+      "output": {
+        "markers": null,
+        "members": {
+          "BackupVaultArn": {
+            "name": "BackupVaultArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "CreationDate": {
+            "name": "CreationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateFramework": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FrameworkControls": {
+            "name": "FrameworkControls",
+            "shape_name": "FrameworkControls",
+            "type": "list"
+          },
+          "FrameworkDescription": {
+            "name": "FrameworkDescription",
+            "shape_name": "FrameworkDescription",
+            "type": "string"
+          },
+          "FrameworkName": {
+            "name": "FrameworkName",
+            "shape_name": "FrameworkName",
+            "type": "string"
+          },
+          "FrameworkTags": {
+            "name": "FrameworkTags",
+            "shape_name": "stringMap",
+            "type": "map"
+          },
+          "IdempotencyToken": {
+            "name": "IdempotencyToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "FrameworkName",
+          "FrameworkControls"
+        ]
+      },
+      "name": "CreateFramework",
+      "output": {
+        "markers": null,
+        "members": {
+          "FrameworkArn": {
+            "name": "FrameworkArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "FrameworkName": {
+            "name": "FrameworkName",
+            "shape_name": "FrameworkName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateLegalHold": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IdempotencyToken": {
+            "name": "IdempotencyToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "RecoveryPointSelection": {
+            "name": "RecoveryPointSelection",
+            "shape_name": "RecoveryPointSelection",
+            "type": "structure"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "map"
+          },
+          "Title": {
+            "name": "Title",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Title",
+          "Description"
+        ]
+      },
+      "name": "CreateLegalHold",
+      "output": {
+        "markers": null,
+        "members": {
+          "CreationDate": {
+            "name": "CreationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "LegalHoldArn": {
+            "name": "LegalHoldArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "LegalHoldId": {
+            "name": "LegalHoldId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "RecoveryPointSelection": {
+            "name": "RecoveryPointSelection",
+            "shape_name": "RecoveryPointSelection",
+            "type": "structure"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "LegalHoldStatus",
+            "type": "string"
+          },
+          "Title": {
+            "name": "Title",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateLogicallyAirGappedBackupVault": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "BackupVaultTags": {
+            "name": "BackupVaultTags",
+            "shape_name": "Tags",
+            "type": "map"
+          },
+          "CreatorRequestId": {
+            "name": "CreatorRequestId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxRetentionDays": {
+            "name": "MaxRetentionDays",
+            "shape_name": "Long",
+            "type": "long"
+          },
+          "MinRetentionDays": {
+            "name": "MinRetentionDays",
+            "shape_name": "Long",
+            "type": "long"
+          }
+        },
+        "required": [
+          "BackupVaultName",
+          "MinRetentionDays",
+          "MaxRetentionDays"
+        ]
+      },
+      "name": "CreateLogicallyAirGappedBackupVault",
+      "output": {
+        "markers": null,
+        "members": {
+          "BackupVaultArn": {
+            "name": "BackupVaultArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "CreationDate": {
+            "name": "CreationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "VaultState": {
+            "name": "VaultState",
+            "shape_name": "VaultState",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateReportPlan": {
+      "input": {
+        "markers": null,
+        "members": {
+          "IdempotencyToken": {
+            "name": "IdempotencyToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ReportDeliveryChannel": {
+            "name": "ReportDeliveryChannel",
+            "shape_name": "ReportDeliveryChannel",
+            "type": "structure"
+          },
+          "ReportPlanDescription": {
+            "name": "ReportPlanDescription",
+            "shape_name": "ReportPlanDescription",
+            "type": "string"
+          },
+          "ReportPlanName": {
+            "name": "ReportPlanName",
+            "shape_name": "ReportPlanName",
+            "type": "string"
+          },
+          "ReportPlanTags": {
+            "name": "ReportPlanTags",
+            "shape_name": "stringMap",
+            "type": "map"
+          },
+          "ReportSetting": {
+            "name": "ReportSetting",
+            "shape_name": "ReportSetting",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ReportPlanName",
+          "ReportDeliveryChannel",
+          "ReportSetting"
+        ]
+      },
+      "name": "CreateReportPlan",
+      "output": {
+        "markers": null,
+        "members": {
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ReportPlanArn": {
+            "name": "ReportPlanArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "ReportPlanName": {
+            "name": "ReportPlanName",
+            "shape_name": "ReportPlanName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateRestoreAccessBackupVault": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "BackupVaultTags": {
+            "name": "BackupVaultTags",
+            "shape_name": "Tags",
+            "type": "map"
+          },
+          "CreatorRequestId": {
+            "name": "CreatorRequestId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "RequesterComment": {
+            "name": "RequesterComment",
+            "shape_name": "RequesterComment",
+            "type": "string"
+          },
+          "SourceBackupVaultArn": {
+            "name": "SourceBackupVaultArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SourceBackupVaultArn"
+        ]
+      },
+      "name": "CreateRestoreAccessBackupVault",
+      "output": {
+        "markers": null,
+        "members": {
+          "CreationDate": {
+            "name": "CreationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "RestoreAccessBackupVaultArn": {
+            "name": "RestoreAccessBackupVaultArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "RestoreAccessBackupVaultName": {
+            "name": "RestoreAccessBackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "VaultState": {
+            "name": "VaultState",
+            "shape_name": "VaultState",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateRestoreTestingPlan": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CreatorRequestId": {
+            "name": "CreatorRequestId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RestoreTestingPlan": {
+            "name": "RestoreTestingPlan",
+            "shape_name": "RestoreTestingPlanForCreate",
+            "type": "structure"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "SensitiveStringMap",
+            "type": "map"
+          }
+        },
+        "required": [
+          "RestoreTestingPlan"
+        ]
+      },
+      "name": "CreateRestoreTestingPlan",
+      "output": {
+        "markers": null,
+        "members": {
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "RestoreTestingPlanArn": {
+            "name": "RestoreTestingPlanArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RestoreTestingPlanName": {
+            "name": "RestoreTestingPlanName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CreationTime",
+          "RestoreTestingPlanArn",
+          "RestoreTestingPlanName"
+        ]
+      }
+    },
+    "CreateRestoreTestingSelection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CreatorRequestId": {
+            "name": "CreatorRequestId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RestoreTestingPlanName": {
+            "name": "RestoreTestingPlanName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RestoreTestingSelection": {
+            "name": "RestoreTestingSelection",
+            "shape_name": "RestoreTestingSelectionForCreate",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "RestoreTestingPlanName",
+          "RestoreTestingSelection"
+        ]
+      },
+      "name": "CreateRestoreTestingSelection",
+      "output": {
+        "markers": null,
+        "members": {
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "RestoreTestingPlanArn": {
+            "name": "RestoreTestingPlanArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RestoreTestingPlanName": {
+            "name": "RestoreTestingPlanName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RestoreTestingSelectionName": {
+            "name": "RestoreTestingSelectionName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CreationTime",
+          "RestoreTestingPlanArn",
+          "RestoreTestingPlanName",
+          "RestoreTestingSelectionName"
+        ]
+      }
+    },
+    "DeleteBackupPlan": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupPlanId": {
+            "name": "BackupPlanId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupPlanId"
+        ]
+      },
+      "name": "DeleteBackupPlan",
+      "output": {
+        "markers": null,
+        "members": {
+          "BackupPlanArn": {
+            "name": "BackupPlanArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "BackupPlanId": {
+            "name": "BackupPlanId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "DeletionDate": {
+            "name": "DeletionDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteBackupSelection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupPlanId": {
+            "name": "BackupPlanId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "SelectionId": {
+            "name": "SelectionId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupPlanId",
+          "SelectionId"
+        ]
+      },
+      "name": "DeleteBackupSelection",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteBackupVault": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName"
+        ]
+      },
+      "name": "DeleteBackupVault",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteBackupVaultAccessPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName"
+        ]
+      },
+      "name": "DeleteBackupVaultAccessPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteBackupVaultLockConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName"
+        ]
+      },
+      "name": "DeleteBackupVaultLockConfiguration",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteBackupVaultNotifications": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName"
+        ]
+      },
+      "name": "DeleteBackupVaultNotifications",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteFramework": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FrameworkName": {
+            "name": "FrameworkName",
+            "shape_name": "FrameworkName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "FrameworkName"
+        ]
+      },
+      "name": "DeleteFramework",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteRecoveryPoint": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "RecoveryPointArn": {
+            "name": "RecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName",
+          "RecoveryPointArn"
+        ]
+      },
+      "name": "DeleteRecoveryPoint",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteReportPlan": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ReportPlanName": {
+            "name": "ReportPlanName",
+            "shape_name": "ReportPlanName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ReportPlanName"
+        ]
+      },
+      "name": "DeleteReportPlan",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteRestoreTestingPlan": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RestoreTestingPlanName": {
+            "name": "RestoreTestingPlanName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RestoreTestingPlanName"
+        ]
+      },
+      "name": "DeleteRestoreTestingPlan",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteRestoreTestingSelection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RestoreTestingPlanName": {
+            "name": "RestoreTestingPlanName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RestoreTestingSelectionName": {
+            "name": "RestoreTestingSelectionName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RestoreTestingPlanName",
+          "RestoreTestingSelectionName"
+        ]
+      },
+      "name": "DeleteRestoreTestingSelection",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DescribeBackupJob": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupJobId": {
+            "name": "BackupJobId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupJobId"
+        ]
+      },
+      "name": "DescribeBackupJob",
+      "output": {
+        "markers": null,
+        "members": {
+          "AccountId": {
+            "name": "AccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "BackupJobId": {
+            "name": "BackupJobId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "BackupOptions": {
+            "name": "BackupOptions",
+            "shape_name": "BackupOptions",
+            "type": "map"
+          },
+          "BackupSizeInBytes": {
+            "name": "BackupSizeInBytes",
+            "shape_name": "Long",
+            "type": "long"
+          },
+          "BackupType": {
+            "name": "BackupType",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "BackupVaultArn": {
+            "name": "BackupVaultArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "BytesTransferred": {
+            "name": "BytesTransferred",
+            "shape_name": "Long",
+            "type": "long"
+          },
+          "ChildJobsInState": {
+            "name": "ChildJobsInState",
+            "shape_name": "BackupJobChildJobsInState",
+            "type": "map"
+          },
+          "CompletionDate": {
+            "name": "CompletionDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "CreatedBy": {
+            "name": "CreatedBy",
+            "shape_name": "RecoveryPointCreator",
+            "type": "structure"
+          },
+          "CreationDate": {
+            "name": "CreationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ExpectedCompletionDate": {
+            "name": "ExpectedCompletionDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "IamRoleArn": {
+            "name": "IamRoleArn",
+            "shape_name": "IAMRoleArn",
+            "type": "string"
+          },
+          "InitiationDate": {
+            "name": "InitiationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "IsParent": {
+            "name": "IsParent",
+            "shape_name": "boolean",
+            "type": "boolean"
+          },
+          "MessageCategory": {
+            "name": "MessageCategory",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "NumberOfChildJobs": {
+            "name": "NumberOfChildJobs",
+            "shape_name": "Long",
+            "type": "long"
+          },
+          "ParentJobId": {
+            "name": "ParentJobId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "PercentDone": {
+            "name": "PercentDone",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "RecoveryPointArn": {
+            "name": "RecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "ResourceName": {
+            "name": "ResourceName",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ResourceType": {
+            "name": "ResourceType",
+            "shape_name": "ResourceType",
+            "type": "string"
+          },
+          "StartBy": {
+            "name": "StartBy",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "BackupJobState",
+            "type": "string"
+          },
+          "StatusMessage": {
+            "name": "StatusMessage",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeBackupVault": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultAccountId": {
+            "name": "BackupVaultAccountId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName"
+        ]
+      },
+      "name": "DescribeBackupVault",
+      "output": {
+        "markers": null,
+        "members": {
+          "BackupVaultArn": {
+            "name": "BackupVaultArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "CreationDate": {
+            "name": "CreationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "CreatorRequestId": {
+            "name": "CreatorRequestId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "EncryptionKeyArn": {
+            "name": "EncryptionKeyArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "LatestMpaApprovalTeamUpdate": {
+            "name": "LatestMpaApprovalTeamUpdate",
+            "shape_name": "LatestMpaApprovalTeamUpdate",
+            "type": "structure"
+          },
+          "LockDate": {
+            "name": "LockDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "Locked": {
+            "name": "Locked",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "MaxRetentionDays": {
+            "name": "MaxRetentionDays",
+            "shape_name": "Long",
+            "type": "long"
+          },
+          "MinRetentionDays": {
+            "name": "MinRetentionDays",
+            "shape_name": "Long",
+            "type": "long"
+          },
+          "MpaApprovalTeamArn": {
+            "name": "MpaApprovalTeamArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "MpaSessionArn": {
+            "name": "MpaSessionArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "NumberOfRecoveryPoints": {
+            "name": "NumberOfRecoveryPoints",
+            "shape_name": "long",
+            "type": "long"
+          },
+          "SourceBackupVaultArn": {
+            "name": "SourceBackupVaultArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "VaultState": {
+            "name": "VaultState",
+            "shape_name": "VaultState",
+            "type": "string"
+          },
+          "VaultType": {
+            "name": "VaultType",
+            "shape_name": "VaultType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeCopyJob": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CopyJobId": {
+            "name": "CopyJobId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CopyJobId"
+        ]
+      },
+      "name": "DescribeCopyJob",
+      "output": {
+        "markers": null,
+        "members": {
+          "CopyJob": {
+            "name": "CopyJob",
+            "shape_name": "CopyJob",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeFramework": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FrameworkName": {
+            "name": "FrameworkName",
+            "shape_name": "FrameworkName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "FrameworkName"
+        ]
+      },
+      "name": "DescribeFramework",
+      "output": {
+        "markers": null,
+        "members": {
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "DeploymentStatus": {
+            "name": "DeploymentStatus",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "FrameworkArn": {
+            "name": "FrameworkArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "FrameworkControls": {
+            "name": "FrameworkControls",
+            "shape_name": "FrameworkControls",
+            "type": "list"
+          },
+          "FrameworkDescription": {
+            "name": "FrameworkDescription",
+            "shape_name": "FrameworkDescription",
+            "type": "string"
+          },
+          "FrameworkName": {
+            "name": "FrameworkName",
+            "shape_name": "FrameworkName",
+            "type": "string"
+          },
+          "FrameworkStatus": {
+            "name": "FrameworkStatus",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IdempotencyToken": {
+            "name": "IdempotencyToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeGlobalSettings": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "DescribeGlobalSettings",
+      "output": {
+        "markers": null,
+        "members": {
+          "GlobalSettings": {
+            "name": "GlobalSettings",
+            "shape_name": "GlobalSettings",
+            "type": "map"
+          },
+          "LastUpdateTime": {
+            "name": "LastUpdateTime",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeProtectedResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      },
+      "name": "DescribeProtectedResource",
+      "output": {
+        "markers": null,
+        "members": {
+          "LastBackupTime": {
+            "name": "LastBackupTime",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "LastBackupVaultArn": {
+            "name": "LastBackupVaultArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "LastRecoveryPointArn": {
+            "name": "LastRecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "LatestRestoreExecutionTimeMinutes": {
+            "name": "LatestRestoreExecutionTimeMinutes",
+            "shape_name": "Long",
+            "type": "long"
+          },
+          "LatestRestoreJobCreationDate": {
+            "name": "LatestRestoreJobCreationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "LatestRestoreRecoveryPointCreationDate": {
+            "name": "LatestRestoreRecoveryPointCreationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "ResourceName": {
+            "name": "ResourceName",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ResourceType": {
+            "name": "ResourceType",
+            "shape_name": "ResourceType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeRecoveryPoint": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultAccountId": {
+            "name": "BackupVaultAccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "RecoveryPointArn": {
+            "name": "RecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName",
+          "RecoveryPointArn"
+        ]
+      },
+      "name": "DescribeRecoveryPoint",
+      "output": {
+        "markers": null,
+        "members": {
+          "BackupSizeInBytes": {
+            "name": "BackupSizeInBytes",
+            "shape_name": "Long",
+            "type": "long"
+          },
+          "BackupVaultArn": {
+            "name": "BackupVaultArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "CalculatedLifecycle": {
+            "name": "CalculatedLifecycle",
+            "shape_name": "CalculatedLifecycle",
+            "type": "structure"
+          },
+          "CompletionDate": {
+            "name": "CompletionDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "CompositeMemberIdentifier": {
+            "name": "CompositeMemberIdentifier",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "CreatedBy": {
+            "name": "CreatedBy",
+            "shape_name": "RecoveryPointCreator",
+            "type": "structure"
+          },
+          "CreationDate": {
+            "name": "CreationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "EncryptionKeyArn": {
+            "name": "EncryptionKeyArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "IamRoleArn": {
+            "name": "IamRoleArn",
+            "shape_name": "IAMRoleArn",
+            "type": "string"
+          },
+          "IndexStatus": {
+            "name": "IndexStatus",
+            "shape_name": "IndexStatus",
+            "type": "string"
+          },
+          "IndexStatusMessage": {
+            "name": "IndexStatusMessage",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "InitiationDate": {
+            "name": "InitiationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "IsEncrypted": {
+            "name": "IsEncrypted",
+            "shape_name": "boolean",
+            "type": "boolean"
+          },
+          "IsParent": {
+            "name": "IsParent",
+            "shape_name": "boolean",
+            "type": "boolean"
+          },
+          "LastRestoreTime": {
+            "name": "LastRestoreTime",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "Lifecycle": {
+            "name": "Lifecycle",
+            "shape_name": "Lifecycle",
+            "type": "structure"
+          },
+          "ParentRecoveryPointArn": {
+            "name": "ParentRecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "RecoveryPointArn": {
+            "name": "RecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "ResourceName": {
+            "name": "ResourceName",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ResourceType": {
+            "name": "ResourceType",
+            "shape_name": "ResourceType",
+            "type": "string"
+          },
+          "SourceBackupVaultArn": {
+            "name": "SourceBackupVaultArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "RecoveryPointStatus",
+            "type": "string"
+          },
+          "StatusMessage": {
+            "name": "StatusMessage",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "StorageClass": {
+            "name": "StorageClass",
+            "shape_name": "StorageClass",
+            "type": "string"
+          },
+          "VaultType": {
+            "name": "VaultType",
+            "shape_name": "VaultType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeRegionSettings": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "DescribeRegionSettings",
+      "output": {
+        "markers": null,
+        "members": {
+          "ResourceTypeManagementPreference": {
+            "name": "ResourceTypeManagementPreference",
+            "shape_name": "ResourceTypeManagementPreference",
+            "type": "map"
+          },
+          "ResourceTypeOptInPreference": {
+            "name": "ResourceTypeOptInPreference",
+            "shape_name": "ResourceTypeOptInPreference",
+            "type": "map"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeReportJob": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ReportJobId": {
+            "name": "ReportJobId",
+            "shape_name": "ReportJobId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ReportJobId"
+        ]
+      },
+      "name": "DescribeReportJob",
+      "output": {
+        "markers": null,
+        "members": {
+          "ReportJob": {
+            "name": "ReportJob",
+            "shape_name": "ReportJob",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeReportPlan": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ReportPlanName": {
+            "name": "ReportPlanName",
+            "shape_name": "ReportPlanName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ReportPlanName"
+        ]
+      },
+      "name": "DescribeReportPlan",
+      "output": {
+        "markers": null,
+        "members": {
+          "ReportPlan": {
+            "name": "ReportPlan",
+            "shape_name": "ReportPlan",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeRestoreJob": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RestoreJobId": {
+            "name": "RestoreJobId",
+            "shape_name": "RestoreJobId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RestoreJobId"
+        ]
+      },
+      "name": "DescribeRestoreJob",
+      "output": {
+        "markers": null,
+        "members": {
+          "AccountId": {
+            "name": "AccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "BackupSizeInBytes": {
+            "name": "BackupSizeInBytes",
+            "shape_name": "Long",
+            "type": "long"
+          },
+          "CompletionDate": {
+            "name": "CompletionDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "CreatedBy": {
+            "name": "CreatedBy",
+            "shape_name": "RestoreJobCreator",
+            "type": "structure"
+          },
+          "CreatedResourceArn": {
+            "name": "CreatedResourceArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "CreationDate": {
+            "name": "CreationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "DeletionStatus": {
+            "name": "DeletionStatus",
+            "shape_name": "RestoreDeletionStatus",
+            "type": "string"
+          },
+          "DeletionStatusMessage": {
+            "name": "DeletionStatusMessage",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ExpectedCompletionTimeMinutes": {
+            "name": "ExpectedCompletionTimeMinutes",
+            "shape_name": "Long",
+            "type": "long"
+          },
+          "IamRoleArn": {
+            "name": "IamRoleArn",
+            "shape_name": "IAMRoleArn",
+            "type": "string"
+          },
+          "PercentDone": {
+            "name": "PercentDone",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "RecoveryPointArn": {
+            "name": "RecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "RecoveryPointCreationDate": {
+            "name": "RecoveryPointCreationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ResourceType": {
+            "name": "ResourceType",
+            "shape_name": "ResourceType",
+            "type": "string"
+          },
+          "RestoreJobId": {
+            "name": "RestoreJobId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "RestoreJobStatus",
+            "type": "string"
+          },
+          "StatusMessage": {
+            "name": "StatusMessage",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ValidationStatus": {
+            "name": "ValidationStatus",
+            "shape_name": "RestoreValidationStatus",
+            "type": "string"
+          },
+          "ValidationStatusMessage": {
+            "name": "ValidationStatusMessage",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DisassociateBackupVaultMpaApprovalTeam": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "RequesterComment": {
+            "name": "RequesterComment",
+            "shape_name": "RequesterComment",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName"
+        ]
+      },
+      "name": "DisassociateBackupVaultMpaApprovalTeam",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DisassociateRecoveryPoint": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "RecoveryPointArn": {
+            "name": "RecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName",
+          "RecoveryPointArn"
+        ]
+      },
+      "name": "DisassociateRecoveryPoint",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DisassociateRecoveryPointFromParent": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "RecoveryPointArn": {
+            "name": "RecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName",
+          "RecoveryPointArn"
+        ]
+      },
+      "name": "DisassociateRecoveryPointFromParent",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ExportBackupPlanTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupPlanId": {
+            "name": "BackupPlanId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupPlanId"
+        ]
+      },
+      "name": "ExportBackupPlanTemplate",
+      "output": {
+        "markers": null,
+        "members": {
+          "BackupPlanTemplateJson": {
+            "name": "BackupPlanTemplateJson",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetBackupPlan": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupPlanId": {
+            "name": "BackupPlanId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupPlanId"
+        ]
+      },
+      "name": "GetBackupPlan",
+      "output": {
+        "markers": null,
+        "members": {
+          "AdvancedBackupSettings": {
+            "name": "AdvancedBackupSettings",
+            "shape_name": "AdvancedBackupSettings",
+            "type": "list"
+          },
+          "BackupPlan": {
+            "name": "BackupPlan",
+            "shape_name": "BackupPlan",
+            "type": "structure"
+          },
+          "BackupPlanArn": {
+            "name": "BackupPlanArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "BackupPlanId": {
+            "name": "BackupPlanId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "CreationDate": {
+            "name": "CreationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "CreatorRequestId": {
+            "name": "CreatorRequestId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "DeletionDate": {
+            "name": "DeletionDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "LastExecutionDate": {
+            "name": "LastExecutionDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetBackupPlanFromJSON": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupPlanTemplateJson": {
+            "name": "BackupPlanTemplateJson",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupPlanTemplateJson"
+        ]
+      },
+      "name": "GetBackupPlanFromJSON",
+      "output": {
+        "markers": null,
+        "members": {
+          "BackupPlan": {
+            "name": "BackupPlan",
+            "shape_name": "BackupPlan",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetBackupPlanFromTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupPlanTemplateId": {
+            "name": "BackupPlanTemplateId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupPlanTemplateId"
+        ]
+      },
+      "name": "GetBackupPlanFromTemplate",
+      "output": {
+        "markers": null,
+        "members": {
+          "BackupPlanDocument": {
+            "name": "BackupPlanDocument",
+            "shape_name": "BackupPlan",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetBackupSelection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupPlanId": {
+            "name": "BackupPlanId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "SelectionId": {
+            "name": "SelectionId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupPlanId",
+          "SelectionId"
+        ]
+      },
+      "name": "GetBackupSelection",
+      "output": {
+        "markers": null,
+        "members": {
+          "BackupPlanId": {
+            "name": "BackupPlanId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "BackupSelection": {
+            "name": "BackupSelection",
+            "shape_name": "BackupSelection",
+            "type": "structure"
+          },
+          "CreationDate": {
+            "name": "CreationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "CreatorRequestId": {
+            "name": "CreatorRequestId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "SelectionId": {
+            "name": "SelectionId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetBackupVaultAccessPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName"
+        ]
+      },
+      "name": "GetBackupVaultAccessPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "BackupVaultArn": {
+            "name": "BackupVaultArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "IAMPolicy",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetBackupVaultNotifications": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName"
+        ]
+      },
+      "name": "GetBackupVaultNotifications",
+      "output": {
+        "markers": null,
+        "members": {
+          "BackupVaultArn": {
+            "name": "BackupVaultArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "BackupVaultEvents": {
+            "name": "BackupVaultEvents",
+            "shape_name": "BackupVaultEvents",
+            "type": "list"
+          },
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "SNSTopicArn": {
+            "name": "SNSTopicArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetLegalHold": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LegalHoldId": {
+            "name": "LegalHoldId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LegalHoldId"
+        ]
+      },
+      "name": "GetLegalHold",
+      "output": {
+        "markers": null,
+        "members": {
+          "CancelDescription": {
+            "name": "CancelDescription",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "CancellationDate": {
+            "name": "CancellationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "CreationDate": {
+            "name": "CreationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "LegalHoldArn": {
+            "name": "LegalHoldArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "LegalHoldId": {
+            "name": "LegalHoldId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "RecoveryPointSelection": {
+            "name": "RecoveryPointSelection",
+            "shape_name": "RecoveryPointSelection",
+            "type": "structure"
+          },
+          "RetainRecordUntil": {
+            "name": "RetainRecordUntil",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "LegalHoldStatus",
+            "type": "string"
+          },
+          "Title": {
+            "name": "Title",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetRecoveryPointIndexDetails": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "RecoveryPointArn": {
+            "name": "RecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName",
+          "RecoveryPointArn"
+        ]
+      },
+      "name": "GetRecoveryPointIndexDetails",
+      "output": {
+        "markers": null,
+        "members": {
+          "BackupVaultArn": {
+            "name": "BackupVaultArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "IndexCompletionDate": {
+            "name": "IndexCompletionDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "IndexCreationDate": {
+            "name": "IndexCreationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "IndexDeletionDate": {
+            "name": "IndexDeletionDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "IndexStatus": {
+            "name": "IndexStatus",
+            "shape_name": "IndexStatus",
+            "type": "string"
+          },
+          "IndexStatusMessage": {
+            "name": "IndexStatusMessage",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "RecoveryPointArn": {
+            "name": "RecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "SourceResourceArn": {
+            "name": "SourceResourceArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "TotalItemsIndexed": {
+            "name": "TotalItemsIndexed",
+            "shape_name": "Long",
+            "type": "long"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetRecoveryPointRestoreMetadata": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultAccountId": {
+            "name": "BackupVaultAccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "RecoveryPointArn": {
+            "name": "RecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName",
+          "RecoveryPointArn"
+        ]
+      },
+      "name": "GetRecoveryPointRestoreMetadata",
+      "output": {
+        "markers": null,
+        "members": {
+          "BackupVaultArn": {
+            "name": "BackupVaultArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "RecoveryPointArn": {
+            "name": "RecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "ResourceType": {
+            "name": "ResourceType",
+            "shape_name": "ResourceType",
+            "type": "string"
+          },
+          "RestoreMetadata": {
+            "name": "RestoreMetadata",
+            "shape_name": "Metadata",
+            "type": "map"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetRestoreJobMetadata": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RestoreJobId": {
+            "name": "RestoreJobId",
+            "shape_name": "RestoreJobId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RestoreJobId"
+        ]
+      },
+      "name": "GetRestoreJobMetadata",
+      "output": {
+        "markers": null,
+        "members": {
+          "Metadata": {
+            "name": "Metadata",
+            "shape_name": "Metadata",
+            "type": "map"
+          },
+          "RestoreJobId": {
+            "name": "RestoreJobId",
+            "shape_name": "RestoreJobId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetRestoreTestingInferredMetadata": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultAccountId": {
+            "name": "BackupVaultAccountId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RecoveryPointArn": {
+            "name": "RecoveryPointArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName",
+          "RecoveryPointArn"
+        ]
+      },
+      "name": "GetRestoreTestingInferredMetadata",
+      "output": {
+        "markers": null,
+        "members": {
+          "InferredMetadata": {
+            "name": "InferredMetadata",
+            "shape_name": "stringMap",
+            "type": "map"
+          }
+        },
+        "required": [
+          "InferredMetadata"
+        ]
+      }
+    },
+    "GetRestoreTestingPlan": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RestoreTestingPlanName": {
+            "name": "RestoreTestingPlanName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RestoreTestingPlanName"
+        ]
+      },
+      "name": "GetRestoreTestingPlan",
+      "output": {
+        "markers": null,
+        "members": {
+          "RestoreTestingPlan": {
+            "name": "RestoreTestingPlan",
+            "shape_name": "RestoreTestingPlanForGet",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "RestoreTestingPlan"
+        ]
+      }
+    },
+    "GetRestoreTestingSelection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RestoreTestingPlanName": {
+            "name": "RestoreTestingPlanName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RestoreTestingSelectionName": {
+            "name": "RestoreTestingSelectionName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RestoreTestingPlanName",
+          "RestoreTestingSelectionName"
+        ]
+      },
+      "name": "GetRestoreTestingSelection",
+      "output": {
+        "markers": null,
+        "members": {
+          "RestoreTestingSelection": {
+            "name": "RestoreTestingSelection",
+            "shape_name": "RestoreTestingSelectionForGet",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "RestoreTestingSelection"
+        ]
+      }
+    },
+    "GetSupportedResourceTypes": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "GetSupportedResourceTypes",
+      "output": {
+        "markers": null,
+        "members": {
+          "ResourceTypes": {
+            "name": "ResourceTypes",
+            "shape_name": "ResourceTypes",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListBackupJobSummaries": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AccountId": {
+            "name": "AccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "AggregationPeriod": {
+            "name": "AggregationPeriod",
+            "shape_name": "AggregationPeriod",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "MessageCategory": {
+            "name": "MessageCategory",
+            "shape_name": "MessageCategory",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ResourceType": {
+            "name": "ResourceType",
+            "shape_name": "ResourceType",
+            "type": "string"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "BackupJobStatus",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListBackupJobSummaries",
+      "output": {
+        "markers": null,
+        "members": {
+          "AggregationPeriod": {
+            "name": "AggregationPeriod",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "BackupJobSummaries": {
+            "name": "BackupJobSummaries",
+            "shape_name": "BackupJobSummaryList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListBackupJobs": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "ByAccountId": {
+            "name": "ByAccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "ByBackupVaultName": {
+            "name": "ByBackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "ByCompleteAfter": {
+            "name": "ByCompleteAfter",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ByCompleteBefore": {
+            "name": "ByCompleteBefore",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ByCreatedAfter": {
+            "name": "ByCreatedAfter",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ByCreatedBefore": {
+            "name": "ByCreatedBefore",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ByMessageCategory": {
+            "name": "ByMessageCategory",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ByParentJobId": {
+            "name": "ByParentJobId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ByResourceArn": {
+            "name": "ByResourceArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "ByResourceType": {
+            "name": "ByResourceType",
+            "shape_name": "ResourceType",
+            "type": "string"
+          },
+          "ByState": {
+            "name": "ByState",
+            "shape_name": "BackupJobState",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListBackupJobs",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "BackupJobs": {
+            "name": "BackupJobs",
+            "shape_name": "BackupJobsList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListBackupPlanTemplates": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListBackupPlanTemplates",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "BackupPlanTemplatesList": {
+            "name": "BackupPlanTemplatesList",
+            "shape_name": "BackupPlanTemplatesList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListBackupPlanVersions": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "BackupPlanId": {
+            "name": "BackupPlanId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupPlanId"
+        ]
+      },
+      "name": "ListBackupPlanVersions",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "BackupPlanVersionsList": {
+            "name": "BackupPlanVersionsList",
+            "shape_name": "BackupPlanVersionsList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListBackupPlans": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "IncludeDeleted": {
+            "name": "IncludeDeleted",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListBackupPlans",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "BackupPlansList": {
+            "name": "BackupPlansList",
+            "shape_name": "BackupPlansList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "BackupPlanArn",
+            "id": "BackupPlanId",
+            "name": "BackupPlanName",
+            "path": [
+              "BackupPlansList"
+            ],
+            "type": "backup:backup-plan"
+          }
+        ]
+      }
+    },
+    "ListBackupSelections": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "BackupPlanId": {
+            "name": "BackupPlanId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupPlanId"
+        ]
+      },
+      "name": "ListBackupSelections",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "BackupSelectionsList": {
+            "name": "BackupSelectionsList",
+            "shape_name": "BackupSelectionsList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListBackupVaults": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "ByShared": {
+            "name": "ByShared",
+            "shape_name": "boolean",
+            "type": "boolean"
+          },
+          "ByVaultType": {
+            "name": "ByVaultType",
+            "shape_name": "VaultType",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListBackupVaults",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "BackupVaultList": {
+            "name": "BackupVaultList",
+            "shape_name": "BackupVaultList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "BackupVaultArn",
+            "id": "BackupVaultName",
+            "name": "BackupVaultName",
+            "path": [
+              "BackupVaultList"
+            ],
+            "type": "backup:backup-vault"
+          }
+        ]
+      }
+    },
+    "ListCopyJobSummaries": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AccountId": {
+            "name": "AccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "AggregationPeriod": {
+            "name": "AggregationPeriod",
+            "shape_name": "AggregationPeriod",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "MessageCategory": {
+            "name": "MessageCategory",
+            "shape_name": "MessageCategory",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ResourceType": {
+            "name": "ResourceType",
+            "shape_name": "ResourceType",
+            "type": "string"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "CopyJobStatus",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListCopyJobSummaries",
+      "output": {
+        "markers": null,
+        "members": {
+          "AggregationPeriod": {
+            "name": "AggregationPeriod",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "CopyJobSummaries": {
+            "name": "CopyJobSummaries",
+            "shape_name": "CopyJobSummaryList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListCopyJobs": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "ByAccountId": {
+            "name": "ByAccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "ByCompleteAfter": {
+            "name": "ByCompleteAfter",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ByCompleteBefore": {
+            "name": "ByCompleteBefore",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ByCreatedAfter": {
+            "name": "ByCreatedAfter",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ByCreatedBefore": {
+            "name": "ByCreatedBefore",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ByDestinationVaultArn": {
+            "name": "ByDestinationVaultArn",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ByMessageCategory": {
+            "name": "ByMessageCategory",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ByParentJobId": {
+            "name": "ByParentJobId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ByResourceArn": {
+            "name": "ByResourceArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "ByResourceType": {
+            "name": "ByResourceType",
+            "shape_name": "ResourceType",
+            "type": "string"
+          },
+          "ByState": {
+            "name": "ByState",
+            "shape_name": "CopyJobState",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListCopyJobs",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "CopyJobs": {
+            "name": "CopyJobs",
+            "shape_name": "CopyJobsList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListFrameworks": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxFrameworkInputs",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListFrameworks",
+      "output": {
+        "markers": null,
+        "members": {
+          "Frameworks": {
+            "name": "Frameworks",
+            "shape_name": "FrameworkList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListIndexedRecoveryPoints": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "CreatedAfter": {
+            "name": "CreatedAfter",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "CreatedBefore": {
+            "name": "CreatedBefore",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "IndexStatus": {
+            "name": "IndexStatus",
+            "shape_name": "IndexStatus",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ResourceType": {
+            "name": "ResourceType",
+            "shape_name": "ResourceType",
+            "type": "string"
+          },
+          "SourceResourceArn": {
+            "name": "SourceResourceArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListIndexedRecoveryPoints",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "IndexedRecoveryPoints": {
+            "name": "IndexedRecoveryPoints",
+            "shape_name": "IndexedRecoveryPointList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListLegalHolds": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListLegalHolds",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "LegalHolds": {
+            "name": "LegalHolds",
+            "shape_name": "LegalHoldsList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListProtectedResources": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListProtectedResources",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Results": {
+            "name": "Results",
+            "shape_name": "ProtectedResourcesList",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "ResourceArn",
+            "name": "ResourceName",
+            "path": [
+              "Results"
+            ],
+            "type": "backup:protected-resource"
+          }
+        ]
+      }
+    },
+    "ListProtectedResourcesByBackupVault": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "BackupVaultAccountId": {
+            "name": "BackupVaultAccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName"
+        ]
+      },
+      "name": "ListProtectedResourcesByBackupVault",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Results": {
+            "name": "Results",
+            "shape_name": "ProtectedResourcesList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListRecoveryPointsByBackupVault": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "BackupVaultAccountId": {
+            "name": "BackupVaultAccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "ByBackupPlanId": {
+            "name": "ByBackupPlanId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ByCreatedAfter": {
+            "name": "ByCreatedAfter",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ByCreatedBefore": {
+            "name": "ByCreatedBefore",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ByParentRecoveryPointArn": {
+            "name": "ByParentRecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "ByResourceArn": {
+            "name": "ByResourceArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "ByResourceType": {
+            "name": "ByResourceType",
+            "shape_name": "ResourceType",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName"
+        ]
+      },
+      "name": "ListRecoveryPointsByBackupVault",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "RecoveryPoints": {
+            "name": "RecoveryPoints",
+            "shape_name": "RecoveryPointByBackupVaultList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListRecoveryPointsByLegalHold": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "LegalHoldId": {
+            "name": "LegalHoldId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LegalHoldId"
+        ]
+      },
+      "name": "ListRecoveryPointsByLegalHold",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "RecoveryPoints": {
+            "name": "RecoveryPoints",
+            "shape_name": "RecoveryPointsList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListRecoveryPointsByResource": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "ManagedByAWSBackupOnly": {
+            "name": "ManagedByAWSBackupOnly",
+            "shape_name": "boolean",
+            "type": "boolean"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      },
+      "name": "ListRecoveryPointsByResource",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "RecoveryPoints": {
+            "name": "RecoveryPoints",
+            "shape_name": "RecoveryPointByResourceList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListReportJobs": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ByCreationAfter": {
+            "name": "ByCreationAfter",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ByCreationBefore": {
+            "name": "ByCreationBefore",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ByReportPlanName": {
+            "name": "ByReportPlanName",
+            "shape_name": "ReportPlanName",
+            "type": "string"
+          },
+          "ByStatus": {
+            "name": "ByStatus",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListReportJobs",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ReportJobs": {
+            "name": "ReportJobs",
+            "shape_name": "ReportJobList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListReportPlans": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListReportPlans",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ReportPlans": {
+            "name": "ReportPlans",
+            "shape_name": "ReportPlanList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListRestoreAccessBackupVaults": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName"
+        ]
+      },
+      "name": "ListRestoreAccessBackupVaults",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "RestoreAccessBackupVaults": {
+            "name": "RestoreAccessBackupVaults",
+            "shape_name": "RestoreAccessBackupVaultList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListRestoreJobSummaries": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AccountId": {
+            "name": "AccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "AggregationPeriod": {
+            "name": "AggregationPeriod",
+            "shape_name": "AggregationPeriod",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ResourceType": {
+            "name": "ResourceType",
+            "shape_name": "ResourceType",
+            "type": "string"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "RestoreJobState",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListRestoreJobSummaries",
+      "output": {
+        "markers": null,
+        "members": {
+          "AggregationPeriod": {
+            "name": "AggregationPeriod",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "RestoreJobSummaries": {
+            "name": "RestoreJobSummaries",
+            "shape_name": "RestoreJobSummaryList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListRestoreJobs": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "ByAccountId": {
+            "name": "ByAccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "ByCompleteAfter": {
+            "name": "ByCompleteAfter",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ByCompleteBefore": {
+            "name": "ByCompleteBefore",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ByCreatedAfter": {
+            "name": "ByCreatedAfter",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ByCreatedBefore": {
+            "name": "ByCreatedBefore",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ByResourceType": {
+            "name": "ByResourceType",
+            "shape_name": "ResourceType",
+            "type": "string"
+          },
+          "ByRestoreTestingPlanArn": {
+            "name": "ByRestoreTestingPlanArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "ByStatus": {
+            "name": "ByStatus",
+            "shape_name": "RestoreJobStatus",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListRestoreJobs",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "RestoreJobs": {
+            "name": "RestoreJobs",
+            "shape_name": "RestoreJobsList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListRestoreJobsByProtectedResource": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "ByRecoveryPointCreationDateAfter": {
+            "name": "ByRecoveryPointCreationDateAfter",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ByRecoveryPointCreationDateBefore": {
+            "name": "ByRecoveryPointCreationDateBefore",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ByStatus": {
+            "name": "ByStatus",
+            "shape_name": "RestoreJobStatus",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      },
+      "name": "ListRestoreJobsByProtectedResource",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "RestoreJobs": {
+            "name": "RestoreJobs",
+            "shape_name": "RestoreJobsList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListRestoreTestingPlans": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "ListRestoreTestingPlansInputMaxResultsInteger",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListRestoreTestingPlans",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RestoreTestingPlans": {
+            "name": "RestoreTestingPlans",
+            "shape_name": "RestoreTestingPlans",
+            "type": "list"
+          }
+        },
+        "required": [
+          "RestoreTestingPlans"
+        ]
+      }
+    },
+    "ListRestoreTestingSelections": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "ListRestoreTestingSelectionsInputMaxResultsInteger",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RestoreTestingPlanName": {
+            "name": "RestoreTestingPlanName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RestoreTestingPlanName"
+        ]
+      },
+      "name": "ListRestoreTestingSelections",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RestoreTestingSelections": {
+            "name": "RestoreTestingSelections",
+            "shape_name": "RestoreTestingSelections",
+            "type": "list"
+          }
+        },
+        "required": [
+          "RestoreTestingSelections"
+        ]
+      }
+    },
+    "ListTags": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      },
+      "name": "ListTags",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "map"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutBackupVaultAccessPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "IAMPolicy",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName"
+        ]
+      },
+      "name": "PutBackupVaultAccessPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "PutBackupVaultLockConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "ChangeableForDays": {
+            "name": "ChangeableForDays",
+            "shape_name": "Long",
+            "type": "long"
+          },
+          "MaxRetentionDays": {
+            "name": "MaxRetentionDays",
+            "shape_name": "Long",
+            "type": "long"
+          },
+          "MinRetentionDays": {
+            "name": "MinRetentionDays",
+            "shape_name": "Long",
+            "type": "long"
+          }
+        },
+        "required": [
+          "BackupVaultName"
+        ]
+      },
+      "name": "PutBackupVaultLockConfiguration",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "PutBackupVaultNotifications": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultEvents": {
+            "name": "BackupVaultEvents",
+            "shape_name": "BackupVaultEvents",
+            "type": "list"
+          },
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "SNSTopicArn": {
+            "name": "SNSTopicArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName",
+          "SNSTopicArn",
+          "BackupVaultEvents"
+        ]
+      },
+      "name": "PutBackupVaultNotifications",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "PutRestoreValidationResult": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RestoreJobId": {
+            "name": "RestoreJobId",
+            "shape_name": "RestoreJobId",
+            "type": "string"
+          },
+          "ValidationStatus": {
+            "name": "ValidationStatus",
+            "shape_name": "RestoreValidationStatus",
+            "type": "string"
+          },
+          "ValidationStatusMessage": {
+            "name": "ValidationStatusMessage",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RestoreJobId",
+          "ValidationStatus"
+        ]
+      },
+      "name": "PutRestoreValidationResult",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RevokeRestoreAccessBackupVault": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "RequesterComment": {
+            "name": "RequesterComment",
+            "shape_name": "RequesterComment",
+            "type": "string"
+          },
+          "RestoreAccessBackupVaultArn": {
+            "name": "RestoreAccessBackupVaultArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName",
+          "RestoreAccessBackupVaultArn"
+        ]
+      },
+      "name": "RevokeRestoreAccessBackupVault",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "StartBackupJob": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupOptions": {
+            "name": "BackupOptions",
+            "shape_name": "BackupOptions",
+            "type": "map"
+          },
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "CompleteWindowMinutes": {
+            "name": "CompleteWindowMinutes",
+            "shape_name": "WindowMinutes",
+            "type": "long"
+          },
+          "IamRoleArn": {
+            "name": "IamRoleArn",
+            "shape_name": "IAMRoleArn",
+            "type": "string"
+          },
+          "IdempotencyToken": {
+            "name": "IdempotencyToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Index": {
+            "name": "Index",
+            "shape_name": "Index",
+            "type": "string"
+          },
+          "Lifecycle": {
+            "name": "Lifecycle",
+            "shape_name": "Lifecycle",
+            "type": "structure"
+          },
+          "RecoveryPointTags": {
+            "name": "RecoveryPointTags",
+            "shape_name": "Tags",
+            "type": "map"
+          },
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "StartWindowMinutes": {
+            "name": "StartWindowMinutes",
+            "shape_name": "WindowMinutes",
+            "type": "long"
+          }
+        },
+        "required": [
+          "BackupVaultName",
+          "ResourceArn",
+          "IamRoleArn"
+        ]
+      },
+      "name": "StartBackupJob",
+      "output": {
+        "markers": null,
+        "members": {
+          "BackupJobId": {
+            "name": "BackupJobId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "CreationDate": {
+            "name": "CreationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "IsParent": {
+            "name": "IsParent",
+            "shape_name": "boolean",
+            "type": "boolean"
+          },
+          "RecoveryPointArn": {
+            "name": "RecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "StartCopyJob": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DestinationBackupVaultArn": {
+            "name": "DestinationBackupVaultArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "IamRoleArn": {
+            "name": "IamRoleArn",
+            "shape_name": "IAMRoleArn",
+            "type": "string"
+          },
+          "IdempotencyToken": {
+            "name": "IdempotencyToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Lifecycle": {
+            "name": "Lifecycle",
+            "shape_name": "Lifecycle",
+            "type": "structure"
+          },
+          "RecoveryPointArn": {
+            "name": "RecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "SourceBackupVaultName": {
+            "name": "SourceBackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RecoveryPointArn",
+          "SourceBackupVaultName",
+          "DestinationBackupVaultArn",
+          "IamRoleArn"
+        ]
+      },
+      "name": "StartCopyJob",
+      "output": {
+        "markers": null,
+        "members": {
+          "CopyJobId": {
+            "name": "CopyJobId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "CreationDate": {
+            "name": "CreationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "IsParent": {
+            "name": "IsParent",
+            "shape_name": "boolean",
+            "type": "boolean"
+          }
+        },
+        "required": null
+      }
+    },
+    "StartReportJob": {
+      "input": {
+        "markers": null,
+        "members": {
+          "IdempotencyToken": {
+            "name": "IdempotencyToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ReportPlanName": {
+            "name": "ReportPlanName",
+            "shape_name": "ReportPlanName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ReportPlanName"
+        ]
+      },
+      "name": "StartReportJob",
+      "output": {
+        "markers": null,
+        "members": {
+          "ReportJobId": {
+            "name": "ReportJobId",
+            "shape_name": "ReportJobId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "StartRestoreJob": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CopySourceTagsToRestoredResource": {
+            "name": "CopySourceTagsToRestoredResource",
+            "shape_name": "boolean",
+            "type": "boolean"
+          },
+          "IamRoleArn": {
+            "name": "IamRoleArn",
+            "shape_name": "IAMRoleArn",
+            "type": "string"
+          },
+          "IdempotencyToken": {
+            "name": "IdempotencyToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Metadata": {
+            "name": "Metadata",
+            "shape_name": "Metadata",
+            "type": "map"
+          },
+          "RecoveryPointArn": {
+            "name": "RecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "ResourceType": {
+            "name": "ResourceType",
+            "shape_name": "ResourceType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RecoveryPointArn",
+          "Metadata"
+        ]
+      },
+      "name": "StartRestoreJob",
+      "output": {
+        "markers": null,
+        "members": {
+          "RestoreJobId": {
+            "name": "RestoreJobId",
+            "shape_name": "RestoreJobId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "StopBackupJob": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupJobId": {
+            "name": "BackupJobId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupJobId"
+        ]
+      },
+      "name": "StopBackupJob",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "map"
+          }
+        },
+        "required": [
+          "ResourceArn",
+          "Tags"
+        ]
+      },
+      "name": "TagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "TagKeyList": {
+            "name": "TagKeyList",
+            "shape_name": "TagKeyList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceArn",
+          "TagKeyList"
+        ]
+      },
+      "name": "UntagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateBackupPlan": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupPlan": {
+            "name": "BackupPlan",
+            "shape_name": "BackupPlanInput",
+            "type": "structure"
+          },
+          "BackupPlanId": {
+            "name": "BackupPlanId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupPlanId",
+          "BackupPlan"
+        ]
+      },
+      "name": "UpdateBackupPlan",
+      "output": {
+        "markers": null,
+        "members": {
+          "AdvancedBackupSettings": {
+            "name": "AdvancedBackupSettings",
+            "shape_name": "AdvancedBackupSettings",
+            "type": "list"
+          },
+          "BackupPlanArn": {
+            "name": "BackupPlanArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "BackupPlanId": {
+            "name": "BackupPlanId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "CreationDate": {
+            "name": "CreationDate",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateFramework": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FrameworkControls": {
+            "name": "FrameworkControls",
+            "shape_name": "FrameworkControls",
+            "type": "list"
+          },
+          "FrameworkDescription": {
+            "name": "FrameworkDescription",
+            "shape_name": "FrameworkDescription",
+            "type": "string"
+          },
+          "FrameworkName": {
+            "name": "FrameworkName",
+            "shape_name": "FrameworkName",
+            "type": "string"
+          },
+          "IdempotencyToken": {
+            "name": "IdempotencyToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "FrameworkName"
+        ]
+      },
+      "name": "UpdateFramework",
+      "output": {
+        "markers": null,
+        "members": {
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "FrameworkArn": {
+            "name": "FrameworkArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "FrameworkName": {
+            "name": "FrameworkName",
+            "shape_name": "FrameworkName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateGlobalSettings": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GlobalSettings": {
+            "name": "GlobalSettings",
+            "shape_name": "GlobalSettings",
+            "type": "map"
+          }
+        },
+        "required": null
+      },
+      "name": "UpdateGlobalSettings",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateRecoveryPointIndexSettings": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "IamRoleArn": {
+            "name": "IamRoleArn",
+            "shape_name": "IAMRoleArn",
+            "type": "string"
+          },
+          "Index": {
+            "name": "Index",
+            "shape_name": "Index",
+            "type": "string"
+          },
+          "RecoveryPointArn": {
+            "name": "RecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName",
+          "RecoveryPointArn",
+          "Index"
+        ]
+      },
+      "name": "UpdateRecoveryPointIndexSettings",
+      "output": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "Index": {
+            "name": "Index",
+            "shape_name": "Index",
+            "type": "string"
+          },
+          "IndexStatus": {
+            "name": "IndexStatus",
+            "shape_name": "IndexStatus",
+            "type": "string"
+          },
+          "RecoveryPointArn": {
+            "name": "RecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateRecoveryPointLifecycle": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupVaultName": {
+            "name": "BackupVaultName",
+            "shape_name": "BackupVaultName",
+            "type": "string"
+          },
+          "Lifecycle": {
+            "name": "Lifecycle",
+            "shape_name": "Lifecycle",
+            "type": "structure"
+          },
+          "RecoveryPointArn": {
+            "name": "RecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BackupVaultName",
+          "RecoveryPointArn"
+        ]
+      },
+      "name": "UpdateRecoveryPointLifecycle",
+      "output": {
+        "markers": null,
+        "members": {
+          "BackupVaultArn": {
+            "name": "BackupVaultArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "CalculatedLifecycle": {
+            "name": "CalculatedLifecycle",
+            "shape_name": "CalculatedLifecycle",
+            "type": "structure"
+          },
+          "Lifecycle": {
+            "name": "Lifecycle",
+            "shape_name": "Lifecycle",
+            "type": "structure"
+          },
+          "RecoveryPointArn": {
+            "name": "RecoveryPointArn",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateRegionSettings": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceTypeManagementPreference": {
+            "name": "ResourceTypeManagementPreference",
+            "shape_name": "ResourceTypeManagementPreference",
+            "type": "map"
+          },
+          "ResourceTypeOptInPreference": {
+            "name": "ResourceTypeOptInPreference",
+            "shape_name": "ResourceTypeOptInPreference",
+            "type": "map"
+          }
+        },
+        "required": null
+      },
+      "name": "UpdateRegionSettings",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateReportPlan": {
+      "input": {
+        "markers": null,
+        "members": {
+          "IdempotencyToken": {
+            "name": "IdempotencyToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ReportDeliveryChannel": {
+            "name": "ReportDeliveryChannel",
+            "shape_name": "ReportDeliveryChannel",
+            "type": "structure"
+          },
+          "ReportPlanDescription": {
+            "name": "ReportPlanDescription",
+            "shape_name": "ReportPlanDescription",
+            "type": "string"
+          },
+          "ReportPlanName": {
+            "name": "ReportPlanName",
+            "shape_name": "ReportPlanName",
+            "type": "string"
+          },
+          "ReportSetting": {
+            "name": "ReportSetting",
+            "shape_name": "ReportSetting",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ReportPlanName"
+        ]
+      },
+      "name": "UpdateReportPlan",
+      "output": {
+        "markers": null,
+        "members": {
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "timestamp",
+            "type": "timestamp"
+          },
+          "ReportPlanArn": {
+            "name": "ReportPlanArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "ReportPlanName": {
+            "name": "ReportPlanName",
+            "shape_name": "ReportPlanName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateRestoreTestingPlan": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RestoreTestingPlan": {
+            "name": "RestoreTestingPlan",
+            "shape_name": "RestoreTestingPlanForUpdate",
+            "type": "structure"
+          },
+          "RestoreTestingPlanName": {
+            "name": "RestoreTestingPlanName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RestoreTestingPlan",
+          "RestoreTestingPlanName"
+        ]
+      },
+      "name": "UpdateRestoreTestingPlan",
+      "output": {
+        "markers": null,
+        "members": {
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "RestoreTestingPlanArn": {
+            "name": "RestoreTestingPlanArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RestoreTestingPlanName": {
+            "name": "RestoreTestingPlanName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "UpdateTime": {
+            "name": "UpdateTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          }
+        },
+        "required": [
+          "CreationTime",
+          "RestoreTestingPlanArn",
+          "RestoreTestingPlanName",
+          "UpdateTime"
+        ]
+      }
+    },
+    "UpdateRestoreTestingSelection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RestoreTestingPlanName": {
+            "name": "RestoreTestingPlanName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RestoreTestingSelection": {
+            "name": "RestoreTestingSelection",
+            "shape_name": "RestoreTestingSelectionForUpdate",
+            "type": "structure"
+          },
+          "RestoreTestingSelectionName": {
+            "name": "RestoreTestingSelectionName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RestoreTestingPlanName",
+          "RestoreTestingSelection",
+          "RestoreTestingSelectionName"
+        ]
+      },
+      "name": "UpdateRestoreTestingSelection",
+      "output": {
+        "markers": null,
+        "members": {
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "RestoreTestingPlanArn": {
+            "name": "RestoreTestingPlanArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RestoreTestingPlanName": {
+            "name": "RestoreTestingPlanName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RestoreTestingSelectionName": {
+            "name": "RestoreTestingSelectionName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "UpdateTime": {
+            "name": "UpdateTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          }
+        },
+        "required": [
+          "CreationTime",
+          "RestoreTestingPlanArn",
+          "RestoreTestingPlanName",
+          "RestoreTestingSelectionName",
+          "UpdateTime"
+        ]
+      }
+    }
+  }
+}

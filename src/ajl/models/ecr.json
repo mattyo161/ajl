@@ -1,0 +1,2369 @@
+{
+  "metadata": {
+    "apiVersion": "2015-09-21",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "api.ecr",
+    "jsonVersion": "1.1",
+    "protocol": "json",
+    "protocols": [
+      "json"
+    ],
+    "serviceAbbreviation": "Amazon ECR",
+    "serviceFullName": "Amazon Elastic Container Registry",
+    "serviceId": "ECR",
+    "signatureVersion": "v4",
+    "signingName": "ecr",
+    "targetPrefix": "AmazonEC2ContainerRegistry_V20150921",
+    "uid": "ecr-2015-09-21"
+  },
+  "name": "ecr",
+  "operations": {
+    "BatchCheckLayerAvailability": {
+      "input": {
+        "markers": null,
+        "members": {
+          "layerDigests": {
+            "name": "layerDigests",
+            "shape_name": "BatchedOperationLayerDigestList",
+            "type": "list"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName",
+          "layerDigests"
+        ]
+      },
+      "name": "BatchCheckLayerAvailability",
+      "output": {
+        "markers": null,
+        "members": {
+          "failures": {
+            "name": "failures",
+            "shape_name": "LayerFailureList",
+            "type": "list"
+          },
+          "layers": {
+            "name": "layers",
+            "shape_name": "LayerList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "BatchDeleteImage": {
+      "input": {
+        "markers": null,
+        "members": {
+          "imageIds": {
+            "name": "imageIds",
+            "shape_name": "ImageIdentifierList",
+            "type": "list"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName",
+          "imageIds"
+        ]
+      },
+      "name": "BatchDeleteImage",
+      "output": {
+        "markers": null,
+        "members": {
+          "failures": {
+            "name": "failures",
+            "shape_name": "ImageFailureList",
+            "type": "list"
+          },
+          "imageIds": {
+            "name": "imageIds",
+            "shape_name": "ImageIdentifierList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "BatchGetImage": {
+      "input": {
+        "markers": null,
+        "members": {
+          "acceptedMediaTypes": {
+            "name": "acceptedMediaTypes",
+            "shape_name": "MediaTypeList",
+            "type": "list"
+          },
+          "imageIds": {
+            "name": "imageIds",
+            "shape_name": "ImageIdentifierList",
+            "type": "list"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName",
+          "imageIds"
+        ]
+      },
+      "name": "BatchGetImage",
+      "output": {
+        "markers": null,
+        "members": {
+          "failures": {
+            "name": "failures",
+            "shape_name": "ImageFailureList",
+            "type": "list"
+          },
+          "images": {
+            "name": "images",
+            "shape_name": "ImageList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "BatchGetRepositoryScanningConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "repositoryNames": {
+            "name": "repositoryNames",
+            "shape_name": "ScanningConfigurationRepositoryNameList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "repositoryNames"
+        ]
+      },
+      "name": "BatchGetRepositoryScanningConfiguration",
+      "output": {
+        "markers": null,
+        "members": {
+          "failures": {
+            "name": "failures",
+            "shape_name": "RepositoryScanningConfigurationFailureList",
+            "type": "list"
+          },
+          "scanningConfigurations": {
+            "name": "scanningConfigurations",
+            "shape_name": "RepositoryScanningConfigurationList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "CompleteLayerUpload": {
+      "input": {
+        "markers": null,
+        "members": {
+          "layerDigests": {
+            "name": "layerDigests",
+            "shape_name": "LayerDigestList",
+            "type": "list"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          },
+          "uploadId": {
+            "name": "uploadId",
+            "shape_name": "UploadId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName",
+          "uploadId",
+          "layerDigests"
+        ]
+      },
+      "name": "CompleteLayerUpload",
+      "output": {
+        "markers": null,
+        "members": {
+          "layerDigest": {
+            "name": "layerDigest",
+            "shape_name": "LayerDigest",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          },
+          "uploadId": {
+            "name": "uploadId",
+            "shape_name": "UploadId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreatePullThroughCacheRule": {
+      "input": {
+        "markers": null,
+        "members": {
+          "credentialArn": {
+            "name": "credentialArn",
+            "shape_name": "CredentialArn",
+            "type": "string"
+          },
+          "customRoleArn": {
+            "name": "customRoleArn",
+            "shape_name": "CustomRoleArn",
+            "type": "string"
+          },
+          "ecrRepositoryPrefix": {
+            "name": "ecrRepositoryPrefix",
+            "shape_name": "PullThroughCacheRuleRepositoryPrefix",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "upstreamRegistry": {
+            "name": "upstreamRegistry",
+            "shape_name": "UpstreamRegistry",
+            "type": "string"
+          },
+          "upstreamRegistryUrl": {
+            "name": "upstreamRegistryUrl",
+            "shape_name": "Url",
+            "type": "string"
+          },
+          "upstreamRepositoryPrefix": {
+            "name": "upstreamRepositoryPrefix",
+            "shape_name": "PullThroughCacheRuleRepositoryPrefix",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ecrRepositoryPrefix",
+          "upstreamRegistryUrl"
+        ]
+      },
+      "name": "CreatePullThroughCacheRule",
+      "output": {
+        "markers": null,
+        "members": {
+          "createdAt": {
+            "name": "createdAt",
+            "shape_name": "CreationTimestamp",
+            "type": "timestamp"
+          },
+          "credentialArn": {
+            "name": "credentialArn",
+            "shape_name": "CredentialArn",
+            "type": "string"
+          },
+          "customRoleArn": {
+            "name": "customRoleArn",
+            "shape_name": "CustomRoleArn",
+            "type": "string"
+          },
+          "ecrRepositoryPrefix": {
+            "name": "ecrRepositoryPrefix",
+            "shape_name": "PullThroughCacheRuleRepositoryPrefix",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "upstreamRegistry": {
+            "name": "upstreamRegistry",
+            "shape_name": "UpstreamRegistry",
+            "type": "string"
+          },
+          "upstreamRegistryUrl": {
+            "name": "upstreamRegistryUrl",
+            "shape_name": "Url",
+            "type": "string"
+          },
+          "upstreamRepositoryPrefix": {
+            "name": "upstreamRepositoryPrefix",
+            "shape_name": "PullThroughCacheRuleRepositoryPrefix",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateRepository": {
+      "input": {
+        "markers": null,
+        "members": {
+          "encryptionConfiguration": {
+            "name": "encryptionConfiguration",
+            "shape_name": "EncryptionConfiguration",
+            "type": "structure"
+          },
+          "imageScanningConfiguration": {
+            "name": "imageScanningConfiguration",
+            "shape_name": "ImageScanningConfiguration",
+            "type": "structure"
+          },
+          "imageTagMutability": {
+            "name": "imageTagMutability",
+            "shape_name": "ImageTagMutability",
+            "type": "string"
+          },
+          "imageTagMutabilityExclusionFilters": {
+            "name": "imageTagMutabilityExclusionFilters",
+            "shape_name": "ImageTagMutabilityExclusionFilters",
+            "type": "list"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "repositoryName"
+        ]
+      },
+      "name": "CreateRepository",
+      "output": {
+        "markers": null,
+        "members": {
+          "repository": {
+            "name": "repository",
+            "shape_name": "Repository",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateRepositoryCreationTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "appliedFor": {
+            "name": "appliedFor",
+            "shape_name": "RCTAppliedForList",
+            "type": "list"
+          },
+          "customRoleArn": {
+            "name": "customRoleArn",
+            "shape_name": "CustomRoleArn",
+            "type": "string"
+          },
+          "description": {
+            "name": "description",
+            "shape_name": "RepositoryTemplateDescription",
+            "type": "string"
+          },
+          "encryptionConfiguration": {
+            "name": "encryptionConfiguration",
+            "shape_name": "EncryptionConfigurationForRepositoryCreationTemplate",
+            "type": "structure"
+          },
+          "imageTagMutability": {
+            "name": "imageTagMutability",
+            "shape_name": "ImageTagMutability",
+            "type": "string"
+          },
+          "imageTagMutabilityExclusionFilters": {
+            "name": "imageTagMutabilityExclusionFilters",
+            "shape_name": "ImageTagMutabilityExclusionFilters",
+            "type": "list"
+          },
+          "lifecyclePolicy": {
+            "name": "lifecyclePolicy",
+            "shape_name": "LifecyclePolicyTextForRepositoryCreationTemplate",
+            "type": "string"
+          },
+          "prefix": {
+            "name": "prefix",
+            "shape_name": "Prefix",
+            "type": "string"
+          },
+          "repositoryPolicy": {
+            "name": "repositoryPolicy",
+            "shape_name": "RepositoryPolicyText",
+            "type": "string"
+          },
+          "resourceTags": {
+            "name": "resourceTags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "prefix",
+          "appliedFor"
+        ]
+      },
+      "name": "CreateRepositoryCreationTemplate",
+      "output": {
+        "markers": null,
+        "members": {
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryCreationTemplate": {
+            "name": "repositoryCreationTemplate",
+            "shape_name": "RepositoryCreationTemplate",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteLifecyclePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName"
+        ]
+      },
+      "name": "DeleteLifecyclePolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "lastEvaluatedAt": {
+            "name": "lastEvaluatedAt",
+            "shape_name": "EvaluationTimestamp",
+            "type": "timestamp"
+          },
+          "lifecyclePolicyText": {
+            "name": "lifecyclePolicyText",
+            "shape_name": "LifecyclePolicyText",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeletePullThroughCacheRule": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ecrRepositoryPrefix": {
+            "name": "ecrRepositoryPrefix",
+            "shape_name": "PullThroughCacheRuleRepositoryPrefix",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ecrRepositoryPrefix"
+        ]
+      },
+      "name": "DeletePullThroughCacheRule",
+      "output": {
+        "markers": null,
+        "members": {
+          "createdAt": {
+            "name": "createdAt",
+            "shape_name": "CreationTimestamp",
+            "type": "timestamp"
+          },
+          "credentialArn": {
+            "name": "credentialArn",
+            "shape_name": "CredentialArn",
+            "type": "string"
+          },
+          "customRoleArn": {
+            "name": "customRoleArn",
+            "shape_name": "CustomRoleArn",
+            "type": "string"
+          },
+          "ecrRepositoryPrefix": {
+            "name": "ecrRepositoryPrefix",
+            "shape_name": "PullThroughCacheRuleRepositoryPrefix",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "upstreamRegistryUrl": {
+            "name": "upstreamRegistryUrl",
+            "shape_name": "Url",
+            "type": "string"
+          },
+          "upstreamRepositoryPrefix": {
+            "name": "upstreamRepositoryPrefix",
+            "shape_name": "PullThroughCacheRuleRepositoryPrefix",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteRegistryPolicy": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "DeleteRegistryPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "policyText": {
+            "name": "policyText",
+            "shape_name": "RegistryPolicyText",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteRepository": {
+      "input": {
+        "markers": null,
+        "members": {
+          "force": {
+            "name": "force",
+            "shape_name": "ForceFlag",
+            "type": "boolean"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName"
+        ]
+      },
+      "name": "DeleteRepository",
+      "output": {
+        "markers": null,
+        "members": {
+          "repository": {
+            "name": "repository",
+            "shape_name": "Repository",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteRepositoryCreationTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "prefix": {
+            "name": "prefix",
+            "shape_name": "Prefix",
+            "type": "string"
+          }
+        },
+        "required": [
+          "prefix"
+        ]
+      },
+      "name": "DeleteRepositoryCreationTemplate",
+      "output": {
+        "markers": null,
+        "members": {
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryCreationTemplate": {
+            "name": "repositoryCreationTemplate",
+            "shape_name": "RepositoryCreationTemplate",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteRepositoryPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName"
+        ]
+      },
+      "name": "DeleteRepositoryPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "policyText": {
+            "name": "policyText",
+            "shape_name": "RepositoryPolicyText",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeImageReplicationStatus": {
+      "input": {
+        "markers": null,
+        "members": {
+          "imageId": {
+            "name": "imageId",
+            "shape_name": "ImageIdentifier",
+            "type": "structure"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName",
+          "imageId"
+        ]
+      },
+      "name": "DescribeImageReplicationStatus",
+      "output": {
+        "markers": null,
+        "members": {
+          "imageId": {
+            "name": "imageId",
+            "shape_name": "ImageIdentifier",
+            "type": "structure"
+          },
+          "replicationStatuses": {
+            "name": "replicationStatuses",
+            "shape_name": "ImageReplicationStatusList",
+            "type": "list"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeImageScanFindings": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "imageId": {
+            "name": "imageId",
+            "shape_name": "ImageIdentifier",
+            "type": "structure"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName",
+          "imageId"
+        ]
+      },
+      "name": "DescribeImageScanFindings",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "imageId": {
+            "name": "imageId",
+            "shape_name": "ImageIdentifier",
+            "type": "structure"
+          },
+          "imageScanFindings": {
+            "name": "imageScanFindings",
+            "shape_name": "ImageScanFindings",
+            "type": "structure"
+          },
+          "imageScanStatus": {
+            "name": "imageScanStatus",
+            "shape_name": "ImageScanStatus",
+            "type": "structure"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeImages": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "filter": {
+            "name": "filter",
+            "shape_name": "DescribeImagesFilter",
+            "type": "structure"
+          },
+          "imageIds": {
+            "name": "imageIds",
+            "shape_name": "ImageIdentifierList",
+            "type": "list"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName"
+        ]
+      },
+      "name": "DescribeImages",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "imageDetails": {
+            "name": "imageDetails",
+            "shape_name": "ImageDetailList",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "id": "imageDigest",
+            "path": [
+              "imageDetails"
+            ],
+            "type": "ecr:image"
+          }
+        ]
+      }
+    },
+    "DescribePullThroughCacheRules": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "ecrRepositoryPrefixes": {
+            "name": "ecrRepositoryPrefixes",
+            "shape_name": "PullThroughCacheRuleRepositoryPrefixList",
+            "type": "list"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribePullThroughCacheRules",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "pullThroughCacheRules": {
+            "name": "pullThroughCacheRules",
+            "shape_name": "PullThroughCacheRuleList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeRegistry": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "DescribeRegistry",
+      "output": {
+        "markers": null,
+        "members": {
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "replicationConfiguration": {
+            "name": "replicationConfiguration",
+            "shape_name": "ReplicationConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeRepositories": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryNames": {
+            "name": "repositoryNames",
+            "shape_name": "RepositoryNameList",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeRepositories",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "repositories": {
+            "name": "repositories",
+            "shape_name": "RepositoryList",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "repositoryArn",
+            "id": "repositoryName",
+            "name": "repositoryName",
+            "path": [
+              "repositories"
+            ],
+            "type": "ecr:repository"
+          }
+        ]
+      }
+    },
+    "DescribeRepositoryCreationTemplates": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "prefixes": {
+            "name": "prefixes",
+            "shape_name": "PrefixList",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeRepositoryCreationTemplates",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryCreationTemplates": {
+            "name": "repositoryCreationTemplates",
+            "shape_name": "RepositoryCreationTemplateList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetAccountSetting": {
+      "input": {
+        "markers": null,
+        "members": {
+          "name": {
+            "name": "name",
+            "shape_name": "AccountSettingName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "name": "GetAccountSetting",
+      "output": {
+        "markers": null,
+        "members": {
+          "name": {
+            "name": "name",
+            "shape_name": "AccountSettingName",
+            "type": "string"
+          },
+          "value": {
+            "name": "value",
+            "shape_name": "AccountSettingName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetAuthorizationToken": {
+      "input": {
+        "markers": null,
+        "members": {
+          "registryIds": {
+            "name": "registryIds",
+            "shape_name": "GetAuthorizationTokenRegistryIdList",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "GetAuthorizationToken",
+      "output": {
+        "markers": null,
+        "members": {
+          "authorizationData": {
+            "name": "authorizationData",
+            "shape_name": "AuthorizationDataList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetDownloadUrlForLayer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "layerDigest": {
+            "name": "layerDigest",
+            "shape_name": "LayerDigest",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName",
+          "layerDigest"
+        ]
+      },
+      "name": "GetDownloadUrlForLayer",
+      "output": {
+        "markers": null,
+        "members": {
+          "downloadUrl": {
+            "name": "downloadUrl",
+            "shape_name": "Url",
+            "type": "string"
+          },
+          "layerDigest": {
+            "name": "layerDigest",
+            "shape_name": "LayerDigest",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetLifecyclePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName"
+        ]
+      },
+      "name": "GetLifecyclePolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "lastEvaluatedAt": {
+            "name": "lastEvaluatedAt",
+            "shape_name": "EvaluationTimestamp",
+            "type": "timestamp"
+          },
+          "lifecyclePolicyText": {
+            "name": "lifecyclePolicyText",
+            "shape_name": "LifecyclePolicyText",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetLifecyclePolicyPreview": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "filter": {
+            "name": "filter",
+            "shape_name": "LifecyclePolicyPreviewFilter",
+            "type": "structure"
+          },
+          "imageIds": {
+            "name": "imageIds",
+            "shape_name": "ImageIdentifierList",
+            "type": "list"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "LifecyclePreviewMaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName"
+        ]
+      },
+      "name": "GetLifecyclePolicyPreview",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "lifecyclePolicyText": {
+            "name": "lifecyclePolicyText",
+            "shape_name": "LifecyclePolicyText",
+            "type": "string"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "previewResults": {
+            "name": "previewResults",
+            "shape_name": "LifecyclePolicyPreviewResultList",
+            "type": "list"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          },
+          "status": {
+            "name": "status",
+            "shape_name": "LifecyclePolicyPreviewStatus",
+            "type": "string"
+          },
+          "summary": {
+            "name": "summary",
+            "shape_name": "LifecyclePolicyPreviewSummary",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetRegistryPolicy": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "GetRegistryPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "policyText": {
+            "name": "policyText",
+            "shape_name": "RegistryPolicyText",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetRegistryScanningConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "GetRegistryScanningConfiguration",
+      "output": {
+        "markers": null,
+        "members": {
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "scanningConfiguration": {
+            "name": "scanningConfiguration",
+            "shape_name": "RegistryScanningConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetRepositoryPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName"
+        ]
+      },
+      "name": "GetRepositoryPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "policyText": {
+            "name": "policyText",
+            "shape_name": "RepositoryPolicyText",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "InitiateLayerUpload": {
+      "input": {
+        "markers": null,
+        "members": {
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName"
+        ]
+      },
+      "name": "InitiateLayerUpload",
+      "output": {
+        "markers": null,
+        "members": {
+          "partSize": {
+            "name": "partSize",
+            "shape_name": "PartSize",
+            "type": "long"
+          },
+          "uploadId": {
+            "name": "uploadId",
+            "shape_name": "UploadId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListImages": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "filter": {
+            "name": "filter",
+            "shape_name": "ListImagesFilter",
+            "type": "structure"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName"
+        ]
+      },
+      "name": "ListImages",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "imageIds": {
+            "name": "imageIds",
+            "shape_name": "ImageIdentifierList",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "resourceArn": {
+            "name": "resourceArn",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "resourceArn"
+        ]
+      },
+      "name": "ListTagsForResource",
+      "output": {
+        "markers": null,
+        "members": {
+          "tags": {
+            "name": "tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutAccountSetting": {
+      "input": {
+        "markers": null,
+        "members": {
+          "name": {
+            "name": "name",
+            "shape_name": "AccountSettingName",
+            "type": "string"
+          },
+          "value": {
+            "name": "value",
+            "shape_name": "AccountSettingValue",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ]
+      },
+      "name": "PutAccountSetting",
+      "output": {
+        "markers": null,
+        "members": {
+          "name": {
+            "name": "name",
+            "shape_name": "AccountSettingName",
+            "type": "string"
+          },
+          "value": {
+            "name": "value",
+            "shape_name": "AccountSettingValue",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutImage": {
+      "input": {
+        "markers": null,
+        "members": {
+          "imageDigest": {
+            "name": "imageDigest",
+            "shape_name": "ImageDigest",
+            "type": "string"
+          },
+          "imageManifest": {
+            "name": "imageManifest",
+            "shape_name": "ImageManifest",
+            "type": "string"
+          },
+          "imageManifestMediaType": {
+            "name": "imageManifestMediaType",
+            "shape_name": "MediaType",
+            "type": "string"
+          },
+          "imageTag": {
+            "name": "imageTag",
+            "shape_name": "ImageTag",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName",
+          "imageManifest"
+        ]
+      },
+      "name": "PutImage",
+      "output": {
+        "markers": null,
+        "members": {
+          "image": {
+            "name": "image",
+            "shape_name": "Image",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutImageScanningConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "imageScanningConfiguration": {
+            "name": "imageScanningConfiguration",
+            "shape_name": "ImageScanningConfiguration",
+            "type": "structure"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName",
+          "imageScanningConfiguration"
+        ]
+      },
+      "name": "PutImageScanningConfiguration",
+      "output": {
+        "markers": null,
+        "members": {
+          "imageScanningConfiguration": {
+            "name": "imageScanningConfiguration",
+            "shape_name": "ImageScanningConfiguration",
+            "type": "structure"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutImageTagMutability": {
+      "input": {
+        "markers": null,
+        "members": {
+          "imageTagMutability": {
+            "name": "imageTagMutability",
+            "shape_name": "ImageTagMutability",
+            "type": "string"
+          },
+          "imageTagMutabilityExclusionFilters": {
+            "name": "imageTagMutabilityExclusionFilters",
+            "shape_name": "ImageTagMutabilityExclusionFilters",
+            "type": "list"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName",
+          "imageTagMutability"
+        ]
+      },
+      "name": "PutImageTagMutability",
+      "output": {
+        "markers": null,
+        "members": {
+          "imageTagMutability": {
+            "name": "imageTagMutability",
+            "shape_name": "ImageTagMutability",
+            "type": "string"
+          },
+          "imageTagMutabilityExclusionFilters": {
+            "name": "imageTagMutabilityExclusionFilters",
+            "shape_name": "ImageTagMutabilityExclusionFilters",
+            "type": "list"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutLifecyclePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "lifecyclePolicyText": {
+            "name": "lifecyclePolicyText",
+            "shape_name": "LifecyclePolicyText",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName",
+          "lifecyclePolicyText"
+        ]
+      },
+      "name": "PutLifecyclePolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "lifecyclePolicyText": {
+            "name": "lifecyclePolicyText",
+            "shape_name": "LifecyclePolicyText",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutRegistryPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "policyText": {
+            "name": "policyText",
+            "shape_name": "RegistryPolicyText",
+            "type": "string"
+          }
+        },
+        "required": [
+          "policyText"
+        ]
+      },
+      "name": "PutRegistryPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "policyText": {
+            "name": "policyText",
+            "shape_name": "RegistryPolicyText",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutRegistryScanningConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "rules": {
+            "name": "rules",
+            "shape_name": "RegistryScanningRuleList",
+            "type": "list"
+          },
+          "scanType": {
+            "name": "scanType",
+            "shape_name": "ScanType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "PutRegistryScanningConfiguration",
+      "output": {
+        "markers": null,
+        "members": {
+          "registryScanningConfiguration": {
+            "name": "registryScanningConfiguration",
+            "shape_name": "RegistryScanningConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutReplicationConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "replicationConfiguration": {
+            "name": "replicationConfiguration",
+            "shape_name": "ReplicationConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "replicationConfiguration"
+        ]
+      },
+      "name": "PutReplicationConfiguration",
+      "output": {
+        "markers": null,
+        "members": {
+          "replicationConfiguration": {
+            "name": "replicationConfiguration",
+            "shape_name": "ReplicationConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "SetRepositoryPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "force": {
+            "name": "force",
+            "shape_name": "ForceFlag",
+            "type": "boolean"
+          },
+          "policyText": {
+            "name": "policyText",
+            "shape_name": "RepositoryPolicyText",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName",
+          "policyText"
+        ]
+      },
+      "name": "SetRepositoryPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "policyText": {
+            "name": "policyText",
+            "shape_name": "RepositoryPolicyText",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "StartImageScan": {
+      "input": {
+        "markers": null,
+        "members": {
+          "imageId": {
+            "name": "imageId",
+            "shape_name": "ImageIdentifier",
+            "type": "structure"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName",
+          "imageId"
+        ]
+      },
+      "name": "StartImageScan",
+      "output": {
+        "markers": null,
+        "members": {
+          "imageId": {
+            "name": "imageId",
+            "shape_name": "ImageIdentifier",
+            "type": "structure"
+          },
+          "imageScanStatus": {
+            "name": "imageScanStatus",
+            "shape_name": "ImageScanStatus",
+            "type": "structure"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "StartLifecyclePolicyPreview": {
+      "input": {
+        "markers": null,
+        "members": {
+          "lifecyclePolicyText": {
+            "name": "lifecyclePolicyText",
+            "shape_name": "LifecyclePolicyText",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName"
+        ]
+      },
+      "name": "StartLifecyclePolicyPreview",
+      "output": {
+        "markers": null,
+        "members": {
+          "lifecyclePolicyText": {
+            "name": "lifecyclePolicyText",
+            "shape_name": "LifecyclePolicyText",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          },
+          "status": {
+            "name": "status",
+            "shape_name": "LifecyclePolicyPreviewStatus",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "TagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "resourceArn": {
+            "name": "resourceArn",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "resourceArn",
+          "tags"
+        ]
+      },
+      "name": "TagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "resourceArn": {
+            "name": "resourceArn",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "tagKeys": {
+            "name": "tagKeys",
+            "shape_name": "TagKeyList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "resourceArn",
+          "tagKeys"
+        ]
+      },
+      "name": "UntagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdatePullThroughCacheRule": {
+      "input": {
+        "markers": null,
+        "members": {
+          "credentialArn": {
+            "name": "credentialArn",
+            "shape_name": "CredentialArn",
+            "type": "string"
+          },
+          "customRoleArn": {
+            "name": "customRoleArn",
+            "shape_name": "CustomRoleArn",
+            "type": "string"
+          },
+          "ecrRepositoryPrefix": {
+            "name": "ecrRepositoryPrefix",
+            "shape_name": "PullThroughCacheRuleRepositoryPrefix",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ecrRepositoryPrefix"
+        ]
+      },
+      "name": "UpdatePullThroughCacheRule",
+      "output": {
+        "markers": null,
+        "members": {
+          "credentialArn": {
+            "name": "credentialArn",
+            "shape_name": "CredentialArn",
+            "type": "string"
+          },
+          "customRoleArn": {
+            "name": "customRoleArn",
+            "shape_name": "CustomRoleArn",
+            "type": "string"
+          },
+          "ecrRepositoryPrefix": {
+            "name": "ecrRepositoryPrefix",
+            "shape_name": "PullThroughCacheRuleRepositoryPrefix",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "updatedAt": {
+            "name": "updatedAt",
+            "shape_name": "UpdatedTimestamp",
+            "type": "timestamp"
+          },
+          "upstreamRepositoryPrefix": {
+            "name": "upstreamRepositoryPrefix",
+            "shape_name": "PullThroughCacheRuleRepositoryPrefix",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateRepositoryCreationTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "appliedFor": {
+            "name": "appliedFor",
+            "shape_name": "RCTAppliedForList",
+            "type": "list"
+          },
+          "customRoleArn": {
+            "name": "customRoleArn",
+            "shape_name": "CustomRoleArn",
+            "type": "string"
+          },
+          "description": {
+            "name": "description",
+            "shape_name": "RepositoryTemplateDescription",
+            "type": "string"
+          },
+          "encryptionConfiguration": {
+            "name": "encryptionConfiguration",
+            "shape_name": "EncryptionConfigurationForRepositoryCreationTemplate",
+            "type": "structure"
+          },
+          "imageTagMutability": {
+            "name": "imageTagMutability",
+            "shape_name": "ImageTagMutability",
+            "type": "string"
+          },
+          "imageTagMutabilityExclusionFilters": {
+            "name": "imageTagMutabilityExclusionFilters",
+            "shape_name": "ImageTagMutabilityExclusionFilters",
+            "type": "list"
+          },
+          "lifecyclePolicy": {
+            "name": "lifecyclePolicy",
+            "shape_name": "LifecyclePolicyTextForRepositoryCreationTemplate",
+            "type": "string"
+          },
+          "prefix": {
+            "name": "prefix",
+            "shape_name": "Prefix",
+            "type": "string"
+          },
+          "repositoryPolicy": {
+            "name": "repositoryPolicy",
+            "shape_name": "RepositoryPolicyText",
+            "type": "string"
+          },
+          "resourceTags": {
+            "name": "resourceTags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "prefix"
+        ]
+      },
+      "name": "UpdateRepositoryCreationTemplate",
+      "output": {
+        "markers": null,
+        "members": {
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryCreationTemplate": {
+            "name": "repositoryCreationTemplate",
+            "shape_name": "RepositoryCreationTemplate",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UploadLayerPart": {
+      "input": {
+        "markers": null,
+        "members": {
+          "layerPartBlob": {
+            "name": "layerPartBlob",
+            "shape_name": "LayerPartBlob",
+            "type": "blob"
+          },
+          "partFirstByte": {
+            "name": "partFirstByte",
+            "shape_name": "PartSize",
+            "type": "long"
+          },
+          "partLastByte": {
+            "name": "partLastByte",
+            "shape_name": "PartSize",
+            "type": "long"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          },
+          "uploadId": {
+            "name": "uploadId",
+            "shape_name": "UploadId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "repositoryName",
+          "uploadId",
+          "partFirstByte",
+          "partLastByte",
+          "layerPartBlob"
+        ]
+      },
+      "name": "UploadLayerPart",
+      "output": {
+        "markers": null,
+        "members": {
+          "lastByteReceived": {
+            "name": "lastByteReceived",
+            "shape_name": "PartSize",
+            "type": "long"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "repositoryName": {
+            "name": "repositoryName",
+            "shape_name": "RepositoryName",
+            "type": "string"
+          },
+          "uploadId": {
+            "name": "uploadId",
+            "shape_name": "UploadId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ValidatePullThroughCacheRule": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ecrRepositoryPrefix": {
+            "name": "ecrRepositoryPrefix",
+            "shape_name": "PullThroughCacheRuleRepositoryPrefix",
+            "type": "string"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ecrRepositoryPrefix"
+        ]
+      },
+      "name": "ValidatePullThroughCacheRule",
+      "output": {
+        "markers": null,
+        "members": {
+          "credentialArn": {
+            "name": "credentialArn",
+            "shape_name": "CredentialArn",
+            "type": "string"
+          },
+          "customRoleArn": {
+            "name": "customRoleArn",
+            "shape_name": "CustomRoleArn",
+            "type": "string"
+          },
+          "ecrRepositoryPrefix": {
+            "name": "ecrRepositoryPrefix",
+            "shape_name": "PullThroughCacheRuleRepositoryPrefix",
+            "type": "string"
+          },
+          "failure": {
+            "name": "failure",
+            "shape_name": "PTCValidateFailure",
+            "type": "string"
+          },
+          "isValid": {
+            "name": "isValid",
+            "shape_name": "IsPTCRuleValid",
+            "type": "boolean"
+          },
+          "registryId": {
+            "name": "registryId",
+            "shape_name": "RegistryId",
+            "type": "string"
+          },
+          "upstreamRegistryUrl": {
+            "name": "upstreamRegistryUrl",
+            "shape_name": "Url",
+            "type": "string"
+          },
+          "upstreamRepositoryPrefix": {
+            "name": "upstreamRepositoryPrefix",
+            "shape_name": "PullThroughCacheRuleRepositoryPrefix",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    }
+  }
+}

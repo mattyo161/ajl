@@ -1,0 +1,3064 @@
+{
+  "metadata": {
+    "apiVersion": "2014-11-13",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "ecs",
+    "jsonVersion": "1.1",
+    "protocol": "json",
+    "protocols": [
+      "json"
+    ],
+    "serviceAbbreviation": "Amazon ECS",
+    "serviceFullName": "Amazon EC2 Container Service",
+    "serviceId": "ECS",
+    "signatureVersion": "v4",
+    "targetPrefix": "AmazonEC2ContainerServiceV20141113",
+    "uid": "ecs-2014-11-13"
+  },
+  "name": "ecs",
+  "operations": {
+    "CreateCapacityProvider": {
+      "input": {
+        "markers": null,
+        "members": {
+          "autoScalingGroupProvider": {
+            "name": "autoScalingGroupProvider",
+            "shape_name": "AutoScalingGroupProvider",
+            "type": "structure"
+          },
+          "name": {
+            "name": "name",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "list"
+          }
+        },
+        "required": [
+          "name",
+          "autoScalingGroupProvider"
+        ]
+      },
+      "name": "CreateCapacityProvider",
+      "output": {
+        "markers": null,
+        "members": {
+          "capacityProvider": {
+            "name": "capacityProvider",
+            "shape_name": "CapacityProvider",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "capacityProviders": {
+            "name": "capacityProviders",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "configuration": {
+            "name": "configuration",
+            "shape_name": "ClusterConfiguration",
+            "type": "structure"
+          },
+          "defaultCapacityProviderStrategy": {
+            "name": "defaultCapacityProviderStrategy",
+            "shape_name": "CapacityProviderStrategy",
+            "type": "list"
+          },
+          "serviceConnectDefaults": {
+            "name": "serviceConnectDefaults",
+            "shape_name": "ClusterServiceConnectDefaultsRequest",
+            "type": "structure"
+          },
+          "settings": {
+            "name": "settings",
+            "shape_name": "ClusterSettings",
+            "type": "list"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "CreateCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "Cluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateService": {
+      "input": {
+        "markers": null,
+        "members": {
+          "availabilityZoneRebalancing": {
+            "name": "availabilityZoneRebalancing",
+            "shape_name": "AvailabilityZoneRebalancing",
+            "type": "string"
+          },
+          "capacityProviderStrategy": {
+            "name": "capacityProviderStrategy",
+            "shape_name": "CapacityProviderStrategy",
+            "type": "list"
+          },
+          "clientToken": {
+            "name": "clientToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "deploymentConfiguration": {
+            "name": "deploymentConfiguration",
+            "shape_name": "DeploymentConfiguration",
+            "type": "structure"
+          },
+          "deploymentController": {
+            "name": "deploymentController",
+            "shape_name": "DeploymentController",
+            "type": "structure"
+          },
+          "desiredCount": {
+            "name": "desiredCount",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "enableECSManagedTags": {
+            "name": "enableECSManagedTags",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "enableExecuteCommand": {
+            "name": "enableExecuteCommand",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "healthCheckGracePeriodSeconds": {
+            "name": "healthCheckGracePeriodSeconds",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "launchType": {
+            "name": "launchType",
+            "shape_name": "LaunchType",
+            "type": "string"
+          },
+          "loadBalancers": {
+            "name": "loadBalancers",
+            "shape_name": "LoadBalancers",
+            "type": "list"
+          },
+          "networkConfiguration": {
+            "name": "networkConfiguration",
+            "shape_name": "NetworkConfiguration",
+            "type": "structure"
+          },
+          "placementConstraints": {
+            "name": "placementConstraints",
+            "shape_name": "PlacementConstraints",
+            "type": "list"
+          },
+          "placementStrategy": {
+            "name": "placementStrategy",
+            "shape_name": "PlacementStrategies",
+            "type": "list"
+          },
+          "platformVersion": {
+            "name": "platformVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "propagateTags": {
+            "name": "propagateTags",
+            "shape_name": "PropagateTags",
+            "type": "string"
+          },
+          "role": {
+            "name": "role",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "schedulingStrategy": {
+            "name": "schedulingStrategy",
+            "shape_name": "SchedulingStrategy",
+            "type": "string"
+          },
+          "serviceConnectConfiguration": {
+            "name": "serviceConnectConfiguration",
+            "shape_name": "ServiceConnectConfiguration",
+            "type": "structure"
+          },
+          "serviceName": {
+            "name": "serviceName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "serviceRegistries": {
+            "name": "serviceRegistries",
+            "shape_name": "ServiceRegistries",
+            "type": "list"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "taskDefinition": {
+            "name": "taskDefinition",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "volumeConfigurations": {
+            "name": "volumeConfigurations",
+            "shape_name": "ServiceVolumeConfigurations",
+            "type": "list"
+          },
+          "vpcLatticeConfigurations": {
+            "name": "vpcLatticeConfigurations",
+            "shape_name": "VpcLatticeConfigurations",
+            "type": "list"
+          }
+        },
+        "required": [
+          "serviceName"
+        ]
+      },
+      "name": "CreateService",
+      "output": {
+        "markers": null,
+        "members": {
+          "service": {
+            "name": "service",
+            "shape_name": "Service",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateTaskSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "capacityProviderStrategy": {
+            "name": "capacityProviderStrategy",
+            "shape_name": "CapacityProviderStrategy",
+            "type": "list"
+          },
+          "clientToken": {
+            "name": "clientToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "externalId": {
+            "name": "externalId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "launchType": {
+            "name": "launchType",
+            "shape_name": "LaunchType",
+            "type": "string"
+          },
+          "loadBalancers": {
+            "name": "loadBalancers",
+            "shape_name": "LoadBalancers",
+            "type": "list"
+          },
+          "networkConfiguration": {
+            "name": "networkConfiguration",
+            "shape_name": "NetworkConfiguration",
+            "type": "structure"
+          },
+          "platformVersion": {
+            "name": "platformVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "scale": {
+            "name": "scale",
+            "shape_name": "Scale",
+            "type": "structure"
+          },
+          "service": {
+            "name": "service",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "serviceRegistries": {
+            "name": "serviceRegistries",
+            "shape_name": "ServiceRegistries",
+            "type": "list"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "taskDefinition": {
+            "name": "taskDefinition",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "service",
+          "cluster",
+          "taskDefinition"
+        ]
+      },
+      "name": "CreateTaskSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "taskSet": {
+            "name": "taskSet",
+            "shape_name": "TaskSet",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteAccountSetting": {
+      "input": {
+        "markers": null,
+        "members": {
+          "name": {
+            "name": "name",
+            "shape_name": "SettingName",
+            "type": "string"
+          },
+          "principalArn": {
+            "name": "principalArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "name": "DeleteAccountSetting",
+      "output": {
+        "markers": null,
+        "members": {
+          "setting": {
+            "name": "setting",
+            "shape_name": "Setting",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "attributes": {
+            "name": "attributes",
+            "shape_name": "Attributes",
+            "type": "list"
+          },
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "attributes"
+        ]
+      },
+      "name": "DeleteAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "attributes": {
+            "name": "attributes",
+            "shape_name": "Attributes",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteCapacityProvider": {
+      "input": {
+        "markers": null,
+        "members": {
+          "capacityProvider": {
+            "name": "capacityProvider",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "capacityProvider"
+        ]
+      },
+      "name": "DeleteCapacityProvider",
+      "output": {
+        "markers": null,
+        "members": {
+          "capacityProvider": {
+            "name": "capacityProvider",
+            "shape_name": "CapacityProvider",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "cluster"
+        ]
+      },
+      "name": "DeleteCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "Cluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteService": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "force": {
+            "name": "force",
+            "shape_name": "BoxedBoolean",
+            "type": "boolean"
+          },
+          "service": {
+            "name": "service",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "service"
+        ]
+      },
+      "name": "DeleteService",
+      "output": {
+        "markers": null,
+        "members": {
+          "service": {
+            "name": "service",
+            "shape_name": "Service",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteTaskDefinitions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "taskDefinitions": {
+            "name": "taskDefinitions",
+            "shape_name": "StringList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "taskDefinitions"
+        ]
+      },
+      "name": "DeleteTaskDefinitions",
+      "output": {
+        "markers": null,
+        "members": {
+          "failures": {
+            "name": "failures",
+            "shape_name": "Failures",
+            "type": "list"
+          },
+          "taskDefinitions": {
+            "name": "taskDefinitions",
+            "shape_name": "TaskDefinitionList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteTaskSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "force": {
+            "name": "force",
+            "shape_name": "BoxedBoolean",
+            "type": "boolean"
+          },
+          "service": {
+            "name": "service",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "taskSet": {
+            "name": "taskSet",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "cluster",
+          "service",
+          "taskSet"
+        ]
+      },
+      "name": "DeleteTaskSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "taskSet": {
+            "name": "taskSet",
+            "shape_name": "TaskSet",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeregisterContainerInstance": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "containerInstance": {
+            "name": "containerInstance",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "force": {
+            "name": "force",
+            "shape_name": "BoxedBoolean",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "containerInstance"
+        ]
+      },
+      "name": "DeregisterContainerInstance",
+      "output": {
+        "markers": null,
+        "members": {
+          "containerInstance": {
+            "name": "containerInstance",
+            "shape_name": "ContainerInstance",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeregisterTaskDefinition": {
+      "input": {
+        "markers": null,
+        "members": {
+          "taskDefinition": {
+            "name": "taskDefinition",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "taskDefinition"
+        ]
+      },
+      "name": "DeregisterTaskDefinition",
+      "output": {
+        "markers": null,
+        "members": {
+          "taskDefinition": {
+            "name": "taskDefinition",
+            "shape_name": "TaskDefinition",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeCapacityProviders": {
+      "input": {
+        "markers": null,
+        "members": {
+          "capacityProviders": {
+            "name": "capacityProviders",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "include": {
+            "name": "include",
+            "shape_name": "CapacityProviderFieldList",
+            "type": "list"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeCapacityProviders",
+      "output": {
+        "markers": null,
+        "members": {
+          "capacityProviders": {
+            "name": "capacityProviders",
+            "shape_name": "CapacityProviders",
+            "type": "list"
+          },
+          "failures": {
+            "name": "failures",
+            "shape_name": "Failures",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeClusters": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clusters": {
+            "name": "clusters",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "include": {
+            "name": "include",
+            "shape_name": "ClusterFieldList",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeClusters",
+      "output": {
+        "markers": null,
+        "members": {
+          "clusters": {
+            "name": "clusters",
+            "shape_name": "Clusters",
+            "type": "list"
+          },
+          "failures": {
+            "name": "failures",
+            "shape_name": "Failures",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "clusterArn",
+            "id": "clusterName",
+            "name": "clusterName",
+            "path": [
+              "clusters"
+            ],
+            "tags": "tags",
+            "type": "ecs:cluster"
+          }
+        ]
+      }
+    },
+    "DescribeContainerInstances": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "containerInstances": {
+            "name": "containerInstances",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "include": {
+            "name": "include",
+            "shape_name": "ContainerInstanceFieldList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "containerInstances"
+        ]
+      },
+      "name": "DescribeContainerInstances",
+      "output": {
+        "markers": null,
+        "members": {
+          "containerInstances": {
+            "name": "containerInstances",
+            "shape_name": "ContainerInstances",
+            "type": "list"
+          },
+          "failures": {
+            "name": "failures",
+            "shape_name": "Failures",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeServiceDeployments": {
+      "input": {
+        "markers": null,
+        "members": {
+          "serviceDeploymentArns": {
+            "name": "serviceDeploymentArns",
+            "shape_name": "StringList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "serviceDeploymentArns"
+        ]
+      },
+      "name": "DescribeServiceDeployments",
+      "output": {
+        "markers": null,
+        "members": {
+          "failures": {
+            "name": "failures",
+            "shape_name": "Failures",
+            "type": "list"
+          },
+          "serviceDeployments": {
+            "name": "serviceDeployments",
+            "shape_name": "ServiceDeployments",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeServiceRevisions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "serviceRevisionArns": {
+            "name": "serviceRevisionArns",
+            "shape_name": "StringList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "serviceRevisionArns"
+        ]
+      },
+      "name": "DescribeServiceRevisions",
+      "output": {
+        "markers": null,
+        "members": {
+          "failures": {
+            "name": "failures",
+            "shape_name": "Failures",
+            "type": "list"
+          },
+          "serviceRevisions": {
+            "name": "serviceRevisions",
+            "shape_name": "ServiceRevisions",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeServices": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "include": {
+            "name": "include",
+            "shape_name": "ServiceFieldList",
+            "type": "list"
+          },
+          "services": {
+            "name": "services",
+            "shape_name": "StringList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "services"
+        ]
+      },
+      "name": "DescribeServices",
+      "output": {
+        "markers": null,
+        "members": {
+          "failures": {
+            "name": "failures",
+            "shape_name": "Failures",
+            "type": "list"
+          },
+          "services": {
+            "name": "services",
+            "shape_name": "Services",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "serviceArn",
+            "id": "serviceName",
+            "name": "serviceName",
+            "path": [
+              "services"
+            ],
+            "tags": "tags",
+            "type": "ecs:service"
+          }
+        ]
+      }
+    },
+    "DescribeTaskDefinition": {
+      "input": {
+        "markers": null,
+        "members": {
+          "include": {
+            "name": "include",
+            "shape_name": "TaskDefinitionFieldList",
+            "type": "list"
+          },
+          "taskDefinition": {
+            "name": "taskDefinition",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "taskDefinition"
+        ]
+      },
+      "name": "DescribeTaskDefinition",
+      "output": {
+        "markers": null,
+        "members": {
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "taskDefinition": {
+            "name": "taskDefinition",
+            "shape_name": "TaskDefinition",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeTaskSets": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "include": {
+            "name": "include",
+            "shape_name": "TaskSetFieldList",
+            "type": "list"
+          },
+          "service": {
+            "name": "service",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "taskSets": {
+            "name": "taskSets",
+            "shape_name": "StringList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "cluster",
+          "service"
+        ]
+      },
+      "name": "DescribeTaskSets",
+      "output": {
+        "markers": null,
+        "members": {
+          "failures": {
+            "name": "failures",
+            "shape_name": "Failures",
+            "type": "list"
+          },
+          "taskSets": {
+            "name": "taskSets",
+            "shape_name": "TaskSets",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeTasks": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "include": {
+            "name": "include",
+            "shape_name": "TaskFieldList",
+            "type": "list"
+          },
+          "tasks": {
+            "name": "tasks",
+            "shape_name": "StringList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "tasks"
+        ]
+      },
+      "name": "DescribeTasks",
+      "output": {
+        "markers": null,
+        "members": {
+          "failures": {
+            "name": "failures",
+            "shape_name": "Failures",
+            "type": "list"
+          },
+          "tasks": {
+            "name": "tasks",
+            "shape_name": "Tasks",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DiscoverPollEndpoint": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "containerInstance": {
+            "name": "containerInstance",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DiscoverPollEndpoint",
+      "output": {
+        "markers": null,
+        "members": {
+          "endpoint": {
+            "name": "endpoint",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "serviceConnectEndpoint": {
+            "name": "serviceConnectEndpoint",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "telemetryEndpoint": {
+            "name": "telemetryEndpoint",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ExecuteCommand": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "command": {
+            "name": "command",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "container": {
+            "name": "container",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "interactive": {
+            "name": "interactive",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "task": {
+            "name": "task",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "command",
+          "interactive",
+          "task"
+        ]
+      },
+      "name": "ExecuteCommand",
+      "output": {
+        "markers": null,
+        "members": {
+          "clusterArn": {
+            "name": "clusterArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "containerArn": {
+            "name": "containerArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "containerName": {
+            "name": "containerName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "interactive": {
+            "name": "interactive",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "session": {
+            "name": "session",
+            "shape_name": "Session",
+            "type": "structure"
+          },
+          "taskArn": {
+            "name": "taskArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetTaskProtection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "tasks": {
+            "name": "tasks",
+            "shape_name": "StringList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "cluster"
+        ]
+      },
+      "name": "GetTaskProtection",
+      "output": {
+        "markers": null,
+        "members": {
+          "failures": {
+            "name": "failures",
+            "shape_name": "Failures",
+            "type": "list"
+          },
+          "protectedTasks": {
+            "name": "protectedTasks",
+            "shape_name": "ProtectedTasks",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListAccountSettings": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "effectiveSettings": {
+            "name": "effectiveSettings",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "Integer",
+            "type": "integer"
+          },
+          "name": {
+            "name": "name",
+            "shape_name": "SettingName",
+            "type": "string"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "principalArn": {
+            "name": "principalArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "value": {
+            "name": "value",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListAccountSettings",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "settings": {
+            "name": "settings",
+            "shape_name": "Settings",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListAttributes": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "attributeName": {
+            "name": "attributeName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "attributeValue": {
+            "name": "attributeValue",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "targetType": {
+            "name": "targetType",
+            "shape_name": "TargetType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "targetType"
+        ]
+      },
+      "name": "ListAttributes",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "attributes": {
+            "name": "attributes",
+            "shape_name": "Attributes",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListClusters": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListClusters",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "clusterArns": {
+            "name": "clusterArns",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "clusterArn",
+            "path": [
+              "clusterArns"
+            ],
+            "scalar_as": "clusterArn",
+            "type": "ecs:cluster"
+          }
+        ]
+      }
+    },
+    "ListContainerInstances": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "filter": {
+            "name": "filter",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "status": {
+            "name": "status",
+            "shape_name": "ContainerInstanceStatus",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListContainerInstances",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "containerInstanceArns": {
+            "name": "containerInstanceArns",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListServiceDeployments": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "createdAt": {
+            "name": "createdAt",
+            "shape_name": "CreatedAt",
+            "type": "structure"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "service": {
+            "name": "service",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "status": {
+            "name": "status",
+            "shape_name": "ServiceDeploymentStatusList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "service"
+        ]
+      },
+      "name": "ListServiceDeployments",
+      "output": {
+        "markers": null,
+        "members": {
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "serviceDeployments": {
+            "name": "serviceDeployments",
+            "shape_name": "ServiceDeploymentsBrief",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListServices": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "launchType": {
+            "name": "launchType",
+            "shape_name": "LaunchType",
+            "type": "string"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "schedulingStrategy": {
+            "name": "schedulingStrategy",
+            "shape_name": "SchedulingStrategy",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListServices",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "serviceArns": {
+            "name": "serviceArns",
+            "shape_name": "StringList",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "serviceArn",
+            "path": [
+              "serviceArns"
+            ],
+            "scalar_as": "serviceArn",
+            "type": "ecs:service"
+          }
+        ]
+      }
+    },
+    "ListServicesByNamespace": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "namespace": {
+            "name": "namespace",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "namespace"
+        ]
+      },
+      "name": "ListServicesByNamespace",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "serviceArns": {
+            "name": "serviceArns",
+            "shape_name": "StringList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "resourceArn": {
+            "name": "resourceArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "resourceArn"
+        ]
+      },
+      "name": "ListTagsForResource",
+      "output": {
+        "markers": null,
+        "members": {
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTaskDefinitionFamilies": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "familyPrefix": {
+            "name": "familyPrefix",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "status": {
+            "name": "status",
+            "shape_name": "TaskDefinitionFamilyStatus",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListTaskDefinitionFamilies",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "families": {
+            "name": "families",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTaskDefinitions": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "familyPrefix": {
+            "name": "familyPrefix",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "sort": {
+            "name": "sort",
+            "shape_name": "SortOrder",
+            "type": "string"
+          },
+          "status": {
+            "name": "status",
+            "shape_name": "TaskDefinitionStatus",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListTaskDefinitions",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "taskDefinitionArns": {
+            "name": "taskDefinitionArns",
+            "shape_name": "StringList",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "taskDefinitionArn",
+            "path": [
+              "taskDefinitionArns"
+            ],
+            "scalar_as": "taskDefinitionArn",
+            "type": "ecs:task-definition"
+          }
+        ]
+      }
+    },
+    "ListTasks": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "containerInstance": {
+            "name": "containerInstance",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "desiredStatus": {
+            "name": "desiredStatus",
+            "shape_name": "DesiredStatus",
+            "type": "string"
+          },
+          "family": {
+            "name": "family",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "launchType": {
+            "name": "launchType",
+            "shape_name": "LaunchType",
+            "type": "string"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "serviceName": {
+            "name": "serviceName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "startedBy": {
+            "name": "startedBy",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListTasks",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "taskArns": {
+            "name": "taskArns",
+            "shape_name": "StringList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutAccountSetting": {
+      "input": {
+        "markers": null,
+        "members": {
+          "name": {
+            "name": "name",
+            "shape_name": "SettingName",
+            "type": "string"
+          },
+          "principalArn": {
+            "name": "principalArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "value": {
+            "name": "value",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ]
+      },
+      "name": "PutAccountSetting",
+      "output": {
+        "markers": null,
+        "members": {
+          "setting": {
+            "name": "setting",
+            "shape_name": "Setting",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutAccountSettingDefault": {
+      "input": {
+        "markers": null,
+        "members": {
+          "name": {
+            "name": "name",
+            "shape_name": "SettingName",
+            "type": "string"
+          },
+          "value": {
+            "name": "value",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "value"
+        ]
+      },
+      "name": "PutAccountSettingDefault",
+      "output": {
+        "markers": null,
+        "members": {
+          "setting": {
+            "name": "setting",
+            "shape_name": "Setting",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "attributes": {
+            "name": "attributes",
+            "shape_name": "Attributes",
+            "type": "list"
+          },
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "attributes"
+        ]
+      },
+      "name": "PutAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "attributes": {
+            "name": "attributes",
+            "shape_name": "Attributes",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutClusterCapacityProviders": {
+      "input": {
+        "markers": null,
+        "members": {
+          "capacityProviders": {
+            "name": "capacityProviders",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "defaultCapacityProviderStrategy": {
+            "name": "defaultCapacityProviderStrategy",
+            "shape_name": "CapacityProviderStrategy",
+            "type": "list"
+          }
+        },
+        "required": [
+          "cluster",
+          "capacityProviders",
+          "defaultCapacityProviderStrategy"
+        ]
+      },
+      "name": "PutClusterCapacityProviders",
+      "output": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "Cluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "RegisterContainerInstance": {
+      "input": {
+        "markers": null,
+        "members": {
+          "attributes": {
+            "name": "attributes",
+            "shape_name": "Attributes",
+            "type": "list"
+          },
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "containerInstanceArn": {
+            "name": "containerInstanceArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "instanceIdentityDocument": {
+            "name": "instanceIdentityDocument",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "instanceIdentityDocumentSignature": {
+            "name": "instanceIdentityDocumentSignature",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "platformDevices": {
+            "name": "platformDevices",
+            "shape_name": "PlatformDevices",
+            "type": "list"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "totalResources": {
+            "name": "totalResources",
+            "shape_name": "Resources",
+            "type": "list"
+          },
+          "versionInfo": {
+            "name": "versionInfo",
+            "shape_name": "VersionInfo",
+            "type": "structure"
+          }
+        },
+        "required": null
+      },
+      "name": "RegisterContainerInstance",
+      "output": {
+        "markers": null,
+        "members": {
+          "containerInstance": {
+            "name": "containerInstance",
+            "shape_name": "ContainerInstance",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "RegisterTaskDefinition": {
+      "input": {
+        "markers": null,
+        "members": {
+          "containerDefinitions": {
+            "name": "containerDefinitions",
+            "shape_name": "ContainerDefinitions",
+            "type": "list"
+          },
+          "cpu": {
+            "name": "cpu",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "enableFaultInjection": {
+            "name": "enableFaultInjection",
+            "shape_name": "BoxedBoolean",
+            "type": "boolean"
+          },
+          "ephemeralStorage": {
+            "name": "ephemeralStorage",
+            "shape_name": "EphemeralStorage",
+            "type": "structure"
+          },
+          "executionRoleArn": {
+            "name": "executionRoleArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "family": {
+            "name": "family",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "inferenceAccelerators": {
+            "name": "inferenceAccelerators",
+            "shape_name": "InferenceAccelerators",
+            "type": "list"
+          },
+          "ipcMode": {
+            "name": "ipcMode",
+            "shape_name": "IpcMode",
+            "type": "string"
+          },
+          "memory": {
+            "name": "memory",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "networkMode": {
+            "name": "networkMode",
+            "shape_name": "NetworkMode",
+            "type": "string"
+          },
+          "pidMode": {
+            "name": "pidMode",
+            "shape_name": "PidMode",
+            "type": "string"
+          },
+          "placementConstraints": {
+            "name": "placementConstraints",
+            "shape_name": "TaskDefinitionPlacementConstraints",
+            "type": "list"
+          },
+          "proxyConfiguration": {
+            "name": "proxyConfiguration",
+            "shape_name": "ProxyConfiguration",
+            "type": "structure"
+          },
+          "requiresCompatibilities": {
+            "name": "requiresCompatibilities",
+            "shape_name": "CompatibilityList",
+            "type": "list"
+          },
+          "runtimePlatform": {
+            "name": "runtimePlatform",
+            "shape_name": "RuntimePlatform",
+            "type": "structure"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "taskRoleArn": {
+            "name": "taskRoleArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "volumes": {
+            "name": "volumes",
+            "shape_name": "VolumeList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "family",
+          "containerDefinitions"
+        ]
+      },
+      "name": "RegisterTaskDefinition",
+      "output": {
+        "markers": null,
+        "members": {
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "taskDefinition": {
+            "name": "taskDefinition",
+            "shape_name": "TaskDefinition",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "RunTask": {
+      "input": {
+        "markers": null,
+        "members": {
+          "capacityProviderStrategy": {
+            "name": "capacityProviderStrategy",
+            "shape_name": "CapacityProviderStrategy",
+            "type": "list"
+          },
+          "clientToken": {
+            "name": "clientToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "count": {
+            "name": "count",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "enableECSManagedTags": {
+            "name": "enableECSManagedTags",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "enableExecuteCommand": {
+            "name": "enableExecuteCommand",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "group": {
+            "name": "group",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "launchType": {
+            "name": "launchType",
+            "shape_name": "LaunchType",
+            "type": "string"
+          },
+          "networkConfiguration": {
+            "name": "networkConfiguration",
+            "shape_name": "NetworkConfiguration",
+            "type": "structure"
+          },
+          "overrides": {
+            "name": "overrides",
+            "shape_name": "TaskOverride",
+            "type": "structure"
+          },
+          "placementConstraints": {
+            "name": "placementConstraints",
+            "shape_name": "PlacementConstraints",
+            "type": "list"
+          },
+          "placementStrategy": {
+            "name": "placementStrategy",
+            "shape_name": "PlacementStrategies",
+            "type": "list"
+          },
+          "platformVersion": {
+            "name": "platformVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "propagateTags": {
+            "name": "propagateTags",
+            "shape_name": "PropagateTags",
+            "type": "string"
+          },
+          "referenceId": {
+            "name": "referenceId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "startedBy": {
+            "name": "startedBy",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "taskDefinition": {
+            "name": "taskDefinition",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "volumeConfigurations": {
+            "name": "volumeConfigurations",
+            "shape_name": "TaskVolumeConfigurations",
+            "type": "list"
+          }
+        },
+        "required": [
+          "taskDefinition"
+        ]
+      },
+      "name": "RunTask",
+      "output": {
+        "markers": null,
+        "members": {
+          "failures": {
+            "name": "failures",
+            "shape_name": "Failures",
+            "type": "list"
+          },
+          "tasks": {
+            "name": "tasks",
+            "shape_name": "Tasks",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "StartTask": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "containerInstances": {
+            "name": "containerInstances",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "enableECSManagedTags": {
+            "name": "enableECSManagedTags",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "enableExecuteCommand": {
+            "name": "enableExecuteCommand",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "group": {
+            "name": "group",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "networkConfiguration": {
+            "name": "networkConfiguration",
+            "shape_name": "NetworkConfiguration",
+            "type": "structure"
+          },
+          "overrides": {
+            "name": "overrides",
+            "shape_name": "TaskOverride",
+            "type": "structure"
+          },
+          "propagateTags": {
+            "name": "propagateTags",
+            "shape_name": "PropagateTags",
+            "type": "string"
+          },
+          "referenceId": {
+            "name": "referenceId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "startedBy": {
+            "name": "startedBy",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "taskDefinition": {
+            "name": "taskDefinition",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "volumeConfigurations": {
+            "name": "volumeConfigurations",
+            "shape_name": "TaskVolumeConfigurations",
+            "type": "list"
+          }
+        },
+        "required": [
+          "containerInstances",
+          "taskDefinition"
+        ]
+      },
+      "name": "StartTask",
+      "output": {
+        "markers": null,
+        "members": {
+          "failures": {
+            "name": "failures",
+            "shape_name": "Failures",
+            "type": "list"
+          },
+          "tasks": {
+            "name": "tasks",
+            "shape_name": "Tasks",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "StopServiceDeployment": {
+      "input": {
+        "markers": null,
+        "members": {
+          "serviceDeploymentArn": {
+            "name": "serviceDeploymentArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "stopType": {
+            "name": "stopType",
+            "shape_name": "StopServiceDeploymentStopType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "serviceDeploymentArn"
+        ]
+      },
+      "name": "StopServiceDeployment",
+      "output": {
+        "markers": null,
+        "members": {
+          "serviceDeploymentArn": {
+            "name": "serviceDeploymentArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "StopTask": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "reason": {
+            "name": "reason",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "task": {
+            "name": "task",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "task"
+        ]
+      },
+      "name": "StopTask",
+      "output": {
+        "markers": null,
+        "members": {
+          "task": {
+            "name": "task",
+            "shape_name": "Task",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "SubmitAttachmentStateChanges": {
+      "input": {
+        "markers": null,
+        "members": {
+          "attachments": {
+            "name": "attachments",
+            "shape_name": "AttachmentStateChanges",
+            "type": "list"
+          },
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "attachments"
+        ]
+      },
+      "name": "SubmitAttachmentStateChanges",
+      "output": {
+        "markers": null,
+        "members": {
+          "acknowledgment": {
+            "name": "acknowledgment",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "SubmitContainerStateChange": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "containerName": {
+            "name": "containerName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "exitCode": {
+            "name": "exitCode",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "networkBindings": {
+            "name": "networkBindings",
+            "shape_name": "NetworkBindings",
+            "type": "list"
+          },
+          "reason": {
+            "name": "reason",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "runtimeId": {
+            "name": "runtimeId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "status": {
+            "name": "status",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "task": {
+            "name": "task",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "SubmitContainerStateChange",
+      "output": {
+        "markers": null,
+        "members": {
+          "acknowledgment": {
+            "name": "acknowledgment",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "SubmitTaskStateChange": {
+      "input": {
+        "markers": null,
+        "members": {
+          "attachments": {
+            "name": "attachments",
+            "shape_name": "AttachmentStateChanges",
+            "type": "list"
+          },
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "containers": {
+            "name": "containers",
+            "shape_name": "ContainerStateChanges",
+            "type": "list"
+          },
+          "executionStoppedAt": {
+            "name": "executionStoppedAt",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "managedAgents": {
+            "name": "managedAgents",
+            "shape_name": "ManagedAgentStateChanges",
+            "type": "list"
+          },
+          "pullStartedAt": {
+            "name": "pullStartedAt",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "pullStoppedAt": {
+            "name": "pullStoppedAt",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "reason": {
+            "name": "reason",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "status": {
+            "name": "status",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "task": {
+            "name": "task",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "SubmitTaskStateChange",
+      "output": {
+        "markers": null,
+        "members": {
+          "acknowledgment": {
+            "name": "acknowledgment",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "TagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "resourceArn": {
+            "name": "resourceArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "list"
+          }
+        },
+        "required": [
+          "resourceArn",
+          "tags"
+        ]
+      },
+      "name": "TagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "resourceArn": {
+            "name": "resourceArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "tagKeys": {
+            "name": "tagKeys",
+            "shape_name": "TagKeys",
+            "type": "list"
+          }
+        },
+        "required": [
+          "resourceArn",
+          "tagKeys"
+        ]
+      },
+      "name": "UntagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateCapacityProvider": {
+      "input": {
+        "markers": null,
+        "members": {
+          "autoScalingGroupProvider": {
+            "name": "autoScalingGroupProvider",
+            "shape_name": "AutoScalingGroupProviderUpdate",
+            "type": "structure"
+          },
+          "name": {
+            "name": "name",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "autoScalingGroupProvider"
+        ]
+      },
+      "name": "UpdateCapacityProvider",
+      "output": {
+        "markers": null,
+        "members": {
+          "capacityProvider": {
+            "name": "capacityProvider",
+            "shape_name": "CapacityProvider",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "configuration": {
+            "name": "configuration",
+            "shape_name": "ClusterConfiguration",
+            "type": "structure"
+          },
+          "serviceConnectDefaults": {
+            "name": "serviceConnectDefaults",
+            "shape_name": "ClusterServiceConnectDefaultsRequest",
+            "type": "structure"
+          },
+          "settings": {
+            "name": "settings",
+            "shape_name": "ClusterSettings",
+            "type": "list"
+          }
+        },
+        "required": [
+          "cluster"
+        ]
+      },
+      "name": "UpdateCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "Cluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateClusterSettings": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "settings": {
+            "name": "settings",
+            "shape_name": "ClusterSettings",
+            "type": "list"
+          }
+        },
+        "required": [
+          "cluster",
+          "settings"
+        ]
+      },
+      "name": "UpdateClusterSettings",
+      "output": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "Cluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateContainerAgent": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "containerInstance": {
+            "name": "containerInstance",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "containerInstance"
+        ]
+      },
+      "name": "UpdateContainerAgent",
+      "output": {
+        "markers": null,
+        "members": {
+          "containerInstance": {
+            "name": "containerInstance",
+            "shape_name": "ContainerInstance",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateContainerInstancesState": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "containerInstances": {
+            "name": "containerInstances",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "status": {
+            "name": "status",
+            "shape_name": "ContainerInstanceStatus",
+            "type": "string"
+          }
+        },
+        "required": [
+          "containerInstances",
+          "status"
+        ]
+      },
+      "name": "UpdateContainerInstancesState",
+      "output": {
+        "markers": null,
+        "members": {
+          "containerInstances": {
+            "name": "containerInstances",
+            "shape_name": "ContainerInstances",
+            "type": "list"
+          },
+          "failures": {
+            "name": "failures",
+            "shape_name": "Failures",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateService": {
+      "input": {
+        "markers": null,
+        "members": {
+          "availabilityZoneRebalancing": {
+            "name": "availabilityZoneRebalancing",
+            "shape_name": "AvailabilityZoneRebalancing",
+            "type": "string"
+          },
+          "capacityProviderStrategy": {
+            "name": "capacityProviderStrategy",
+            "shape_name": "CapacityProviderStrategy",
+            "type": "list"
+          },
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "deploymentConfiguration": {
+            "name": "deploymentConfiguration",
+            "shape_name": "DeploymentConfiguration",
+            "type": "structure"
+          },
+          "deploymentController": {
+            "name": "deploymentController",
+            "shape_name": "DeploymentController",
+            "type": "structure"
+          },
+          "desiredCount": {
+            "name": "desiredCount",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "enableECSManagedTags": {
+            "name": "enableECSManagedTags",
+            "shape_name": "BoxedBoolean",
+            "type": "boolean"
+          },
+          "enableExecuteCommand": {
+            "name": "enableExecuteCommand",
+            "shape_name": "BoxedBoolean",
+            "type": "boolean"
+          },
+          "forceNewDeployment": {
+            "name": "forceNewDeployment",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "healthCheckGracePeriodSeconds": {
+            "name": "healthCheckGracePeriodSeconds",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "loadBalancers": {
+            "name": "loadBalancers",
+            "shape_name": "LoadBalancers",
+            "type": "list"
+          },
+          "networkConfiguration": {
+            "name": "networkConfiguration",
+            "shape_name": "NetworkConfiguration",
+            "type": "structure"
+          },
+          "placementConstraints": {
+            "name": "placementConstraints",
+            "shape_name": "PlacementConstraints",
+            "type": "list"
+          },
+          "placementStrategy": {
+            "name": "placementStrategy",
+            "shape_name": "PlacementStrategies",
+            "type": "list"
+          },
+          "platformVersion": {
+            "name": "platformVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "propagateTags": {
+            "name": "propagateTags",
+            "shape_name": "PropagateTags",
+            "type": "string"
+          },
+          "service": {
+            "name": "service",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "serviceConnectConfiguration": {
+            "name": "serviceConnectConfiguration",
+            "shape_name": "ServiceConnectConfiguration",
+            "type": "structure"
+          },
+          "serviceRegistries": {
+            "name": "serviceRegistries",
+            "shape_name": "ServiceRegistries",
+            "type": "list"
+          },
+          "taskDefinition": {
+            "name": "taskDefinition",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "volumeConfigurations": {
+            "name": "volumeConfigurations",
+            "shape_name": "ServiceVolumeConfigurations",
+            "type": "list"
+          },
+          "vpcLatticeConfigurations": {
+            "name": "vpcLatticeConfigurations",
+            "shape_name": "VpcLatticeConfigurations",
+            "type": "list"
+          }
+        },
+        "required": [
+          "service"
+        ]
+      },
+      "name": "UpdateService",
+      "output": {
+        "markers": null,
+        "members": {
+          "service": {
+            "name": "service",
+            "shape_name": "Service",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateServicePrimaryTaskSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "primaryTaskSet": {
+            "name": "primaryTaskSet",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "service": {
+            "name": "service",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "cluster",
+          "service",
+          "primaryTaskSet"
+        ]
+      },
+      "name": "UpdateServicePrimaryTaskSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "taskSet": {
+            "name": "taskSet",
+            "shape_name": "TaskSet",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateTaskProtection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "expiresInMinutes": {
+            "name": "expiresInMinutes",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "protectionEnabled": {
+            "name": "protectionEnabled",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "tasks": {
+            "name": "tasks",
+            "shape_name": "StringList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "cluster",
+          "tasks",
+          "protectionEnabled"
+        ]
+      },
+      "name": "UpdateTaskProtection",
+      "output": {
+        "markers": null,
+        "members": {
+          "failures": {
+            "name": "failures",
+            "shape_name": "Failures",
+            "type": "list"
+          },
+          "protectedTasks": {
+            "name": "protectedTasks",
+            "shape_name": "ProtectedTasks",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateTaskSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "scale": {
+            "name": "scale",
+            "shape_name": "Scale",
+            "type": "structure"
+          },
+          "service": {
+            "name": "service",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "taskSet": {
+            "name": "taskSet",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "cluster",
+          "service",
+          "taskSet",
+          "scale"
+        ]
+      },
+      "name": "UpdateTaskSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "taskSet": {
+            "name": "taskSet",
+            "shape_name": "TaskSet",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    }
+  }
+}

@@ -1,0 +1,2688 @@
+{
+  "metadata": {
+    "apiVersion": "2014-10-31",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "rds",
+    "protocol": "query",
+    "protocols": [
+      "query"
+    ],
+    "serviceAbbreviation": "Amazon DocDB",
+    "serviceFullName": "Amazon DocumentDB with MongoDB compatibility",
+    "serviceId": "DocDB",
+    "signatureVersion": "v4",
+    "signingName": "rds",
+    "uid": "docdb-2014-10-31",
+    "xmlNamespace": "http://rds.amazonaws.com/doc/2014-10-31/"
+  },
+  "name": "docdb",
+  "operations": {
+    "AddSourceIdentifierToSubscription": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SourceIdentifier": {
+            "name": "SourceIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SubscriptionName": {
+            "name": "SubscriptionName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SubscriptionName",
+          "SourceIdentifier"
+        ]
+      },
+      "name": "AddSourceIdentifierToSubscription",
+      "output": {
+        "markers": null,
+        "members": {
+          "EventSubscription": {
+            "name": "EventSubscription",
+            "shape_name": "EventSubscription",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "AddTagsToResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceName": {
+            "name": "ResourceName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceName",
+          "Tags"
+        ]
+      },
+      "name": "AddTagsToResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ApplyPendingMaintenanceAction": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ApplyAction": {
+            "name": "ApplyAction",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "OptInType": {
+            "name": "OptInType",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ResourceIdentifier": {
+            "name": "ResourceIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceIdentifier",
+          "ApplyAction",
+          "OptInType"
+        ]
+      },
+      "name": "ApplyPendingMaintenanceAction",
+      "output": {
+        "markers": null,
+        "members": {
+          "ResourcePendingMaintenanceActions": {
+            "name": "ResourcePendingMaintenanceActions",
+            "shape_name": "ResourcePendingMaintenanceActions",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CopyDBClusterParameterGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SourceDBClusterParameterGroupIdentifier": {
+            "name": "SourceDBClusterParameterGroupIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "TargetDBClusterParameterGroupDescription": {
+            "name": "TargetDBClusterParameterGroupDescription",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "TargetDBClusterParameterGroupIdentifier": {
+            "name": "TargetDBClusterParameterGroupIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SourceDBClusterParameterGroupIdentifier",
+          "TargetDBClusterParameterGroupIdentifier",
+          "TargetDBClusterParameterGroupDescription"
+        ]
+      },
+      "name": "CopyDBClusterParameterGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBClusterParameterGroup": {
+            "name": "DBClusterParameterGroup",
+            "shape_name": "DBClusterParameterGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CopyDBClusterSnapshot": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CopyTags": {
+            "name": "CopyTags",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PreSignedUrl": {
+            "name": "PreSignedUrl",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SourceDBClusterSnapshotIdentifier": {
+            "name": "SourceDBClusterSnapshotIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SourceRegion": {
+            "name": "SourceRegion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "TargetDBClusterSnapshotIdentifier": {
+            "name": "TargetDBClusterSnapshotIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SourceDBClusterSnapshotIdentifier",
+          "TargetDBClusterSnapshotIdentifier"
+        ]
+      },
+      "name": "CopyDBClusterSnapshot",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBClusterSnapshot": {
+            "name": "DBClusterSnapshot",
+            "shape_name": "DBClusterSnapshot",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateDBCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AvailabilityZones": {
+            "name": "AvailabilityZones",
+            "shape_name": "AvailabilityZones",
+            "type": "list"
+          },
+          "BackupRetentionPeriod": {
+            "name": "BackupRetentionPeriod",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "DBClusterIdentifier": {
+            "name": "DBClusterIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DBClusterParameterGroupName": {
+            "name": "DBClusterParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DBSubnetGroupName": {
+            "name": "DBSubnetGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DeletionProtection": {
+            "name": "DeletionProtection",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "EnableCloudwatchLogsExports": {
+            "name": "EnableCloudwatchLogsExports",
+            "shape_name": "LogTypeList",
+            "type": "list"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "EngineVersion": {
+            "name": "EngineVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "GlobalClusterIdentifier": {
+            "name": "GlobalClusterIdentifier",
+            "shape_name": "GlobalClusterIdentifier",
+            "type": "string"
+          },
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ManageMasterUserPassword": {
+            "name": "ManageMasterUserPassword",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "MasterUserPassword": {
+            "name": "MasterUserPassword",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MasterUserSecretKmsKeyId": {
+            "name": "MasterUserSecretKmsKeyId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MasterUsername": {
+            "name": "MasterUsername",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Port": {
+            "name": "Port",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "PreSignedUrl": {
+            "name": "PreSignedUrl",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PreferredBackupWindow": {
+            "name": "PreferredBackupWindow",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PreferredMaintenanceWindow": {
+            "name": "PreferredMaintenanceWindow",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ServerlessV2ScalingConfiguration": {
+            "name": "ServerlessV2ScalingConfiguration",
+            "shape_name": "ServerlessV2ScalingConfiguration",
+            "type": "structure"
+          },
+          "SourceRegion": {
+            "name": "SourceRegion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "StorageEncrypted": {
+            "name": "StorageEncrypted",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "StorageType": {
+            "name": "StorageType",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "VpcSecurityGroupIds": {
+            "name": "VpcSecurityGroupIds",
+            "shape_name": "VpcSecurityGroupIdList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "DBClusterIdentifier",
+          "Engine"
+        ]
+      },
+      "name": "CreateDBCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBCluster": {
+            "name": "DBCluster",
+            "shape_name": "DBCluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateDBClusterParameterGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DBClusterParameterGroupName": {
+            "name": "DBClusterParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DBParameterGroupFamily": {
+            "name": "DBParameterGroupFamily",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "DBClusterParameterGroupName",
+          "DBParameterGroupFamily",
+          "Description"
+        ]
+      },
+      "name": "CreateDBClusterParameterGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBClusterParameterGroup": {
+            "name": "DBClusterParameterGroup",
+            "shape_name": "DBClusterParameterGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateDBClusterSnapshot": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DBClusterIdentifier": {
+            "name": "DBClusterIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DBClusterSnapshotIdentifier": {
+            "name": "DBClusterSnapshotIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "DBClusterSnapshotIdentifier",
+          "DBClusterIdentifier"
+        ]
+      },
+      "name": "CreateDBClusterSnapshot",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBClusterSnapshot": {
+            "name": "DBClusterSnapshot",
+            "shape_name": "DBClusterSnapshot",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateDBInstance": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AutoMinorVersionUpgrade": {
+            "name": "AutoMinorVersionUpgrade",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "AvailabilityZone": {
+            "name": "AvailabilityZone",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CACertificateIdentifier": {
+            "name": "CACertificateIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CopyTagsToSnapshot": {
+            "name": "CopyTagsToSnapshot",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "DBClusterIdentifier": {
+            "name": "DBClusterIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DBInstanceClass": {
+            "name": "DBInstanceClass",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DBInstanceIdentifier": {
+            "name": "DBInstanceIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "EnablePerformanceInsights": {
+            "name": "EnablePerformanceInsights",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PerformanceInsightsKMSKeyId": {
+            "name": "PerformanceInsightsKMSKeyId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PreferredMaintenanceWindow": {
+            "name": "PreferredMaintenanceWindow",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PromotionTier": {
+            "name": "PromotionTier",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "DBInstanceIdentifier",
+          "DBInstanceClass",
+          "Engine",
+          "DBClusterIdentifier"
+        ]
+      },
+      "name": "CreateDBInstance",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBInstance": {
+            "name": "DBInstance",
+            "shape_name": "DBInstance",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateDBSubnetGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DBSubnetGroupDescription": {
+            "name": "DBSubnetGroupDescription",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DBSubnetGroupName": {
+            "name": "DBSubnetGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SubnetIds": {
+            "name": "SubnetIds",
+            "shape_name": "SubnetIdentifierList",
+            "type": "list"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "DBSubnetGroupName",
+          "DBSubnetGroupDescription",
+          "SubnetIds"
+        ]
+      },
+      "name": "CreateDBSubnetGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBSubnetGroup": {
+            "name": "DBSubnetGroup",
+            "shape_name": "DBSubnetGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateEventSubscription": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Enabled": {
+            "name": "Enabled",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "EventCategories": {
+            "name": "EventCategories",
+            "shape_name": "EventCategoriesList",
+            "type": "list"
+          },
+          "SnsTopicArn": {
+            "name": "SnsTopicArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SourceIds": {
+            "name": "SourceIds",
+            "shape_name": "SourceIdsList",
+            "type": "list"
+          },
+          "SourceType": {
+            "name": "SourceType",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SubscriptionName": {
+            "name": "SubscriptionName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "SubscriptionName",
+          "SnsTopicArn"
+        ]
+      },
+      "name": "CreateEventSubscription",
+      "output": {
+        "markers": null,
+        "members": {
+          "EventSubscription": {
+            "name": "EventSubscription",
+            "shape_name": "EventSubscription",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateGlobalCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DatabaseName": {
+            "name": "DatabaseName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DeletionProtection": {
+            "name": "DeletionProtection",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "EngineVersion": {
+            "name": "EngineVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "GlobalClusterIdentifier": {
+            "name": "GlobalClusterIdentifier",
+            "shape_name": "GlobalClusterIdentifier",
+            "type": "string"
+          },
+          "SourceDBClusterIdentifier": {
+            "name": "SourceDBClusterIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "StorageEncrypted": {
+            "name": "StorageEncrypted",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "GlobalClusterIdentifier"
+        ]
+      },
+      "name": "CreateGlobalCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "GlobalCluster": {
+            "name": "GlobalCluster",
+            "shape_name": "GlobalCluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteDBCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DBClusterIdentifier": {
+            "name": "DBClusterIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "FinalDBSnapshotIdentifier": {
+            "name": "FinalDBSnapshotIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SkipFinalSnapshot": {
+            "name": "SkipFinalSnapshot",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "DBClusterIdentifier"
+        ]
+      },
+      "name": "DeleteDBCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBCluster": {
+            "name": "DBCluster",
+            "shape_name": "DBCluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteDBClusterParameterGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DBClusterParameterGroupName": {
+            "name": "DBClusterParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DBClusterParameterGroupName"
+        ]
+      },
+      "name": "DeleteDBClusterParameterGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteDBClusterSnapshot": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DBClusterSnapshotIdentifier": {
+            "name": "DBClusterSnapshotIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DBClusterSnapshotIdentifier"
+        ]
+      },
+      "name": "DeleteDBClusterSnapshot",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBClusterSnapshot": {
+            "name": "DBClusterSnapshot",
+            "shape_name": "DBClusterSnapshot",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteDBInstance": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DBInstanceIdentifier": {
+            "name": "DBInstanceIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DBInstanceIdentifier"
+        ]
+      },
+      "name": "DeleteDBInstance",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBInstance": {
+            "name": "DBInstance",
+            "shape_name": "DBInstance",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteDBSubnetGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DBSubnetGroupName": {
+            "name": "DBSubnetGroupName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DBSubnetGroupName"
+        ]
+      },
+      "name": "DeleteDBSubnetGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteEventSubscription": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SubscriptionName": {
+            "name": "SubscriptionName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SubscriptionName"
+        ]
+      },
+      "name": "DeleteEventSubscription",
+      "output": {
+        "markers": null,
+        "members": {
+          "EventSubscription": {
+            "name": "EventSubscription",
+            "shape_name": "EventSubscription",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteGlobalCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GlobalClusterIdentifier": {
+            "name": "GlobalClusterIdentifier",
+            "shape_name": "GlobalClusterIdentifier",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GlobalClusterIdentifier"
+        ]
+      },
+      "name": "DeleteGlobalCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "GlobalCluster": {
+            "name": "GlobalCluster",
+            "shape_name": "GlobalCluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeCertificates": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CertificateIdentifier": {
+            "name": "CertificateIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "FilterList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeCertificates",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Certificates": {
+            "name": "Certificates",
+            "shape_name": "CertificateList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeDBClusterParameterGroups": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "DBClusterParameterGroupName": {
+            "name": "DBClusterParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "FilterList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeDBClusterParameterGroups",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "DBClusterParameterGroups": {
+            "name": "DBClusterParameterGroups",
+            "shape_name": "DBClusterParameterGroupList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeDBClusterParameters": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "DBClusterParameterGroupName": {
+            "name": "DBClusterParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "FilterList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "Source": {
+            "name": "Source",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DBClusterParameterGroupName"
+        ]
+      },
+      "name": "DescribeDBClusterParameters",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Parameters": {
+            "name": "Parameters",
+            "shape_name": "ParametersList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeDBClusterSnapshotAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DBClusterSnapshotIdentifier": {
+            "name": "DBClusterSnapshotIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DBClusterSnapshotIdentifier"
+        ]
+      },
+      "name": "DescribeDBClusterSnapshotAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBClusterSnapshotAttributesResult": {
+            "name": "DBClusterSnapshotAttributesResult",
+            "shape_name": "DBClusterSnapshotAttributesResult",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeDBClusterSnapshots": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "DBClusterIdentifier": {
+            "name": "DBClusterIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DBClusterSnapshotIdentifier": {
+            "name": "DBClusterSnapshotIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "FilterList",
+            "type": "list"
+          },
+          "IncludePublic": {
+            "name": "IncludePublic",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "IncludeShared": {
+            "name": "IncludeShared",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "SnapshotType": {
+            "name": "SnapshotType",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeDBClusterSnapshots",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "DBClusterSnapshots": {
+            "name": "DBClusterSnapshots",
+            "shape_name": "DBClusterSnapshotList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeDBClusters": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "DBClusterIdentifier": {
+            "name": "DBClusterIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "FilterList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeDBClusters",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "DBClusters": {
+            "name": "DBClusters",
+            "shape_name": "DBClusterList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "DBClusterArn",
+            "id": "DBClusterIdentifier",
+            "path": [
+              "DBClusters"
+            ],
+            "type": "rds:cluster"
+          }
+        ]
+      }
+    },
+    "DescribeDBEngineVersions": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "DBParameterGroupFamily": {
+            "name": "DBParameterGroupFamily",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DefaultOnly": {
+            "name": "DefaultOnly",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "EngineVersion": {
+            "name": "EngineVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "FilterList",
+            "type": "list"
+          },
+          "ListSupportedCharacterSets": {
+            "name": "ListSupportedCharacterSets",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "ListSupportedTimezones": {
+            "name": "ListSupportedTimezones",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeDBEngineVersions",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "DBEngineVersions": {
+            "name": "DBEngineVersions",
+            "shape_name": "DBEngineVersionList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeDBInstances": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "DBInstanceIdentifier": {
+            "name": "DBInstanceIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "FilterList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeDBInstances",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "DBInstances": {
+            "name": "DBInstances",
+            "shape_name": "DBInstanceList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "DBInstanceArn",
+            "id": "DBInstanceIdentifier",
+            "path": [
+              "DBInstances"
+            ],
+            "type": "rds:db"
+          }
+        ]
+      }
+    },
+    "DescribeDBSubnetGroups": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "DBSubnetGroupName": {
+            "name": "DBSubnetGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "FilterList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeDBSubnetGroups",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "DBSubnetGroups": {
+            "name": "DBSubnetGroups",
+            "shape_name": "DBSubnetGroups",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeEngineDefaultClusterParameters": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DBParameterGroupFamily": {
+            "name": "DBParameterGroupFamily",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "FilterList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "DBParameterGroupFamily"
+        ]
+      },
+      "name": "DescribeEngineDefaultClusterParameters",
+      "output": {
+        "markers": null,
+        "members": {
+          "EngineDefaults": {
+            "name": "EngineDefaults",
+            "shape_name": "EngineDefaults",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeEventCategories": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "FilterList",
+            "type": "list"
+          },
+          "SourceType": {
+            "name": "SourceType",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeEventCategories",
+      "output": {
+        "markers": null,
+        "members": {
+          "EventCategoriesMapList": {
+            "name": "EventCategoriesMapList",
+            "shape_name": "EventCategoriesMapList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeEventSubscriptions": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "FilterList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "SubscriptionName": {
+            "name": "SubscriptionName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeEventSubscriptions",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "EventSubscriptionsList": {
+            "name": "EventSubscriptionsList",
+            "shape_name": "EventSubscriptionsList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeEvents": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Duration": {
+            "name": "Duration",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "EndTime": {
+            "name": "EndTime",
+            "shape_name": "TStamp",
+            "type": "timestamp"
+          },
+          "EventCategories": {
+            "name": "EventCategories",
+            "shape_name": "EventCategoriesList",
+            "type": "list"
+          },
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "FilterList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "SourceIdentifier": {
+            "name": "SourceIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SourceType": {
+            "name": "SourceType",
+            "shape_name": "SourceType",
+            "type": "string"
+          },
+          "StartTime": {
+            "name": "StartTime",
+            "shape_name": "TStamp",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeEvents",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Events": {
+            "name": "Events",
+            "shape_name": "EventList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeGlobalClusters": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "FilterList",
+            "type": "list"
+          },
+          "GlobalClusterIdentifier": {
+            "name": "GlobalClusterIdentifier",
+            "shape_name": "GlobalClusterIdentifier",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeGlobalClusters",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "GlobalClusters": {
+            "name": "GlobalClusters",
+            "shape_name": "GlobalClusterList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeOrderableDBInstanceOptions": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "DBInstanceClass": {
+            "name": "DBInstanceClass",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "EngineVersion": {
+            "name": "EngineVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "FilterList",
+            "type": "list"
+          },
+          "LicenseModel": {
+            "name": "LicenseModel",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "Vpc": {
+            "name": "Vpc",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "Engine"
+        ]
+      },
+      "name": "DescribeOrderableDBInstanceOptions",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "OrderableDBInstanceOptions": {
+            "name": "OrderableDBInstanceOptions",
+            "shape_name": "OrderableDBInstanceOptionsList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribePendingMaintenanceActions": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "FilterList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "ResourceIdentifier": {
+            "name": "ResourceIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribePendingMaintenanceActions",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PendingMaintenanceActions": {
+            "name": "PendingMaintenanceActions",
+            "shape_name": "PendingMaintenanceActions",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "FailoverDBCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DBClusterIdentifier": {
+            "name": "DBClusterIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "TargetDBInstanceIdentifier": {
+            "name": "TargetDBInstanceIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "FailoverDBCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBCluster": {
+            "name": "DBCluster",
+            "shape_name": "DBCluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "FailoverGlobalCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AllowDataLoss": {
+            "name": "AllowDataLoss",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "GlobalClusterIdentifier": {
+            "name": "GlobalClusterIdentifier",
+            "shape_name": "GlobalClusterIdentifier",
+            "type": "string"
+          },
+          "Switchover": {
+            "name": "Switchover",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "TargetDbClusterIdentifier": {
+            "name": "TargetDbClusterIdentifier",
+            "shape_name": "DBClusterIdentifier",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GlobalClusterIdentifier",
+          "TargetDbClusterIdentifier"
+        ]
+      },
+      "name": "FailoverGlobalCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "GlobalCluster": {
+            "name": "GlobalCluster",
+            "shape_name": "GlobalCluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "FilterList",
+            "type": "list"
+          },
+          "ResourceName": {
+            "name": "ResourceName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceName"
+        ]
+      },
+      "name": "ListTagsForResource",
+      "output": {
+        "markers": null,
+        "members": {
+          "TagList": {
+            "name": "TagList",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyDBCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AllowMajorVersionUpgrade": {
+            "name": "AllowMajorVersionUpgrade",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "ApplyImmediately": {
+            "name": "ApplyImmediately",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "BackupRetentionPeriod": {
+            "name": "BackupRetentionPeriod",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "CloudwatchLogsExportConfiguration": {
+            "name": "CloudwatchLogsExportConfiguration",
+            "shape_name": "CloudwatchLogsExportConfiguration",
+            "type": "structure"
+          },
+          "DBClusterIdentifier": {
+            "name": "DBClusterIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DBClusterParameterGroupName": {
+            "name": "DBClusterParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DeletionProtection": {
+            "name": "DeletionProtection",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "EngineVersion": {
+            "name": "EngineVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ManageMasterUserPassword": {
+            "name": "ManageMasterUserPassword",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "MasterUserPassword": {
+            "name": "MasterUserPassword",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MasterUserSecretKmsKeyId": {
+            "name": "MasterUserSecretKmsKeyId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "NewDBClusterIdentifier": {
+            "name": "NewDBClusterIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Port": {
+            "name": "Port",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "PreferredBackupWindow": {
+            "name": "PreferredBackupWindow",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PreferredMaintenanceWindow": {
+            "name": "PreferredMaintenanceWindow",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RotateMasterUserPassword": {
+            "name": "RotateMasterUserPassword",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "ServerlessV2ScalingConfiguration": {
+            "name": "ServerlessV2ScalingConfiguration",
+            "shape_name": "ServerlessV2ScalingConfiguration",
+            "type": "structure"
+          },
+          "StorageType": {
+            "name": "StorageType",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "VpcSecurityGroupIds": {
+            "name": "VpcSecurityGroupIds",
+            "shape_name": "VpcSecurityGroupIdList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "DBClusterIdentifier"
+        ]
+      },
+      "name": "ModifyDBCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBCluster": {
+            "name": "DBCluster",
+            "shape_name": "DBCluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyDBClusterParameterGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DBClusterParameterGroupName": {
+            "name": "DBClusterParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Parameters": {
+            "name": "Parameters",
+            "shape_name": "ParametersList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "DBClusterParameterGroupName",
+          "Parameters"
+        ]
+      },
+      "name": "ModifyDBClusterParameterGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBClusterParameterGroupName": {
+            "name": "DBClusterParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyDBClusterSnapshotAttribute": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AttributeName": {
+            "name": "AttributeName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DBClusterSnapshotIdentifier": {
+            "name": "DBClusterSnapshotIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ValuesToAdd": {
+            "name": "ValuesToAdd",
+            "shape_name": "AttributeValueList",
+            "type": "list"
+          },
+          "ValuesToRemove": {
+            "name": "ValuesToRemove",
+            "shape_name": "AttributeValueList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "DBClusterSnapshotIdentifier",
+          "AttributeName"
+        ]
+      },
+      "name": "ModifyDBClusterSnapshotAttribute",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBClusterSnapshotAttributesResult": {
+            "name": "DBClusterSnapshotAttributesResult",
+            "shape_name": "DBClusterSnapshotAttributesResult",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyDBInstance": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ApplyImmediately": {
+            "name": "ApplyImmediately",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "AutoMinorVersionUpgrade": {
+            "name": "AutoMinorVersionUpgrade",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "CACertificateIdentifier": {
+            "name": "CACertificateIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CertificateRotationRestart": {
+            "name": "CertificateRotationRestart",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "CopyTagsToSnapshot": {
+            "name": "CopyTagsToSnapshot",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "DBInstanceClass": {
+            "name": "DBInstanceClass",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DBInstanceIdentifier": {
+            "name": "DBInstanceIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "EnablePerformanceInsights": {
+            "name": "EnablePerformanceInsights",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "NewDBInstanceIdentifier": {
+            "name": "NewDBInstanceIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PerformanceInsightsKMSKeyId": {
+            "name": "PerformanceInsightsKMSKeyId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PreferredMaintenanceWindow": {
+            "name": "PreferredMaintenanceWindow",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PromotionTier": {
+            "name": "PromotionTier",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "DBInstanceIdentifier"
+        ]
+      },
+      "name": "ModifyDBInstance",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBInstance": {
+            "name": "DBInstance",
+            "shape_name": "DBInstance",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyDBSubnetGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DBSubnetGroupDescription": {
+            "name": "DBSubnetGroupDescription",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DBSubnetGroupName": {
+            "name": "DBSubnetGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SubnetIds": {
+            "name": "SubnetIds",
+            "shape_name": "SubnetIdentifierList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "DBSubnetGroupName",
+          "SubnetIds"
+        ]
+      },
+      "name": "ModifyDBSubnetGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBSubnetGroup": {
+            "name": "DBSubnetGroup",
+            "shape_name": "DBSubnetGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyEventSubscription": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Enabled": {
+            "name": "Enabled",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "EventCategories": {
+            "name": "EventCategories",
+            "shape_name": "EventCategoriesList",
+            "type": "list"
+          },
+          "SnsTopicArn": {
+            "name": "SnsTopicArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SourceType": {
+            "name": "SourceType",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SubscriptionName": {
+            "name": "SubscriptionName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SubscriptionName"
+        ]
+      },
+      "name": "ModifyEventSubscription",
+      "output": {
+        "markers": null,
+        "members": {
+          "EventSubscription": {
+            "name": "EventSubscription",
+            "shape_name": "EventSubscription",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyGlobalCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DeletionProtection": {
+            "name": "DeletionProtection",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "GlobalClusterIdentifier": {
+            "name": "GlobalClusterIdentifier",
+            "shape_name": "GlobalClusterIdentifier",
+            "type": "string"
+          },
+          "NewGlobalClusterIdentifier": {
+            "name": "NewGlobalClusterIdentifier",
+            "shape_name": "GlobalClusterIdentifier",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GlobalClusterIdentifier"
+        ]
+      },
+      "name": "ModifyGlobalCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "GlobalCluster": {
+            "name": "GlobalCluster",
+            "shape_name": "GlobalCluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "RebootDBInstance": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DBInstanceIdentifier": {
+            "name": "DBInstanceIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ForceFailover": {
+            "name": "ForceFailover",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "DBInstanceIdentifier"
+        ]
+      },
+      "name": "RebootDBInstance",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBInstance": {
+            "name": "DBInstance",
+            "shape_name": "DBInstance",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "RemoveFromGlobalCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DbClusterIdentifier": {
+            "name": "DbClusterIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "GlobalClusterIdentifier": {
+            "name": "GlobalClusterIdentifier",
+            "shape_name": "GlobalClusterIdentifier",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GlobalClusterIdentifier",
+          "DbClusterIdentifier"
+        ]
+      },
+      "name": "RemoveFromGlobalCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "GlobalCluster": {
+            "name": "GlobalCluster",
+            "shape_name": "GlobalCluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "RemoveSourceIdentifierFromSubscription": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SourceIdentifier": {
+            "name": "SourceIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SubscriptionName": {
+            "name": "SubscriptionName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SubscriptionName",
+          "SourceIdentifier"
+        ]
+      },
+      "name": "RemoveSourceIdentifierFromSubscription",
+      "output": {
+        "markers": null,
+        "members": {
+          "EventSubscription": {
+            "name": "EventSubscription",
+            "shape_name": "EventSubscription",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "RemoveTagsFromResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceName": {
+            "name": "ResourceName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "KeyList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceName",
+          "TagKeys"
+        ]
+      },
+      "name": "RemoveTagsFromResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ResetDBClusterParameterGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DBClusterParameterGroupName": {
+            "name": "DBClusterParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Parameters": {
+            "name": "Parameters",
+            "shape_name": "ParametersList",
+            "type": "list"
+          },
+          "ResetAllParameters": {
+            "name": "ResetAllParameters",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "DBClusterParameterGroupName"
+        ]
+      },
+      "name": "ResetDBClusterParameterGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBClusterParameterGroupName": {
+            "name": "DBClusterParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "RestoreDBClusterFromSnapshot": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AvailabilityZones": {
+            "name": "AvailabilityZones",
+            "shape_name": "AvailabilityZones",
+            "type": "list"
+          },
+          "DBClusterIdentifier": {
+            "name": "DBClusterIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DBClusterParameterGroupName": {
+            "name": "DBClusterParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DBSubnetGroupName": {
+            "name": "DBSubnetGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DeletionProtection": {
+            "name": "DeletionProtection",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "EnableCloudwatchLogsExports": {
+            "name": "EnableCloudwatchLogsExports",
+            "shape_name": "LogTypeList",
+            "type": "list"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "EngineVersion": {
+            "name": "EngineVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Port": {
+            "name": "Port",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "ServerlessV2ScalingConfiguration": {
+            "name": "ServerlessV2ScalingConfiguration",
+            "shape_name": "ServerlessV2ScalingConfiguration",
+            "type": "structure"
+          },
+          "SnapshotIdentifier": {
+            "name": "SnapshotIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "StorageType": {
+            "name": "StorageType",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "VpcSecurityGroupIds": {
+            "name": "VpcSecurityGroupIds",
+            "shape_name": "VpcSecurityGroupIdList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "DBClusterIdentifier",
+          "SnapshotIdentifier",
+          "Engine"
+        ]
+      },
+      "name": "RestoreDBClusterFromSnapshot",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBCluster": {
+            "name": "DBCluster",
+            "shape_name": "DBCluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "RestoreDBClusterToPointInTime": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DBClusterIdentifier": {
+            "name": "DBClusterIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DBSubnetGroupName": {
+            "name": "DBSubnetGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DeletionProtection": {
+            "name": "DeletionProtection",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "EnableCloudwatchLogsExports": {
+            "name": "EnableCloudwatchLogsExports",
+            "shape_name": "LogTypeList",
+            "type": "list"
+          },
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Port": {
+            "name": "Port",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "RestoreToTime": {
+            "name": "RestoreToTime",
+            "shape_name": "TStamp",
+            "type": "timestamp"
+          },
+          "RestoreType": {
+            "name": "RestoreType",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ServerlessV2ScalingConfiguration": {
+            "name": "ServerlessV2ScalingConfiguration",
+            "shape_name": "ServerlessV2ScalingConfiguration",
+            "type": "structure"
+          },
+          "SourceDBClusterIdentifier": {
+            "name": "SourceDBClusterIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "StorageType": {
+            "name": "StorageType",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "UseLatestRestorableTime": {
+            "name": "UseLatestRestorableTime",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "VpcSecurityGroupIds": {
+            "name": "VpcSecurityGroupIds",
+            "shape_name": "VpcSecurityGroupIdList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "DBClusterIdentifier",
+          "SourceDBClusterIdentifier"
+        ]
+      },
+      "name": "RestoreDBClusterToPointInTime",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBCluster": {
+            "name": "DBCluster",
+            "shape_name": "DBCluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "StartDBCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DBClusterIdentifier": {
+            "name": "DBClusterIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DBClusterIdentifier"
+        ]
+      },
+      "name": "StartDBCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBCluster": {
+            "name": "DBCluster",
+            "shape_name": "DBCluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "StopDBCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DBClusterIdentifier": {
+            "name": "DBClusterIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DBClusterIdentifier"
+        ]
+      },
+      "name": "StopDBCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "DBCluster": {
+            "name": "DBCluster",
+            "shape_name": "DBCluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "SwitchoverGlobalCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GlobalClusterIdentifier": {
+            "name": "GlobalClusterIdentifier",
+            "shape_name": "GlobalClusterIdentifier",
+            "type": "string"
+          },
+          "TargetDbClusterIdentifier": {
+            "name": "TargetDbClusterIdentifier",
+            "shape_name": "DBClusterIdentifier",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GlobalClusterIdentifier",
+          "TargetDbClusterIdentifier"
+        ]
+      },
+      "name": "SwitchoverGlobalCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "GlobalCluster": {
+            "name": "GlobalCluster",
+            "shape_name": "GlobalCluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    }
+  }
+}

@@ -1,0 +1,2072 @@
+{
+  "metadata": {
+    "apiVersion": "2015-12-01",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "elasticloadbalancing",
+    "protocol": "query",
+    "protocols": [
+      "query"
+    ],
+    "serviceAbbreviation": "Elastic Load Balancing v2",
+    "serviceFullName": "Elastic Load Balancing",
+    "serviceId": "Elastic Load Balancing v2",
+    "signatureVersion": "v4",
+    "uid": "elasticloadbalancingv2-2015-12-01",
+    "xmlNamespace": "http://elasticloadbalancing.amazonaws.com/doc/2015-12-01/"
+  },
+  "name": "elbv2",
+  "operations": {
+    "AddListenerCertificates": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Certificates": {
+            "name": "Certificates",
+            "shape_name": "CertificateList",
+            "type": "list"
+          },
+          "ListenerArn": {
+            "name": "ListenerArn",
+            "shape_name": "ListenerArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ListenerArn",
+          "Certificates"
+        ]
+      },
+      "name": "AddListenerCertificates",
+      "output": {
+        "markers": null,
+        "members": {
+          "Certificates": {
+            "name": "Certificates",
+            "shape_name": "CertificateList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "AddTags": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceArns": {
+            "name": "ResourceArns",
+            "shape_name": "ResourceArns",
+            "type": "list"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceArns",
+          "Tags"
+        ]
+      },
+      "name": "AddTags",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "AddTrustStoreRevocations": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RevocationContents": {
+            "name": "RevocationContents",
+            "shape_name": "RevocationContents",
+            "type": "list"
+          },
+          "TrustStoreArn": {
+            "name": "TrustStoreArn",
+            "shape_name": "TrustStoreArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TrustStoreArn"
+        ]
+      },
+      "name": "AddTrustStoreRevocations",
+      "output": {
+        "markers": null,
+        "members": {
+          "TrustStoreRevocations": {
+            "name": "TrustStoreRevocations",
+            "shape_name": "TrustStoreRevocations",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateListener": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AlpnPolicy": {
+            "name": "AlpnPolicy",
+            "shape_name": "AlpnPolicyName",
+            "type": "list"
+          },
+          "Certificates": {
+            "name": "Certificates",
+            "shape_name": "CertificateList",
+            "type": "list"
+          },
+          "DefaultActions": {
+            "name": "DefaultActions",
+            "shape_name": "Actions",
+            "type": "list"
+          },
+          "LoadBalancerArn": {
+            "name": "LoadBalancerArn",
+            "shape_name": "LoadBalancerArn",
+            "type": "string"
+          },
+          "MutualAuthentication": {
+            "name": "MutualAuthentication",
+            "shape_name": "MutualAuthenticationAttributes",
+            "type": "structure"
+          },
+          "Port": {
+            "name": "Port",
+            "shape_name": "Port",
+            "type": "integer"
+          },
+          "Protocol": {
+            "name": "Protocol",
+            "shape_name": "ProtocolEnum",
+            "type": "string"
+          },
+          "SslPolicy": {
+            "name": "SslPolicy",
+            "shape_name": "SslPolicyName",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "LoadBalancerArn",
+          "DefaultActions"
+        ]
+      },
+      "name": "CreateListener",
+      "output": {
+        "markers": null,
+        "members": {
+          "Listeners": {
+            "name": "Listeners",
+            "shape_name": "Listeners",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateLoadBalancer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CustomerOwnedIpv4Pool": {
+            "name": "CustomerOwnedIpv4Pool",
+            "shape_name": "CustomerOwnedIpv4Pool",
+            "type": "string"
+          },
+          "EnablePrefixForIpv6SourceNat": {
+            "name": "EnablePrefixForIpv6SourceNat",
+            "shape_name": "EnablePrefixForIpv6SourceNatEnum",
+            "type": "string"
+          },
+          "IpAddressType": {
+            "name": "IpAddressType",
+            "shape_name": "IpAddressType",
+            "type": "string"
+          },
+          "IpamPools": {
+            "name": "IpamPools",
+            "shape_name": "IpamPools",
+            "type": "structure"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "LoadBalancerName",
+            "type": "string"
+          },
+          "Scheme": {
+            "name": "Scheme",
+            "shape_name": "LoadBalancerSchemeEnum",
+            "type": "string"
+          },
+          "SecurityGroups": {
+            "name": "SecurityGroups",
+            "shape_name": "SecurityGroups",
+            "type": "list"
+          },
+          "SubnetMappings": {
+            "name": "SubnetMappings",
+            "shape_name": "SubnetMappings",
+            "type": "list"
+          },
+          "Subnets": {
+            "name": "Subnets",
+            "shape_name": "Subnets",
+            "type": "list"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "LoadBalancerTypeEnum",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "CreateLoadBalancer",
+      "output": {
+        "markers": null,
+        "members": {
+          "LoadBalancers": {
+            "name": "LoadBalancers",
+            "shape_name": "LoadBalancers",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateRule": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Actions": {
+            "name": "Actions",
+            "shape_name": "Actions",
+            "type": "list"
+          },
+          "Conditions": {
+            "name": "Conditions",
+            "shape_name": "RuleConditionList",
+            "type": "list"
+          },
+          "ListenerArn": {
+            "name": "ListenerArn",
+            "shape_name": "ListenerArn",
+            "type": "string"
+          },
+          "Priority": {
+            "name": "Priority",
+            "shape_name": "RulePriority",
+            "type": "integer"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ListenerArn",
+          "Conditions",
+          "Priority",
+          "Actions"
+        ]
+      },
+      "name": "CreateRule",
+      "output": {
+        "markers": null,
+        "members": {
+          "Rules": {
+            "name": "Rules",
+            "shape_name": "Rules",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateTargetGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HealthCheckEnabled": {
+            "name": "HealthCheckEnabled",
+            "shape_name": "HealthCheckEnabled",
+            "type": "boolean"
+          },
+          "HealthCheckIntervalSeconds": {
+            "name": "HealthCheckIntervalSeconds",
+            "shape_name": "HealthCheckIntervalSeconds",
+            "type": "integer"
+          },
+          "HealthCheckPath": {
+            "name": "HealthCheckPath",
+            "shape_name": "Path",
+            "type": "string"
+          },
+          "HealthCheckPort": {
+            "name": "HealthCheckPort",
+            "shape_name": "HealthCheckPort",
+            "type": "string"
+          },
+          "HealthCheckProtocol": {
+            "name": "HealthCheckProtocol",
+            "shape_name": "ProtocolEnum",
+            "type": "string"
+          },
+          "HealthCheckTimeoutSeconds": {
+            "name": "HealthCheckTimeoutSeconds",
+            "shape_name": "HealthCheckTimeoutSeconds",
+            "type": "integer"
+          },
+          "HealthyThresholdCount": {
+            "name": "HealthyThresholdCount",
+            "shape_name": "HealthCheckThresholdCount",
+            "type": "integer"
+          },
+          "IpAddressType": {
+            "name": "IpAddressType",
+            "shape_name": "TargetGroupIpAddressTypeEnum",
+            "type": "string"
+          },
+          "Matcher": {
+            "name": "Matcher",
+            "shape_name": "Matcher",
+            "type": "structure"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "TargetGroupName",
+            "type": "string"
+          },
+          "Port": {
+            "name": "Port",
+            "shape_name": "Port",
+            "type": "integer"
+          },
+          "Protocol": {
+            "name": "Protocol",
+            "shape_name": "ProtocolEnum",
+            "type": "string"
+          },
+          "ProtocolVersion": {
+            "name": "ProtocolVersion",
+            "shape_name": "ProtocolVersion",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "TargetType": {
+            "name": "TargetType",
+            "shape_name": "TargetTypeEnum",
+            "type": "string"
+          },
+          "UnhealthyThresholdCount": {
+            "name": "UnhealthyThresholdCount",
+            "shape_name": "HealthCheckThresholdCount",
+            "type": "integer"
+          },
+          "VpcId": {
+            "name": "VpcId",
+            "shape_name": "VpcId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "CreateTargetGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "TargetGroups": {
+            "name": "TargetGroups",
+            "shape_name": "TargetGroups",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateTrustStore": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CaCertificatesBundleS3Bucket": {
+            "name": "CaCertificatesBundleS3Bucket",
+            "shape_name": "S3Bucket",
+            "type": "string"
+          },
+          "CaCertificatesBundleS3Key": {
+            "name": "CaCertificatesBundleS3Key",
+            "shape_name": "S3Key",
+            "type": "string"
+          },
+          "CaCertificatesBundleS3ObjectVersion": {
+            "name": "CaCertificatesBundleS3ObjectVersion",
+            "shape_name": "S3ObjectVersion",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "TrustStoreName",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Name",
+          "CaCertificatesBundleS3Bucket",
+          "CaCertificatesBundleS3Key"
+        ]
+      },
+      "name": "CreateTrustStore",
+      "output": {
+        "markers": null,
+        "members": {
+          "TrustStores": {
+            "name": "TrustStores",
+            "shape_name": "TrustStores",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteListener": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ListenerArn": {
+            "name": "ListenerArn",
+            "shape_name": "ListenerArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ListenerArn"
+        ]
+      },
+      "name": "DeleteListener",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteLoadBalancer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LoadBalancerArn": {
+            "name": "LoadBalancerArn",
+            "shape_name": "LoadBalancerArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LoadBalancerArn"
+        ]
+      },
+      "name": "DeleteLoadBalancer",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteRule": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RuleArn": {
+            "name": "RuleArn",
+            "shape_name": "RuleArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RuleArn"
+        ]
+      },
+      "name": "DeleteRule",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteSharedTrustStoreAssociation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          },
+          "TrustStoreArn": {
+            "name": "TrustStoreArn",
+            "shape_name": "TrustStoreArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TrustStoreArn",
+          "ResourceArn"
+        ]
+      },
+      "name": "DeleteSharedTrustStoreAssociation",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteTargetGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "TargetGroupArn": {
+            "name": "TargetGroupArn",
+            "shape_name": "TargetGroupArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TargetGroupArn"
+        ]
+      },
+      "name": "DeleteTargetGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteTrustStore": {
+      "input": {
+        "markers": null,
+        "members": {
+          "TrustStoreArn": {
+            "name": "TrustStoreArn",
+            "shape_name": "TrustStoreArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TrustStoreArn"
+        ]
+      },
+      "name": "DeleteTrustStore",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeregisterTargets": {
+      "input": {
+        "markers": null,
+        "members": {
+          "TargetGroupArn": {
+            "name": "TargetGroupArn",
+            "shape_name": "TargetGroupArn",
+            "type": "string"
+          },
+          "Targets": {
+            "name": "Targets",
+            "shape_name": "TargetDescriptions",
+            "type": "list"
+          }
+        },
+        "required": [
+          "TargetGroupArn",
+          "Targets"
+        ]
+      },
+      "name": "DeregisterTargets",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DescribeAccountLimits": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "PageSize": {
+            "name": "PageSize",
+            "shape_name": "PageSize",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeAccountLimits",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "Limits": {
+            "name": "Limits",
+            "shape_name": "Limits",
+            "type": "list"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "Marker",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeCapacityReservation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LoadBalancerArn": {
+            "name": "LoadBalancerArn",
+            "shape_name": "LoadBalancerArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LoadBalancerArn"
+        ]
+      },
+      "name": "DescribeCapacityReservation",
+      "output": {
+        "markers": null,
+        "members": {
+          "CapacityReservationState": {
+            "name": "CapacityReservationState",
+            "shape_name": "ZonalCapacityReservationStates",
+            "type": "list"
+          },
+          "DecreaseRequestsRemaining": {
+            "name": "DecreaseRequestsRemaining",
+            "shape_name": "DecreaseRequestsRemaining",
+            "type": "integer"
+          },
+          "LastModifiedTime": {
+            "name": "LastModifiedTime",
+            "shape_name": "LastModifiedTime",
+            "type": "timestamp"
+          },
+          "MinimumLoadBalancerCapacity": {
+            "name": "MinimumLoadBalancerCapacity",
+            "shape_name": "MinimumLoadBalancerCapacity",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeListenerAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ListenerArn": {
+            "name": "ListenerArn",
+            "shape_name": "ListenerArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ListenerArn"
+        ]
+      },
+      "name": "DescribeListenerAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "ListenerAttributes",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeListenerCertificates": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "ListenerArn": {
+            "name": "ListenerArn",
+            "shape_name": "ListenerArn",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "PageSize": {
+            "name": "PageSize",
+            "shape_name": "PageSize",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "ListenerArn"
+        ]
+      },
+      "name": "DescribeListenerCertificates",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "Certificates": {
+            "name": "Certificates",
+            "shape_name": "CertificateList",
+            "type": "list"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "Marker",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeListeners": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "ListenerArns": {
+            "name": "ListenerArns",
+            "shape_name": "ListenerArns",
+            "type": "list"
+          },
+          "LoadBalancerArn": {
+            "name": "LoadBalancerArn",
+            "shape_name": "LoadBalancerArn",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "PageSize": {
+            "name": "PageSize",
+            "shape_name": "PageSize",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeListeners",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "Listeners": {
+            "name": "Listeners",
+            "shape_name": "Listeners",
+            "type": "list"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "Marker",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeLoadBalancerAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LoadBalancerArn": {
+            "name": "LoadBalancerArn",
+            "shape_name": "LoadBalancerArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LoadBalancerArn"
+        ]
+      },
+      "name": "DescribeLoadBalancerAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "LoadBalancerAttributes",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeLoadBalancers": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "LoadBalancerArns": {
+            "name": "LoadBalancerArns",
+            "shape_name": "LoadBalancerArns",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "Names": {
+            "name": "Names",
+            "shape_name": "LoadBalancerNames",
+            "type": "list"
+          },
+          "PageSize": {
+            "name": "PageSize",
+            "shape_name": "PageSize",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeLoadBalancers",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "LoadBalancers": {
+            "name": "LoadBalancers",
+            "shape_name": "LoadBalancers",
+            "type": "list"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "Marker",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "LoadBalancerArn",
+            "id": "LoadBalancerName",
+            "name": "LoadBalancerName",
+            "path": [
+              "LoadBalancers"
+            ],
+            "type": "elasticloadbalancing:loadbalancer"
+          }
+        ]
+      }
+    },
+    "DescribeRules": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "ListenerArn": {
+            "name": "ListenerArn",
+            "shape_name": "ListenerArn",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "PageSize": {
+            "name": "PageSize",
+            "shape_name": "PageSize",
+            "type": "integer"
+          },
+          "RuleArns": {
+            "name": "RuleArns",
+            "shape_name": "RuleArns",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeRules",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "Rules": {
+            "name": "Rules",
+            "shape_name": "Rules",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeSSLPolicies": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "LoadBalancerType": {
+            "name": "LoadBalancerType",
+            "shape_name": "LoadBalancerTypeEnum",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "Names": {
+            "name": "Names",
+            "shape_name": "SslPolicyNames",
+            "type": "list"
+          },
+          "PageSize": {
+            "name": "PageSize",
+            "shape_name": "PageSize",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeSSLPolicies",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "SslPolicies": {
+            "name": "SslPolicies",
+            "shape_name": "SslPolicies",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeTags": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceArns": {
+            "name": "ResourceArns",
+            "shape_name": "ResourceArns",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceArns"
+        ]
+      },
+      "name": "DescribeTags",
+      "output": {
+        "markers": null,
+        "members": {
+          "TagDescriptions": {
+            "name": "TagDescriptions",
+            "shape_name": "TagDescriptions",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeTargetGroupAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "TargetGroupArn": {
+            "name": "TargetGroupArn",
+            "shape_name": "TargetGroupArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TargetGroupArn"
+        ]
+      },
+      "name": "DescribeTargetGroupAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "TargetGroupAttributes",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeTargetGroups": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "LoadBalancerArn": {
+            "name": "LoadBalancerArn",
+            "shape_name": "LoadBalancerArn",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "Names": {
+            "name": "Names",
+            "shape_name": "TargetGroupNames",
+            "type": "list"
+          },
+          "PageSize": {
+            "name": "PageSize",
+            "shape_name": "PageSize",
+            "type": "integer"
+          },
+          "TargetGroupArns": {
+            "name": "TargetGroupArns",
+            "shape_name": "TargetGroupArns",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeTargetGroups",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "TargetGroups": {
+            "name": "TargetGroups",
+            "shape_name": "TargetGroups",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "TargetGroupArn",
+            "id": "TargetGroupName",
+            "name": "TargetGroupName",
+            "path": [
+              "TargetGroups"
+            ],
+            "type": "elasticloadbalancing:targetgroup"
+          }
+        ]
+      }
+    },
+    "DescribeTargetHealth": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Include": {
+            "name": "Include",
+            "shape_name": "ListOfDescribeTargetHealthIncludeOptions",
+            "type": "list"
+          },
+          "TargetGroupArn": {
+            "name": "TargetGroupArn",
+            "shape_name": "TargetGroupArn",
+            "type": "string"
+          },
+          "Targets": {
+            "name": "Targets",
+            "shape_name": "TargetDescriptions",
+            "type": "list"
+          }
+        },
+        "required": [
+          "TargetGroupArn"
+        ]
+      },
+      "name": "DescribeTargetHealth",
+      "output": {
+        "markers": null,
+        "members": {
+          "TargetHealthDescriptions": {
+            "name": "TargetHealthDescriptions",
+            "shape_name": "TargetHealthDescriptions",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeTrustStoreAssociations": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "PageSize": {
+            "name": "PageSize",
+            "shape_name": "PageSize",
+            "type": "integer"
+          },
+          "TrustStoreArn": {
+            "name": "TrustStoreArn",
+            "shape_name": "TrustStoreArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TrustStoreArn"
+        ]
+      },
+      "name": "DescribeTrustStoreAssociations",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "TrustStoreAssociations": {
+            "name": "TrustStoreAssociations",
+            "shape_name": "TrustStoreAssociations",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeTrustStoreRevocations": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "PageSize": {
+            "name": "PageSize",
+            "shape_name": "PageSize",
+            "type": "integer"
+          },
+          "RevocationIds": {
+            "name": "RevocationIds",
+            "shape_name": "RevocationIds",
+            "type": "list"
+          },
+          "TrustStoreArn": {
+            "name": "TrustStoreArn",
+            "shape_name": "TrustStoreArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TrustStoreArn"
+        ]
+      },
+      "name": "DescribeTrustStoreRevocations",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "TrustStoreRevocations": {
+            "name": "TrustStoreRevocations",
+            "shape_name": "DescribeTrustStoreRevocationResponse",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeTrustStores": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "Names": {
+            "name": "Names",
+            "shape_name": "TrustStoreNames",
+            "type": "list"
+          },
+          "PageSize": {
+            "name": "PageSize",
+            "shape_name": "PageSize",
+            "type": "integer"
+          },
+          "TrustStoreArns": {
+            "name": "TrustStoreArns",
+            "shape_name": "TrustStoreArns",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeTrustStores",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "TrustStores": {
+            "name": "TrustStores",
+            "shape_name": "TrustStores",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetResourcePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      },
+      "name": "GetResourcePolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "Policy",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetTrustStoreCaCertificatesBundle": {
+      "input": {
+        "markers": null,
+        "members": {
+          "TrustStoreArn": {
+            "name": "TrustStoreArn",
+            "shape_name": "TrustStoreArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TrustStoreArn"
+        ]
+      },
+      "name": "GetTrustStoreCaCertificatesBundle",
+      "output": {
+        "markers": null,
+        "members": {
+          "Location": {
+            "name": "Location",
+            "shape_name": "Location",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetTrustStoreRevocationContent": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RevocationId": {
+            "name": "RevocationId",
+            "shape_name": "RevocationId",
+            "type": "long"
+          },
+          "TrustStoreArn": {
+            "name": "TrustStoreArn",
+            "shape_name": "TrustStoreArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TrustStoreArn",
+          "RevocationId"
+        ]
+      },
+      "name": "GetTrustStoreRevocationContent",
+      "output": {
+        "markers": null,
+        "members": {
+          "Location": {
+            "name": "Location",
+            "shape_name": "Location",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyCapacityReservation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LoadBalancerArn": {
+            "name": "LoadBalancerArn",
+            "shape_name": "LoadBalancerArn",
+            "type": "string"
+          },
+          "MinimumLoadBalancerCapacity": {
+            "name": "MinimumLoadBalancerCapacity",
+            "shape_name": "MinimumLoadBalancerCapacity",
+            "type": "structure"
+          },
+          "ResetCapacityReservation": {
+            "name": "ResetCapacityReservation",
+            "shape_name": "ResetCapacityReservation",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "LoadBalancerArn"
+        ]
+      },
+      "name": "ModifyCapacityReservation",
+      "output": {
+        "markers": null,
+        "members": {
+          "CapacityReservationState": {
+            "name": "CapacityReservationState",
+            "shape_name": "ZonalCapacityReservationStates",
+            "type": "list"
+          },
+          "DecreaseRequestsRemaining": {
+            "name": "DecreaseRequestsRemaining",
+            "shape_name": "DecreaseRequestsRemaining",
+            "type": "integer"
+          },
+          "LastModifiedTime": {
+            "name": "LastModifiedTime",
+            "shape_name": "LastModifiedTime",
+            "type": "timestamp"
+          },
+          "MinimumLoadBalancerCapacity": {
+            "name": "MinimumLoadBalancerCapacity",
+            "shape_name": "MinimumLoadBalancerCapacity",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyIpPools": {
+      "input": {
+        "markers": null,
+        "members": {
+          "IpamPools": {
+            "name": "IpamPools",
+            "shape_name": "IpamPools",
+            "type": "structure"
+          },
+          "LoadBalancerArn": {
+            "name": "LoadBalancerArn",
+            "shape_name": "LoadBalancerArn",
+            "type": "string"
+          },
+          "RemoveIpamPools": {
+            "name": "RemoveIpamPools",
+            "shape_name": "RemoveIpamPools",
+            "type": "list"
+          }
+        },
+        "required": [
+          "LoadBalancerArn"
+        ]
+      },
+      "name": "ModifyIpPools",
+      "output": {
+        "markers": null,
+        "members": {
+          "IpamPools": {
+            "name": "IpamPools",
+            "shape_name": "IpamPools",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyListener": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AlpnPolicy": {
+            "name": "AlpnPolicy",
+            "shape_name": "AlpnPolicyName",
+            "type": "list"
+          },
+          "Certificates": {
+            "name": "Certificates",
+            "shape_name": "CertificateList",
+            "type": "list"
+          },
+          "DefaultActions": {
+            "name": "DefaultActions",
+            "shape_name": "Actions",
+            "type": "list"
+          },
+          "ListenerArn": {
+            "name": "ListenerArn",
+            "shape_name": "ListenerArn",
+            "type": "string"
+          },
+          "MutualAuthentication": {
+            "name": "MutualAuthentication",
+            "shape_name": "MutualAuthenticationAttributes",
+            "type": "structure"
+          },
+          "Port": {
+            "name": "Port",
+            "shape_name": "Port",
+            "type": "integer"
+          },
+          "Protocol": {
+            "name": "Protocol",
+            "shape_name": "ProtocolEnum",
+            "type": "string"
+          },
+          "SslPolicy": {
+            "name": "SslPolicy",
+            "shape_name": "SslPolicyName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ListenerArn"
+        ]
+      },
+      "name": "ModifyListener",
+      "output": {
+        "markers": null,
+        "members": {
+          "Listeners": {
+            "name": "Listeners",
+            "shape_name": "Listeners",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyListenerAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "ListenerAttributes",
+            "type": "list"
+          },
+          "ListenerArn": {
+            "name": "ListenerArn",
+            "shape_name": "ListenerArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ListenerArn",
+          "Attributes"
+        ]
+      },
+      "name": "ModifyListenerAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "ListenerAttributes",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyLoadBalancerAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "LoadBalancerAttributes",
+            "type": "list"
+          },
+          "LoadBalancerArn": {
+            "name": "LoadBalancerArn",
+            "shape_name": "LoadBalancerArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LoadBalancerArn",
+          "Attributes"
+        ]
+      },
+      "name": "ModifyLoadBalancerAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "LoadBalancerAttributes",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyRule": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Actions": {
+            "name": "Actions",
+            "shape_name": "Actions",
+            "type": "list"
+          },
+          "Conditions": {
+            "name": "Conditions",
+            "shape_name": "RuleConditionList",
+            "type": "list"
+          },
+          "RuleArn": {
+            "name": "RuleArn",
+            "shape_name": "RuleArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RuleArn"
+        ]
+      },
+      "name": "ModifyRule",
+      "output": {
+        "markers": null,
+        "members": {
+          "Rules": {
+            "name": "Rules",
+            "shape_name": "Rules",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyTargetGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HealthCheckEnabled": {
+            "name": "HealthCheckEnabled",
+            "shape_name": "HealthCheckEnabled",
+            "type": "boolean"
+          },
+          "HealthCheckIntervalSeconds": {
+            "name": "HealthCheckIntervalSeconds",
+            "shape_name": "HealthCheckIntervalSeconds",
+            "type": "integer"
+          },
+          "HealthCheckPath": {
+            "name": "HealthCheckPath",
+            "shape_name": "Path",
+            "type": "string"
+          },
+          "HealthCheckPort": {
+            "name": "HealthCheckPort",
+            "shape_name": "HealthCheckPort",
+            "type": "string"
+          },
+          "HealthCheckProtocol": {
+            "name": "HealthCheckProtocol",
+            "shape_name": "ProtocolEnum",
+            "type": "string"
+          },
+          "HealthCheckTimeoutSeconds": {
+            "name": "HealthCheckTimeoutSeconds",
+            "shape_name": "HealthCheckTimeoutSeconds",
+            "type": "integer"
+          },
+          "HealthyThresholdCount": {
+            "name": "HealthyThresholdCount",
+            "shape_name": "HealthCheckThresholdCount",
+            "type": "integer"
+          },
+          "Matcher": {
+            "name": "Matcher",
+            "shape_name": "Matcher",
+            "type": "structure"
+          },
+          "TargetGroupArn": {
+            "name": "TargetGroupArn",
+            "shape_name": "TargetGroupArn",
+            "type": "string"
+          },
+          "UnhealthyThresholdCount": {
+            "name": "UnhealthyThresholdCount",
+            "shape_name": "HealthCheckThresholdCount",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "TargetGroupArn"
+        ]
+      },
+      "name": "ModifyTargetGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "TargetGroups": {
+            "name": "TargetGroups",
+            "shape_name": "TargetGroups",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyTargetGroupAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "TargetGroupAttributes",
+            "type": "list"
+          },
+          "TargetGroupArn": {
+            "name": "TargetGroupArn",
+            "shape_name": "TargetGroupArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TargetGroupArn",
+          "Attributes"
+        ]
+      },
+      "name": "ModifyTargetGroupAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "TargetGroupAttributes",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyTrustStore": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CaCertificatesBundleS3Bucket": {
+            "name": "CaCertificatesBundleS3Bucket",
+            "shape_name": "S3Bucket",
+            "type": "string"
+          },
+          "CaCertificatesBundleS3Key": {
+            "name": "CaCertificatesBundleS3Key",
+            "shape_name": "S3Key",
+            "type": "string"
+          },
+          "CaCertificatesBundleS3ObjectVersion": {
+            "name": "CaCertificatesBundleS3ObjectVersion",
+            "shape_name": "S3ObjectVersion",
+            "type": "string"
+          },
+          "TrustStoreArn": {
+            "name": "TrustStoreArn",
+            "shape_name": "TrustStoreArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TrustStoreArn",
+          "CaCertificatesBundleS3Bucket",
+          "CaCertificatesBundleS3Key"
+        ]
+      },
+      "name": "ModifyTrustStore",
+      "output": {
+        "markers": null,
+        "members": {
+          "TrustStores": {
+            "name": "TrustStores",
+            "shape_name": "TrustStores",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "RegisterTargets": {
+      "input": {
+        "markers": null,
+        "members": {
+          "TargetGroupArn": {
+            "name": "TargetGroupArn",
+            "shape_name": "TargetGroupArn",
+            "type": "string"
+          },
+          "Targets": {
+            "name": "Targets",
+            "shape_name": "TargetDescriptions",
+            "type": "list"
+          }
+        },
+        "required": [
+          "TargetGroupArn",
+          "Targets"
+        ]
+      },
+      "name": "RegisterTargets",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RemoveListenerCertificates": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Certificates": {
+            "name": "Certificates",
+            "shape_name": "CertificateList",
+            "type": "list"
+          },
+          "ListenerArn": {
+            "name": "ListenerArn",
+            "shape_name": "ListenerArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ListenerArn",
+          "Certificates"
+        ]
+      },
+      "name": "RemoveListenerCertificates",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RemoveTags": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceArns": {
+            "name": "ResourceArns",
+            "shape_name": "ResourceArns",
+            "type": "list"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "TagKeys",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceArns",
+          "TagKeys"
+        ]
+      },
+      "name": "RemoveTags",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RemoveTrustStoreRevocations": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RevocationIds": {
+            "name": "RevocationIds",
+            "shape_name": "RevocationIds",
+            "type": "list"
+          },
+          "TrustStoreArn": {
+            "name": "TrustStoreArn",
+            "shape_name": "TrustStoreArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TrustStoreArn",
+          "RevocationIds"
+        ]
+      },
+      "name": "RemoveTrustStoreRevocations",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SetIpAddressType": {
+      "input": {
+        "markers": null,
+        "members": {
+          "IpAddressType": {
+            "name": "IpAddressType",
+            "shape_name": "IpAddressType",
+            "type": "string"
+          },
+          "LoadBalancerArn": {
+            "name": "LoadBalancerArn",
+            "shape_name": "LoadBalancerArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LoadBalancerArn",
+          "IpAddressType"
+        ]
+      },
+      "name": "SetIpAddressType",
+      "output": {
+        "markers": null,
+        "members": {
+          "IpAddressType": {
+            "name": "IpAddressType",
+            "shape_name": "IpAddressType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "SetRulePriorities": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RulePriorities": {
+            "name": "RulePriorities",
+            "shape_name": "RulePriorityList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "RulePriorities"
+        ]
+      },
+      "name": "SetRulePriorities",
+      "output": {
+        "markers": null,
+        "members": {
+          "Rules": {
+            "name": "Rules",
+            "shape_name": "Rules",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "SetSecurityGroups": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic": {
+            "name": "EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic",
+            "shape_name": "EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum",
+            "type": "string"
+          },
+          "LoadBalancerArn": {
+            "name": "LoadBalancerArn",
+            "shape_name": "LoadBalancerArn",
+            "type": "string"
+          },
+          "SecurityGroups": {
+            "name": "SecurityGroups",
+            "shape_name": "SecurityGroups",
+            "type": "list"
+          }
+        },
+        "required": [
+          "LoadBalancerArn",
+          "SecurityGroups"
+        ]
+      },
+      "name": "SetSecurityGroups",
+      "output": {
+        "markers": null,
+        "members": {
+          "EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic": {
+            "name": "EnforceSecurityGroupInboundRulesOnPrivateLinkTraffic",
+            "shape_name": "EnforceSecurityGroupInboundRulesOnPrivateLinkTrafficEnum",
+            "type": "string"
+          },
+          "SecurityGroupIds": {
+            "name": "SecurityGroupIds",
+            "shape_name": "SecurityGroups",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "SetSubnets": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EnablePrefixForIpv6SourceNat": {
+            "name": "EnablePrefixForIpv6SourceNat",
+            "shape_name": "EnablePrefixForIpv6SourceNatEnum",
+            "type": "string"
+          },
+          "IpAddressType": {
+            "name": "IpAddressType",
+            "shape_name": "IpAddressType",
+            "type": "string"
+          },
+          "LoadBalancerArn": {
+            "name": "LoadBalancerArn",
+            "shape_name": "LoadBalancerArn",
+            "type": "string"
+          },
+          "SubnetMappings": {
+            "name": "SubnetMappings",
+            "shape_name": "SubnetMappings",
+            "type": "list"
+          },
+          "Subnets": {
+            "name": "Subnets",
+            "shape_name": "Subnets",
+            "type": "list"
+          }
+        },
+        "required": [
+          "LoadBalancerArn"
+        ]
+      },
+      "name": "SetSubnets",
+      "output": {
+        "markers": null,
+        "members": {
+          "AvailabilityZones": {
+            "name": "AvailabilityZones",
+            "shape_name": "AvailabilityZones",
+            "type": "list"
+          },
+          "EnablePrefixForIpv6SourceNat": {
+            "name": "EnablePrefixForIpv6SourceNat",
+            "shape_name": "EnablePrefixForIpv6SourceNatEnum",
+            "type": "string"
+          },
+          "IpAddressType": {
+            "name": "IpAddressType",
+            "shape_name": "IpAddressType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    }
+  }
+}

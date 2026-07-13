@@ -1,0 +1,2583 @@
+{
+  "metadata": {
+    "apiVersion": "2014-11-01",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "kms",
+    "jsonVersion": "1.1",
+    "protocol": "json",
+    "protocols": [
+      "json"
+    ],
+    "serviceAbbreviation": "KMS",
+    "serviceFullName": "AWS Key Management Service",
+    "serviceId": "KMS",
+    "signatureVersion": "v4",
+    "targetPrefix": "TrentService",
+    "uid": "kms-2014-11-01"
+  },
+  "name": "kms",
+  "operations": {
+    "CancelKeyDeletion": {
+      "input": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId"
+        ]
+      },
+      "name": "CancelKeyDeletion",
+      "output": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ConnectCustomKeyStore": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CustomKeyStoreId": {
+            "name": "CustomKeyStoreId",
+            "shape_name": "CustomKeyStoreIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CustomKeyStoreId"
+        ]
+      },
+      "name": "ConnectCustomKeyStore",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateAlias": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AliasName": {
+            "name": "AliasName",
+            "shape_name": "AliasNameType",
+            "type": "string"
+          },
+          "TargetKeyId": {
+            "name": "TargetKeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AliasName",
+          "TargetKeyId"
+        ]
+      },
+      "name": "CreateAlias",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateCustomKeyStore": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CloudHsmClusterId": {
+            "name": "CloudHsmClusterId",
+            "shape_name": "CloudHsmClusterIdType",
+            "type": "string"
+          },
+          "CustomKeyStoreName": {
+            "name": "CustomKeyStoreName",
+            "shape_name": "CustomKeyStoreNameType",
+            "type": "string"
+          },
+          "CustomKeyStoreType": {
+            "name": "CustomKeyStoreType",
+            "shape_name": "CustomKeyStoreType",
+            "type": "string"
+          },
+          "KeyStorePassword": {
+            "name": "KeyStorePassword",
+            "shape_name": "KeyStorePasswordType",
+            "type": "string"
+          },
+          "TrustAnchorCertificate": {
+            "name": "TrustAnchorCertificate",
+            "shape_name": "TrustAnchorCertificateType",
+            "type": "string"
+          },
+          "XksProxyAuthenticationCredential": {
+            "name": "XksProxyAuthenticationCredential",
+            "shape_name": "XksProxyAuthenticationCredentialType",
+            "type": "structure"
+          },
+          "XksProxyConnectivity": {
+            "name": "XksProxyConnectivity",
+            "shape_name": "XksProxyConnectivityType",
+            "type": "string"
+          },
+          "XksProxyUriEndpoint": {
+            "name": "XksProxyUriEndpoint",
+            "shape_name": "XksProxyUriEndpointType",
+            "type": "string"
+          },
+          "XksProxyUriPath": {
+            "name": "XksProxyUriPath",
+            "shape_name": "XksProxyUriPathType",
+            "type": "string"
+          },
+          "XksProxyVpcEndpointServiceName": {
+            "name": "XksProxyVpcEndpointServiceName",
+            "shape_name": "XksProxyVpcEndpointServiceNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CustomKeyStoreName"
+        ]
+      },
+      "name": "CreateCustomKeyStore",
+      "output": {
+        "markers": null,
+        "members": {
+          "CustomKeyStoreId": {
+            "name": "CustomKeyStoreId",
+            "shape_name": "CustomKeyStoreIdType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateGrant": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Constraints": {
+            "name": "Constraints",
+            "shape_name": "GrantConstraints",
+            "type": "structure"
+          },
+          "DryRun": {
+            "name": "DryRun",
+            "shape_name": "NullableBooleanType",
+            "type": "boolean"
+          },
+          "GrantTokens": {
+            "name": "GrantTokens",
+            "shape_name": "GrantTokenList",
+            "type": "list"
+          },
+          "GranteePrincipal": {
+            "name": "GranteePrincipal",
+            "shape_name": "PrincipalIdType",
+            "type": "string"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "GrantNameType",
+            "type": "string"
+          },
+          "Operations": {
+            "name": "Operations",
+            "shape_name": "GrantOperationList",
+            "type": "list"
+          },
+          "RetiringPrincipal": {
+            "name": "RetiringPrincipal",
+            "shape_name": "PrincipalIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId",
+          "GranteePrincipal",
+          "Operations"
+        ]
+      },
+      "name": "CreateGrant",
+      "output": {
+        "markers": null,
+        "members": {
+          "GrantId": {
+            "name": "GrantId",
+            "shape_name": "GrantIdType",
+            "type": "string"
+          },
+          "GrantToken": {
+            "name": "GrantToken",
+            "shape_name": "GrantTokenType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BypassPolicyLockoutSafetyCheck": {
+            "name": "BypassPolicyLockoutSafetyCheck",
+            "shape_name": "BooleanType",
+            "type": "boolean"
+          },
+          "CustomKeyStoreId": {
+            "name": "CustomKeyStoreId",
+            "shape_name": "CustomKeyStoreIdType",
+            "type": "string"
+          },
+          "CustomerMasterKeySpec": {
+            "name": "CustomerMasterKeySpec",
+            "shape_name": "CustomerMasterKeySpec",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "DescriptionType",
+            "type": "string"
+          },
+          "KeySpec": {
+            "name": "KeySpec",
+            "shape_name": "KeySpec",
+            "type": "string"
+          },
+          "KeyUsage": {
+            "name": "KeyUsage",
+            "shape_name": "KeyUsageType",
+            "type": "string"
+          },
+          "MultiRegion": {
+            "name": "MultiRegion",
+            "shape_name": "NullableBooleanType",
+            "type": "boolean"
+          },
+          "Origin": {
+            "name": "Origin",
+            "shape_name": "OriginType",
+            "type": "string"
+          },
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "PolicyType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "XksKeyId": {
+            "name": "XksKeyId",
+            "shape_name": "XksKeyIdType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "CreateKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "KeyMetadata": {
+            "name": "KeyMetadata",
+            "shape_name": "KeyMetadata",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "Decrypt": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CiphertextBlob": {
+            "name": "CiphertextBlob",
+            "shape_name": "CiphertextType",
+            "type": "blob"
+          },
+          "DryRun": {
+            "name": "DryRun",
+            "shape_name": "NullableBooleanType",
+            "type": "boolean"
+          },
+          "EncryptionAlgorithm": {
+            "name": "EncryptionAlgorithm",
+            "shape_name": "EncryptionAlgorithmSpec",
+            "type": "string"
+          },
+          "EncryptionContext": {
+            "name": "EncryptionContext",
+            "shape_name": "EncryptionContextType",
+            "type": "map"
+          },
+          "GrantTokens": {
+            "name": "GrantTokens",
+            "shape_name": "GrantTokenList",
+            "type": "list"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "Recipient": {
+            "name": "Recipient",
+            "shape_name": "RecipientInfo",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "CiphertextBlob"
+        ]
+      },
+      "name": "Decrypt",
+      "output": {
+        "markers": null,
+        "members": {
+          "CiphertextForRecipient": {
+            "name": "CiphertextForRecipient",
+            "shape_name": "CiphertextType",
+            "type": "blob"
+          },
+          "EncryptionAlgorithm": {
+            "name": "EncryptionAlgorithm",
+            "shape_name": "EncryptionAlgorithmSpec",
+            "type": "string"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "KeyMaterialId": {
+            "name": "KeyMaterialId",
+            "shape_name": "BackingKeyIdType",
+            "type": "string"
+          },
+          "Plaintext": {
+            "name": "Plaintext",
+            "shape_name": "PlaintextType",
+            "type": "blob"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteAlias": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AliasName": {
+            "name": "AliasName",
+            "shape_name": "AliasNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AliasName"
+        ]
+      },
+      "name": "DeleteAlias",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteCustomKeyStore": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CustomKeyStoreId": {
+            "name": "CustomKeyStoreId",
+            "shape_name": "CustomKeyStoreIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CustomKeyStoreId"
+        ]
+      },
+      "name": "DeleteCustomKeyStore",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteImportedKeyMaterial": {
+      "input": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "KeyMaterialId": {
+            "name": "KeyMaterialId",
+            "shape_name": "BackingKeyIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId"
+        ]
+      },
+      "name": "DeleteImportedKeyMaterial",
+      "output": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "KeyMaterialId": {
+            "name": "KeyMaterialId",
+            "shape_name": "BackingKeyIdResponseType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeriveSharedSecret": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DryRun": {
+            "name": "DryRun",
+            "shape_name": "NullableBooleanType",
+            "type": "boolean"
+          },
+          "GrantTokens": {
+            "name": "GrantTokens",
+            "shape_name": "GrantTokenList",
+            "type": "list"
+          },
+          "KeyAgreementAlgorithm": {
+            "name": "KeyAgreementAlgorithm",
+            "shape_name": "KeyAgreementAlgorithmSpec",
+            "type": "string"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "PublicKey": {
+            "name": "PublicKey",
+            "shape_name": "PublicKeyType",
+            "type": "blob"
+          },
+          "Recipient": {
+            "name": "Recipient",
+            "shape_name": "RecipientInfo",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "KeyId",
+          "KeyAgreementAlgorithm",
+          "PublicKey"
+        ]
+      },
+      "name": "DeriveSharedSecret",
+      "output": {
+        "markers": null,
+        "members": {
+          "CiphertextForRecipient": {
+            "name": "CiphertextForRecipient",
+            "shape_name": "CiphertextType",
+            "type": "blob"
+          },
+          "KeyAgreementAlgorithm": {
+            "name": "KeyAgreementAlgorithm",
+            "shape_name": "KeyAgreementAlgorithmSpec",
+            "type": "string"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "KeyOrigin": {
+            "name": "KeyOrigin",
+            "shape_name": "OriginType",
+            "type": "string"
+          },
+          "SharedSecret": {
+            "name": "SharedSecret",
+            "shape_name": "PlaintextType",
+            "type": "blob"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeCustomKeyStores": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CustomKeyStoreId": {
+            "name": "CustomKeyStoreId",
+            "shape_name": "CustomKeyStoreIdType",
+            "type": "string"
+          },
+          "CustomKeyStoreName": {
+            "name": "CustomKeyStoreName",
+            "shape_name": "CustomKeyStoreNameType",
+            "type": "string"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "LimitType",
+            "type": "integer"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "MarkerType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeCustomKeyStores",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "CustomKeyStores": {
+            "name": "CustomKeyStores",
+            "shape_name": "CustomKeyStoresList",
+            "type": "list"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "MarkerType",
+            "type": "string"
+          },
+          "Truncated": {
+            "name": "Truncated",
+            "shape_name": "BooleanType",
+            "type": "boolean"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GrantTokens": {
+            "name": "GrantTokens",
+            "shape_name": "GrantTokenList",
+            "type": "list"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId"
+        ]
+      },
+      "name": "DescribeKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "KeyMetadata": {
+            "name": "KeyMetadata",
+            "shape_name": "KeyMetadata",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DisableKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId"
+        ]
+      },
+      "name": "DisableKey",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DisableKeyRotation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId"
+        ]
+      },
+      "name": "DisableKeyRotation",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DisconnectCustomKeyStore": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CustomKeyStoreId": {
+            "name": "CustomKeyStoreId",
+            "shape_name": "CustomKeyStoreIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CustomKeyStoreId"
+        ]
+      },
+      "name": "DisconnectCustomKeyStore",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "EnableKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId"
+        ]
+      },
+      "name": "EnableKey",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "EnableKeyRotation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "RotationPeriodInDays": {
+            "name": "RotationPeriodInDays",
+            "shape_name": "RotationPeriodInDaysType",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "KeyId"
+        ]
+      },
+      "name": "EnableKeyRotation",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "Encrypt": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DryRun": {
+            "name": "DryRun",
+            "shape_name": "NullableBooleanType",
+            "type": "boolean"
+          },
+          "EncryptionAlgorithm": {
+            "name": "EncryptionAlgorithm",
+            "shape_name": "EncryptionAlgorithmSpec",
+            "type": "string"
+          },
+          "EncryptionContext": {
+            "name": "EncryptionContext",
+            "shape_name": "EncryptionContextType",
+            "type": "map"
+          },
+          "GrantTokens": {
+            "name": "GrantTokens",
+            "shape_name": "GrantTokenList",
+            "type": "list"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "Plaintext": {
+            "name": "Plaintext",
+            "shape_name": "PlaintextType",
+            "type": "blob"
+          }
+        },
+        "required": [
+          "KeyId",
+          "Plaintext"
+        ]
+      },
+      "name": "Encrypt",
+      "output": {
+        "markers": null,
+        "members": {
+          "CiphertextBlob": {
+            "name": "CiphertextBlob",
+            "shape_name": "CiphertextType",
+            "type": "blob"
+          },
+          "EncryptionAlgorithm": {
+            "name": "EncryptionAlgorithm",
+            "shape_name": "EncryptionAlgorithmSpec",
+            "type": "string"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GenerateDataKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DryRun": {
+            "name": "DryRun",
+            "shape_name": "NullableBooleanType",
+            "type": "boolean"
+          },
+          "EncryptionContext": {
+            "name": "EncryptionContext",
+            "shape_name": "EncryptionContextType",
+            "type": "map"
+          },
+          "GrantTokens": {
+            "name": "GrantTokens",
+            "shape_name": "GrantTokenList",
+            "type": "list"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "KeySpec": {
+            "name": "KeySpec",
+            "shape_name": "DataKeySpec",
+            "type": "string"
+          },
+          "NumberOfBytes": {
+            "name": "NumberOfBytes",
+            "shape_name": "NumberOfBytesType",
+            "type": "integer"
+          },
+          "Recipient": {
+            "name": "Recipient",
+            "shape_name": "RecipientInfo",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "KeyId"
+        ]
+      },
+      "name": "GenerateDataKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "CiphertextBlob": {
+            "name": "CiphertextBlob",
+            "shape_name": "CiphertextType",
+            "type": "blob"
+          },
+          "CiphertextForRecipient": {
+            "name": "CiphertextForRecipient",
+            "shape_name": "CiphertextType",
+            "type": "blob"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "KeyMaterialId": {
+            "name": "KeyMaterialId",
+            "shape_name": "BackingKeyIdType",
+            "type": "string"
+          },
+          "Plaintext": {
+            "name": "Plaintext",
+            "shape_name": "PlaintextType",
+            "type": "blob"
+          }
+        },
+        "required": null
+      }
+    },
+    "GenerateDataKeyPair": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DryRun": {
+            "name": "DryRun",
+            "shape_name": "NullableBooleanType",
+            "type": "boolean"
+          },
+          "EncryptionContext": {
+            "name": "EncryptionContext",
+            "shape_name": "EncryptionContextType",
+            "type": "map"
+          },
+          "GrantTokens": {
+            "name": "GrantTokens",
+            "shape_name": "GrantTokenList",
+            "type": "list"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "KeyPairSpec": {
+            "name": "KeyPairSpec",
+            "shape_name": "DataKeyPairSpec",
+            "type": "string"
+          },
+          "Recipient": {
+            "name": "Recipient",
+            "shape_name": "RecipientInfo",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "KeyId",
+          "KeyPairSpec"
+        ]
+      },
+      "name": "GenerateDataKeyPair",
+      "output": {
+        "markers": null,
+        "members": {
+          "CiphertextForRecipient": {
+            "name": "CiphertextForRecipient",
+            "shape_name": "CiphertextType",
+            "type": "blob"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "KeyMaterialId": {
+            "name": "KeyMaterialId",
+            "shape_name": "BackingKeyIdType",
+            "type": "string"
+          },
+          "KeyPairSpec": {
+            "name": "KeyPairSpec",
+            "shape_name": "DataKeyPairSpec",
+            "type": "string"
+          },
+          "PrivateKeyCiphertextBlob": {
+            "name": "PrivateKeyCiphertextBlob",
+            "shape_name": "CiphertextType",
+            "type": "blob"
+          },
+          "PrivateKeyPlaintext": {
+            "name": "PrivateKeyPlaintext",
+            "shape_name": "PlaintextType",
+            "type": "blob"
+          },
+          "PublicKey": {
+            "name": "PublicKey",
+            "shape_name": "PublicKeyType",
+            "type": "blob"
+          }
+        },
+        "required": null
+      }
+    },
+    "GenerateDataKeyPairWithoutPlaintext": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DryRun": {
+            "name": "DryRun",
+            "shape_name": "NullableBooleanType",
+            "type": "boolean"
+          },
+          "EncryptionContext": {
+            "name": "EncryptionContext",
+            "shape_name": "EncryptionContextType",
+            "type": "map"
+          },
+          "GrantTokens": {
+            "name": "GrantTokens",
+            "shape_name": "GrantTokenList",
+            "type": "list"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "KeyPairSpec": {
+            "name": "KeyPairSpec",
+            "shape_name": "DataKeyPairSpec",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId",
+          "KeyPairSpec"
+        ]
+      },
+      "name": "GenerateDataKeyPairWithoutPlaintext",
+      "output": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "KeyMaterialId": {
+            "name": "KeyMaterialId",
+            "shape_name": "BackingKeyIdType",
+            "type": "string"
+          },
+          "KeyPairSpec": {
+            "name": "KeyPairSpec",
+            "shape_name": "DataKeyPairSpec",
+            "type": "string"
+          },
+          "PrivateKeyCiphertextBlob": {
+            "name": "PrivateKeyCiphertextBlob",
+            "shape_name": "CiphertextType",
+            "type": "blob"
+          },
+          "PublicKey": {
+            "name": "PublicKey",
+            "shape_name": "PublicKeyType",
+            "type": "blob"
+          }
+        },
+        "required": null
+      }
+    },
+    "GenerateDataKeyWithoutPlaintext": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DryRun": {
+            "name": "DryRun",
+            "shape_name": "NullableBooleanType",
+            "type": "boolean"
+          },
+          "EncryptionContext": {
+            "name": "EncryptionContext",
+            "shape_name": "EncryptionContextType",
+            "type": "map"
+          },
+          "GrantTokens": {
+            "name": "GrantTokens",
+            "shape_name": "GrantTokenList",
+            "type": "list"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "KeySpec": {
+            "name": "KeySpec",
+            "shape_name": "DataKeySpec",
+            "type": "string"
+          },
+          "NumberOfBytes": {
+            "name": "NumberOfBytes",
+            "shape_name": "NumberOfBytesType",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "KeyId"
+        ]
+      },
+      "name": "GenerateDataKeyWithoutPlaintext",
+      "output": {
+        "markers": null,
+        "members": {
+          "CiphertextBlob": {
+            "name": "CiphertextBlob",
+            "shape_name": "CiphertextType",
+            "type": "blob"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "KeyMaterialId": {
+            "name": "KeyMaterialId",
+            "shape_name": "BackingKeyIdType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GenerateMac": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DryRun": {
+            "name": "DryRun",
+            "shape_name": "NullableBooleanType",
+            "type": "boolean"
+          },
+          "GrantTokens": {
+            "name": "GrantTokens",
+            "shape_name": "GrantTokenList",
+            "type": "list"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "MacAlgorithm": {
+            "name": "MacAlgorithm",
+            "shape_name": "MacAlgorithmSpec",
+            "type": "string"
+          },
+          "Message": {
+            "name": "Message",
+            "shape_name": "PlaintextType",
+            "type": "blob"
+          }
+        },
+        "required": [
+          "Message",
+          "KeyId",
+          "MacAlgorithm"
+        ]
+      },
+      "name": "GenerateMac",
+      "output": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "Mac": {
+            "name": "Mac",
+            "shape_name": "CiphertextType",
+            "type": "blob"
+          },
+          "MacAlgorithm": {
+            "name": "MacAlgorithm",
+            "shape_name": "MacAlgorithmSpec",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GenerateRandom": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CustomKeyStoreId": {
+            "name": "CustomKeyStoreId",
+            "shape_name": "CustomKeyStoreIdType",
+            "type": "string"
+          },
+          "NumberOfBytes": {
+            "name": "NumberOfBytes",
+            "shape_name": "NumberOfBytesType",
+            "type": "integer"
+          },
+          "Recipient": {
+            "name": "Recipient",
+            "shape_name": "RecipientInfo",
+            "type": "structure"
+          }
+        },
+        "required": null
+      },
+      "name": "GenerateRandom",
+      "output": {
+        "markers": null,
+        "members": {
+          "CiphertextForRecipient": {
+            "name": "CiphertextForRecipient",
+            "shape_name": "CiphertextType",
+            "type": "blob"
+          },
+          "Plaintext": {
+            "name": "Plaintext",
+            "shape_name": "PlaintextType",
+            "type": "blob"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetKeyPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "PolicyNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId"
+        ]
+      },
+      "name": "GetKeyPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "PolicyType",
+            "type": "string"
+          },
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "PolicyNameType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetKeyRotationStatus": {
+      "input": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId"
+        ]
+      },
+      "name": "GetKeyRotationStatus",
+      "output": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "KeyRotationEnabled": {
+            "name": "KeyRotationEnabled",
+            "shape_name": "BooleanType",
+            "type": "boolean"
+          },
+          "NextRotationDate": {
+            "name": "NextRotationDate",
+            "shape_name": "DateType",
+            "type": "timestamp"
+          },
+          "OnDemandRotationStartDate": {
+            "name": "OnDemandRotationStartDate",
+            "shape_name": "DateType",
+            "type": "timestamp"
+          },
+          "RotationPeriodInDays": {
+            "name": "RotationPeriodInDays",
+            "shape_name": "RotationPeriodInDaysType",
+            "type": "integer"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetParametersForImport": {
+      "input": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "WrappingAlgorithm": {
+            "name": "WrappingAlgorithm",
+            "shape_name": "AlgorithmSpec",
+            "type": "string"
+          },
+          "WrappingKeySpec": {
+            "name": "WrappingKeySpec",
+            "shape_name": "WrappingKeySpec",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId",
+          "WrappingAlgorithm",
+          "WrappingKeySpec"
+        ]
+      },
+      "name": "GetParametersForImport",
+      "output": {
+        "markers": null,
+        "members": {
+          "ImportToken": {
+            "name": "ImportToken",
+            "shape_name": "CiphertextType",
+            "type": "blob"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "ParametersValidTo": {
+            "name": "ParametersValidTo",
+            "shape_name": "DateType",
+            "type": "timestamp"
+          },
+          "PublicKey": {
+            "name": "PublicKey",
+            "shape_name": "PlaintextType",
+            "type": "blob"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetPublicKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GrantTokens": {
+            "name": "GrantTokens",
+            "shape_name": "GrantTokenList",
+            "type": "list"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId"
+        ]
+      },
+      "name": "GetPublicKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "CustomerMasterKeySpec": {
+            "name": "CustomerMasterKeySpec",
+            "shape_name": "CustomerMasterKeySpec",
+            "type": "string"
+          },
+          "EncryptionAlgorithms": {
+            "name": "EncryptionAlgorithms",
+            "shape_name": "EncryptionAlgorithmSpecList",
+            "type": "list"
+          },
+          "KeyAgreementAlgorithms": {
+            "name": "KeyAgreementAlgorithms",
+            "shape_name": "KeyAgreementAlgorithmSpecList",
+            "type": "list"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "KeySpec": {
+            "name": "KeySpec",
+            "shape_name": "KeySpec",
+            "type": "string"
+          },
+          "KeyUsage": {
+            "name": "KeyUsage",
+            "shape_name": "KeyUsageType",
+            "type": "string"
+          },
+          "PublicKey": {
+            "name": "PublicKey",
+            "shape_name": "PublicKeyType",
+            "type": "blob"
+          },
+          "SigningAlgorithms": {
+            "name": "SigningAlgorithms",
+            "shape_name": "SigningAlgorithmSpecList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ImportKeyMaterial": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EncryptedKeyMaterial": {
+            "name": "EncryptedKeyMaterial",
+            "shape_name": "CiphertextType",
+            "type": "blob"
+          },
+          "ExpirationModel": {
+            "name": "ExpirationModel",
+            "shape_name": "ExpirationModelType",
+            "type": "string"
+          },
+          "ImportToken": {
+            "name": "ImportToken",
+            "shape_name": "CiphertextType",
+            "type": "blob"
+          },
+          "ImportType": {
+            "name": "ImportType",
+            "shape_name": "ImportType",
+            "type": "string"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "KeyMaterialDescription": {
+            "name": "KeyMaterialDescription",
+            "shape_name": "KeyMaterialDescriptionType",
+            "type": "string"
+          },
+          "KeyMaterialId": {
+            "name": "KeyMaterialId",
+            "shape_name": "BackingKeyIdType",
+            "type": "string"
+          },
+          "ValidTo": {
+            "name": "ValidTo",
+            "shape_name": "DateType",
+            "type": "timestamp"
+          }
+        },
+        "required": [
+          "KeyId",
+          "ImportToken",
+          "EncryptedKeyMaterial"
+        ]
+      },
+      "name": "ImportKeyMaterial",
+      "output": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "KeyMaterialId": {
+            "name": "KeyMaterialId",
+            "shape_name": "BackingKeyIdType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListAliases": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "LimitType",
+            "type": "integer"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "MarkerType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListAliases",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "Aliases": {
+            "name": "Aliases",
+            "shape_name": "AliasList",
+            "type": "list"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "MarkerType",
+            "type": "string"
+          },
+          "Truncated": {
+            "name": "Truncated",
+            "shape_name": "BooleanType",
+            "type": "boolean"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "AliasArn",
+            "id": "AliasName",
+            "name": "AliasName",
+            "path": [
+              "Aliases"
+            ],
+            "type": "kms:alias"
+          }
+        ]
+      }
+    },
+    "ListGrants": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "GrantId": {
+            "name": "GrantId",
+            "shape_name": "GrantIdType",
+            "type": "string"
+          },
+          "GranteePrincipal": {
+            "name": "GranteePrincipal",
+            "shape_name": "PrincipalIdType",
+            "type": "string"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "LimitType",
+            "type": "integer"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "MarkerType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId"
+        ]
+      },
+      "name": "ListGrants",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "Grants": {
+            "name": "Grants",
+            "shape_name": "GrantList",
+            "type": "list"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "MarkerType",
+            "type": "string"
+          },
+          "Truncated": {
+            "name": "Truncated",
+            "shape_name": "BooleanType",
+            "type": "boolean"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListKeyPolicies": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "LimitType",
+            "type": "integer"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "MarkerType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId"
+        ]
+      },
+      "name": "ListKeyPolicies",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "MarkerType",
+            "type": "string"
+          },
+          "PolicyNames": {
+            "name": "PolicyNames",
+            "shape_name": "PolicyNameList",
+            "type": "list"
+          },
+          "Truncated": {
+            "name": "Truncated",
+            "shape_name": "BooleanType",
+            "type": "boolean"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListKeyRotations": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IncludeKeyMaterial": {
+            "name": "IncludeKeyMaterial",
+            "shape_name": "IncludeKeyMaterial",
+            "type": "string"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "LimitType",
+            "type": "integer"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "MarkerType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId"
+        ]
+      },
+      "name": "ListKeyRotations",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "MarkerType",
+            "type": "string"
+          },
+          "Rotations": {
+            "name": "Rotations",
+            "shape_name": "RotationsList",
+            "type": "list"
+          },
+          "Truncated": {
+            "name": "Truncated",
+            "shape_name": "BooleanType",
+            "type": "boolean"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListKeys": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "LimitType",
+            "type": "integer"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "MarkerType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListKeys",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "Keys": {
+            "name": "Keys",
+            "shape_name": "KeyList",
+            "type": "list"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "MarkerType",
+            "type": "string"
+          },
+          "Truncated": {
+            "name": "Truncated",
+            "shape_name": "BooleanType",
+            "type": "boolean"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "KeyArn",
+            "id": "KeyId",
+            "path": [
+              "Keys"
+            ],
+            "type": "kms:key"
+          }
+        ]
+      }
+    },
+    "ListResourceTags": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "LimitType",
+            "type": "integer"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "MarkerType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId"
+        ]
+      },
+      "name": "ListResourceTags",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "MarkerType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "Truncated": {
+            "name": "Truncated",
+            "shape_name": "BooleanType",
+            "type": "boolean"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListRetirableGrants": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "LimitType",
+            "type": "integer"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "MarkerType",
+            "type": "string"
+          },
+          "RetiringPrincipal": {
+            "name": "RetiringPrincipal",
+            "shape_name": "PrincipalIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RetiringPrincipal"
+        ]
+      },
+      "name": "ListRetirableGrants",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "Grants": {
+            "name": "Grants",
+            "shape_name": "GrantList",
+            "type": "list"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "MarkerType",
+            "type": "string"
+          },
+          "Truncated": {
+            "name": "Truncated",
+            "shape_name": "BooleanType",
+            "type": "boolean"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutKeyPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BypassPolicyLockoutSafetyCheck": {
+            "name": "BypassPolicyLockoutSafetyCheck",
+            "shape_name": "BooleanType",
+            "type": "boolean"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "PolicyType",
+            "type": "string"
+          },
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "PolicyNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId",
+          "Policy"
+        ]
+      },
+      "name": "PutKeyPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ReEncrypt": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CiphertextBlob": {
+            "name": "CiphertextBlob",
+            "shape_name": "CiphertextType",
+            "type": "blob"
+          },
+          "DestinationEncryptionAlgorithm": {
+            "name": "DestinationEncryptionAlgorithm",
+            "shape_name": "EncryptionAlgorithmSpec",
+            "type": "string"
+          },
+          "DestinationEncryptionContext": {
+            "name": "DestinationEncryptionContext",
+            "shape_name": "EncryptionContextType",
+            "type": "map"
+          },
+          "DestinationKeyId": {
+            "name": "DestinationKeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "DryRun": {
+            "name": "DryRun",
+            "shape_name": "NullableBooleanType",
+            "type": "boolean"
+          },
+          "GrantTokens": {
+            "name": "GrantTokens",
+            "shape_name": "GrantTokenList",
+            "type": "list"
+          },
+          "SourceEncryptionAlgorithm": {
+            "name": "SourceEncryptionAlgorithm",
+            "shape_name": "EncryptionAlgorithmSpec",
+            "type": "string"
+          },
+          "SourceEncryptionContext": {
+            "name": "SourceEncryptionContext",
+            "shape_name": "EncryptionContextType",
+            "type": "map"
+          },
+          "SourceKeyId": {
+            "name": "SourceKeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CiphertextBlob",
+          "DestinationKeyId"
+        ]
+      },
+      "name": "ReEncrypt",
+      "output": {
+        "markers": null,
+        "members": {
+          "CiphertextBlob": {
+            "name": "CiphertextBlob",
+            "shape_name": "CiphertextType",
+            "type": "blob"
+          },
+          "DestinationEncryptionAlgorithm": {
+            "name": "DestinationEncryptionAlgorithm",
+            "shape_name": "EncryptionAlgorithmSpec",
+            "type": "string"
+          },
+          "DestinationKeyMaterialId": {
+            "name": "DestinationKeyMaterialId",
+            "shape_name": "BackingKeyIdType",
+            "type": "string"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "SourceEncryptionAlgorithm": {
+            "name": "SourceEncryptionAlgorithm",
+            "shape_name": "EncryptionAlgorithmSpec",
+            "type": "string"
+          },
+          "SourceKeyId": {
+            "name": "SourceKeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "SourceKeyMaterialId": {
+            "name": "SourceKeyMaterialId",
+            "shape_name": "BackingKeyIdType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ReplicateKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BypassPolicyLockoutSafetyCheck": {
+            "name": "BypassPolicyLockoutSafetyCheck",
+            "shape_name": "BooleanType",
+            "type": "boolean"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "DescriptionType",
+            "type": "string"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "PolicyType",
+            "type": "string"
+          },
+          "ReplicaRegion": {
+            "name": "ReplicaRegion",
+            "shape_name": "RegionType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "KeyId",
+          "ReplicaRegion"
+        ]
+      },
+      "name": "ReplicateKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "ReplicaKeyMetadata": {
+            "name": "ReplicaKeyMetadata",
+            "shape_name": "KeyMetadata",
+            "type": "structure"
+          },
+          "ReplicaPolicy": {
+            "name": "ReplicaPolicy",
+            "shape_name": "PolicyType",
+            "type": "string"
+          },
+          "ReplicaTags": {
+            "name": "ReplicaTags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "RetireGrant": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DryRun": {
+            "name": "DryRun",
+            "shape_name": "NullableBooleanType",
+            "type": "boolean"
+          },
+          "GrantId": {
+            "name": "GrantId",
+            "shape_name": "GrantIdType",
+            "type": "string"
+          },
+          "GrantToken": {
+            "name": "GrantToken",
+            "shape_name": "GrantTokenType",
+            "type": "string"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "RetireGrant",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RevokeGrant": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DryRun": {
+            "name": "DryRun",
+            "shape_name": "NullableBooleanType",
+            "type": "boolean"
+          },
+          "GrantId": {
+            "name": "GrantId",
+            "shape_name": "GrantIdType",
+            "type": "string"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId",
+          "GrantId"
+        ]
+      },
+      "name": "RevokeGrant",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RotateKeyOnDemand": {
+      "input": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId"
+        ]
+      },
+      "name": "RotateKeyOnDemand",
+      "output": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ScheduleKeyDeletion": {
+      "input": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "PendingWindowInDays": {
+            "name": "PendingWindowInDays",
+            "shape_name": "PendingWindowInDaysType",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "KeyId"
+        ]
+      },
+      "name": "ScheduleKeyDeletion",
+      "output": {
+        "markers": null,
+        "members": {
+          "DeletionDate": {
+            "name": "DeletionDate",
+            "shape_name": "DateType",
+            "type": "timestamp"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "KeyState": {
+            "name": "KeyState",
+            "shape_name": "KeyState",
+            "type": "string"
+          },
+          "PendingWindowInDays": {
+            "name": "PendingWindowInDays",
+            "shape_name": "PendingWindowInDaysType",
+            "type": "integer"
+          }
+        },
+        "required": null
+      }
+    },
+    "Sign": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DryRun": {
+            "name": "DryRun",
+            "shape_name": "NullableBooleanType",
+            "type": "boolean"
+          },
+          "GrantTokens": {
+            "name": "GrantTokens",
+            "shape_name": "GrantTokenList",
+            "type": "list"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "Message": {
+            "name": "Message",
+            "shape_name": "PlaintextType",
+            "type": "blob"
+          },
+          "MessageType": {
+            "name": "MessageType",
+            "shape_name": "MessageType",
+            "type": "string"
+          },
+          "SigningAlgorithm": {
+            "name": "SigningAlgorithm",
+            "shape_name": "SigningAlgorithmSpec",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId",
+          "Message",
+          "SigningAlgorithm"
+        ]
+      },
+      "name": "Sign",
+      "output": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "Signature": {
+            "name": "Signature",
+            "shape_name": "CiphertextType",
+            "type": "blob"
+          },
+          "SigningAlgorithm": {
+            "name": "SigningAlgorithm",
+            "shape_name": "SigningAlgorithmSpec",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "TagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "KeyId",
+          "Tags"
+        ]
+      },
+      "name": "TagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "TagKeyList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "KeyId",
+          "TagKeys"
+        ]
+      },
+      "name": "UntagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateAlias": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AliasName": {
+            "name": "AliasName",
+            "shape_name": "AliasNameType",
+            "type": "string"
+          },
+          "TargetKeyId": {
+            "name": "TargetKeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AliasName",
+          "TargetKeyId"
+        ]
+      },
+      "name": "UpdateAlias",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateCustomKeyStore": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CloudHsmClusterId": {
+            "name": "CloudHsmClusterId",
+            "shape_name": "CloudHsmClusterIdType",
+            "type": "string"
+          },
+          "CustomKeyStoreId": {
+            "name": "CustomKeyStoreId",
+            "shape_name": "CustomKeyStoreIdType",
+            "type": "string"
+          },
+          "KeyStorePassword": {
+            "name": "KeyStorePassword",
+            "shape_name": "KeyStorePasswordType",
+            "type": "string"
+          },
+          "NewCustomKeyStoreName": {
+            "name": "NewCustomKeyStoreName",
+            "shape_name": "CustomKeyStoreNameType",
+            "type": "string"
+          },
+          "XksProxyAuthenticationCredential": {
+            "name": "XksProxyAuthenticationCredential",
+            "shape_name": "XksProxyAuthenticationCredentialType",
+            "type": "structure"
+          },
+          "XksProxyConnectivity": {
+            "name": "XksProxyConnectivity",
+            "shape_name": "XksProxyConnectivityType",
+            "type": "string"
+          },
+          "XksProxyUriEndpoint": {
+            "name": "XksProxyUriEndpoint",
+            "shape_name": "XksProxyUriEndpointType",
+            "type": "string"
+          },
+          "XksProxyUriPath": {
+            "name": "XksProxyUriPath",
+            "shape_name": "XksProxyUriPathType",
+            "type": "string"
+          },
+          "XksProxyVpcEndpointServiceName": {
+            "name": "XksProxyVpcEndpointServiceName",
+            "shape_name": "XksProxyVpcEndpointServiceNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CustomKeyStoreId"
+        ]
+      },
+      "name": "UpdateCustomKeyStore",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateKeyDescription": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "DescriptionType",
+            "type": "string"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId",
+          "Description"
+        ]
+      },
+      "name": "UpdateKeyDescription",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdatePrimaryRegion": {
+      "input": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "PrimaryRegion": {
+            "name": "PrimaryRegion",
+            "shape_name": "RegionType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId",
+          "PrimaryRegion"
+        ]
+      },
+      "name": "UpdatePrimaryRegion",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "Verify": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DryRun": {
+            "name": "DryRun",
+            "shape_name": "NullableBooleanType",
+            "type": "boolean"
+          },
+          "GrantTokens": {
+            "name": "GrantTokens",
+            "shape_name": "GrantTokenList",
+            "type": "list"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "Message": {
+            "name": "Message",
+            "shape_name": "PlaintextType",
+            "type": "blob"
+          },
+          "MessageType": {
+            "name": "MessageType",
+            "shape_name": "MessageType",
+            "type": "string"
+          },
+          "Signature": {
+            "name": "Signature",
+            "shape_name": "CiphertextType",
+            "type": "blob"
+          },
+          "SigningAlgorithm": {
+            "name": "SigningAlgorithm",
+            "shape_name": "SigningAlgorithmSpec",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyId",
+          "Message",
+          "Signature",
+          "SigningAlgorithm"
+        ]
+      },
+      "name": "Verify",
+      "output": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "SignatureValid": {
+            "name": "SignatureValid",
+            "shape_name": "BooleanType",
+            "type": "boolean"
+          },
+          "SigningAlgorithm": {
+            "name": "SigningAlgorithm",
+            "shape_name": "SigningAlgorithmSpec",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "VerifyMac": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DryRun": {
+            "name": "DryRun",
+            "shape_name": "NullableBooleanType",
+            "type": "boolean"
+          },
+          "GrantTokens": {
+            "name": "GrantTokens",
+            "shape_name": "GrantTokenList",
+            "type": "list"
+          },
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "Mac": {
+            "name": "Mac",
+            "shape_name": "CiphertextType",
+            "type": "blob"
+          },
+          "MacAlgorithm": {
+            "name": "MacAlgorithm",
+            "shape_name": "MacAlgorithmSpec",
+            "type": "string"
+          },
+          "Message": {
+            "name": "Message",
+            "shape_name": "PlaintextType",
+            "type": "blob"
+          }
+        },
+        "required": [
+          "Message",
+          "KeyId",
+          "MacAlgorithm",
+          "Mac"
+        ]
+      },
+      "name": "VerifyMac",
+      "output": {
+        "markers": null,
+        "members": {
+          "KeyId": {
+            "name": "KeyId",
+            "shape_name": "KeyIdType",
+            "type": "string"
+          },
+          "MacAlgorithm": {
+            "name": "MacAlgorithm",
+            "shape_name": "MacAlgorithmSpec",
+            "type": "string"
+          },
+          "MacValid": {
+            "name": "MacValid",
+            "shape_name": "BooleanType",
+            "type": "boolean"
+          }
+        },
+        "required": null
+      }
+    }
+  }
+}

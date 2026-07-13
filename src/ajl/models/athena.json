@@ -1,0 +1,2576 @@
+{
+  "metadata": {
+    "apiVersion": "2017-05-18",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "athena",
+    "jsonVersion": "1.1",
+    "protocol": "json",
+    "protocols": [
+      "json"
+    ],
+    "serviceFullName": "Amazon Athena",
+    "serviceId": "Athena",
+    "signatureVersion": "v4",
+    "targetPrefix": "AmazonAthena",
+    "uid": "athena-2017-05-18"
+  },
+  "name": "athena",
+  "operations": {
+    "BatchGetNamedQuery": {
+      "input": {
+        "markers": null,
+        "members": {
+          "NamedQueryIds": {
+            "name": "NamedQueryIds",
+            "shape_name": "NamedQueryIdList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "NamedQueryIds"
+        ]
+      },
+      "name": "BatchGetNamedQuery",
+      "output": {
+        "markers": null,
+        "members": {
+          "NamedQueries": {
+            "name": "NamedQueries",
+            "shape_name": "NamedQueryList",
+            "type": "list"
+          },
+          "UnprocessedNamedQueryIds": {
+            "name": "UnprocessedNamedQueryIds",
+            "shape_name": "UnprocessedNamedQueryIdList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "BatchGetPreparedStatement": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PreparedStatementNames": {
+            "name": "PreparedStatementNames",
+            "shape_name": "PreparedStatementNameList",
+            "type": "list"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PreparedStatementNames",
+          "WorkGroup"
+        ]
+      },
+      "name": "BatchGetPreparedStatement",
+      "output": {
+        "markers": null,
+        "members": {
+          "PreparedStatements": {
+            "name": "PreparedStatements",
+            "shape_name": "PreparedStatementDetailsList",
+            "type": "list"
+          },
+          "UnprocessedPreparedStatementNames": {
+            "name": "UnprocessedPreparedStatementNames",
+            "shape_name": "UnprocessedPreparedStatementNameList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "BatchGetQueryExecution": {
+      "input": {
+        "markers": null,
+        "members": {
+          "QueryExecutionIds": {
+            "name": "QueryExecutionIds",
+            "shape_name": "QueryExecutionIdList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "QueryExecutionIds"
+        ]
+      },
+      "name": "BatchGetQueryExecution",
+      "output": {
+        "markers": null,
+        "members": {
+          "QueryExecutions": {
+            "name": "QueryExecutions",
+            "shape_name": "QueryExecutionList",
+            "type": "list"
+          },
+          "UnprocessedQueryExecutionIds": {
+            "name": "UnprocessedQueryExecutionIds",
+            "shape_name": "UnprocessedQueryExecutionIdList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "CancelCapacityReservation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "CapacityReservationName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "CancelCapacityReservation",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateCapacityReservation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "CapacityReservationName",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "TargetDpus": {
+            "name": "TargetDpus",
+            "shape_name": "TargetDpusInteger",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "TargetDpus",
+          "Name"
+        ]
+      },
+      "name": "CreateCapacityReservation",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateDataCatalog": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "DescriptionString",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "CatalogNameString",
+            "type": "string"
+          },
+          "Parameters": {
+            "name": "Parameters",
+            "shape_name": "ParametersMap",
+            "type": "map"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "DataCatalogType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Type"
+        ]
+      },
+      "name": "CreateDataCatalog",
+      "output": {
+        "markers": null,
+        "members": {
+          "DataCatalog": {
+            "name": "DataCatalog",
+            "shape_name": "DataCatalog",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateNamedQuery": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "IdempotencyToken",
+            "type": "string"
+          },
+          "Database": {
+            "name": "Database",
+            "shape_name": "DatabaseString",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "DescriptionString",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "NameString",
+            "type": "string"
+          },
+          "QueryString": {
+            "name": "QueryString",
+            "shape_name": "QueryString",
+            "type": "string"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Database",
+          "QueryString"
+        ]
+      },
+      "name": "CreateNamedQuery",
+      "output": {
+        "markers": null,
+        "members": {
+          "NamedQueryId": {
+            "name": "NamedQueryId",
+            "shape_name": "NamedQueryId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateNotebook": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "NotebookName",
+            "type": "string"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkGroup",
+          "Name"
+        ]
+      },
+      "name": "CreateNotebook",
+      "output": {
+        "markers": null,
+        "members": {
+          "NotebookId": {
+            "name": "NotebookId",
+            "shape_name": "NotebookId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreatePreparedStatement": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "DescriptionString",
+            "type": "string"
+          },
+          "QueryStatement": {
+            "name": "QueryStatement",
+            "shape_name": "QueryString",
+            "type": "string"
+          },
+          "StatementName": {
+            "name": "StatementName",
+            "shape_name": "StatementName",
+            "type": "string"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StatementName",
+          "WorkGroup",
+          "QueryStatement"
+        ]
+      },
+      "name": "CreatePreparedStatement",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreatePresignedNotebookUrl": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SessionId": {
+            "name": "SessionId",
+            "shape_name": "SessionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SessionId"
+        ]
+      },
+      "name": "CreatePresignedNotebookUrl",
+      "output": {
+        "markers": null,
+        "members": {
+          "AuthToken": {
+            "name": "AuthToken",
+            "shape_name": "AuthToken",
+            "type": "string"
+          },
+          "AuthTokenExpirationTime": {
+            "name": "AuthTokenExpirationTime",
+            "shape_name": "Long",
+            "type": "long"
+          },
+          "NotebookUrl": {
+            "name": "NotebookUrl",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "NotebookUrl",
+          "AuthToken",
+          "AuthTokenExpirationTime"
+        ]
+      }
+    },
+    "CreateWorkGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Configuration": {
+            "name": "Configuration",
+            "shape_name": "WorkGroupConfiguration",
+            "type": "structure"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "WorkGroupDescriptionString",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "CreateWorkGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteCapacityReservation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "CapacityReservationName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "DeleteCapacityReservation",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteDataCatalog": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DeleteCatalogOnly": {
+            "name": "DeleteCatalogOnly",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "CatalogNameString",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "DeleteDataCatalog",
+      "output": {
+        "markers": null,
+        "members": {
+          "DataCatalog": {
+            "name": "DataCatalog",
+            "shape_name": "DataCatalog",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteNamedQuery": {
+      "input": {
+        "markers": null,
+        "members": {
+          "NamedQueryId": {
+            "name": "NamedQueryId",
+            "shape_name": "NamedQueryId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "NamedQueryId"
+        ]
+      },
+      "name": "DeleteNamedQuery",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteNotebook": {
+      "input": {
+        "markers": null,
+        "members": {
+          "NotebookId": {
+            "name": "NotebookId",
+            "shape_name": "NotebookId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "NotebookId"
+        ]
+      },
+      "name": "DeleteNotebook",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeletePreparedStatement": {
+      "input": {
+        "markers": null,
+        "members": {
+          "StatementName": {
+            "name": "StatementName",
+            "shape_name": "StatementName",
+            "type": "string"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StatementName",
+          "WorkGroup"
+        ]
+      },
+      "name": "DeletePreparedStatement",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteWorkGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RecursiveDeleteOption": {
+            "name": "RecursiveDeleteOption",
+            "shape_name": "BoxedBoolean",
+            "type": "boolean"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkGroup"
+        ]
+      },
+      "name": "DeleteWorkGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ExportNotebook": {
+      "input": {
+        "markers": null,
+        "members": {
+          "NotebookId": {
+            "name": "NotebookId",
+            "shape_name": "NotebookId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "NotebookId"
+        ]
+      },
+      "name": "ExportNotebook",
+      "output": {
+        "markers": null,
+        "members": {
+          "NotebookMetadata": {
+            "name": "NotebookMetadata",
+            "shape_name": "NotebookMetadata",
+            "type": "structure"
+          },
+          "Payload": {
+            "name": "Payload",
+            "shape_name": "Payload",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetCalculationExecution": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CalculationExecutionId": {
+            "name": "CalculationExecutionId",
+            "shape_name": "CalculationExecutionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CalculationExecutionId"
+        ]
+      },
+      "name": "GetCalculationExecution",
+      "output": {
+        "markers": null,
+        "members": {
+          "CalculationExecutionId": {
+            "name": "CalculationExecutionId",
+            "shape_name": "CalculationExecutionId",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "DescriptionString",
+            "type": "string"
+          },
+          "Result": {
+            "name": "Result",
+            "shape_name": "CalculationResult",
+            "type": "structure"
+          },
+          "SessionId": {
+            "name": "SessionId",
+            "shape_name": "SessionId",
+            "type": "string"
+          },
+          "Statistics": {
+            "name": "Statistics",
+            "shape_name": "CalculationStatistics",
+            "type": "structure"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "CalculationStatus",
+            "type": "structure"
+          },
+          "WorkingDirectory": {
+            "name": "WorkingDirectory",
+            "shape_name": "S3Uri",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetCalculationExecutionCode": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CalculationExecutionId": {
+            "name": "CalculationExecutionId",
+            "shape_name": "CalculationExecutionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CalculationExecutionId"
+        ]
+      },
+      "name": "GetCalculationExecutionCode",
+      "output": {
+        "markers": null,
+        "members": {
+          "CodeBlock": {
+            "name": "CodeBlock",
+            "shape_name": "CodeBlock",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetCalculationExecutionStatus": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CalculationExecutionId": {
+            "name": "CalculationExecutionId",
+            "shape_name": "CalculationExecutionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CalculationExecutionId"
+        ]
+      },
+      "name": "GetCalculationExecutionStatus",
+      "output": {
+        "markers": null,
+        "members": {
+          "Statistics": {
+            "name": "Statistics",
+            "shape_name": "CalculationStatistics",
+            "type": "structure"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "CalculationStatus",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetCapacityAssignmentConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CapacityReservationName": {
+            "name": "CapacityReservationName",
+            "shape_name": "CapacityReservationName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CapacityReservationName"
+        ]
+      },
+      "name": "GetCapacityAssignmentConfiguration",
+      "output": {
+        "markers": null,
+        "members": {
+          "CapacityAssignmentConfiguration": {
+            "name": "CapacityAssignmentConfiguration",
+            "shape_name": "CapacityAssignmentConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "CapacityAssignmentConfiguration"
+        ]
+      }
+    },
+    "GetCapacityReservation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "CapacityReservationName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "GetCapacityReservation",
+      "output": {
+        "markers": null,
+        "members": {
+          "CapacityReservation": {
+            "name": "CapacityReservation",
+            "shape_name": "CapacityReservation",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "CapacityReservation"
+        ]
+      }
+    },
+    "GetDataCatalog": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "CatalogNameString",
+            "type": "string"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "GetDataCatalog",
+      "output": {
+        "markers": null,
+        "members": {
+          "DataCatalog": {
+            "name": "DataCatalog",
+            "shape_name": "DataCatalog",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetDatabase": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CatalogName": {
+            "name": "CatalogName",
+            "shape_name": "CatalogNameString",
+            "type": "string"
+          },
+          "DatabaseName": {
+            "name": "DatabaseName",
+            "shape_name": "NameString",
+            "type": "string"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CatalogName",
+          "DatabaseName"
+        ]
+      },
+      "name": "GetDatabase",
+      "output": {
+        "markers": null,
+        "members": {
+          "Database": {
+            "name": "Database",
+            "shape_name": "Database",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetNamedQuery": {
+      "input": {
+        "markers": null,
+        "members": {
+          "NamedQueryId": {
+            "name": "NamedQueryId",
+            "shape_name": "NamedQueryId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "NamedQueryId"
+        ]
+      },
+      "name": "GetNamedQuery",
+      "output": {
+        "markers": null,
+        "members": {
+          "NamedQuery": {
+            "name": "NamedQuery",
+            "shape_name": "NamedQuery",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetNotebookMetadata": {
+      "input": {
+        "markers": null,
+        "members": {
+          "NotebookId": {
+            "name": "NotebookId",
+            "shape_name": "NotebookId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "NotebookId"
+        ]
+      },
+      "name": "GetNotebookMetadata",
+      "output": {
+        "markers": null,
+        "members": {
+          "NotebookMetadata": {
+            "name": "NotebookMetadata",
+            "shape_name": "NotebookMetadata",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetPreparedStatement": {
+      "input": {
+        "markers": null,
+        "members": {
+          "StatementName": {
+            "name": "StatementName",
+            "shape_name": "StatementName",
+            "type": "string"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StatementName",
+          "WorkGroup"
+        ]
+      },
+      "name": "GetPreparedStatement",
+      "output": {
+        "markers": null,
+        "members": {
+          "PreparedStatement": {
+            "name": "PreparedStatement",
+            "shape_name": "PreparedStatement",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetQueryExecution": {
+      "input": {
+        "markers": null,
+        "members": {
+          "QueryExecutionId": {
+            "name": "QueryExecutionId",
+            "shape_name": "QueryExecutionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueryExecutionId"
+        ]
+      },
+      "name": "GetQueryExecution",
+      "output": {
+        "markers": null,
+        "members": {
+          "QueryExecution": {
+            "name": "QueryExecution",
+            "shape_name": "QueryExecution",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetQueryResults": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxQueryResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "QueryExecutionId": {
+            "name": "QueryExecutionId",
+            "shape_name": "QueryExecutionId",
+            "type": "string"
+          },
+          "QueryResultType": {
+            "name": "QueryResultType",
+            "shape_name": "QueryResultType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueryExecutionId"
+        ]
+      },
+      "name": "GetQueryResults",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "ResultSet": {
+            "name": "ResultSet",
+            "shape_name": "ResultSet",
+            "type": "structure"
+          },
+          "UpdateCount": {
+            "name": "UpdateCount",
+            "shape_name": "Long",
+            "type": "long"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetQueryRuntimeStatistics": {
+      "input": {
+        "markers": null,
+        "members": {
+          "QueryExecutionId": {
+            "name": "QueryExecutionId",
+            "shape_name": "QueryExecutionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueryExecutionId"
+        ]
+      },
+      "name": "GetQueryRuntimeStatistics",
+      "output": {
+        "markers": null,
+        "members": {
+          "QueryRuntimeStatistics": {
+            "name": "QueryRuntimeStatistics",
+            "shape_name": "QueryRuntimeStatistics",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetSession": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SessionId": {
+            "name": "SessionId",
+            "shape_name": "SessionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SessionId"
+        ]
+      },
+      "name": "GetSession",
+      "output": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "DescriptionString",
+            "type": "string"
+          },
+          "EngineConfiguration": {
+            "name": "EngineConfiguration",
+            "shape_name": "EngineConfiguration",
+            "type": "structure"
+          },
+          "EngineVersion": {
+            "name": "EngineVersion",
+            "shape_name": "NameString",
+            "type": "string"
+          },
+          "NotebookVersion": {
+            "name": "NotebookVersion",
+            "shape_name": "NameString",
+            "type": "string"
+          },
+          "SessionConfiguration": {
+            "name": "SessionConfiguration",
+            "shape_name": "SessionConfiguration",
+            "type": "structure"
+          },
+          "SessionId": {
+            "name": "SessionId",
+            "shape_name": "SessionId",
+            "type": "string"
+          },
+          "Statistics": {
+            "name": "Statistics",
+            "shape_name": "SessionStatistics",
+            "type": "structure"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "SessionStatus",
+            "type": "structure"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetSessionStatus": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SessionId": {
+            "name": "SessionId",
+            "shape_name": "SessionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SessionId"
+        ]
+      },
+      "name": "GetSessionStatus",
+      "output": {
+        "markers": null,
+        "members": {
+          "SessionId": {
+            "name": "SessionId",
+            "shape_name": "SessionId",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "SessionStatus",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetTableMetadata": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CatalogName": {
+            "name": "CatalogName",
+            "shape_name": "CatalogNameString",
+            "type": "string"
+          },
+          "DatabaseName": {
+            "name": "DatabaseName",
+            "shape_name": "NameString",
+            "type": "string"
+          },
+          "TableName": {
+            "name": "TableName",
+            "shape_name": "NameString",
+            "type": "string"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CatalogName",
+          "DatabaseName",
+          "TableName"
+        ]
+      },
+      "name": "GetTableMetadata",
+      "output": {
+        "markers": null,
+        "members": {
+          "TableMetadata": {
+            "name": "TableMetadata",
+            "shape_name": "TableMetadata",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetWorkGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkGroup"
+        ]
+      },
+      "name": "GetWorkGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ImportNotebook": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "NotebookName",
+            "type": "string"
+          },
+          "NotebookS3LocationUri": {
+            "name": "NotebookS3LocationUri",
+            "shape_name": "S3Uri",
+            "type": "string"
+          },
+          "Payload": {
+            "name": "Payload",
+            "shape_name": "Payload",
+            "type": "string"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "NotebookType",
+            "type": "string"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkGroup",
+          "Name",
+          "Type"
+        ]
+      },
+      "name": "ImportNotebook",
+      "output": {
+        "markers": null,
+        "members": {
+          "NotebookId": {
+            "name": "NotebookId",
+            "shape_name": "NotebookId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListApplicationDPUSizes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxApplicationDPUSizesCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListApplicationDPUSizes",
+      "output": {
+        "markers": null,
+        "members": {
+          "ApplicationDPUSizes": {
+            "name": "ApplicationDPUSizes",
+            "shape_name": "ApplicationDPUSizesList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListCalculationExecutions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxCalculationsCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "SessionManagerToken",
+            "type": "string"
+          },
+          "SessionId": {
+            "name": "SessionId",
+            "shape_name": "SessionId",
+            "type": "string"
+          },
+          "StateFilter": {
+            "name": "StateFilter",
+            "shape_name": "CalculationExecutionState",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SessionId"
+        ]
+      },
+      "name": "ListCalculationExecutions",
+      "output": {
+        "markers": null,
+        "members": {
+          "Calculations": {
+            "name": "Calculations",
+            "shape_name": "CalculationsList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "SessionManagerToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListCapacityReservations": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxCapacityReservationsCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListCapacityReservations",
+      "output": {
+        "markers": null,
+        "members": {
+          "CapacityReservations": {
+            "name": "CapacityReservations",
+            "shape_name": "CapacityReservationsList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CapacityReservations"
+        ]
+      }
+    },
+    "ListDataCatalogs": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxDataCatalogsCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListDataCatalogs",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "DataCatalogsSummary": {
+            "name": "DataCatalogsSummary",
+            "shape_name": "DataCatalogSummaryList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListDatabases": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "CatalogName": {
+            "name": "CatalogName",
+            "shape_name": "CatalogNameString",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxDatabasesCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CatalogName"
+        ]
+      },
+      "name": "ListDatabases",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "DatabaseList": {
+            "name": "DatabaseList",
+            "shape_name": "DatabaseList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListEngineVersions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxEngineVersionsCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListEngineVersions",
+      "output": {
+        "markers": null,
+        "members": {
+          "EngineVersions": {
+            "name": "EngineVersions",
+            "shape_name": "EngineVersionsList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListExecutors": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ExecutorStateFilter": {
+            "name": "ExecutorStateFilter",
+            "shape_name": "ExecutorState",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxListExecutorsCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "SessionManagerToken",
+            "type": "string"
+          },
+          "SessionId": {
+            "name": "SessionId",
+            "shape_name": "SessionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SessionId"
+        ]
+      },
+      "name": "ListExecutors",
+      "output": {
+        "markers": null,
+        "members": {
+          "ExecutorsSummary": {
+            "name": "ExecutorsSummary",
+            "shape_name": "ExecutorsSummaryList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "SessionManagerToken",
+            "type": "string"
+          },
+          "SessionId": {
+            "name": "SessionId",
+            "shape_name": "SessionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SessionId"
+        ]
+      }
+    },
+    "ListNamedQueries": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxNamedQueriesCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListNamedQueries",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NamedQueryIds": {
+            "name": "NamedQueryIds",
+            "shape_name": "NamedQueryIdList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListNotebookMetadata": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "FilterDefinition",
+            "type": "structure"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxNotebooksCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkGroup"
+        ]
+      },
+      "name": "ListNotebookMetadata",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "NotebookMetadataList": {
+            "name": "NotebookMetadataList",
+            "shape_name": "NotebookMetadataArray",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListNotebookSessions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxSessionsCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "NotebookId": {
+            "name": "NotebookId",
+            "shape_name": "NotebookId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "NotebookId"
+        ]
+      },
+      "name": "ListNotebookSessions",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "NotebookSessionsList": {
+            "name": "NotebookSessionsList",
+            "shape_name": "NotebookSessionsList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "NotebookSessionsList"
+        ]
+      }
+    },
+    "ListPreparedStatements": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxPreparedStatementsCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkGroup"
+        ]
+      },
+      "name": "ListPreparedStatements",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "PreparedStatements": {
+            "name": "PreparedStatements",
+            "shape_name": "PreparedStatementsList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListQueryExecutions": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxQueryExecutionsCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListQueryExecutions",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "QueryExecutionIds": {
+            "name": "QueryExecutionIds",
+            "shape_name": "QueryExecutionIdList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListSessions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxSessionsCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "SessionManagerToken",
+            "type": "string"
+          },
+          "StateFilter": {
+            "name": "StateFilter",
+            "shape_name": "SessionState",
+            "type": "string"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkGroup"
+        ]
+      },
+      "name": "ListSessions",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "SessionManagerToken",
+            "type": "string"
+          },
+          "Sessions": {
+            "name": "Sessions",
+            "shape_name": "SessionsList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTableMetadata": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "CatalogName": {
+            "name": "CatalogName",
+            "shape_name": "CatalogNameString",
+            "type": "string"
+          },
+          "DatabaseName": {
+            "name": "DatabaseName",
+            "shape_name": "NameString",
+            "type": "string"
+          },
+          "Expression": {
+            "name": "Expression",
+            "shape_name": "ExpressionString",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxTableMetadataCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CatalogName",
+          "DatabaseName"
+        ]
+      },
+      "name": "ListTableMetadata",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "TableMetadataList": {
+            "name": "TableMetadataList",
+            "shape_name": "TableMetadataList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxTagsCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "ResourceARN": {
+            "name": "ResourceARN",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceARN"
+        ]
+      },
+      "name": "ListTagsForResource",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListWorkGroups": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxWorkGroupsCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListWorkGroups",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "WorkGroups": {
+            "name": "WorkGroups",
+            "shape_name": "WorkGroupsList",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:athena:{region}:{account}:workgroup/{Name}",
+            "id": "Name",
+            "name": "Name",
+            "path": [
+              "WorkGroups"
+            ],
+            "type": "athena:workgroup"
+          }
+        ]
+      }
+    },
+    "PutCapacityAssignmentConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CapacityAssignments": {
+            "name": "CapacityAssignments",
+            "shape_name": "CapacityAssignmentsList",
+            "type": "list"
+          },
+          "CapacityReservationName": {
+            "name": "CapacityReservationName",
+            "shape_name": "CapacityReservationName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CapacityReservationName",
+          "CapacityAssignments"
+        ]
+      },
+      "name": "PutCapacityAssignmentConfiguration",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "StartCalculationExecution": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CalculationConfiguration": {
+            "name": "CalculationConfiguration",
+            "shape_name": "CalculationConfiguration",
+            "type": "structure"
+          },
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "IdempotencyToken",
+            "type": "string"
+          },
+          "CodeBlock": {
+            "name": "CodeBlock",
+            "shape_name": "CodeBlock",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "DescriptionString",
+            "type": "string"
+          },
+          "SessionId": {
+            "name": "SessionId",
+            "shape_name": "SessionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SessionId"
+        ]
+      },
+      "name": "StartCalculationExecution",
+      "output": {
+        "markers": null,
+        "members": {
+          "CalculationExecutionId": {
+            "name": "CalculationExecutionId",
+            "shape_name": "CalculationExecutionId",
+            "type": "string"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "CalculationExecutionState",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "StartQueryExecution": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "IdempotencyToken",
+            "type": "string"
+          },
+          "ExecutionParameters": {
+            "name": "ExecutionParameters",
+            "shape_name": "ExecutionParameters",
+            "type": "list"
+          },
+          "QueryExecutionContext": {
+            "name": "QueryExecutionContext",
+            "shape_name": "QueryExecutionContext",
+            "type": "structure"
+          },
+          "QueryString": {
+            "name": "QueryString",
+            "shape_name": "QueryString",
+            "type": "string"
+          },
+          "ResultConfiguration": {
+            "name": "ResultConfiguration",
+            "shape_name": "ResultConfiguration",
+            "type": "structure"
+          },
+          "ResultReuseConfiguration": {
+            "name": "ResultReuseConfiguration",
+            "shape_name": "ResultReuseConfiguration",
+            "type": "structure"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueryString"
+        ]
+      },
+      "name": "StartQueryExecution",
+      "output": {
+        "markers": null,
+        "members": {
+          "QueryExecutionId": {
+            "name": "QueryExecutionId",
+            "shape_name": "QueryExecutionId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "StartSession": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "IdempotencyToken",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "DescriptionString",
+            "type": "string"
+          },
+          "EngineConfiguration": {
+            "name": "EngineConfiguration",
+            "shape_name": "EngineConfiguration",
+            "type": "structure"
+          },
+          "NotebookVersion": {
+            "name": "NotebookVersion",
+            "shape_name": "NameString",
+            "type": "string"
+          },
+          "SessionIdleTimeoutInMinutes": {
+            "name": "SessionIdleTimeoutInMinutes",
+            "shape_name": "SessionIdleTimeoutInMinutes",
+            "type": "integer"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkGroup",
+          "EngineConfiguration"
+        ]
+      },
+      "name": "StartSession",
+      "output": {
+        "markers": null,
+        "members": {
+          "SessionId": {
+            "name": "SessionId",
+            "shape_name": "SessionId",
+            "type": "string"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "SessionState",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "StopCalculationExecution": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CalculationExecutionId": {
+            "name": "CalculationExecutionId",
+            "shape_name": "CalculationExecutionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CalculationExecutionId"
+        ]
+      },
+      "name": "StopCalculationExecution",
+      "output": {
+        "markers": null,
+        "members": {
+          "State": {
+            "name": "State",
+            "shape_name": "CalculationExecutionState",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "StopQueryExecution": {
+      "input": {
+        "markers": null,
+        "members": {
+          "QueryExecutionId": {
+            "name": "QueryExecutionId",
+            "shape_name": "QueryExecutionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueryExecutionId"
+        ]
+      },
+      "name": "StopQueryExecution",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceARN": {
+            "name": "ResourceARN",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceARN",
+          "Tags"
+        ]
+      },
+      "name": "TagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TerminateSession": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SessionId": {
+            "name": "SessionId",
+            "shape_name": "SessionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SessionId"
+        ]
+      },
+      "name": "TerminateSession",
+      "output": {
+        "markers": null,
+        "members": {
+          "State": {
+            "name": "State",
+            "shape_name": "SessionState",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceARN": {
+            "name": "ResourceARN",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "TagKeyList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceARN",
+          "TagKeys"
+        ]
+      },
+      "name": "UntagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateCapacityReservation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "CapacityReservationName",
+            "type": "string"
+          },
+          "TargetDpus": {
+            "name": "TargetDpus",
+            "shape_name": "TargetDpusInteger",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "TargetDpus",
+          "Name"
+        ]
+      },
+      "name": "UpdateCapacityReservation",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateDataCatalog": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "DescriptionString",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "CatalogNameString",
+            "type": "string"
+          },
+          "Parameters": {
+            "name": "Parameters",
+            "shape_name": "ParametersMap",
+            "type": "map"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "DataCatalogType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Type"
+        ]
+      },
+      "name": "UpdateDataCatalog",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateNamedQuery": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "NamedQueryDescriptionString",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "NameString",
+            "type": "string"
+          },
+          "NamedQueryId": {
+            "name": "NamedQueryId",
+            "shape_name": "NamedQueryId",
+            "type": "string"
+          },
+          "QueryString": {
+            "name": "QueryString",
+            "shape_name": "QueryString",
+            "type": "string"
+          }
+        },
+        "required": [
+          "NamedQueryId",
+          "Name",
+          "QueryString"
+        ]
+      },
+      "name": "UpdateNamedQuery",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateNotebook": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "NotebookId": {
+            "name": "NotebookId",
+            "shape_name": "NotebookId",
+            "type": "string"
+          },
+          "Payload": {
+            "name": "Payload",
+            "shape_name": "Payload",
+            "type": "string"
+          },
+          "SessionId": {
+            "name": "SessionId",
+            "shape_name": "SessionId",
+            "type": "string"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "NotebookType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "NotebookId",
+          "Payload",
+          "Type"
+        ]
+      },
+      "name": "UpdateNotebook",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateNotebookMetadata": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "NotebookName",
+            "type": "string"
+          },
+          "NotebookId": {
+            "name": "NotebookId",
+            "shape_name": "NotebookId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "NotebookId",
+          "Name"
+        ]
+      },
+      "name": "UpdateNotebookMetadata",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdatePreparedStatement": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "DescriptionString",
+            "type": "string"
+          },
+          "QueryStatement": {
+            "name": "QueryStatement",
+            "shape_name": "QueryString",
+            "type": "string"
+          },
+          "StatementName": {
+            "name": "StatementName",
+            "shape_name": "StatementName",
+            "type": "string"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StatementName",
+          "WorkGroup",
+          "QueryStatement"
+        ]
+      },
+      "name": "UpdatePreparedStatement",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateWorkGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConfigurationUpdates": {
+            "name": "ConfigurationUpdates",
+            "shape_name": "WorkGroupConfigurationUpdates",
+            "type": "structure"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "WorkGroupDescriptionString",
+            "type": "string"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "WorkGroupState",
+            "type": "string"
+          },
+          "WorkGroup": {
+            "name": "WorkGroup",
+            "shape_name": "WorkGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkGroup"
+        ]
+      },
+      "name": "UpdateWorkGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    }
+  }
+}

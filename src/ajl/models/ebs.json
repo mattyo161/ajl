@@ -1,0 +1,426 @@
+{
+  "metadata": {
+    "apiVersion": "2019-11-02",
+    "endpointPrefix": "ebs",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "serviceAbbreviation": "Amazon EBS",
+    "serviceFullName": "Amazon Elastic Block Store",
+    "serviceId": "EBS",
+    "signatureVersion": "v4",
+    "uid": "ebs-2019-11-02"
+  },
+  "name": "ebs",
+  "operations": {
+    "CompleteSnapshot": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ChangedBlocksCount": {
+            "name": "ChangedBlocksCount",
+            "shape_name": "ChangedBlocksCount",
+            "type": "integer"
+          },
+          "Checksum": {
+            "name": "Checksum",
+            "shape_name": "Checksum",
+            "type": "string"
+          },
+          "ChecksumAggregationMethod": {
+            "name": "ChecksumAggregationMethod",
+            "shape_name": "ChecksumAggregationMethod",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "SnapshotId": {
+            "name": "SnapshotId",
+            "shape_name": "SnapshotId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SnapshotId",
+          "ChangedBlocksCount"
+        ]
+      },
+      "name": "CompleteSnapshot",
+      "output": {
+        "markers": null,
+        "members": {
+          "Status": {
+            "name": "Status",
+            "shape_name": "Status",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetSnapshotBlock": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BlockIndex": {
+            "name": "BlockIndex",
+            "shape_name": "BlockIndex",
+            "type": "integer"
+          },
+          "BlockToken": {
+            "name": "BlockToken",
+            "shape_name": "BlockToken",
+            "type": "string"
+          },
+          "SnapshotId": {
+            "name": "SnapshotId",
+            "shape_name": "SnapshotId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SnapshotId",
+          "BlockIndex",
+          "BlockToken"
+        ]
+      },
+      "name": "GetSnapshotBlock",
+      "output": {
+        "markers": null,
+        "members": {
+          "BlockData": {
+            "name": "BlockData",
+            "shape_name": "BlockData",
+            "type": "blob"
+          },
+          "Checksum": {
+            "name": "Checksum",
+            "shape_name": "Checksum",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "DataLength": {
+            "name": "DataLength",
+            "shape_name": "DataLength",
+            "type": "integer"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListChangedBlocks": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FirstSnapshotId": {
+            "name": "FirstSnapshotId",
+            "shape_name": "SnapshotId",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PageToken",
+            "type": "string"
+          },
+          "SecondSnapshotId": {
+            "name": "SecondSnapshotId",
+            "shape_name": "SnapshotId",
+            "type": "string"
+          },
+          "StartingBlockIndex": {
+            "name": "StartingBlockIndex",
+            "shape_name": "BlockIndex",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "SecondSnapshotId"
+        ]
+      },
+      "name": "ListChangedBlocks",
+      "output": {
+        "markers": null,
+        "members": {
+          "BlockSize": {
+            "name": "BlockSize",
+            "shape_name": "BlockSize",
+            "type": "integer"
+          },
+          "ChangedBlocks": {
+            "name": "ChangedBlocks",
+            "shape_name": "ChangedBlocks",
+            "type": "list"
+          },
+          "ExpiryTime": {
+            "name": "ExpiryTime",
+            "shape_name": "TimeStamp",
+            "type": "timestamp"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PageToken",
+            "type": "string"
+          },
+          "VolumeSize": {
+            "name": "VolumeSize",
+            "shape_name": "VolumeSize",
+            "type": "long"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListSnapshotBlocks": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PageToken",
+            "type": "string"
+          },
+          "SnapshotId": {
+            "name": "SnapshotId",
+            "shape_name": "SnapshotId",
+            "type": "string"
+          },
+          "StartingBlockIndex": {
+            "name": "StartingBlockIndex",
+            "shape_name": "BlockIndex",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "SnapshotId"
+        ]
+      },
+      "name": "ListSnapshotBlocks",
+      "output": {
+        "markers": null,
+        "members": {
+          "BlockSize": {
+            "name": "BlockSize",
+            "shape_name": "BlockSize",
+            "type": "integer"
+          },
+          "Blocks": {
+            "name": "Blocks",
+            "shape_name": "Blocks",
+            "type": "list"
+          },
+          "ExpiryTime": {
+            "name": "ExpiryTime",
+            "shape_name": "TimeStamp",
+            "type": "timestamp"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PageToken",
+            "type": "string"
+          },
+          "VolumeSize": {
+            "name": "VolumeSize",
+            "shape_name": "VolumeSize",
+            "type": "long"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutSnapshotBlock": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BlockData": {
+            "name": "BlockData",
+            "shape_name": "BlockData",
+            "type": "blob"
+          },
+          "BlockIndex": {
+            "name": "BlockIndex",
+            "shape_name": "BlockIndex",
+            "type": "integer"
+          },
+          "Checksum": {
+            "name": "Checksum",
+            "shape_name": "Checksum",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          },
+          "DataLength": {
+            "name": "DataLength",
+            "shape_name": "DataLength",
+            "type": "integer"
+          },
+          "Progress": {
+            "name": "Progress",
+            "shape_name": "Progress",
+            "type": "integer"
+          },
+          "SnapshotId": {
+            "name": "SnapshotId",
+            "shape_name": "SnapshotId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SnapshotId",
+          "BlockIndex",
+          "BlockData",
+          "DataLength",
+          "Checksum",
+          "ChecksumAlgorithm"
+        ]
+      },
+      "name": "PutSnapshotBlock",
+      "output": {
+        "markers": null,
+        "members": {
+          "Checksum": {
+            "name": "Checksum",
+            "shape_name": "Checksum",
+            "type": "string"
+          },
+          "ChecksumAlgorithm": {
+            "name": "ChecksumAlgorithm",
+            "shape_name": "ChecksumAlgorithm",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "StartSnapshot": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientToken": {
+            "name": "ClientToken",
+            "shape_name": "IdempotencyToken",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "Description",
+            "type": "string"
+          },
+          "Encrypted": {
+            "name": "Encrypted",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "KmsKeyArn": {
+            "name": "KmsKeyArn",
+            "shape_name": "KmsKeyArn",
+            "type": "string"
+          },
+          "ParentSnapshotId": {
+            "name": "ParentSnapshotId",
+            "shape_name": "SnapshotId",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "Timeout": {
+            "name": "Timeout",
+            "shape_name": "Timeout",
+            "type": "integer"
+          },
+          "VolumeSize": {
+            "name": "VolumeSize",
+            "shape_name": "VolumeSize",
+            "type": "long"
+          }
+        },
+        "required": [
+          "VolumeSize"
+        ]
+      },
+      "name": "StartSnapshot",
+      "output": {
+        "markers": null,
+        "members": {
+          "BlockSize": {
+            "name": "BlockSize",
+            "shape_name": "BlockSize",
+            "type": "integer"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "Description",
+            "type": "string"
+          },
+          "KmsKeyArn": {
+            "name": "KmsKeyArn",
+            "shape_name": "KmsKeyArn",
+            "type": "string"
+          },
+          "OwnerId": {
+            "name": "OwnerId",
+            "shape_name": "OwnerId",
+            "type": "string"
+          },
+          "ParentSnapshotId": {
+            "name": "ParentSnapshotId",
+            "shape_name": "SnapshotId",
+            "type": "string"
+          },
+          "SnapshotId": {
+            "name": "SnapshotId",
+            "shape_name": "SnapshotId",
+            "type": "string"
+          },
+          "SseType": {
+            "name": "SseType",
+            "shape_name": "SSEType",
+            "type": "string"
+          },
+          "StartTime": {
+            "name": "StartTime",
+            "shape_name": "TimeStamp",
+            "type": "timestamp"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "Status",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "VolumeSize": {
+            "name": "VolumeSize",
+            "shape_name": "VolumeSize",
+            "type": "long"
+          }
+        },
+        "required": null
+      }
+    }
+  }
+}

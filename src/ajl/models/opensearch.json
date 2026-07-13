@@ -1,0 +1,3317 @@
+{
+  "metadata": {
+    "apiVersion": "2021-01-01",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "es",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceFullName": "Amazon OpenSearch Service",
+    "serviceId": "OpenSearch",
+    "signatureVersion": "v4",
+    "uid": "opensearch-2021-01-01"
+  },
+  "name": "opensearch",
+  "operations": {
+    "AcceptInboundConnection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConnectionId": {
+            "name": "ConnectionId",
+            "shape_name": "ConnectionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ConnectionId"
+        ]
+      },
+      "name": "AcceptInboundConnection",
+      "output": {
+        "markers": null,
+        "members": {
+          "Connection": {
+            "name": "Connection",
+            "shape_name": "InboundConnection",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "AddDataSource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DataSourceType": {
+            "name": "DataSourceType",
+            "shape_name": "DataSourceType",
+            "type": "structure"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "DataSourceDescription",
+            "type": "string"
+          },
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "DataSourceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName",
+          "Name",
+          "DataSourceType"
+        ]
+      },
+      "name": "AddDataSource",
+      "output": {
+        "markers": null,
+        "members": {
+          "Message": {
+            "name": "Message",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "AddDirectQueryDataSource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DataSourceName": {
+            "name": "DataSourceName",
+            "shape_name": "DirectQueryDataSourceName",
+            "type": "string"
+          },
+          "DataSourceType": {
+            "name": "DataSourceType",
+            "shape_name": "DirectQueryDataSourceType",
+            "type": "structure"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "DirectQueryDataSourceDescription",
+            "type": "string"
+          },
+          "OpenSearchArns": {
+            "name": "OpenSearchArns",
+            "shape_name": "DirectQueryOpenSearchARNList",
+            "type": "list"
+          },
+          "TagList": {
+            "name": "TagList",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "DataSourceName",
+          "DataSourceType",
+          "OpenSearchArns"
+        ]
+      },
+      "name": "AddDirectQueryDataSource",
+      "output": {
+        "markers": null,
+        "members": {
+          "DataSourceArn": {
+            "name": "DataSourceArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "AddTags": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ARN": {
+            "name": "ARN",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "TagList": {
+            "name": "TagList",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ARN",
+          "TagList"
+        ]
+      },
+      "name": "AddTags",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "AssociatePackage": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AssociationConfiguration": {
+            "name": "AssociationConfiguration",
+            "shape_name": "PackageAssociationConfiguration",
+            "type": "structure"
+          },
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "PackageID": {
+            "name": "PackageID",
+            "shape_name": "PackageID",
+            "type": "string"
+          },
+          "PrerequisitePackageIDList": {
+            "name": "PrerequisitePackageIDList",
+            "shape_name": "PackageIDList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "PackageID",
+          "DomainName"
+        ]
+      },
+      "name": "AssociatePackage",
+      "output": {
+        "markers": null,
+        "members": {
+          "DomainPackageDetails": {
+            "name": "DomainPackageDetails",
+            "shape_name": "DomainPackageDetails",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "AssociatePackages": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "PackageList": {
+            "name": "PackageList",
+            "shape_name": "PackageDetailsForAssociationList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "PackageList",
+          "DomainName"
+        ]
+      },
+      "name": "AssociatePackages",
+      "output": {
+        "markers": null,
+        "members": {
+          "DomainPackageDetailsList": {
+            "name": "DomainPackageDetailsList",
+            "shape_name": "DomainPackageDetailsList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "AuthorizeVpcEndpointAccess": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Account": {
+            "name": "Account",
+            "shape_name": "AWSAccount",
+            "type": "string"
+          },
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "Service": {
+            "name": "Service",
+            "shape_name": "AWSServicePrincipal",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "AuthorizeVpcEndpointAccess",
+      "output": {
+        "markers": null,
+        "members": {
+          "AuthorizedPrincipal": {
+            "name": "AuthorizedPrincipal",
+            "shape_name": "AuthorizedPrincipal",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "AuthorizedPrincipal"
+        ]
+      }
+    },
+    "CancelDomainConfigChange": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "DryRun": {
+            "name": "DryRun",
+            "shape_name": "DryRun",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "CancelDomainConfigChange",
+      "output": {
+        "markers": null,
+        "members": {
+          "CancelledChangeIds": {
+            "name": "CancelledChangeIds",
+            "shape_name": "GUIDList",
+            "type": "list"
+          },
+          "CancelledChangeProperties": {
+            "name": "CancelledChangeProperties",
+            "shape_name": "CancelledChangePropertyList",
+            "type": "list"
+          },
+          "DryRun": {
+            "name": "DryRun",
+            "shape_name": "DryRun",
+            "type": "boolean"
+          }
+        },
+        "required": null
+      }
+    },
+    "CancelServiceSoftwareUpdate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "CancelServiceSoftwareUpdate",
+      "output": {
+        "markers": null,
+        "members": {
+          "ServiceSoftwareOptions": {
+            "name": "ServiceSoftwareOptions",
+            "shape_name": "ServiceSoftwareOptions",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateApplication": {
+      "input": {
+        "markers": null,
+        "members": {
+          "appConfigs": {
+            "name": "appConfigs",
+            "shape_name": "AppConfigs",
+            "type": "list"
+          },
+          "clientToken": {
+            "name": "clientToken",
+            "shape_name": "ClientToken",
+            "type": "string"
+          },
+          "dataSources": {
+            "name": "dataSources",
+            "shape_name": "DataSources",
+            "type": "list"
+          },
+          "iamIdentityCenterOptions": {
+            "name": "iamIdentityCenterOptions",
+            "shape_name": "IamIdentityCenterOptionsInput",
+            "type": "structure"
+          },
+          "name": {
+            "name": "name",
+            "shape_name": "ApplicationName",
+            "type": "string"
+          },
+          "tagList": {
+            "name": "tagList",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "name": "CreateApplication",
+      "output": {
+        "markers": null,
+        "members": {
+          "appConfigs": {
+            "name": "appConfigs",
+            "shape_name": "AppConfigs",
+            "type": "list"
+          },
+          "arn": {
+            "name": "arn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "createdAt": {
+            "name": "createdAt",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "dataSources": {
+            "name": "dataSources",
+            "shape_name": "DataSources",
+            "type": "list"
+          },
+          "iamIdentityCenterOptions": {
+            "name": "iamIdentityCenterOptions",
+            "shape_name": "IamIdentityCenterOptions",
+            "type": "structure"
+          },
+          "id": {
+            "name": "id",
+            "shape_name": "Id",
+            "type": "string"
+          },
+          "name": {
+            "name": "name",
+            "shape_name": "ApplicationName",
+            "type": "string"
+          },
+          "tagList": {
+            "name": "tagList",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateDomain": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AIMLOptions": {
+            "name": "AIMLOptions",
+            "shape_name": "AIMLOptionsInput",
+            "type": "structure"
+          },
+          "AccessPolicies": {
+            "name": "AccessPolicies",
+            "shape_name": "PolicyDocument",
+            "type": "string"
+          },
+          "AdvancedOptions": {
+            "name": "AdvancedOptions",
+            "shape_name": "AdvancedOptions",
+            "type": "map"
+          },
+          "AdvancedSecurityOptions": {
+            "name": "AdvancedSecurityOptions",
+            "shape_name": "AdvancedSecurityOptionsInput",
+            "type": "structure"
+          },
+          "AutoTuneOptions": {
+            "name": "AutoTuneOptions",
+            "shape_name": "AutoTuneOptionsInput",
+            "type": "structure"
+          },
+          "ClusterConfig": {
+            "name": "ClusterConfig",
+            "shape_name": "ClusterConfig",
+            "type": "structure"
+          },
+          "CognitoOptions": {
+            "name": "CognitoOptions",
+            "shape_name": "CognitoOptions",
+            "type": "structure"
+          },
+          "DomainEndpointOptions": {
+            "name": "DomainEndpointOptions",
+            "shape_name": "DomainEndpointOptions",
+            "type": "structure"
+          },
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "EBSOptions": {
+            "name": "EBSOptions",
+            "shape_name": "EBSOptions",
+            "type": "structure"
+          },
+          "EncryptionAtRestOptions": {
+            "name": "EncryptionAtRestOptions",
+            "shape_name": "EncryptionAtRestOptions",
+            "type": "structure"
+          },
+          "EngineVersion": {
+            "name": "EngineVersion",
+            "shape_name": "VersionString",
+            "type": "string"
+          },
+          "IPAddressType": {
+            "name": "IPAddressType",
+            "shape_name": "IPAddressType",
+            "type": "string"
+          },
+          "IdentityCenterOptions": {
+            "name": "IdentityCenterOptions",
+            "shape_name": "IdentityCenterOptionsInput",
+            "type": "structure"
+          },
+          "LogPublishingOptions": {
+            "name": "LogPublishingOptions",
+            "shape_name": "LogPublishingOptions",
+            "type": "map"
+          },
+          "NodeToNodeEncryptionOptions": {
+            "name": "NodeToNodeEncryptionOptions",
+            "shape_name": "NodeToNodeEncryptionOptions",
+            "type": "structure"
+          },
+          "OffPeakWindowOptions": {
+            "name": "OffPeakWindowOptions",
+            "shape_name": "OffPeakWindowOptions",
+            "type": "structure"
+          },
+          "SnapshotOptions": {
+            "name": "SnapshotOptions",
+            "shape_name": "SnapshotOptions",
+            "type": "structure"
+          },
+          "SoftwareUpdateOptions": {
+            "name": "SoftwareUpdateOptions",
+            "shape_name": "SoftwareUpdateOptions",
+            "type": "structure"
+          },
+          "TagList": {
+            "name": "TagList",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "VPCOptions": {
+            "name": "VPCOptions",
+            "shape_name": "VPCOptions",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "CreateDomain",
+      "output": {
+        "markers": null,
+        "members": {
+          "DomainStatus": {
+            "name": "DomainStatus",
+            "shape_name": "DomainStatus",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateOutboundConnection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConnectionAlias": {
+            "name": "ConnectionAlias",
+            "shape_name": "ConnectionAlias",
+            "type": "string"
+          },
+          "ConnectionMode": {
+            "name": "ConnectionMode",
+            "shape_name": "ConnectionMode",
+            "type": "string"
+          },
+          "ConnectionProperties": {
+            "name": "ConnectionProperties",
+            "shape_name": "ConnectionProperties",
+            "type": "structure"
+          },
+          "LocalDomainInfo": {
+            "name": "LocalDomainInfo",
+            "shape_name": "DomainInformationContainer",
+            "type": "structure"
+          },
+          "RemoteDomainInfo": {
+            "name": "RemoteDomainInfo",
+            "shape_name": "DomainInformationContainer",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "LocalDomainInfo",
+          "RemoteDomainInfo",
+          "ConnectionAlias"
+        ]
+      },
+      "name": "CreateOutboundConnection",
+      "output": {
+        "markers": null,
+        "members": {
+          "ConnectionAlias": {
+            "name": "ConnectionAlias",
+            "shape_name": "ConnectionAlias",
+            "type": "string"
+          },
+          "ConnectionId": {
+            "name": "ConnectionId",
+            "shape_name": "ConnectionId",
+            "type": "string"
+          },
+          "ConnectionMode": {
+            "name": "ConnectionMode",
+            "shape_name": "ConnectionMode",
+            "type": "string"
+          },
+          "ConnectionProperties": {
+            "name": "ConnectionProperties",
+            "shape_name": "ConnectionProperties",
+            "type": "structure"
+          },
+          "ConnectionStatus": {
+            "name": "ConnectionStatus",
+            "shape_name": "OutboundConnectionStatus",
+            "type": "structure"
+          },
+          "LocalDomainInfo": {
+            "name": "LocalDomainInfo",
+            "shape_name": "DomainInformationContainer",
+            "type": "structure"
+          },
+          "RemoteDomainInfo": {
+            "name": "RemoteDomainInfo",
+            "shape_name": "DomainInformationContainer",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreatePackage": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EngineVersion": {
+            "name": "EngineVersion",
+            "shape_name": "EngineVersion",
+            "type": "string"
+          },
+          "PackageConfiguration": {
+            "name": "PackageConfiguration",
+            "shape_name": "PackageConfiguration",
+            "type": "structure"
+          },
+          "PackageDescription": {
+            "name": "PackageDescription",
+            "shape_name": "PackageDescription",
+            "type": "string"
+          },
+          "PackageEncryptionOptions": {
+            "name": "PackageEncryptionOptions",
+            "shape_name": "PackageEncryptionOptions",
+            "type": "structure"
+          },
+          "PackageName": {
+            "name": "PackageName",
+            "shape_name": "PackageName",
+            "type": "string"
+          },
+          "PackageSource": {
+            "name": "PackageSource",
+            "shape_name": "PackageSource",
+            "type": "structure"
+          },
+          "PackageType": {
+            "name": "PackageType",
+            "shape_name": "PackageType",
+            "type": "string"
+          },
+          "PackageVendingOptions": {
+            "name": "PackageVendingOptions",
+            "shape_name": "PackageVendingOptions",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "PackageName",
+          "PackageType",
+          "PackageSource"
+        ]
+      },
+      "name": "CreatePackage",
+      "output": {
+        "markers": null,
+        "members": {
+          "PackageDetails": {
+            "name": "PackageDetails",
+            "shape_name": "PackageDetails",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateVpcEndpoint": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientToken": {
+            "name": "ClientToken",
+            "shape_name": "ClientToken",
+            "type": "string"
+          },
+          "DomainArn": {
+            "name": "DomainArn",
+            "shape_name": "DomainArn",
+            "type": "string"
+          },
+          "VpcOptions": {
+            "name": "VpcOptions",
+            "shape_name": "VPCOptions",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "DomainArn",
+          "VpcOptions"
+        ]
+      },
+      "name": "CreateVpcEndpoint",
+      "output": {
+        "markers": null,
+        "members": {
+          "VpcEndpoint": {
+            "name": "VpcEndpoint",
+            "shape_name": "VpcEndpoint",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "VpcEndpoint"
+        ]
+      }
+    },
+    "DeleteApplication": {
+      "input": {
+        "markers": null,
+        "members": {
+          "id": {
+            "name": "id",
+            "shape_name": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "name": "DeleteApplication",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteDataSource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "DataSourceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName",
+          "Name"
+        ]
+      },
+      "name": "DeleteDataSource",
+      "output": {
+        "markers": null,
+        "members": {
+          "Message": {
+            "name": "Message",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteDirectQueryDataSource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DataSourceName": {
+            "name": "DataSourceName",
+            "shape_name": "DirectQueryDataSourceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DataSourceName"
+        ]
+      },
+      "name": "DeleteDirectQueryDataSource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteDomain": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "DeleteDomain",
+      "output": {
+        "markers": null,
+        "members": {
+          "DomainStatus": {
+            "name": "DomainStatus",
+            "shape_name": "DomainStatus",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteInboundConnection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConnectionId": {
+            "name": "ConnectionId",
+            "shape_name": "ConnectionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ConnectionId"
+        ]
+      },
+      "name": "DeleteInboundConnection",
+      "output": {
+        "markers": null,
+        "members": {
+          "Connection": {
+            "name": "Connection",
+            "shape_name": "InboundConnection",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteOutboundConnection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConnectionId": {
+            "name": "ConnectionId",
+            "shape_name": "ConnectionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ConnectionId"
+        ]
+      },
+      "name": "DeleteOutboundConnection",
+      "output": {
+        "markers": null,
+        "members": {
+          "Connection": {
+            "name": "Connection",
+            "shape_name": "OutboundConnection",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeletePackage": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PackageID": {
+            "name": "PackageID",
+            "shape_name": "PackageID",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PackageID"
+        ]
+      },
+      "name": "DeletePackage",
+      "output": {
+        "markers": null,
+        "members": {
+          "PackageDetails": {
+            "name": "PackageDetails",
+            "shape_name": "PackageDetails",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteVpcEndpoint": {
+      "input": {
+        "markers": null,
+        "members": {
+          "VpcEndpointId": {
+            "name": "VpcEndpointId",
+            "shape_name": "VpcEndpointId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "VpcEndpointId"
+        ]
+      },
+      "name": "DeleteVpcEndpoint",
+      "output": {
+        "markers": null,
+        "members": {
+          "VpcEndpointSummary": {
+            "name": "VpcEndpointSummary",
+            "shape_name": "VpcEndpointSummary",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "VpcEndpointSummary"
+        ]
+      }
+    },
+    "DescribeDomain": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "DescribeDomain",
+      "output": {
+        "markers": null,
+        "members": {
+          "DomainStatus": {
+            "name": "DomainStatus",
+            "shape_name": "DomainStatus",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "DomainStatus"
+        ]
+      }
+    },
+    "DescribeDomainAutoTunes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "DescribeDomainAutoTunes",
+      "output": {
+        "markers": null,
+        "members": {
+          "AutoTunes": {
+            "name": "AutoTunes",
+            "shape_name": "AutoTuneList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeDomainChangeProgress": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ChangeId": {
+            "name": "ChangeId",
+            "shape_name": "GUID",
+            "type": "string"
+          },
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "DescribeDomainChangeProgress",
+      "output": {
+        "markers": null,
+        "members": {
+          "ChangeProgressStatus": {
+            "name": "ChangeProgressStatus",
+            "shape_name": "ChangeProgressStatusDetails",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeDomainConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "DescribeDomainConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "DomainConfig": {
+            "name": "DomainConfig",
+            "shape_name": "DomainConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "DomainConfig"
+        ]
+      }
+    },
+    "DescribeDomainHealth": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "DescribeDomainHealth",
+      "output": {
+        "markers": null,
+        "members": {
+          "ActiveAvailabilityZoneCount": {
+            "name": "ActiveAvailabilityZoneCount",
+            "shape_name": "NumberOfAZs",
+            "type": "string"
+          },
+          "AvailabilityZoneCount": {
+            "name": "AvailabilityZoneCount",
+            "shape_name": "NumberOfAZs",
+            "type": "string"
+          },
+          "ClusterHealth": {
+            "name": "ClusterHealth",
+            "shape_name": "DomainHealth",
+            "type": "string"
+          },
+          "DataNodeCount": {
+            "name": "DataNodeCount",
+            "shape_name": "NumberOfNodes",
+            "type": "string"
+          },
+          "DedicatedMaster": {
+            "name": "DedicatedMaster",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "DomainState": {
+            "name": "DomainState",
+            "shape_name": "DomainState",
+            "type": "string"
+          },
+          "EnvironmentInformation": {
+            "name": "EnvironmentInformation",
+            "shape_name": "EnvironmentInfoList",
+            "type": "list"
+          },
+          "MasterEligibleNodeCount": {
+            "name": "MasterEligibleNodeCount",
+            "shape_name": "NumberOfNodes",
+            "type": "string"
+          },
+          "MasterNode": {
+            "name": "MasterNode",
+            "shape_name": "MasterNodeStatus",
+            "type": "string"
+          },
+          "StandByAvailabilityZoneCount": {
+            "name": "StandByAvailabilityZoneCount",
+            "shape_name": "NumberOfAZs",
+            "type": "string"
+          },
+          "TotalShards": {
+            "name": "TotalShards",
+            "shape_name": "NumberOfShards",
+            "type": "string"
+          },
+          "TotalUnAssignedShards": {
+            "name": "TotalUnAssignedShards",
+            "shape_name": "NumberOfShards",
+            "type": "string"
+          },
+          "WarmNodeCount": {
+            "name": "WarmNodeCount",
+            "shape_name": "NumberOfNodes",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeDomainNodes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "DescribeDomainNodes",
+      "output": {
+        "markers": null,
+        "members": {
+          "DomainNodesStatusList": {
+            "name": "DomainNodesStatusList",
+            "shape_name": "DomainNodesStatusList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeDomains": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainNames": {
+            "name": "DomainNames",
+            "shape_name": "DomainNameList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "DomainNames"
+        ]
+      },
+      "name": "DescribeDomains",
+      "output": {
+        "markers": null,
+        "members": {
+          "DomainStatusList": {
+            "name": "DomainStatusList",
+            "shape_name": "DomainStatusList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "DomainStatusList"
+        ],
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "DomainName",
+            "name": "DomainName",
+            "path": [
+              "DomainStatusList"
+            ],
+            "type": "es:domain"
+          }
+        ]
+      }
+    },
+    "DescribeDryRunProgress": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "DryRunId": {
+            "name": "DryRunId",
+            "shape_name": "GUID",
+            "type": "string"
+          },
+          "LoadDryRunConfig": {
+            "name": "LoadDryRunConfig",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "DescribeDryRunProgress",
+      "output": {
+        "markers": null,
+        "members": {
+          "DryRunConfig": {
+            "name": "DryRunConfig",
+            "shape_name": "DomainStatus",
+            "type": "structure"
+          },
+          "DryRunProgressStatus": {
+            "name": "DryRunProgressStatus",
+            "shape_name": "DryRunProgressStatus",
+            "type": "structure"
+          },
+          "DryRunResults": {
+            "name": "DryRunResults",
+            "shape_name": "DryRunResults",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeInboundConnections": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "FilterList",
+            "type": "list"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeInboundConnections",
+      "output": {
+        "markers": null,
+        "members": {
+          "Connections": {
+            "name": "Connections",
+            "shape_name": "InboundConnections",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeInstanceTypeLimits": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "EngineVersion": {
+            "name": "EngineVersion",
+            "shape_name": "VersionString",
+            "type": "string"
+          },
+          "InstanceType": {
+            "name": "InstanceType",
+            "shape_name": "OpenSearchPartitionInstanceType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "InstanceType",
+          "EngineVersion"
+        ]
+      },
+      "name": "DescribeInstanceTypeLimits",
+      "output": {
+        "markers": null,
+        "members": {
+          "LimitsByRole": {
+            "name": "LimitsByRole",
+            "shape_name": "LimitsByRole",
+            "type": "map"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeOutboundConnections": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "FilterList",
+            "type": "list"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeOutboundConnections",
+      "output": {
+        "markers": null,
+        "members": {
+          "Connections": {
+            "name": "Connections",
+            "shape_name": "OutboundConnections",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribePackages": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "DescribePackagesFilterList",
+            "type": "list"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribePackages",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PackageDetailsList": {
+            "name": "PackageDetailsList",
+            "shape_name": "PackageDetailsList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeReservedInstanceOfferings": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "ReservedInstanceOfferingId": {
+            "name": "ReservedInstanceOfferingId",
+            "shape_name": "GUID",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeReservedInstanceOfferings",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "ReservedInstanceOfferings": {
+            "name": "ReservedInstanceOfferings",
+            "shape_name": "ReservedInstanceOfferingList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeReservedInstances": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "ReservedInstanceId": {
+            "name": "ReservedInstanceId",
+            "shape_name": "GUID",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeReservedInstances",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ReservedInstances": {
+            "name": "ReservedInstances",
+            "shape_name": "ReservedInstanceList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeVpcEndpoints": {
+      "input": {
+        "markers": null,
+        "members": {
+          "VpcEndpointIds": {
+            "name": "VpcEndpointIds",
+            "shape_name": "VpcEndpointIdList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "VpcEndpointIds"
+        ]
+      },
+      "name": "DescribeVpcEndpoints",
+      "output": {
+        "markers": null,
+        "members": {
+          "VpcEndpointErrors": {
+            "name": "VpcEndpointErrors",
+            "shape_name": "VpcEndpointErrorList",
+            "type": "list"
+          },
+          "VpcEndpoints": {
+            "name": "VpcEndpoints",
+            "shape_name": "VpcEndpoints",
+            "type": "list"
+          }
+        },
+        "required": [
+          "VpcEndpoints",
+          "VpcEndpointErrors"
+        ]
+      }
+    },
+    "DissociatePackage": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "PackageID": {
+            "name": "PackageID",
+            "shape_name": "PackageID",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PackageID",
+          "DomainName"
+        ]
+      },
+      "name": "DissociatePackage",
+      "output": {
+        "markers": null,
+        "members": {
+          "DomainPackageDetails": {
+            "name": "DomainPackageDetails",
+            "shape_name": "DomainPackageDetails",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DissociatePackages": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "PackageList": {
+            "name": "PackageList",
+            "shape_name": "PackageIDList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "PackageList",
+          "DomainName"
+        ]
+      },
+      "name": "DissociatePackages",
+      "output": {
+        "markers": null,
+        "members": {
+          "DomainPackageDetailsList": {
+            "name": "DomainPackageDetailsList",
+            "shape_name": "DomainPackageDetailsList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetApplication": {
+      "input": {
+        "markers": null,
+        "members": {
+          "id": {
+            "name": "id",
+            "shape_name": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "name": "GetApplication",
+      "output": {
+        "markers": null,
+        "members": {
+          "appConfigs": {
+            "name": "appConfigs",
+            "shape_name": "AppConfigs",
+            "type": "list"
+          },
+          "arn": {
+            "name": "arn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "createdAt": {
+            "name": "createdAt",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "dataSources": {
+            "name": "dataSources",
+            "shape_name": "DataSources",
+            "type": "list"
+          },
+          "endpoint": {
+            "name": "endpoint",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "iamIdentityCenterOptions": {
+            "name": "iamIdentityCenterOptions",
+            "shape_name": "IamIdentityCenterOptions",
+            "type": "structure"
+          },
+          "id": {
+            "name": "id",
+            "shape_name": "Id",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "name": "lastUpdatedAt",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "name": {
+            "name": "name",
+            "shape_name": "ApplicationName",
+            "type": "string"
+          },
+          "status": {
+            "name": "status",
+            "shape_name": "ApplicationStatus",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetCompatibleVersions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "GetCompatibleVersions",
+      "output": {
+        "markers": null,
+        "members": {
+          "CompatibleVersions": {
+            "name": "CompatibleVersions",
+            "shape_name": "CompatibleVersionsList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetDataSource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "DataSourceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName",
+          "Name"
+        ]
+      },
+      "name": "GetDataSource",
+      "output": {
+        "markers": null,
+        "members": {
+          "DataSourceType": {
+            "name": "DataSourceType",
+            "shape_name": "DataSourceType",
+            "type": "structure"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "DataSourceDescription",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "DataSourceName",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "DataSourceStatus",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetDirectQueryDataSource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DataSourceName": {
+            "name": "DataSourceName",
+            "shape_name": "DirectQueryDataSourceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DataSourceName"
+        ]
+      },
+      "name": "GetDirectQueryDataSource",
+      "output": {
+        "markers": null,
+        "members": {
+          "DataSourceArn": {
+            "name": "DataSourceArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DataSourceName": {
+            "name": "DataSourceName",
+            "shape_name": "DirectQueryDataSourceName",
+            "type": "string"
+          },
+          "DataSourceType": {
+            "name": "DataSourceType",
+            "shape_name": "DirectQueryDataSourceType",
+            "type": "structure"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "DirectQueryDataSourceDescription",
+            "type": "string"
+          },
+          "OpenSearchArns": {
+            "name": "OpenSearchArns",
+            "shape_name": "DirectQueryOpenSearchARNList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetDomainMaintenanceStatus": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "MaintenanceId": {
+            "name": "MaintenanceId",
+            "shape_name": "RequestId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName",
+          "MaintenanceId"
+        ]
+      },
+      "name": "GetDomainMaintenanceStatus",
+      "output": {
+        "markers": null,
+        "members": {
+          "Action": {
+            "name": "Action",
+            "shape_name": "MaintenanceType",
+            "type": "string"
+          },
+          "CreatedAt": {
+            "name": "CreatedAt",
+            "shape_name": "UpdateTimestamp",
+            "type": "timestamp"
+          },
+          "NodeId": {
+            "name": "NodeId",
+            "shape_name": "NodeId",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "MaintenanceStatus",
+            "type": "string"
+          },
+          "StatusMessage": {
+            "name": "StatusMessage",
+            "shape_name": "MaintenanceStatusMessage",
+            "type": "string"
+          },
+          "UpdatedAt": {
+            "name": "UpdatedAt",
+            "shape_name": "UpdateTimestamp",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetPackageVersionHistory": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "PackageID": {
+            "name": "PackageID",
+            "shape_name": "PackageID",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PackageID"
+        ]
+      },
+      "name": "GetPackageVersionHistory",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PackageID": {
+            "name": "PackageID",
+            "shape_name": "PackageID",
+            "type": "string"
+          },
+          "PackageVersionHistoryList": {
+            "name": "PackageVersionHistoryList",
+            "shape_name": "PackageVersionHistoryList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetUpgradeHistory": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "GetUpgradeHistory",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "UpgradeHistories": {
+            "name": "UpgradeHistories",
+            "shape_name": "UpgradeHistoryList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetUpgradeStatus": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "GetUpgradeStatus",
+      "output": {
+        "markers": null,
+        "members": {
+          "StepStatus": {
+            "name": "StepStatus",
+            "shape_name": "UpgradeStatus",
+            "type": "string"
+          },
+          "UpgradeName": {
+            "name": "UpgradeName",
+            "shape_name": "UpgradeName",
+            "type": "string"
+          },
+          "UpgradeStep": {
+            "name": "UpgradeStep",
+            "shape_name": "UpgradeStep",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListApplications": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "statuses": {
+            "name": "statuses",
+            "shape_name": "ApplicationStatuses",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "ListApplications",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "ApplicationSummaries": {
+            "name": "ApplicationSummaries",
+            "shape_name": "ApplicationSummaries",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListDataSources": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "ListDataSources",
+      "output": {
+        "markers": null,
+        "members": {
+          "DataSources": {
+            "name": "DataSources",
+            "shape_name": "DataSourceList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListDirectQueryDataSources": {
+      "input": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListDirectQueryDataSources",
+      "output": {
+        "markers": null,
+        "members": {
+          "DirectQueryDataSources": {
+            "name": "DirectQueryDataSources",
+            "shape_name": "DirectQueryDataSourceList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListDomainMaintenances": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Action": {
+            "name": "Action",
+            "shape_name": "MaintenanceType",
+            "type": "string"
+          },
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "MaintenanceStatus",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "ListDomainMaintenances",
+      "output": {
+        "markers": null,
+        "members": {
+          "DomainMaintenances": {
+            "name": "DomainMaintenances",
+            "shape_name": "DomainMaintenanceList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListDomainNames": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EngineType": {
+            "name": "EngineType",
+            "shape_name": "EngineType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListDomainNames",
+      "output": {
+        "markers": null,
+        "members": {
+          "DomainNames": {
+            "name": "DomainNames",
+            "shape_name": "DomainInfoList",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:es:{region}:{account}:domain/{DomainName}",
+            "id": "DomainName",
+            "name": "DomainName",
+            "path": [
+              "DomainNames"
+            ],
+            "type": "es:domain"
+          }
+        ]
+      }
+    },
+    "ListDomainsForPackage": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "PackageID": {
+            "name": "PackageID",
+            "shape_name": "PackageID",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PackageID"
+        ]
+      },
+      "name": "ListDomainsForPackage",
+      "output": {
+        "markers": null,
+        "members": {
+          "DomainPackageDetailsList": {
+            "name": "DomainPackageDetailsList",
+            "shape_name": "DomainPackageDetailsList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListInstanceTypeDetails": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "EngineVersion": {
+            "name": "EngineVersion",
+            "shape_name": "VersionString",
+            "type": "string"
+          },
+          "InstanceType": {
+            "name": "InstanceType",
+            "shape_name": "InstanceTypeString",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "RetrieveAZs": {
+            "name": "RetrieveAZs",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "EngineVersion"
+        ]
+      },
+      "name": "ListInstanceTypeDetails",
+      "output": {
+        "markers": null,
+        "members": {
+          "InstanceTypeDetails": {
+            "name": "InstanceTypeDetails",
+            "shape_name": "InstanceTypeDetailsList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListPackagesForDomain": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "ListPackagesForDomain",
+      "output": {
+        "markers": null,
+        "members": {
+          "DomainPackageDetailsList": {
+            "name": "DomainPackageDetailsList",
+            "shape_name": "DomainPackageDetailsList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListScheduledActions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "ListScheduledActions",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "ScheduledActions": {
+            "name": "ScheduledActions",
+            "shape_name": "ScheduledActionsList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTags": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ARN": {
+            "name": "ARN",
+            "shape_name": "ARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ARN"
+        ]
+      },
+      "name": "ListTags",
+      "output": {
+        "markers": null,
+        "members": {
+          "TagList": {
+            "name": "TagList",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListVersions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListVersions",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Versions": {
+            "name": "Versions",
+            "shape_name": "VersionList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListVpcEndpointAccess": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "ListVpcEndpointAccess",
+      "output": {
+        "markers": null,
+        "members": {
+          "AuthorizedPrincipalList": {
+            "name": "AuthorizedPrincipalList",
+            "shape_name": "AuthorizedPrincipalList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AuthorizedPrincipalList",
+          "NextToken"
+        ]
+      }
+    },
+    "ListVpcEndpoints": {
+      "input": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListVpcEndpoints",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "VpcEndpointSummaryList": {
+            "name": "VpcEndpointSummaryList",
+            "shape_name": "VpcEndpointSummaryList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "VpcEndpointSummaryList",
+          "NextToken"
+        ]
+      }
+    },
+    "ListVpcEndpointsForDomain": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "ListVpcEndpointsForDomain",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "VpcEndpointSummaryList": {
+            "name": "VpcEndpointSummaryList",
+            "shape_name": "VpcEndpointSummaryList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "VpcEndpointSummaryList",
+          "NextToken"
+        ]
+      }
+    },
+    "PurchaseReservedInstanceOffering": {
+      "input": {
+        "markers": null,
+        "members": {
+          "InstanceCount": {
+            "name": "InstanceCount",
+            "shape_name": "InstanceCount",
+            "type": "integer"
+          },
+          "ReservationName": {
+            "name": "ReservationName",
+            "shape_name": "ReservationToken",
+            "type": "string"
+          },
+          "ReservedInstanceOfferingId": {
+            "name": "ReservedInstanceOfferingId",
+            "shape_name": "GUID",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ReservedInstanceOfferingId",
+          "ReservationName"
+        ]
+      },
+      "name": "PurchaseReservedInstanceOffering",
+      "output": {
+        "markers": null,
+        "members": {
+          "ReservationName": {
+            "name": "ReservationName",
+            "shape_name": "ReservationToken",
+            "type": "string"
+          },
+          "ReservedInstanceId": {
+            "name": "ReservedInstanceId",
+            "shape_name": "GUID",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "RejectInboundConnection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConnectionId": {
+            "name": "ConnectionId",
+            "shape_name": "ConnectionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ConnectionId"
+        ]
+      },
+      "name": "RejectInboundConnection",
+      "output": {
+        "markers": null,
+        "members": {
+          "Connection": {
+            "name": "Connection",
+            "shape_name": "InboundConnection",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "RemoveTags": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ARN": {
+            "name": "ARN",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "StringList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ARN",
+          "TagKeys"
+        ]
+      },
+      "name": "RemoveTags",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RevokeVpcEndpointAccess": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Account": {
+            "name": "Account",
+            "shape_name": "AWSAccount",
+            "type": "string"
+          },
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "Service": {
+            "name": "Service",
+            "shape_name": "AWSServicePrincipal",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "RevokeVpcEndpointAccess",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "StartDomainMaintenance": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Action": {
+            "name": "Action",
+            "shape_name": "MaintenanceType",
+            "type": "string"
+          },
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "NodeId": {
+            "name": "NodeId",
+            "shape_name": "NodeId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName",
+          "Action"
+        ]
+      },
+      "name": "StartDomainMaintenance",
+      "output": {
+        "markers": null,
+        "members": {
+          "MaintenanceId": {
+            "name": "MaintenanceId",
+            "shape_name": "RequestId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "StartServiceSoftwareUpdate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DesiredStartTime": {
+            "name": "DesiredStartTime",
+            "shape_name": "Long",
+            "type": "long"
+          },
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "ScheduleAt": {
+            "name": "ScheduleAt",
+            "shape_name": "ScheduleAt",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "StartServiceSoftwareUpdate",
+      "output": {
+        "markers": null,
+        "members": {
+          "ServiceSoftwareOptions": {
+            "name": "ServiceSoftwareOptions",
+            "shape_name": "ServiceSoftwareOptions",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateApplication": {
+      "input": {
+        "markers": null,
+        "members": {
+          "appConfigs": {
+            "name": "appConfigs",
+            "shape_name": "AppConfigs",
+            "type": "list"
+          },
+          "dataSources": {
+            "name": "dataSources",
+            "shape_name": "DataSources",
+            "type": "list"
+          },
+          "id": {
+            "name": "id",
+            "shape_name": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "name": "UpdateApplication",
+      "output": {
+        "markers": null,
+        "members": {
+          "appConfigs": {
+            "name": "appConfigs",
+            "shape_name": "AppConfigs",
+            "type": "list"
+          },
+          "arn": {
+            "name": "arn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "createdAt": {
+            "name": "createdAt",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "dataSources": {
+            "name": "dataSources",
+            "shape_name": "DataSources",
+            "type": "list"
+          },
+          "iamIdentityCenterOptions": {
+            "name": "iamIdentityCenterOptions",
+            "shape_name": "IamIdentityCenterOptions",
+            "type": "structure"
+          },
+          "id": {
+            "name": "id",
+            "shape_name": "Id",
+            "type": "string"
+          },
+          "lastUpdatedAt": {
+            "name": "lastUpdatedAt",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "name": {
+            "name": "name",
+            "shape_name": "ApplicationName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateDataSource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DataSourceType": {
+            "name": "DataSourceType",
+            "shape_name": "DataSourceType",
+            "type": "structure"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "DataSourceDescription",
+            "type": "string"
+          },
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "DataSourceName",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "DataSourceStatus",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName",
+          "Name",
+          "DataSourceType"
+        ]
+      },
+      "name": "UpdateDataSource",
+      "output": {
+        "markers": null,
+        "members": {
+          "Message": {
+            "name": "Message",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateDirectQueryDataSource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DataSourceName": {
+            "name": "DataSourceName",
+            "shape_name": "DirectQueryDataSourceName",
+            "type": "string"
+          },
+          "DataSourceType": {
+            "name": "DataSourceType",
+            "shape_name": "DirectQueryDataSourceType",
+            "type": "structure"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "DirectQueryDataSourceDescription",
+            "type": "string"
+          },
+          "OpenSearchArns": {
+            "name": "OpenSearchArns",
+            "shape_name": "DirectQueryOpenSearchARNList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "DataSourceName",
+          "DataSourceType",
+          "OpenSearchArns"
+        ]
+      },
+      "name": "UpdateDirectQueryDataSource",
+      "output": {
+        "markers": null,
+        "members": {
+          "DataSourceArn": {
+            "name": "DataSourceArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateDomainConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AIMLOptions": {
+            "name": "AIMLOptions",
+            "shape_name": "AIMLOptionsInput",
+            "type": "structure"
+          },
+          "AccessPolicies": {
+            "name": "AccessPolicies",
+            "shape_name": "PolicyDocument",
+            "type": "string"
+          },
+          "AdvancedOptions": {
+            "name": "AdvancedOptions",
+            "shape_name": "AdvancedOptions",
+            "type": "map"
+          },
+          "AdvancedSecurityOptions": {
+            "name": "AdvancedSecurityOptions",
+            "shape_name": "AdvancedSecurityOptionsInput",
+            "type": "structure"
+          },
+          "AutoTuneOptions": {
+            "name": "AutoTuneOptions",
+            "shape_name": "AutoTuneOptions",
+            "type": "structure"
+          },
+          "ClusterConfig": {
+            "name": "ClusterConfig",
+            "shape_name": "ClusterConfig",
+            "type": "structure"
+          },
+          "CognitoOptions": {
+            "name": "CognitoOptions",
+            "shape_name": "CognitoOptions",
+            "type": "structure"
+          },
+          "DomainEndpointOptions": {
+            "name": "DomainEndpointOptions",
+            "shape_name": "DomainEndpointOptions",
+            "type": "structure"
+          },
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "DryRun": {
+            "name": "DryRun",
+            "shape_name": "DryRun",
+            "type": "boolean"
+          },
+          "DryRunMode": {
+            "name": "DryRunMode",
+            "shape_name": "DryRunMode",
+            "type": "string"
+          },
+          "EBSOptions": {
+            "name": "EBSOptions",
+            "shape_name": "EBSOptions",
+            "type": "structure"
+          },
+          "EncryptionAtRestOptions": {
+            "name": "EncryptionAtRestOptions",
+            "shape_name": "EncryptionAtRestOptions",
+            "type": "structure"
+          },
+          "IPAddressType": {
+            "name": "IPAddressType",
+            "shape_name": "IPAddressType",
+            "type": "string"
+          },
+          "IdentityCenterOptions": {
+            "name": "IdentityCenterOptions",
+            "shape_name": "IdentityCenterOptionsInput",
+            "type": "structure"
+          },
+          "LogPublishingOptions": {
+            "name": "LogPublishingOptions",
+            "shape_name": "LogPublishingOptions",
+            "type": "map"
+          },
+          "NodeToNodeEncryptionOptions": {
+            "name": "NodeToNodeEncryptionOptions",
+            "shape_name": "NodeToNodeEncryptionOptions",
+            "type": "structure"
+          },
+          "OffPeakWindowOptions": {
+            "name": "OffPeakWindowOptions",
+            "shape_name": "OffPeakWindowOptions",
+            "type": "structure"
+          },
+          "SnapshotOptions": {
+            "name": "SnapshotOptions",
+            "shape_name": "SnapshotOptions",
+            "type": "structure"
+          },
+          "SoftwareUpdateOptions": {
+            "name": "SoftwareUpdateOptions",
+            "shape_name": "SoftwareUpdateOptions",
+            "type": "structure"
+          },
+          "VPCOptions": {
+            "name": "VPCOptions",
+            "shape_name": "VPCOptions",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "UpdateDomainConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "DomainConfig": {
+            "name": "DomainConfig",
+            "shape_name": "DomainConfig",
+            "type": "structure"
+          },
+          "DryRunProgressStatus": {
+            "name": "DryRunProgressStatus",
+            "shape_name": "DryRunProgressStatus",
+            "type": "structure"
+          },
+          "DryRunResults": {
+            "name": "DryRunResults",
+            "shape_name": "DryRunResults",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "DomainConfig"
+        ]
+      }
+    },
+    "UpdatePackage": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CommitMessage": {
+            "name": "CommitMessage",
+            "shape_name": "CommitMessage",
+            "type": "string"
+          },
+          "PackageConfiguration": {
+            "name": "PackageConfiguration",
+            "shape_name": "PackageConfiguration",
+            "type": "structure"
+          },
+          "PackageDescription": {
+            "name": "PackageDescription",
+            "shape_name": "PackageDescription",
+            "type": "string"
+          },
+          "PackageEncryptionOptions": {
+            "name": "PackageEncryptionOptions",
+            "shape_name": "PackageEncryptionOptions",
+            "type": "structure"
+          },
+          "PackageID": {
+            "name": "PackageID",
+            "shape_name": "PackageID",
+            "type": "string"
+          },
+          "PackageSource": {
+            "name": "PackageSource",
+            "shape_name": "PackageSource",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "PackageID",
+          "PackageSource"
+        ]
+      },
+      "name": "UpdatePackage",
+      "output": {
+        "markers": null,
+        "members": {
+          "PackageDetails": {
+            "name": "PackageDetails",
+            "shape_name": "PackageDetails",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdatePackageScope": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Operation": {
+            "name": "Operation",
+            "shape_name": "PackageScopeOperationEnum",
+            "type": "string"
+          },
+          "PackageID": {
+            "name": "PackageID",
+            "shape_name": "PackageID",
+            "type": "string"
+          },
+          "PackageUserList": {
+            "name": "PackageUserList",
+            "shape_name": "PackageUserList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "PackageID",
+          "Operation",
+          "PackageUserList"
+        ]
+      },
+      "name": "UpdatePackageScope",
+      "output": {
+        "markers": null,
+        "members": {
+          "Operation": {
+            "name": "Operation",
+            "shape_name": "PackageScopeOperationEnum",
+            "type": "string"
+          },
+          "PackageID": {
+            "name": "PackageID",
+            "shape_name": "PackageID",
+            "type": "string"
+          },
+          "PackageUserList": {
+            "name": "PackageUserList",
+            "shape_name": "PackageUserList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateScheduledAction": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ActionID": {
+            "name": "ActionID",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ActionType": {
+            "name": "ActionType",
+            "shape_name": "ActionType",
+            "type": "string"
+          },
+          "DesiredStartTime": {
+            "name": "DesiredStartTime",
+            "shape_name": "Long",
+            "type": "long"
+          },
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "ScheduleAt": {
+            "name": "ScheduleAt",
+            "shape_name": "ScheduleAt",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName",
+          "ActionID",
+          "ActionType",
+          "ScheduleAt"
+        ]
+      },
+      "name": "UpdateScheduledAction",
+      "output": {
+        "markers": null,
+        "members": {
+          "ScheduledAction": {
+            "name": "ScheduledAction",
+            "shape_name": "ScheduledAction",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateVpcEndpoint": {
+      "input": {
+        "markers": null,
+        "members": {
+          "VpcEndpointId": {
+            "name": "VpcEndpointId",
+            "shape_name": "VpcEndpointId",
+            "type": "string"
+          },
+          "VpcOptions": {
+            "name": "VpcOptions",
+            "shape_name": "VPCOptions",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "VpcEndpointId",
+          "VpcOptions"
+        ]
+      },
+      "name": "UpdateVpcEndpoint",
+      "output": {
+        "markers": null,
+        "members": {
+          "VpcEndpoint": {
+            "name": "VpcEndpoint",
+            "shape_name": "VpcEndpoint",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "VpcEndpoint"
+        ]
+      }
+    },
+    "UpgradeDomain": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AdvancedOptions": {
+            "name": "AdvancedOptions",
+            "shape_name": "AdvancedOptions",
+            "type": "map"
+          },
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "PerformCheckOnly": {
+            "name": "PerformCheckOnly",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "TargetVersion": {
+            "name": "TargetVersion",
+            "shape_name": "VersionString",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName",
+          "TargetVersion"
+        ]
+      },
+      "name": "UpgradeDomain",
+      "output": {
+        "markers": null,
+        "members": {
+          "AdvancedOptions": {
+            "name": "AdvancedOptions",
+            "shape_name": "AdvancedOptions",
+            "type": "map"
+          },
+          "ChangeProgressDetails": {
+            "name": "ChangeProgressDetails",
+            "shape_name": "ChangeProgressDetails",
+            "type": "structure"
+          },
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainName",
+            "type": "string"
+          },
+          "PerformCheckOnly": {
+            "name": "PerformCheckOnly",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "TargetVersion": {
+            "name": "TargetVersion",
+            "shape_name": "VersionString",
+            "type": "string"
+          },
+          "UpgradeId": {
+            "name": "UpgradeId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    }
+  }
+}

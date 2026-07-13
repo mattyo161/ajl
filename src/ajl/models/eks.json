@@ -1,0 +1,2714 @@
+{
+  "metadata": {
+    "apiVersion": "2017-11-01",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "eks",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceAbbreviation": "Amazon EKS",
+    "serviceFullName": "Amazon Elastic Kubernetes Service",
+    "serviceId": "EKS",
+    "signatureVersion": "v4",
+    "signingName": "eks",
+    "uid": "eks-2017-11-01"
+  },
+  "name": "eks",
+  "operations": {
+    "AssociateAccessPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "accessScope": {
+            "name": "accessScope",
+            "shape_name": "AccessScope",
+            "type": "structure"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "policyArn": {
+            "name": "policyArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "principalArn": {
+            "name": "principalArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName",
+          "principalArn",
+          "policyArn",
+          "accessScope"
+        ]
+      },
+      "name": "AssociateAccessPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "associatedAccessPolicy": {
+            "name": "associatedAccessPolicy",
+            "shape_name": "AssociatedAccessPolicy",
+            "type": "structure"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "principalArn": {
+            "name": "principalArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "AssociateEncryptionConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clientRequestToken": {
+            "name": "clientRequestToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "encryptionConfig": {
+            "name": "encryptionConfig",
+            "shape_name": "EncryptionConfigList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "clusterName",
+          "encryptionConfig"
+        ]
+      },
+      "name": "AssociateEncryptionConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "update": {
+            "name": "update",
+            "shape_name": "Update",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "AssociateIdentityProviderConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clientRequestToken": {
+            "name": "clientRequestToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "oidc": {
+            "name": "oidc",
+            "shape_name": "OidcIdentityProviderConfigRequest",
+            "type": "structure"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "TagMap",
+            "type": "map"
+          }
+        },
+        "required": [
+          "clusterName",
+          "oidc"
+        ]
+      },
+      "name": "AssociateIdentityProviderConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "tags": {
+            "name": "tags",
+            "shape_name": "TagMap",
+            "type": "map"
+          },
+          "update": {
+            "name": "update",
+            "shape_name": "Update",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateAccessEntry": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clientRequestToken": {
+            "name": "clientRequestToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "kubernetesGroups": {
+            "name": "kubernetesGroups",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "principalArn": {
+            "name": "principalArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "TagMap",
+            "type": "map"
+          },
+          "type": {
+            "name": "type",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "username": {
+            "name": "username",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName",
+          "principalArn"
+        ]
+      },
+      "name": "CreateAccessEntry",
+      "output": {
+        "markers": null,
+        "members": {
+          "accessEntry": {
+            "name": "accessEntry",
+            "shape_name": "AccessEntry",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateAddon": {
+      "input": {
+        "markers": null,
+        "members": {
+          "addonName": {
+            "name": "addonName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "addonVersion": {
+            "name": "addonVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clientRequestToken": {
+            "name": "clientRequestToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "ClusterName",
+            "type": "string"
+          },
+          "configurationValues": {
+            "name": "configurationValues",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "podIdentityAssociations": {
+            "name": "podIdentityAssociations",
+            "shape_name": "AddonPodIdentityAssociationsList",
+            "type": "list"
+          },
+          "resolveConflicts": {
+            "name": "resolveConflicts",
+            "shape_name": "ResolveConflicts",
+            "type": "string"
+          },
+          "serviceAccountRoleArn": {
+            "name": "serviceAccountRoleArn",
+            "shape_name": "RoleArn",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "TagMap",
+            "type": "map"
+          }
+        },
+        "required": [
+          "clusterName",
+          "addonName"
+        ]
+      },
+      "name": "CreateAddon",
+      "output": {
+        "markers": null,
+        "members": {
+          "addon": {
+            "name": "addon",
+            "shape_name": "Addon",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "accessConfig": {
+            "name": "accessConfig",
+            "shape_name": "CreateAccessConfigRequest",
+            "type": "structure"
+          },
+          "bootstrapSelfManagedAddons": {
+            "name": "bootstrapSelfManagedAddons",
+            "shape_name": "BoxedBoolean",
+            "type": "boolean"
+          },
+          "clientRequestToken": {
+            "name": "clientRequestToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "computeConfig": {
+            "name": "computeConfig",
+            "shape_name": "ComputeConfigRequest",
+            "type": "structure"
+          },
+          "deletionProtection": {
+            "name": "deletionProtection",
+            "shape_name": "BoxedBoolean",
+            "type": "boolean"
+          },
+          "encryptionConfig": {
+            "name": "encryptionConfig",
+            "shape_name": "EncryptionConfigList",
+            "type": "list"
+          },
+          "kubernetesNetworkConfig": {
+            "name": "kubernetesNetworkConfig",
+            "shape_name": "KubernetesNetworkConfigRequest",
+            "type": "structure"
+          },
+          "logging": {
+            "name": "logging",
+            "shape_name": "Logging",
+            "type": "structure"
+          },
+          "name": {
+            "name": "name",
+            "shape_name": "ClusterName",
+            "type": "string"
+          },
+          "outpostConfig": {
+            "name": "outpostConfig",
+            "shape_name": "OutpostConfigRequest",
+            "type": "structure"
+          },
+          "remoteNetworkConfig": {
+            "name": "remoteNetworkConfig",
+            "shape_name": "RemoteNetworkConfigRequest",
+            "type": "structure"
+          },
+          "resourcesVpcConfig": {
+            "name": "resourcesVpcConfig",
+            "shape_name": "VpcConfigRequest",
+            "type": "structure"
+          },
+          "roleArn": {
+            "name": "roleArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "storageConfig": {
+            "name": "storageConfig",
+            "shape_name": "StorageConfigRequest",
+            "type": "structure"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "TagMap",
+            "type": "map"
+          },
+          "upgradePolicy": {
+            "name": "upgradePolicy",
+            "shape_name": "UpgradePolicyRequest",
+            "type": "structure"
+          },
+          "version": {
+            "name": "version",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "zonalShiftConfig": {
+            "name": "zonalShiftConfig",
+            "shape_name": "ZonalShiftConfigRequest",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "name",
+          "roleArn",
+          "resourcesVpcConfig"
+        ]
+      },
+      "name": "CreateCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "Cluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateEksAnywhereSubscription": {
+      "input": {
+        "markers": null,
+        "members": {
+          "autoRenew": {
+            "name": "autoRenew",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "clientRequestToken": {
+            "name": "clientRequestToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "licenseQuantity": {
+            "name": "licenseQuantity",
+            "shape_name": "Integer",
+            "type": "integer"
+          },
+          "licenseType": {
+            "name": "licenseType",
+            "shape_name": "EksAnywhereSubscriptionLicenseType",
+            "type": "string"
+          },
+          "name": {
+            "name": "name",
+            "shape_name": "EksAnywhereSubscriptionName",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "TagMap",
+            "type": "map"
+          },
+          "term": {
+            "name": "term",
+            "shape_name": "EksAnywhereSubscriptionTerm",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "name",
+          "term"
+        ]
+      },
+      "name": "CreateEksAnywhereSubscription",
+      "output": {
+        "markers": null,
+        "members": {
+          "subscription": {
+            "name": "subscription",
+            "shape_name": "EksAnywhereSubscription",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateFargateProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clientRequestToken": {
+            "name": "clientRequestToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "fargateProfileName": {
+            "name": "fargateProfileName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "podExecutionRoleArn": {
+            "name": "podExecutionRoleArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "selectors": {
+            "name": "selectors",
+            "shape_name": "FargateProfileSelectors",
+            "type": "list"
+          },
+          "subnets": {
+            "name": "subnets",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "TagMap",
+            "type": "map"
+          }
+        },
+        "required": [
+          "fargateProfileName",
+          "clusterName",
+          "podExecutionRoleArn"
+        ]
+      },
+      "name": "CreateFargateProfile",
+      "output": {
+        "markers": null,
+        "members": {
+          "fargateProfile": {
+            "name": "fargateProfile",
+            "shape_name": "FargateProfile",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateNodegroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "amiType": {
+            "name": "amiType",
+            "shape_name": "AMITypes",
+            "type": "string"
+          },
+          "capacityType": {
+            "name": "capacityType",
+            "shape_name": "CapacityTypes",
+            "type": "string"
+          },
+          "clientRequestToken": {
+            "name": "clientRequestToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "diskSize": {
+            "name": "diskSize",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "instanceTypes": {
+            "name": "instanceTypes",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "labels": {
+            "name": "labels",
+            "shape_name": "labelsMap",
+            "type": "map"
+          },
+          "launchTemplate": {
+            "name": "launchTemplate",
+            "shape_name": "LaunchTemplateSpecification",
+            "type": "structure"
+          },
+          "nodeRepairConfig": {
+            "name": "nodeRepairConfig",
+            "shape_name": "NodeRepairConfig",
+            "type": "structure"
+          },
+          "nodeRole": {
+            "name": "nodeRole",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "nodegroupName": {
+            "name": "nodegroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "releaseVersion": {
+            "name": "releaseVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "remoteAccess": {
+            "name": "remoteAccess",
+            "shape_name": "RemoteAccessConfig",
+            "type": "structure"
+          },
+          "scalingConfig": {
+            "name": "scalingConfig",
+            "shape_name": "NodegroupScalingConfig",
+            "type": "structure"
+          },
+          "subnets": {
+            "name": "subnets",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "TagMap",
+            "type": "map"
+          },
+          "taints": {
+            "name": "taints",
+            "shape_name": "taintsList",
+            "type": "list"
+          },
+          "updateConfig": {
+            "name": "updateConfig",
+            "shape_name": "NodegroupUpdateConfig",
+            "type": "structure"
+          },
+          "version": {
+            "name": "version",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName",
+          "nodegroupName",
+          "subnets",
+          "nodeRole"
+        ]
+      },
+      "name": "CreateNodegroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "nodegroup": {
+            "name": "nodegroup",
+            "shape_name": "Nodegroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreatePodIdentityAssociation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clientRequestToken": {
+            "name": "clientRequestToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "disableSessionTags": {
+            "name": "disableSessionTags",
+            "shape_name": "BoxedBoolean",
+            "type": "boolean"
+          },
+          "namespace": {
+            "name": "namespace",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "roleArn": {
+            "name": "roleArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "serviceAccount": {
+            "name": "serviceAccount",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "TagMap",
+            "type": "map"
+          },
+          "targetRoleArn": {
+            "name": "targetRoleArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName",
+          "namespace",
+          "serviceAccount",
+          "roleArn"
+        ]
+      },
+      "name": "CreatePodIdentityAssociation",
+      "output": {
+        "markers": null,
+        "members": {
+          "association": {
+            "name": "association",
+            "shape_name": "PodIdentityAssociation",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteAccessEntry": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "principalArn": {
+            "name": "principalArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName",
+          "principalArn"
+        ]
+      },
+      "name": "DeleteAccessEntry",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteAddon": {
+      "input": {
+        "markers": null,
+        "members": {
+          "addonName": {
+            "name": "addonName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "ClusterName",
+            "type": "string"
+          },
+          "preserve": {
+            "name": "preserve",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "clusterName",
+          "addonName"
+        ]
+      },
+      "name": "DeleteAddon",
+      "output": {
+        "markers": null,
+        "members": {
+          "addon": {
+            "name": "addon",
+            "shape_name": "Addon",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "name": {
+            "name": "name",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "name": "DeleteCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "Cluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteEksAnywhereSubscription": {
+      "input": {
+        "markers": null,
+        "members": {
+          "id": {
+            "name": "id",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "name": "DeleteEksAnywhereSubscription",
+      "output": {
+        "markers": null,
+        "members": {
+          "subscription": {
+            "name": "subscription",
+            "shape_name": "EksAnywhereSubscription",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteFargateProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "fargateProfileName": {
+            "name": "fargateProfileName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName",
+          "fargateProfileName"
+        ]
+      },
+      "name": "DeleteFargateProfile",
+      "output": {
+        "markers": null,
+        "members": {
+          "fargateProfile": {
+            "name": "fargateProfile",
+            "shape_name": "FargateProfile",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteNodegroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "nodegroupName": {
+            "name": "nodegroupName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName",
+          "nodegroupName"
+        ]
+      },
+      "name": "DeleteNodegroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "nodegroup": {
+            "name": "nodegroup",
+            "shape_name": "Nodegroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeletePodIdentityAssociation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "associationId": {
+            "name": "associationId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName",
+          "associationId"
+        ]
+      },
+      "name": "DeletePodIdentityAssociation",
+      "output": {
+        "markers": null,
+        "members": {
+          "association": {
+            "name": "association",
+            "shape_name": "PodIdentityAssociation",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeregisterCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "name": {
+            "name": "name",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "name": "DeregisterCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "Cluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeAccessEntry": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "principalArn": {
+            "name": "principalArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName",
+          "principalArn"
+        ]
+      },
+      "name": "DescribeAccessEntry",
+      "output": {
+        "markers": null,
+        "members": {
+          "accessEntry": {
+            "name": "accessEntry",
+            "shape_name": "AccessEntry",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeAddon": {
+      "input": {
+        "markers": null,
+        "members": {
+          "addonName": {
+            "name": "addonName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "ClusterName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName",
+          "addonName"
+        ]
+      },
+      "name": "DescribeAddon",
+      "output": {
+        "markers": null,
+        "members": {
+          "addon": {
+            "name": "addon",
+            "shape_name": "Addon",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeAddonConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "addonName": {
+            "name": "addonName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "addonVersion": {
+            "name": "addonVersion",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "addonName",
+          "addonVersion"
+        ]
+      },
+      "name": "DescribeAddonConfiguration",
+      "output": {
+        "markers": null,
+        "members": {
+          "addonName": {
+            "name": "addonName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "addonVersion": {
+            "name": "addonVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "configurationSchema": {
+            "name": "configurationSchema",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "podIdentityConfiguration": {
+            "name": "podIdentityConfiguration",
+            "shape_name": "AddonPodIdentityConfigurationList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeAddonVersions": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "addonName": {
+            "name": "addonName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "kubernetesVersion": {
+            "name": "kubernetesVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "DescribeAddonVersionsRequestMaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "owners": {
+            "name": "owners",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "publishers": {
+            "name": "publishers",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "types": {
+            "name": "types",
+            "shape_name": "StringList",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeAddonVersions",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "addons": {
+            "name": "addons",
+            "shape_name": "Addons",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "name": {
+            "name": "name",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "name": "DescribeCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "Cluster",
+            "type": "structure"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "arn",
+            "id": "name",
+            "name": "name",
+            "path": [
+              "cluster"
+            ],
+            "tags": "tags",
+            "type": "eks:cluster"
+          }
+        ]
+      }
+    },
+    "DescribeClusterVersions": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "clusterType": {
+            "name": "clusterType",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clusterVersions": {
+            "name": "clusterVersions",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "defaultOnly": {
+            "name": "defaultOnly",
+            "shape_name": "BoxedBoolean",
+            "type": "boolean"
+          },
+          "includeAll": {
+            "name": "includeAll",
+            "shape_name": "BoxedBoolean",
+            "type": "boolean"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "DescribeClusterVersionMaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "status": {
+            "name": "status",
+            "shape_name": "ClusterVersionStatus",
+            "type": "string"
+          },
+          "versionStatus": {
+            "name": "versionStatus",
+            "shape_name": "VersionStatus",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeClusterVersions",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "clusterVersions": {
+            "name": "clusterVersions",
+            "shape_name": "ClusterVersionList",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeEksAnywhereSubscription": {
+      "input": {
+        "markers": null,
+        "members": {
+          "id": {
+            "name": "id",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "name": "DescribeEksAnywhereSubscription",
+      "output": {
+        "markers": null,
+        "members": {
+          "subscription": {
+            "name": "subscription",
+            "shape_name": "EksAnywhereSubscription",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeFargateProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "fargateProfileName": {
+            "name": "fargateProfileName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName",
+          "fargateProfileName"
+        ]
+      },
+      "name": "DescribeFargateProfile",
+      "output": {
+        "markers": null,
+        "members": {
+          "fargateProfile": {
+            "name": "fargateProfile",
+            "shape_name": "FargateProfile",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeIdentityProviderConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "identityProviderConfig": {
+            "name": "identityProviderConfig",
+            "shape_name": "IdentityProviderConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "clusterName",
+          "identityProviderConfig"
+        ]
+      },
+      "name": "DescribeIdentityProviderConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "identityProviderConfig": {
+            "name": "identityProviderConfig",
+            "shape_name": "IdentityProviderConfigResponse",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeInsight": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "id": {
+            "name": "id",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName",
+          "id"
+        ]
+      },
+      "name": "DescribeInsight",
+      "output": {
+        "markers": null,
+        "members": {
+          "insight": {
+            "name": "insight",
+            "shape_name": "Insight",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeNodegroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "nodegroupName": {
+            "name": "nodegroupName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName",
+          "nodegroupName"
+        ]
+      },
+      "name": "DescribeNodegroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "nodegroup": {
+            "name": "nodegroup",
+            "shape_name": "Nodegroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribePodIdentityAssociation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "associationId": {
+            "name": "associationId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName",
+          "associationId"
+        ]
+      },
+      "name": "DescribePodIdentityAssociation",
+      "output": {
+        "markers": null,
+        "members": {
+          "association": {
+            "name": "association",
+            "shape_name": "PodIdentityAssociation",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeUpdate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "addonName": {
+            "name": "addonName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "name": {
+            "name": "name",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "nodegroupName": {
+            "name": "nodegroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "updateId": {
+            "name": "updateId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "updateId"
+        ]
+      },
+      "name": "DescribeUpdate",
+      "output": {
+        "markers": null,
+        "members": {
+          "update": {
+            "name": "update",
+            "shape_name": "Update",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DisassociateAccessPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "policyArn": {
+            "name": "policyArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "principalArn": {
+            "name": "principalArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName",
+          "principalArn",
+          "policyArn"
+        ]
+      },
+      "name": "DisassociateAccessPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DisassociateIdentityProviderConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clientRequestToken": {
+            "name": "clientRequestToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "identityProviderConfig": {
+            "name": "identityProviderConfig",
+            "shape_name": "IdentityProviderConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "clusterName",
+          "identityProviderConfig"
+        ]
+      },
+      "name": "DisassociateIdentityProviderConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "update": {
+            "name": "update",
+            "shape_name": "Update",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListAccessEntries": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "associatedPolicyArn": {
+            "name": "associatedPolicyArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "ListAccessEntriesRequestMaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName"
+        ]
+      },
+      "name": "ListAccessEntries",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "accessEntries": {
+            "name": "accessEntries",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListAccessPolicies": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "ListAccessPoliciesRequestMaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListAccessPolicies",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "accessPolicies": {
+            "name": "accessPolicies",
+            "shape_name": "AccessPoliciesList",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListAddons": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "ClusterName",
+            "type": "string"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "ListAddonsRequestMaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName"
+        ]
+      },
+      "name": "ListAddons",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "addons": {
+            "name": "addons",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListAssociatedAccessPolicies": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "ListAssociatedAccessPoliciesRequestMaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "principalArn": {
+            "name": "principalArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName",
+          "principalArn"
+        ]
+      },
+      "name": "ListAssociatedAccessPolicies",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "associatedAccessPolicies": {
+            "name": "associatedAccessPolicies",
+            "shape_name": "AssociatedAccessPoliciesList",
+            "type": "list"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "principalArn": {
+            "name": "principalArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListClusters": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "include": {
+            "name": "include",
+            "shape_name": "IncludeClustersList",
+            "type": "list"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "ListClustersRequestMaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListClusters",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "clusters": {
+            "name": "clusters",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:eks:{region}:{account}:cluster/{name}",
+            "id": "name",
+            "name": "name",
+            "path": [
+              "clusters"
+            ],
+            "scalar_as": "name",
+            "type": "eks:cluster"
+          }
+        ]
+      }
+    },
+    "ListEksAnywhereSubscriptions": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "includeStatus": {
+            "name": "includeStatus",
+            "shape_name": "EksAnywhereSubscriptionStatusValues",
+            "type": "list"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "ListEksAnywhereSubscriptionsRequestMaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListEksAnywhereSubscriptions",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "subscriptions": {
+            "name": "subscriptions",
+            "shape_name": "EksAnywhereSubscriptionList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListFargateProfiles": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "FargateProfilesRequestMaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName"
+        ]
+      },
+      "name": "ListFargateProfiles",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "fargateProfileNames": {
+            "name": "fargateProfileNames",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListIdentityProviderConfigs": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "ListIdentityProviderConfigsRequestMaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName"
+        ]
+      },
+      "name": "ListIdentityProviderConfigs",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "identityProviderConfigs": {
+            "name": "identityProviderConfigs",
+            "shape_name": "IdentityProviderConfigs",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListInsights": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "filter": {
+            "name": "filter",
+            "shape_name": "InsightsFilter",
+            "type": "structure"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "ListInsightsMaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName"
+        ]
+      },
+      "name": "ListInsights",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "insights": {
+            "name": "insights",
+            "shape_name": "InsightSummaries",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListNodegroups": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "ListNodegroupsRequestMaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName"
+        ]
+      },
+      "name": "ListNodegroups",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "nodegroups": {
+            "name": "nodegroups",
+            "shape_name": "StringList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListPodIdentityAssociations": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "ListPodIdentityAssociationsMaxResults",
+            "type": "integer"
+          },
+          "namespace": {
+            "name": "namespace",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "serviceAccount": {
+            "name": "serviceAccount",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName"
+        ]
+      },
+      "name": "ListPodIdentityAssociations",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "associations": {
+            "name": "associations",
+            "shape_name": "PodIdentityAssociationSummaries",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "resourceArn": {
+            "name": "resourceArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "resourceArn"
+        ]
+      },
+      "name": "ListTagsForResource",
+      "output": {
+        "markers": null,
+        "members": {
+          "tags": {
+            "name": "tags",
+            "shape_name": "TagMap",
+            "type": "map"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListUpdates": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "addonName": {
+            "name": "addonName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "ListUpdatesRequestMaxResults",
+            "type": "integer"
+          },
+          "name": {
+            "name": "name",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "nodegroupName": {
+            "name": "nodegroupName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "name": "ListUpdates",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "updateIds": {
+            "name": "updateIds",
+            "shape_name": "StringList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "RegisterCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clientRequestToken": {
+            "name": "clientRequestToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "connectorConfig": {
+            "name": "connectorConfig",
+            "shape_name": "ConnectorConfigRequest",
+            "type": "structure"
+          },
+          "name": {
+            "name": "name",
+            "shape_name": "ClusterName",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "TagMap",
+            "type": "map"
+          }
+        },
+        "required": [
+          "name",
+          "connectorConfig"
+        ]
+      },
+      "name": "RegisterCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "cluster": {
+            "name": "cluster",
+            "shape_name": "Cluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "TagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "resourceArn": {
+            "name": "resourceArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "TagMap",
+            "type": "map"
+          }
+        },
+        "required": [
+          "resourceArn",
+          "tags"
+        ]
+      },
+      "name": "TagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "resourceArn": {
+            "name": "resourceArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "tagKeys": {
+            "name": "tagKeys",
+            "shape_name": "TagKeyList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "resourceArn",
+          "tagKeys"
+        ]
+      },
+      "name": "UntagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateAccessEntry": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clientRequestToken": {
+            "name": "clientRequestToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "kubernetesGroups": {
+            "name": "kubernetesGroups",
+            "shape_name": "StringList",
+            "type": "list"
+          },
+          "principalArn": {
+            "name": "principalArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "username": {
+            "name": "username",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName",
+          "principalArn"
+        ]
+      },
+      "name": "UpdateAccessEntry",
+      "output": {
+        "markers": null,
+        "members": {
+          "accessEntry": {
+            "name": "accessEntry",
+            "shape_name": "AccessEntry",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateAddon": {
+      "input": {
+        "markers": null,
+        "members": {
+          "addonName": {
+            "name": "addonName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "addonVersion": {
+            "name": "addonVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clientRequestToken": {
+            "name": "clientRequestToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "ClusterName",
+            "type": "string"
+          },
+          "configurationValues": {
+            "name": "configurationValues",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "podIdentityAssociations": {
+            "name": "podIdentityAssociations",
+            "shape_name": "AddonPodIdentityAssociationsList",
+            "type": "list"
+          },
+          "resolveConflicts": {
+            "name": "resolveConflicts",
+            "shape_name": "ResolveConflicts",
+            "type": "string"
+          },
+          "serviceAccountRoleArn": {
+            "name": "serviceAccountRoleArn",
+            "shape_name": "RoleArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName",
+          "addonName"
+        ]
+      },
+      "name": "UpdateAddon",
+      "output": {
+        "markers": null,
+        "members": {
+          "update": {
+            "name": "update",
+            "shape_name": "Update",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateClusterConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "accessConfig": {
+            "name": "accessConfig",
+            "shape_name": "UpdateAccessConfigRequest",
+            "type": "structure"
+          },
+          "clientRequestToken": {
+            "name": "clientRequestToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "computeConfig": {
+            "name": "computeConfig",
+            "shape_name": "ComputeConfigRequest",
+            "type": "structure"
+          },
+          "deletionProtection": {
+            "name": "deletionProtection",
+            "shape_name": "BoxedBoolean",
+            "type": "boolean"
+          },
+          "kubernetesNetworkConfig": {
+            "name": "kubernetesNetworkConfig",
+            "shape_name": "KubernetesNetworkConfigRequest",
+            "type": "structure"
+          },
+          "logging": {
+            "name": "logging",
+            "shape_name": "Logging",
+            "type": "structure"
+          },
+          "name": {
+            "name": "name",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "remoteNetworkConfig": {
+            "name": "remoteNetworkConfig",
+            "shape_name": "RemoteNetworkConfigRequest",
+            "type": "structure"
+          },
+          "resourcesVpcConfig": {
+            "name": "resourcesVpcConfig",
+            "shape_name": "VpcConfigRequest",
+            "type": "structure"
+          },
+          "storageConfig": {
+            "name": "storageConfig",
+            "shape_name": "StorageConfigRequest",
+            "type": "structure"
+          },
+          "upgradePolicy": {
+            "name": "upgradePolicy",
+            "shape_name": "UpgradePolicyRequest",
+            "type": "structure"
+          },
+          "zonalShiftConfig": {
+            "name": "zonalShiftConfig",
+            "shape_name": "ZonalShiftConfigRequest",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "name": "UpdateClusterConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "update": {
+            "name": "update",
+            "shape_name": "Update",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateClusterVersion": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clientRequestToken": {
+            "name": "clientRequestToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "force": {
+            "name": "force",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "name": {
+            "name": "name",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "version": {
+            "name": "version",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "version"
+        ]
+      },
+      "name": "UpdateClusterVersion",
+      "output": {
+        "markers": null,
+        "members": {
+          "update": {
+            "name": "update",
+            "shape_name": "Update",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateEksAnywhereSubscription": {
+      "input": {
+        "markers": null,
+        "members": {
+          "autoRenew": {
+            "name": "autoRenew",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "clientRequestToken": {
+            "name": "clientRequestToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "id": {
+            "name": "id",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "autoRenew"
+        ]
+      },
+      "name": "UpdateEksAnywhereSubscription",
+      "output": {
+        "markers": null,
+        "members": {
+          "subscription": {
+            "name": "subscription",
+            "shape_name": "EksAnywhereSubscription",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateNodegroupConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clientRequestToken": {
+            "name": "clientRequestToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "labels": {
+            "name": "labels",
+            "shape_name": "UpdateLabelsPayload",
+            "type": "structure"
+          },
+          "nodeRepairConfig": {
+            "name": "nodeRepairConfig",
+            "shape_name": "NodeRepairConfig",
+            "type": "structure"
+          },
+          "nodegroupName": {
+            "name": "nodegroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "scalingConfig": {
+            "name": "scalingConfig",
+            "shape_name": "NodegroupScalingConfig",
+            "type": "structure"
+          },
+          "taints": {
+            "name": "taints",
+            "shape_name": "UpdateTaintsPayload",
+            "type": "structure"
+          },
+          "updateConfig": {
+            "name": "updateConfig",
+            "shape_name": "NodegroupUpdateConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "clusterName",
+          "nodegroupName"
+        ]
+      },
+      "name": "UpdateNodegroupConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "update": {
+            "name": "update",
+            "shape_name": "Update",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateNodegroupVersion": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clientRequestToken": {
+            "name": "clientRequestToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "force": {
+            "name": "force",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "launchTemplate": {
+            "name": "launchTemplate",
+            "shape_name": "LaunchTemplateSpecification",
+            "type": "structure"
+          },
+          "nodegroupName": {
+            "name": "nodegroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "releaseVersion": {
+            "name": "releaseVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "version": {
+            "name": "version",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName",
+          "nodegroupName"
+        ]
+      },
+      "name": "UpdateNodegroupVersion",
+      "output": {
+        "markers": null,
+        "members": {
+          "update": {
+            "name": "update",
+            "shape_name": "Update",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdatePodIdentityAssociation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "associationId": {
+            "name": "associationId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clientRequestToken": {
+            "name": "clientRequestToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "clusterName": {
+            "name": "clusterName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "disableSessionTags": {
+            "name": "disableSessionTags",
+            "shape_name": "BoxedBoolean",
+            "type": "boolean"
+          },
+          "roleArn": {
+            "name": "roleArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "targetRoleArn": {
+            "name": "targetRoleArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "clusterName",
+          "associationId"
+        ]
+      },
+      "name": "UpdatePodIdentityAssociation",
+      "output": {
+        "markers": null,
+        "members": {
+          "association": {
+            "name": "association",
+            "shape_name": "PodIdentityAssociation",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    }
+  }
+}

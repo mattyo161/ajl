@@ -1,0 +1,2277 @@
+{
+  "metadata": {
+    "apiVersion": "2010-12-01",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "email",
+    "protocol": "query",
+    "protocols": [
+      "query"
+    ],
+    "serviceAbbreviation": "Amazon SES",
+    "serviceFullName": "Amazon Simple Email Service",
+    "serviceId": "SES",
+    "signatureVersion": "v4",
+    "signingName": "ses",
+    "uid": "email-2010-12-01",
+    "xmlNamespace": "http://ses.amazonaws.com/doc/2010-12-01/"
+  },
+  "name": "ses",
+  "operations": {
+    "CloneReceiptRuleSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "OriginalRuleSetName": {
+            "name": "OriginalRuleSetName",
+            "shape_name": "ReceiptRuleSetName",
+            "type": "string"
+          },
+          "RuleSetName": {
+            "name": "RuleSetName",
+            "shape_name": "ReceiptRuleSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RuleSetName",
+          "OriginalRuleSetName"
+        ]
+      },
+      "name": "CloneReceiptRuleSet",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateConfigurationSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConfigurationSet": {
+            "name": "ConfigurationSet",
+            "shape_name": "ConfigurationSet",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ConfigurationSet"
+        ]
+      },
+      "name": "CreateConfigurationSet",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateConfigurationSetEventDestination": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConfigurationSetName": {
+            "name": "ConfigurationSetName",
+            "shape_name": "ConfigurationSetName",
+            "type": "string"
+          },
+          "EventDestination": {
+            "name": "EventDestination",
+            "shape_name": "EventDestination",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ConfigurationSetName",
+          "EventDestination"
+        ]
+      },
+      "name": "CreateConfigurationSetEventDestination",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateConfigurationSetTrackingOptions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConfigurationSetName": {
+            "name": "ConfigurationSetName",
+            "shape_name": "ConfigurationSetName",
+            "type": "string"
+          },
+          "TrackingOptions": {
+            "name": "TrackingOptions",
+            "shape_name": "TrackingOptions",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ConfigurationSetName",
+          "TrackingOptions"
+        ]
+      },
+      "name": "CreateConfigurationSetTrackingOptions",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateCustomVerificationEmailTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FailureRedirectionURL": {
+            "name": "FailureRedirectionURL",
+            "shape_name": "FailureRedirectionURL",
+            "type": "string"
+          },
+          "FromEmailAddress": {
+            "name": "FromEmailAddress",
+            "shape_name": "FromAddress",
+            "type": "string"
+          },
+          "SuccessRedirectionURL": {
+            "name": "SuccessRedirectionURL",
+            "shape_name": "SuccessRedirectionURL",
+            "type": "string"
+          },
+          "TemplateContent": {
+            "name": "TemplateContent",
+            "shape_name": "TemplateContent",
+            "type": "string"
+          },
+          "TemplateName": {
+            "name": "TemplateName",
+            "shape_name": "TemplateName",
+            "type": "string"
+          },
+          "TemplateSubject": {
+            "name": "TemplateSubject",
+            "shape_name": "Subject",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TemplateName",
+          "FromEmailAddress",
+          "TemplateSubject",
+          "TemplateContent",
+          "SuccessRedirectionURL",
+          "FailureRedirectionURL"
+        ]
+      },
+      "name": "CreateCustomVerificationEmailTemplate",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateReceiptFilter": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Filter": {
+            "name": "Filter",
+            "shape_name": "ReceiptFilter",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Filter"
+        ]
+      },
+      "name": "CreateReceiptFilter",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateReceiptRule": {
+      "input": {
+        "markers": null,
+        "members": {
+          "After": {
+            "name": "After",
+            "shape_name": "ReceiptRuleName",
+            "type": "string"
+          },
+          "Rule": {
+            "name": "Rule",
+            "shape_name": "ReceiptRule",
+            "type": "structure"
+          },
+          "RuleSetName": {
+            "name": "RuleSetName",
+            "shape_name": "ReceiptRuleSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RuleSetName",
+          "Rule"
+        ]
+      },
+      "name": "CreateReceiptRule",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateReceiptRuleSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RuleSetName": {
+            "name": "RuleSetName",
+            "shape_name": "ReceiptRuleSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RuleSetName"
+        ]
+      },
+      "name": "CreateReceiptRuleSet",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Template": {
+            "name": "Template",
+            "shape_name": "Template",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Template"
+        ]
+      },
+      "name": "CreateTemplate",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteConfigurationSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConfigurationSetName": {
+            "name": "ConfigurationSetName",
+            "shape_name": "ConfigurationSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ConfigurationSetName"
+        ]
+      },
+      "name": "DeleteConfigurationSet",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteConfigurationSetEventDestination": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConfigurationSetName": {
+            "name": "ConfigurationSetName",
+            "shape_name": "ConfigurationSetName",
+            "type": "string"
+          },
+          "EventDestinationName": {
+            "name": "EventDestinationName",
+            "shape_name": "EventDestinationName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ConfigurationSetName",
+          "EventDestinationName"
+        ]
+      },
+      "name": "DeleteConfigurationSetEventDestination",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteConfigurationSetTrackingOptions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConfigurationSetName": {
+            "name": "ConfigurationSetName",
+            "shape_name": "ConfigurationSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ConfigurationSetName"
+        ]
+      },
+      "name": "DeleteConfigurationSetTrackingOptions",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteCustomVerificationEmailTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "TemplateName": {
+            "name": "TemplateName",
+            "shape_name": "TemplateName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TemplateName"
+        ]
+      },
+      "name": "DeleteCustomVerificationEmailTemplate",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteIdentity": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Identity": {
+            "name": "Identity",
+            "shape_name": "Identity",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Identity"
+        ]
+      },
+      "name": "DeleteIdentity",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteIdentityPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Identity": {
+            "name": "Identity",
+            "shape_name": "Identity",
+            "type": "string"
+          },
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "PolicyName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Identity",
+          "PolicyName"
+        ]
+      },
+      "name": "DeleteIdentityPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteReceiptFilter": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FilterName": {
+            "name": "FilterName",
+            "shape_name": "ReceiptFilterName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "FilterName"
+        ]
+      },
+      "name": "DeleteReceiptFilter",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteReceiptRule": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RuleName": {
+            "name": "RuleName",
+            "shape_name": "ReceiptRuleName",
+            "type": "string"
+          },
+          "RuleSetName": {
+            "name": "RuleSetName",
+            "shape_name": "ReceiptRuleSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RuleSetName",
+          "RuleName"
+        ]
+      },
+      "name": "DeleteReceiptRule",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteReceiptRuleSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RuleSetName": {
+            "name": "RuleSetName",
+            "shape_name": "ReceiptRuleSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RuleSetName"
+        ]
+      },
+      "name": "DeleteReceiptRuleSet",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "TemplateName": {
+            "name": "TemplateName",
+            "shape_name": "TemplateName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TemplateName"
+        ]
+      },
+      "name": "DeleteTemplate",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteVerifiedEmailAddress": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EmailAddress": {
+            "name": "EmailAddress",
+            "shape_name": "Address",
+            "type": "string"
+          }
+        },
+        "required": [
+          "EmailAddress"
+        ]
+      },
+      "name": "DeleteVerifiedEmailAddress",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DescribeActiveReceiptRuleSet": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "DescribeActiveReceiptRuleSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "Metadata": {
+            "name": "Metadata",
+            "shape_name": "ReceiptRuleSetMetadata",
+            "type": "structure"
+          },
+          "Rules": {
+            "name": "Rules",
+            "shape_name": "ReceiptRulesList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeConfigurationSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConfigurationSetAttributeNames": {
+            "name": "ConfigurationSetAttributeNames",
+            "shape_name": "ConfigurationSetAttributeList",
+            "type": "list"
+          },
+          "ConfigurationSetName": {
+            "name": "ConfigurationSetName",
+            "shape_name": "ConfigurationSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ConfigurationSetName"
+        ]
+      },
+      "name": "DescribeConfigurationSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "ConfigurationSet": {
+            "name": "ConfigurationSet",
+            "shape_name": "ConfigurationSet",
+            "type": "structure"
+          },
+          "DeliveryOptions": {
+            "name": "DeliveryOptions",
+            "shape_name": "DeliveryOptions",
+            "type": "structure"
+          },
+          "EventDestinations": {
+            "name": "EventDestinations",
+            "shape_name": "EventDestinations",
+            "type": "list"
+          },
+          "ReputationOptions": {
+            "name": "ReputationOptions",
+            "shape_name": "ReputationOptions",
+            "type": "structure"
+          },
+          "TrackingOptions": {
+            "name": "TrackingOptions",
+            "shape_name": "TrackingOptions",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeReceiptRule": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RuleName": {
+            "name": "RuleName",
+            "shape_name": "ReceiptRuleName",
+            "type": "string"
+          },
+          "RuleSetName": {
+            "name": "RuleSetName",
+            "shape_name": "ReceiptRuleSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RuleSetName",
+          "RuleName"
+        ]
+      },
+      "name": "DescribeReceiptRule",
+      "output": {
+        "markers": null,
+        "members": {
+          "Rule": {
+            "name": "Rule",
+            "shape_name": "ReceiptRule",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeReceiptRuleSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RuleSetName": {
+            "name": "RuleSetName",
+            "shape_name": "ReceiptRuleSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RuleSetName"
+        ]
+      },
+      "name": "DescribeReceiptRuleSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "Metadata": {
+            "name": "Metadata",
+            "shape_name": "ReceiptRuleSetMetadata",
+            "type": "structure"
+          },
+          "Rules": {
+            "name": "Rules",
+            "shape_name": "ReceiptRulesList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetAccountSendingEnabled": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "GetAccountSendingEnabled",
+      "output": {
+        "markers": null,
+        "members": {
+          "Enabled": {
+            "name": "Enabled",
+            "shape_name": "Enabled",
+            "type": "boolean"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetCustomVerificationEmailTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "TemplateName": {
+            "name": "TemplateName",
+            "shape_name": "TemplateName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TemplateName"
+        ]
+      },
+      "name": "GetCustomVerificationEmailTemplate",
+      "output": {
+        "markers": null,
+        "members": {
+          "FailureRedirectionURL": {
+            "name": "FailureRedirectionURL",
+            "shape_name": "FailureRedirectionURL",
+            "type": "string"
+          },
+          "FromEmailAddress": {
+            "name": "FromEmailAddress",
+            "shape_name": "FromAddress",
+            "type": "string"
+          },
+          "SuccessRedirectionURL": {
+            "name": "SuccessRedirectionURL",
+            "shape_name": "SuccessRedirectionURL",
+            "type": "string"
+          },
+          "TemplateContent": {
+            "name": "TemplateContent",
+            "shape_name": "TemplateContent",
+            "type": "string"
+          },
+          "TemplateName": {
+            "name": "TemplateName",
+            "shape_name": "TemplateName",
+            "type": "string"
+          },
+          "TemplateSubject": {
+            "name": "TemplateSubject",
+            "shape_name": "Subject",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetIdentityDkimAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Identities": {
+            "name": "Identities",
+            "shape_name": "IdentityList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Identities"
+        ]
+      },
+      "name": "GetIdentityDkimAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "DkimAttributes": {
+            "name": "DkimAttributes",
+            "shape_name": "DkimAttributes",
+            "type": "map"
+          }
+        },
+        "required": [
+          "DkimAttributes"
+        ]
+      }
+    },
+    "GetIdentityMailFromDomainAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Identities": {
+            "name": "Identities",
+            "shape_name": "IdentityList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Identities"
+        ]
+      },
+      "name": "GetIdentityMailFromDomainAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "MailFromDomainAttributes": {
+            "name": "MailFromDomainAttributes",
+            "shape_name": "MailFromDomainAttributes",
+            "type": "map"
+          }
+        },
+        "required": [
+          "MailFromDomainAttributes"
+        ]
+      }
+    },
+    "GetIdentityNotificationAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Identities": {
+            "name": "Identities",
+            "shape_name": "IdentityList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Identities"
+        ]
+      },
+      "name": "GetIdentityNotificationAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "NotificationAttributes": {
+            "name": "NotificationAttributes",
+            "shape_name": "NotificationAttributes",
+            "type": "map"
+          }
+        },
+        "required": [
+          "NotificationAttributes"
+        ]
+      }
+    },
+    "GetIdentityPolicies": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Identity": {
+            "name": "Identity",
+            "shape_name": "Identity",
+            "type": "string"
+          },
+          "PolicyNames": {
+            "name": "PolicyNames",
+            "shape_name": "PolicyNameList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Identity",
+          "PolicyNames"
+        ]
+      },
+      "name": "GetIdentityPolicies",
+      "output": {
+        "markers": null,
+        "members": {
+          "Policies": {
+            "name": "Policies",
+            "shape_name": "PolicyMap",
+            "type": "map"
+          }
+        },
+        "required": [
+          "Policies"
+        ]
+      }
+    },
+    "GetIdentityVerificationAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Identities": {
+            "name": "Identities",
+            "shape_name": "IdentityList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Identities"
+        ]
+      },
+      "name": "GetIdentityVerificationAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "VerificationAttributes": {
+            "name": "VerificationAttributes",
+            "shape_name": "VerificationAttributes",
+            "type": "map"
+          }
+        },
+        "required": [
+          "VerificationAttributes"
+        ]
+      }
+    },
+    "GetSendQuota": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "GetSendQuota",
+      "output": {
+        "markers": null,
+        "members": {
+          "Max24HourSend": {
+            "name": "Max24HourSend",
+            "shape_name": "Max24HourSend",
+            "type": "double"
+          },
+          "MaxSendRate": {
+            "name": "MaxSendRate",
+            "shape_name": "MaxSendRate",
+            "type": "double"
+          },
+          "SentLast24Hours": {
+            "name": "SentLast24Hours",
+            "shape_name": "SentLast24Hours",
+            "type": "double"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetSendStatistics": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "GetSendStatistics",
+      "output": {
+        "markers": null,
+        "members": {
+          "SendDataPoints": {
+            "name": "SendDataPoints",
+            "shape_name": "SendDataPointList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "TemplateName": {
+            "name": "TemplateName",
+            "shape_name": "TemplateName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TemplateName"
+        ]
+      },
+      "name": "GetTemplate",
+      "output": {
+        "markers": null,
+        "members": {
+          "Template": {
+            "name": "Template",
+            "shape_name": "Template",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListConfigurationSets": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "MaxItems",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListConfigurationSets",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "ConfigurationSets": {
+            "name": "ConfigurationSets",
+            "shape_name": "ConfigurationSets",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListCustomVerificationEmailTemplates": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListCustomVerificationEmailTemplates",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "CustomVerificationEmailTemplates": {
+            "name": "CustomVerificationEmailTemplates",
+            "shape_name": "CustomVerificationEmailTemplates",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListIdentities": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "IdentityType": {
+            "name": "IdentityType",
+            "shape_name": "IdentityType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "MaxItems",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListIdentities",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Identities": {
+            "name": "Identities",
+            "shape_name": "IdentityList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Identities"
+        ],
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:ses:{region}:{account}:identity/{Identity}",
+            "id": "Identity",
+            "name": "Identity",
+            "path": [
+              "Identities"
+            ],
+            "scalar_as": "Identity",
+            "type": "ses:identity"
+          }
+        ]
+      }
+    },
+    "ListIdentityPolicies": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Identity": {
+            "name": "Identity",
+            "shape_name": "Identity",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Identity"
+        ]
+      },
+      "name": "ListIdentityPolicies",
+      "output": {
+        "markers": null,
+        "members": {
+          "PolicyNames": {
+            "name": "PolicyNames",
+            "shape_name": "PolicyNameList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "PolicyNames"
+        ]
+      }
+    },
+    "ListReceiptFilters": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "ListReceiptFilters",
+      "output": {
+        "markers": null,
+        "members": {
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "ReceiptFilterList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListReceiptRuleSets": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListReceiptRuleSets",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "RuleSets": {
+            "name": "RuleSets",
+            "shape_name": "ReceiptRuleSetsLists",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTemplates": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "MaxItems",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListTemplates",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "TemplatesMetadata": {
+            "name": "TemplatesMetadata",
+            "shape_name": "TemplateMetadataList",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:ses:{region}:{account}:template/{Name}",
+            "id": "Name",
+            "name": "Name",
+            "path": [
+              "TemplatesMetadata"
+            ],
+            "type": "ses:template"
+          }
+        ]
+      }
+    },
+    "ListVerifiedEmailAddresses": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "ListVerifiedEmailAddresses",
+      "output": {
+        "markers": null,
+        "members": {
+          "VerifiedEmailAddresses": {
+            "name": "VerifiedEmailAddresses",
+            "shape_name": "AddressList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutConfigurationSetDeliveryOptions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConfigurationSetName": {
+            "name": "ConfigurationSetName",
+            "shape_name": "ConfigurationSetName",
+            "type": "string"
+          },
+          "DeliveryOptions": {
+            "name": "DeliveryOptions",
+            "shape_name": "DeliveryOptions",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ConfigurationSetName"
+        ]
+      },
+      "name": "PutConfigurationSetDeliveryOptions",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "PutIdentityPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Identity": {
+            "name": "Identity",
+            "shape_name": "Identity",
+            "type": "string"
+          },
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "Policy",
+            "type": "string"
+          },
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "PolicyName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Identity",
+          "PolicyName",
+          "Policy"
+        ]
+      },
+      "name": "PutIdentityPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ReorderReceiptRuleSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RuleNames": {
+            "name": "RuleNames",
+            "shape_name": "ReceiptRuleNamesList",
+            "type": "list"
+          },
+          "RuleSetName": {
+            "name": "RuleSetName",
+            "shape_name": "ReceiptRuleSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RuleSetName",
+          "RuleNames"
+        ]
+      },
+      "name": "ReorderReceiptRuleSet",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SendBounce": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BounceSender": {
+            "name": "BounceSender",
+            "shape_name": "Address",
+            "type": "string"
+          },
+          "BounceSenderArn": {
+            "name": "BounceSenderArn",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          },
+          "BouncedRecipientInfoList": {
+            "name": "BouncedRecipientInfoList",
+            "shape_name": "BouncedRecipientInfoList",
+            "type": "list"
+          },
+          "Explanation": {
+            "name": "Explanation",
+            "shape_name": "Explanation",
+            "type": "string"
+          },
+          "MessageDsn": {
+            "name": "MessageDsn",
+            "shape_name": "MessageDsn",
+            "type": "structure"
+          },
+          "OriginalMessageId": {
+            "name": "OriginalMessageId",
+            "shape_name": "MessageId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "OriginalMessageId",
+          "BounceSender",
+          "BouncedRecipientInfoList"
+        ]
+      },
+      "name": "SendBounce",
+      "output": {
+        "markers": null,
+        "members": {
+          "MessageId": {
+            "name": "MessageId",
+            "shape_name": "MessageId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "SendBulkTemplatedEmail": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConfigurationSetName": {
+            "name": "ConfigurationSetName",
+            "shape_name": "ConfigurationSetName",
+            "type": "string"
+          },
+          "DefaultTags": {
+            "name": "DefaultTags",
+            "shape_name": "MessageTagList",
+            "type": "list"
+          },
+          "DefaultTemplateData": {
+            "name": "DefaultTemplateData",
+            "shape_name": "TemplateData",
+            "type": "string"
+          },
+          "Destinations": {
+            "name": "Destinations",
+            "shape_name": "BulkEmailDestinationList",
+            "type": "list"
+          },
+          "ReplyToAddresses": {
+            "name": "ReplyToAddresses",
+            "shape_name": "AddressList",
+            "type": "list"
+          },
+          "ReturnPath": {
+            "name": "ReturnPath",
+            "shape_name": "Address",
+            "type": "string"
+          },
+          "ReturnPathArn": {
+            "name": "ReturnPathArn",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          },
+          "Source": {
+            "name": "Source",
+            "shape_name": "Address",
+            "type": "string"
+          },
+          "SourceArn": {
+            "name": "SourceArn",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          },
+          "Template": {
+            "name": "Template",
+            "shape_name": "TemplateName",
+            "type": "string"
+          },
+          "TemplateArn": {
+            "name": "TemplateArn",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Source",
+          "Template",
+          "DefaultTemplateData",
+          "Destinations"
+        ]
+      },
+      "name": "SendBulkTemplatedEmail",
+      "output": {
+        "markers": null,
+        "members": {
+          "Status": {
+            "name": "Status",
+            "shape_name": "BulkEmailDestinationStatusList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Status"
+        ]
+      }
+    },
+    "SendCustomVerificationEmail": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConfigurationSetName": {
+            "name": "ConfigurationSetName",
+            "shape_name": "ConfigurationSetName",
+            "type": "string"
+          },
+          "EmailAddress": {
+            "name": "EmailAddress",
+            "shape_name": "Address",
+            "type": "string"
+          },
+          "TemplateName": {
+            "name": "TemplateName",
+            "shape_name": "TemplateName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "EmailAddress",
+          "TemplateName"
+        ]
+      },
+      "name": "SendCustomVerificationEmail",
+      "output": {
+        "markers": null,
+        "members": {
+          "MessageId": {
+            "name": "MessageId",
+            "shape_name": "MessageId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "SendEmail": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConfigurationSetName": {
+            "name": "ConfigurationSetName",
+            "shape_name": "ConfigurationSetName",
+            "type": "string"
+          },
+          "Destination": {
+            "name": "Destination",
+            "shape_name": "Destination",
+            "type": "structure"
+          },
+          "Message": {
+            "name": "Message",
+            "shape_name": "Message",
+            "type": "structure"
+          },
+          "ReplyToAddresses": {
+            "name": "ReplyToAddresses",
+            "shape_name": "AddressList",
+            "type": "list"
+          },
+          "ReturnPath": {
+            "name": "ReturnPath",
+            "shape_name": "Address",
+            "type": "string"
+          },
+          "ReturnPathArn": {
+            "name": "ReturnPathArn",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          },
+          "Source": {
+            "name": "Source",
+            "shape_name": "Address",
+            "type": "string"
+          },
+          "SourceArn": {
+            "name": "SourceArn",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "MessageTagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Source",
+          "Destination",
+          "Message"
+        ]
+      },
+      "name": "SendEmail",
+      "output": {
+        "markers": null,
+        "members": {
+          "MessageId": {
+            "name": "MessageId",
+            "shape_name": "MessageId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "MessageId"
+        ]
+      }
+    },
+    "SendRawEmail": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConfigurationSetName": {
+            "name": "ConfigurationSetName",
+            "shape_name": "ConfigurationSetName",
+            "type": "string"
+          },
+          "Destinations": {
+            "name": "Destinations",
+            "shape_name": "AddressList",
+            "type": "list"
+          },
+          "FromArn": {
+            "name": "FromArn",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          },
+          "RawMessage": {
+            "name": "RawMessage",
+            "shape_name": "RawMessage",
+            "type": "structure"
+          },
+          "ReturnPathArn": {
+            "name": "ReturnPathArn",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          },
+          "Source": {
+            "name": "Source",
+            "shape_name": "Address",
+            "type": "string"
+          },
+          "SourceArn": {
+            "name": "SourceArn",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "MessageTagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "RawMessage"
+        ]
+      },
+      "name": "SendRawEmail",
+      "output": {
+        "markers": null,
+        "members": {
+          "MessageId": {
+            "name": "MessageId",
+            "shape_name": "MessageId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "MessageId"
+        ]
+      }
+    },
+    "SendTemplatedEmail": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConfigurationSetName": {
+            "name": "ConfigurationSetName",
+            "shape_name": "ConfigurationSetName",
+            "type": "string"
+          },
+          "Destination": {
+            "name": "Destination",
+            "shape_name": "Destination",
+            "type": "structure"
+          },
+          "ReplyToAddresses": {
+            "name": "ReplyToAddresses",
+            "shape_name": "AddressList",
+            "type": "list"
+          },
+          "ReturnPath": {
+            "name": "ReturnPath",
+            "shape_name": "Address",
+            "type": "string"
+          },
+          "ReturnPathArn": {
+            "name": "ReturnPathArn",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          },
+          "Source": {
+            "name": "Source",
+            "shape_name": "Address",
+            "type": "string"
+          },
+          "SourceArn": {
+            "name": "SourceArn",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "MessageTagList",
+            "type": "list"
+          },
+          "Template": {
+            "name": "Template",
+            "shape_name": "TemplateName",
+            "type": "string"
+          },
+          "TemplateArn": {
+            "name": "TemplateArn",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          },
+          "TemplateData": {
+            "name": "TemplateData",
+            "shape_name": "TemplateData",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Source",
+          "Destination",
+          "Template",
+          "TemplateData"
+        ]
+      },
+      "name": "SendTemplatedEmail",
+      "output": {
+        "markers": null,
+        "members": {
+          "MessageId": {
+            "name": "MessageId",
+            "shape_name": "MessageId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "MessageId"
+        ]
+      }
+    },
+    "SetActiveReceiptRuleSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RuleSetName": {
+            "name": "RuleSetName",
+            "shape_name": "ReceiptRuleSetName",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "SetActiveReceiptRuleSet",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SetIdentityDkimEnabled": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DkimEnabled": {
+            "name": "DkimEnabled",
+            "shape_name": "Enabled",
+            "type": "boolean"
+          },
+          "Identity": {
+            "name": "Identity",
+            "shape_name": "Identity",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Identity",
+          "DkimEnabled"
+        ]
+      },
+      "name": "SetIdentityDkimEnabled",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SetIdentityFeedbackForwardingEnabled": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ForwardingEnabled": {
+            "name": "ForwardingEnabled",
+            "shape_name": "Enabled",
+            "type": "boolean"
+          },
+          "Identity": {
+            "name": "Identity",
+            "shape_name": "Identity",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Identity",
+          "ForwardingEnabled"
+        ]
+      },
+      "name": "SetIdentityFeedbackForwardingEnabled",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SetIdentityHeadersInNotificationsEnabled": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Enabled": {
+            "name": "Enabled",
+            "shape_name": "Enabled",
+            "type": "boolean"
+          },
+          "Identity": {
+            "name": "Identity",
+            "shape_name": "Identity",
+            "type": "string"
+          },
+          "NotificationType": {
+            "name": "NotificationType",
+            "shape_name": "NotificationType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Identity",
+          "NotificationType",
+          "Enabled"
+        ]
+      },
+      "name": "SetIdentityHeadersInNotificationsEnabled",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SetIdentityMailFromDomain": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BehaviorOnMXFailure": {
+            "name": "BehaviorOnMXFailure",
+            "shape_name": "BehaviorOnMXFailure",
+            "type": "string"
+          },
+          "Identity": {
+            "name": "Identity",
+            "shape_name": "Identity",
+            "type": "string"
+          },
+          "MailFromDomain": {
+            "name": "MailFromDomain",
+            "shape_name": "MailFromDomainName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Identity"
+        ]
+      },
+      "name": "SetIdentityMailFromDomain",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SetIdentityNotificationTopic": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Identity": {
+            "name": "Identity",
+            "shape_name": "Identity",
+            "type": "string"
+          },
+          "NotificationType": {
+            "name": "NotificationType",
+            "shape_name": "NotificationType",
+            "type": "string"
+          },
+          "SnsTopic": {
+            "name": "SnsTopic",
+            "shape_name": "NotificationTopic",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Identity",
+          "NotificationType"
+        ]
+      },
+      "name": "SetIdentityNotificationTopic",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SetReceiptRulePosition": {
+      "input": {
+        "markers": null,
+        "members": {
+          "After": {
+            "name": "After",
+            "shape_name": "ReceiptRuleName",
+            "type": "string"
+          },
+          "RuleName": {
+            "name": "RuleName",
+            "shape_name": "ReceiptRuleName",
+            "type": "string"
+          },
+          "RuleSetName": {
+            "name": "RuleSetName",
+            "shape_name": "ReceiptRuleSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RuleSetName",
+          "RuleName"
+        ]
+      },
+      "name": "SetReceiptRulePosition",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TestRenderTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "TemplateData": {
+            "name": "TemplateData",
+            "shape_name": "TemplateData",
+            "type": "string"
+          },
+          "TemplateName": {
+            "name": "TemplateName",
+            "shape_name": "TemplateName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TemplateName",
+          "TemplateData"
+        ]
+      },
+      "name": "TestRenderTemplate",
+      "output": {
+        "markers": null,
+        "members": {
+          "RenderedTemplate": {
+            "name": "RenderedTemplate",
+            "shape_name": "RenderedTemplate",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateAccountSendingEnabled": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Enabled": {
+            "name": "Enabled",
+            "shape_name": "Enabled",
+            "type": "boolean"
+          }
+        },
+        "required": null
+      },
+      "name": "UpdateAccountSendingEnabled",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateConfigurationSetEventDestination": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConfigurationSetName": {
+            "name": "ConfigurationSetName",
+            "shape_name": "ConfigurationSetName",
+            "type": "string"
+          },
+          "EventDestination": {
+            "name": "EventDestination",
+            "shape_name": "EventDestination",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ConfigurationSetName",
+          "EventDestination"
+        ]
+      },
+      "name": "UpdateConfigurationSetEventDestination",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateConfigurationSetReputationMetricsEnabled": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConfigurationSetName": {
+            "name": "ConfigurationSetName",
+            "shape_name": "ConfigurationSetName",
+            "type": "string"
+          },
+          "Enabled": {
+            "name": "Enabled",
+            "shape_name": "Enabled",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "ConfigurationSetName",
+          "Enabled"
+        ]
+      },
+      "name": "UpdateConfigurationSetReputationMetricsEnabled",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateConfigurationSetSendingEnabled": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConfigurationSetName": {
+            "name": "ConfigurationSetName",
+            "shape_name": "ConfigurationSetName",
+            "type": "string"
+          },
+          "Enabled": {
+            "name": "Enabled",
+            "shape_name": "Enabled",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "ConfigurationSetName",
+          "Enabled"
+        ]
+      },
+      "name": "UpdateConfigurationSetSendingEnabled",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateConfigurationSetTrackingOptions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConfigurationSetName": {
+            "name": "ConfigurationSetName",
+            "shape_name": "ConfigurationSetName",
+            "type": "string"
+          },
+          "TrackingOptions": {
+            "name": "TrackingOptions",
+            "shape_name": "TrackingOptions",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ConfigurationSetName",
+          "TrackingOptions"
+        ]
+      },
+      "name": "UpdateConfigurationSetTrackingOptions",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateCustomVerificationEmailTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FailureRedirectionURL": {
+            "name": "FailureRedirectionURL",
+            "shape_name": "FailureRedirectionURL",
+            "type": "string"
+          },
+          "FromEmailAddress": {
+            "name": "FromEmailAddress",
+            "shape_name": "FromAddress",
+            "type": "string"
+          },
+          "SuccessRedirectionURL": {
+            "name": "SuccessRedirectionURL",
+            "shape_name": "SuccessRedirectionURL",
+            "type": "string"
+          },
+          "TemplateContent": {
+            "name": "TemplateContent",
+            "shape_name": "TemplateContent",
+            "type": "string"
+          },
+          "TemplateName": {
+            "name": "TemplateName",
+            "shape_name": "TemplateName",
+            "type": "string"
+          },
+          "TemplateSubject": {
+            "name": "TemplateSubject",
+            "shape_name": "Subject",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TemplateName"
+        ]
+      },
+      "name": "UpdateCustomVerificationEmailTemplate",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateReceiptRule": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Rule": {
+            "name": "Rule",
+            "shape_name": "ReceiptRule",
+            "type": "structure"
+          },
+          "RuleSetName": {
+            "name": "RuleSetName",
+            "shape_name": "ReceiptRuleSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RuleSetName",
+          "Rule"
+        ]
+      },
+      "name": "UpdateReceiptRule",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Template": {
+            "name": "Template",
+            "shape_name": "Template",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Template"
+        ]
+      },
+      "name": "UpdateTemplate",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "VerifyDomainDkim": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Domain": {
+            "name": "Domain",
+            "shape_name": "Domain",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Domain"
+        ]
+      },
+      "name": "VerifyDomainDkim",
+      "output": {
+        "markers": null,
+        "members": {
+          "DkimTokens": {
+            "name": "DkimTokens",
+            "shape_name": "VerificationTokenList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "DkimTokens"
+        ]
+      }
+    },
+    "VerifyDomainIdentity": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Domain": {
+            "name": "Domain",
+            "shape_name": "Domain",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Domain"
+        ]
+      },
+      "name": "VerifyDomainIdentity",
+      "output": {
+        "markers": null,
+        "members": {
+          "VerificationToken": {
+            "name": "VerificationToken",
+            "shape_name": "VerificationToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "VerificationToken"
+        ]
+      }
+    },
+    "VerifyEmailAddress": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EmailAddress": {
+            "name": "EmailAddress",
+            "shape_name": "Address",
+            "type": "string"
+          }
+        },
+        "required": [
+          "EmailAddress"
+        ]
+      },
+      "name": "VerifyEmailAddress",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "VerifyEmailIdentity": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EmailAddress": {
+            "name": "EmailAddress",
+            "shape_name": "Address",
+            "type": "string"
+          }
+        },
+        "required": [
+          "EmailAddress"
+        ]
+      },
+      "name": "VerifyEmailIdentity",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    }
+  }
+}

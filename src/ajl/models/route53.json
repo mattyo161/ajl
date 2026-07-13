@@ -1,0 +1,3034 @@
+{
+  "metadata": {
+    "apiVersion": "2013-04-01",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "route53",
+    "globalEndpoint": "route53.amazonaws.com",
+    "protocol": "rest-xml",
+    "protocols": [
+      "rest-xml"
+    ],
+    "serviceAbbreviation": "Route 53",
+    "serviceFullName": "Amazon Route 53",
+    "serviceId": "Route 53",
+    "signatureVersion": "v4",
+    "uid": "route53-2013-04-01"
+  },
+  "name": "route53",
+  "operations": {
+    "ActivateKeySigningKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "SigningKeyName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HostedZoneId",
+          "Name"
+        ]
+      },
+      "name": "ActivateKeySigningKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "ChangeInfo": {
+            "name": "ChangeInfo",
+            "shape_name": "ChangeInfo",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ChangeInfo"
+        ]
+      }
+    },
+    "AssociateVPCWithHostedZone": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Comment": {
+            "name": "Comment",
+            "shape_name": "AssociateVPCComment",
+            "type": "string"
+          },
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "VPC": {
+            "name": "VPC",
+            "shape_name": "VPC",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "HostedZoneId",
+          "VPC"
+        ]
+      },
+      "name": "AssociateVPCWithHostedZone",
+      "output": {
+        "markers": null,
+        "members": {
+          "ChangeInfo": {
+            "name": "ChangeInfo",
+            "shape_name": "ChangeInfo",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ChangeInfo"
+        ]
+      }
+    },
+    "ChangeCidrCollection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Changes": {
+            "name": "Changes",
+            "shape_name": "CidrCollectionChanges",
+            "type": "list"
+          },
+          "CollectionVersion": {
+            "name": "CollectionVersion",
+            "shape_name": "CollectionVersion",
+            "type": "long"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "UUID",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id",
+          "Changes"
+        ]
+      },
+      "name": "ChangeCidrCollection",
+      "output": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "ChangeId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      }
+    },
+    "ChangeResourceRecordSets": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ChangeBatch": {
+            "name": "ChangeBatch",
+            "shape_name": "ChangeBatch",
+            "type": "structure"
+          },
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HostedZoneId",
+          "ChangeBatch"
+        ]
+      },
+      "name": "ChangeResourceRecordSets",
+      "output": {
+        "markers": null,
+        "members": {
+          "ChangeInfo": {
+            "name": "ChangeInfo",
+            "shape_name": "ChangeInfo",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ChangeInfo"
+        ]
+      }
+    },
+    "ChangeTagsForResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AddTags": {
+            "name": "AddTags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "RemoveTagKeys": {
+            "name": "RemoveTagKeys",
+            "shape_name": "TagKeyList",
+            "type": "list"
+          },
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "TagResourceId",
+            "type": "string"
+          },
+          "ResourceType": {
+            "name": "ResourceType",
+            "shape_name": "TagResourceType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceType",
+          "ResourceId"
+        ]
+      },
+      "name": "ChangeTagsForResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateCidrCollection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CallerReference": {
+            "name": "CallerReference",
+            "shape_name": "CidrNonce",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "CollectionName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "CallerReference"
+        ]
+      },
+      "name": "CreateCidrCollection",
+      "output": {
+        "markers": null,
+        "members": {
+          "Collection": {
+            "name": "Collection",
+            "shape_name": "CidrCollection",
+            "type": "structure"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "ResourceURI",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateHealthCheck": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CallerReference": {
+            "name": "CallerReference",
+            "shape_name": "HealthCheckNonce",
+            "type": "string"
+          },
+          "HealthCheckConfig": {
+            "name": "HealthCheckConfig",
+            "shape_name": "HealthCheckConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "CallerReference",
+          "HealthCheckConfig"
+        ]
+      },
+      "name": "CreateHealthCheck",
+      "output": {
+        "markers": null,
+        "members": {
+          "HealthCheck": {
+            "name": "HealthCheck",
+            "shape_name": "HealthCheck",
+            "type": "structure"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "ResourceURI",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HealthCheck",
+          "Location"
+        ]
+      }
+    },
+    "CreateHostedZone": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CallerReference": {
+            "name": "CallerReference",
+            "shape_name": "Nonce",
+            "type": "string"
+          },
+          "DelegationSetId": {
+            "name": "DelegationSetId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "HostedZoneConfig": {
+            "name": "HostedZoneConfig",
+            "shape_name": "HostedZoneConfig",
+            "type": "structure"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "DNSName",
+            "type": "string"
+          },
+          "VPC": {
+            "name": "VPC",
+            "shape_name": "VPC",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Name",
+          "CallerReference"
+        ]
+      },
+      "name": "CreateHostedZone",
+      "output": {
+        "markers": null,
+        "members": {
+          "ChangeInfo": {
+            "name": "ChangeInfo",
+            "shape_name": "ChangeInfo",
+            "type": "structure"
+          },
+          "DelegationSet": {
+            "name": "DelegationSet",
+            "shape_name": "DelegationSet",
+            "type": "structure"
+          },
+          "HostedZone": {
+            "name": "HostedZone",
+            "shape_name": "HostedZone",
+            "type": "structure"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "ResourceURI",
+            "type": "string"
+          },
+          "VPC": {
+            "name": "VPC",
+            "shape_name": "VPC",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "HostedZone",
+          "ChangeInfo",
+          "DelegationSet",
+          "Location"
+        ]
+      }
+    },
+    "CreateKeySigningKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CallerReference": {
+            "name": "CallerReference",
+            "shape_name": "Nonce",
+            "type": "string"
+          },
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "KeyManagementServiceArn": {
+            "name": "KeyManagementServiceArn",
+            "shape_name": "SigningKeyString",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "SigningKeyName",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "SigningKeyStatus",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CallerReference",
+          "HostedZoneId",
+          "KeyManagementServiceArn",
+          "Name",
+          "Status"
+        ]
+      },
+      "name": "CreateKeySigningKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "ChangeInfo": {
+            "name": "ChangeInfo",
+            "shape_name": "ChangeInfo",
+            "type": "structure"
+          },
+          "KeySigningKey": {
+            "name": "KeySigningKey",
+            "shape_name": "KeySigningKey",
+            "type": "structure"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "ResourceURI",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ChangeInfo",
+          "KeySigningKey",
+          "Location"
+        ]
+      }
+    },
+    "CreateQueryLoggingConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CloudWatchLogsLogGroupArn": {
+            "name": "CloudWatchLogsLogGroupArn",
+            "shape_name": "CloudWatchLogsLogGroupArn",
+            "type": "string"
+          },
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HostedZoneId",
+          "CloudWatchLogsLogGroupArn"
+        ]
+      },
+      "name": "CreateQueryLoggingConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "Location": {
+            "name": "Location",
+            "shape_name": "ResourceURI",
+            "type": "string"
+          },
+          "QueryLoggingConfig": {
+            "name": "QueryLoggingConfig",
+            "shape_name": "QueryLoggingConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "QueryLoggingConfig",
+          "Location"
+        ]
+      }
+    },
+    "CreateReusableDelegationSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CallerReference": {
+            "name": "CallerReference",
+            "shape_name": "Nonce",
+            "type": "string"
+          },
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CallerReference"
+        ]
+      },
+      "name": "CreateReusableDelegationSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "DelegationSet": {
+            "name": "DelegationSet",
+            "shape_name": "DelegationSet",
+            "type": "structure"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "ResourceURI",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DelegationSet",
+          "Location"
+        ]
+      }
+    },
+    "CreateTrafficPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Comment": {
+            "name": "Comment",
+            "shape_name": "TrafficPolicyComment",
+            "type": "string"
+          },
+          "Document": {
+            "name": "Document",
+            "shape_name": "TrafficPolicyDocument",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "TrafficPolicyName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Document"
+        ]
+      },
+      "name": "CreateTrafficPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "Location": {
+            "name": "Location",
+            "shape_name": "ResourceURI",
+            "type": "string"
+          },
+          "TrafficPolicy": {
+            "name": "TrafficPolicy",
+            "shape_name": "TrafficPolicy",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "TrafficPolicy",
+          "Location"
+        ]
+      }
+    },
+    "CreateTrafficPolicyInstance": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "DNSName",
+            "type": "string"
+          },
+          "TTL": {
+            "name": "TTL",
+            "shape_name": "TTL",
+            "type": "long"
+          },
+          "TrafficPolicyId": {
+            "name": "TrafficPolicyId",
+            "shape_name": "TrafficPolicyId",
+            "type": "string"
+          },
+          "TrafficPolicyVersion": {
+            "name": "TrafficPolicyVersion",
+            "shape_name": "TrafficPolicyVersion",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "HostedZoneId",
+          "Name",
+          "TTL",
+          "TrafficPolicyId",
+          "TrafficPolicyVersion"
+        ]
+      },
+      "name": "CreateTrafficPolicyInstance",
+      "output": {
+        "markers": null,
+        "members": {
+          "Location": {
+            "name": "Location",
+            "shape_name": "ResourceURI",
+            "type": "string"
+          },
+          "TrafficPolicyInstance": {
+            "name": "TrafficPolicyInstance",
+            "shape_name": "TrafficPolicyInstance",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "TrafficPolicyInstance",
+          "Location"
+        ]
+      }
+    },
+    "CreateTrafficPolicyVersion": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Comment": {
+            "name": "Comment",
+            "shape_name": "TrafficPolicyComment",
+            "type": "string"
+          },
+          "Document": {
+            "name": "Document",
+            "shape_name": "TrafficPolicyDocument",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "TrafficPolicyId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id",
+          "Document"
+        ]
+      },
+      "name": "CreateTrafficPolicyVersion",
+      "output": {
+        "markers": null,
+        "members": {
+          "Location": {
+            "name": "Location",
+            "shape_name": "ResourceURI",
+            "type": "string"
+          },
+          "TrafficPolicy": {
+            "name": "TrafficPolicy",
+            "shape_name": "TrafficPolicy",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "TrafficPolicy",
+          "Location"
+        ]
+      }
+    },
+    "CreateVPCAssociationAuthorization": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "VPC": {
+            "name": "VPC",
+            "shape_name": "VPC",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "HostedZoneId",
+          "VPC"
+        ]
+      },
+      "name": "CreateVPCAssociationAuthorization",
+      "output": {
+        "markers": null,
+        "members": {
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "VPC": {
+            "name": "VPC",
+            "shape_name": "VPC",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "HostedZoneId",
+          "VPC"
+        ]
+      }
+    },
+    "DeactivateKeySigningKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "SigningKeyName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HostedZoneId",
+          "Name"
+        ]
+      },
+      "name": "DeactivateKeySigningKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "ChangeInfo": {
+            "name": "ChangeInfo",
+            "shape_name": "ChangeInfo",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ChangeInfo"
+        ]
+      }
+    },
+    "DeleteCidrCollection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "UUID",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DeleteCidrCollection",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteHealthCheck": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HealthCheckId": {
+            "name": "HealthCheckId",
+            "shape_name": "HealthCheckId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HealthCheckId"
+        ]
+      },
+      "name": "DeleteHealthCheck",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteHostedZone": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "ResourceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DeleteHostedZone",
+      "output": {
+        "markers": null,
+        "members": {
+          "ChangeInfo": {
+            "name": "ChangeInfo",
+            "shape_name": "ChangeInfo",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ChangeInfo"
+        ]
+      }
+    },
+    "DeleteKeySigningKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "SigningKeyName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HostedZoneId",
+          "Name"
+        ]
+      },
+      "name": "DeleteKeySigningKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "ChangeInfo": {
+            "name": "ChangeInfo",
+            "shape_name": "ChangeInfo",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ChangeInfo"
+        ]
+      }
+    },
+    "DeleteQueryLoggingConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "QueryLoggingConfigId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DeleteQueryLoggingConfig",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteReusableDelegationSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "ResourceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DeleteReusableDelegationSet",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteTrafficPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "TrafficPolicyId",
+            "type": "string"
+          },
+          "Version": {
+            "name": "Version",
+            "shape_name": "TrafficPolicyVersion",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "Id",
+          "Version"
+        ]
+      },
+      "name": "DeleteTrafficPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteTrafficPolicyInstance": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "TrafficPolicyInstanceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DeleteTrafficPolicyInstance",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteVPCAssociationAuthorization": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "VPC": {
+            "name": "VPC",
+            "shape_name": "VPC",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "HostedZoneId",
+          "VPC"
+        ]
+      },
+      "name": "DeleteVPCAssociationAuthorization",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DisableHostedZoneDNSSEC": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HostedZoneId"
+        ]
+      },
+      "name": "DisableHostedZoneDNSSEC",
+      "output": {
+        "markers": null,
+        "members": {
+          "ChangeInfo": {
+            "name": "ChangeInfo",
+            "shape_name": "ChangeInfo",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ChangeInfo"
+        ]
+      }
+    },
+    "DisassociateVPCFromHostedZone": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Comment": {
+            "name": "Comment",
+            "shape_name": "DisassociateVPCComment",
+            "type": "string"
+          },
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "VPC": {
+            "name": "VPC",
+            "shape_name": "VPC",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "HostedZoneId",
+          "VPC"
+        ]
+      },
+      "name": "DisassociateVPCFromHostedZone",
+      "output": {
+        "markers": null,
+        "members": {
+          "ChangeInfo": {
+            "name": "ChangeInfo",
+            "shape_name": "ChangeInfo",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ChangeInfo"
+        ]
+      }
+    },
+    "EnableHostedZoneDNSSEC": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HostedZoneId"
+        ]
+      },
+      "name": "EnableHostedZoneDNSSEC",
+      "output": {
+        "markers": null,
+        "members": {
+          "ChangeInfo": {
+            "name": "ChangeInfo",
+            "shape_name": "ChangeInfo",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ChangeInfo"
+        ]
+      }
+    },
+    "GetAccountLimit": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Type": {
+            "name": "Type",
+            "shape_name": "AccountLimitType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Type"
+        ]
+      },
+      "name": "GetAccountLimit",
+      "output": {
+        "markers": null,
+        "members": {
+          "Count": {
+            "name": "Count",
+            "shape_name": "UsageCount",
+            "type": "long"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "AccountLimit",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Limit",
+          "Count"
+        ]
+      }
+    },
+    "GetChange": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "ChangeId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetChange",
+      "output": {
+        "markers": null,
+        "members": {
+          "ChangeInfo": {
+            "name": "ChangeInfo",
+            "shape_name": "ChangeInfo",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ChangeInfo"
+        ]
+      }
+    },
+    "GetCheckerIpRanges": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "GetCheckerIpRanges",
+      "output": {
+        "markers": null,
+        "members": {
+          "CheckerIpRanges": {
+            "name": "CheckerIpRanges",
+            "shape_name": "CheckerIpRanges",
+            "type": "list"
+          }
+        },
+        "required": [
+          "CheckerIpRanges"
+        ]
+      }
+    },
+    "GetDNSSEC": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HostedZoneId"
+        ]
+      },
+      "name": "GetDNSSEC",
+      "output": {
+        "markers": null,
+        "members": {
+          "KeySigningKeys": {
+            "name": "KeySigningKeys",
+            "shape_name": "KeySigningKeys",
+            "type": "list"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "DNSSECStatus",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Status",
+          "KeySigningKeys"
+        ]
+      }
+    },
+    "GetGeoLocation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ContinentCode": {
+            "name": "ContinentCode",
+            "shape_name": "GeoLocationContinentCode",
+            "type": "string"
+          },
+          "CountryCode": {
+            "name": "CountryCode",
+            "shape_name": "GeoLocationCountryCode",
+            "type": "string"
+          },
+          "SubdivisionCode": {
+            "name": "SubdivisionCode",
+            "shape_name": "GeoLocationSubdivisionCode",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "GetGeoLocation",
+      "output": {
+        "markers": null,
+        "members": {
+          "GeoLocationDetails": {
+            "name": "GeoLocationDetails",
+            "shape_name": "GeoLocationDetails",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "GeoLocationDetails"
+        ]
+      }
+    },
+    "GetHealthCheck": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HealthCheckId": {
+            "name": "HealthCheckId",
+            "shape_name": "HealthCheckId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HealthCheckId"
+        ]
+      },
+      "name": "GetHealthCheck",
+      "output": {
+        "markers": null,
+        "members": {
+          "HealthCheck": {
+            "name": "HealthCheck",
+            "shape_name": "HealthCheck",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "HealthCheck"
+        ]
+      }
+    },
+    "GetHealthCheckCount": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "GetHealthCheckCount",
+      "output": {
+        "markers": null,
+        "members": {
+          "HealthCheckCount": {
+            "name": "HealthCheckCount",
+            "shape_name": "HealthCheckCount",
+            "type": "long"
+          }
+        },
+        "required": [
+          "HealthCheckCount"
+        ]
+      }
+    },
+    "GetHealthCheckLastFailureReason": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HealthCheckId": {
+            "name": "HealthCheckId",
+            "shape_name": "HealthCheckId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HealthCheckId"
+        ]
+      },
+      "name": "GetHealthCheckLastFailureReason",
+      "output": {
+        "markers": null,
+        "members": {
+          "HealthCheckObservations": {
+            "name": "HealthCheckObservations",
+            "shape_name": "HealthCheckObservations",
+            "type": "list"
+          }
+        },
+        "required": [
+          "HealthCheckObservations"
+        ]
+      }
+    },
+    "GetHealthCheckStatus": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HealthCheckId": {
+            "name": "HealthCheckId",
+            "shape_name": "HealthCheckId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HealthCheckId"
+        ]
+      },
+      "name": "GetHealthCheckStatus",
+      "output": {
+        "markers": null,
+        "members": {
+          "HealthCheckObservations": {
+            "name": "HealthCheckObservations",
+            "shape_name": "HealthCheckObservations",
+            "type": "list"
+          }
+        },
+        "required": [
+          "HealthCheckObservations"
+        ]
+      }
+    },
+    "GetHostedZone": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "ResourceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetHostedZone",
+      "output": {
+        "markers": null,
+        "members": {
+          "DelegationSet": {
+            "name": "DelegationSet",
+            "shape_name": "DelegationSet",
+            "type": "structure"
+          },
+          "HostedZone": {
+            "name": "HostedZone",
+            "shape_name": "HostedZone",
+            "type": "structure"
+          },
+          "VPCs": {
+            "name": "VPCs",
+            "shape_name": "VPCs",
+            "type": "list"
+          }
+        },
+        "required": [
+          "HostedZone"
+        ]
+      }
+    },
+    "GetHostedZoneCount": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "GetHostedZoneCount",
+      "output": {
+        "markers": null,
+        "members": {
+          "HostedZoneCount": {
+            "name": "HostedZoneCount",
+            "shape_name": "HostedZoneCount",
+            "type": "long"
+          }
+        },
+        "required": [
+          "HostedZoneCount"
+        ]
+      }
+    },
+    "GetHostedZoneLimit": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "HostedZoneLimitType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Type",
+          "HostedZoneId"
+        ]
+      },
+      "name": "GetHostedZoneLimit",
+      "output": {
+        "markers": null,
+        "members": {
+          "Count": {
+            "name": "Count",
+            "shape_name": "UsageCount",
+            "type": "long"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "HostedZoneLimit",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Limit",
+          "Count"
+        ]
+      }
+    },
+    "GetQueryLoggingConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "QueryLoggingConfigId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetQueryLoggingConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "QueryLoggingConfig": {
+            "name": "QueryLoggingConfig",
+            "shape_name": "QueryLoggingConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "QueryLoggingConfig"
+        ]
+      }
+    },
+    "GetReusableDelegationSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "ResourceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetReusableDelegationSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "DelegationSet": {
+            "name": "DelegationSet",
+            "shape_name": "DelegationSet",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "DelegationSet"
+        ]
+      }
+    },
+    "GetReusableDelegationSetLimit": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DelegationSetId": {
+            "name": "DelegationSetId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "ReusableDelegationSetLimitType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Type",
+          "DelegationSetId"
+        ]
+      },
+      "name": "GetReusableDelegationSetLimit",
+      "output": {
+        "markers": null,
+        "members": {
+          "Count": {
+            "name": "Count",
+            "shape_name": "UsageCount",
+            "type": "long"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "ReusableDelegationSetLimit",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Limit",
+          "Count"
+        ]
+      }
+    },
+    "GetTrafficPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "TrafficPolicyId",
+            "type": "string"
+          },
+          "Version": {
+            "name": "Version",
+            "shape_name": "TrafficPolicyVersion",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "Id",
+          "Version"
+        ]
+      },
+      "name": "GetTrafficPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "TrafficPolicy": {
+            "name": "TrafficPolicy",
+            "shape_name": "TrafficPolicy",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "TrafficPolicy"
+        ]
+      }
+    },
+    "GetTrafficPolicyInstance": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "TrafficPolicyInstanceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetTrafficPolicyInstance",
+      "output": {
+        "markers": null,
+        "members": {
+          "TrafficPolicyInstance": {
+            "name": "TrafficPolicyInstance",
+            "shape_name": "TrafficPolicyInstance",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "TrafficPolicyInstance"
+        ]
+      }
+    },
+    "GetTrafficPolicyInstanceCount": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "GetTrafficPolicyInstanceCount",
+      "output": {
+        "markers": null,
+        "members": {
+          "TrafficPolicyInstanceCount": {
+            "name": "TrafficPolicyInstanceCount",
+            "shape_name": "TrafficPolicyInstanceCount",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "TrafficPolicyInstanceCount"
+        ]
+      }
+    },
+    "ListCidrBlocks": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "CollectionId": {
+            "name": "CollectionId",
+            "shape_name": "UUID",
+            "type": "string"
+          },
+          "LocationName": {
+            "name": "LocationName",
+            "shape_name": "CidrLocationNameDefaultNotAllowed",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CollectionId"
+        ]
+      },
+      "name": "ListCidrBlocks",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "CidrBlocks": {
+            "name": "CidrBlocks",
+            "shape_name": "CidrBlockSummaries",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListCidrCollections": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListCidrCollections",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "CidrCollections": {
+            "name": "CidrCollections",
+            "shape_name": "CollectionSummaries",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListCidrLocations": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "CollectionId": {
+            "name": "CollectionId",
+            "shape_name": "UUID",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CollectionId"
+        ]
+      },
+      "name": "ListCidrLocations",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "CidrLocations": {
+            "name": "CidrLocations",
+            "shape_name": "LocationSummaries",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListGeoLocations": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          },
+          "StartContinentCode": {
+            "name": "StartContinentCode",
+            "shape_name": "GeoLocationContinentCode",
+            "type": "string"
+          },
+          "StartCountryCode": {
+            "name": "StartCountryCode",
+            "shape_name": "GeoLocationCountryCode",
+            "type": "string"
+          },
+          "StartSubdivisionCode": {
+            "name": "StartSubdivisionCode",
+            "shape_name": "GeoLocationSubdivisionCode",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListGeoLocations",
+      "output": {
+        "markers": null,
+        "members": {
+          "GeoLocationDetailsList": {
+            "name": "GeoLocationDetailsList",
+            "shape_name": "GeoLocationDetailsList",
+            "type": "list"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "PageTruncated",
+            "type": "boolean"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          },
+          "NextContinentCode": {
+            "name": "NextContinentCode",
+            "shape_name": "GeoLocationContinentCode",
+            "type": "string"
+          },
+          "NextCountryCode": {
+            "name": "NextCountryCode",
+            "shape_name": "GeoLocationCountryCode",
+            "type": "string"
+          },
+          "NextSubdivisionCode": {
+            "name": "NextSubdivisionCode",
+            "shape_name": "GeoLocationSubdivisionCode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GeoLocationDetailsList",
+          "IsTruncated",
+          "MaxItems"
+        ]
+      }
+    },
+    "ListHealthChecks": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "PageMarker",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListHealthChecks",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "HealthChecks": {
+            "name": "HealthChecks",
+            "shape_name": "HealthChecks",
+            "type": "list"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "PageTruncated",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "PageMarker",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "PageMarker",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HealthChecks",
+          "Marker",
+          "IsTruncated",
+          "MaxItems"
+        ],
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:route53:::healthcheck/{Id}",
+            "id": "Id",
+            "path": [
+              "HealthChecks"
+            ],
+            "type": "route53:healthcheck"
+          }
+        ]
+      }
+    },
+    "ListHostedZones": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "DelegationSetId": {
+            "name": "DelegationSetId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "HostedZoneType": {
+            "name": "HostedZoneType",
+            "shape_name": "HostedZoneType",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "PageMarker",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListHostedZones",
+      "output": {
+        "jq": "(.HostedZones//[])[] |\n.Id = (.Id | sub(\"^/hostedzone/\"; \"\")) |\n{Type: \"route53:hostedzone\", Id: .Id, Name: .Name,\n Arn: \"arn:\\($partition//\"aws\"):route53:::hostedzone/\\(.Id)\", Tags: {}} + .",
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "HostedZones": {
+            "name": "HostedZones",
+            "shape_name": "HostedZones",
+            "type": "list"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "PageTruncated",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "PageMarker",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "PageMarker",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HostedZones",
+          "Marker",
+          "IsTruncated",
+          "MaxItems"
+        ]
+      }
+    },
+    "ListHostedZonesByName": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DNSName": {
+            "name": "DNSName",
+            "shape_name": "DNSName",
+            "type": "string"
+          },
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListHostedZonesByName",
+      "output": {
+        "markers": null,
+        "members": {
+          "DNSName": {
+            "name": "DNSName",
+            "shape_name": "DNSName",
+            "type": "string"
+          },
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "HostedZones": {
+            "name": "HostedZones",
+            "shape_name": "HostedZones",
+            "type": "list"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "PageTruncated",
+            "type": "boolean"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          },
+          "NextDNSName": {
+            "name": "NextDNSName",
+            "shape_name": "DNSName",
+            "type": "string"
+          },
+          "NextHostedZoneId": {
+            "name": "NextHostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HostedZones",
+          "IsTruncated",
+          "MaxItems"
+        ]
+      }
+    },
+    "ListHostedZonesByVPC": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "VPCId": {
+            "name": "VPCId",
+            "shape_name": "VPCId",
+            "type": "string"
+          },
+          "VPCRegion": {
+            "name": "VPCRegion",
+            "shape_name": "VPCRegion",
+            "type": "string"
+          }
+        },
+        "required": [
+          "VPCId",
+          "VPCRegion"
+        ]
+      },
+      "name": "ListHostedZonesByVPC",
+      "output": {
+        "markers": null,
+        "members": {
+          "HostedZoneSummaries": {
+            "name": "HostedZoneSummaries",
+            "shape_name": "HostedZoneSummaries",
+            "type": "list"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HostedZoneSummaries",
+          "MaxItems"
+        ]
+      }
+    },
+    "ListQueryLoggingConfigs": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListQueryLoggingConfigs",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "QueryLoggingConfigs": {
+            "name": "QueryLoggingConfigs",
+            "shape_name": "QueryLoggingConfigs",
+            "type": "list"
+          }
+        },
+        "required": [
+          "QueryLoggingConfigs"
+        ]
+      }
+    },
+    "ListResourceRecordSets": {
+      "input": {
+        "markers": [
+          "StartRecordName",
+          "StartRecordType",
+          "StartRecordIdentifier"
+        ],
+        "members": {
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          },
+          "StartRecordIdentifier": {
+            "name": "StartRecordIdentifier",
+            "shape_name": "ResourceRecordSetIdentifier",
+            "type": "string"
+          },
+          "StartRecordName": {
+            "name": "StartRecordName",
+            "shape_name": "DNSName",
+            "type": "string"
+          },
+          "StartRecordType": {
+            "name": "StartRecordType",
+            "shape_name": "RRType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HostedZoneId"
+        ]
+      },
+      "name": "ListResourceRecordSets",
+      "output": {
+        "markers": [
+          "NextRecordName",
+          "NextRecordType",
+          "NextRecordIdentifier"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "PageTruncated",
+            "type": "boolean"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          },
+          "NextRecordIdentifier": {
+            "name": "NextRecordIdentifier",
+            "shape_name": "ResourceRecordSetIdentifier",
+            "type": "string"
+          },
+          "NextRecordName": {
+            "name": "NextRecordName",
+            "shape_name": "DNSName",
+            "type": "string"
+          },
+          "NextRecordType": {
+            "name": "NextRecordType",
+            "shape_name": "RRType",
+            "type": "string"
+          },
+          "ResourceRecordSets": {
+            "name": "ResourceRecordSets",
+            "shape_name": "ResourceRecordSets",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceRecordSets",
+          "IsTruncated",
+          "MaxItems"
+        ],
+        "resources": [
+          {
+            "id": "Name",
+            "name": "Name",
+            "path": [
+              "ResourceRecordSets"
+            ],
+            "type": "route53:rrset"
+          }
+        ]
+      }
+    },
+    "ListReusableDelegationSets": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "PageMarker",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListReusableDelegationSets",
+      "output": {
+        "markers": null,
+        "members": {
+          "DelegationSets": {
+            "name": "DelegationSets",
+            "shape_name": "DelegationSets",
+            "type": "list"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "PageTruncated",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "PageMarker",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "PageMarker",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DelegationSets",
+          "Marker",
+          "IsTruncated",
+          "MaxItems"
+        ]
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "TagResourceId",
+            "type": "string"
+          },
+          "ResourceType": {
+            "name": "ResourceType",
+            "shape_name": "TagResourceType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceType",
+          "ResourceId"
+        ]
+      },
+      "name": "ListTagsForResource",
+      "output": {
+        "markers": null,
+        "members": {
+          "ResourceTagSet": {
+            "name": "ResourceTagSet",
+            "shape_name": "ResourceTagSet",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ResourceTagSet"
+        ]
+      }
+    },
+    "ListTagsForResources": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceIds": {
+            "name": "ResourceIds",
+            "shape_name": "TagResourceIdList",
+            "type": "list"
+          },
+          "ResourceType": {
+            "name": "ResourceType",
+            "shape_name": "TagResourceType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceType",
+          "ResourceIds"
+        ]
+      },
+      "name": "ListTagsForResources",
+      "output": {
+        "markers": null,
+        "members": {
+          "ResourceTagSets": {
+            "name": "ResourceTagSets",
+            "shape_name": "ResourceTagSetList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceTagSets"
+        ]
+      }
+    },
+    "ListTrafficPolicies": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          },
+          "TrafficPolicyIdMarker": {
+            "name": "TrafficPolicyIdMarker",
+            "shape_name": "TrafficPolicyId",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListTrafficPolicies",
+      "output": {
+        "markers": null,
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "PageTruncated",
+            "type": "boolean"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          },
+          "TrafficPolicyIdMarker": {
+            "name": "TrafficPolicyIdMarker",
+            "shape_name": "TrafficPolicyId",
+            "type": "string"
+          },
+          "TrafficPolicySummaries": {
+            "name": "TrafficPolicySummaries",
+            "shape_name": "TrafficPolicySummaries",
+            "type": "list"
+          }
+        },
+        "required": [
+          "TrafficPolicySummaries",
+          "IsTruncated",
+          "TrafficPolicyIdMarker",
+          "MaxItems"
+        ]
+      }
+    },
+    "ListTrafficPolicyInstances": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HostedZoneIdMarker": {
+            "name": "HostedZoneIdMarker",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          },
+          "TrafficPolicyInstanceNameMarker": {
+            "name": "TrafficPolicyInstanceNameMarker",
+            "shape_name": "DNSName",
+            "type": "string"
+          },
+          "TrafficPolicyInstanceTypeMarker": {
+            "name": "TrafficPolicyInstanceTypeMarker",
+            "shape_name": "RRType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListTrafficPolicyInstances",
+      "output": {
+        "markers": null,
+        "members": {
+          "HostedZoneIdMarker": {
+            "name": "HostedZoneIdMarker",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "PageTruncated",
+            "type": "boolean"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          },
+          "TrafficPolicyInstanceNameMarker": {
+            "name": "TrafficPolicyInstanceNameMarker",
+            "shape_name": "DNSName",
+            "type": "string"
+          },
+          "TrafficPolicyInstanceTypeMarker": {
+            "name": "TrafficPolicyInstanceTypeMarker",
+            "shape_name": "RRType",
+            "type": "string"
+          },
+          "TrafficPolicyInstances": {
+            "name": "TrafficPolicyInstances",
+            "shape_name": "TrafficPolicyInstances",
+            "type": "list"
+          }
+        },
+        "required": [
+          "TrafficPolicyInstances",
+          "IsTruncated",
+          "MaxItems"
+        ]
+      }
+    },
+    "ListTrafficPolicyInstancesByHostedZone": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          },
+          "TrafficPolicyInstanceNameMarker": {
+            "name": "TrafficPolicyInstanceNameMarker",
+            "shape_name": "DNSName",
+            "type": "string"
+          },
+          "TrafficPolicyInstanceTypeMarker": {
+            "name": "TrafficPolicyInstanceTypeMarker",
+            "shape_name": "RRType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HostedZoneId"
+        ]
+      },
+      "name": "ListTrafficPolicyInstancesByHostedZone",
+      "output": {
+        "markers": null,
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "PageTruncated",
+            "type": "boolean"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          },
+          "TrafficPolicyInstanceNameMarker": {
+            "name": "TrafficPolicyInstanceNameMarker",
+            "shape_name": "DNSName",
+            "type": "string"
+          },
+          "TrafficPolicyInstanceTypeMarker": {
+            "name": "TrafficPolicyInstanceTypeMarker",
+            "shape_name": "RRType",
+            "type": "string"
+          },
+          "TrafficPolicyInstances": {
+            "name": "TrafficPolicyInstances",
+            "shape_name": "TrafficPolicyInstances",
+            "type": "list"
+          }
+        },
+        "required": [
+          "TrafficPolicyInstances",
+          "IsTruncated",
+          "MaxItems"
+        ]
+      }
+    },
+    "ListTrafficPolicyInstancesByPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HostedZoneIdMarker": {
+            "name": "HostedZoneIdMarker",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          },
+          "TrafficPolicyId": {
+            "name": "TrafficPolicyId",
+            "shape_name": "TrafficPolicyId",
+            "type": "string"
+          },
+          "TrafficPolicyInstanceNameMarker": {
+            "name": "TrafficPolicyInstanceNameMarker",
+            "shape_name": "DNSName",
+            "type": "string"
+          },
+          "TrafficPolicyInstanceTypeMarker": {
+            "name": "TrafficPolicyInstanceTypeMarker",
+            "shape_name": "RRType",
+            "type": "string"
+          },
+          "TrafficPolicyVersion": {
+            "name": "TrafficPolicyVersion",
+            "shape_name": "TrafficPolicyVersion",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "TrafficPolicyId",
+          "TrafficPolicyVersion"
+        ]
+      },
+      "name": "ListTrafficPolicyInstancesByPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "HostedZoneIdMarker": {
+            "name": "HostedZoneIdMarker",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "PageTruncated",
+            "type": "boolean"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          },
+          "TrafficPolicyInstanceNameMarker": {
+            "name": "TrafficPolicyInstanceNameMarker",
+            "shape_name": "DNSName",
+            "type": "string"
+          },
+          "TrafficPolicyInstanceTypeMarker": {
+            "name": "TrafficPolicyInstanceTypeMarker",
+            "shape_name": "RRType",
+            "type": "string"
+          },
+          "TrafficPolicyInstances": {
+            "name": "TrafficPolicyInstances",
+            "shape_name": "TrafficPolicyInstances",
+            "type": "list"
+          }
+        },
+        "required": [
+          "TrafficPolicyInstances",
+          "IsTruncated",
+          "MaxItems"
+        ]
+      }
+    },
+    "ListTrafficPolicyVersions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "TrafficPolicyId",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          },
+          "TrafficPolicyVersionMarker": {
+            "name": "TrafficPolicyVersionMarker",
+            "shape_name": "TrafficPolicyVersionMarker",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "ListTrafficPolicyVersions",
+      "output": {
+        "markers": null,
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "PageTruncated",
+            "type": "boolean"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "PageMaxItems",
+            "type": "string"
+          },
+          "TrafficPolicies": {
+            "name": "TrafficPolicies",
+            "shape_name": "TrafficPolicies",
+            "type": "list"
+          },
+          "TrafficPolicyVersionMarker": {
+            "name": "TrafficPolicyVersionMarker",
+            "shape_name": "TrafficPolicyVersionMarker",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TrafficPolicies",
+          "IsTruncated",
+          "TrafficPolicyVersionMarker",
+          "MaxItems"
+        ]
+      }
+    },
+    "ListVPCAssociationAuthorizations": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HostedZoneId"
+        ]
+      },
+      "name": "ListVPCAssociationAuthorizations",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "VPCs": {
+            "name": "VPCs",
+            "shape_name": "VPCs",
+            "type": "list"
+          }
+        },
+        "required": [
+          "HostedZoneId",
+          "VPCs"
+        ]
+      }
+    },
+    "TestDNSAnswer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EDNS0ClientSubnetIP": {
+            "name": "EDNS0ClientSubnetIP",
+            "shape_name": "IPAddress",
+            "type": "string"
+          },
+          "EDNS0ClientSubnetMask": {
+            "name": "EDNS0ClientSubnetMask",
+            "shape_name": "SubnetMask",
+            "type": "string"
+          },
+          "HostedZoneId": {
+            "name": "HostedZoneId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "RecordName": {
+            "name": "RecordName",
+            "shape_name": "DNSName",
+            "type": "string"
+          },
+          "RecordType": {
+            "name": "RecordType",
+            "shape_name": "RRType",
+            "type": "string"
+          },
+          "ResolverIP": {
+            "name": "ResolverIP",
+            "shape_name": "IPAddress",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HostedZoneId",
+          "RecordName",
+          "RecordType"
+        ]
+      },
+      "name": "TestDNSAnswer",
+      "output": {
+        "markers": null,
+        "members": {
+          "Nameserver": {
+            "name": "Nameserver",
+            "shape_name": "Nameserver",
+            "type": "string"
+          },
+          "Protocol": {
+            "name": "Protocol",
+            "shape_name": "TransportProtocol",
+            "type": "string"
+          },
+          "RecordData": {
+            "name": "RecordData",
+            "shape_name": "RecordData",
+            "type": "list"
+          },
+          "RecordName": {
+            "name": "RecordName",
+            "shape_name": "DNSName",
+            "type": "string"
+          },
+          "RecordType": {
+            "name": "RecordType",
+            "shape_name": "RRType",
+            "type": "string"
+          },
+          "ResponseCode": {
+            "name": "ResponseCode",
+            "shape_name": "DNSRCode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Nameserver",
+          "RecordName",
+          "RecordType",
+          "RecordData",
+          "ResponseCode",
+          "Protocol"
+        ]
+      }
+    },
+    "UpdateHealthCheck": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AlarmIdentifier": {
+            "name": "AlarmIdentifier",
+            "shape_name": "AlarmIdentifier",
+            "type": "structure"
+          },
+          "ChildHealthChecks": {
+            "name": "ChildHealthChecks",
+            "shape_name": "ChildHealthCheckList",
+            "type": "list"
+          },
+          "Disabled": {
+            "name": "Disabled",
+            "shape_name": "Disabled",
+            "type": "boolean"
+          },
+          "EnableSNI": {
+            "name": "EnableSNI",
+            "shape_name": "EnableSNI",
+            "type": "boolean"
+          },
+          "FailureThreshold": {
+            "name": "FailureThreshold",
+            "shape_name": "FailureThreshold",
+            "type": "integer"
+          },
+          "FullyQualifiedDomainName": {
+            "name": "FullyQualifiedDomainName",
+            "shape_name": "FullyQualifiedDomainName",
+            "type": "string"
+          },
+          "HealthCheckId": {
+            "name": "HealthCheckId",
+            "shape_name": "HealthCheckId",
+            "type": "string"
+          },
+          "HealthCheckVersion": {
+            "name": "HealthCheckVersion",
+            "shape_name": "HealthCheckVersion",
+            "type": "long"
+          },
+          "HealthThreshold": {
+            "name": "HealthThreshold",
+            "shape_name": "HealthThreshold",
+            "type": "integer"
+          },
+          "IPAddress": {
+            "name": "IPAddress",
+            "shape_name": "IPAddress",
+            "type": "string"
+          },
+          "InsufficientDataHealthStatus": {
+            "name": "InsufficientDataHealthStatus",
+            "shape_name": "InsufficientDataHealthStatus",
+            "type": "string"
+          },
+          "Inverted": {
+            "name": "Inverted",
+            "shape_name": "Inverted",
+            "type": "boolean"
+          },
+          "Port": {
+            "name": "Port",
+            "shape_name": "Port",
+            "type": "integer"
+          },
+          "Regions": {
+            "name": "Regions",
+            "shape_name": "HealthCheckRegionList",
+            "type": "list"
+          },
+          "ResetElements": {
+            "name": "ResetElements",
+            "shape_name": "ResettableElementNameList",
+            "type": "list"
+          },
+          "ResourcePath": {
+            "name": "ResourcePath",
+            "shape_name": "ResourcePath",
+            "type": "string"
+          },
+          "SearchString": {
+            "name": "SearchString",
+            "shape_name": "SearchString",
+            "type": "string"
+          }
+        },
+        "required": [
+          "HealthCheckId"
+        ]
+      },
+      "name": "UpdateHealthCheck",
+      "output": {
+        "markers": null,
+        "members": {
+          "HealthCheck": {
+            "name": "HealthCheck",
+            "shape_name": "HealthCheck",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "HealthCheck"
+        ]
+      }
+    },
+    "UpdateHostedZoneComment": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Comment": {
+            "name": "Comment",
+            "shape_name": "ResourceDescription",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "ResourceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "UpdateHostedZoneComment",
+      "output": {
+        "markers": null,
+        "members": {
+          "HostedZone": {
+            "name": "HostedZone",
+            "shape_name": "HostedZone",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "HostedZone"
+        ]
+      }
+    },
+    "UpdateTrafficPolicyComment": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Comment": {
+            "name": "Comment",
+            "shape_name": "TrafficPolicyComment",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "TrafficPolicyId",
+            "type": "string"
+          },
+          "Version": {
+            "name": "Version",
+            "shape_name": "TrafficPolicyVersion",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "Id",
+          "Version",
+          "Comment"
+        ]
+      },
+      "name": "UpdateTrafficPolicyComment",
+      "output": {
+        "markers": null,
+        "members": {
+          "TrafficPolicy": {
+            "name": "TrafficPolicy",
+            "shape_name": "TrafficPolicy",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "TrafficPolicy"
+        ]
+      }
+    },
+    "UpdateTrafficPolicyInstance": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "TrafficPolicyInstanceId",
+            "type": "string"
+          },
+          "TTL": {
+            "name": "TTL",
+            "shape_name": "TTL",
+            "type": "long"
+          },
+          "TrafficPolicyId": {
+            "name": "TrafficPolicyId",
+            "shape_name": "TrafficPolicyId",
+            "type": "string"
+          },
+          "TrafficPolicyVersion": {
+            "name": "TrafficPolicyVersion",
+            "shape_name": "TrafficPolicyVersion",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "Id",
+          "TTL",
+          "TrafficPolicyId",
+          "TrafficPolicyVersion"
+        ]
+      },
+      "name": "UpdateTrafficPolicyInstance",
+      "output": {
+        "markers": null,
+        "members": {
+          "TrafficPolicyInstance": {
+            "name": "TrafficPolicyInstance",
+            "shape_name": "TrafficPolicyInstance",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "TrafficPolicyInstance"
+        ]
+      }
+    }
+  }
+}

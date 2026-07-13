@@ -1,0 +1,6120 @@
+{
+  "metadata": {
+    "apiVersion": "2010-05-08",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "iam",
+    "globalEndpoint": "iam.amazonaws.com",
+    "protocol": "query",
+    "protocols": [
+      "query"
+    ],
+    "serviceAbbreviation": "IAM",
+    "serviceFullName": "AWS Identity and Access Management",
+    "serviceId": "IAM",
+    "signatureVersion": "v4",
+    "uid": "iam-2010-05-08",
+    "xmlNamespace": "https://iam.amazonaws.com/doc/2010-05-08/"
+  },
+  "name": "iam",
+  "operations": {
+    "AddClientIDToOpenIDConnectProvider": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientID": {
+            "name": "ClientID",
+            "shape_name": "clientIDType",
+            "type": "string"
+          },
+          "OpenIDConnectProviderArn": {
+            "name": "OpenIDConnectProviderArn",
+            "shape_name": "arnType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "OpenIDConnectProviderArn",
+          "ClientID"
+        ]
+      },
+      "name": "AddClientIDToOpenIDConnectProvider",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "AddRoleToInstanceProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "InstanceProfileName": {
+            "name": "InstanceProfileName",
+            "shape_name": "instanceProfileNameType",
+            "type": "string"
+          },
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "InstanceProfileName",
+          "RoleName"
+        ]
+      },
+      "name": "AddRoleToInstanceProfile",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "AddUserToGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GroupName": {
+            "name": "GroupName",
+            "shape_name": "groupNameType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GroupName",
+          "UserName"
+        ]
+      },
+      "name": "AddUserToGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "AttachGroupPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GroupName": {
+            "name": "GroupName",
+            "shape_name": "groupNameType",
+            "type": "string"
+          },
+          "PolicyArn": {
+            "name": "PolicyArn",
+            "shape_name": "arnType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GroupName",
+          "PolicyArn"
+        ]
+      },
+      "name": "AttachGroupPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "AttachRolePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyArn": {
+            "name": "PolicyArn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RoleName",
+          "PolicyArn"
+        ]
+      },
+      "name": "AttachRolePolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "AttachUserPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyArn": {
+            "name": "PolicyArn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName",
+          "PolicyArn"
+        ]
+      },
+      "name": "AttachUserPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ChangePassword": {
+      "input": {
+        "markers": null,
+        "members": {
+          "NewPassword": {
+            "name": "NewPassword",
+            "shape_name": "passwordType",
+            "type": "string"
+          },
+          "OldPassword": {
+            "name": "OldPassword",
+            "shape_name": "passwordType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "OldPassword",
+          "NewPassword"
+        ]
+      },
+      "name": "ChangePassword",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateAccessKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "CreateAccessKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "AccessKey": {
+            "name": "AccessKey",
+            "shape_name": "AccessKey",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "AccessKey"
+        ]
+      }
+    },
+    "CreateAccountAlias": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AccountAlias": {
+            "name": "AccountAlias",
+            "shape_name": "accountAliasType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AccountAlias"
+        ]
+      },
+      "name": "CreateAccountAlias",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GroupName": {
+            "name": "GroupName",
+            "shape_name": "groupNameType",
+            "type": "string"
+          },
+          "Path": {
+            "name": "Path",
+            "shape_name": "pathType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GroupName"
+        ]
+      },
+      "name": "CreateGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "Group": {
+            "name": "Group",
+            "shape_name": "Group",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Group"
+        ]
+      }
+    },
+    "CreateInstanceProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "InstanceProfileName": {
+            "name": "InstanceProfileName",
+            "shape_name": "instanceProfileNameType",
+            "type": "string"
+          },
+          "Path": {
+            "name": "Path",
+            "shape_name": "pathType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "InstanceProfileName"
+        ]
+      },
+      "name": "CreateInstanceProfile",
+      "output": {
+        "markers": null,
+        "members": {
+          "InstanceProfile": {
+            "name": "InstanceProfile",
+            "shape_name": "InstanceProfile",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "InstanceProfile"
+        ]
+      }
+    },
+    "CreateLoginProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Password": {
+            "name": "Password",
+            "shape_name": "passwordType",
+            "type": "string"
+          },
+          "PasswordResetRequired": {
+            "name": "PasswordResetRequired",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "CreateLoginProfile",
+      "output": {
+        "markers": null,
+        "members": {
+          "LoginProfile": {
+            "name": "LoginProfile",
+            "shape_name": "LoginProfile",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "LoginProfile"
+        ]
+      }
+    },
+    "CreateOpenIDConnectProvider": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientIDList": {
+            "name": "ClientIDList",
+            "shape_name": "clientIDListType",
+            "type": "list"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          },
+          "ThumbprintList": {
+            "name": "ThumbprintList",
+            "shape_name": "thumbprintListType",
+            "type": "list"
+          },
+          "Url": {
+            "name": "Url",
+            "shape_name": "OpenIDConnectProviderUrlType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Url"
+        ]
+      },
+      "name": "CreateOpenIDConnectProvider",
+      "output": {
+        "markers": null,
+        "members": {
+          "OpenIDConnectProviderArn": {
+            "name": "OpenIDConnectProviderArn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreatePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "policyDescriptionType",
+            "type": "string"
+          },
+          "Path": {
+            "name": "Path",
+            "shape_name": "policyPathType",
+            "type": "string"
+          },
+          "PolicyDocument": {
+            "name": "PolicyDocument",
+            "shape_name": "policyDocumentType",
+            "type": "string"
+          },
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "policyNameType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "PolicyName",
+          "PolicyDocument"
+        ]
+      },
+      "name": "CreatePolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "Policy",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreatePolicyVersion": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyArn": {
+            "name": "PolicyArn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "PolicyDocument": {
+            "name": "PolicyDocument",
+            "shape_name": "policyDocumentType",
+            "type": "string"
+          },
+          "SetAsDefault": {
+            "name": "SetAsDefault",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "PolicyArn",
+          "PolicyDocument"
+        ]
+      },
+      "name": "CreatePolicyVersion",
+      "output": {
+        "markers": null,
+        "members": {
+          "PolicyVersion": {
+            "name": "PolicyVersion",
+            "shape_name": "PolicyVersion",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateRole": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AssumeRolePolicyDocument": {
+            "name": "AssumeRolePolicyDocument",
+            "shape_name": "policyDocumentType",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "roleDescriptionType",
+            "type": "string"
+          },
+          "MaxSessionDuration": {
+            "name": "MaxSessionDuration",
+            "shape_name": "roleMaxSessionDurationType",
+            "type": "integer"
+          },
+          "Path": {
+            "name": "Path",
+            "shape_name": "pathType",
+            "type": "string"
+          },
+          "PermissionsBoundary": {
+            "name": "PermissionsBoundary",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "RoleName",
+          "AssumeRolePolicyDocument"
+        ]
+      },
+      "name": "CreateRole",
+      "output": {
+        "markers": null,
+        "members": {
+          "Role": {
+            "name": "Role",
+            "shape_name": "Role",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Role"
+        ]
+      }
+    },
+    "CreateSAMLProvider": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AddPrivateKey": {
+            "name": "AddPrivateKey",
+            "shape_name": "privateKeyType",
+            "type": "string"
+          },
+          "AssertionEncryptionMode": {
+            "name": "AssertionEncryptionMode",
+            "shape_name": "assertionEncryptionModeType",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "SAMLProviderNameType",
+            "type": "string"
+          },
+          "SAMLMetadataDocument": {
+            "name": "SAMLMetadataDocument",
+            "shape_name": "SAMLMetadataDocumentType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "SAMLMetadataDocument",
+          "Name"
+        ]
+      },
+      "name": "CreateSAMLProvider",
+      "output": {
+        "markers": null,
+        "members": {
+          "SAMLProviderArn": {
+            "name": "SAMLProviderArn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateServiceLinkedRole": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AWSServiceName": {
+            "name": "AWSServiceName",
+            "shape_name": "groupNameType",
+            "type": "string"
+          },
+          "CustomSuffix": {
+            "name": "CustomSuffix",
+            "shape_name": "customSuffixType",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "roleDescriptionType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AWSServiceName"
+        ]
+      },
+      "name": "CreateServiceLinkedRole",
+      "output": {
+        "markers": null,
+        "members": {
+          "Role": {
+            "name": "Role",
+            "shape_name": "Role",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateServiceSpecificCredential": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CredentialAgeDays": {
+            "name": "CredentialAgeDays",
+            "shape_name": "credentialAgeDays",
+            "type": "integer"
+          },
+          "ServiceName": {
+            "name": "ServiceName",
+            "shape_name": "serviceName",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName",
+          "ServiceName"
+        ]
+      },
+      "name": "CreateServiceSpecificCredential",
+      "output": {
+        "markers": null,
+        "members": {
+          "ServiceSpecificCredential": {
+            "name": "ServiceSpecificCredential",
+            "shape_name": "ServiceSpecificCredential",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateUser": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Path": {
+            "name": "Path",
+            "shape_name": "pathType",
+            "type": "string"
+          },
+          "PermissionsBoundary": {
+            "name": "PermissionsBoundary",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName"
+        ]
+      },
+      "name": "CreateUser",
+      "output": {
+        "markers": null,
+        "members": {
+          "User": {
+            "name": "User",
+            "shape_name": "User",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateVirtualMFADevice": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Path": {
+            "name": "Path",
+            "shape_name": "pathType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          },
+          "VirtualMFADeviceName": {
+            "name": "VirtualMFADeviceName",
+            "shape_name": "virtualMFADeviceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "VirtualMFADeviceName"
+        ]
+      },
+      "name": "CreateVirtualMFADevice",
+      "output": {
+        "markers": null,
+        "members": {
+          "VirtualMFADevice": {
+            "name": "VirtualMFADevice",
+            "shape_name": "VirtualMFADevice",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "VirtualMFADevice"
+        ]
+      }
+    },
+    "DeactivateMFADevice": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SerialNumber": {
+            "name": "SerialNumber",
+            "shape_name": "serialNumberType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SerialNumber"
+        ]
+      },
+      "name": "DeactivateMFADevice",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteAccessKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AccessKeyId": {
+            "name": "AccessKeyId",
+            "shape_name": "accessKeyIdType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AccessKeyId"
+        ]
+      },
+      "name": "DeleteAccessKey",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteAccountAlias": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AccountAlias": {
+            "name": "AccountAlias",
+            "shape_name": "accountAliasType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AccountAlias"
+        ]
+      },
+      "name": "DeleteAccountAlias",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteAccountPasswordPolicy": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "DeleteAccountPasswordPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GroupName": {
+            "name": "GroupName",
+            "shape_name": "groupNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GroupName"
+        ]
+      },
+      "name": "DeleteGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteGroupPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GroupName": {
+            "name": "GroupName",
+            "shape_name": "groupNameType",
+            "type": "string"
+          },
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "policyNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GroupName",
+          "PolicyName"
+        ]
+      },
+      "name": "DeleteGroupPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteInstanceProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "InstanceProfileName": {
+            "name": "InstanceProfileName",
+            "shape_name": "instanceProfileNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "InstanceProfileName"
+        ]
+      },
+      "name": "DeleteInstanceProfile",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteLoginProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DeleteLoginProfile",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteOpenIDConnectProvider": {
+      "input": {
+        "markers": null,
+        "members": {
+          "OpenIDConnectProviderArn": {
+            "name": "OpenIDConnectProviderArn",
+            "shape_name": "arnType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "OpenIDConnectProviderArn"
+        ]
+      },
+      "name": "DeleteOpenIDConnectProvider",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeletePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyArn": {
+            "name": "PolicyArn",
+            "shape_name": "arnType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PolicyArn"
+        ]
+      },
+      "name": "DeletePolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeletePolicyVersion": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyArn": {
+            "name": "PolicyArn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "policyVersionIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PolicyArn",
+          "VersionId"
+        ]
+      },
+      "name": "DeletePolicyVersion",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteRole": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RoleName"
+        ]
+      },
+      "name": "DeleteRole",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteRolePermissionsBoundary": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RoleName"
+        ]
+      },
+      "name": "DeleteRolePermissionsBoundary",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteRolePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "policyNameType",
+            "type": "string"
+          },
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RoleName",
+          "PolicyName"
+        ]
+      },
+      "name": "DeleteRolePolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteSAMLProvider": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SAMLProviderArn": {
+            "name": "SAMLProviderArn",
+            "shape_name": "arnType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SAMLProviderArn"
+        ]
+      },
+      "name": "DeleteSAMLProvider",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteSSHPublicKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SSHPublicKeyId": {
+            "name": "SSHPublicKeyId",
+            "shape_name": "publicKeyIdType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName",
+          "SSHPublicKeyId"
+        ]
+      },
+      "name": "DeleteSSHPublicKey",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteServerCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ServerCertificateName": {
+            "name": "ServerCertificateName",
+            "shape_name": "serverCertificateNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerCertificateName"
+        ]
+      },
+      "name": "DeleteServerCertificate",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteServiceLinkedRole": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RoleName"
+        ]
+      },
+      "name": "DeleteServiceLinkedRole",
+      "output": {
+        "markers": null,
+        "members": {
+          "DeletionTaskId": {
+            "name": "DeletionTaskId",
+            "shape_name": "DeletionTaskIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DeletionTaskId"
+        ]
+      }
+    },
+    "DeleteServiceSpecificCredential": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ServiceSpecificCredentialId": {
+            "name": "ServiceSpecificCredentialId",
+            "shape_name": "serviceSpecificCredentialId",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServiceSpecificCredentialId"
+        ]
+      },
+      "name": "DeleteServiceSpecificCredential",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteSigningCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CertificateId": {
+            "name": "CertificateId",
+            "shape_name": "certificateIdType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CertificateId"
+        ]
+      },
+      "name": "DeleteSigningCertificate",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteUser": {
+      "input": {
+        "markers": null,
+        "members": {
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName"
+        ]
+      },
+      "name": "DeleteUser",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteUserPermissionsBoundary": {
+      "input": {
+        "markers": null,
+        "members": {
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName"
+        ]
+      },
+      "name": "DeleteUserPermissionsBoundary",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteUserPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "policyNameType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName",
+          "PolicyName"
+        ]
+      },
+      "name": "DeleteUserPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteVirtualMFADevice": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SerialNumber": {
+            "name": "SerialNumber",
+            "shape_name": "serialNumberType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SerialNumber"
+        ]
+      },
+      "name": "DeleteVirtualMFADevice",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DetachGroupPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GroupName": {
+            "name": "GroupName",
+            "shape_name": "groupNameType",
+            "type": "string"
+          },
+          "PolicyArn": {
+            "name": "PolicyArn",
+            "shape_name": "arnType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GroupName",
+          "PolicyArn"
+        ]
+      },
+      "name": "DetachGroupPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DetachRolePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyArn": {
+            "name": "PolicyArn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RoleName",
+          "PolicyArn"
+        ]
+      },
+      "name": "DetachRolePolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DetachUserPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyArn": {
+            "name": "PolicyArn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName",
+          "PolicyArn"
+        ]
+      },
+      "name": "DetachUserPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DisableOrganizationsRootCredentialsManagement": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "DisableOrganizationsRootCredentialsManagement",
+      "output": {
+        "markers": null,
+        "members": {
+          "EnabledFeatures": {
+            "name": "EnabledFeatures",
+            "shape_name": "FeaturesListType",
+            "type": "list"
+          },
+          "OrganizationId": {
+            "name": "OrganizationId",
+            "shape_name": "OrganizationIdType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DisableOrganizationsRootSessions": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "DisableOrganizationsRootSessions",
+      "output": {
+        "markers": null,
+        "members": {
+          "EnabledFeatures": {
+            "name": "EnabledFeatures",
+            "shape_name": "FeaturesListType",
+            "type": "list"
+          },
+          "OrganizationId": {
+            "name": "OrganizationId",
+            "shape_name": "OrganizationIdType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "EnableMFADevice": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AuthenticationCode1": {
+            "name": "AuthenticationCode1",
+            "shape_name": "authenticationCodeType",
+            "type": "string"
+          },
+          "AuthenticationCode2": {
+            "name": "AuthenticationCode2",
+            "shape_name": "authenticationCodeType",
+            "type": "string"
+          },
+          "SerialNumber": {
+            "name": "SerialNumber",
+            "shape_name": "serialNumberType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName",
+          "SerialNumber",
+          "AuthenticationCode1",
+          "AuthenticationCode2"
+        ]
+      },
+      "name": "EnableMFADevice",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "EnableOrganizationsRootCredentialsManagement": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "EnableOrganizationsRootCredentialsManagement",
+      "output": {
+        "markers": null,
+        "members": {
+          "EnabledFeatures": {
+            "name": "EnabledFeatures",
+            "shape_name": "FeaturesListType",
+            "type": "list"
+          },
+          "OrganizationId": {
+            "name": "OrganizationId",
+            "shape_name": "OrganizationIdType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "EnableOrganizationsRootSessions": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "EnableOrganizationsRootSessions",
+      "output": {
+        "markers": null,
+        "members": {
+          "EnabledFeatures": {
+            "name": "EnabledFeatures",
+            "shape_name": "FeaturesListType",
+            "type": "list"
+          },
+          "OrganizationId": {
+            "name": "OrganizationId",
+            "shape_name": "OrganizationIdType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GenerateCredentialReport": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "GenerateCredentialReport",
+      "output": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "ReportStateDescriptionType",
+            "type": "string"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "ReportStateType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GenerateOrganizationsAccessReport": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EntityPath": {
+            "name": "EntityPath",
+            "shape_name": "organizationsEntityPathType",
+            "type": "string"
+          },
+          "OrganizationsPolicyId": {
+            "name": "OrganizationsPolicyId",
+            "shape_name": "organizationsPolicyIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "EntityPath"
+        ]
+      },
+      "name": "GenerateOrganizationsAccessReport",
+      "output": {
+        "markers": null,
+        "members": {
+          "JobId": {
+            "name": "JobId",
+            "shape_name": "jobIDType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GenerateServiceLastAccessedDetails": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "Granularity": {
+            "name": "Granularity",
+            "shape_name": "AccessAdvisorUsageGranularityType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Arn"
+        ]
+      },
+      "name": "GenerateServiceLastAccessedDetails",
+      "output": {
+        "markers": null,
+        "members": {
+          "JobId": {
+            "name": "JobId",
+            "shape_name": "jobIDType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetAccessKeyLastUsed": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AccessKeyId": {
+            "name": "AccessKeyId",
+            "shape_name": "accessKeyIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AccessKeyId"
+        ]
+      },
+      "name": "GetAccessKeyLastUsed",
+      "output": {
+        "markers": null,
+        "members": {
+          "AccessKeyLastUsed": {
+            "name": "AccessKeyLastUsed",
+            "shape_name": "AccessKeyLastUsed",
+            "type": "structure"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetAccountAuthorizationDetails": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Filter": {
+            "name": "Filter",
+            "shape_name": "entityListType",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "GetAccountAuthorizationDetails",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "GroupDetailList": {
+            "name": "GroupDetailList",
+            "shape_name": "groupDetailListType",
+            "type": "list"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "Policies": {
+            "name": "Policies",
+            "shape_name": "ManagedPolicyDetailListType",
+            "type": "list"
+          },
+          "RoleDetailList": {
+            "name": "RoleDetailList",
+            "shape_name": "roleDetailListType",
+            "type": "list"
+          },
+          "UserDetailList": {
+            "name": "UserDetailList",
+            "shape_name": "userDetailListType",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetAccountPasswordPolicy": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "GetAccountPasswordPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "PasswordPolicy": {
+            "name": "PasswordPolicy",
+            "shape_name": "PasswordPolicy",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "PasswordPolicy"
+        ]
+      }
+    },
+    "GetAccountSummary": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "GetAccountSummary",
+      "output": {
+        "markers": null,
+        "members": {
+          "SummaryMap": {
+            "name": "SummaryMap",
+            "shape_name": "summaryMapType",
+            "type": "map"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetContextKeysForCustomPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyInputList": {
+            "name": "PolicyInputList",
+            "shape_name": "SimulationPolicyListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "PolicyInputList"
+        ]
+      },
+      "name": "GetContextKeysForCustomPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "ContextKeyNames": {
+            "name": "ContextKeyNames",
+            "shape_name": "ContextKeyNamesResultListType",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetContextKeysForPrincipalPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyInputList": {
+            "name": "PolicyInputList",
+            "shape_name": "SimulationPolicyListType",
+            "type": "list"
+          },
+          "PolicySourceArn": {
+            "name": "PolicySourceArn",
+            "shape_name": "arnType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PolicySourceArn"
+        ]
+      },
+      "name": "GetContextKeysForPrincipalPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "ContextKeyNames": {
+            "name": "ContextKeyNames",
+            "shape_name": "ContextKeyNamesResultListType",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetCredentialReport": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "GetCredentialReport",
+      "output": {
+        "markers": null,
+        "members": {
+          "Content": {
+            "name": "Content",
+            "shape_name": "ReportContentType",
+            "type": "blob"
+          },
+          "GeneratedTime": {
+            "name": "GeneratedTime",
+            "shape_name": "dateType",
+            "type": "timestamp"
+          },
+          "ReportFormat": {
+            "name": "ReportFormat",
+            "shape_name": "ReportFormatType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetGroup": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "GroupName": {
+            "name": "GroupName",
+            "shape_name": "groupNameType",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "GroupName"
+        ]
+      },
+      "name": "GetGroup",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Group": {
+            "name": "Group",
+            "shape_name": "Group",
+            "type": "structure"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "Users": {
+            "name": "Users",
+            "shape_name": "userListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Group",
+          "Users"
+        ]
+      }
+    },
+    "GetGroupPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GroupName": {
+            "name": "GroupName",
+            "shape_name": "groupNameType",
+            "type": "string"
+          },
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "policyNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GroupName",
+          "PolicyName"
+        ]
+      },
+      "name": "GetGroupPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "GroupName": {
+            "name": "GroupName",
+            "shape_name": "groupNameType",
+            "type": "string"
+          },
+          "PolicyDocument": {
+            "name": "PolicyDocument",
+            "shape_name": "policyDocumentType",
+            "type": "string"
+          },
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "policyNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GroupName",
+          "PolicyName",
+          "PolicyDocument"
+        ]
+      }
+    },
+    "GetInstanceProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "InstanceProfileName": {
+            "name": "InstanceProfileName",
+            "shape_name": "instanceProfileNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "InstanceProfileName"
+        ]
+      },
+      "name": "GetInstanceProfile",
+      "output": {
+        "markers": null,
+        "members": {
+          "InstanceProfile": {
+            "name": "InstanceProfile",
+            "shape_name": "InstanceProfile",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "InstanceProfile"
+        ]
+      }
+    },
+    "GetLoginProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "GetLoginProfile",
+      "output": {
+        "markers": null,
+        "members": {
+          "LoginProfile": {
+            "name": "LoginProfile",
+            "shape_name": "LoginProfile",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "LoginProfile"
+        ]
+      }
+    },
+    "GetMFADevice": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SerialNumber": {
+            "name": "SerialNumber",
+            "shape_name": "serialNumberType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SerialNumber"
+        ]
+      },
+      "name": "GetMFADevice",
+      "output": {
+        "markers": null,
+        "members": {
+          "Certifications": {
+            "name": "Certifications",
+            "shape_name": "CertificationMapType",
+            "type": "map"
+          },
+          "EnableDate": {
+            "name": "EnableDate",
+            "shape_name": "dateType",
+            "type": "timestamp"
+          },
+          "SerialNumber": {
+            "name": "SerialNumber",
+            "shape_name": "serialNumberType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SerialNumber"
+        ]
+      }
+    },
+    "GetOpenIDConnectProvider": {
+      "input": {
+        "markers": null,
+        "members": {
+          "OpenIDConnectProviderArn": {
+            "name": "OpenIDConnectProviderArn",
+            "shape_name": "arnType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "OpenIDConnectProviderArn"
+        ]
+      },
+      "name": "GetOpenIDConnectProvider",
+      "output": {
+        "markers": null,
+        "members": {
+          "ClientIDList": {
+            "name": "ClientIDList",
+            "shape_name": "clientIDListType",
+            "type": "list"
+          },
+          "CreateDate": {
+            "name": "CreateDate",
+            "shape_name": "dateType",
+            "type": "timestamp"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          },
+          "ThumbprintList": {
+            "name": "ThumbprintList",
+            "shape_name": "thumbprintListType",
+            "type": "list"
+          },
+          "Url": {
+            "name": "Url",
+            "shape_name": "OpenIDConnectProviderUrlType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetOrganizationsAccessReport": {
+      "input": {
+        "markers": null,
+        "members": {
+          "JobId": {
+            "name": "JobId",
+            "shape_name": "jobIDType",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "SortKey": {
+            "name": "SortKey",
+            "shape_name": "sortKeyType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "JobId"
+        ]
+      },
+      "name": "GetOrganizationsAccessReport",
+      "output": {
+        "markers": null,
+        "members": {
+          "AccessDetails": {
+            "name": "AccessDetails",
+            "shape_name": "AccessDetails",
+            "type": "list"
+          },
+          "ErrorDetails": {
+            "name": "ErrorDetails",
+            "shape_name": "ErrorDetails",
+            "type": "structure"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "JobCompletionDate": {
+            "name": "JobCompletionDate",
+            "shape_name": "dateType",
+            "type": "timestamp"
+          },
+          "JobCreationDate": {
+            "name": "JobCreationDate",
+            "shape_name": "dateType",
+            "type": "timestamp"
+          },
+          "JobStatus": {
+            "name": "JobStatus",
+            "shape_name": "jobStatusType",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "NumberOfServicesAccessible": {
+            "name": "NumberOfServicesAccessible",
+            "shape_name": "integerType",
+            "type": "integer"
+          },
+          "NumberOfServicesNotAccessed": {
+            "name": "NumberOfServicesNotAccessed",
+            "shape_name": "integerType",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "JobStatus",
+          "JobCreationDate"
+        ]
+      }
+    },
+    "GetPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyArn": {
+            "name": "PolicyArn",
+            "shape_name": "arnType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PolicyArn"
+        ]
+      },
+      "name": "GetPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "Policy",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetPolicyVersion": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyArn": {
+            "name": "PolicyArn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "policyVersionIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PolicyArn",
+          "VersionId"
+        ]
+      },
+      "name": "GetPolicyVersion",
+      "output": {
+        "markers": null,
+        "members": {
+          "PolicyVersion": {
+            "name": "PolicyVersion",
+            "shape_name": "PolicyVersion",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetRole": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RoleName"
+        ]
+      },
+      "name": "GetRole",
+      "output": {
+        "markers": null,
+        "members": {
+          "Role": {
+            "name": "Role",
+            "shape_name": "Role",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Role"
+        ]
+      }
+    },
+    "GetRolePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "policyNameType",
+            "type": "string"
+          },
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RoleName",
+          "PolicyName"
+        ]
+      },
+      "name": "GetRolePolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "PolicyDocument": {
+            "name": "PolicyDocument",
+            "shape_name": "policyDocumentType",
+            "type": "string"
+          },
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "policyNameType",
+            "type": "string"
+          },
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RoleName",
+          "PolicyName",
+          "PolicyDocument"
+        ]
+      }
+    },
+    "GetSAMLProvider": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SAMLProviderArn": {
+            "name": "SAMLProviderArn",
+            "shape_name": "arnType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SAMLProviderArn"
+        ]
+      },
+      "name": "GetSAMLProvider",
+      "output": {
+        "markers": null,
+        "members": {
+          "AssertionEncryptionMode": {
+            "name": "AssertionEncryptionMode",
+            "shape_name": "assertionEncryptionModeType",
+            "type": "string"
+          },
+          "CreateDate": {
+            "name": "CreateDate",
+            "shape_name": "dateType",
+            "type": "timestamp"
+          },
+          "PrivateKeyList": {
+            "name": "PrivateKeyList",
+            "shape_name": "privateKeyList",
+            "type": "list"
+          },
+          "SAMLMetadataDocument": {
+            "name": "SAMLMetadataDocument",
+            "shape_name": "SAMLMetadataDocumentType",
+            "type": "string"
+          },
+          "SAMLProviderUUID": {
+            "name": "SAMLProviderUUID",
+            "shape_name": "privateKeyIdType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          },
+          "ValidUntil": {
+            "name": "ValidUntil",
+            "shape_name": "dateType",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetSSHPublicKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Encoding": {
+            "name": "Encoding",
+            "shape_name": "encodingType",
+            "type": "string"
+          },
+          "SSHPublicKeyId": {
+            "name": "SSHPublicKeyId",
+            "shape_name": "publicKeyIdType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName",
+          "SSHPublicKeyId",
+          "Encoding"
+        ]
+      },
+      "name": "GetSSHPublicKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "SSHPublicKey": {
+            "name": "SSHPublicKey",
+            "shape_name": "SSHPublicKey",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetServerCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ServerCertificateName": {
+            "name": "ServerCertificateName",
+            "shape_name": "serverCertificateNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerCertificateName"
+        ]
+      },
+      "name": "GetServerCertificate",
+      "output": {
+        "markers": null,
+        "members": {
+          "ServerCertificate": {
+            "name": "ServerCertificate",
+            "shape_name": "ServerCertificate",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ServerCertificate"
+        ]
+      }
+    },
+    "GetServiceLastAccessedDetails": {
+      "input": {
+        "markers": null,
+        "members": {
+          "JobId": {
+            "name": "JobId",
+            "shape_name": "jobIDType",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "JobId"
+        ]
+      },
+      "name": "GetServiceLastAccessedDetails",
+      "output": {
+        "markers": null,
+        "members": {
+          "Error": {
+            "name": "Error",
+            "shape_name": "ErrorDetails",
+            "type": "structure"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "JobCompletionDate": {
+            "name": "JobCompletionDate",
+            "shape_name": "dateType",
+            "type": "timestamp"
+          },
+          "JobCreationDate": {
+            "name": "JobCreationDate",
+            "shape_name": "dateType",
+            "type": "timestamp"
+          },
+          "JobStatus": {
+            "name": "JobStatus",
+            "shape_name": "jobStatusType",
+            "type": "string"
+          },
+          "JobType": {
+            "name": "JobType",
+            "shape_name": "AccessAdvisorUsageGranularityType",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "ServicesLastAccessed": {
+            "name": "ServicesLastAccessed",
+            "shape_name": "ServicesLastAccessed",
+            "type": "list"
+          }
+        },
+        "required": [
+          "JobStatus",
+          "JobCreationDate",
+          "ServicesLastAccessed",
+          "JobCompletionDate"
+        ]
+      }
+    },
+    "GetServiceLastAccessedDetailsWithEntities": {
+      "input": {
+        "markers": null,
+        "members": {
+          "JobId": {
+            "name": "JobId",
+            "shape_name": "jobIDType",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "ServiceNamespace": {
+            "name": "ServiceNamespace",
+            "shape_name": "serviceNamespaceType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "JobId",
+          "ServiceNamespace"
+        ]
+      },
+      "name": "GetServiceLastAccessedDetailsWithEntities",
+      "output": {
+        "markers": null,
+        "members": {
+          "EntityDetailsList": {
+            "name": "EntityDetailsList",
+            "shape_name": "entityDetailsListType",
+            "type": "list"
+          },
+          "Error": {
+            "name": "Error",
+            "shape_name": "ErrorDetails",
+            "type": "structure"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "JobCompletionDate": {
+            "name": "JobCompletionDate",
+            "shape_name": "dateType",
+            "type": "timestamp"
+          },
+          "JobCreationDate": {
+            "name": "JobCreationDate",
+            "shape_name": "dateType",
+            "type": "timestamp"
+          },
+          "JobStatus": {
+            "name": "JobStatus",
+            "shape_name": "jobStatusType",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "JobStatus",
+          "JobCreationDate",
+          "JobCompletionDate",
+          "EntityDetailsList"
+        ]
+      }
+    },
+    "GetServiceLinkedRoleDeletionStatus": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DeletionTaskId": {
+            "name": "DeletionTaskId",
+            "shape_name": "DeletionTaskIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DeletionTaskId"
+        ]
+      },
+      "name": "GetServiceLinkedRoleDeletionStatus",
+      "output": {
+        "markers": null,
+        "members": {
+          "Reason": {
+            "name": "Reason",
+            "shape_name": "DeletionTaskFailureReasonType",
+            "type": "structure"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "DeletionTaskStatusType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Status"
+        ]
+      }
+    },
+    "GetUser": {
+      "input": {
+        "markers": null,
+        "members": {
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "GetUser",
+      "output": {
+        "markers": null,
+        "members": {
+          "User": {
+            "name": "User",
+            "shape_name": "User",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "User"
+        ]
+      }
+    },
+    "GetUserPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "policyNameType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName",
+          "PolicyName"
+        ]
+      },
+      "name": "GetUserPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "PolicyDocument": {
+            "name": "PolicyDocument",
+            "shape_name": "policyDocumentType",
+            "type": "string"
+          },
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "policyNameType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName",
+          "PolicyName",
+          "PolicyDocument"
+        ]
+      }
+    },
+    "ListAccessKeys": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListAccessKeys",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "AccessKeyMetadata": {
+            "name": "AccessKeyMetadata",
+            "shape_name": "accessKeyMetadataListType",
+            "type": "list"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AccessKeyMetadata"
+        ]
+      }
+    },
+    "ListAccountAliases": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "ListAccountAliases",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "AccountAliases": {
+            "name": "AccountAliases",
+            "shape_name": "accountAliasListType",
+            "type": "list"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AccountAliases"
+        ]
+      }
+    },
+    "ListAttachedGroupPolicies": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "GroupName": {
+            "name": "GroupName",
+            "shape_name": "groupNameType",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "PathPrefix": {
+            "name": "PathPrefix",
+            "shape_name": "policyPathType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GroupName"
+        ]
+      },
+      "name": "ListAttachedGroupPolicies",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "AttachedPolicies": {
+            "name": "AttachedPolicies",
+            "shape_name": "attachedPoliciesListType",
+            "type": "list"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListAttachedRolePolicies": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "PathPrefix": {
+            "name": "PathPrefix",
+            "shape_name": "policyPathType",
+            "type": "string"
+          },
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RoleName"
+        ]
+      },
+      "name": "ListAttachedRolePolicies",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "AttachedPolicies": {
+            "name": "AttachedPolicies",
+            "shape_name": "attachedPoliciesListType",
+            "type": "list"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListAttachedUserPolicies": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "PathPrefix": {
+            "name": "PathPrefix",
+            "shape_name": "policyPathType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName"
+        ]
+      },
+      "name": "ListAttachedUserPolicies",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "AttachedPolicies": {
+            "name": "AttachedPolicies",
+            "shape_name": "attachedPoliciesListType",
+            "type": "list"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListEntitiesForPolicy": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "EntityFilter": {
+            "name": "EntityFilter",
+            "shape_name": "EntityType",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "PathPrefix": {
+            "name": "PathPrefix",
+            "shape_name": "pathType",
+            "type": "string"
+          },
+          "PolicyArn": {
+            "name": "PolicyArn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "PolicyUsageFilter": {
+            "name": "PolicyUsageFilter",
+            "shape_name": "PolicyUsageType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PolicyArn"
+        ]
+      },
+      "name": "ListEntitiesForPolicy",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "PolicyGroups": {
+            "name": "PolicyGroups",
+            "shape_name": "PolicyGroupListType",
+            "type": "list"
+          },
+          "PolicyRoles": {
+            "name": "PolicyRoles",
+            "shape_name": "PolicyRoleListType",
+            "type": "list"
+          },
+          "PolicyUsers": {
+            "name": "PolicyUsers",
+            "shape_name": "PolicyUserListType",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListGroupPolicies": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "GroupName": {
+            "name": "GroupName",
+            "shape_name": "groupNameType",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "GroupName"
+        ]
+      },
+      "name": "ListGroupPolicies",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "PolicyNames": {
+            "name": "PolicyNames",
+            "shape_name": "policyNameListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "PolicyNames"
+        ]
+      }
+    },
+    "ListGroups": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "PathPrefix": {
+            "name": "PathPrefix",
+            "shape_name": "pathPrefixType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListGroups",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Groups": {
+            "name": "Groups",
+            "shape_name": "groupListType",
+            "type": "list"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Groups"
+        ],
+        "resources": [
+          {
+            "arn": "Arn",
+            "id": "GroupId",
+            "name": "GroupName",
+            "path": [
+              "Groups"
+            ],
+            "type": "iam:group"
+          }
+        ]
+      }
+    },
+    "ListGroupsForUser": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName"
+        ]
+      },
+      "name": "ListGroupsForUser",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Groups": {
+            "name": "Groups",
+            "shape_name": "groupListType",
+            "type": "list"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Groups"
+        ]
+      }
+    },
+    "ListInstanceProfileTags": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "InstanceProfileName": {
+            "name": "InstanceProfileName",
+            "shape_name": "instanceProfileNameType",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "InstanceProfileName"
+        ]
+      },
+      "name": "ListInstanceProfileTags",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Tags"
+        ]
+      }
+    },
+    "ListInstanceProfiles": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "PathPrefix": {
+            "name": "PathPrefix",
+            "shape_name": "pathPrefixType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListInstanceProfiles",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "InstanceProfiles": {
+            "name": "InstanceProfiles",
+            "shape_name": "instanceProfileListType",
+            "type": "list"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "InstanceProfiles"
+        ],
+        "resources": [
+          {
+            "arn": "Arn",
+            "id": "InstanceProfileId",
+            "name": "InstanceProfileName",
+            "path": [
+              "InstanceProfiles"
+            ],
+            "type": "iam:instance-profile"
+          }
+        ]
+      }
+    },
+    "ListInstanceProfilesForRole": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RoleName"
+        ]
+      },
+      "name": "ListInstanceProfilesForRole",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "InstanceProfiles": {
+            "name": "InstanceProfiles",
+            "shape_name": "instanceProfileListType",
+            "type": "list"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "InstanceProfiles"
+        ]
+      }
+    },
+    "ListMFADeviceTags": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "SerialNumber": {
+            "name": "SerialNumber",
+            "shape_name": "serialNumberType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SerialNumber"
+        ]
+      },
+      "name": "ListMFADeviceTags",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Tags"
+        ]
+      }
+    },
+    "ListMFADevices": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListMFADevices",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "MFADevices": {
+            "name": "MFADevices",
+            "shape_name": "mfaDeviceListType",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "MFADevices"
+        ]
+      }
+    },
+    "ListOpenIDConnectProviderTags": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "OpenIDConnectProviderArn": {
+            "name": "OpenIDConnectProviderArn",
+            "shape_name": "arnType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "OpenIDConnectProviderArn"
+        ]
+      },
+      "name": "ListOpenIDConnectProviderTags",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Tags"
+        ]
+      }
+    },
+    "ListOpenIDConnectProviders": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "ListOpenIDConnectProviders",
+      "output": {
+        "markers": null,
+        "members": {
+          "OpenIDConnectProviderList": {
+            "name": "OpenIDConnectProviderList",
+            "shape_name": "OpenIDConnectProviderListType",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListOrganizationsFeatures": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "ListOrganizationsFeatures",
+      "output": {
+        "markers": null,
+        "members": {
+          "EnabledFeatures": {
+            "name": "EnabledFeatures",
+            "shape_name": "FeaturesListType",
+            "type": "list"
+          },
+          "OrganizationId": {
+            "name": "OrganizationId",
+            "shape_name": "OrganizationIdType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListPolicies": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "OnlyAttached": {
+            "name": "OnlyAttached",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "PathPrefix": {
+            "name": "PathPrefix",
+            "shape_name": "policyPathType",
+            "type": "string"
+          },
+          "PolicyUsageFilter": {
+            "name": "PolicyUsageFilter",
+            "shape_name": "PolicyUsageType",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "policyScopeType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListPolicies",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "Policies": {
+            "name": "Policies",
+            "shape_name": "policyListType",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "Arn",
+            "id": "PolicyId",
+            "name": "PolicyName",
+            "path": [
+              "Policies"
+            ],
+            "type": "iam:policy"
+          }
+        ]
+      }
+    },
+    "ListPoliciesGrantingServiceAccess": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "ServiceNamespaces": {
+            "name": "ServiceNamespaces",
+            "shape_name": "serviceNamespaceListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Arn",
+          "ServiceNamespaces"
+        ]
+      },
+      "name": "ListPoliciesGrantingServiceAccess",
+      "output": {
+        "markers": null,
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "PoliciesGrantingServiceAccess": {
+            "name": "PoliciesGrantingServiceAccess",
+            "shape_name": "listPolicyGrantingServiceAccessResponseListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "PoliciesGrantingServiceAccess"
+        ]
+      }
+    },
+    "ListPolicyTags": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "PolicyArn": {
+            "name": "PolicyArn",
+            "shape_name": "arnType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PolicyArn"
+        ]
+      },
+      "name": "ListPolicyTags",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Tags"
+        ]
+      }
+    },
+    "ListPolicyVersions": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "PolicyArn": {
+            "name": "PolicyArn",
+            "shape_name": "arnType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PolicyArn"
+        ]
+      },
+      "name": "ListPolicyVersions",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "Versions": {
+            "name": "Versions",
+            "shape_name": "policyDocumentVersionListType",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListRolePolicies": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RoleName"
+        ]
+      },
+      "name": "ListRolePolicies",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "PolicyNames": {
+            "name": "PolicyNames",
+            "shape_name": "policyNameListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "PolicyNames"
+        ]
+      }
+    },
+    "ListRoleTags": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RoleName"
+        ]
+      },
+      "name": "ListRoleTags",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Tags"
+        ]
+      }
+    },
+    "ListRoles": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "PathPrefix": {
+            "name": "PathPrefix",
+            "shape_name": "pathPrefixType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListRoles",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "Roles": {
+            "name": "Roles",
+            "shape_name": "roleListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Roles"
+        ],
+        "resources": [
+          {
+            "arn": "Arn",
+            "id": "RoleId",
+            "name": "RoleName",
+            "path": [
+              "Roles"
+            ],
+            "type": "iam:role"
+          }
+        ]
+      }
+    },
+    "ListSAMLProviderTags": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "SAMLProviderArn": {
+            "name": "SAMLProviderArn",
+            "shape_name": "arnType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SAMLProviderArn"
+        ]
+      },
+      "name": "ListSAMLProviderTags",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Tags"
+        ]
+      }
+    },
+    "ListSAMLProviders": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "ListSAMLProviders",
+      "output": {
+        "markers": null,
+        "members": {
+          "SAMLProviderList": {
+            "name": "SAMLProviderList",
+            "shape_name": "SAMLProviderListType",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListSSHPublicKeys": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListSSHPublicKeys",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "SSHPublicKeys": {
+            "name": "SSHPublicKeys",
+            "shape_name": "SSHPublicKeyListType",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListServerCertificateTags": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "ServerCertificateName": {
+            "name": "ServerCertificateName",
+            "shape_name": "serverCertificateNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerCertificateName"
+        ]
+      },
+      "name": "ListServerCertificateTags",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Tags"
+        ]
+      }
+    },
+    "ListServerCertificates": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "PathPrefix": {
+            "name": "PathPrefix",
+            "shape_name": "pathPrefixType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListServerCertificates",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "ServerCertificateMetadataList": {
+            "name": "ServerCertificateMetadataList",
+            "shape_name": "serverCertificateMetadataListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ServerCertificateMetadataList"
+        ]
+      }
+    },
+    "ListServiceSpecificCredentials": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AllUsers": {
+            "name": "AllUsers",
+            "shape_name": "allUsers",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "ServiceName": {
+            "name": "ServiceName",
+            "shape_name": "serviceName",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListServiceSpecificCredentials",
+      "output": {
+        "markers": null,
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "ServiceSpecificCredentials": {
+            "name": "ServiceSpecificCredentials",
+            "shape_name": "ServiceSpecificCredentialsListType",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListSigningCertificates": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListSigningCertificates",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Certificates": {
+            "name": "Certificates",
+            "shape_name": "certificateListType",
+            "type": "list"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Certificates"
+        ]
+      }
+    },
+    "ListUserPolicies": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName"
+        ]
+      },
+      "name": "ListUserPolicies",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "PolicyNames": {
+            "name": "PolicyNames",
+            "shape_name": "policyNameListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "PolicyNames"
+        ]
+      }
+    },
+    "ListUserTags": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName"
+        ]
+      },
+      "name": "ListUserTags",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Tags"
+        ]
+      }
+    },
+    "ListUsers": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "PathPrefix": {
+            "name": "PathPrefix",
+            "shape_name": "pathPrefixType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListUsers",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "Users": {
+            "name": "Users",
+            "shape_name": "userListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Users"
+        ],
+        "resources": [
+          {
+            "arn": "Arn",
+            "id": "UserId",
+            "name": "UserName",
+            "path": [
+              "Users"
+            ],
+            "type": "iam:user"
+          }
+        ]
+      }
+    },
+    "ListVirtualMFADevices": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "AssignmentStatus": {
+            "name": "AssignmentStatus",
+            "shape_name": "assignmentStatusType",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "ListVirtualMFADevices",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          },
+          "VirtualMFADevices": {
+            "name": "VirtualMFADevices",
+            "shape_name": "virtualMFADeviceListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "VirtualMFADevices"
+        ]
+      }
+    },
+    "PutGroupPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GroupName": {
+            "name": "GroupName",
+            "shape_name": "groupNameType",
+            "type": "string"
+          },
+          "PolicyDocument": {
+            "name": "PolicyDocument",
+            "shape_name": "policyDocumentType",
+            "type": "string"
+          },
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "policyNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GroupName",
+          "PolicyName",
+          "PolicyDocument"
+        ]
+      },
+      "name": "PutGroupPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "PutRolePermissionsBoundary": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PermissionsBoundary": {
+            "name": "PermissionsBoundary",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RoleName",
+          "PermissionsBoundary"
+        ]
+      },
+      "name": "PutRolePermissionsBoundary",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "PutRolePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyDocument": {
+            "name": "PolicyDocument",
+            "shape_name": "policyDocumentType",
+            "type": "string"
+          },
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "policyNameType",
+            "type": "string"
+          },
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RoleName",
+          "PolicyName",
+          "PolicyDocument"
+        ]
+      },
+      "name": "PutRolePolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "PutUserPermissionsBoundary": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PermissionsBoundary": {
+            "name": "PermissionsBoundary",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName",
+          "PermissionsBoundary"
+        ]
+      },
+      "name": "PutUserPermissionsBoundary",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "PutUserPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyDocument": {
+            "name": "PolicyDocument",
+            "shape_name": "policyDocumentType",
+            "type": "string"
+          },
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "policyNameType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName",
+          "PolicyName",
+          "PolicyDocument"
+        ]
+      },
+      "name": "PutUserPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RemoveClientIDFromOpenIDConnectProvider": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientID": {
+            "name": "ClientID",
+            "shape_name": "clientIDType",
+            "type": "string"
+          },
+          "OpenIDConnectProviderArn": {
+            "name": "OpenIDConnectProviderArn",
+            "shape_name": "arnType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "OpenIDConnectProviderArn",
+          "ClientID"
+        ]
+      },
+      "name": "RemoveClientIDFromOpenIDConnectProvider",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RemoveRoleFromInstanceProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "InstanceProfileName": {
+            "name": "InstanceProfileName",
+            "shape_name": "instanceProfileNameType",
+            "type": "string"
+          },
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "InstanceProfileName",
+          "RoleName"
+        ]
+      },
+      "name": "RemoveRoleFromInstanceProfile",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RemoveUserFromGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GroupName": {
+            "name": "GroupName",
+            "shape_name": "groupNameType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GroupName",
+          "UserName"
+        ]
+      },
+      "name": "RemoveUserFromGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ResetServiceSpecificCredential": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ServiceSpecificCredentialId": {
+            "name": "ServiceSpecificCredentialId",
+            "shape_name": "serviceSpecificCredentialId",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServiceSpecificCredentialId"
+        ]
+      },
+      "name": "ResetServiceSpecificCredential",
+      "output": {
+        "markers": null,
+        "members": {
+          "ServiceSpecificCredential": {
+            "name": "ServiceSpecificCredential",
+            "shape_name": "ServiceSpecificCredential",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ResyncMFADevice": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AuthenticationCode1": {
+            "name": "AuthenticationCode1",
+            "shape_name": "authenticationCodeType",
+            "type": "string"
+          },
+          "AuthenticationCode2": {
+            "name": "AuthenticationCode2",
+            "shape_name": "authenticationCodeType",
+            "type": "string"
+          },
+          "SerialNumber": {
+            "name": "SerialNumber",
+            "shape_name": "serialNumberType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName",
+          "SerialNumber",
+          "AuthenticationCode1",
+          "AuthenticationCode2"
+        ]
+      },
+      "name": "ResyncMFADevice",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SetDefaultPolicyVersion": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyArn": {
+            "name": "PolicyArn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "policyVersionIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PolicyArn",
+          "VersionId"
+        ]
+      },
+      "name": "SetDefaultPolicyVersion",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SetSecurityTokenServicePreferences": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GlobalEndpointTokenVersion": {
+            "name": "GlobalEndpointTokenVersion",
+            "shape_name": "globalEndpointTokenVersion",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GlobalEndpointTokenVersion"
+        ]
+      },
+      "name": "SetSecurityTokenServicePreferences",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SimulateCustomPolicy": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "ActionNames": {
+            "name": "ActionNames",
+            "shape_name": "ActionNameListType",
+            "type": "list"
+          },
+          "CallerArn": {
+            "name": "CallerArn",
+            "shape_name": "ResourceNameType",
+            "type": "string"
+          },
+          "ContextEntries": {
+            "name": "ContextEntries",
+            "shape_name": "ContextEntryListType",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "PermissionsBoundaryPolicyInputList": {
+            "name": "PermissionsBoundaryPolicyInputList",
+            "shape_name": "SimulationPolicyListType",
+            "type": "list"
+          },
+          "PolicyInputList": {
+            "name": "PolicyInputList",
+            "shape_name": "SimulationPolicyListType",
+            "type": "list"
+          },
+          "ResourceArns": {
+            "name": "ResourceArns",
+            "shape_name": "ResourceNameListType",
+            "type": "list"
+          },
+          "ResourceHandlingOption": {
+            "name": "ResourceHandlingOption",
+            "shape_name": "ResourceHandlingOptionType",
+            "type": "string"
+          },
+          "ResourceOwner": {
+            "name": "ResourceOwner",
+            "shape_name": "ResourceNameType",
+            "type": "string"
+          },
+          "ResourcePolicy": {
+            "name": "ResourcePolicy",
+            "shape_name": "policyDocumentType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PolicyInputList",
+          "ActionNames"
+        ]
+      },
+      "name": "SimulateCustomPolicy",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "EvaluationResults": {
+            "name": "EvaluationResults",
+            "shape_name": "EvaluationResultsListType",
+            "type": "list"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "SimulatePrincipalPolicy": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "ActionNames": {
+            "name": "ActionNames",
+            "shape_name": "ActionNameListType",
+            "type": "list"
+          },
+          "CallerArn": {
+            "name": "CallerArn",
+            "shape_name": "ResourceNameType",
+            "type": "string"
+          },
+          "ContextEntries": {
+            "name": "ContextEntries",
+            "shape_name": "ContextEntryListType",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "markerType",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "maxItemsType",
+            "type": "integer"
+          },
+          "PermissionsBoundaryPolicyInputList": {
+            "name": "PermissionsBoundaryPolicyInputList",
+            "shape_name": "SimulationPolicyListType",
+            "type": "list"
+          },
+          "PolicyInputList": {
+            "name": "PolicyInputList",
+            "shape_name": "SimulationPolicyListType",
+            "type": "list"
+          },
+          "PolicySourceArn": {
+            "name": "PolicySourceArn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "ResourceArns": {
+            "name": "ResourceArns",
+            "shape_name": "ResourceNameListType",
+            "type": "list"
+          },
+          "ResourceHandlingOption": {
+            "name": "ResourceHandlingOption",
+            "shape_name": "ResourceHandlingOptionType",
+            "type": "string"
+          },
+          "ResourceOwner": {
+            "name": "ResourceOwner",
+            "shape_name": "ResourceNameType",
+            "type": "string"
+          },
+          "ResourcePolicy": {
+            "name": "ResourcePolicy",
+            "shape_name": "policyDocumentType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PolicySourceArn",
+          "ActionNames"
+        ]
+      },
+      "name": "SimulatePrincipalPolicy",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "EvaluationResults": {
+            "name": "EvaluationResults",
+            "shape_name": "EvaluationResultsListType",
+            "type": "list"
+          },
+          "IsTruncated": {
+            "name": "IsTruncated",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "responseMarkerType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "TagInstanceProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "InstanceProfileName": {
+            "name": "InstanceProfileName",
+            "shape_name": "instanceProfileNameType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "InstanceProfileName",
+          "Tags"
+        ]
+      },
+      "name": "TagInstanceProfile",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TagMFADevice": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SerialNumber": {
+            "name": "SerialNumber",
+            "shape_name": "serialNumberType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "SerialNumber",
+          "Tags"
+        ]
+      },
+      "name": "TagMFADevice",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TagOpenIDConnectProvider": {
+      "input": {
+        "markers": null,
+        "members": {
+          "OpenIDConnectProviderArn": {
+            "name": "OpenIDConnectProviderArn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "OpenIDConnectProviderArn",
+          "Tags"
+        ]
+      },
+      "name": "TagOpenIDConnectProvider",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TagPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyArn": {
+            "name": "PolicyArn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "PolicyArn",
+          "Tags"
+        ]
+      },
+      "name": "TagPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TagRole": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "RoleName",
+          "Tags"
+        ]
+      },
+      "name": "TagRole",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TagSAMLProvider": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SAMLProviderArn": {
+            "name": "SAMLProviderArn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "SAMLProviderArn",
+          "Tags"
+        ]
+      },
+      "name": "TagSAMLProvider",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TagServerCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ServerCertificateName": {
+            "name": "ServerCertificateName",
+            "shape_name": "serverCertificateNameType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ServerCertificateName",
+          "Tags"
+        ]
+      },
+      "name": "TagServerCertificate",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TagUser": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName",
+          "Tags"
+        ]
+      },
+      "name": "TagUser",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UntagInstanceProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "InstanceProfileName": {
+            "name": "InstanceProfileName",
+            "shape_name": "instanceProfileNameType",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "tagKeyListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "InstanceProfileName",
+          "TagKeys"
+        ]
+      },
+      "name": "UntagInstanceProfile",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UntagMFADevice": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SerialNumber": {
+            "name": "SerialNumber",
+            "shape_name": "serialNumberType",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "tagKeyListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "SerialNumber",
+          "TagKeys"
+        ]
+      },
+      "name": "UntagMFADevice",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UntagOpenIDConnectProvider": {
+      "input": {
+        "markers": null,
+        "members": {
+          "OpenIDConnectProviderArn": {
+            "name": "OpenIDConnectProviderArn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "tagKeyListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "OpenIDConnectProviderArn",
+          "TagKeys"
+        ]
+      },
+      "name": "UntagOpenIDConnectProvider",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UntagPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyArn": {
+            "name": "PolicyArn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "tagKeyListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "PolicyArn",
+          "TagKeys"
+        ]
+      },
+      "name": "UntagPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UntagRole": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "tagKeyListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "RoleName",
+          "TagKeys"
+        ]
+      },
+      "name": "UntagRole",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UntagSAMLProvider": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SAMLProviderArn": {
+            "name": "SAMLProviderArn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "tagKeyListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "SAMLProviderArn",
+          "TagKeys"
+        ]
+      },
+      "name": "UntagSAMLProvider",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UntagServerCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ServerCertificateName": {
+            "name": "ServerCertificateName",
+            "shape_name": "serverCertificateNameType",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "tagKeyListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ServerCertificateName",
+          "TagKeys"
+        ]
+      },
+      "name": "UntagServerCertificate",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UntagUser": {
+      "input": {
+        "markers": null,
+        "members": {
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "tagKeyListType",
+            "type": "list"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName",
+          "TagKeys"
+        ]
+      },
+      "name": "UntagUser",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateAccessKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AccessKeyId": {
+            "name": "AccessKeyId",
+            "shape_name": "accessKeyIdType",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "statusType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AccessKeyId",
+          "Status"
+        ]
+      },
+      "name": "UpdateAccessKey",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateAccountPasswordPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AllowUsersToChangePassword": {
+            "name": "AllowUsersToChangePassword",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "HardExpiry": {
+            "name": "HardExpiry",
+            "shape_name": "booleanObjectType",
+            "type": "boolean"
+          },
+          "MaxPasswordAge": {
+            "name": "MaxPasswordAge",
+            "shape_name": "maxPasswordAgeType",
+            "type": "integer"
+          },
+          "MinimumPasswordLength": {
+            "name": "MinimumPasswordLength",
+            "shape_name": "minimumPasswordLengthType",
+            "type": "integer"
+          },
+          "PasswordReusePrevention": {
+            "name": "PasswordReusePrevention",
+            "shape_name": "passwordReusePreventionType",
+            "type": "integer"
+          },
+          "RequireLowercaseCharacters": {
+            "name": "RequireLowercaseCharacters",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "RequireNumbers": {
+            "name": "RequireNumbers",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "RequireSymbols": {
+            "name": "RequireSymbols",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          },
+          "RequireUppercaseCharacters": {
+            "name": "RequireUppercaseCharacters",
+            "shape_name": "booleanType",
+            "type": "boolean"
+          }
+        },
+        "required": null
+      },
+      "name": "UpdateAccountPasswordPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateAssumeRolePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyDocument": {
+            "name": "PolicyDocument",
+            "shape_name": "policyDocumentType",
+            "type": "string"
+          },
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RoleName",
+          "PolicyDocument"
+        ]
+      },
+      "name": "UpdateAssumeRolePolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GroupName": {
+            "name": "GroupName",
+            "shape_name": "groupNameType",
+            "type": "string"
+          },
+          "NewGroupName": {
+            "name": "NewGroupName",
+            "shape_name": "groupNameType",
+            "type": "string"
+          },
+          "NewPath": {
+            "name": "NewPath",
+            "shape_name": "pathType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GroupName"
+        ]
+      },
+      "name": "UpdateGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateLoginProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Password": {
+            "name": "Password",
+            "shape_name": "passwordType",
+            "type": "string"
+          },
+          "PasswordResetRequired": {
+            "name": "PasswordResetRequired",
+            "shape_name": "booleanObjectType",
+            "type": "boolean"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName"
+        ]
+      },
+      "name": "UpdateLoginProfile",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateOpenIDConnectProviderThumbprint": {
+      "input": {
+        "markers": null,
+        "members": {
+          "OpenIDConnectProviderArn": {
+            "name": "OpenIDConnectProviderArn",
+            "shape_name": "arnType",
+            "type": "string"
+          },
+          "ThumbprintList": {
+            "name": "ThumbprintList",
+            "shape_name": "thumbprintListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "OpenIDConnectProviderArn",
+          "ThumbprintList"
+        ]
+      },
+      "name": "UpdateOpenIDConnectProviderThumbprint",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateRole": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "roleDescriptionType",
+            "type": "string"
+          },
+          "MaxSessionDuration": {
+            "name": "MaxSessionDuration",
+            "shape_name": "roleMaxSessionDurationType",
+            "type": "integer"
+          },
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RoleName"
+        ]
+      },
+      "name": "UpdateRole",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateRoleDescription": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "roleDescriptionType",
+            "type": "string"
+          },
+          "RoleName": {
+            "name": "RoleName",
+            "shape_name": "roleNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RoleName",
+          "Description"
+        ]
+      },
+      "name": "UpdateRoleDescription",
+      "output": {
+        "markers": null,
+        "members": {
+          "Role": {
+            "name": "Role",
+            "shape_name": "Role",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateSAMLProvider": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AddPrivateKey": {
+            "name": "AddPrivateKey",
+            "shape_name": "privateKeyType",
+            "type": "string"
+          },
+          "AssertionEncryptionMode": {
+            "name": "AssertionEncryptionMode",
+            "shape_name": "assertionEncryptionModeType",
+            "type": "string"
+          },
+          "RemovePrivateKey": {
+            "name": "RemovePrivateKey",
+            "shape_name": "privateKeyIdType",
+            "type": "string"
+          },
+          "SAMLMetadataDocument": {
+            "name": "SAMLMetadataDocument",
+            "shape_name": "SAMLMetadataDocumentType",
+            "type": "string"
+          },
+          "SAMLProviderArn": {
+            "name": "SAMLProviderArn",
+            "shape_name": "arnType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SAMLProviderArn"
+        ]
+      },
+      "name": "UpdateSAMLProvider",
+      "output": {
+        "markers": null,
+        "members": {
+          "SAMLProviderArn": {
+            "name": "SAMLProviderArn",
+            "shape_name": "arnType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateSSHPublicKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SSHPublicKeyId": {
+            "name": "SSHPublicKeyId",
+            "shape_name": "publicKeyIdType",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "statusType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName",
+          "SSHPublicKeyId",
+          "Status"
+        ]
+      },
+      "name": "UpdateSSHPublicKey",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateServerCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "NewPath": {
+            "name": "NewPath",
+            "shape_name": "pathType",
+            "type": "string"
+          },
+          "NewServerCertificateName": {
+            "name": "NewServerCertificateName",
+            "shape_name": "serverCertificateNameType",
+            "type": "string"
+          },
+          "ServerCertificateName": {
+            "name": "ServerCertificateName",
+            "shape_name": "serverCertificateNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerCertificateName"
+        ]
+      },
+      "name": "UpdateServerCertificate",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateServiceSpecificCredential": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ServiceSpecificCredentialId": {
+            "name": "ServiceSpecificCredentialId",
+            "shape_name": "serviceSpecificCredentialId",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "statusType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServiceSpecificCredentialId",
+          "Status"
+        ]
+      },
+      "name": "UpdateServiceSpecificCredential",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateSigningCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CertificateId": {
+            "name": "CertificateId",
+            "shape_name": "certificateIdType",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "statusType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CertificateId",
+          "Status"
+        ]
+      },
+      "name": "UpdateSigningCertificate",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateUser": {
+      "input": {
+        "markers": null,
+        "members": {
+          "NewPath": {
+            "name": "NewPath",
+            "shape_name": "pathType",
+            "type": "string"
+          },
+          "NewUserName": {
+            "name": "NewUserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName"
+        ]
+      },
+      "name": "UpdateUser",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UploadSSHPublicKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SSHPublicKeyBody": {
+            "name": "SSHPublicKeyBody",
+            "shape_name": "publicKeyMaterialType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "userNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserName",
+          "SSHPublicKeyBody"
+        ]
+      },
+      "name": "UploadSSHPublicKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "SSHPublicKey": {
+            "name": "SSHPublicKey",
+            "shape_name": "SSHPublicKey",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UploadServerCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CertificateBody": {
+            "name": "CertificateBody",
+            "shape_name": "certificateBodyType",
+            "type": "string"
+          },
+          "CertificateChain": {
+            "name": "CertificateChain",
+            "shape_name": "certificateChainType",
+            "type": "string"
+          },
+          "Path": {
+            "name": "Path",
+            "shape_name": "pathType",
+            "type": "string"
+          },
+          "PrivateKey": {
+            "name": "PrivateKey",
+            "shape_name": "privateKeyType",
+            "type": "string"
+          },
+          "ServerCertificateName": {
+            "name": "ServerCertificateName",
+            "shape_name": "serverCertificateNameType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ServerCertificateName",
+          "CertificateBody",
+          "PrivateKey"
+        ]
+      },
+      "name": "UploadServerCertificate",
+      "output": {
+        "markers": null,
+        "members": {
+          "ServerCertificateMetadata": {
+            "name": "ServerCertificateMetadata",
+            "shape_name": "ServerCertificateMetadata",
+            "type": "structure"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "tagListType",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "UploadSigningCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CertificateBody": {
+            "name": "CertificateBody",
+            "shape_name": "certificateBodyType",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "existingUserNameType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CertificateBody"
+        ]
+      },
+      "name": "UploadSigningCertificate",
+      "output": {
+        "markers": null,
+        "members": {
+          "Certificate": {
+            "name": "Certificate",
+            "shape_name": "SigningCertificate",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Certificate"
+        ]
+      }
+    }
+  }
+}

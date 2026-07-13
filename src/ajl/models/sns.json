@@ -1,0 +1,1367 @@
+{
+  "metadata": {
+    "apiVersion": "2010-03-31",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "sns",
+    "protocol": "query",
+    "protocols": [
+      "query"
+    ],
+    "serviceAbbreviation": "Amazon SNS",
+    "serviceFullName": "Amazon Simple Notification Service",
+    "serviceId": "SNS",
+    "signatureVersion": "v4",
+    "uid": "sns-2010-03-31",
+    "xmlNamespace": "http://sns.amazonaws.com/doc/2010-03-31/"
+  },
+  "name": "sns",
+  "operations": {
+    "AddPermission": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AWSAccountId": {
+            "name": "AWSAccountId",
+            "shape_name": "DelegatesList",
+            "type": "list"
+          },
+          "ActionName": {
+            "name": "ActionName",
+            "shape_name": "ActionsList",
+            "type": "list"
+          },
+          "Label": {
+            "name": "Label",
+            "shape_name": "label",
+            "type": "string"
+          },
+          "TopicArn": {
+            "name": "TopicArn",
+            "shape_name": "topicARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TopicArn",
+          "Label",
+          "AWSAccountId",
+          "ActionName"
+        ]
+      },
+      "name": "AddPermission",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CheckIfPhoneNumberIsOptedOut": {
+      "input": {
+        "markers": null,
+        "members": {
+          "phoneNumber": {
+            "name": "phoneNumber",
+            "shape_name": "PhoneNumber",
+            "type": "string"
+          }
+        },
+        "required": [
+          "phoneNumber"
+        ]
+      },
+      "name": "CheckIfPhoneNumberIsOptedOut",
+      "output": {
+        "markers": null,
+        "members": {
+          "isOptedOut": {
+            "name": "isOptedOut",
+            "shape_name": "boolean",
+            "type": "boolean"
+          }
+        },
+        "required": null
+      }
+    },
+    "ConfirmSubscription": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AuthenticateOnUnsubscribe": {
+            "name": "AuthenticateOnUnsubscribe",
+            "shape_name": "authenticateOnUnsubscribe",
+            "type": "string"
+          },
+          "Token": {
+            "name": "Token",
+            "shape_name": "token",
+            "type": "string"
+          },
+          "TopicArn": {
+            "name": "TopicArn",
+            "shape_name": "topicARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TopicArn",
+          "Token"
+        ]
+      },
+      "name": "ConfirmSubscription",
+      "output": {
+        "markers": null,
+        "members": {
+          "SubscriptionArn": {
+            "name": "SubscriptionArn",
+            "shape_name": "subscriptionARN",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreatePlatformApplication": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "MapStringToString",
+            "type": "map"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Platform": {
+            "name": "Platform",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Platform",
+          "Attributes"
+        ]
+      },
+      "name": "CreatePlatformApplication",
+      "output": {
+        "markers": null,
+        "members": {
+          "PlatformApplicationArn": {
+            "name": "PlatformApplicationArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreatePlatformEndpoint": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "MapStringToString",
+            "type": "map"
+          },
+          "CustomUserData": {
+            "name": "CustomUserData",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PlatformApplicationArn": {
+            "name": "PlatformApplicationArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Token": {
+            "name": "Token",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PlatformApplicationArn",
+          "Token"
+        ]
+      },
+      "name": "CreatePlatformEndpoint",
+      "output": {
+        "markers": null,
+        "members": {
+          "EndpointArn": {
+            "name": "EndpointArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateSMSSandboxPhoneNumber": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LanguageCode": {
+            "name": "LanguageCode",
+            "shape_name": "LanguageCodeString",
+            "type": "string"
+          },
+          "PhoneNumber": {
+            "name": "PhoneNumber",
+            "shape_name": "PhoneNumberString",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PhoneNumber"
+        ]
+      },
+      "name": "CreateSMSSandboxPhoneNumber",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateTopic": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "TopicAttributesMap",
+            "type": "map"
+          },
+          "DataProtectionPolicy": {
+            "name": "DataProtectionPolicy",
+            "shape_name": "attributeValue",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "topicName",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "CreateTopic",
+      "output": {
+        "markers": null,
+        "members": {
+          "TopicArn": {
+            "name": "TopicArn",
+            "shape_name": "topicARN",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteEndpoint": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EndpointArn": {
+            "name": "EndpointArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "EndpointArn"
+        ]
+      },
+      "name": "DeleteEndpoint",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeletePlatformApplication": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PlatformApplicationArn": {
+            "name": "PlatformApplicationArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PlatformApplicationArn"
+        ]
+      },
+      "name": "DeletePlatformApplication",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteSMSSandboxPhoneNumber": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PhoneNumber": {
+            "name": "PhoneNumber",
+            "shape_name": "PhoneNumberString",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PhoneNumber"
+        ]
+      },
+      "name": "DeleteSMSSandboxPhoneNumber",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteTopic": {
+      "input": {
+        "markers": null,
+        "members": {
+          "TopicArn": {
+            "name": "TopicArn",
+            "shape_name": "topicARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TopicArn"
+        ]
+      },
+      "name": "DeleteTopic",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "GetDataProtectionPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "topicARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      },
+      "name": "GetDataProtectionPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "DataProtectionPolicy": {
+            "name": "DataProtectionPolicy",
+            "shape_name": "attributeValue",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetEndpointAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EndpointArn": {
+            "name": "EndpointArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "EndpointArn"
+        ]
+      },
+      "name": "GetEndpointAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "MapStringToString",
+            "type": "map"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetPlatformApplicationAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PlatformApplicationArn": {
+            "name": "PlatformApplicationArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PlatformApplicationArn"
+        ]
+      },
+      "name": "GetPlatformApplicationAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "MapStringToString",
+            "type": "map"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetSMSAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "attributes": {
+            "name": "attributes",
+            "shape_name": "ListString",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "GetSMSAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "attributes": {
+            "name": "attributes",
+            "shape_name": "MapStringToString",
+            "type": "map"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetSMSSandboxAccountStatus": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "GetSMSSandboxAccountStatus",
+      "output": {
+        "markers": null,
+        "members": {
+          "IsInSandbox": {
+            "name": "IsInSandbox",
+            "shape_name": "boolean",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "IsInSandbox"
+        ]
+      }
+    },
+    "GetSubscriptionAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SubscriptionArn": {
+            "name": "SubscriptionArn",
+            "shape_name": "subscriptionARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SubscriptionArn"
+        ]
+      },
+      "name": "GetSubscriptionAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "SubscriptionAttributesMap",
+            "type": "map"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetTopicAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "TopicArn": {
+            "name": "TopicArn",
+            "shape_name": "topicARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TopicArn"
+        ]
+      },
+      "name": "GetTopicAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "TopicAttributesMap",
+            "type": "map"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListEndpointsByPlatformApplication": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PlatformApplicationArn": {
+            "name": "PlatformApplicationArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PlatformApplicationArn"
+        ]
+      },
+      "name": "ListEndpointsByPlatformApplication",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Endpoints": {
+            "name": "Endpoints",
+            "shape_name": "ListOfEndpoints",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListOriginationNumbers": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxItemsListOriginationNumbers",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "nextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListOriginationNumbers",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "nextToken",
+            "type": "string"
+          },
+          "PhoneNumbers": {
+            "name": "PhoneNumbers",
+            "shape_name": "PhoneNumberInformationList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListPhoneNumbersOptedOut": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListPhoneNumbersOptedOut",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "phoneNumbers": {
+            "name": "phoneNumbers",
+            "shape_name": "PhoneNumberList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListPlatformApplications": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListPlatformApplications",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PlatformApplications": {
+            "name": "PlatformApplications",
+            "shape_name": "ListOfPlatformApplications",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "PlatformApplicationArn",
+            "path": [
+              "PlatformApplications"
+            ],
+            "type": "sns:platform-application"
+          }
+        ]
+      }
+    },
+    "ListSMSSandboxPhoneNumbers": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxItems",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "nextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListSMSSandboxPhoneNumbers",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "PhoneNumbers": {
+            "name": "PhoneNumbers",
+            "shape_name": "SMSSandboxPhoneNumberList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "PhoneNumbers"
+        ]
+      }
+    },
+    "ListSubscriptions": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "nextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListSubscriptions",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "nextToken",
+            "type": "string"
+          },
+          "Subscriptions": {
+            "name": "Subscriptions",
+            "shape_name": "SubscriptionsList",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "SubscriptionArn",
+            "path": [
+              "Subscriptions"
+            ],
+            "type": "sns:subscription"
+          }
+        ]
+      }
+    },
+    "ListSubscriptionsByTopic": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "nextToken",
+            "type": "string"
+          },
+          "TopicArn": {
+            "name": "TopicArn",
+            "shape_name": "topicARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TopicArn"
+        ]
+      },
+      "name": "ListSubscriptionsByTopic",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "nextToken",
+            "type": "string"
+          },
+          "Subscriptions": {
+            "name": "Subscriptions",
+            "shape_name": "SubscriptionsList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      },
+      "name": "ListTagsForResource",
+      "output": {
+        "markers": null,
+        "members": {
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTopics": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "nextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListTopics",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "nextToken",
+            "type": "string"
+          },
+          "Topics": {
+            "name": "Topics",
+            "shape_name": "TopicsList",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "TopicArn",
+            "path": [
+              "Topics"
+            ],
+            "type": "sns:topic"
+          }
+        ]
+      }
+    },
+    "OptInPhoneNumber": {
+      "input": {
+        "markers": null,
+        "members": {
+          "phoneNumber": {
+            "name": "phoneNumber",
+            "shape_name": "PhoneNumber",
+            "type": "string"
+          }
+        },
+        "required": [
+          "phoneNumber"
+        ]
+      },
+      "name": "OptInPhoneNumber",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "Publish": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Message": {
+            "name": "Message",
+            "shape_name": "message",
+            "type": "string"
+          },
+          "MessageAttributes": {
+            "name": "MessageAttributes",
+            "shape_name": "MessageAttributeMap",
+            "type": "map"
+          },
+          "MessageDeduplicationId": {
+            "name": "MessageDeduplicationId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MessageGroupId": {
+            "name": "MessageGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MessageStructure": {
+            "name": "MessageStructure",
+            "shape_name": "messageStructure",
+            "type": "string"
+          },
+          "PhoneNumber": {
+            "name": "PhoneNumber",
+            "shape_name": "PhoneNumber",
+            "type": "string"
+          },
+          "Subject": {
+            "name": "Subject",
+            "shape_name": "subject",
+            "type": "string"
+          },
+          "TargetArn": {
+            "name": "TargetArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "TopicArn": {
+            "name": "TopicArn",
+            "shape_name": "topicARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Message"
+        ]
+      },
+      "name": "Publish",
+      "output": {
+        "markers": null,
+        "members": {
+          "MessageId": {
+            "name": "MessageId",
+            "shape_name": "messageId",
+            "type": "string"
+          },
+          "SequenceNumber": {
+            "name": "SequenceNumber",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "PublishBatch": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PublishBatchRequestEntries": {
+            "name": "PublishBatchRequestEntries",
+            "shape_name": "PublishBatchRequestEntryList",
+            "type": "list"
+          },
+          "TopicArn": {
+            "name": "TopicArn",
+            "shape_name": "topicARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TopicArn",
+          "PublishBatchRequestEntries"
+        ]
+      },
+      "name": "PublishBatch",
+      "output": {
+        "markers": null,
+        "members": {
+          "Failed": {
+            "name": "Failed",
+            "shape_name": "BatchResultErrorEntryList",
+            "type": "list"
+          },
+          "Successful": {
+            "name": "Successful",
+            "shape_name": "PublishBatchResultEntryList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutDataProtectionPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DataProtectionPolicy": {
+            "name": "DataProtectionPolicy",
+            "shape_name": "attributeValue",
+            "type": "string"
+          },
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "topicARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn",
+          "DataProtectionPolicy"
+        ]
+      },
+      "name": "PutDataProtectionPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RemovePermission": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Label": {
+            "name": "Label",
+            "shape_name": "label",
+            "type": "string"
+          },
+          "TopicArn": {
+            "name": "TopicArn",
+            "shape_name": "topicARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TopicArn",
+          "Label"
+        ]
+      },
+      "name": "RemovePermission",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SetEndpointAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "MapStringToString",
+            "type": "map"
+          },
+          "EndpointArn": {
+            "name": "EndpointArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "EndpointArn",
+          "Attributes"
+        ]
+      },
+      "name": "SetEndpointAttributes",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SetPlatformApplicationAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "MapStringToString",
+            "type": "map"
+          },
+          "PlatformApplicationArn": {
+            "name": "PlatformApplicationArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PlatformApplicationArn",
+          "Attributes"
+        ]
+      },
+      "name": "SetPlatformApplicationAttributes",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SetSMSAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "attributes": {
+            "name": "attributes",
+            "shape_name": "MapStringToString",
+            "type": "map"
+          }
+        },
+        "required": [
+          "attributes"
+        ]
+      },
+      "name": "SetSMSAttributes",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SetSubscriptionAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AttributeName": {
+            "name": "AttributeName",
+            "shape_name": "attributeName",
+            "type": "string"
+          },
+          "AttributeValue": {
+            "name": "AttributeValue",
+            "shape_name": "attributeValue",
+            "type": "string"
+          },
+          "SubscriptionArn": {
+            "name": "SubscriptionArn",
+            "shape_name": "subscriptionARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SubscriptionArn",
+          "AttributeName"
+        ]
+      },
+      "name": "SetSubscriptionAttributes",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SetTopicAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AttributeName": {
+            "name": "AttributeName",
+            "shape_name": "attributeName",
+            "type": "string"
+          },
+          "AttributeValue": {
+            "name": "AttributeValue",
+            "shape_name": "attributeValue",
+            "type": "string"
+          },
+          "TopicArn": {
+            "name": "TopicArn",
+            "shape_name": "topicARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TopicArn",
+          "AttributeName"
+        ]
+      },
+      "name": "SetTopicAttributes",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "Subscribe": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "SubscriptionAttributesMap",
+            "type": "map"
+          },
+          "Endpoint": {
+            "name": "Endpoint",
+            "shape_name": "endpoint",
+            "type": "string"
+          },
+          "Protocol": {
+            "name": "Protocol",
+            "shape_name": "protocol",
+            "type": "string"
+          },
+          "ReturnSubscriptionArn": {
+            "name": "ReturnSubscriptionArn",
+            "shape_name": "boolean",
+            "type": "boolean"
+          },
+          "TopicArn": {
+            "name": "TopicArn",
+            "shape_name": "topicARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TopicArn",
+          "Protocol"
+        ]
+      },
+      "name": "Subscribe",
+      "output": {
+        "markers": null,
+        "members": {
+          "SubscriptionArn": {
+            "name": "SubscriptionArn",
+            "shape_name": "subscriptionARN",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "TagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceArn",
+          "Tags"
+        ]
+      },
+      "name": "TagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "Unsubscribe": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SubscriptionArn": {
+            "name": "SubscriptionArn",
+            "shape_name": "subscriptionARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SubscriptionArn"
+        ]
+      },
+      "name": "Unsubscribe",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "TagKeyList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceArn",
+          "TagKeys"
+        ]
+      },
+      "name": "UntagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "VerifySMSSandboxPhoneNumber": {
+      "input": {
+        "markers": null,
+        "members": {
+          "OneTimePassword": {
+            "name": "OneTimePassword",
+            "shape_name": "OTPCode",
+            "type": "string"
+          },
+          "PhoneNumber": {
+            "name": "PhoneNumber",
+            "shape_name": "PhoneNumberString",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PhoneNumber",
+          "OneTimePassword"
+        ]
+      },
+      "name": "VerifySMSSandboxPhoneNumber",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    }
+  }
+}

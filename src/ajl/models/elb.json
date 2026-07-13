@@ -1,0 +1,974 @@
+{
+  "metadata": {
+    "apiVersion": "2012-06-01",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "elasticloadbalancing",
+    "protocol": "query",
+    "protocols": [
+      "query"
+    ],
+    "serviceFullName": "Elastic Load Balancing",
+    "serviceId": "Elastic Load Balancing",
+    "signatureVersion": "v4",
+    "uid": "elasticloadbalancing-2012-06-01",
+    "xmlNamespace": "http://elasticloadbalancing.amazonaws.com/doc/2012-06-01/"
+  },
+  "name": "elb",
+  "operations": {
+    "AddTags": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LoadBalancerNames": {
+            "name": "LoadBalancerNames",
+            "shape_name": "LoadBalancerNames",
+            "type": "list"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "LoadBalancerNames",
+          "Tags"
+        ]
+      },
+      "name": "AddTags",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ApplySecurityGroupsToLoadBalancer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          },
+          "SecurityGroups": {
+            "name": "SecurityGroups",
+            "shape_name": "SecurityGroups",
+            "type": "list"
+          }
+        },
+        "required": [
+          "LoadBalancerName",
+          "SecurityGroups"
+        ]
+      },
+      "name": "ApplySecurityGroupsToLoadBalancer",
+      "output": {
+        "markers": null,
+        "members": {
+          "SecurityGroups": {
+            "name": "SecurityGroups",
+            "shape_name": "SecurityGroups",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "AttachLoadBalancerToSubnets": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          },
+          "Subnets": {
+            "name": "Subnets",
+            "shape_name": "Subnets",
+            "type": "list"
+          }
+        },
+        "required": [
+          "LoadBalancerName",
+          "Subnets"
+        ]
+      },
+      "name": "AttachLoadBalancerToSubnets",
+      "output": {
+        "markers": null,
+        "members": {
+          "Subnets": {
+            "name": "Subnets",
+            "shape_name": "Subnets",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ConfigureHealthCheck": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HealthCheck": {
+            "name": "HealthCheck",
+            "shape_name": "HealthCheck",
+            "type": "structure"
+          },
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LoadBalancerName",
+          "HealthCheck"
+        ]
+      },
+      "name": "ConfigureHealthCheck",
+      "output": {
+        "markers": null,
+        "members": {
+          "HealthCheck": {
+            "name": "HealthCheck",
+            "shape_name": "HealthCheck",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateAppCookieStickinessPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CookieName": {
+            "name": "CookieName",
+            "shape_name": "CookieName",
+            "type": "string"
+          },
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          },
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "PolicyName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LoadBalancerName",
+          "PolicyName",
+          "CookieName"
+        ]
+      },
+      "name": "CreateAppCookieStickinessPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateLBCookieStickinessPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CookieExpirationPeriod": {
+            "name": "CookieExpirationPeriod",
+            "shape_name": "CookieExpirationPeriod",
+            "type": "long"
+          },
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          },
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "PolicyName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LoadBalancerName",
+          "PolicyName"
+        ]
+      },
+      "name": "CreateLBCookieStickinessPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateLoadBalancer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AvailabilityZones": {
+            "name": "AvailabilityZones",
+            "shape_name": "AvailabilityZones",
+            "type": "list"
+          },
+          "Listeners": {
+            "name": "Listeners",
+            "shape_name": "Listeners",
+            "type": "list"
+          },
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          },
+          "Scheme": {
+            "name": "Scheme",
+            "shape_name": "LoadBalancerScheme",
+            "type": "string"
+          },
+          "SecurityGroups": {
+            "name": "SecurityGroups",
+            "shape_name": "SecurityGroups",
+            "type": "list"
+          },
+          "Subnets": {
+            "name": "Subnets",
+            "shape_name": "Subnets",
+            "type": "list"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "LoadBalancerName",
+          "Listeners"
+        ]
+      },
+      "name": "CreateLoadBalancer",
+      "output": {
+        "markers": null,
+        "members": {
+          "DNSName": {
+            "name": "DNSName",
+            "shape_name": "DNSName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateLoadBalancerListeners": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Listeners": {
+            "name": "Listeners",
+            "shape_name": "Listeners",
+            "type": "list"
+          },
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LoadBalancerName",
+          "Listeners"
+        ]
+      },
+      "name": "CreateLoadBalancerListeners",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateLoadBalancerPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          },
+          "PolicyAttributes": {
+            "name": "PolicyAttributes",
+            "shape_name": "PolicyAttributes",
+            "type": "list"
+          },
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "PolicyName",
+            "type": "string"
+          },
+          "PolicyTypeName": {
+            "name": "PolicyTypeName",
+            "shape_name": "PolicyTypeName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LoadBalancerName",
+          "PolicyName",
+          "PolicyTypeName"
+        ]
+      },
+      "name": "CreateLoadBalancerPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteLoadBalancer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LoadBalancerName"
+        ]
+      },
+      "name": "DeleteLoadBalancer",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteLoadBalancerListeners": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          },
+          "LoadBalancerPorts": {
+            "name": "LoadBalancerPorts",
+            "shape_name": "Ports",
+            "type": "list"
+          }
+        },
+        "required": [
+          "LoadBalancerName",
+          "LoadBalancerPorts"
+        ]
+      },
+      "name": "DeleteLoadBalancerListeners",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteLoadBalancerPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          },
+          "PolicyName": {
+            "name": "PolicyName",
+            "shape_name": "PolicyName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LoadBalancerName",
+          "PolicyName"
+        ]
+      },
+      "name": "DeleteLoadBalancerPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeregisterInstancesFromLoadBalancer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Instances": {
+            "name": "Instances",
+            "shape_name": "Instances",
+            "type": "list"
+          },
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LoadBalancerName",
+          "Instances"
+        ]
+      },
+      "name": "DeregisterInstancesFromLoadBalancer",
+      "output": {
+        "markers": null,
+        "members": {
+          "Instances": {
+            "name": "Instances",
+            "shape_name": "Instances",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeAccountLimits": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "PageSize": {
+            "name": "PageSize",
+            "shape_name": "PageSize",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeAccountLimits",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "Limits": {
+            "name": "Limits",
+            "shape_name": "Limits",
+            "type": "list"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "Marker",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeInstanceHealth": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Instances": {
+            "name": "Instances",
+            "shape_name": "Instances",
+            "type": "list"
+          },
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LoadBalancerName"
+        ]
+      },
+      "name": "DescribeInstanceHealth",
+      "output": {
+        "markers": null,
+        "members": {
+          "InstanceStates": {
+            "name": "InstanceStates",
+            "shape_name": "InstanceStates",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeLoadBalancerAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LoadBalancerName"
+        ]
+      },
+      "name": "DescribeLoadBalancerAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "LoadBalancerAttributes": {
+            "name": "LoadBalancerAttributes",
+            "shape_name": "LoadBalancerAttributes",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeLoadBalancerPolicies": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          },
+          "PolicyNames": {
+            "name": "PolicyNames",
+            "shape_name": "PolicyNames",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeLoadBalancerPolicies",
+      "output": {
+        "markers": null,
+        "members": {
+          "PolicyDescriptions": {
+            "name": "PolicyDescriptions",
+            "shape_name": "PolicyDescriptions",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeLoadBalancerPolicyTypes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PolicyTypeNames": {
+            "name": "PolicyTypeNames",
+            "shape_name": "PolicyTypeNames",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeLoadBalancerPolicyTypes",
+      "output": {
+        "markers": null,
+        "members": {
+          "PolicyTypeDescriptions": {
+            "name": "PolicyTypeDescriptions",
+            "shape_name": "PolicyTypeDescriptions",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeLoadBalancers": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "LoadBalancerNames": {
+            "name": "LoadBalancerNames",
+            "shape_name": "LoadBalancerNames",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "PageSize": {
+            "name": "PageSize",
+            "shape_name": "PageSize",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeLoadBalancers",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "LoadBalancerDescriptions": {
+            "name": "LoadBalancerDescriptions",
+            "shape_name": "LoadBalancerDescriptions",
+            "type": "list"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "Marker",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:elasticloadbalancing:{region}:{account}:loadbalancer/{LoadBalancerName}",
+            "id": "LoadBalancerName",
+            "name": "LoadBalancerName",
+            "path": [
+              "LoadBalancerDescriptions"
+            ],
+            "type": "elasticloadbalancing:loadbalancer"
+          }
+        ]
+      }
+    },
+    "DescribeTags": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LoadBalancerNames": {
+            "name": "LoadBalancerNames",
+            "shape_name": "LoadBalancerNamesMax20",
+            "type": "list"
+          }
+        },
+        "required": [
+          "LoadBalancerNames"
+        ]
+      },
+      "name": "DescribeTags",
+      "output": {
+        "markers": null,
+        "members": {
+          "TagDescriptions": {
+            "name": "TagDescriptions",
+            "shape_name": "TagDescriptions",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DetachLoadBalancerFromSubnets": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          },
+          "Subnets": {
+            "name": "Subnets",
+            "shape_name": "Subnets",
+            "type": "list"
+          }
+        },
+        "required": [
+          "LoadBalancerName",
+          "Subnets"
+        ]
+      },
+      "name": "DetachLoadBalancerFromSubnets",
+      "output": {
+        "markers": null,
+        "members": {
+          "Subnets": {
+            "name": "Subnets",
+            "shape_name": "Subnets",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DisableAvailabilityZonesForLoadBalancer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AvailabilityZones": {
+            "name": "AvailabilityZones",
+            "shape_name": "AvailabilityZones",
+            "type": "list"
+          },
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LoadBalancerName",
+          "AvailabilityZones"
+        ]
+      },
+      "name": "DisableAvailabilityZonesForLoadBalancer",
+      "output": {
+        "markers": null,
+        "members": {
+          "AvailabilityZones": {
+            "name": "AvailabilityZones",
+            "shape_name": "AvailabilityZones",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "EnableAvailabilityZonesForLoadBalancer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AvailabilityZones": {
+            "name": "AvailabilityZones",
+            "shape_name": "AvailabilityZones",
+            "type": "list"
+          },
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LoadBalancerName",
+          "AvailabilityZones"
+        ]
+      },
+      "name": "EnableAvailabilityZonesForLoadBalancer",
+      "output": {
+        "markers": null,
+        "members": {
+          "AvailabilityZones": {
+            "name": "AvailabilityZones",
+            "shape_name": "AvailabilityZones",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyLoadBalancerAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LoadBalancerAttributes": {
+            "name": "LoadBalancerAttributes",
+            "shape_name": "LoadBalancerAttributes",
+            "type": "structure"
+          },
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LoadBalancerName",
+          "LoadBalancerAttributes"
+        ]
+      },
+      "name": "ModifyLoadBalancerAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "LoadBalancerAttributes": {
+            "name": "LoadBalancerAttributes",
+            "shape_name": "LoadBalancerAttributes",
+            "type": "structure"
+          },
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "RegisterInstancesWithLoadBalancer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Instances": {
+            "name": "Instances",
+            "shape_name": "Instances",
+            "type": "list"
+          },
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LoadBalancerName",
+          "Instances"
+        ]
+      },
+      "name": "RegisterInstancesWithLoadBalancer",
+      "output": {
+        "markers": null,
+        "members": {
+          "Instances": {
+            "name": "Instances",
+            "shape_name": "Instances",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "RemoveTags": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LoadBalancerNames": {
+            "name": "LoadBalancerNames",
+            "shape_name": "LoadBalancerNames",
+            "type": "list"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagKeyList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "LoadBalancerNames",
+          "Tags"
+        ]
+      },
+      "name": "RemoveTags",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SetLoadBalancerListenerSSLCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          },
+          "LoadBalancerPort": {
+            "name": "LoadBalancerPort",
+            "shape_name": "AccessPointPort",
+            "type": "integer"
+          },
+          "SSLCertificateId": {
+            "name": "SSLCertificateId",
+            "shape_name": "SSLCertificateId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LoadBalancerName",
+          "LoadBalancerPort",
+          "SSLCertificateId"
+        ]
+      },
+      "name": "SetLoadBalancerListenerSSLCertificate",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SetLoadBalancerPoliciesForBackendServer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "InstancePort": {
+            "name": "InstancePort",
+            "shape_name": "EndPointPort",
+            "type": "integer"
+          },
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          },
+          "PolicyNames": {
+            "name": "PolicyNames",
+            "shape_name": "PolicyNames",
+            "type": "list"
+          }
+        },
+        "required": [
+          "LoadBalancerName",
+          "InstancePort",
+          "PolicyNames"
+        ]
+      },
+      "name": "SetLoadBalancerPoliciesForBackendServer",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SetLoadBalancerPoliciesOfListener": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LoadBalancerName": {
+            "name": "LoadBalancerName",
+            "shape_name": "AccessPointName",
+            "type": "string"
+          },
+          "LoadBalancerPort": {
+            "name": "LoadBalancerPort",
+            "shape_name": "AccessPointPort",
+            "type": "integer"
+          },
+          "PolicyNames": {
+            "name": "PolicyNames",
+            "shape_name": "PolicyNames",
+            "type": "list"
+          }
+        },
+        "required": [
+          "LoadBalancerName",
+          "LoadBalancerPort",
+          "PolicyNames"
+        ]
+      },
+      "name": "SetLoadBalancerPoliciesOfListener",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    }
+  }
+}

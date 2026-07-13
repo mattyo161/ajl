@@ -1,0 +1,1470 @@
+{
+  "metadata": {
+    "apiVersion": "2015-02-01",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "elasticfilesystem",
+    "protocol": "rest-json",
+    "protocols": [
+      "rest-json"
+    ],
+    "serviceAbbreviation": "EFS",
+    "serviceFullName": "Amazon Elastic File System",
+    "serviceId": "EFS",
+    "signatureVersion": "v4",
+    "uid": "elasticfilesystem-2015-02-01"
+  },
+  "name": "efs",
+  "operations": {
+    "CreateAccessPoint": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientToken": {
+            "name": "ClientToken",
+            "shape_name": "ClientToken",
+            "type": "string"
+          },
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          },
+          "PosixUser": {
+            "name": "PosixUser",
+            "shape_name": "PosixUser",
+            "type": "structure"
+          },
+          "RootDirectory": {
+            "name": "RootDirectory",
+            "shape_name": "RootDirectory",
+            "type": "structure"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ClientToken",
+          "FileSystemId"
+        ]
+      },
+      "name": "CreateAccessPoint",
+      "output": {
+        "markers": null,
+        "members": {
+          "AccessPointArn": {
+            "name": "AccessPointArn",
+            "shape_name": "AccessPointArn",
+            "type": "string"
+          },
+          "AccessPointId": {
+            "name": "AccessPointId",
+            "shape_name": "AccessPointId",
+            "type": "string"
+          },
+          "ClientToken": {
+            "name": "ClientToken",
+            "shape_name": "ClientToken",
+            "type": "string"
+          },
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          },
+          "LifeCycleState": {
+            "name": "LifeCycleState",
+            "shape_name": "LifeCycleState",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "Name",
+            "type": "string"
+          },
+          "OwnerId": {
+            "name": "OwnerId",
+            "shape_name": "AwsAccountId",
+            "type": "string"
+          },
+          "PosixUser": {
+            "name": "PosixUser",
+            "shape_name": "PosixUser",
+            "type": "structure"
+          },
+          "RootDirectory": {
+            "name": "RootDirectory",
+            "shape_name": "RootDirectory",
+            "type": "structure"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateFileSystem": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AvailabilityZoneName": {
+            "name": "AvailabilityZoneName",
+            "shape_name": "AvailabilityZoneName",
+            "type": "string"
+          },
+          "Backup": {
+            "name": "Backup",
+            "shape_name": "Backup",
+            "type": "boolean"
+          },
+          "CreationToken": {
+            "name": "CreationToken",
+            "shape_name": "CreationToken",
+            "type": "string"
+          },
+          "Encrypted": {
+            "name": "Encrypted",
+            "shape_name": "Encrypted",
+            "type": "boolean"
+          },
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "KmsKeyId",
+            "type": "string"
+          },
+          "PerformanceMode": {
+            "name": "PerformanceMode",
+            "shape_name": "PerformanceMode",
+            "type": "string"
+          },
+          "ProvisionedThroughputInMibps": {
+            "name": "ProvisionedThroughputInMibps",
+            "shape_name": "ProvisionedThroughputInMibps",
+            "type": "double"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "ThroughputMode": {
+            "name": "ThroughputMode",
+            "shape_name": "ThroughputMode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CreationToken"
+        ]
+      },
+      "name": "CreateFileSystem",
+      "output": {
+        "markers": null,
+        "members": {
+          "AvailabilityZoneId": {
+            "name": "AvailabilityZoneId",
+            "shape_name": "AvailabilityZoneId",
+            "type": "string"
+          },
+          "AvailabilityZoneName": {
+            "name": "AvailabilityZoneName",
+            "shape_name": "AvailabilityZoneName",
+            "type": "string"
+          },
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "CreationToken": {
+            "name": "CreationToken",
+            "shape_name": "CreationToken",
+            "type": "string"
+          },
+          "Encrypted": {
+            "name": "Encrypted",
+            "shape_name": "Encrypted",
+            "type": "boolean"
+          },
+          "FileSystemArn": {
+            "name": "FileSystemArn",
+            "shape_name": "FileSystemArn",
+            "type": "string"
+          },
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          },
+          "FileSystemProtection": {
+            "name": "FileSystemProtection",
+            "shape_name": "FileSystemProtectionDescription",
+            "type": "structure"
+          },
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "KmsKeyId",
+            "type": "string"
+          },
+          "LifeCycleState": {
+            "name": "LifeCycleState",
+            "shape_name": "LifeCycleState",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "TagValue",
+            "type": "string"
+          },
+          "NumberOfMountTargets": {
+            "name": "NumberOfMountTargets",
+            "shape_name": "MountTargetCount",
+            "type": "integer"
+          },
+          "OwnerId": {
+            "name": "OwnerId",
+            "shape_name": "AwsAccountId",
+            "type": "string"
+          },
+          "PerformanceMode": {
+            "name": "PerformanceMode",
+            "shape_name": "PerformanceMode",
+            "type": "string"
+          },
+          "ProvisionedThroughputInMibps": {
+            "name": "ProvisionedThroughputInMibps",
+            "shape_name": "ProvisionedThroughputInMibps",
+            "type": "double"
+          },
+          "SizeInBytes": {
+            "name": "SizeInBytes",
+            "shape_name": "FileSystemSize",
+            "type": "structure"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "ThroughputMode": {
+            "name": "ThroughputMode",
+            "shape_name": "ThroughputMode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "OwnerId",
+          "CreationToken",
+          "FileSystemId",
+          "CreationTime",
+          "LifeCycleState",
+          "NumberOfMountTargets",
+          "SizeInBytes",
+          "PerformanceMode",
+          "Tags"
+        ]
+      }
+    },
+    "CreateMountTarget": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          },
+          "IpAddress": {
+            "name": "IpAddress",
+            "shape_name": "IpAddress",
+            "type": "string"
+          },
+          "IpAddressType": {
+            "name": "IpAddressType",
+            "shape_name": "IpAddressType",
+            "type": "string"
+          },
+          "Ipv6Address": {
+            "name": "Ipv6Address",
+            "shape_name": "Ipv6Address",
+            "type": "string"
+          },
+          "SecurityGroups": {
+            "name": "SecurityGroups",
+            "shape_name": "SecurityGroups",
+            "type": "list"
+          },
+          "SubnetId": {
+            "name": "SubnetId",
+            "shape_name": "SubnetId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "FileSystemId",
+          "SubnetId"
+        ]
+      },
+      "name": "CreateMountTarget",
+      "output": {
+        "markers": null,
+        "members": {
+          "AvailabilityZoneId": {
+            "name": "AvailabilityZoneId",
+            "shape_name": "AvailabilityZoneId",
+            "type": "string"
+          },
+          "AvailabilityZoneName": {
+            "name": "AvailabilityZoneName",
+            "shape_name": "AvailabilityZoneName",
+            "type": "string"
+          },
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          },
+          "IpAddress": {
+            "name": "IpAddress",
+            "shape_name": "IpAddress",
+            "type": "string"
+          },
+          "Ipv6Address": {
+            "name": "Ipv6Address",
+            "shape_name": "Ipv6Address",
+            "type": "string"
+          },
+          "LifeCycleState": {
+            "name": "LifeCycleState",
+            "shape_name": "LifeCycleState",
+            "type": "string"
+          },
+          "MountTargetId": {
+            "name": "MountTargetId",
+            "shape_name": "MountTargetId",
+            "type": "string"
+          },
+          "NetworkInterfaceId": {
+            "name": "NetworkInterfaceId",
+            "shape_name": "NetworkInterfaceId",
+            "type": "string"
+          },
+          "OwnerId": {
+            "name": "OwnerId",
+            "shape_name": "AwsAccountId",
+            "type": "string"
+          },
+          "SubnetId": {
+            "name": "SubnetId",
+            "shape_name": "SubnetId",
+            "type": "string"
+          },
+          "VpcId": {
+            "name": "VpcId",
+            "shape_name": "VpcId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "MountTargetId",
+          "FileSystemId",
+          "SubnetId",
+          "LifeCycleState"
+        ]
+      }
+    },
+    "CreateReplicationConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Destinations": {
+            "name": "Destinations",
+            "shape_name": "DestinationsToCreate",
+            "type": "list"
+          },
+          "SourceFileSystemId": {
+            "name": "SourceFileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SourceFileSystemId",
+          "Destinations"
+        ]
+      },
+      "name": "CreateReplicationConfiguration",
+      "output": {
+        "markers": null,
+        "members": {
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "Destinations": {
+            "name": "Destinations",
+            "shape_name": "Destinations",
+            "type": "list"
+          },
+          "OriginalSourceFileSystemArn": {
+            "name": "OriginalSourceFileSystemArn",
+            "shape_name": "FileSystemArn",
+            "type": "string"
+          },
+          "SourceFileSystemArn": {
+            "name": "SourceFileSystemArn",
+            "shape_name": "FileSystemArn",
+            "type": "string"
+          },
+          "SourceFileSystemId": {
+            "name": "SourceFileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          },
+          "SourceFileSystemOwnerId": {
+            "name": "SourceFileSystemOwnerId",
+            "shape_name": "AwsAccountId",
+            "type": "string"
+          },
+          "SourceFileSystemRegion": {
+            "name": "SourceFileSystemRegion",
+            "shape_name": "RegionName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SourceFileSystemId",
+          "SourceFileSystemRegion",
+          "SourceFileSystemArn",
+          "OriginalSourceFileSystemArn",
+          "CreationTime",
+          "Destinations"
+        ]
+      }
+    },
+    "CreateTags": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          }
+        },
+        "required": [
+          "FileSystemId",
+          "Tags"
+        ]
+      },
+      "name": "CreateTags",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteAccessPoint": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AccessPointId": {
+            "name": "AccessPointId",
+            "shape_name": "AccessPointId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AccessPointId"
+        ]
+      },
+      "name": "DeleteAccessPoint",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteFileSystem": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "FileSystemId"
+        ]
+      },
+      "name": "DeleteFileSystem",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteFileSystemPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "FileSystemId"
+        ]
+      },
+      "name": "DeleteFileSystemPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteMountTarget": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MountTargetId": {
+            "name": "MountTargetId",
+            "shape_name": "MountTargetId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "MountTargetId"
+        ]
+      },
+      "name": "DeleteMountTarget",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteReplicationConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DeletionMode": {
+            "name": "DeletionMode",
+            "shape_name": "DeletionMode",
+            "type": "string"
+          },
+          "SourceFileSystemId": {
+            "name": "SourceFileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SourceFileSystemId"
+        ]
+      },
+      "name": "DeleteReplicationConfiguration",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteTags": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "TagKeys",
+            "type": "list"
+          }
+        },
+        "required": [
+          "FileSystemId",
+          "TagKeys"
+        ]
+      },
+      "name": "DeleteTags",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DescribeAccessPoints": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "AccessPointId": {
+            "name": "AccessPointId",
+            "shape_name": "AccessPointId",
+            "type": "string"
+          },
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeAccessPoints",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "AccessPoints": {
+            "name": "AccessPoints",
+            "shape_name": "AccessPointDescriptions",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeAccountPreferences": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeAccountPreferences",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "ResourceIdPreference": {
+            "name": "ResourceIdPreference",
+            "shape_name": "ResourceIdPreference",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeBackupPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "FileSystemId"
+        ]
+      },
+      "name": "DescribeBackupPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "BackupPolicy": {
+            "name": "BackupPolicy",
+            "shape_name": "BackupPolicy",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeFileSystemPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "FileSystemId"
+        ]
+      },
+      "name": "DescribeFileSystemPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          },
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "Policy",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeFileSystems": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CreationToken": {
+            "name": "CreationToken",
+            "shape_name": "CreationToken",
+            "type": "string"
+          },
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "MaxItems",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeFileSystems",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "FileSystems": {
+            "name": "FileSystems",
+            "shape_name": "FileSystemDescriptions",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "Marker",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "FileSystemArn",
+            "id": "FileSystemId",
+            "name": "Name",
+            "path": [
+              "FileSystems"
+            ],
+            "tags": "Tags",
+            "type": "elasticfilesystem:file-system"
+          }
+        ]
+      }
+    },
+    "DescribeLifecycleConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "FileSystemId"
+        ]
+      },
+      "name": "DescribeLifecycleConfiguration",
+      "output": {
+        "markers": null,
+        "members": {
+          "LifecyclePolicies": {
+            "name": "LifecyclePolicies",
+            "shape_name": "LifecyclePolicies",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeMountTargetSecurityGroups": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MountTargetId": {
+            "name": "MountTargetId",
+            "shape_name": "MountTargetId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "MountTargetId"
+        ]
+      },
+      "name": "DescribeMountTargetSecurityGroups",
+      "output": {
+        "markers": null,
+        "members": {
+          "SecurityGroups": {
+            "name": "SecurityGroups",
+            "shape_name": "SecurityGroups",
+            "type": "list"
+          }
+        },
+        "required": [
+          "SecurityGroups"
+        ]
+      }
+    },
+    "DescribeMountTargets": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "AccessPointId": {
+            "name": "AccessPointId",
+            "shape_name": "AccessPointId",
+            "type": "string"
+          },
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "MaxItems",
+            "type": "integer"
+          },
+          "MountTargetId": {
+            "name": "MountTargetId",
+            "shape_name": "MountTargetId",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeMountTargets",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "MountTargets": {
+            "name": "MountTargets",
+            "shape_name": "MountTargetDescriptions",
+            "type": "list"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "Marker",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "id": "MountTargetId",
+            "path": [
+              "MountTargets"
+            ],
+            "type": "elasticfilesystem:mount-target"
+          }
+        ]
+      }
+    },
+    "DescribeReplicationConfigurations": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeReplicationConfigurations",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "Replications": {
+            "name": "Replications",
+            "shape_name": "ReplicationConfigurationDescriptions",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeTags": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "MaxItems",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "FileSystemId"
+        ]
+      },
+      "name": "DescribeTags",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "Marker",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Tags"
+        ]
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceId"
+        ]
+      },
+      "name": "ListTagsForResource",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyMountTargetSecurityGroups": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MountTargetId": {
+            "name": "MountTargetId",
+            "shape_name": "MountTargetId",
+            "type": "string"
+          },
+          "SecurityGroups": {
+            "name": "SecurityGroups",
+            "shape_name": "SecurityGroups",
+            "type": "list"
+          }
+        },
+        "required": [
+          "MountTargetId"
+        ]
+      },
+      "name": "ModifyMountTargetSecurityGroups",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "PutAccountPreferences": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceIdType": {
+            "name": "ResourceIdType",
+            "shape_name": "ResourceIdType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceIdType"
+        ]
+      },
+      "name": "PutAccountPreferences",
+      "output": {
+        "markers": null,
+        "members": {
+          "ResourceIdPreference": {
+            "name": "ResourceIdPreference",
+            "shape_name": "ResourceIdPreference",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutBackupPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BackupPolicy": {
+            "name": "BackupPolicy",
+            "shape_name": "BackupPolicy",
+            "type": "structure"
+          },
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "FileSystemId",
+          "BackupPolicy"
+        ]
+      },
+      "name": "PutBackupPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "BackupPolicy": {
+            "name": "BackupPolicy",
+            "shape_name": "BackupPolicy",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutFileSystemPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BypassPolicyLockoutSafetyCheck": {
+            "name": "BypassPolicyLockoutSafetyCheck",
+            "shape_name": "BypassPolicyLockoutSafetyCheck",
+            "type": "boolean"
+          },
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          },
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "Policy",
+            "type": "string"
+          }
+        },
+        "required": [
+          "FileSystemId",
+          "Policy"
+        ]
+      },
+      "name": "PutFileSystemPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          },
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "Policy",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutLifecycleConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          },
+          "LifecyclePolicies": {
+            "name": "LifecyclePolicies",
+            "shape_name": "LifecyclePolicies",
+            "type": "list"
+          }
+        },
+        "required": [
+          "FileSystemId",
+          "LifecyclePolicies"
+        ]
+      },
+      "name": "PutLifecycleConfiguration",
+      "output": {
+        "markers": null,
+        "members": {
+          "LifecyclePolicies": {
+            "name": "LifecyclePolicies",
+            "shape_name": "LifecyclePolicies",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "TagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceId",
+          "Tags"
+        ]
+      },
+      "name": "TagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "TagKeys",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceId",
+          "TagKeys"
+        ]
+      },
+      "name": "UntagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateFileSystem": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          },
+          "ProvisionedThroughputInMibps": {
+            "name": "ProvisionedThroughputInMibps",
+            "shape_name": "ProvisionedThroughputInMibps",
+            "type": "double"
+          },
+          "ThroughputMode": {
+            "name": "ThroughputMode",
+            "shape_name": "ThroughputMode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "FileSystemId"
+        ]
+      },
+      "name": "UpdateFileSystem",
+      "output": {
+        "markers": null,
+        "members": {
+          "AvailabilityZoneId": {
+            "name": "AvailabilityZoneId",
+            "shape_name": "AvailabilityZoneId",
+            "type": "string"
+          },
+          "AvailabilityZoneName": {
+            "name": "AvailabilityZoneName",
+            "shape_name": "AvailabilityZoneName",
+            "type": "string"
+          },
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "CreationToken": {
+            "name": "CreationToken",
+            "shape_name": "CreationToken",
+            "type": "string"
+          },
+          "Encrypted": {
+            "name": "Encrypted",
+            "shape_name": "Encrypted",
+            "type": "boolean"
+          },
+          "FileSystemArn": {
+            "name": "FileSystemArn",
+            "shape_name": "FileSystemArn",
+            "type": "string"
+          },
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          },
+          "FileSystemProtection": {
+            "name": "FileSystemProtection",
+            "shape_name": "FileSystemProtectionDescription",
+            "type": "structure"
+          },
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "KmsKeyId",
+            "type": "string"
+          },
+          "LifeCycleState": {
+            "name": "LifeCycleState",
+            "shape_name": "LifeCycleState",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "TagValue",
+            "type": "string"
+          },
+          "NumberOfMountTargets": {
+            "name": "NumberOfMountTargets",
+            "shape_name": "MountTargetCount",
+            "type": "integer"
+          },
+          "OwnerId": {
+            "name": "OwnerId",
+            "shape_name": "AwsAccountId",
+            "type": "string"
+          },
+          "PerformanceMode": {
+            "name": "PerformanceMode",
+            "shape_name": "PerformanceMode",
+            "type": "string"
+          },
+          "ProvisionedThroughputInMibps": {
+            "name": "ProvisionedThroughputInMibps",
+            "shape_name": "ProvisionedThroughputInMibps",
+            "type": "double"
+          },
+          "SizeInBytes": {
+            "name": "SizeInBytes",
+            "shape_name": "FileSystemSize",
+            "type": "structure"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "ThroughputMode": {
+            "name": "ThroughputMode",
+            "shape_name": "ThroughputMode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "OwnerId",
+          "CreationToken",
+          "FileSystemId",
+          "CreationTime",
+          "LifeCycleState",
+          "NumberOfMountTargets",
+          "SizeInBytes",
+          "PerformanceMode",
+          "Tags"
+        ]
+      }
+    },
+    "UpdateFileSystemProtection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FileSystemId": {
+            "name": "FileSystemId",
+            "shape_name": "FileSystemId",
+            "type": "string"
+          },
+          "ReplicationOverwriteProtection": {
+            "name": "ReplicationOverwriteProtection",
+            "shape_name": "ReplicationOverwriteProtection",
+            "type": "string"
+          }
+        },
+        "required": [
+          "FileSystemId"
+        ]
+      },
+      "name": "UpdateFileSystemProtection",
+      "output": {
+        "markers": null,
+        "members": {
+          "ReplicationOverwriteProtection": {
+            "name": "ReplicationOverwriteProtection",
+            "shape_name": "ReplicationOverwriteProtection",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    }
+  }
+}

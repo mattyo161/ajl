@@ -1,0 +1,853 @@
+{
+  "metadata": {
+    "apiVersion": "2012-11-05",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "awsQueryCompatible": {},
+    "endpointPrefix": "sqs",
+    "jsonVersion": "1.0",
+    "protocol": "json",
+    "protocols": [
+      "json"
+    ],
+    "serviceAbbreviation": "Amazon SQS",
+    "serviceFullName": "Amazon Simple Queue Service",
+    "serviceId": "SQS",
+    "signatureVersion": "v4",
+    "targetPrefix": "AmazonSQS",
+    "uid": "sqs-2012-11-05"
+  },
+  "name": "sqs",
+  "operations": {
+    "AddPermission": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AWSAccountIds": {
+            "name": "AWSAccountIds",
+            "shape_name": "AWSAccountIdList",
+            "type": "list"
+          },
+          "Actions": {
+            "name": "Actions",
+            "shape_name": "ActionNameList",
+            "type": "list"
+          },
+          "Label": {
+            "name": "Label",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "QueueUrl": {
+            "name": "QueueUrl",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueueUrl",
+          "Label",
+          "AWSAccountIds",
+          "Actions"
+        ]
+      },
+      "name": "AddPermission",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CancelMessageMoveTask": {
+      "input": {
+        "markers": null,
+        "members": {
+          "TaskHandle": {
+            "name": "TaskHandle",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TaskHandle"
+        ]
+      },
+      "name": "CancelMessageMoveTask",
+      "output": {
+        "markers": null,
+        "members": {
+          "ApproximateNumberOfMessagesMoved": {
+            "name": "ApproximateNumberOfMessagesMoved",
+            "shape_name": "Long",
+            "type": "long"
+          }
+        },
+        "required": null
+      }
+    },
+    "ChangeMessageVisibility": {
+      "input": {
+        "markers": null,
+        "members": {
+          "QueueUrl": {
+            "name": "QueueUrl",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ReceiptHandle": {
+            "name": "ReceiptHandle",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "VisibilityTimeout": {
+            "name": "VisibilityTimeout",
+            "shape_name": "NullableInteger",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "QueueUrl",
+          "ReceiptHandle",
+          "VisibilityTimeout"
+        ]
+      },
+      "name": "ChangeMessageVisibility",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ChangeMessageVisibilityBatch": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Entries": {
+            "name": "Entries",
+            "shape_name": "ChangeMessageVisibilityBatchRequestEntryList",
+            "type": "list"
+          },
+          "QueueUrl": {
+            "name": "QueueUrl",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueueUrl",
+          "Entries"
+        ]
+      },
+      "name": "ChangeMessageVisibilityBatch",
+      "output": {
+        "markers": null,
+        "members": {
+          "Failed": {
+            "name": "Failed",
+            "shape_name": "BatchResultErrorEntryList",
+            "type": "list"
+          },
+          "Successful": {
+            "name": "Successful",
+            "shape_name": "ChangeMessageVisibilityBatchResultEntryList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Successful",
+          "Failed"
+        ]
+      }
+    },
+    "CreateQueue": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "QueueAttributeMap",
+            "type": "map"
+          },
+          "QueueName": {
+            "name": "QueueName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "TagMap",
+            "type": "map"
+          }
+        },
+        "required": [
+          "QueueName"
+        ]
+      },
+      "name": "CreateQueue",
+      "output": {
+        "markers": null,
+        "members": {
+          "QueueUrl": {
+            "name": "QueueUrl",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteMessage": {
+      "input": {
+        "markers": null,
+        "members": {
+          "QueueUrl": {
+            "name": "QueueUrl",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ReceiptHandle": {
+            "name": "ReceiptHandle",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueueUrl",
+          "ReceiptHandle"
+        ]
+      },
+      "name": "DeleteMessage",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteMessageBatch": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Entries": {
+            "name": "Entries",
+            "shape_name": "DeleteMessageBatchRequestEntryList",
+            "type": "list"
+          },
+          "QueueUrl": {
+            "name": "QueueUrl",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueueUrl",
+          "Entries"
+        ]
+      },
+      "name": "DeleteMessageBatch",
+      "output": {
+        "markers": null,
+        "members": {
+          "Failed": {
+            "name": "Failed",
+            "shape_name": "BatchResultErrorEntryList",
+            "type": "list"
+          },
+          "Successful": {
+            "name": "Successful",
+            "shape_name": "DeleteMessageBatchResultEntryList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Successful",
+          "Failed"
+        ]
+      }
+    },
+    "DeleteQueue": {
+      "input": {
+        "markers": null,
+        "members": {
+          "QueueUrl": {
+            "name": "QueueUrl",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueueUrl"
+        ]
+      },
+      "name": "DeleteQueue",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "GetQueueAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AttributeNames": {
+            "name": "AttributeNames",
+            "shape_name": "AttributeNameList",
+            "type": "list"
+          },
+          "QueueUrl": {
+            "name": "QueueUrl",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueueUrl"
+        ]
+      },
+      "name": "GetQueueAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "QueueAttributeMap",
+            "type": "map"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetQueueUrl": {
+      "input": {
+        "markers": null,
+        "members": {
+          "QueueName": {
+            "name": "QueueName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "QueueOwnerAWSAccountId": {
+            "name": "QueueOwnerAWSAccountId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueueName"
+        ]
+      },
+      "name": "GetQueueUrl",
+      "output": {
+        "markers": null,
+        "members": {
+          "QueueUrl": {
+            "name": "QueueUrl",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListDeadLetterSourceQueues": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "QueueUrl": {
+            "name": "QueueUrl",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueueUrl"
+        ]
+      },
+      "name": "ListDeadLetterSourceQueues",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "queueUrls": {
+            "name": "queueUrls",
+            "shape_name": "QueueUrlList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "queueUrls"
+        ]
+      }
+    },
+    "ListMessageMoveTasks": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "NullableInteger",
+            "type": "integer"
+          },
+          "SourceArn": {
+            "name": "SourceArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SourceArn"
+        ]
+      },
+      "name": "ListMessageMoveTasks",
+      "output": {
+        "markers": null,
+        "members": {
+          "Results": {
+            "name": "Results",
+            "shape_name": "ListMessageMoveTasksResultEntryList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListQueueTags": {
+      "input": {
+        "markers": null,
+        "members": {
+          "QueueUrl": {
+            "name": "QueueUrl",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueueUrl"
+        ]
+      },
+      "name": "ListQueueTags",
+      "output": {
+        "markers": null,
+        "members": {
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagMap",
+            "type": "map"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListQueues": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "QueueNamePrefix": {
+            "name": "QueueNamePrefix",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListQueues",
+      "output": {
+        "jq": "(.QueueUrls//[])[] | . as $url | ($url | split(\"/\")) as $p |\n{Type: \"sqs:queue\", Id: $p[-1], Name: $p[-1],\n Arn: \"arn:\\($partition//\"aws\"):sqs:\\($region):\\($p[-2]):\\($p[-1])\",\n Tags: {}, QueueUrl: $url}",
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "Token",
+            "type": "string"
+          },
+          "QueueUrls": {
+            "name": "QueueUrls",
+            "shape_name": "QueueUrlList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "PurgeQueue": {
+      "input": {
+        "markers": null,
+        "members": {
+          "QueueUrl": {
+            "name": "QueueUrl",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueueUrl"
+        ]
+      },
+      "name": "PurgeQueue",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ReceiveMessage": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AttributeNames": {
+            "name": "AttributeNames",
+            "shape_name": "AttributeNameList",
+            "type": "list"
+          },
+          "MaxNumberOfMessages": {
+            "name": "MaxNumberOfMessages",
+            "shape_name": "NullableInteger",
+            "type": "integer"
+          },
+          "MessageAttributeNames": {
+            "name": "MessageAttributeNames",
+            "shape_name": "MessageAttributeNameList",
+            "type": "list"
+          },
+          "MessageSystemAttributeNames": {
+            "name": "MessageSystemAttributeNames",
+            "shape_name": "MessageSystemAttributeList",
+            "type": "list"
+          },
+          "QueueUrl": {
+            "name": "QueueUrl",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ReceiveRequestAttemptId": {
+            "name": "ReceiveRequestAttemptId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "VisibilityTimeout": {
+            "name": "VisibilityTimeout",
+            "shape_name": "NullableInteger",
+            "type": "integer"
+          },
+          "WaitTimeSeconds": {
+            "name": "WaitTimeSeconds",
+            "shape_name": "NullableInteger",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "QueueUrl"
+        ]
+      },
+      "name": "ReceiveMessage",
+      "output": {
+        "markers": null,
+        "members": {
+          "Messages": {
+            "name": "Messages",
+            "shape_name": "MessageList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "RemovePermission": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Label": {
+            "name": "Label",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "QueueUrl": {
+            "name": "QueueUrl",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueueUrl",
+          "Label"
+        ]
+      },
+      "name": "RemovePermission",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SendMessage": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DelaySeconds": {
+            "name": "DelaySeconds",
+            "shape_name": "NullableInteger",
+            "type": "integer"
+          },
+          "MessageAttributes": {
+            "name": "MessageAttributes",
+            "shape_name": "MessageBodyAttributeMap",
+            "type": "map"
+          },
+          "MessageBody": {
+            "name": "MessageBody",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MessageDeduplicationId": {
+            "name": "MessageDeduplicationId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MessageGroupId": {
+            "name": "MessageGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MessageSystemAttributes": {
+            "name": "MessageSystemAttributes",
+            "shape_name": "MessageBodySystemAttributeMap",
+            "type": "map"
+          },
+          "QueueUrl": {
+            "name": "QueueUrl",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueueUrl",
+          "MessageBody"
+        ]
+      },
+      "name": "SendMessage",
+      "output": {
+        "markers": null,
+        "members": {
+          "MD5OfMessageAttributes": {
+            "name": "MD5OfMessageAttributes",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MD5OfMessageBody": {
+            "name": "MD5OfMessageBody",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MD5OfMessageSystemAttributes": {
+            "name": "MD5OfMessageSystemAttributes",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MessageId": {
+            "name": "MessageId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SequenceNumber": {
+            "name": "SequenceNumber",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "SendMessageBatch": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Entries": {
+            "name": "Entries",
+            "shape_name": "SendMessageBatchRequestEntryList",
+            "type": "list"
+          },
+          "QueueUrl": {
+            "name": "QueueUrl",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueueUrl",
+          "Entries"
+        ]
+      },
+      "name": "SendMessageBatch",
+      "output": {
+        "markers": null,
+        "members": {
+          "Failed": {
+            "name": "Failed",
+            "shape_name": "BatchResultErrorEntryList",
+            "type": "list"
+          },
+          "Successful": {
+            "name": "Successful",
+            "shape_name": "SendMessageBatchResultEntryList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Successful",
+          "Failed"
+        ]
+      }
+    },
+    "SetQueueAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "QueueAttributeMap",
+            "type": "map"
+          },
+          "QueueUrl": {
+            "name": "QueueUrl",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueueUrl",
+          "Attributes"
+        ]
+      },
+      "name": "SetQueueAttributes",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "StartMessageMoveTask": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DestinationArn": {
+            "name": "DestinationArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxNumberOfMessagesPerSecond": {
+            "name": "MaxNumberOfMessagesPerSecond",
+            "shape_name": "NullableInteger",
+            "type": "integer"
+          },
+          "SourceArn": {
+            "name": "SourceArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SourceArn"
+        ]
+      },
+      "name": "StartMessageMoveTask",
+      "output": {
+        "markers": null,
+        "members": {
+          "TaskHandle": {
+            "name": "TaskHandle",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "TagQueue": {
+      "input": {
+        "markers": null,
+        "members": {
+          "QueueUrl": {
+            "name": "QueueUrl",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagMap",
+            "type": "map"
+          }
+        },
+        "required": [
+          "QueueUrl",
+          "Tags"
+        ]
+      },
+      "name": "TagQueue",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UntagQueue": {
+      "input": {
+        "markers": null,
+        "members": {
+          "QueueUrl": {
+            "name": "QueueUrl",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "TagKeyList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "QueueUrl",
+          "TagKeys"
+        ]
+      },
+      "name": "UntagQueue",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    }
+  }
+}

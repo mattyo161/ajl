@@ -1,0 +1,5322 @@
+{
+  "metadata": {
+    "apiVersion": "2020-05-31",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "cloudfront",
+    "globalEndpoint": "cloudfront.amazonaws.com",
+    "protocol": "rest-xml",
+    "protocols": [
+      "rest-xml"
+    ],
+    "serviceAbbreviation": "CloudFront",
+    "serviceFullName": "Amazon CloudFront",
+    "serviceId": "CloudFront",
+    "signatureVersion": "v4",
+    "signingName": "cloudfront",
+    "uid": "cloudfront-2020-05-31"
+  },
+  "name": "cloudfront",
+  "operations": {
+    "AssociateAlias": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Alias": {
+            "name": "Alias",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "TargetDistributionId": {
+            "name": "TargetDistributionId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TargetDistributionId",
+          "Alias"
+        ]
+      },
+      "name": "AssociateAlias",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "AssociateDistributionTenantWebACL": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "WebACLArn": {
+            "name": "WebACLArn",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id",
+          "WebACLArn"
+        ]
+      },
+      "name": "AssociateDistributionTenantWebACL",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "WebACLArn": {
+            "name": "WebACLArn",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "AssociateDistributionWebACL": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "WebACLArn": {
+            "name": "WebACLArn",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id",
+          "WebACLArn"
+        ]
+      },
+      "name": "AssociateDistributionWebACL",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "WebACLArn": {
+            "name": "WebACLArn",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CopyDistribution": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CallerReference": {
+            "name": "CallerReference",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Enabled": {
+            "name": "Enabled",
+            "shape_name": "boolean",
+            "type": "boolean"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "PrimaryDistributionId": {
+            "name": "PrimaryDistributionId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Staging": {
+            "name": "Staging",
+            "shape_name": "boolean",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "PrimaryDistributionId",
+          "CallerReference"
+        ]
+      },
+      "name": "CopyDistribution",
+      "output": {
+        "markers": null,
+        "members": {
+          "Distribution": {
+            "name": "Distribution",
+            "shape_name": "Distribution",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateAnycastIpList": {
+      "input": {
+        "markers": null,
+        "members": {
+          "IpCount": {
+            "name": "IpCount",
+            "shape_name": "integer",
+            "type": "integer"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "AnycastIpListName",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Name",
+          "IpCount"
+        ]
+      },
+      "name": "CreateAnycastIpList",
+      "output": {
+        "markers": null,
+        "members": {
+          "AnycastIpList": {
+            "name": "AnycastIpList",
+            "shape_name": "AnycastIpList",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateCachePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CachePolicyConfig": {
+            "name": "CachePolicyConfig",
+            "shape_name": "CachePolicyConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "CachePolicyConfig"
+        ]
+      },
+      "name": "CreateCachePolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "CachePolicy": {
+            "name": "CachePolicy",
+            "shape_name": "CachePolicy",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateCloudFrontOriginAccessIdentity": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CloudFrontOriginAccessIdentityConfig": {
+            "name": "CloudFrontOriginAccessIdentityConfig",
+            "shape_name": "CloudFrontOriginAccessIdentityConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "CloudFrontOriginAccessIdentityConfig"
+        ]
+      },
+      "name": "CreateCloudFrontOriginAccessIdentity",
+      "output": {
+        "markers": null,
+        "members": {
+          "CloudFrontOriginAccessIdentity": {
+            "name": "CloudFrontOriginAccessIdentity",
+            "shape_name": "CloudFrontOriginAccessIdentity",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateConnectionGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AnycastIpListId": {
+            "name": "AnycastIpListId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Enabled": {
+            "name": "Enabled",
+            "shape_name": "boolean",
+            "type": "boolean"
+          },
+          "Ipv6Enabled": {
+            "name": "Ipv6Enabled",
+            "shape_name": "boolean",
+            "type": "boolean"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "CreateConnectionGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "ConnectionGroup": {
+            "name": "ConnectionGroup",
+            "shape_name": "ConnectionGroup",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateContinuousDeploymentPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ContinuousDeploymentPolicyConfig": {
+            "name": "ContinuousDeploymentPolicyConfig",
+            "shape_name": "ContinuousDeploymentPolicyConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ContinuousDeploymentPolicyConfig"
+        ]
+      },
+      "name": "CreateContinuousDeploymentPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "ContinuousDeploymentPolicy": {
+            "name": "ContinuousDeploymentPolicy",
+            "shape_name": "ContinuousDeploymentPolicy",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateDistribution": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DistributionConfig": {
+            "name": "DistributionConfig",
+            "shape_name": "DistributionConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "DistributionConfig"
+        ]
+      },
+      "name": "CreateDistribution",
+      "output": {
+        "markers": null,
+        "members": {
+          "Distribution": {
+            "name": "Distribution",
+            "shape_name": "Distribution",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateDistributionTenant": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConnectionGroupId": {
+            "name": "ConnectionGroupId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Customizations": {
+            "name": "Customizations",
+            "shape_name": "Customizations",
+            "type": "structure"
+          },
+          "DistributionId": {
+            "name": "DistributionId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Domains": {
+            "name": "Domains",
+            "shape_name": "DomainList",
+            "type": "list"
+          },
+          "Enabled": {
+            "name": "Enabled",
+            "shape_name": "boolean",
+            "type": "boolean"
+          },
+          "ManagedCertificateRequest": {
+            "name": "ManagedCertificateRequest",
+            "shape_name": "ManagedCertificateRequest",
+            "type": "structure"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "CreateDistributionTenantRequestNameString",
+            "type": "string"
+          },
+          "Parameters": {
+            "name": "Parameters",
+            "shape_name": "Parameters",
+            "type": "list"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "DistributionId",
+          "Name",
+          "Domains"
+        ]
+      },
+      "name": "CreateDistributionTenant",
+      "output": {
+        "markers": null,
+        "members": {
+          "DistributionTenant": {
+            "name": "DistributionTenant",
+            "shape_name": "DistributionTenant",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateDistributionWithTags": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DistributionConfigWithTags": {
+            "name": "DistributionConfigWithTags",
+            "shape_name": "DistributionConfigWithTags",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "DistributionConfigWithTags"
+        ]
+      },
+      "name": "CreateDistributionWithTags",
+      "output": {
+        "markers": null,
+        "members": {
+          "Distribution": {
+            "name": "Distribution",
+            "shape_name": "Distribution",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateFieldLevelEncryptionConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FieldLevelEncryptionConfig": {
+            "name": "FieldLevelEncryptionConfig",
+            "shape_name": "FieldLevelEncryptionConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "FieldLevelEncryptionConfig"
+        ]
+      },
+      "name": "CreateFieldLevelEncryptionConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "FieldLevelEncryption": {
+            "name": "FieldLevelEncryption",
+            "shape_name": "FieldLevelEncryption",
+            "type": "structure"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateFieldLevelEncryptionProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FieldLevelEncryptionProfileConfig": {
+            "name": "FieldLevelEncryptionProfileConfig",
+            "shape_name": "FieldLevelEncryptionProfileConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "FieldLevelEncryptionProfileConfig"
+        ]
+      },
+      "name": "CreateFieldLevelEncryptionProfile",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "FieldLevelEncryptionProfile": {
+            "name": "FieldLevelEncryptionProfile",
+            "shape_name": "FieldLevelEncryptionProfile",
+            "type": "structure"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateFunction": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FunctionCode": {
+            "name": "FunctionCode",
+            "shape_name": "FunctionBlob",
+            "type": "blob"
+          },
+          "FunctionConfig": {
+            "name": "FunctionConfig",
+            "shape_name": "FunctionConfig",
+            "type": "structure"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "FunctionName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "FunctionConfig",
+          "FunctionCode"
+        ]
+      },
+      "name": "CreateFunction",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "FunctionSummary": {
+            "name": "FunctionSummary",
+            "shape_name": "FunctionSummary",
+            "type": "structure"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateInvalidation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DistributionId": {
+            "name": "DistributionId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "InvalidationBatch": {
+            "name": "InvalidationBatch",
+            "shape_name": "InvalidationBatch",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "DistributionId",
+          "InvalidationBatch"
+        ]
+      },
+      "name": "CreateInvalidation",
+      "output": {
+        "markers": null,
+        "members": {
+          "Invalidation": {
+            "name": "Invalidation",
+            "shape_name": "Invalidation",
+            "type": "structure"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateInvalidationForDistributionTenant": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "InvalidationBatch": {
+            "name": "InvalidationBatch",
+            "shape_name": "InvalidationBatch",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Id",
+          "InvalidationBatch"
+        ]
+      },
+      "name": "CreateInvalidationForDistributionTenant",
+      "output": {
+        "markers": null,
+        "members": {
+          "Invalidation": {
+            "name": "Invalidation",
+            "shape_name": "Invalidation",
+            "type": "structure"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateKeyGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "KeyGroupConfig": {
+            "name": "KeyGroupConfig",
+            "shape_name": "KeyGroupConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "KeyGroupConfig"
+        ]
+      },
+      "name": "CreateKeyGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "KeyGroup": {
+            "name": "KeyGroup",
+            "shape_name": "KeyGroup",
+            "type": "structure"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateKeyValueStore": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Comment": {
+            "name": "Comment",
+            "shape_name": "KeyValueStoreComment",
+            "type": "string"
+          },
+          "ImportSource": {
+            "name": "ImportSource",
+            "shape_name": "ImportSource",
+            "type": "structure"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "KeyValueStoreName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "CreateKeyValueStore",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "KeyValueStore": {
+            "name": "KeyValueStore",
+            "shape_name": "KeyValueStore",
+            "type": "structure"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateMonitoringSubscription": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DistributionId": {
+            "name": "DistributionId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MonitoringSubscription": {
+            "name": "MonitoringSubscription",
+            "shape_name": "MonitoringSubscription",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "DistributionId",
+          "MonitoringSubscription"
+        ]
+      },
+      "name": "CreateMonitoringSubscription",
+      "output": {
+        "markers": null,
+        "members": {
+          "MonitoringSubscription": {
+            "name": "MonitoringSubscription",
+            "shape_name": "MonitoringSubscription",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateOriginAccessControl": {
+      "input": {
+        "markers": null,
+        "members": {
+          "OriginAccessControlConfig": {
+            "name": "OriginAccessControlConfig",
+            "shape_name": "OriginAccessControlConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "OriginAccessControlConfig"
+        ]
+      },
+      "name": "CreateOriginAccessControl",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "OriginAccessControl": {
+            "name": "OriginAccessControl",
+            "shape_name": "OriginAccessControl",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateOriginRequestPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "OriginRequestPolicyConfig": {
+            "name": "OriginRequestPolicyConfig",
+            "shape_name": "OriginRequestPolicyConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "OriginRequestPolicyConfig"
+        ]
+      },
+      "name": "CreateOriginRequestPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "OriginRequestPolicy": {
+            "name": "OriginRequestPolicy",
+            "shape_name": "OriginRequestPolicy",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreatePublicKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PublicKeyConfig": {
+            "name": "PublicKeyConfig",
+            "shape_name": "PublicKeyConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "PublicKeyConfig"
+        ]
+      },
+      "name": "CreatePublicKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "PublicKey": {
+            "name": "PublicKey",
+            "shape_name": "PublicKey",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateRealtimeLogConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EndPoints": {
+            "name": "EndPoints",
+            "shape_name": "EndPointList",
+            "type": "list"
+          },
+          "Fields": {
+            "name": "Fields",
+            "shape_name": "FieldList",
+            "type": "list"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "SamplingRate": {
+            "name": "SamplingRate",
+            "shape_name": "long",
+            "type": "long"
+          }
+        },
+        "required": [
+          "EndPoints",
+          "Fields",
+          "Name",
+          "SamplingRate"
+        ]
+      },
+      "name": "CreateRealtimeLogConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "RealtimeLogConfig": {
+            "name": "RealtimeLogConfig",
+            "shape_name": "RealtimeLogConfig",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateResponseHeadersPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResponseHeadersPolicyConfig": {
+            "name": "ResponseHeadersPolicyConfig",
+            "shape_name": "ResponseHeadersPolicyConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ResponseHeadersPolicyConfig"
+        ]
+      },
+      "name": "CreateResponseHeadersPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ResponseHeadersPolicy": {
+            "name": "ResponseHeadersPolicy",
+            "shape_name": "ResponseHeadersPolicy",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateStreamingDistribution": {
+      "input": {
+        "markers": null,
+        "members": {
+          "StreamingDistributionConfig": {
+            "name": "StreamingDistributionConfig",
+            "shape_name": "StreamingDistributionConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "StreamingDistributionConfig"
+        ]
+      },
+      "name": "CreateStreamingDistribution",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "StreamingDistribution": {
+            "name": "StreamingDistribution",
+            "shape_name": "StreamingDistribution",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateStreamingDistributionWithTags": {
+      "input": {
+        "markers": null,
+        "members": {
+          "StreamingDistributionConfigWithTags": {
+            "name": "StreamingDistributionConfigWithTags",
+            "shape_name": "StreamingDistributionConfigWithTags",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "StreamingDistributionConfigWithTags"
+        ]
+      },
+      "name": "CreateStreamingDistributionWithTags",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "StreamingDistribution": {
+            "name": "StreamingDistribution",
+            "shape_name": "StreamingDistribution",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateVpcOrigin": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "structure"
+          },
+          "VpcOriginEndpointConfig": {
+            "name": "VpcOriginEndpointConfig",
+            "shape_name": "VpcOriginEndpointConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "VpcOriginEndpointConfig"
+        ]
+      },
+      "name": "CreateVpcOrigin",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Location": {
+            "name": "Location",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "VpcOrigin": {
+            "name": "VpcOrigin",
+            "shape_name": "VpcOrigin",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteAnycastIpList": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id",
+          "IfMatch"
+        ]
+      },
+      "name": "DeleteAnycastIpList",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteCachePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DeleteCachePolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteCloudFrontOriginAccessIdentity": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DeleteCloudFrontOriginAccessIdentity",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteConnectionGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id",
+          "IfMatch"
+        ]
+      },
+      "name": "DeleteConnectionGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteContinuousDeploymentPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DeleteContinuousDeploymentPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteDistribution": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DeleteDistribution",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteDistributionTenant": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id",
+          "IfMatch"
+        ]
+      },
+      "name": "DeleteDistributionTenant",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteFieldLevelEncryptionConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DeleteFieldLevelEncryptionConfig",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteFieldLevelEncryptionProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DeleteFieldLevelEncryptionProfile",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteFunction": {
+      "input": {
+        "markers": null,
+        "members": {
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "FunctionName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "IfMatch"
+        ]
+      },
+      "name": "DeleteFunction",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteKeyGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DeleteKeyGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteKeyValueStore": {
+      "input": {
+        "markers": null,
+        "members": {
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "KeyValueStoreName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "IfMatch"
+        ]
+      },
+      "name": "DeleteKeyValueStore",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteMonitoringSubscription": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DistributionId": {
+            "name": "DistributionId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DistributionId"
+        ]
+      },
+      "name": "DeleteMonitoringSubscription",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteOriginAccessControl": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DeleteOriginAccessControl",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteOriginRequestPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DeleteOriginRequestPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeletePublicKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DeletePublicKey",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteRealtimeLogConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ARN": {
+            "name": "ARN",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DeleteRealtimeLogConfig",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteResponseHeadersPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DeleteResponseHeadersPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteStreamingDistribution": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DeleteStreamingDistribution",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteVpcOrigin": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id",
+          "IfMatch"
+        ]
+      },
+      "name": "DeleteVpcOrigin",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "VpcOrigin": {
+            "name": "VpcOrigin",
+            "shape_name": "VpcOrigin",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeFunction": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "FunctionName",
+            "type": "string"
+          },
+          "Stage": {
+            "name": "Stage",
+            "shape_name": "FunctionStage",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "DescribeFunction",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "FunctionSummary": {
+            "name": "FunctionSummary",
+            "shape_name": "FunctionSummary",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeKeyValueStore": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "KeyValueStoreName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "DescribeKeyValueStore",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "KeyValueStore": {
+            "name": "KeyValueStore",
+            "shape_name": "KeyValueStore",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DisassociateDistributionTenantWebACL": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DisassociateDistributionTenantWebACL",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DisassociateDistributionWebACL": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DisassociateDistributionWebACL",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetAnycastIpList": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetAnycastIpList",
+      "output": {
+        "markers": null,
+        "members": {
+          "AnycastIpList": {
+            "name": "AnycastIpList",
+            "shape_name": "AnycastIpList",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetCachePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetCachePolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "CachePolicy": {
+            "name": "CachePolicy",
+            "shape_name": "CachePolicy",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetCachePolicyConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetCachePolicyConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "CachePolicyConfig": {
+            "name": "CachePolicyConfig",
+            "shape_name": "CachePolicyConfig",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetCloudFrontOriginAccessIdentity": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetCloudFrontOriginAccessIdentity",
+      "output": {
+        "markers": null,
+        "members": {
+          "CloudFrontOriginAccessIdentity": {
+            "name": "CloudFrontOriginAccessIdentity",
+            "shape_name": "CloudFrontOriginAccessIdentity",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetCloudFrontOriginAccessIdentityConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetCloudFrontOriginAccessIdentityConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "CloudFrontOriginAccessIdentityConfig": {
+            "name": "CloudFrontOriginAccessIdentityConfig",
+            "shape_name": "CloudFrontOriginAccessIdentityConfig",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetConnectionGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Identifier": {
+            "name": "Identifier",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Identifier"
+        ]
+      },
+      "name": "GetConnectionGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "ConnectionGroup": {
+            "name": "ConnectionGroup",
+            "shape_name": "ConnectionGroup",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetConnectionGroupByRoutingEndpoint": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RoutingEndpoint": {
+            "name": "RoutingEndpoint",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RoutingEndpoint"
+        ]
+      },
+      "name": "GetConnectionGroupByRoutingEndpoint",
+      "output": {
+        "markers": null,
+        "members": {
+          "ConnectionGroup": {
+            "name": "ConnectionGroup",
+            "shape_name": "ConnectionGroup",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetContinuousDeploymentPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetContinuousDeploymentPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "ContinuousDeploymentPolicy": {
+            "name": "ContinuousDeploymentPolicy",
+            "shape_name": "ContinuousDeploymentPolicy",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetContinuousDeploymentPolicyConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetContinuousDeploymentPolicyConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "ContinuousDeploymentPolicyConfig": {
+            "name": "ContinuousDeploymentPolicyConfig",
+            "shape_name": "ContinuousDeploymentPolicyConfig",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetDistribution": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetDistribution",
+      "output": {
+        "markers": null,
+        "members": {
+          "Distribution": {
+            "name": "Distribution",
+            "shape_name": "Distribution",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetDistributionConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetDistributionConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "DistributionConfig": {
+            "name": "DistributionConfig",
+            "shape_name": "DistributionConfig",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetDistributionTenant": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Identifier": {
+            "name": "Identifier",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Identifier"
+        ]
+      },
+      "name": "GetDistributionTenant",
+      "output": {
+        "markers": null,
+        "members": {
+          "DistributionTenant": {
+            "name": "DistributionTenant",
+            "shape_name": "DistributionTenant",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetDistributionTenantByDomain": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Domain": {
+            "name": "Domain",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Domain"
+        ]
+      },
+      "name": "GetDistributionTenantByDomain",
+      "output": {
+        "markers": null,
+        "members": {
+          "DistributionTenant": {
+            "name": "DistributionTenant",
+            "shape_name": "DistributionTenant",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetFieldLevelEncryption": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetFieldLevelEncryption",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "FieldLevelEncryption": {
+            "name": "FieldLevelEncryption",
+            "shape_name": "FieldLevelEncryption",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetFieldLevelEncryptionConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetFieldLevelEncryptionConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "FieldLevelEncryptionConfig": {
+            "name": "FieldLevelEncryptionConfig",
+            "shape_name": "FieldLevelEncryptionConfig",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetFieldLevelEncryptionProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetFieldLevelEncryptionProfile",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "FieldLevelEncryptionProfile": {
+            "name": "FieldLevelEncryptionProfile",
+            "shape_name": "FieldLevelEncryptionProfile",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetFieldLevelEncryptionProfileConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetFieldLevelEncryptionProfileConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "FieldLevelEncryptionProfileConfig": {
+            "name": "FieldLevelEncryptionProfileConfig",
+            "shape_name": "FieldLevelEncryptionProfileConfig",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetFunction": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "FunctionName",
+            "type": "string"
+          },
+          "Stage": {
+            "name": "Stage",
+            "shape_name": "FunctionStage",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "GetFunction",
+      "output": {
+        "markers": null,
+        "members": {
+          "ContentType": {
+            "name": "ContentType",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "FunctionCode": {
+            "name": "FunctionCode",
+            "shape_name": "FunctionBlob",
+            "type": "blob"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetInvalidation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DistributionId": {
+            "name": "DistributionId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DistributionId",
+          "Id"
+        ]
+      },
+      "name": "GetInvalidation",
+      "output": {
+        "markers": null,
+        "members": {
+          "Invalidation": {
+            "name": "Invalidation",
+            "shape_name": "Invalidation",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetInvalidationForDistributionTenant": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DistributionTenantId": {
+            "name": "DistributionTenantId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DistributionTenantId",
+          "Id"
+        ]
+      },
+      "name": "GetInvalidationForDistributionTenant",
+      "output": {
+        "markers": null,
+        "members": {
+          "Invalidation": {
+            "name": "Invalidation",
+            "shape_name": "Invalidation",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetKeyGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetKeyGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "KeyGroup": {
+            "name": "KeyGroup",
+            "shape_name": "KeyGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetKeyGroupConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetKeyGroupConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "KeyGroupConfig": {
+            "name": "KeyGroupConfig",
+            "shape_name": "KeyGroupConfig",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetManagedCertificateDetails": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Identifier": {
+            "name": "Identifier",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Identifier"
+        ]
+      },
+      "name": "GetManagedCertificateDetails",
+      "output": {
+        "markers": null,
+        "members": {
+          "ManagedCertificateDetails": {
+            "name": "ManagedCertificateDetails",
+            "shape_name": "ManagedCertificateDetails",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetMonitoringSubscription": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DistributionId": {
+            "name": "DistributionId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DistributionId"
+        ]
+      },
+      "name": "GetMonitoringSubscription",
+      "output": {
+        "markers": null,
+        "members": {
+          "MonitoringSubscription": {
+            "name": "MonitoringSubscription",
+            "shape_name": "MonitoringSubscription",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetOriginAccessControl": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetOriginAccessControl",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "OriginAccessControl": {
+            "name": "OriginAccessControl",
+            "shape_name": "OriginAccessControl",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetOriginAccessControlConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetOriginAccessControlConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "OriginAccessControlConfig": {
+            "name": "OriginAccessControlConfig",
+            "shape_name": "OriginAccessControlConfig",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetOriginRequestPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetOriginRequestPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "OriginRequestPolicy": {
+            "name": "OriginRequestPolicy",
+            "shape_name": "OriginRequestPolicy",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetOriginRequestPolicyConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetOriginRequestPolicyConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "OriginRequestPolicyConfig": {
+            "name": "OriginRequestPolicyConfig",
+            "shape_name": "OriginRequestPolicyConfig",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetPublicKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetPublicKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "PublicKey": {
+            "name": "PublicKey",
+            "shape_name": "PublicKey",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetPublicKeyConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetPublicKeyConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "PublicKeyConfig": {
+            "name": "PublicKeyConfig",
+            "shape_name": "PublicKeyConfig",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetRealtimeLogConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ARN": {
+            "name": "ARN",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "GetRealtimeLogConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "RealtimeLogConfig": {
+            "name": "RealtimeLogConfig",
+            "shape_name": "RealtimeLogConfig",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetResponseHeadersPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetResponseHeadersPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ResponseHeadersPolicy": {
+            "name": "ResponseHeadersPolicy",
+            "shape_name": "ResponseHeadersPolicy",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetResponseHeadersPolicyConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetResponseHeadersPolicyConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ResponseHeadersPolicyConfig": {
+            "name": "ResponseHeadersPolicyConfig",
+            "shape_name": "ResponseHeadersPolicyConfig",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetStreamingDistribution": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetStreamingDistribution",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "StreamingDistribution": {
+            "name": "StreamingDistribution",
+            "shape_name": "StreamingDistribution",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetStreamingDistributionConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetStreamingDistributionConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "StreamingDistributionConfig": {
+            "name": "StreamingDistributionConfig",
+            "shape_name": "StreamingDistributionConfig",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetVpcOrigin": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetVpcOrigin",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "VpcOrigin": {
+            "name": "VpcOrigin",
+            "shape_name": "VpcOrigin",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListAnycastIpLists": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "integer",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "ListAnycastIpLists",
+      "output": {
+        "markers": null,
+        "members": {
+          "AnycastIpLists": {
+            "name": "AnycastIpLists",
+            "shape_name": "AnycastIpListCollection",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListCachePolicies": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "CachePolicyType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListCachePolicies",
+      "output": {
+        "markers": null,
+        "members": {
+          "CachePolicyList": {
+            "name": "CachePolicyList",
+            "shape_name": "CachePolicyList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListCloudFrontOriginAccessIdentities": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListCloudFrontOriginAccessIdentities",
+      "output": {
+        "markers": null,
+        "members": {
+          "CloudFrontOriginAccessIdentityList": {
+            "name": "CloudFrontOriginAccessIdentityList",
+            "shape_name": "CloudFrontOriginAccessIdentityList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListConflictingAliases": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Alias": {
+            "name": "Alias",
+            "shape_name": "aliasString",
+            "type": "string"
+          },
+          "DistributionId": {
+            "name": "DistributionId",
+            "shape_name": "distributionIdString",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "listConflictingAliasesMaxItemsInteger",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "DistributionId",
+          "Alias"
+        ]
+      },
+      "name": "ListConflictingAliases",
+      "output": {
+        "markers": null,
+        "members": {
+          "ConflictingAliasesList": {
+            "name": "ConflictingAliasesList",
+            "shape_name": "ConflictingAliasesList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListConnectionGroups": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "AssociationFilter": {
+            "name": "AssociationFilter",
+            "shape_name": "ConnectionGroupAssociationFilter",
+            "type": "structure"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "integer",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "ListConnectionGroups",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "ConnectionGroups": {
+            "name": "ConnectionGroups",
+            "shape_name": "ConnectionGroupSummaryList",
+            "type": "list"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListContinuousDeploymentPolicies": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListContinuousDeploymentPolicies",
+      "output": {
+        "markers": null,
+        "members": {
+          "ContinuousDeploymentPolicyList": {
+            "name": "ContinuousDeploymentPolicyList",
+            "shape_name": "ContinuousDeploymentPolicyList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListDistributionTenants": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "AssociationFilter": {
+            "name": "AssociationFilter",
+            "shape_name": "DistributionTenantAssociationFilter",
+            "type": "structure"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "integer",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "ListDistributionTenants",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "DistributionTenantList": {
+            "name": "DistributionTenantList",
+            "shape_name": "DistributionTenantList",
+            "type": "list"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListDistributionTenantsByCustomization": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CertificateArn": {
+            "name": "CertificateArn",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "integer",
+            "type": "integer"
+          },
+          "WebACLArn": {
+            "name": "WebACLArn",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListDistributionTenantsByCustomization",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "DistributionTenantList": {
+            "name": "DistributionTenantList",
+            "shape_name": "DistributionTenantList",
+            "type": "list"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListDistributions": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListDistributions",
+      "output": {
+        "markers": null,
+        "members": {
+          "DistributionList": {
+            "name": "DistributionList",
+            "shape_name": "DistributionList",
+            "type": "structure"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "Id",
+            "name": "DomainName",
+            "path": [
+              "DistributionList",
+              "Items"
+            ],
+            "type": "cloudfront:distribution"
+          }
+        ]
+      }
+    },
+    "ListDistributionsByAnycastIpListId": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AnycastIpListId": {
+            "name": "AnycastIpListId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AnycastIpListId"
+        ]
+      },
+      "name": "ListDistributionsByAnycastIpListId",
+      "output": {
+        "markers": null,
+        "members": {
+          "DistributionList": {
+            "name": "DistributionList",
+            "shape_name": "DistributionList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListDistributionsByCachePolicyId": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CachePolicyId": {
+            "name": "CachePolicyId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CachePolicyId"
+        ]
+      },
+      "name": "ListDistributionsByCachePolicyId",
+      "output": {
+        "markers": null,
+        "members": {
+          "DistributionIdList": {
+            "name": "DistributionIdList",
+            "shape_name": "DistributionIdList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListDistributionsByConnectionMode": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "ConnectionMode": {
+            "name": "ConnectionMode",
+            "shape_name": "ConnectionMode",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "integer",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "ConnectionMode"
+        ]
+      },
+      "name": "ListDistributionsByConnectionMode",
+      "output": {
+        "markers": null,
+        "members": {
+          "DistributionList": {
+            "name": "DistributionList",
+            "shape_name": "DistributionList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListDistributionsByKeyGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "KeyGroupId": {
+            "name": "KeyGroupId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "KeyGroupId"
+        ]
+      },
+      "name": "ListDistributionsByKeyGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "DistributionIdList": {
+            "name": "DistributionIdList",
+            "shape_name": "DistributionIdList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListDistributionsByOriginRequestPolicyId": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "OriginRequestPolicyId": {
+            "name": "OriginRequestPolicyId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "OriginRequestPolicyId"
+        ]
+      },
+      "name": "ListDistributionsByOriginRequestPolicyId",
+      "output": {
+        "markers": null,
+        "members": {
+          "DistributionIdList": {
+            "name": "DistributionIdList",
+            "shape_name": "DistributionIdList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListDistributionsByRealtimeLogConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "RealtimeLogConfigArn": {
+            "name": "RealtimeLogConfigArn",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "RealtimeLogConfigName": {
+            "name": "RealtimeLogConfigName",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListDistributionsByRealtimeLogConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "DistributionList": {
+            "name": "DistributionList",
+            "shape_name": "DistributionList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListDistributionsByResponseHeadersPolicyId": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ResponseHeadersPolicyId": {
+            "name": "ResponseHeadersPolicyId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResponseHeadersPolicyId"
+        ]
+      },
+      "name": "ListDistributionsByResponseHeadersPolicyId",
+      "output": {
+        "markers": null,
+        "members": {
+          "DistributionIdList": {
+            "name": "DistributionIdList",
+            "shape_name": "DistributionIdList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListDistributionsByVpcOriginId": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "VpcOriginId": {
+            "name": "VpcOriginId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "VpcOriginId"
+        ]
+      },
+      "name": "ListDistributionsByVpcOriginId",
+      "output": {
+        "markers": null,
+        "members": {
+          "DistributionIdList": {
+            "name": "DistributionIdList",
+            "shape_name": "DistributionIdList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListDistributionsByWebACLId": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "WebACLId": {
+            "name": "WebACLId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WebACLId"
+        ]
+      },
+      "name": "ListDistributionsByWebACLId",
+      "output": {
+        "markers": null,
+        "members": {
+          "DistributionList": {
+            "name": "DistributionList",
+            "shape_name": "DistributionList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListDomainConflicts": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Domain": {
+            "name": "Domain",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "DomainControlValidationResource": {
+            "name": "DomainControlValidationResource",
+            "shape_name": "DistributionResourceId",
+            "type": "structure"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "integer",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "Domain",
+          "DomainControlValidationResource"
+        ]
+      },
+      "name": "ListDomainConflicts",
+      "output": {
+        "markers": [
+          "NextMarker"
+        ],
+        "members": {
+          "DomainConflicts": {
+            "name": "DomainConflicts",
+            "shape_name": "DomainConflictsList",
+            "type": "list"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListFieldLevelEncryptionConfigs": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListFieldLevelEncryptionConfigs",
+      "output": {
+        "markers": null,
+        "members": {
+          "FieldLevelEncryptionList": {
+            "name": "FieldLevelEncryptionList",
+            "shape_name": "FieldLevelEncryptionList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListFieldLevelEncryptionProfiles": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListFieldLevelEncryptionProfiles",
+      "output": {
+        "markers": null,
+        "members": {
+          "FieldLevelEncryptionProfileList": {
+            "name": "FieldLevelEncryptionProfileList",
+            "shape_name": "FieldLevelEncryptionProfileList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListFunctions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Stage": {
+            "name": "Stage",
+            "shape_name": "FunctionStage",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListFunctions",
+      "output": {
+        "markers": null,
+        "members": {
+          "FunctionList": {
+            "name": "FunctionList",
+            "shape_name": "FunctionList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListInvalidations": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "DistributionId": {
+            "name": "DistributionId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DistributionId"
+        ]
+      },
+      "name": "ListInvalidations",
+      "output": {
+        "markers": null,
+        "members": {
+          "InvalidationList": {
+            "name": "InvalidationList",
+            "shape_name": "InvalidationList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListInvalidationsForDistributionTenant": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "integer",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "ListInvalidationsForDistributionTenant",
+      "output": {
+        "markers": null,
+        "members": {
+          "InvalidationList": {
+            "name": "InvalidationList",
+            "shape_name": "InvalidationList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListKeyGroups": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListKeyGroups",
+      "output": {
+        "markers": null,
+        "members": {
+          "KeyGroupList": {
+            "name": "KeyGroupList",
+            "shape_name": "KeyGroupList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListKeyValueStores": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListKeyValueStores",
+      "output": {
+        "markers": null,
+        "members": {
+          "KeyValueStoreList": {
+            "name": "KeyValueStoreList",
+            "shape_name": "KeyValueStoreList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListOriginAccessControls": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListOriginAccessControls",
+      "output": {
+        "markers": null,
+        "members": {
+          "OriginAccessControlList": {
+            "name": "OriginAccessControlList",
+            "shape_name": "OriginAccessControlList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListOriginRequestPolicies": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "OriginRequestPolicyType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListOriginRequestPolicies",
+      "output": {
+        "markers": null,
+        "members": {
+          "OriginRequestPolicyList": {
+            "name": "OriginRequestPolicyList",
+            "shape_name": "OriginRequestPolicyList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListPublicKeys": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListPublicKeys",
+      "output": {
+        "markers": null,
+        "members": {
+          "PublicKeyList": {
+            "name": "PublicKeyList",
+            "shape_name": "PublicKeyList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListRealtimeLogConfigs": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListRealtimeLogConfigs",
+      "output": {
+        "markers": null,
+        "members": {
+          "RealtimeLogConfigs": {
+            "name": "RealtimeLogConfigs",
+            "shape_name": "RealtimeLogConfigs",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListResponseHeadersPolicies": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "ResponseHeadersPolicyType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListResponseHeadersPolicies",
+      "output": {
+        "markers": null,
+        "members": {
+          "ResponseHeadersPolicyList": {
+            "name": "ResponseHeadersPolicyList",
+            "shape_name": "ResponseHeadersPolicyList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListStreamingDistributions": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListStreamingDistributions",
+      "output": {
+        "markers": null,
+        "members": {
+          "StreamingDistributionList": {
+            "name": "StreamingDistributionList",
+            "shape_name": "StreamingDistributionList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Resource": {
+            "name": "Resource",
+            "shape_name": "ResourceARN",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Resource"
+        ]
+      },
+      "name": "ListTagsForResource",
+      "output": {
+        "markers": null,
+        "members": {
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Tags"
+        ]
+      }
+    },
+    "ListVpcOrigins": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListVpcOrigins",
+      "output": {
+        "markers": null,
+        "members": {
+          "VpcOriginList": {
+            "name": "VpcOriginList",
+            "shape_name": "VpcOriginList",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "PublishFunction": {
+      "input": {
+        "markers": null,
+        "members": {
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "FunctionName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "IfMatch"
+        ]
+      },
+      "name": "PublishFunction",
+      "output": {
+        "markers": null,
+        "members": {
+          "FunctionSummary": {
+            "name": "FunctionSummary",
+            "shape_name": "FunctionSummary",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "TagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Resource": {
+            "name": "Resource",
+            "shape_name": "ResourceARN",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Resource",
+          "Tags"
+        ]
+      },
+      "name": "TagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TestFunction": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventObject": {
+            "name": "EventObject",
+            "shape_name": "FunctionEventObject",
+            "type": "blob"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "FunctionName",
+            "type": "string"
+          },
+          "Stage": {
+            "name": "Stage",
+            "shape_name": "FunctionStage",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "IfMatch",
+          "EventObject"
+        ]
+      },
+      "name": "TestFunction",
+      "output": {
+        "markers": null,
+        "members": {
+          "TestResult": {
+            "name": "TestResult",
+            "shape_name": "TestResult",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Resource": {
+            "name": "Resource",
+            "shape_name": "ResourceARN",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "TagKeys",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Resource",
+          "TagKeys"
+        ]
+      },
+      "name": "UntagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateCachePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CachePolicyConfig": {
+            "name": "CachePolicyConfig",
+            "shape_name": "CachePolicyConfig",
+            "type": "structure"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CachePolicyConfig",
+          "Id"
+        ]
+      },
+      "name": "UpdateCachePolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "CachePolicy": {
+            "name": "CachePolicy",
+            "shape_name": "CachePolicy",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateCloudFrontOriginAccessIdentity": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CloudFrontOriginAccessIdentityConfig": {
+            "name": "CloudFrontOriginAccessIdentityConfig",
+            "shape_name": "CloudFrontOriginAccessIdentityConfig",
+            "type": "structure"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CloudFrontOriginAccessIdentityConfig",
+          "Id"
+        ]
+      },
+      "name": "UpdateCloudFrontOriginAccessIdentity",
+      "output": {
+        "markers": null,
+        "members": {
+          "CloudFrontOriginAccessIdentity": {
+            "name": "CloudFrontOriginAccessIdentity",
+            "shape_name": "CloudFrontOriginAccessIdentity",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateConnectionGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AnycastIpListId": {
+            "name": "AnycastIpListId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Enabled": {
+            "name": "Enabled",
+            "shape_name": "boolean",
+            "type": "boolean"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Ipv6Enabled": {
+            "name": "Ipv6Enabled",
+            "shape_name": "boolean",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "Id",
+          "IfMatch"
+        ]
+      },
+      "name": "UpdateConnectionGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "ConnectionGroup": {
+            "name": "ConnectionGroup",
+            "shape_name": "ConnectionGroup",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateContinuousDeploymentPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ContinuousDeploymentPolicyConfig": {
+            "name": "ContinuousDeploymentPolicyConfig",
+            "shape_name": "ContinuousDeploymentPolicyConfig",
+            "type": "structure"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ContinuousDeploymentPolicyConfig",
+          "Id"
+        ]
+      },
+      "name": "UpdateContinuousDeploymentPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "ContinuousDeploymentPolicy": {
+            "name": "ContinuousDeploymentPolicy",
+            "shape_name": "ContinuousDeploymentPolicy",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateDistribution": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DistributionConfig": {
+            "name": "DistributionConfig",
+            "shape_name": "DistributionConfig",
+            "type": "structure"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DistributionConfig",
+          "Id"
+        ]
+      },
+      "name": "UpdateDistribution",
+      "output": {
+        "markers": null,
+        "members": {
+          "Distribution": {
+            "name": "Distribution",
+            "shape_name": "Distribution",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateDistributionTenant": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConnectionGroupId": {
+            "name": "ConnectionGroupId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Customizations": {
+            "name": "Customizations",
+            "shape_name": "Customizations",
+            "type": "structure"
+          },
+          "DistributionId": {
+            "name": "DistributionId",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Domains": {
+            "name": "Domains",
+            "shape_name": "DomainList",
+            "type": "list"
+          },
+          "Enabled": {
+            "name": "Enabled",
+            "shape_name": "boolean",
+            "type": "boolean"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ManagedCertificateRequest": {
+            "name": "ManagedCertificateRequest",
+            "shape_name": "ManagedCertificateRequest",
+            "type": "structure"
+          },
+          "Parameters": {
+            "name": "Parameters",
+            "shape_name": "Parameters",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Id",
+          "IfMatch"
+        ]
+      },
+      "name": "UpdateDistributionTenant",
+      "output": {
+        "markers": null,
+        "members": {
+          "DistributionTenant": {
+            "name": "DistributionTenant",
+            "shape_name": "DistributionTenant",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateDistributionWithStagingConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "StagingDistributionId": {
+            "name": "StagingDistributionId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "UpdateDistributionWithStagingConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "Distribution": {
+            "name": "Distribution",
+            "shape_name": "Distribution",
+            "type": "structure"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateDomainAssociation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Domain": {
+            "name": "Domain",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "TargetResource": {
+            "name": "TargetResource",
+            "shape_name": "DistributionResourceId",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Domain",
+          "TargetResource"
+        ]
+      },
+      "name": "UpdateDomainAssociation",
+      "output": {
+        "markers": null,
+        "members": {
+          "Domain": {
+            "name": "Domain",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateFieldLevelEncryptionConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FieldLevelEncryptionConfig": {
+            "name": "FieldLevelEncryptionConfig",
+            "shape_name": "FieldLevelEncryptionConfig",
+            "type": "structure"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "FieldLevelEncryptionConfig",
+          "Id"
+        ]
+      },
+      "name": "UpdateFieldLevelEncryptionConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "FieldLevelEncryption": {
+            "name": "FieldLevelEncryption",
+            "shape_name": "FieldLevelEncryption",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateFieldLevelEncryptionProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FieldLevelEncryptionProfileConfig": {
+            "name": "FieldLevelEncryptionProfileConfig",
+            "shape_name": "FieldLevelEncryptionProfileConfig",
+            "type": "structure"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "FieldLevelEncryptionProfileConfig",
+          "Id"
+        ]
+      },
+      "name": "UpdateFieldLevelEncryptionProfile",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "FieldLevelEncryptionProfile": {
+            "name": "FieldLevelEncryptionProfile",
+            "shape_name": "FieldLevelEncryptionProfile",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateFunction": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FunctionCode": {
+            "name": "FunctionCode",
+            "shape_name": "FunctionBlob",
+            "type": "blob"
+          },
+          "FunctionConfig": {
+            "name": "FunctionConfig",
+            "shape_name": "FunctionConfig",
+            "type": "structure"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "FunctionName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "IfMatch",
+          "FunctionConfig",
+          "FunctionCode"
+        ]
+      },
+      "name": "UpdateFunction",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "FunctionSummary": {
+            "name": "FunctionSummary",
+            "shape_name": "FunctionSummary",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateKeyGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "KeyGroupConfig": {
+            "name": "KeyGroupConfig",
+            "shape_name": "KeyGroupConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "KeyGroupConfig",
+          "Id"
+        ]
+      },
+      "name": "UpdateKeyGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "KeyGroup": {
+            "name": "KeyGroup",
+            "shape_name": "KeyGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateKeyValueStore": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Comment": {
+            "name": "Comment",
+            "shape_name": "KeyValueStoreComment",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "KeyValueStoreName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Comment",
+          "IfMatch"
+        ]
+      },
+      "name": "UpdateKeyValueStore",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "KeyValueStore": {
+            "name": "KeyValueStore",
+            "shape_name": "KeyValueStore",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateOriginAccessControl": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "OriginAccessControlConfig": {
+            "name": "OriginAccessControlConfig",
+            "shape_name": "OriginAccessControlConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "OriginAccessControlConfig",
+          "Id"
+        ]
+      },
+      "name": "UpdateOriginAccessControl",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "OriginAccessControl": {
+            "name": "OriginAccessControl",
+            "shape_name": "OriginAccessControl",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateOriginRequestPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "OriginRequestPolicyConfig": {
+            "name": "OriginRequestPolicyConfig",
+            "shape_name": "OriginRequestPolicyConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "OriginRequestPolicyConfig",
+          "Id"
+        ]
+      },
+      "name": "UpdateOriginRequestPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "OriginRequestPolicy": {
+            "name": "OriginRequestPolicy",
+            "shape_name": "OriginRequestPolicy",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdatePublicKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "PublicKeyConfig": {
+            "name": "PublicKeyConfig",
+            "shape_name": "PublicKeyConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "PublicKeyConfig",
+          "Id"
+        ]
+      },
+      "name": "UpdatePublicKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "PublicKey": {
+            "name": "PublicKey",
+            "shape_name": "PublicKey",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateRealtimeLogConfig": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ARN": {
+            "name": "ARN",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "EndPoints": {
+            "name": "EndPoints",
+            "shape_name": "EndPointList",
+            "type": "list"
+          },
+          "Fields": {
+            "name": "Fields",
+            "shape_name": "FieldList",
+            "type": "list"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "SamplingRate": {
+            "name": "SamplingRate",
+            "shape_name": "long",
+            "type": "long"
+          }
+        },
+        "required": null
+      },
+      "name": "UpdateRealtimeLogConfig",
+      "output": {
+        "markers": null,
+        "members": {
+          "RealtimeLogConfig": {
+            "name": "RealtimeLogConfig",
+            "shape_name": "RealtimeLogConfig",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateResponseHeadersPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ResponseHeadersPolicyConfig": {
+            "name": "ResponseHeadersPolicyConfig",
+            "shape_name": "ResponseHeadersPolicyConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ResponseHeadersPolicyConfig",
+          "Id"
+        ]
+      },
+      "name": "UpdateResponseHeadersPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "ResponseHeadersPolicy": {
+            "name": "ResponseHeadersPolicy",
+            "shape_name": "ResponseHeadersPolicy",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateStreamingDistribution": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "StreamingDistributionConfig": {
+            "name": "StreamingDistributionConfig",
+            "shape_name": "StreamingDistributionConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "StreamingDistributionConfig",
+          "Id"
+        ]
+      },
+      "name": "UpdateStreamingDistribution",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "StreamingDistribution": {
+            "name": "StreamingDistribution",
+            "shape_name": "StreamingDistribution",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateVpcOrigin": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "IfMatch": {
+            "name": "IfMatch",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "VpcOriginEndpointConfig": {
+            "name": "VpcOriginEndpointConfig",
+            "shape_name": "VpcOriginEndpointConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "VpcOriginEndpointConfig",
+          "Id",
+          "IfMatch"
+        ]
+      },
+      "name": "UpdateVpcOrigin",
+      "output": {
+        "markers": null,
+        "members": {
+          "ETag": {
+            "name": "ETag",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "VpcOrigin": {
+            "name": "VpcOrigin",
+            "shape_name": "VpcOrigin",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "VerifyDnsConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Domain": {
+            "name": "Domain",
+            "shape_name": "string",
+            "type": "string"
+          },
+          "Identifier": {
+            "name": "Identifier",
+            "shape_name": "string",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Identifier"
+        ]
+      },
+      "name": "VerifyDnsConfiguration",
+      "output": {
+        "markers": null,
+        "members": {
+          "DnsConfigurationList": {
+            "name": "DnsConfigurationList",
+            "shape_name": "DnsConfigurationList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    }
+  }
+}

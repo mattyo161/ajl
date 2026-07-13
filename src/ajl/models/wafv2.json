@@ -1,0 +1,2410 @@
+{
+  "metadata": {
+    "apiVersion": "2019-07-29",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "wafv2",
+    "jsonVersion": "1.1",
+    "protocol": "json",
+    "protocols": [
+      "json"
+    ],
+    "serviceAbbreviation": "WAFV2",
+    "serviceFullName": "AWS WAFV2",
+    "serviceId": "WAFV2",
+    "signatureVersion": "v4",
+    "targetPrefix": "AWSWAF_20190729",
+    "uid": "wafv2-2019-07-29"
+  },
+  "name": "wafv2",
+  "operations": {
+    "AssociateWebACL": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          },
+          "WebACLArn": {
+            "name": "WebACLArn",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WebACLArn",
+          "ResourceArn"
+        ]
+      },
+      "name": "AssociateWebACL",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CheckCapacity": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Rules": {
+            "name": "Rules",
+            "shape_name": "Rules",
+            "type": "list"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Scope",
+          "Rules"
+        ]
+      },
+      "name": "CheckCapacity",
+      "output": {
+        "markers": null,
+        "members": {
+          "Capacity": {
+            "name": "Capacity",
+            "shape_name": "ConsumedCapacity",
+            "type": "long"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateAPIKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          },
+          "TokenDomains": {
+            "name": "TokenDomains",
+            "shape_name": "APIKeyTokenDomains",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Scope",
+          "TokenDomains"
+        ]
+      },
+      "name": "CreateAPIKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "APIKey": {
+            "name": "APIKey",
+            "shape_name": "APIKey",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateIPSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Addresses": {
+            "name": "Addresses",
+            "shape_name": "IPAddresses",
+            "type": "list"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "EntityDescription",
+            "type": "string"
+          },
+          "IPAddressVersion": {
+            "name": "IPAddressVersion",
+            "shape_name": "IPAddressVersion",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Name",
+          "Scope",
+          "IPAddressVersion",
+          "Addresses"
+        ]
+      },
+      "name": "CreateIPSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "Summary": {
+            "name": "Summary",
+            "shape_name": "IPSetSummary",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateRegexPatternSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "EntityDescription",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "RegularExpressionList": {
+            "name": "RegularExpressionList",
+            "shape_name": "RegularExpressionList",
+            "type": "list"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Name",
+          "Scope",
+          "RegularExpressionList"
+        ]
+      },
+      "name": "CreateRegexPatternSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "Summary": {
+            "name": "Summary",
+            "shape_name": "RegexPatternSetSummary",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateRuleGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Capacity": {
+            "name": "Capacity",
+            "shape_name": "CapacityUnit",
+            "type": "long"
+          },
+          "CustomResponseBodies": {
+            "name": "CustomResponseBodies",
+            "shape_name": "CustomResponseBodies",
+            "type": "map"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "EntityDescription",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "Rules": {
+            "name": "Rules",
+            "shape_name": "Rules",
+            "type": "list"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "VisibilityConfig": {
+            "name": "VisibilityConfig",
+            "shape_name": "VisibilityConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Name",
+          "Scope",
+          "Capacity",
+          "VisibilityConfig"
+        ]
+      },
+      "name": "CreateRuleGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "Summary": {
+            "name": "Summary",
+            "shape_name": "RuleGroupSummary",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateWebACL": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ApplicationConfig": {
+            "name": "ApplicationConfig",
+            "shape_name": "ApplicationConfig",
+            "type": "structure"
+          },
+          "AssociationConfig": {
+            "name": "AssociationConfig",
+            "shape_name": "AssociationConfig",
+            "type": "structure"
+          },
+          "CaptchaConfig": {
+            "name": "CaptchaConfig",
+            "shape_name": "CaptchaConfig",
+            "type": "structure"
+          },
+          "ChallengeConfig": {
+            "name": "ChallengeConfig",
+            "shape_name": "ChallengeConfig",
+            "type": "structure"
+          },
+          "CustomResponseBodies": {
+            "name": "CustomResponseBodies",
+            "shape_name": "CustomResponseBodies",
+            "type": "map"
+          },
+          "DataProtectionConfig": {
+            "name": "DataProtectionConfig",
+            "shape_name": "DataProtectionConfig",
+            "type": "structure"
+          },
+          "DefaultAction": {
+            "name": "DefaultAction",
+            "shape_name": "DefaultAction",
+            "type": "structure"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "EntityDescription",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "OnSourceDDoSProtectionConfig": {
+            "name": "OnSourceDDoSProtectionConfig",
+            "shape_name": "OnSourceDDoSProtectionConfig",
+            "type": "structure"
+          },
+          "Rules": {
+            "name": "Rules",
+            "shape_name": "Rules",
+            "type": "list"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "TokenDomains": {
+            "name": "TokenDomains",
+            "shape_name": "TokenDomains",
+            "type": "list"
+          },
+          "VisibilityConfig": {
+            "name": "VisibilityConfig",
+            "shape_name": "VisibilityConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Name",
+          "Scope",
+          "DefaultAction",
+          "VisibilityConfig"
+        ]
+      },
+      "name": "CreateWebACL",
+      "output": {
+        "markers": null,
+        "members": {
+          "Summary": {
+            "name": "Summary",
+            "shape_name": "WebACLSummary",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteAPIKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "APIKey": {
+            "name": "APIKey",
+            "shape_name": "APIKey",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Scope",
+          "APIKey"
+        ]
+      },
+      "name": "DeleteAPIKey",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteFirewallManagerRuleGroups": {
+      "input": {
+        "markers": null,
+        "members": {
+          "WebACLArn": {
+            "name": "WebACLArn",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          },
+          "WebACLLockToken": {
+            "name": "WebACLLockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WebACLArn",
+          "WebACLLockToken"
+        ]
+      },
+      "name": "DeleteFirewallManagerRuleGroups",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextWebACLLockToken": {
+            "name": "NextWebACLLockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteIPSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "EntityId",
+            "type": "string"
+          },
+          "LockToken": {
+            "name": "LockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Scope",
+          "Id",
+          "LockToken"
+        ]
+      },
+      "name": "DeleteIPSet",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteLoggingConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LogScope": {
+            "name": "LogScope",
+            "shape_name": "LogScope",
+            "type": "string"
+          },
+          "LogType": {
+            "name": "LogType",
+            "shape_name": "LogType",
+            "type": "string"
+          },
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      },
+      "name": "DeleteLoggingConfiguration",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeletePermissionPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      },
+      "name": "DeletePermissionPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteRegexPatternSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "EntityId",
+            "type": "string"
+          },
+          "LockToken": {
+            "name": "LockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Scope",
+          "Id",
+          "LockToken"
+        ]
+      },
+      "name": "DeleteRegexPatternSet",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteRuleGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "EntityId",
+            "type": "string"
+          },
+          "LockToken": {
+            "name": "LockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Scope",
+          "Id",
+          "LockToken"
+        ]
+      },
+      "name": "DeleteRuleGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteWebACL": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "EntityId",
+            "type": "string"
+          },
+          "LockToken": {
+            "name": "LockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Scope",
+          "Id",
+          "LockToken"
+        ]
+      },
+      "name": "DeleteWebACL",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DescribeAllManagedProducts": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Scope"
+        ]
+      },
+      "name": "DescribeAllManagedProducts",
+      "output": {
+        "markers": null,
+        "members": {
+          "ManagedProducts": {
+            "name": "ManagedProducts",
+            "shape_name": "ManagedProductDescriptors",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeManagedProductsByVendor": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          },
+          "VendorName": {
+            "name": "VendorName",
+            "shape_name": "VendorName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "VendorName",
+          "Scope"
+        ]
+      },
+      "name": "DescribeManagedProductsByVendor",
+      "output": {
+        "markers": null,
+        "members": {
+          "ManagedProducts": {
+            "name": "ManagedProducts",
+            "shape_name": "ManagedProductDescriptors",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeManagedRuleGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          },
+          "VendorName": {
+            "name": "VendorName",
+            "shape_name": "VendorName",
+            "type": "string"
+          },
+          "VersionName": {
+            "name": "VersionName",
+            "shape_name": "VersionKeyString",
+            "type": "string"
+          }
+        },
+        "required": [
+          "VendorName",
+          "Name",
+          "Scope"
+        ]
+      },
+      "name": "DescribeManagedRuleGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "AvailableLabels": {
+            "name": "AvailableLabels",
+            "shape_name": "LabelSummaries",
+            "type": "list"
+          },
+          "Capacity": {
+            "name": "Capacity",
+            "shape_name": "CapacityUnit",
+            "type": "long"
+          },
+          "ConsumedLabels": {
+            "name": "ConsumedLabels",
+            "shape_name": "LabelSummaries",
+            "type": "list"
+          },
+          "LabelNamespace": {
+            "name": "LabelNamespace",
+            "shape_name": "LabelName",
+            "type": "string"
+          },
+          "Rules": {
+            "name": "Rules",
+            "shape_name": "RuleSummaries",
+            "type": "list"
+          },
+          "SnsTopicArn": {
+            "name": "SnsTopicArn",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          },
+          "VersionName": {
+            "name": "VersionName",
+            "shape_name": "VersionKeyString",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DisassociateWebACL": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      },
+      "name": "DisassociateWebACL",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "GenerateMobileSdkReleaseUrl": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Platform": {
+            "name": "Platform",
+            "shape_name": "Platform",
+            "type": "string"
+          },
+          "ReleaseVersion": {
+            "name": "ReleaseVersion",
+            "shape_name": "VersionKeyString",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Platform",
+          "ReleaseVersion"
+        ]
+      },
+      "name": "GenerateMobileSdkReleaseUrl",
+      "output": {
+        "markers": null,
+        "members": {
+          "Url": {
+            "name": "Url",
+            "shape_name": "DownloadUrl",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetDecryptedAPIKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "APIKey": {
+            "name": "APIKey",
+            "shape_name": "APIKey",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Scope",
+          "APIKey"
+        ]
+      },
+      "name": "GetDecryptedAPIKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "CreationTimestamp": {
+            "name": "CreationTimestamp",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "TokenDomains": {
+            "name": "TokenDomains",
+            "shape_name": "TokenDomains",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetIPSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "EntityId",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Scope",
+          "Id"
+        ]
+      },
+      "name": "GetIPSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "IPSet": {
+            "name": "IPSet",
+            "shape_name": "IPSet",
+            "type": "structure"
+          },
+          "LockToken": {
+            "name": "LockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetLoggingConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LogScope": {
+            "name": "LogScope",
+            "shape_name": "LogScope",
+            "type": "string"
+          },
+          "LogType": {
+            "name": "LogType",
+            "shape_name": "LogType",
+            "type": "string"
+          },
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      },
+      "name": "GetLoggingConfiguration",
+      "output": {
+        "markers": null,
+        "members": {
+          "LoggingConfiguration": {
+            "name": "LoggingConfiguration",
+            "shape_name": "LoggingConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetManagedRuleSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "EntityId",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Scope",
+          "Id"
+        ]
+      },
+      "name": "GetManagedRuleSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "LockToken": {
+            "name": "LockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          },
+          "ManagedRuleSet": {
+            "name": "ManagedRuleSet",
+            "shape_name": "ManagedRuleSet",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetMobileSdkRelease": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Platform": {
+            "name": "Platform",
+            "shape_name": "Platform",
+            "type": "string"
+          },
+          "ReleaseVersion": {
+            "name": "ReleaseVersion",
+            "shape_name": "VersionKeyString",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Platform",
+          "ReleaseVersion"
+        ]
+      },
+      "name": "GetMobileSdkRelease",
+      "output": {
+        "markers": null,
+        "members": {
+          "MobileSdkRelease": {
+            "name": "MobileSdkRelease",
+            "shape_name": "MobileSdkRelease",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetPermissionPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      },
+      "name": "GetPermissionPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "PolicyString",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetRateBasedStatementManagedKeys": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RuleGroupRuleName": {
+            "name": "RuleGroupRuleName",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "RuleName": {
+            "name": "RuleName",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          },
+          "WebACLId": {
+            "name": "WebACLId",
+            "shape_name": "EntityId",
+            "type": "string"
+          },
+          "WebACLName": {
+            "name": "WebACLName",
+            "shape_name": "EntityName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Scope",
+          "WebACLName",
+          "WebACLId",
+          "RuleName"
+        ]
+      },
+      "name": "GetRateBasedStatementManagedKeys",
+      "output": {
+        "markers": null,
+        "members": {
+          "ManagedKeysIPV4": {
+            "name": "ManagedKeysIPV4",
+            "shape_name": "RateBasedStatementManagedKeysIPSet",
+            "type": "structure"
+          },
+          "ManagedKeysIPV6": {
+            "name": "ManagedKeysIPV6",
+            "shape_name": "RateBasedStatementManagedKeysIPSet",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetRegexPatternSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "EntityId",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Scope",
+          "Id"
+        ]
+      },
+      "name": "GetRegexPatternSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "LockToken": {
+            "name": "LockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          },
+          "RegexPatternSet": {
+            "name": "RegexPatternSet",
+            "shape_name": "RegexPatternSet",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetRuleGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ARN": {
+            "name": "ARN",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "EntityId",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "GetRuleGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "LockToken": {
+            "name": "LockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          },
+          "RuleGroup": {
+            "name": "RuleGroup",
+            "shape_name": "RuleGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetSampledRequests": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "ListMaxItems",
+            "type": "long"
+          },
+          "RuleMetricName": {
+            "name": "RuleMetricName",
+            "shape_name": "MetricName",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          },
+          "TimeWindow": {
+            "name": "TimeWindow",
+            "shape_name": "TimeWindow",
+            "type": "structure"
+          },
+          "WebAclArn": {
+            "name": "WebAclArn",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WebAclArn",
+          "RuleMetricName",
+          "Scope",
+          "TimeWindow",
+          "MaxItems"
+        ]
+      },
+      "name": "GetSampledRequests",
+      "output": {
+        "markers": null,
+        "members": {
+          "PopulationSize": {
+            "name": "PopulationSize",
+            "shape_name": "PopulationSize",
+            "type": "long"
+          },
+          "SampledRequests": {
+            "name": "SampledRequests",
+            "shape_name": "SampledHTTPRequests",
+            "type": "list"
+          },
+          "TimeWindow": {
+            "name": "TimeWindow",
+            "shape_name": "TimeWindow",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetWebACL": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ARN": {
+            "name": "ARN",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "EntityId",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "GetWebACL",
+      "output": {
+        "markers": null,
+        "members": {
+          "ApplicationIntegrationURL": {
+            "name": "ApplicationIntegrationURL",
+            "shape_name": "OutputUrl",
+            "type": "string"
+          },
+          "LockToken": {
+            "name": "LockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          },
+          "WebACL": {
+            "name": "WebACL",
+            "shape_name": "WebACL",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetWebACLForResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      },
+      "name": "GetWebACLForResource",
+      "output": {
+        "markers": null,
+        "members": {
+          "WebACL": {
+            "name": "WebACL",
+            "shape_name": "WebACL",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListAPIKeys": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "PaginationLimit",
+            "type": "integer"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Scope"
+        ]
+      },
+      "name": "ListAPIKeys",
+      "output": {
+        "markers": null,
+        "members": {
+          "APIKeySummaries": {
+            "name": "APIKeySummaries",
+            "shape_name": "APIKeySummaries",
+            "type": "list"
+          },
+          "ApplicationIntegrationURL": {
+            "name": "ApplicationIntegrationURL",
+            "shape_name": "OutputUrl",
+            "type": "string"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListAvailableManagedRuleGroupVersions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "PaginationLimit",
+            "type": "integer"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          },
+          "VendorName": {
+            "name": "VendorName",
+            "shape_name": "VendorName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "VendorName",
+          "Name",
+          "Scope"
+        ]
+      },
+      "name": "ListAvailableManagedRuleGroupVersions",
+      "output": {
+        "markers": null,
+        "members": {
+          "CurrentDefaultVersion": {
+            "name": "CurrentDefaultVersion",
+            "shape_name": "VersionKeyString",
+            "type": "string"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          },
+          "Versions": {
+            "name": "Versions",
+            "shape_name": "ManagedRuleGroupVersions",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListAvailableManagedRuleGroups": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "PaginationLimit",
+            "type": "integer"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Scope"
+        ]
+      },
+      "name": "ListAvailableManagedRuleGroups",
+      "output": {
+        "markers": null,
+        "members": {
+          "ManagedRuleGroups": {
+            "name": "ManagedRuleGroups",
+            "shape_name": "ManagedRuleGroupSummaries",
+            "type": "list"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListIPSets": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "PaginationLimit",
+            "type": "integer"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Scope"
+        ]
+      },
+      "name": "ListIPSets",
+      "output": {
+        "markers": null,
+        "members": {
+          "IPSets": {
+            "name": "IPSets",
+            "shape_name": "IPSetSummaries",
+            "type": "list"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "Id",
+            "name": "Name",
+            "path": [
+              "IPSets"
+            ],
+            "type": "wafv2:ipset"
+          }
+        ]
+      }
+    },
+    "ListLoggingConfigurations": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "PaginationLimit",
+            "type": "integer"
+          },
+          "LogScope": {
+            "name": "LogScope",
+            "shape_name": "LogScope",
+            "type": "string"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Scope"
+        ]
+      },
+      "name": "ListLoggingConfigurations",
+      "output": {
+        "markers": null,
+        "members": {
+          "LoggingConfigurations": {
+            "name": "LoggingConfigurations",
+            "shape_name": "LoggingConfigurations",
+            "type": "list"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListManagedRuleSets": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "PaginationLimit",
+            "type": "integer"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Scope"
+        ]
+      },
+      "name": "ListManagedRuleSets",
+      "output": {
+        "markers": null,
+        "members": {
+          "ManagedRuleSets": {
+            "name": "ManagedRuleSets",
+            "shape_name": "ManagedRuleSetSummaries",
+            "type": "list"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListMobileSdkReleases": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "PaginationLimit",
+            "type": "integer"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          },
+          "Platform": {
+            "name": "Platform",
+            "shape_name": "Platform",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Platform"
+        ]
+      },
+      "name": "ListMobileSdkReleases",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          },
+          "ReleaseSummaries": {
+            "name": "ReleaseSummaries",
+            "shape_name": "ReleaseSummaries",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListRegexPatternSets": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "PaginationLimit",
+            "type": "integer"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Scope"
+        ]
+      },
+      "name": "ListRegexPatternSets",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          },
+          "RegexPatternSets": {
+            "name": "RegexPatternSets",
+            "shape_name": "RegexPatternSetSummaries",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListResourcesForWebACL": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceType": {
+            "name": "ResourceType",
+            "shape_name": "ResourceType",
+            "type": "string"
+          },
+          "WebACLArn": {
+            "name": "WebACLArn",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WebACLArn"
+        ]
+      },
+      "name": "ListResourcesForWebACL",
+      "output": {
+        "markers": null,
+        "members": {
+          "ResourceArns": {
+            "name": "ResourceArns",
+            "shape_name": "ResourceArns",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListRuleGroups": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "PaginationLimit",
+            "type": "integer"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Scope"
+        ]
+      },
+      "name": "ListRuleGroups",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          },
+          "RuleGroups": {
+            "name": "RuleGroups",
+            "shape_name": "RuleGroupSummaries",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "Id",
+            "name": "Name",
+            "path": [
+              "RuleGroups"
+            ],
+            "type": "wafv2:rulegroup"
+          }
+        ]
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "PaginationLimit",
+            "type": "integer"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          },
+          "ResourceARN": {
+            "name": "ResourceARN",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceARN"
+        ]
+      },
+      "name": "ListTagsForResource",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          },
+          "TagInfoForResource": {
+            "name": "TagInfoForResource",
+            "shape_name": "TagInfoForResource",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListWebACLs": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "PaginationLimit",
+            "type": "integer"
+          },
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Scope"
+        ]
+      },
+      "name": "ListWebACLs",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextMarker": {
+            "name": "NextMarker",
+            "shape_name": "NextMarker",
+            "type": "string"
+          },
+          "WebACLs": {
+            "name": "WebACLs",
+            "shape_name": "WebACLSummaries",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "Id",
+            "name": "Name",
+            "path": [
+              "WebACLs"
+            ],
+            "type": "wafv2:webacl"
+          }
+        ]
+      }
+    },
+    "PutLoggingConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LoggingConfiguration": {
+            "name": "LoggingConfiguration",
+            "shape_name": "LoggingConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "LoggingConfiguration"
+        ]
+      },
+      "name": "PutLoggingConfiguration",
+      "output": {
+        "markers": null,
+        "members": {
+          "LoggingConfiguration": {
+            "name": "LoggingConfiguration",
+            "shape_name": "LoggingConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutManagedRuleSetVersions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "EntityId",
+            "type": "string"
+          },
+          "LockToken": {
+            "name": "LockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "RecommendedVersion": {
+            "name": "RecommendedVersion",
+            "shape_name": "VersionKeyString",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          },
+          "VersionsToPublish": {
+            "name": "VersionsToPublish",
+            "shape_name": "VersionsToPublish",
+            "type": "map"
+          }
+        },
+        "required": [
+          "Name",
+          "Scope",
+          "Id",
+          "LockToken"
+        ]
+      },
+      "name": "PutManagedRuleSetVersions",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextLockToken": {
+            "name": "NextLockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutPermissionPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "PolicyString",
+            "type": "string"
+          },
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn",
+          "Policy"
+        ]
+      },
+      "name": "PutPermissionPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceARN": {
+            "name": "ResourceARN",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceARN",
+          "Tags"
+        ]
+      },
+      "name": "TagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceARN": {
+            "name": "ResourceARN",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "TagKeyList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceARN",
+          "TagKeys"
+        ]
+      },
+      "name": "UntagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateIPSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Addresses": {
+            "name": "Addresses",
+            "shape_name": "IPAddresses",
+            "type": "list"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "EntityDescription",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "EntityId",
+            "type": "string"
+          },
+          "LockToken": {
+            "name": "LockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Scope",
+          "Id",
+          "Addresses",
+          "LockToken"
+        ]
+      },
+      "name": "UpdateIPSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextLockToken": {
+            "name": "NextLockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateManagedRuleSetVersionExpiryDate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ExpiryTimestamp": {
+            "name": "ExpiryTimestamp",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "EntityId",
+            "type": "string"
+          },
+          "LockToken": {
+            "name": "LockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          },
+          "VersionToExpire": {
+            "name": "VersionToExpire",
+            "shape_name": "VersionKeyString",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Scope",
+          "Id",
+          "LockToken",
+          "VersionToExpire",
+          "ExpiryTimestamp"
+        ]
+      },
+      "name": "UpdateManagedRuleSetVersionExpiryDate",
+      "output": {
+        "markers": null,
+        "members": {
+          "ExpiringVersion": {
+            "name": "ExpiringVersion",
+            "shape_name": "VersionKeyString",
+            "type": "string"
+          },
+          "ExpiryTimestamp": {
+            "name": "ExpiryTimestamp",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "NextLockToken": {
+            "name": "NextLockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateRegexPatternSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "EntityDescription",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "EntityId",
+            "type": "string"
+          },
+          "LockToken": {
+            "name": "LockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "RegularExpressionList": {
+            "name": "RegularExpressionList",
+            "shape_name": "RegularExpressionList",
+            "type": "list"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Scope",
+          "Id",
+          "RegularExpressionList",
+          "LockToken"
+        ]
+      },
+      "name": "UpdateRegexPatternSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextLockToken": {
+            "name": "NextLockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateRuleGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CustomResponseBodies": {
+            "name": "CustomResponseBodies",
+            "shape_name": "CustomResponseBodies",
+            "type": "map"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "EntityDescription",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "EntityId",
+            "type": "string"
+          },
+          "LockToken": {
+            "name": "LockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "Rules": {
+            "name": "Rules",
+            "shape_name": "Rules",
+            "type": "list"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          },
+          "VisibilityConfig": {
+            "name": "VisibilityConfig",
+            "shape_name": "VisibilityConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Name",
+          "Scope",
+          "Id",
+          "VisibilityConfig",
+          "LockToken"
+        ]
+      },
+      "name": "UpdateRuleGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextLockToken": {
+            "name": "NextLockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateWebACL": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AssociationConfig": {
+            "name": "AssociationConfig",
+            "shape_name": "AssociationConfig",
+            "type": "structure"
+          },
+          "CaptchaConfig": {
+            "name": "CaptchaConfig",
+            "shape_name": "CaptchaConfig",
+            "type": "structure"
+          },
+          "ChallengeConfig": {
+            "name": "ChallengeConfig",
+            "shape_name": "ChallengeConfig",
+            "type": "structure"
+          },
+          "CustomResponseBodies": {
+            "name": "CustomResponseBodies",
+            "shape_name": "CustomResponseBodies",
+            "type": "map"
+          },
+          "DataProtectionConfig": {
+            "name": "DataProtectionConfig",
+            "shape_name": "DataProtectionConfig",
+            "type": "structure"
+          },
+          "DefaultAction": {
+            "name": "DefaultAction",
+            "shape_name": "DefaultAction",
+            "type": "structure"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "EntityDescription",
+            "type": "string"
+          },
+          "Id": {
+            "name": "Id",
+            "shape_name": "EntityId",
+            "type": "string"
+          },
+          "LockToken": {
+            "name": "LockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EntityName",
+            "type": "string"
+          },
+          "OnSourceDDoSProtectionConfig": {
+            "name": "OnSourceDDoSProtectionConfig",
+            "shape_name": "OnSourceDDoSProtectionConfig",
+            "type": "structure"
+          },
+          "Rules": {
+            "name": "Rules",
+            "shape_name": "Rules",
+            "type": "list"
+          },
+          "Scope": {
+            "name": "Scope",
+            "shape_name": "Scope",
+            "type": "string"
+          },
+          "TokenDomains": {
+            "name": "TokenDomains",
+            "shape_name": "TokenDomains",
+            "type": "list"
+          },
+          "VisibilityConfig": {
+            "name": "VisibilityConfig",
+            "shape_name": "VisibilityConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Name",
+          "Scope",
+          "Id",
+          "DefaultAction",
+          "VisibilityConfig",
+          "LockToken"
+        ]
+      },
+      "name": "UpdateWebACL",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextLockToken": {
+            "name": "NextLockToken",
+            "shape_name": "LockToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    }
+  }
+}
