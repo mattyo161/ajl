@@ -925,7 +925,18 @@
             "shape_name": "TableDescription",
             "type": "structure"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn": "TableArn",
+            "id": "TableName",
+            "name": "TableName",
+            "path": [
+              "Table"
+            ],
+            "type": "dynamodb:table"
+          }
+        ]
       }
     },
     "DescribeTableReplicaAutoScaling": {
@@ -1716,7 +1727,18 @@
             "shape_name": "TableName",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:dynamodb::{account}:global-table/{GlobalTableName}",
+            "id": "GlobalTableName",
+            "name": "GlobalTableName",
+            "path": [
+              "GlobalTables"
+            ],
+            "type": "dynamodb:global-table"
+          }
+        ]
       }
     },
     "ListImports": {
@@ -1822,7 +1844,19 @@
             "shape_name": "TableNameList",
             "type": "list"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:dynamodb:{region}:{account}:table/{TableName}",
+            "id": "TableName",
+            "name": "TableName",
+            "path": [
+              "TableNames"
+            ],
+            "scalar_as": "TableName",
+            "type": "dynamodb:table"
+          }
+        ]
       }
     },
     "ListTagsOfResource": {

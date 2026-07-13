@@ -4404,7 +4404,18 @@
             "shape_name": "String",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn": "DBClusterParameterGroupArn",
+            "id": "DBClusterParameterGroupName",
+            "name": "DBClusterParameterGroupName",
+            "path": [
+              "DBClusterParameterGroups"
+            ],
+            "type": "rds:cluster-pg"
+          }
+        ]
       }
     },
     "DescribeDBClusterParameters": {
@@ -4626,7 +4637,18 @@
             "shape_name": "String",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn": "DBClusterSnapshotArn",
+            "id": "DBClusterSnapshotIdentifier",
+            "path": [
+              "DBClusterSnapshots"
+            ],
+            "tags": "TagList",
+            "type": "rds:cluster-snapshot"
+          }
+        ]
       }
     },
     "DescribeDBClusters": {
@@ -4786,7 +4808,18 @@
             "shape_name": "String",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn": "DBClusterArn",
+            "id": "DBClusterIdentifier",
+            "path": [
+              "DBClusters"
+            ],
+            "tags": "TagList",
+            "type": "rds:cluster"
+          }
+        ]
       }
     },
     "DescribeDBEngineVersions": {
@@ -5188,7 +5221,18 @@
             "shape_name": "String",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn": "DBInstanceArn",
+            "id": "DBInstanceIdentifier",
+            "path": [
+              "DBInstances"
+            ],
+            "tags": "TagList",
+            "type": "rds:db"
+          }
+        ]
       }
     },
     "DescribeDBLogFiles": {
@@ -5332,7 +5376,18 @@
             "shape_name": "String",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn": "DBParameterGroupArn",
+            "id": "DBParameterGroupName",
+            "name": "DBParameterGroupName",
+            "path": [
+              "DBParameterGroups"
+            ],
+            "type": "rds:pg"
+          }
+        ]
       }
     },
     "DescribeDBParameters": {
@@ -6207,7 +6262,18 @@
             "shape_name": "String",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn": "DBSnapshotArn",
+            "id": "DBSnapshotIdentifier",
+            "path": [
+              "DBSnapshots"
+            ],
+            "tags": "TagList",
+            "type": "rds:snapshot"
+          }
+        ]
       }
     },
     "DescribeDBSubnetGroups": {
@@ -6277,7 +6343,18 @@
             "shape_name": "String",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn": "DBSubnetGroupArn",
+            "id": "DBSubnetGroupName",
+            "name": "DBSubnetGroupName",
+            "path": [
+              "DBSubnetGroups"
+            ],
+            "type": "rds:subgrp"
+          }
+        ]
       }
     },
     "DescribeEngineDefaultClusterParameters": {
@@ -6478,7 +6555,17 @@
             "shape_name": "String",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn": "EventSubscriptionArn",
+            "id": "CustSubscriptionId",
+            "path": [
+              "EventSubscriptionsList"
+            ],
+            "type": "rds:es"
+          }
+        ]
       }
     },
     "DescribeEvents": {

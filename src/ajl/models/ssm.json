@@ -2219,7 +2219,6 @@
       },
       "name": "DescribeInstanceInformation",
       "output": {
-        "jq": ".InstanceInformationList[]",
         "lists": {
           "InstanceInformationList": {
             "all_fields": [
@@ -2272,7 +2271,18 @@
             "shape_name": "NextToken",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:ssm:{region}:{account}:managed-instance/{InstanceId}",
+            "id": "InstanceId",
+            "name": "Name",
+            "path": [
+              "InstanceInformationList"
+            ],
+            "type": "ssm:managed-instance"
+          }
+        ]
       }
     },
     "DescribeInstancePatchStates": {
@@ -3152,7 +3162,6 @@
       },
       "name": "DescribeMaintenanceWindows",
       "output": {
-        "jq": ".WindowIdentities[] | {Id: .WindowId} + .",
         "lists": {
           "WindowIdentities": {
             "all_fields": [
@@ -3192,7 +3201,18 @@
             "shape_name": "MaintenanceWindowIdentityList",
             "type": "list"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:ssm:{region}:{account}:maintenancewindow/{WindowId}",
+            "id": "WindowId",
+            "name": "Name",
+            "path": [
+              "WindowIdentities"
+            ],
+            "type": "ssm:maintenancewindow"
+          }
+        ]
       }
     },
     "DescribeMaintenanceWindowsForTarget": {
@@ -3370,7 +3390,6 @@
       },
       "name": "DescribeParameters",
       "output": {
-        "jq": ".Parameters[] | {Arn: .ARN} + . | del(.ARN)",
         "lists": {
           "Parameters": {
             "all_fields": [
@@ -3410,7 +3429,18 @@
             "shape_name": "ParameterMetadataList",
             "type": "list"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "Name",
+            "name": "Name",
+            "path": [
+              "Parameters"
+            ],
+            "type": "ssm:parameter"
+          }
+        ]
       }
     },
     "DescribePatchBaselines": {
@@ -5127,7 +5157,6 @@
       },
       "name": "GetParameters",
       "output": {
-        "jq": ".Parameters[] | {Arn: .ARN} + . | del(.ARN)",
         "lists": {
           "InvalidParameters": {
             "all_fields": [],
@@ -5166,7 +5195,18 @@
             "shape_name": "ParameterList",
             "type": "list"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "Name",
+            "name": "Name",
+            "path": [
+              "Parameters"
+            ],
+            "type": "ssm:parameter"
+          }
+        ]
       }
     },
     "GetParametersByPath": {
@@ -5212,7 +5252,6 @@
       },
       "name": "GetParametersByPath",
       "output": {
-        "jq": ".Parameters[] | {Arn: .ARN} + . | del(.ARN)",
         "lists": {
           "Parameters": {
             "all_fields": [
@@ -5247,7 +5286,18 @@
             "shape_name": "ParameterList",
             "type": "list"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "Name",
+            "name": "Name",
+            "path": [
+              "Parameters"
+            ],
+            "type": "ssm:parameter"
+          }
+        ]
       }
     },
     "GetPatchBaseline": {
@@ -5663,7 +5713,6 @@
       },
       "name": "ListAssociations",
       "output": {
-        "jq": ".Associations[]",
         "lists": {
           "Associations": {
             "all_fields": [
@@ -5706,7 +5755,18 @@
             "shape_name": "NextToken",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:ssm:{region}:{account}:association/{AssociationId}",
+            "id": "AssociationId",
+            "name": "AssociationName",
+            "path": [
+              "Associations"
+            ],
+            "type": "ssm:association"
+          }
+        ]
       }
     },
     "ListCommandInvocations": {
@@ -6233,7 +6293,19 @@
             "shape_name": "NextToken",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:ssm:{region}:{account}:document/{Name}",
+            "id": "Name",
+            "name": "Name",
+            "path": [
+              "DocumentIdentifiers"
+            ],
+            "tags": "Tags",
+            "type": "ssm:document"
+          }
+        ]
       }
     },
     "ListInventoryEntries": {

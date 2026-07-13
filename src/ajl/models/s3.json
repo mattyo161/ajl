@@ -3732,7 +3732,6 @@
       },
       "name": "ListBuckets",
       "output": {
-        "jq": ".Buckets//[]|.[]",
         "lists": {
           "Buckets": {
             "all_fields": [
@@ -3758,7 +3757,18 @@
             "shape_name": "Owner",
             "type": "structure"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:s3:::{Name}",
+            "id": "Name",
+            "name": "Name",
+            "path": [
+              "Buckets"
+            ],
+            "type": "s3:bucket"
+          }
+        ]
       }
     },
     "ListDirectoryBuckets": {
@@ -3969,7 +3979,27 @@
             "shape_name": "MultipartUploadList",
             "type": "list"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:s3:::{root_Bucket}/{Prefix}",
+            "id": "Prefix",
+            "name": "Prefix",
+            "path": [
+              "CommonPrefixes"
+            ],
+            "type": "s3:prefix"
+          },
+          {
+            "arn_format": "arn:{partition}:s3:::{root_Bucket}/{Key}",
+            "id": "UploadId",
+            "name": "Key",
+            "path": [
+              "Uploads"
+            ],
+            "type": "s3:multipart-upload"
+          }
+        ]
       }
     },
     "ListObjectVersions": {
@@ -4036,7 +4066,7 @@
       },
       "name": "ListObjectVersions",
       "output": {
-        "jq": "{Bucket: .Name} as $all | {Delimiter} as $prefix_only | ($all + $prefix_only + (.CommonPrefixes//[]|.[])), ($all + (.Versions//[]|.[]))",
+        "jq": ". as $r |\n((.CommonPrefixes//[])[] |\n  {Type: \"s3:prefix\", Id: .Prefix, Name: .Prefix,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Prefix)\", Tags: {},\n   Bucket: $r.Name, Delimiter: $r.Delimiter} + .),\n((.Versions//[])[] |\n  {Type: \"s3:object-version\", Id: .Key, Name: .Key,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Key)\", Tags: {},\n   Bucket: $r.Name} + .),\n((.DeleteMarkers//[])[] |\n  {Type: \"s3:delete-marker\", Id: .Key, Name: .Key,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Key)\", Tags: {},\n   Bucket: $r.Name} + .)",
         "lists": {
           "CommonPrefixes": {
             "all_fields": [
@@ -4219,7 +4249,7 @@
       },
       "name": "ListObjects",
       "output": {
-        "jq": "{Bucket: .Name} as $all | {Delimiter} as $prefix_only | ($all + $prefix_only + (.CommonPrefixes//[]|.[])), ($all + .Contents//[]|.[]))",
+        "jq": ". as $r |\n((.CommonPrefixes//[])[] |\n  {Type: \"s3:prefix\", Id: .Prefix, Name: .Prefix,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Prefix)\", Tags: {},\n   Bucket: $r.Name, Delimiter: $r.Delimiter} + .),\n((.Contents//[])[] |\n  {Type: \"s3:object\", Id: .Key, Name: .Key,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Key)\", Tags: {},\n   Bucket: $r.Name} + .)",
         "lists": {
           "CommonPrefixes": {
             "all_fields": [
@@ -4376,7 +4406,7 @@
       },
       "name": "ListObjectsV2",
       "output": {
-        "jq": "{Bucket: .Name} as $all | {Delimiter} as $prefix_only | ($all + $prefix_only + (.CommonPrefixes//[]|.[])), ($all + (.Contents//[]|.[]))",
+        "jq": ". as $r |\n((.CommonPrefixes//[])[] |\n  {Type: \"s3:prefix\", Id: .Prefix, Name: .Prefix,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Prefix)\", Tags: {},\n   Bucket: $r.Name, Delimiter: $r.Delimiter} + .),\n((.Contents//[])[] |\n  {Type: \"s3:object\", Id: .Key, Name: .Key,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Key)\", Tags: {},\n   Bucket: $r.Name} + .)",
         "lists": {
           "CommonPrefixes": {
             "all_fields": [
