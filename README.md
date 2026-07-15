@@ -8,6 +8,39 @@
 - [AGENTS.md](AGENTS.md) / [CLAUDE.md](CLAUDE.md) — instructions for AI coding agents
 - [tools/README.md](tools/README.md) — model generation tooling
 
+## Installation
+
+Requires Python ≥ 3.10 and configured AWS credentials (a profile,
+environment variables, or an instance role — anything boto3 understands).
+
+Install as a standalone tool straight from GitHub with
+[uv](https://github.com/astral-sh/uv) (or swap `uv tool install` for
+`pipx install`):
+
+```shell
+uv tool install git+https://github.com/mattyo161/ajl
+ajl s3 list-buckets
+```
+
+Or from a local clone, which is also the development setup:
+
+```shell
+git clone https://github.com/mattyo161/ajl
+cd ajl
+uv tool install .     # install the ajl command globally
+# — or —
+uv sync               # just a .venv for development
+uv run ajl s3 list-buckets
+```
+
+A preview build is also on TestPyPI (may lag behind the repo). Dependencies
+live on regular PyPI, so include it as an extra index:
+
+```shell
+pip install --index-url https://test.pypi.org/simple/ \
+  --extra-index-url https://pypi.org/simple/ ajl
+```
+
 ## Usage
 
 ```shell
