@@ -144,6 +144,15 @@ Python ≥ 3.10. `orjson` is used for serialization speed (with `default=str`
 so datetimes from boto3 never crash a stream). Dev tools (`aws`, `uv`, `jq`,
 `yq`) are pinned via `mise.toml`.
 
+### Version derived from git tags (setuptools-scm)
+The package version comes from git tags (`v0.2.0` → `0.2.0`) via
+setuptools-scm instead of a hand-bumped field — the version previously lived
+in both `pyproject.toml` and `__init__.py` and the two could drift. Releasing
+is now `git tag vX.Y.Z`; untagged builds get a `.devN+g<sha>` suffix so they
+can never be mistaken for releases. `ajl.__version__` reads the generated
+`src/ajl/_version.py` (gitignored), with a dev fallback for uninstalled
+source trees.
+
 ---
 
 ## Decision log template

@@ -122,12 +122,18 @@ A good PR:
 
 ## Releasing
 
-Bump `version` in `pyproject.toml`, then:
+The version is derived from git tags by setuptools-scm — there is no version
+field to bump. Tag the release commit and build:
 
 ```shell
-uv build
+git tag v0.3.0
+git push origin v0.3.0
+uv build                                      # produces ajl-0.3.0
 uv publish --index testpypi --token <token>   # TestPyPI first
 ```
+
+Untagged commits build as dev versions (`0.3.1.dev2+g<sha>`), so anything
+without a clean `vX.Y.Z` tag is visibly not a release.
 
 Verify the published package in a scratch venv
 (`uv pip install -i https://test.pypi.org/simple/ ajl`) before any wider
