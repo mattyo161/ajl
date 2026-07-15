@@ -1,5 +1,13 @@
 # ajl - AWS JSON Line
 
+## Documentation
+
+- [CONTRIBUTING.md](CONTRIBUTING.md) — dev setup, model curation workflow, tests, releasing
+- [STYLE_GUIDE.md](STYLE_GUIDE.md) — code and output conventions
+- [DESIGN.md](DESIGN.md) — design decisions and the reasoning behind them
+- [AGENTS.md](AGENTS.md) / [CLAUDE.md](CLAUDE.md) — instructions for AI coding agents
+- [tools/README.md](tools/README.md) — model generation tooling
+
 ## Usage
 
 ```shell
