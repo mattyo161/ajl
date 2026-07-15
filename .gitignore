@@ -208,3 +208,11 @@ __marimo__/
 
 # Working Directories
 /.temp/
+
+# JetBrains IDE
+.idea/
+
+# Local scratch output (root-level only; packaged models live in src/ajl/models)
+/models/
+/ajl-session-info.json
+/*.jsonl
