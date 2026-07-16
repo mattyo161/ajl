@@ -196,3 +196,20 @@ def test_debug_cache_hit_env_gated(monkeypatch, capsys):
     monkeypatch.setenv("AJL_DEBUG_CACHE", "1")
     cache_hit("client", ("dev", "us-east-1"))
     assert "cache hit client" in capsys.readouterr().err
+
+
+def test_no_cache_overrides_env_default(tmp_path, monkeypatch):
+    options = make_options(tmp_path, monkeypatch, cache=None, no_cache=True)
+    monkeypatch.setenv("AJL_CACHE", "15m")
+    assert not ResultCache(options).enabled
+    options = make_options(tmp_path, monkeypatch, cache="15m", no_cache=True)
+    assert not ResultCache(options).enabled
+
+
+def test_no_learn_overrides_env_default(monkeypatch):
+    from types import SimpleNamespace
+
+    monkeypatch.setenv("AJL_LEARN", "1")
+    assert learn.enabled(SimpleNamespace(learn=False, no_learn=False))
+    assert not learn.enabled(SimpleNamespace(learn=False, no_learn=True))
+    assert not learn.enabled(SimpleNamespace(learn=True, no_learn=True))

@@ -68,6 +68,9 @@ def build_parser():
                         "and store fresh ones, gzipped (+age encrypted when "
                         "AJL_AGE_* is set) under ~/.cache/ajl; AJL_CACHE sets a "
                         "default; manage with 'ajl cache ls|clear|keygen'")
+    parser.add_argument("--no-cache", action="store_true", default=False,
+                        help="disable the result cache for this run, overriding "
+                        "an AJL_CACHE default")
     parser.add_argument("--refresh", action="store_true", default=False,
                         help="with --cache: skip reading the cache, still store "
                         "the fresh result")
@@ -78,6 +81,9 @@ def build_parser():
                         help="print the aws-cli equivalent to stderr and append "
                         "an audit record (duration, cache status, scan slices) "
                         "to the learn log (AJL_LEARN=1 enables globally)")
+    parser.add_argument("--no-learn", action="store_true", default=False,
+                        help="disable the learn log for this run, overriding an "
+                        "AJL_LEARN default")
     parser.add_argument("--verbose", action="store_true", default=False)
     return parser
 

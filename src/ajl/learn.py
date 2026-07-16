@@ -23,6 +23,8 @@ import orjson
 
 
 def enabled(options):
+    if getattr(options, "no_learn", False):
+        return False
     if getattr(options, "learn", False):
         return True
     return os.environ.get("AJL_LEARN", "").lower() in ("1", "true", "yes", "on")

@@ -138,7 +138,7 @@ class ResultCache:
 
     def __init__(self, options):
         ttl_text = options.cache or os.environ.get("AJL_CACHE") or ""
-        self.enabled = bool(ttl_text)
+        self.enabled = bool(ttl_text) and not getattr(options, "no_cache", False)
         self.ttl = parse_duration(ttl_text) if self.enabled else 0
         self.refresh = getattr(options, "refresh", False)
         rm_after = (getattr(options, "rm_after", None)
