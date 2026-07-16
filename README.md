@@ -84,6 +84,35 @@ ajl s3 scan s3://my-bucket/tmp/ \
   | ajl s3 delete-objects --bucket my-bucket --params-json -
 ```
 
+## Caching, encryption, and the learn log
+
+```shell
+# serve results younger than 15m from ~/.cache/ajl (gzipped); else run + store
+ajl ssm describe-parameters --cache 15m
+ajl ssm describe-parameters --cache 15m          # instant: zero API calls
+export AJL_CACHE=15m                             # make caching the default
+
+# age-encrypt the cache with a per-session key (lose the key? it just re-runs)
+export AJL_AGE_IDENTITY="$(ajl cache keygen 2>/dev/null | grep AGE-SECRET-KEY)"
+
+ajl cache ls                # entries as JSONL: command, age, lines, encrypted
+ajl cache clear [--all]     # expired entries (default) or everything
+ajl x y --refresh           # skip reading the cache, still store fresh
+ajl x y --rm-after 1h       # entry lifetime before auto-cleanup (default 7d)
+
+# the learn log: see the aws-cli equivalent, keep an audit/perf record
+ajl ec2 describe-instances --learn
+# stderr: ajl: [learn] aws ec2 describe-instances
+# and one JSONL record (argv, aws equivalent, duration, exit code, cache
+# status, scan slice samples) appended to ~/.local/state/ajl/learn.jsonl
+export AJL_LEARN=1                               # always on
+```
+
+Cache hits always print one stderr notice (age, line count, seconds saved) so
+you can never unknowingly analyze stale data — and stdout stays byte-identical
+to the original run. Every internal cache (boto3 sessions/clients, account
+ids, jq programs, models) reports hits to stderr under `AJL_DEBUG_CACHE=1`.
+
 ### `ajl s3 list` and `ajl s3 scan`
 
 Both emit **lean records** built for volume: `Uri` (`s3://bucket/key`)

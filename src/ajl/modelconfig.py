@@ -9,12 +9,15 @@ import os
 import sys
 from importlib import resources
 
+from .debug import cache_hit
+
 _CACHE = {}
 
 
 def load_service_model(service: str):
     """Return the parsed model for a service, or None when there is none."""
     if service in _CACHE:
+        cache_hit("model", service)
         return _CACHE[service]
 
     model = None

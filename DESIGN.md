@@ -278,6 +278,47 @@ ecs cluster → services → tasks, route53 zones → record sets, org accounts 
 anything. When a second walker shows up, extract the Scanner core rather than
 cloning it.
 
+## Result cache & learn log
+
+### Whole-invocation result cache, opt-in, always announced
+`--cache TTL` / `AJL_CACHE` cache the invocation's complete JSONL output,
+gzipped under `~/.cache/ajl`, keyed by a hash of everything that shapes the
+output (ajl version, service/operation, tokens, output-affecting flags,
+resolved profile/region, full `--params-json` content — stdin is spooled and
+hashed). Point-in-time API data rarely changes inside 15 minutes, so a hit
+replays instantly with zero API calls *and zero credentials*. Hits always
+print one stderr notice (age, lines, seconds saved) — silently serving cached
+data would invite staleness confusion. Only exit-0 runs are stored; entries
+carry an expiry (`--rm-after`, default 7d) and any cache-enabled run sweeps
+expired entries. `ajl cache ls|clear|keygen` manage it.
+
+### age encryption via pyrage, keyed from the environment
+With `AJL_AGE_IDENTITY` set (an `AGE-SECRET-KEY-...` or a path), cache files
+are age-encrypted after gzip — one env var covers both directions since the
+recipient derives from the identity (`AJL_AGE_RECIPIENTS` and
+`AJL_AGE_PASSPHRASE` cover asymmetric-write-only and symmetric modes). The
+session-key story is the point: generate a key per session, and secrets like
+org-wide ssm parameter dumps never touch disk in plaintext; an entry the
+current key can't open is just a cache miss, and losing the key merely means
+re-running the command. pyrage (rust wheels) avoids needing the age binary;
+encrypt/decrypt buffers the gzipped payload in memory, so skip `--cache` for
+truly giant scans until a streaming path exists.
+
+### The learn log: one record per invocation, teaching plus audit
+`--learn` / `AJL_LEARN=1` prints the aws-cli equivalent to stderr up front
+(`ajl: [learn] aws ec2 describe-instances --max-results 5`) and appends one
+JSONL record to `~/.local/state/ajl/learn.jsonl`: argv, aws equivalent,
+profile/region, duration, exit code, cache status, and for scans the run
+stats plus a ~12-slice sample of the prefixes/ranges actually listed — the
+interesting jumps, never the per-page marker churn. One line per invocation
+keeps it a usable audit and performance log.
+
+### Internal cache hits are observable (`AJL_DEBUG_CACHE=1`)
+boto3 sessions/clients, STS account ids, compiled jq programs, service
+models and scan's s3 clients report cache hits to stderr when the env var is
+set — for debugging credential reuse surprises and confirming fan-out runs
+reuse clients rather than rebuilding per line.
+
 ### Version derived from git tags (setuptools-scm)
 The package version comes from git tags (`v0.2.0` → `0.2.0`) via
 setuptools-scm instead of a hand-bumped field — the version previously lived

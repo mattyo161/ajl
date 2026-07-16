@@ -59,6 +59,7 @@ from botocore.auth import S3SigV4Auth
 from botocore.awsrequest import AWSRequest
 from botocore.config import Config
 
+from .debug import cache_hit
 from .normalize import tags_to_map
 
 PAGE_SIZE = 1000
@@ -435,6 +436,7 @@ class Scanner:
             "emitted_prefixes": 0, "splits": 0, "abandons": 0,
             "failures": 0, "tag_errors": 0,
         }
+        self.samples = []  # first few task slices, for the learn log
         self._clients = {}
         self._client_lock = threading.Lock()
         self._failed_lock = threading.Lock()
@@ -466,6 +468,8 @@ class Scanner:
     def client(self, session_key):
         with self._client_lock:
             client = self._clients.get(session_key)
+            if client is not None:
+                cache_hit("s3-client", session_key)
             if client is None:
                 if self.client_factory:
                     client = self.client_factory(session_key)
@@ -503,6 +507,9 @@ class Scanner:
 
     def _process(self, task):
         self._inc("tasks")
+        with self.cond:
+            if len(self.samples) < 12:
+                self.samples.append(task.seed())
         session_key = self.runner.session_key(task.profile, task.region)
         client = self.client(session_key)
         delimiter = task.delimiters[0] if task.delimiters else None
@@ -850,14 +857,17 @@ def _show_progress(parsed):
     return not parsed.no_progress and sys.stderr.isatty()
 
 
-def _finish(scanner, seeds, name, started):
+def _finish(scanner, seeds, name, started, report=None):
     stats = scanner.run(seeds)
+    if report is not None:
+        report["Stats"] = dict(stats)
+        report["Slices"] = list(scanner.samples)
     summary = " ".join(f"{k}={v}" for k, v in stats.items())
     print(f"ajl: {name} done in {time.time() - started:.1f}s {summary}", file=sys.stderr)
     return 1 if stats["failures"] else 0
 
 
-def run_scan(runner, emitter, options, tokens):
+def run_scan(runner, emitter, options, tokens, report=None):
     """Entry point from main(); tokens are the args after 'ajl s3 scan'."""
     scan_options = build_scan_parser().parse_args(tokens)
     delimiters = tuple(d for d in re.split(r"[,\s]+", scan_options.delimiters) if d)
@@ -892,13 +902,13 @@ def run_scan(runner, emitter, options, tokens):
     )
     started = time.time()
     try:
-        return _finish(scanner, seeds, "scan", started)
+        return _finish(scanner, seeds, "scan", started, report)
     finally:
         if failed_fp:
             failed_fp.close()
 
 
-def run_list(runner, emitter, options, tokens):
+def run_list(runner, emitter, options, tokens, report=None):
     """Entry point from main(); tokens are the args after 'ajl s3 list'."""
     list_options = build_list_parser().parse_args(tokens)
     delimiters = (list_options.delimiter,) if list_options.delimiter else ()
@@ -927,7 +937,7 @@ def run_list(runner, emitter, options, tokens):
     )
     started = time.time()
     try:
-        return _finish(scanner, seeds, "list", started)
+        return _finish(scanner, seeds, "list", started, report)
     finally:
         if failed_fp:
             failed_fp.close()

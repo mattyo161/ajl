@@ -47,6 +47,12 @@ credentials; the test suite does not.
   Resource Groups Tagging API, background threads, submission-order emit.
 - `src/ajl/modelconfig.py` — loads packaged models; `AJL_MODELS_DIR` env var
   overrides for development.
+- `src/ajl/cache.py` — `--cache TTL` whole-invocation result cache (gzip +
+  optional age via pyrage; env: `AJL_CACHE`, `AJL_CACHE_DIR`, `AJL_AGE_*`);
+  `ajl cache keygen|ls|clear`.
+- `src/ajl/learn.py` — `--learn` / `AJL_LEARN=1`: aws-cli-equivalent stderr
+  line + JSONL audit record per invocation.
+- `src/ajl/debug.py` — `AJL_DEBUG_CACHE=1` internal-cache hit diagnostics.
 - `src/ajl/models/*.json` — per-service models. **Generated files.**
 - `tools/apply-resource-configs.py` — the real home of curated output
   shaping (declarative configs + hand-written jq programs).

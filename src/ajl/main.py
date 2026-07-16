@@ -22,6 +22,9 @@ import jq as jqlib
 import jsonlines
 import orjson
 
+from . import learn
+from .cache import ResultCache, run_cache_command
+from .debug import cache_hit
 from .modelconfig import get_operation_config
 from .normalize import iter_configured_resources, iter_default_resources
 from .pagination import iter_pages
@@ -60,6 +63,21 @@ def build_parser():
     parser.add_argument("--workers", type=int, default=8,
                         help="parallel requests in --params-json mode (default 8; "
                         "use 1 to preserve input order)")
+    parser.add_argument("--cache", type=str, default=None, metavar="TTL",
+                        help="serve cached results younger than TTL (e.g. 15m, 2h) "
+                        "and store fresh ones, gzipped (+age encrypted when "
+                        "AJL_AGE_* is set) under ~/.cache/ajl; AJL_CACHE sets a "
+                        "default; manage with 'ajl cache ls|clear|keygen'")
+    parser.add_argument("--refresh", action="store_true", default=False,
+                        help="with --cache: skip reading the cache, still store "
+                        "the fresh result")
+    parser.add_argument("--rm-after", type=str, default=None, metavar="DUR",
+                        help="cache entry lifetime before automatic cleanup "
+                        "(default AJL_CACHE_RM_AFTER or 7d)")
+    parser.add_argument("--learn", action="store_true", default=False,
+                        help="print the aws-cli equivalent to stderr and append "
+                        "an audit record (duration, cache status, scan slices) "
+                        "to the learn log (AJL_LEARN=1 enables globally)")
     parser.add_argument("--verbose", action="store_true", default=False)
     return parser
 
@@ -198,6 +216,8 @@ class Runner:
                 profile, region = session_key
                 session = boto3.Session(profile_name=profile, region_name=region)
                 self._sessions[session_key] = session
+            else:
+                cache_hit("session", session_key)
             return session
 
     def client(self, session_key, service):
@@ -205,11 +225,14 @@ class Runner:
             key = (session_key, service)
             if key not in self._clients:
                 self._clients[key] = self.session(session_key).client(service)
+            else:
+                cache_hit("client", key)
             return self._clients[key]
 
     def account(self, session_key):
         with self._lock:
             if session_key in self._accounts:
+                cache_hit("account", session_key)
                 return self._accounts[session_key]
         try:
             sts = self.client(session_key, "sts")
@@ -226,6 +249,8 @@ class Runner:
         with self._lock:
             if key not in self._jq_cache:
                 self._jq_cache[key] = jqlib.compile(program, args=jq_args)
+            else:
+                cache_hit("jq", program[:60])
             return self._jq_cache[key]
 
 
@@ -412,48 +437,100 @@ def main(argv=None):
     if passthrough and not passthrough[0].startswith("-"):
         operation = passthrough.pop(0)
 
-    runner = Runner(
-        default_profile=options.profile or DEFAULT_PROFILE,
-        default_region=options.region or DEFAULT_REGION,
-        verbose=options.verbose,
-    )
+    if service == "cache":
+        return run_cache_command(operation, passthrough)
 
-    emitter = Emitter()
-    if options.fetch_tags:
-        emitter = TagMergeEmitter(
-            emitter,
-            lambda session_key: runner.client(session_key, "resourcegroupstaggingapi"),
-        )
-    if options.jq:
-        emitter = JqEmitter(emitter, options.jq)
-    if options.stamp_session:
-        emitter = StampEmitter(emitter, runner)
+    started = time.monotonic()
+    learning = learn.enabled(options)
+    learn_record = {
+        "Command": "ajl " + " ".join(argv),
+        "Service": service,
+        "Operation": operation,
+        "Profile": options.profile or DEFAULT_PROFILE,
+        "Region": options.region or DEFAULT_REGION,
+        "Cache": "off",
+    }
 
-    exit_code = 0
+    result_cache = ResultCache(options)
     try:
-        if service == "s3" and operation in ("scan", "list"):
-            from .scan import run_list, run_scan
+        cache_key = None
+        if result_cache.enabled:
+            result_cache.buffer_params_stdin(options)
+            cache_key = result_cache.key(options, service, operation, passthrough)
+            meta = result_cache.try_replay(cache_key)
+            if meta is not None:
+                if learning:
+                    learn.log({**learn_record, "Cache": "hit",
+                               "DurationS": round(time.monotonic() - started, 3),
+                               "SavedS": meta.get("duration"), "ExitCode": 0})
+                return 0
+            learn_record["Cache"] = "miss"
 
-            run = run_scan if operation == "scan" else run_list
-            exit_code = run(runner, emitter, options, passthrough)
-        elif options.params_json:
-            extra_options = parse_extra_options(passthrough, verbose=options.verbose)
-            errors = run_params_json(runner, emitter, options, service, operation, extra_options)
-            exit_code = 1 if errors else 0
-        else:
-            if not service or not operation:
-                parser.error("a <service> and <operation> are required (or use --params-json)")
-            extra_options = parse_extra_options(passthrough, verbose=options.verbose)
-            session_key = runner.session_key()
-            params = coerce_params(extra_options, service, caseconverter.pascalcase(operation))
-            try:
-                run_operation(runner, emitter, options, service, operation, params, session_key)
-            except Exception as exc:
-                print(f"ajl: {service}.{operation} failed: {exc}", file=sys.stderr)
-                exit_code = 1
+        runner = Runner(
+            default_profile=options.profile or DEFAULT_PROFILE,
+            default_region=options.region or DEFAULT_REGION,
+            verbose=options.verbose,
+        )
+
+        writer = result_cache.open_writer(cache_key, argv) if result_cache.enabled else None
+        emitter = Emitter(stream=writer)
+        if options.fetch_tags:
+            emitter = TagMergeEmitter(
+                emitter,
+                lambda session_key: runner.client(session_key, "resourcegroupstaggingapi"),
+            )
+        if options.jq:
+            emitter = JqEmitter(emitter, options.jq)
+        if options.stamp_session:
+            emitter = StampEmitter(emitter, runner)
+
+        exit_code = 0
+        report = {}
+        try:
+            if service == "s3" and operation in ("scan", "list"):
+                from .scan import run_list, run_scan
+
+                if learning:
+                    learn.announce(learn_record["Command"])
+                run = run_scan if operation == "scan" else run_list
+                exit_code = run(runner, emitter, options, passthrough, report=report)
+            elif options.params_json:
+                extra_options = parse_extra_options(passthrough, verbose=options.verbose)
+                if learning:
+                    learn.announce(learn_record["Command"])
+                errors = run_params_json(runner, emitter, options, service, operation, extra_options)
+                exit_code = 1 if errors else 0
+            else:
+                if not service or not operation:
+                    parser.error("a <service> and <operation> are required (or use --params-json)")
+                extra_options = parse_extra_options(passthrough, verbose=options.verbose)
+                session_key = runner.session_key()
+                params = coerce_params(extra_options, service, caseconverter.pascalcase(operation))
+                learn_record["AwsEquivalent"] = learn.aws_equivalent(
+                    service, operation, params,
+                    profile=options.profile, region=options.region,
+                )
+                if learning:
+                    learn.announce(learn_record["AwsEquivalent"])
+                try:
+                    run_operation(runner, emitter, options, service, operation, params, session_key)
+                except Exception as exc:
+                    print(f"ajl: {service}.{operation} failed: {exc}", file=sys.stderr)
+                    exit_code = 1
+        finally:
+            emitter.flush()
+            if writer:
+                if exit_code == 0:
+                    writer.commit(time.monotonic() - started)
+                else:
+                    writer.abort()
+        if learning:
+            learn_record.update(report)
+            learn.log({**learn_record, "ExitCode": exit_code,
+                       "DurationS": round(time.monotonic() - started, 3)})
+        return exit_code
     finally:
-        emitter.flush()
-    return exit_code
+        result_cache.cleanup_spool()
 
 
 if __name__ == "__main__":
