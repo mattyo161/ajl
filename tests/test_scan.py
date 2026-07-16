@@ -30,9 +30,16 @@ class FakeS3:
 
     meta = FakeMeta()
 
-    def __init__(self, keys):
+    def __init__(self, keys, tags=None):
         self.keys = sorted(keys)
+        self.tags = tags or {}
         self.calls = 0
+
+    def get_object_tagging(self, Bucket, Key, **_):
+        self.calls += 1
+        if Key not in self.keys:
+            raise RuntimeError("NoSuchKey")
+        return {"TagSet": self.tags.get(Key, [])}
 
     def list_objects_v2(self, Bucket, Prefix="", Delimiter=None, StartAfter="",
                         MaxKeys=1000, ContinuationToken=None, **_):
@@ -103,7 +110,7 @@ def run_scan_over(keys, tasks=None, client=None, workers=4, **scanner_kwargs):
 
 
 def assert_exactly_once(records, keys):
-    emitted = [r["Id"] for r in records if r["Type"] == "s3:object"]
+    emitted = [r["Key"] for r in records if r["Type"] == "s3:object"]
     assert sorted(emitted) == sorted(keys)
 
 
@@ -111,10 +118,11 @@ def test_flat_scan_small_pages():
     keys = [f"k{i:03d}" for i in range(25)]
     records, stats, _ = run_scan_over(keys, page_size=10, split_after=100)
     assert_exactly_once(records, keys)
-    assert records[0]["Type"] == "s3:object"
-    assert records[0]["Arn"] == "arn:aws:s3:::b/k000"
-    assert records[0]["Uri"] == "s3://b/k000"
-    assert records[0]["Tags"] == {}
+    # lean records: Uri replaces Id/Name/Arn, Tags only under --include-tags
+    assert records[0] == {
+        "Type": "s3:object", "Uri": "s3://b/k000", "Bucket": "b",
+        "Key": "k000", "Size": 1,
+    }
     assert stats["objects"] == 25
 
 
@@ -132,7 +140,10 @@ def test_emit_prefixes_records():
     records, _, _ = run_scan_over(keys, tasks=tasks, emit_prefixes=True)
     prefix_records = [r for r in records if r["Type"] == "s3:prefix"]
     assert {r["Prefix"] for r in prefix_records} == {"a/", "b/"}
-    assert prefix_records[0]["Uri"].startswith("s3://b/")
+    assert prefix_records[0] == {
+        "Type": "s3:prefix", "Uri": "s3://b/a/", "Bucket": "b",
+        "Prefix": "a/", "Delimiter": "/",
+    }
     assert_exactly_once(records, keys)
 
 
@@ -264,3 +275,75 @@ def test_multi_account_seeds_route_sessions():
     ])
     assert set(clients) == {("dev", "us-east-1"), ("prod", "eu-west-1")}
     assert len(out.getvalue().splitlines()) == 4
+
+
+def test_include_tags_fetches_object_tags():
+    keys = ["a", "b"]
+    client = FakeS3(keys, tags={"a": [{"Key": "env", "Value": "prod"}]})
+    records, stats, _ = run_scan_over(keys, client=client, include_tags=True)
+    by_key = {r["Key"]: r for r in records}
+    assert by_key["a"]["Tags"] == {"env": "prod"}
+    assert by_key["b"]["Tags"] == {}
+    assert list(by_key["a"])[:3] == ["Type", "Uri", "Tags"]
+
+
+def test_include_tags_errors_are_best_effort():
+    class TagFailS3(FakeS3):
+        def get_object_tagging(self, Bucket, Key, **_):
+            raise RuntimeError("AccessDenied")
+
+    keys = ["a"]
+    records, stats, _ = run_scan_over(keys, client=TagFailS3(keys), include_tags=True)
+    assert records[0]["Tags"] == {}
+    assert stats["tag_errors"] == 1
+    assert stats["failures"] == 0
+
+
+def test_list_mode_single_level_no_recursion():
+    keys = ["a/1", "a/2", "b/x/1", "top.txt"]
+    tasks = [Task(bucket="b", delimiters=("/",))]
+    records, stats, _ = run_scan_over(
+        keys, tasks=tasks, splitter=None, recurse=False,
+    )
+    objects = [r["Key"] for r in records if r["Type"] == "s3:object"]
+    prefixes = [r["Prefix"] for r in records if r["Type"] == "s3:prefix"]
+    assert objects == ["top.txt"]          # no descent into a/ or b/
+    assert sorted(prefixes) == ["a/", "b/"]
+    assert stats["tasks"] == 1
+
+
+def test_list_pipe_dance_covers_all_keys_once():
+    # ajl s3 list --delimiter / | ajl s3 list --params-json - \
+    #   | ajl s3 list --params-json - --jq 'del(.Delimiter)' | ...
+    keys = [
+        "a/x/1", "a/x/2", "a/y/1", "b/z/deep/very/1", "b/top", "root",
+    ]
+    client = FakeS3(keys)
+
+    def stage(seed_lines, strip_delimiter=False):
+        tasks = []
+        for line in seed_lines:
+            if strip_delimiter:
+                line = {k: v for k, v in line.items() if k != "Delimiter"}
+            tasks.append(seed_task(line, ()))
+        records, _, _ = run_scan_over(
+            keys, tasks=tasks, client=client, splitter=None, recurse=False,
+        )
+        objects = [r for r in records if r["Type"] == "s3:object"]
+        prefixes = [r for r in records if r["Type"] == "s3:prefix"]
+        return objects, prefixes
+
+    objects1, prefixes1 = stage([{"Bucket": "b", "Delimiter": "/"}])
+    objects2, prefixes2 = stage(prefixes1)                        # repeats Delimiter
+    objects3, prefixes3 = stage(prefixes2, strip_delimiter=True)  # recursive tail
+    emitted = [r["Key"] for r in objects1 + objects2 + objects3]
+    assert sorted(emitted) == sorted(keys)
+    assert prefixes3 == []  # final stage listed recursively, no more fan-out
+
+
+def test_seed_task_single_delimiter_field():
+    # piped s3:prefix records repeat their level; explicit schedules win
+    task = seed_task({"Bucket": "b", "Prefix": "a/", "Delimiter": "/"}, ())
+    assert task.delimiters == ("/",)
+    task = seed_task({"Bucket": "b", "Delimiter": "-"}, ("/", "/"))
+    assert task.delimiters == ("/", "/")

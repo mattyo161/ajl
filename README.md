@@ -67,6 +67,12 @@ ajl ec2 describe-instances --jq 'select(.State.Name == "running") | .Uri // .Arn
 # stamp records with Profile/Region/Account so later stages reuse the session
 ajl s3 list-buckets --profile prod --stamp-session
 
+# single-level listing with pipeable prefixes: the classic fan-out dance
+ajl s3 list s3://my-bucket --delimiter / \
+  | ajl s3 list --params-json - \
+  | ajl s3 list --params-json - --jq 'del(.Delimiter)' \
+  | ajl s3 list --params-json - --workers 32
+
 # inventory a whole bucket: delimiter fan-out + adaptive range splitting
 ajl s3 scan s3://my-bucket --delimiters '/ / /' --workers 64 \
   --failed-out failed.jsonl
@@ -78,7 +84,21 @@ ajl s3 scan s3://my-bucket/tmp/ \
   | ajl s3 delete-objects --bucket my-bucket --params-json -
 ```
 
-### `ajl s3 scan`
+### `ajl s3 list` and `ajl s3 scan`
+
+Both emit **lean records** built for volume: `Uri` (`s3://bucket/key`)
+replaces `Id`/`Name`/`Arn`, and `Tags` appears only under `--include-tags`
+(one `get-object-tagging` call per object). A live progress line shows on
+stderr while results stream (auto-off when stderr isn't a terminal, or with
+`--no-progress`). The generic `ajl s3 list-objects-v2` keeps the full
+five-property contract.
+
+`list` is the composable single-level primitive: one `list-objects-v2` per
+seed, `CommonPrefixes` emitted as `s3:prefix` records that pipe straight back
+into the next `ajl s3 list --params-json -`. Each prefix record carries its
+`Delimiter`, so every pipe stage repeats the grouping one level deeper until a
+`--jq 'del(.Delimiter)'` makes the final stage list its prefixes recursively —
+with `--workers` fanning the requests out in parallel.
 
 `scan` inventories buckets orders of magnitude faster than `list-objects-v2
 --recursive`-style listings by turning the keyspace into parallel work: one
@@ -92,8 +112,7 @@ shared hash prefixes instead of scanning them serially); fixed splitters
 `--split-class package.module:ClassName` drops in your own strategy for
 tomorrow's pathological bucket. A delimiter level that over-shatters (more
 than `--max-fan` child prefixes) automatically falls back to range splitting.
-Failed listings stream to `--failed-out` as re-runnable `--params-json` seeds,
-and every record carries a `Uri` (`s3://bucket/key`) so streams compose.
+Failed listings stream to `--failed-out` as re-runnable `--params-json` seeds.
 
 Records emitted by `ajl` can be piped straight back into `--params-json -`:
 params that the target operation does not accept (like `Type`, `Arn`, `Tags`)

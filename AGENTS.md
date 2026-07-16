@@ -37,9 +37,11 @@ credentials; the test suite does not.
   `output.resources` configs; module docstring documents the config schema.
 - `src/ajl/pagination.py` — botocore paginators first, marker-loop fallback
   from model `input.markers`/`output.markers`.
-- `src/ajl/scan.py` — `ajl s3 scan`: queue/worker-pool bucket inventory with
-  delimiter fan-out and pluggable range splitters (radix leapfrog default);
-  module docstring documents the task/splitter contracts.
+- `src/ajl/scan.py` — `ajl s3 scan` (recursive queue/worker-pool inventory
+  with pluggable range splitters, radix leapfrog default) and `ajl s3 list`
+  (same engine, recurse off, pipeable prefixes); records here are LEAN
+  (`Type`+`Uri`, no Id/Name/Arn, Tags only via --include-tags); module
+  docstring documents the task/splitter contracts.
 - `src/ajl/tags.py` — `--fetch-tags` batching (100 ARNs/call) via the
   Resource Groups Tagging API, background threads, submission-order emit.
 - `src/ajl/modelconfig.py` — loads packaged models; `AJL_MODELS_DIR` env var
@@ -61,8 +63,9 @@ credentials; the test suite does not.
    `ajl:`. Never `print()` to stdout outside the `Emitter`.
 3. **Don't break the output contract**: leading `Type`/`Id`/`Name`/`Arn`/`Tags`
    on every shaped record, `Tags` always a map, missing values as `""`/`{}`
-   (not null/absent), records re-pipeable via `--params-json`. If a change
-   touches this, add an entry to DESIGN.md.
+   (not null/absent), records re-pipeable via `--params-json`. Exception:
+   `s3 scan`/`s3 list` records are deliberately lean (`Type`+`Uri`). If a
+   change touches this, add an entry to DESIGN.md.
 4. **Per-request errors must not kill a stream.** Catch, report to stderr,
    continue, exit 1 at the end.
 5. **Locks are held briefly and never across network calls** (see

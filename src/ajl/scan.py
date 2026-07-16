@@ -1,12 +1,20 @@
-"""Orchestrated S3 inventory fan-out (``ajl s3 scan``).
+"""S3 keyspace listing engine: ``ajl s3 scan`` (recursive inventory fan-out)
+and ``ajl s3 list`` (composable single-level list-objects-v2).
 
 One bounded worker pool pulls listing tasks from a shared queue. Each task is
 one ``list-objects-v2`` listing over a ``(bucket, prefix, start_after,
 end_at)`` slice of the keyspace; ``Contents`` stream to stdout as
-``s3:object`` records and ``CommonPrefixes`` go back into the queue with the
-remaining delimiter schedule. Ranges use exclusive ``start_after`` and
+``s3:object`` records and ``CommonPrefixes`` either go back into the queue
+with the remaining delimiter schedule (``scan``) or are emitted as pipeable
+``s3:prefix`` records (``list``). Ranges use exclusive ``start_after`` and
 inclusive ``end_at`` bounds so adjacent slices partition the keyspace with no
 gap and no overlap.
+
+Records are lean by design — at inventory volumes the Id/Name/Arn/Tags
+contract properties are repetition: ``Uri`` (``s3://bucket/key``) carries the
+identity, ``Tags`` exists only under ``--include-tags`` (one GetObjectTagging
+call per object). The generic ``ajl s3 list-objects-v2`` shapes keep the full
+five-property contract.
 
 Per-task decision loop:
 
@@ -44,6 +52,8 @@ from dataclasses import dataclass, replace
 import jsonlines
 import orjson
 from botocore.config import Config
+
+from .normalize import tags_to_map
 
 PAGE_SIZE = 1000
 _MAX_CHAR = "\U0010ffff"  # highest code point; UTF-8 F4 8F BF BF sorts last
@@ -217,10 +227,14 @@ class Scanner:
         page_size=PAGE_SIZE,
         max_items=None,
         emit_prefixes=False,
+        recurse=True,
+        include_tags=False,
         failed_out=None,
         client_factory=None,
         workers=8,
         verbose=False,
+        progress=False,
+        name="scan",
     ):
         self.runner = runner
         self.emitter = emitter
@@ -230,10 +244,14 @@ class Scanner:
         self.page_size = page_size
         self.max_items = max_items
         self.emit_prefixes = emit_prefixes
+        self.recurse = recurse  # False: emit CommonPrefixes instead of enqueueing
+        self.include_tags = include_tags
         self.failed_out = failed_out
         self.client_factory = client_factory
         self.workers = max(1, workers)
         self.verbose = verbose
+        self.progress = progress
+        self.name = name
         self.queue = deque()
         self.cond = threading.Condition()
         self.active = 0
@@ -241,7 +259,7 @@ class Scanner:
         self.emitted = 0
         self.stats = {
             "tasks": 0, "calls": 0, "objects": 0, "prefixes": 0,
-            "splits": 0, "abandons": 0, "failures": 0,
+            "splits": 0, "abandons": 0, "failures": 0, "tag_errors": 0,
         }
         self._clients = {}
         self._client_lock = threading.Lock()
@@ -253,15 +271,17 @@ class Scanner:
             threading.Thread(target=self._worker, daemon=True) for _ in range(self.workers)
         ]
         stop_monitor = threading.Event()
-        if self.verbose:
-            threading.Thread(
-                target=self._monitor, args=(stop_monitor,), daemon=True
-            ).start()
+        monitor = None
+        if self.progress or self.verbose:
+            monitor = threading.Thread(target=self._monitor, args=(stop_monitor,), daemon=True)
+            monitor.start()
         for thread in threads:
             thread.start()
         for thread in threads:
             thread.join()
         stop_monitor.set()
+        if monitor:
+            monitor.join(timeout=2)
         return self.stats
 
     def add(self, task):
@@ -307,7 +327,6 @@ class Scanner:
         self._inc("tasks")
         session_key = self.runner.session_key(task.profile, task.region)
         client = self.client(session_key)
-        partition = getattr(client.meta, "partition", "aws")
         delimiter = task.delimiters[0] if task.delimiters else None
         rest = tuple(task.delimiters[1:])
         params = {"Bucket": task.bucket, "MaxKeys": self.page_size}
@@ -333,25 +352,27 @@ class Scanner:
                     key = item["Key"]
                     if task.end_at and key > task.end_at:
                         return
-                    if not self._emit_object(item, task, partition, session_key):
+                    if not self._emit_object(item, task, client, session_key):
                         return
                     progress = key
                 if delimiter:
                     for cp in response.get("CommonPrefixes") or []:
                         child = cp["Prefix"]
-                        self.add(
-                            replace(task, prefix=child, delimiters=rest,
-                                    start_after="", end_at="")
-                        )
                         self._inc("prefixes")
-                        fan += 1
                         progress = max(progress, sentinel_after(child))
-                        if self.emit_prefixes:
-                            self._emit_prefix(child, task, rest, partition, session_key)
+                        if self.recurse:
+                            self.add(
+                                replace(task, prefix=child, delimiters=rest,
+                                        start_after="", end_at="")
+                            )
+                            fan += 1
+                        if self.emit_prefixes or not self.recurse:
+                            if not self._emit_prefix(child, task, delimiter, session_key):
+                                return
                 if not response.get("IsTruncated"):
                     return
                 token = response.get("NextContinuationToken")
-                if delimiter and fan > self.max_fan:
+                if delimiter and self.recurse and fan > self.max_fan:
                     # over-shattered: everything <= progress is handled; hand
                     # the rest of the keyspace to the splitter path
                     self._inc("abandons")
@@ -416,41 +437,45 @@ class Scanner:
             self.emitted += 1
             return True
 
-    def _emit_object(self, item, task, partition, session_key):
+    def _emit_object(self, item, task, client, session_key):
         if not self._count_emit():
             return False
         key = item["Key"]
-        record = {
-            "Type": "s3:object",
-            "Id": key,
-            "Name": key,
-            "Arn": f"arn:{partition}:s3:::{task.bucket}/{key}",
-            "Tags": {},
-            "Uri": f"s3://{task.bucket}/{key}",
-            "Bucket": task.bucket,
-        }
+        record = {"Type": "s3:object", "Uri": f"s3://{task.bucket}/{key}"}
+        if self.include_tags:
+            record["Tags"] = self._object_tags(client, task.bucket, key)
+        record["Bucket"] = task.bucket
         record.update(item)
         self.emitter.emit(record, session_key)
         self._inc("objects")
         return True
 
-    def _emit_prefix(self, prefix, task, rest, partition, session_key):
+    def _object_tags(self, client, bucket, key):
+        self._inc("calls")
+        try:
+            response = client.get_object_tagging(Bucket=bucket, Key=key)
+        except Exception as exc:
+            self._inc("tag_errors")
+            if self.verbose:
+                print(f"ajl: get-object-tagging failed for s3://{bucket}/{key}: {exc}",
+                      file=sys.stderr)
+            return {}
+        return tags_to_map(response.get("TagSet"))
+
+    def _emit_prefix(self, prefix, task, delimiter, session_key):
         if not self._count_emit():
-            return
+            return False
         self.emitter.emit(
             {
                 "Type": "s3:prefix",
-                "Id": prefix,
-                "Name": prefix,
-                "Arn": f"arn:{partition}:s3:::{task.bucket}/{prefix}",
-                "Tags": {},
                 "Uri": f"s3://{task.bucket}/{prefix}",
                 "Bucket": task.bucket,
                 "Prefix": prefix,
-                "Delimiter": rest[0] if rest else None,
+                "Delimiter": delimiter,
             },
             session_key,
         )
+        return True
 
     def _fail(self, task, exc):
         self._inc("failures")
@@ -470,11 +495,33 @@ class Scanner:
             self.stats[stat] += 1
 
     def _monitor(self, stop):
-        while not stop.wait(5):
+        """Live progress: a tqdm counter on a TTY, plain stderr lines under
+        --verbose (log-friendly)."""
+        bar = None
+        if self.progress:
+            from tqdm import tqdm
+
+            bar = tqdm(desc=f"ajl s3 {self.name}", unit=" obj", file=sys.stderr,
+                       dynamic_ncols=True)
+        interval = 0.5 if bar else 5
+        while not stop.wait(interval):
             with self.cond:
-                line = " ".join(f"{k}={v}" for k, v in self.stats.items())
+                stats = dict(self.stats)
                 queued = len(self.queue)
-            print(f"ajl: scan progress {line} queued={queued}", file=sys.stderr)
+            if bar:
+                bar.n = stats["objects"]
+                bar.set_postfix(
+                    tasks=stats["tasks"], queued=queued, prefixes=stats["prefixes"],
+                    splits=stats["splits"], failures=stats["failures"], refresh=False,
+                )
+                bar.refresh()
+            if self.verbose:
+                line = " ".join(f"{k}={v}" for k, v in stats.items())
+                print(f"ajl: {self.name} progress {line} queued={queued}", file=sys.stderr)
+        if bar:
+            bar.n = self.stats["objects"]
+            bar.refresh()
+            bar.close()
 
 
 def parse_uri(uri):
@@ -488,8 +535,8 @@ def parse_uri(uri):
 
 def seed_task(line, default_delimiters):
     """Build a Task from a --params-json line (accepts records emitted by
-    ajl itself: Bucket/Prefix or Uri, plus optional StartAfter/EndAt and
-    profile/region in either case)."""
+    ajl itself: Bucket/Prefix or Uri, a s3:prefix record's Delimiter, plus
+    optional StartAfter/EndAt and profile/region in either case)."""
     bucket = line.get("Bucket") or line.get("bucket")
     prefix = line.get("Prefix") or line.get("prefix") or ""
     uri = line.get("Uri") or line.get("uri")
@@ -499,6 +546,8 @@ def seed_task(line, default_delimiters):
         raise ValueError("line has no 'Bucket' or 'Uri'")
     end_at = line.get("EndAt") or ""
     delimiters = tuple(line.get("Delimiters") or default_delimiters)
+    if not delimiters and line.get("Delimiter"):
+        delimiters = (line["Delimiter"],)  # piped s3:prefix records repeat their level
     if end_at:
         delimiters = ()  # ranges are always leaf-mode listings
     return Task(
@@ -522,6 +571,9 @@ def build_scan_parser():
         "--params-json (seed tasks from JSONL) and --verbose (progress lines).",
     )
     parser.add_argument("uris", nargs="*", metavar="s3://bucket/prefix")
+    parser.add_argument("--uri", action="append", default=[], dest="uri_flags",
+                        metavar="s3://bucket/prefix",
+                        help="same as the positional uris")
     parser.add_argument("--delimiters", default="", metavar="'/ / .'",
                         help="delimiter schedule, one level per entry "
                         "(whitespace or comma separated)")
@@ -541,21 +593,56 @@ def build_scan_parser():
                         help="MaxKeys per request (default 1000)")
     parser.add_argument("--emit-prefixes", action="store_true", default=False,
                         help="also emit s3:prefix records for discovered prefixes")
+    parser.add_argument("--include-tags", action="store_true", default=False,
+                        help="add a Tags map via one get-object-tagging call per "
+                        "object (expensive at volume)")
+    parser.add_argument("--no-progress", action="store_true", default=False,
+                        help="disable the live progress line (auto-disabled when "
+                        "stderr is not a terminal)")
     parser.add_argument("--failed-out", default=None, metavar="FILE",
                         help="write failed tasks as JSONL seeds for re-running "
                         "via --params-json")
     return parser
 
 
-def run_scan(runner, emitter, options, tokens):
-    """Entry point from main(); tokens are the args after 'ajl s3 scan'."""
-    scan_options = build_scan_parser().parse_args(tokens)
-    delimiters = tuple(d for d in re.split(r"[,\s]+", scan_options.delimiters) if d)
+def build_list_parser():
+    parser = argparse.ArgumentParser(
+        prog="ajl s3 list",
+        description="Simplified list-objects-v2: uri-addressed lean records; "
+        "s3:prefix records pipe straight back into the next `ajl s3 list "
+        "--params-json -` (each line repeats its own Delimiter until a --jq "
+        "'del(.Delimiter)' makes the final stage recursive).",
+        epilog="The global ajl flags also apply: --workers (pool size), "
+        "--profile/--region, --max-items, --jq, --stamp-session, "
+        "--params-json (seed listings from JSONL) and --verbose.",
+    )
+    parser.add_argument("uris", nargs="*", metavar="s3://bucket/prefix")
+    parser.add_argument("--uri", action="append", default=[], dest="uri_flags",
+                        metavar="s3://bucket/prefix",
+                        help="same as the positional uris")
+    parser.add_argument("--delimiter", default=None,
+                        help="group keys into s3:prefix records at this delimiter")
+    parser.add_argument("--start-after", default=None, metavar="KEY",
+                        help="list keys after this one (uri seeds only)")
+    parser.add_argument("--page-size", type=int, default=PAGE_SIZE, metavar="N",
+                        help="MaxKeys per request (default 1000)")
+    parser.add_argument("--include-tags", action="store_true", default=False,
+                        help="add a Tags map via one get-object-tagging call per "
+                        "object (expensive at volume)")
+    parser.add_argument("--no-progress", action="store_true", default=False,
+                        help="disable the live progress line (auto-disabled when "
+                        "stderr is not a terminal)")
+    parser.add_argument("--failed-out", default=None, metavar="FILE",
+                        help="write failed listings as JSONL seeds")
+    return parser
 
+
+def collect_seeds(options, parsed, delimiters, start_after=""):
     seeds = []
-    for uri in scan_options.uris:
+    for uri in [*parsed.uris, *parsed.uri_flags]:
         bucket, prefix = parse_uri(uri)
-        seeds.append(Task(bucket=bucket, prefix=prefix, delimiters=delimiters))
+        seeds.append(Task(bucket=bucket, prefix=prefix, delimiters=delimiters,
+                          start_after=start_after))
     if options.params_json:
         source = sys.stdin if options.params_json == "-" else open(options.params_json)
         with jsonlines.Reader(source) as reader:
@@ -565,7 +652,26 @@ def run_scan(runner, emitter, options, tokens):
                         raise ValueError("not a JSON object")
                     seeds.append(seed_task(line, delimiters))
                 except ValueError as exc:
-                    print(f"ajl: scan skipping seed line: {exc}", file=sys.stderr)
+                    print(f"ajl: skipping seed line: {exc}", file=sys.stderr)
+    return seeds
+
+
+def _show_progress(parsed):
+    return not parsed.no_progress and sys.stderr.isatty()
+
+
+def _finish(scanner, seeds, name, started):
+    stats = scanner.run(seeds)
+    summary = " ".join(f"{k}={v}" for k, v in stats.items())
+    print(f"ajl: {name} done in {time.time() - started:.1f}s {summary}", file=sys.stderr)
+    return 1 if stats["failures"] else 0
+
+
+def run_scan(runner, emitter, options, tokens):
+    """Entry point from main(); tokens are the args after 'ajl s3 scan'."""
+    scan_options = build_scan_parser().parse_args(tokens)
+    delimiters = tuple(d for d in re.split(r"[,\s]+", scan_options.delimiters) if d)
+    seeds = collect_seeds(options, scan_options, delimiters)
     if not seeds:
         print("ajl: s3 scan needs s3://bucket[/prefix] uris or --params-json",
               file=sys.stderr)
@@ -586,16 +692,50 @@ def run_scan(runner, emitter, options, tokens):
         page_size=scan_options.page_size,
         max_items=options.max_items,
         emit_prefixes=scan_options.emit_prefixes,
+        include_tags=scan_options.include_tags,
         failed_out=failed_fp,
         workers=options.workers,
         verbose=options.verbose,
+        progress=_show_progress(scan_options),
+        name="scan",
     )
     started = time.time()
     try:
-        stats = scanner.run(seeds)
+        return _finish(scanner, seeds, "scan", started)
     finally:
         if failed_fp:
             failed_fp.close()
-    summary = " ".join(f"{k}={v}" for k, v in stats.items())
-    print(f"ajl: scan done in {time.time() - started:.1f}s {summary}", file=sys.stderr)
-    return 1 if stats["failures"] else 0
+
+
+def run_list(runner, emitter, options, tokens):
+    """Entry point from main(); tokens are the args after 'ajl s3 list'."""
+    list_options = build_list_parser().parse_args(tokens)
+    delimiters = (list_options.delimiter,) if list_options.delimiter else ()
+    seeds = collect_seeds(options, list_options, delimiters,
+                          start_after=list_options.start_after or "")
+    if not seeds:
+        print("ajl: s3 list needs s3://bucket[/prefix] uris or --params-json",
+              file=sys.stderr)
+        return 2
+
+    failed_fp = open(list_options.failed_out, "w") if list_options.failed_out else None
+    scanner = Scanner(
+        runner,
+        emitter,
+        splitter=None,
+        recurse=False,
+        page_size=list_options.page_size,
+        max_items=options.max_items,
+        include_tags=list_options.include_tags,
+        failed_out=failed_fp,
+        workers=options.workers,
+        verbose=options.verbose,
+        progress=_show_progress(list_options),
+        name="list",
+    )
+    started = time.time()
+    try:
+        return _finish(scanner, seeds, "list", started)
+    finally:
+        if failed_fp:
+            failed_fp.close()

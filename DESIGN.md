@@ -162,12 +162,37 @@ mixing sessions can be piped back in and each line routes to the session that
 produced it.
 
 ### `Uri` on s3 records
-All curated s3 shapes (and `ajl s3 scan`) emit `Uri: s3://bucket/key` right
-after `Tags`, via a declarative `uri_format` template (same variables as
-`arn_format`). URIs are the composable s3 addressing scheme: seeds for
-`scan`, input to other s3 tooling, and unambiguous across buckets.
+All curated s3 shapes emit `Uri: s3://bucket/key` via a declarative
+`uri_format` template (same variables as `arn_format`). URIs are the
+composable s3 addressing scheme: seeds for `scan`/`list`, input to other s3
+tooling, and unambiguous across buckets.
 
-## s3 scan
+## s3 scan / s3 list
+
+### Lean records on the high-volume path
+`scan` and `list` records are `{Type, Uri, Bucket, ...api fields}` — a
+deliberate exception to the five-property contract. At inventory volumes
+`Id`/`Name`/`Arn` are pure repetition of `Uri` (billions of records × ~200
+wasted bytes), and an always-empty `Tags: {}` is noise: `--include-tags`
+opts in, populated for real via one `get-object-tagging` call per object
+(expensive, so never the default). The generic `ajl s3 list-objects-v2`
+shapes keep the full contract for consumers that want schema uniformity.
+
+### `ajl s3 list`: the composable single-level primitive
+The original supplemental-wrapper pattern, kept because pipes are sometimes
+the right tool: one `list-objects-v2` per seed, prefixes *emitted* (not
+recursed) as `s3:prefix` records carrying their `Delimiter`, so each
+`--params-json` stage repeats the grouping one level deeper and a
+`--jq 'del(.Delimiter)'` turns the last stage recursive. Implemented as the
+same `Scanner` engine with `recurse=False` — workers, session routing,
+failed-out and progress come for free.
+
+### Progress on by default when stderr is a terminal
+Long scans stream results but the interesting signal (tasks, queue depth,
+splits, failures) is invisible until done — so a tqdm counter renders on
+stderr (0.5s refresh) whenever stderr is a TTY, `--no-progress` opts out, and
+non-TTY runs stay clean for logs/cron. `--verbose` additionally prints plain
+progress lines every 5s (grep-able in captured logs).
 
 ### Fan-out is a scheduler, not a pipe depth
 `ajl s3 scan` replaces N-deep `--params-json` pipelines for bucket inventory:

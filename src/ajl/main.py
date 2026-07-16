@@ -382,11 +382,14 @@ def run_params_json(runner, emitter, options, service, operation, base_params):
 
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
-    if argv[:2] == ["s3", "scan"] and any(flag in argv for flag in ("-h", "--help")):
-        # route help to the scan subparser before the root parser eats it
-        from .scan import build_scan_parser
+    if argv[:2] in (["s3", "scan"], ["s3", "list"]) and any(
+        flag in argv for flag in ("-h", "--help")
+    ):
+        # route help to the subparser before the root parser eats it
+        from .scan import build_list_parser, build_scan_parser
 
-        build_scan_parser().parse_args(["--help"])
+        subparser = build_scan_parser() if argv[1] == "scan" else build_list_parser()
+        subparser.parse_args(["--help"])
     parser = build_parser()
     options, passthrough = parser.parse_known_args(argv)
 
@@ -416,10 +419,11 @@ def main(argv=None):
 
     exit_code = 0
     try:
-        if service == "s3" and operation == "scan":
-            from .scan import run_scan
+        if service == "s3" and operation in ("scan", "list"):
+            from .scan import run_list, run_scan
 
-            exit_code = run_scan(runner, emitter, options, passthrough)
+            run = run_scan if operation == "scan" else run_list
+            exit_code = run(runner, emitter, options, passthrough)
         elif options.params_json:
             extra_options = parse_extra_options(passthrough, verbose=options.verbose)
             errors = run_params_json(runner, emitter, options, service, operation, extra_options)
