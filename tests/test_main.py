@@ -262,3 +262,71 @@ def test_pop_session_fields_accepts_both_cases():
     line = {"profile": "p2", "region": "us-east-2"}
     assert pop_session_fields(line) == ("p2", "us-east-2")
     assert pop_session_fields({}) == (None, None)
+
+
+def test_shape_page_cloudformation_stack():
+    page = {"Stacks": [{
+        "StackName": "web-prod",
+        "StackId": "arn:aws:cloudformation:us-east-1:111122223333:stack/web-prod/abc-123",
+        "Tags": [{"Key": "env", "Value": "prod"}],
+    }]}
+    (record,) = _shape_with_model("cloudformation", "DescribeStacks", page)
+    assert record["Type"] == "cloudformation:stack"
+    assert record["Id"] == "web-prod"
+    assert record["Arn"].startswith("arn:aws:cloudformation:")
+    assert record["Tags"] == {"env": "prod"}
+
+
+def test_shape_page_cloudwatch_metric_and_composite_alarms():
+    page = {
+        "MetricAlarms": [{"AlarmName": "cpu-high", "AlarmArn": "arn:aws:cloudwatch:us-east-1:1:alarm:cpu-high"}],
+        "CompositeAlarms": [{"AlarmName": "svc-degraded", "AlarmArn": "arn:aws:cloudwatch:us-east-1:1:alarm:svc-degraded"}],
+    }
+    records = _shape_with_model("cloudwatch", "DescribeAlarms", page)
+    assert [r["Id"] for r in records] == ["cpu-high", "svc-degraded"]
+    assert all(r["Type"] == "cloudwatch:alarm" for r in records)
+
+
+def test_shape_page_logs_log_group_arn_format():
+    page = {"logGroups": [{"logGroupName": "/ecs/web"}]}
+    (record,) = _shape_with_model("logs", "DescribeLogGroups", page)
+    assert record["Type"] == "logs:log-group"
+    assert record["Arn"] == "arn:aws:logs:us-east-1:111122223333:log-group:/ecs/web"
+
+
+def test_shape_page_ecs_task_scalar_arns():
+    page = {"taskArns": ["arn:aws:ecs:us-east-1:1:task/prod/abc123"]}
+    (record,) = _shape_with_model("ecs", "ListTasks", page)
+    assert record["Type"] == "ecs:task"
+    assert record["Id"] == "abc123"
+
+
+def test_shape_page_eks_nodegroup():
+    page = {"nodegroup": {
+        "nodegroupName": "workers",
+        "nodegroupArn": "arn:aws:eks:us-east-1:1:nodegroup/main/workers/aa-bb",
+        "tags": {"team": "platform"},
+    }}
+    (record,) = _shape_with_model("eks", "DescribeNodegroup", page)
+    assert record["Type"] == "eks:nodegroup"
+    assert record["Name"] == "workers"
+    assert record["Tags"] == {"team": "platform"}
+
+
+def test_operation_lookup_is_case_insensitive():
+    # the CLI cannot reconstruct acronym casing (ID, DB, ACL) from kebab-case
+    from ajl.modelconfig import get_operation_config
+
+    assert get_operation_config("iam", "ListOpenIdConnectProviders") is not None
+    assert get_operation_config("rds", "DescribeDbInstances") is not None
+    assert get_operation_config("wafv2", "ListWebAcls") is not None
+    assert get_operation_config("rds", "NoSuchOperation") is None
+
+
+def test_shape_page_iam_oidc_provider_via_cli_casing():
+    page = {"OpenIDConnectProviderList": [
+        {"Arn": "arn:aws:iam::111122223333:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/70FF"}
+    ]}
+    (record,) = _shape_with_model("iam", "ListOpenIdConnectProviders", page)
+    assert record["Type"] == "iam:oidc-provider"
+    assert record["Id"] == "70FF"

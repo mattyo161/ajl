@@ -36,9 +36,28 @@ def load_service_model(service: str):
     return model
 
 
+_OP_INDEX = {}
+
+
 def get_operation_config(service: str, operation_pascal: str):
-    """Return the operation config for a service operation, or None."""
+    """Return the operation config for a service operation, or None.
+
+    Lookup is case-insensitive: the CLI's kebab-to-Pascal conversion cannot
+    reconstruct acronym casing (list-open-id-connect-providers becomes
+    ListOpenIdConnectProviders, but the API name is ListOpenIDConnectProviders,
+    and likewise DBInstances, WebACLs, ...).
+    """
     model = load_service_model(service)
     if not model:
         return None
-    return (model.get("operations") or {}).get(operation_pascal)
+    operations = model.get("operations") or {}
+    config = operations.get(operation_pascal)
+    if config is None:
+        index = _OP_INDEX.get(service)
+        if index is None:
+            index = {name.lower(): name for name in operations}
+            _OP_INDEX[service] = index
+        actual = index.get(operation_pascal.lower())
+        if actual:
+            config = operations[actual]
+    return config
