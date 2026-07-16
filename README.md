@@ -128,7 +128,28 @@ The `Tags` property will be a map of all the tags for the given resource. Many A
 
 ## Performance
 
-Using `ajl` I have found performance compared to `aws-cli` to be amazingly fast. Performance versus making direct calls to the boto3 is likely comparable, with perhaps some slight overhead due to conversion of the output data to JSON line, however the streaming benefits, the ability to make calls with simple JSON objects, did I mention it will support profiles & regions in your calls so a single command can process many accounts and regions.
+Real numbers from a 270k-object CloudTrail log bucket (run from AWS
+CloudShell — a constrained 1-vCPU environment, not a tuned instance):
+
+| approach | wall time |
+|---|---|
+| `aws s3 ls --recursive` | 79.0s |
+| `aws s3api list-objects-v2` (serial pagination) | 63.6s |
+| `ajl s3 scan` **defaults**, `--workers 32` | **12.5s** — 21,700 obj/s |
+| `ajl s3 scan` hand-tuned 6-level `/` schedule | 12.0s |
+
+Two things worth noticing: the zero-config default (adaptive radix
+splitting) lands within noise of a hand-tuned delimiter schedule, and the
+whole scan cost 605 API calls for 270,108 objects — barely above the
+271-page theoretical floor, just made in parallel instead of in series.
+And the cold-start story is short: on a fresh CloudShell,
+`uv tool install git+https://github.com/mattyo161/ajl` to first inventory
+line is under a minute.
+
+The full design — how splitting works without seeing the keys first, why
+there's a raw-HTTP fast path, where the real walls are (spoiler: eventually
+your NIC), and the playbook for billion-object buckets — is in
+[docs/scan-design.md](docs/scan-design.md).
 
 My hope is that putting this out into the community there will be opportunities to take this concept much further then the general PoCs that I have been messing with over the years working with AWS.
 

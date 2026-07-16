@@ -41,7 +41,8 @@ credentials; the test suite does not.
   with pluggable range splitters, radix leapfrog default) and `ajl s3 list`
   (same engine, recurse off, pipeable prefixes); records here are LEAN
   (`Type`+`Uri`, no Id/Name/Arn, Tags only via --include-tags); module
-  docstring documents the task/splitter contracts.
+  docstring documents the task/splitter contracts, docs/scan-design.md the
+  full design narrative.
 - `src/ajl/tags.py` — `--fetch-tags` batching (100 ARNs/call) via the
   Resource Groups Tagging API, background threads, submission-order emit.
 - `src/ajl/modelconfig.py` — loads packaged models; `AJL_MODELS_DIR` env var

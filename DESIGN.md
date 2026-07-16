@@ -169,6 +169,9 @@ tooling, and unambiguous across buckets.
 
 ## s3 scan / s3 list
 
+Narrative deep dive (architecture, splitter math, measured results, the
+billion-object playbook): [docs/scan-design.md](docs/scan-design.md).
+
 ### Lean records on the high-volume path
 `scan` and `list` records are `{Type, Uri, Bucket, ...api fields}` — a
 deliberate exception to the five-property contract. At inventory volumes
