@@ -1,9 +1,11 @@
 # CLAUDE.md
 
 @AGENTS.md
+@docs/AI_GUIDE.md
 
 The agent guide above is the canonical instruction set for this repo (kept in
-AGENTS.md so it works for any coding agent). Claude-specific notes:
+AGENTS.md so it works for any coding agent); the vendored AI_GUIDE holds the
+cross-repo house rules. Claude-specific notes:
 
 - Full docs: [DESIGN.md](DESIGN.md) (decision log — append to it when you
   change a decision), [STYLE_GUIDE.md](STYLE_GUIDE.md),
