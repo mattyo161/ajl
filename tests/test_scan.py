@@ -230,12 +230,16 @@ def test_radix_branch_discovery_descends_common_prefix():
     ctx = SplitContext(client=client, bucket="b", prefix="", last_key=keys[0],
                        end_at="", count_call=lambda: None)
     ranges = RadixSplitter().split(ctx)
-    # branches 0/4/a/f minus everything <= the already-emitted first key
+    # branches 0/4/a/f at the shared "8a3145" stem, extrapolated one level
+    # deeper (4^2 = 16 pairs) minus boundaries <= the already-emitted first key
     assert ranges is not None
-    assert [rng["start_after"] for rng in ranges][0] == keys[0]
-    assert [rng["end_at"] for rng in ranges][-1] == ""
-    boundaries = [rng["end_at"] for rng in ranges][:-1]
-    assert boundaries == ["8a31454", "8a3145a", "8a3145f"]
+    assert len(ranges) == 16
+    assert ranges[0]["start_after"] == keys[0]
+    assert ranges[-1]["end_at"] == ""
+    for previous, current in zip(ranges, ranges[1:]):
+        assert previous["end_at"] == current["start_after"]  # gapless partition
+    assert ranges[0]["end_at"] == "8a314504"
+    assert ranges[-1]["start_after"] == "8a3145ff"
 
 
 def test_parse_uri():
@@ -367,3 +371,57 @@ def test_progress_monitor_updates_and_closes():
     keys = [f"k{i}" for i in range(5)]
     records, _, _ = run_scan_over(keys, progress=True)
     assert_exactly_once(records, keys)
+
+
+def test_parse_list_xml_matches_boto_shape():
+    from ajl.scan import parse_list_xml
+
+    body = b"""<?xml version="1.0" encoding="UTF-8"?>
+<ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+  <Name>my-bucket</Name><KeyCount>3</KeyCount><MaxKeys>1000</MaxKeys>
+  <IsTruncated>true</IsTruncated>
+  <NextContinuationToken>tok123</NextContinuationToken>
+  <EncodingType>url</EncodingType>
+  <Contents>
+    <Key>nrn%3Aglobal%3Ax%3A00031378</Key>
+    <LastModified>2026-07-08T00:58:32.000Z</LastModified>
+    <ETag>&quot;cf5ef4439c681795881e50298eb14099&quot;</ETag>
+    <Size>4081</Size><StorageClass>STANDARD</StorageClass>
+  </Contents>
+  <Contents>
+    <Key>plain/key.txt</Key>
+    <LastModified>2026-07-13T16:23:24.000Z</LastModified>
+    <ETag>&quot;fb827215268768253&quot;</ETag>
+    <Size>158</Size><StorageClass>STANDARD</StorageClass>
+  </Contents>
+  <Contents><Key>sparse</Key><Size>0</Size></Contents>
+  <CommonPrefixes><Prefix>a%2Fb%2F</Prefix></CommonPrefixes>
+  <CommonPrefixes><Prefix>c/</Prefix></CommonPrefixes>
+</ListBucketResult>"""
+    response = parse_list_xml(body)
+    assert response["IsTruncated"] is True
+    assert response["NextContinuationToken"] == "tok123"
+    assert response["KeyCount"] == 3
+    assert response["Contents"][0] == {
+        "Key": "nrn:global:x:00031378",
+        "LastModified": "2026-07-08T00:58:32.000Z",
+        "ETag": '"cf5ef4439c681795881e50298eb14099"',
+        "Size": 4081,
+        "StorageClass": "STANDARD",
+    }
+    assert response["Contents"][2] == {"Key": "sparse", "Size": 0}
+    assert [p["Prefix"] for p in response["CommonPrefixes"]] == ["a/b/", "c/"]
+
+
+def test_parse_list_xml_final_page():
+    from ajl.scan import parse_list_xml
+
+    body = b"""<?xml version="1.0"?>
+<ListBucketResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+  <Name>b</Name><KeyCount>0</KeyCount><IsTruncated>false</IsTruncated>
+</ListBucketResult>"""
+    response = parse_list_xml(body)
+    assert response["IsTruncated"] is False
+    assert response["Contents"] == []
+    assert response["CommonPrefixes"] == []
+    assert "NextContinuationToken" not in response

@@ -13,6 +13,7 @@ import argparse
 import os
 import sys
 import threading
+import time
 from concurrent.futures import ThreadPoolExecutor
 
 import boto3
@@ -146,20 +147,31 @@ def strip_metadata(response):
 
 
 class Emitter:
-    """Line-atomic JSONL writer shared across worker threads."""
+    """Line-atomic JSONL writer shared across worker threads.
 
-    def __init__(self, stream=None):
+    Flushes are batched on a short interval rather than per line — at
+    inventory volumes a flush syscall per record dominates CPU while a 100ms
+    delay is imperceptible in a pipe. flush() forces the tail out.
+    """
+
+    def __init__(self, stream=None, flush_interval=0.1):
         self.stream = stream or sys.stdout
         self.lock = threading.Lock()
+        self.flush_interval = flush_interval
+        self._last_flush = 0.0
 
     def emit(self, obj, session_key=None):
         line = obj if isinstance(obj, str) else dumps(obj)
         with self.lock:
             self.stream.write(line + "\n")
-            self.stream.flush()
+            now = time.monotonic()
+            if now - self._last_flush >= self.flush_interval:
+                self.stream.flush()
+                self._last_flush = now
 
     def flush(self):
-        pass
+        with self.lock:
+            self.stream.flush()
 
 
 class Runner:

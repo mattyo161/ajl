@@ -226,6 +226,49 @@ yet imagined (e.g. boundaries sampled from a database's primary keys).
 (`max_attempts=10`) so throughput self-tunes to the bucket index's SlowDown
 responses instead of failing or hammering.
 
+### Fast listing path: raw SigV4 HTTP + C ElementTree (default; `--no-fast`)
+botocore's generic response parser costs ~100ms of GIL-holding CPU per
+1000-key page (shape walking + tz-aware datetime objects that ajl immediately
+stringifies again), capping any number of workers at ~10 pages/s in one
+process. `FastLister` signs ListObjectsV2 GETs with botocore's `S3SigV4Auth`
+(S3 requires the `x-amz-content-sha256` header — plain SigV4Auth 400s), sends
+them over a pooled `requests` session with its own backoff retry, and parses
+with C ElementTree in ~3ms — `LastModified` stays the ISO string S3 sent
+(cosmetic diff: `.000Z` vs `+00:00`). Responses use `encoding-type=url`, keys
+are unquoted on parse (botocore parity). `get_object_tagging` and `meta` still
+delegate to the boto3 client. `--no-fast` is the escape hatch for exotic
+setups; custom `endpoint_url`s get path-style URLs.
+
+### Delimiter under-shatter: a fan of zero is a leaf
+A delimiter task still paginating past `--split-after` pages with **zero**
+prefixes found (e.g. a `:` level applied to a plain-uuid tail) is a de-facto
+leaf serially scanning the keyspace — the same abandon mechanism as over-
+shatter requeues the remainder for the splitter. Before this, a schedule like
+`/ : :` on a colon-less tail listed 231 pages serially with splits never
+engaging.
+
+### Radix extrapolates its alphabet one level deeper
+Range boundaries partition the keyspace wherever they sit, so after
+discovering the branch alphabet (e.g. 16 hex chars) the splitter synthesizes
+`chars²` boundaries (capped by `fan_target=256`) with zero extra probes — a
+right guess (uuids, hashes) fans 256-wide in one split; a wrong one just
+yields some empty ranges at one call each. Probe-per-split cost stays
+~log2(keylen) via binary-search descent of shared stems (a 36-char literal
+prefix costs ~10 probes, not 72).
+
+### Emitter flushes on a 100ms interval, not per line
+A flush syscall per record dominated CPU at 200k+ records (the stream is
+already the kernel pipe buffer's problem); 100ms max staleness is
+imperceptible in a pipe and `flush()` still forces the tail at exit.
+
+### Known floor: the network pipe, not the code
+A 1000-key page is ~300-400KB of XML (S3 sends no compression and offers no
+field selection), so 230k objects ≈ 80MB on the wire — on a ~40Mbit/s
+connection that is an ~18-20s physical floor regardless of workers. Measured:
+the same scan that took 40.5s pre-optimization runs at that floor (~21s) with
+8 workers and ~3.8s of CPU. On fat pipes (EC2/CloudShell) the fast path keeps
+scaling where botocore parsing used to be the ceiling.
+
 ### Future: generalize the queue to parent→child API walks
 The scheduler pattern (queue + bounded pool + child tasks) applies beyond s3:
 ecs cluster → services → tasks, route53 zones → record sets, org accounts →

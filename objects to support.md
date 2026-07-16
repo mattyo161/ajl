@@ -1,0 +1,77 @@
+   3 acm:certificate
+2719 backup:recovery-point
+   1 cloud9:environment
+   8 cloudformation:stack
+   2 cloudtrail:trail
+1377 cloudwatch:alarm
+   4 ec2:client-vpn-endpoint
+   1 ec2:customer-gateway
+ 295 ec2:elastic-ip
+   2 ec2:image
+  11 ec2:instance
+   7 ec2:internet-gateway
+   2 ec2:launch-template
+  10 ec2:natgateway
+   2 ec2:network-acl
+1027 ec2:network-interface
+  28 ec2:route-table
+ 160 ec2:security-group
+   2 ec2:snapshot
+  43 ec2:subnet
+  15 ec2:volume
+   9 ec2:vpc
+   1 ec2:vpc-endpoint
+   1 ec2:vpn-connection
+   1 ec2:vpn-gateway
+5082 ecr:image
+  62 ecr:repository
+   1 ecs:capacity-provider
+  90 ecs:cluster
+ 171 ecs:service
+ 151 ecs:task
+ 659 ecs:task-definition
+   1 eks:access-entry
+   3 eks:addon
+   2 eks:cluster
+   1 eks:nodegroup
+  35 eks:pod
+  87 elasticfilesystem:file-system
+ 170 elasticloadbalancing:listener
+ 170 elasticloadbalancing:listener-rule
+  86 elasticloadbalancing:loadbalancer
+ 247 elasticloadbalancing:targetgroup
+   1 es:domain
+  11 events:rule
+   1 iam:group
+   6 iam:instance-profile
+   4 iam:oidc-provider
+ 135 iam:policy
+ 243 iam:role
+  12 iam:user
+   3 kms:key
+   6 lambda:function
+ 192 logs:log-group
+   4 payments:payment-instrument
+   2 rds:cluster
+   1 rds:cluster-snapshot
+  62 rds:db
+  58 rds:pg
+1998 rds:snapshot
+  60 rds:subgrp
+   2 route53:hostedzone
+  44 s3:bucket
+  10 s3:null
+   1 sagemaker:action
+   1 sagemaker:context
+   4 sagemaker:endpoint-config
+   4 sagemaker:model
+  18 secretsmanager:secret
+   9 servicediscovery:namespace
+  15 servicediscovery:service
+   8 sqlworkbench:connection
+   1 sqlworkbench:notebook
+   1 ssm:document
+1639 ssm:parameter
+  41 ssm:session
+   2 transfer:server
+   3 wafv2:regional

@@ -41,16 +41,22 @@ advanced to the last emitted key) so a re-run scans only what's missing.
 import argparse
 import importlib
 import itertools
+import random
 import re
 import string
 import sys
 import threading
 import time
+import xml.etree.ElementTree as ET
 from collections import deque
 from dataclasses import dataclass, replace
+from urllib.parse import quote, unquote, urlsplit
 
 import jsonlines
 import orjson
+import requests
+from botocore.auth import S3SigV4Auth
+from botocore.awsrequest import AWSRequest
 from botocore.config import Config
 
 from .normalize import tags_to_map
@@ -124,12 +130,15 @@ class RadixSplitter:
 
     name = "radix"
 
-    def __init__(self, max_branches=64, max_depth=48):
+    def __init__(self, max_branches=64, max_depth=48, fan_target=256):
         self.max_branches = max_branches
         self.max_depth = max_depth
+        self.fan_target = fan_target
 
     def split(self, ctx):
-        base = ctx.prefix
+        base = self._descend(ctx)
+        if base is None:
+            return None
         chars = []
         for _ in range(self.max_depth):
             chars = self._branches(ctx, base)
@@ -139,24 +148,64 @@ class RadixSplitter:
             break
         if len(chars) < 2:
             return None
-        boundaries = [base + c for c in chars[1:]]
+        # extrapolate the discovered alphabet one level deeper without any
+        # extra probes: ranges partition the keyspace no matter where the
+        # boundaries sit, so a wrong guess only costs some empty ranges,
+        # while a right one (uuids, hashes) fans len(chars)^2 wide at once
+        suffixes = list(chars)
+        if len(chars) ** 2 <= self.fan_target:
+            suffixes = [c1 + c2 for c1 in chars for c2 in chars]
+        boundaries = [base + s for s in suffixes]
+        boundaries = [
+            b for b in boundaries
+            if b > ctx.last_key and (not ctx.end_at or b < ctx.end_at)
+        ]
+        if not boundaries:
+            return None
         starts = [ctx.last_key] + boundaries
         ends = boundaries + [ctx.end_at]
         return [{"start_after": s, "end_at": e} for s, e in zip(starts, ends)]
+
+    def _descend(self, ctx):
+        """Binary-search the deepest prefix shared by every remaining key.
+
+        Long literal prefixes (nrn:..., date paths, hash stems) would cost two
+        probes per character walked one level at a time; instead probe the
+        first remaining key, then bisect on 'does anything exist past
+        sentinel(first[:depth])' — ~log2(keylen) calls total.
+        """
+        first = self._first_key(ctx, ctx.prefix, ctx.last_key)
+        if first is None:
+            return None
+        low = len(ctx.prefix)  # all keys share ctx.prefix by construction
+        high = len(first)  # nothing longer than the first key can be shared
+        while low < high:
+            mid = (low + high + 1) // 2
+            if self._first_key(ctx, ctx.prefix, sentinel_after(first[:mid])) is None:
+                low = mid  # everything starts with first[:mid]; go deeper
+            else:
+                high = mid - 1
+        return first[:low]
+
+    def _first_key(self, ctx, prefix, start_after):
+        ctx.count_call()
+        response = ctx.client.list_objects_v2(
+            Bucket=ctx.bucket, Prefix=prefix, StartAfter=start_after, MaxKeys=1
+        )
+        contents = response.get("Contents") or []
+        if not contents:
+            return None
+        key = contents[0]["Key"]
+        if ctx.end_at and key > ctx.end_at:
+            return None
+        return key
 
     def _branches(self, ctx, base):
         chars = []
         cursor = ctx.last_key
         while len(chars) < self.max_branches:
-            ctx.count_call()
-            response = ctx.client.list_objects_v2(
-                Bucket=ctx.bucket, Prefix=base, StartAfter=cursor, MaxKeys=1
-            )
-            contents = response.get("Contents") or []
-            if not contents:
-                break
-            key = contents[0]["Key"]
-            if ctx.end_at and key > ctx.end_at:
+            key = self._first_key(ctx, base, cursor)
+            if key is None:
                 break
             if len(key) <= len(base):
                 cursor = key  # a key equal to the base itself; ranges cover it
@@ -214,6 +263,128 @@ def load_splitter(spec):
     return cls()
 
 
+_S3_XMLNS = "{http://s3.amazonaws.com/doc/2006-03-01/}"
+_RETRY_STATUSES = frozenset((429, 500, 502, 503, 504))
+
+
+def parse_list_xml(body):
+    """Parse a ListObjectsV2 response requested with encoding-type=url.
+
+    Returns the boto3 response shape, except LastModified stays the ISO
+    string S3 sent — botocore's tz-aware datetime parsing is ~100ms of GIL
+    per 1000-key page, and ajl serializes it straight back to a string.
+    """
+    root = ET.fromstring(body)
+
+    def text(name, default=""):
+        return root.findtext(f"{_S3_XMLNS}{name}") or default
+
+    contents = []
+    for node in root.iter(f"{_S3_XMLNS}Contents"):
+        item = {"Key": unquote(node.findtext(f"{_S3_XMLNS}Key") or "")}
+        last_modified = node.findtext(f"{_S3_XMLNS}LastModified")
+        if last_modified:
+            item["LastModified"] = last_modified
+        etag = node.findtext(f"{_S3_XMLNS}ETag")
+        if etag:
+            item["ETag"] = etag
+        size = node.findtext(f"{_S3_XMLNS}Size")
+        if size is not None:
+            item["Size"] = int(size)
+        storage_class = node.findtext(f"{_S3_XMLNS}StorageClass")
+        if storage_class:
+            item["StorageClass"] = storage_class
+        contents.append(item)
+    prefixes = [
+        {"Prefix": unquote(node.findtext(f"{_S3_XMLNS}Prefix") or "")}
+        for node in root.iter(f"{_S3_XMLNS}CommonPrefixes")
+    ]
+    response = {
+        "Name": text("Name"),
+        "KeyCount": int(text("KeyCount", "0") or 0),
+        "IsTruncated": text("IsTruncated") == "true",
+        "Contents": contents,
+        "CommonPrefixes": prefixes,
+    }
+    token = text("NextContinuationToken")
+    if token:
+        response["NextContinuationToken"] = token
+    return response
+
+
+class FastLister:
+    """ListObjectsV2 over raw SigV4-signed HTTP with C ElementTree parsing.
+
+    Exists because botocore's generic response parser costs ~100ms of
+    GIL-holding CPU per 1000-key page, which caps a whole worker pool at
+    ~10 pages/s regardless of concurrency. This path parses a page in ~3ms.
+    get_object_tagging (and anything else) stays on the boto3 client.
+    """
+
+    def __init__(self, boto_client, session, pool_size=32, max_attempts=10):
+        self.credentials = session.get_credentials()
+        self.region = boto_client.meta.region_name or "us-east-1"
+        self.endpoint_url = boto_client.meta.endpoint_url
+        self.max_attempts = max_attempts
+        self.boto_client = boto_client
+        self.meta = boto_client.meta
+        self.http = requests.Session()
+        adapter = requests.adapters.HTTPAdapter(
+            pool_connections=pool_size, pool_maxsize=pool_size
+        )
+        self.http.mount("https://", adapter)
+        self.http.mount("http://", adapter)
+
+    def get_object_tagging(self, **kwargs):
+        return self.boto_client.get_object_tagging(**kwargs)
+
+    def _base_url(self, bucket):
+        host = urlsplit(self.endpoint_url).hostname or ""
+        if host.endswith("amazonaws.com") and "." not in bucket:
+            return f"https://{bucket}.s3.{self.region}.amazonaws.com/"
+        # path-style for custom endpoints and dotted bucket names
+        return f"{self.endpoint_url.rstrip('/')}/{bucket}/"
+
+    def list_objects_v2(self, Bucket, Prefix=None, Delimiter=None, StartAfter=None,
+                        ContinuationToken=None, MaxKeys=1000, **_):
+        params = [("list-type", "2"), ("encoding-type", "url"),
+                  ("max-keys", str(MaxKeys))]
+        if ContinuationToken:
+            params.append(("continuation-token", ContinuationToken))
+        if Delimiter:
+            params.append(("delimiter", Delimiter))
+        if Prefix:
+            params.append(("prefix", Prefix))
+        if StartAfter:
+            params.append(("start-after", StartAfter))
+        params.sort()  # canonical order: sign and send the identical string
+        query = "&".join(f"{k}={quote(v, safe='')}" for k, v in params)
+        url = f"{self._base_url(Bucket)}?{query}"
+        last_error = None
+        for attempt in range(self.max_attempts):
+            if attempt:
+                time.sleep(min(0.05 * 2**attempt, 5) * (0.5 + random.random()))
+            request = AWSRequest(method="GET", url=url)
+            S3SigV4Auth(
+                self.credentials.get_frozen_credentials(), "s3", self.region
+            ).add_auth(request)
+            try:
+                response = self.http.get(
+                    url, headers=dict(request.headers), timeout=(10, 120)
+                )
+            except requests.RequestException as exc:
+                last_error = exc
+                continue
+            if response.status_code == 200:
+                return parse_list_xml(response.content)
+            last_error = RuntimeError(
+                f"S3 returned {response.status_code}: {response.text[:300]}"
+            )
+            if response.status_code not in _RETRY_STATUSES:
+                break
+        raise last_error
+
+
 class Scanner:
     """Bounded worker pool draining a queue of listing tasks."""
 
@@ -234,6 +405,7 @@ class Scanner:
         workers=8,
         verbose=False,
         progress=False,
+        fast=True,
         name="scan",
     ):
         self.runner = runner
@@ -251,6 +423,7 @@ class Scanner:
         self.workers = max(1, workers)
         self.verbose = verbose
         self.progress = progress
+        self.fast = fast
         self.name = name
         self.queue = deque()
         self.cond = threading.Condition()
@@ -259,7 +432,8 @@ class Scanner:
         self.emitted = 0
         self.stats = {
             "tasks": 0, "calls": 0, "objects": 0, "prefixes": 0,
-            "splits": 0, "abandons": 0, "failures": 0, "tag_errors": 0,
+            "emitted_prefixes": 0, "splits": 0, "abandons": 0,
+            "failures": 0, "tag_errors": 0,
         }
         self._clients = {}
         self._client_lock = threading.Lock()
@@ -300,7 +474,11 @@ class Scanner:
                         retries={"mode": "adaptive", "max_attempts": 10},
                         max_pool_connections=max(10, self.workers),
                     )
-                    client = self.runner.session(session_key).client("s3", config=config)
+                    session = self.runner.session(session_key)
+                    client = session.client("s3", config=config)
+                    if self.fast:
+                        client = FastLister(client, session,
+                                            pool_size=max(10, self.workers))
                 self._clients[session_key] = client
             return client
 
@@ -372,13 +550,18 @@ class Scanner:
                 if not response.get("IsTruncated"):
                     return
                 token = response.get("NextContinuationToken")
-                if delimiter and self.recurse and fan > self.max_fan:
-                    # over-shattered: everything <= progress is handled; hand
-                    # the rest of the keyspace to the splitter path
+                if delimiter and self.recurse and (
+                    fan > self.max_fan
+                    or (fan == 0 and pages >= self.split_after)
+                ):
+                    # over-shattered (fan too big) or under-shattered (the
+                    # delimiter never appears, so this is a de-facto leaf
+                    # paginating serially): everything <= progress is handled;
+                    # hand the rest of the keyspace to the splitter path
                     self._inc("abandons")
                     if self.verbose:
                         print(
-                            f"ajl: scan fan {fan} > {self.max_fan} under "
+                            f"ajl: scan fan {fan} after {pages} pages under "
                             f"s3://{task.bucket}/{task.prefix}; switching to ranges",
                             file=sys.stderr,
                         )
@@ -428,17 +611,18 @@ class Scanner:
             )
         return True
 
-    def _count_emit(self):
+    def _count_emit(self, stat):
         with self.cond:
             if self.max_items and self.emitted >= self.max_items:
                 self.stopped = True
                 self.cond.notify_all()
                 return False
             self.emitted += 1
+            self.stats[stat] += 1
             return True
 
     def _emit_object(self, item, task, client, session_key):
-        if not self._count_emit():
+        if not self._count_emit("objects"):
             return False
         key = item["Key"]
         record = {"Type": "s3:object", "Uri": f"s3://{task.bucket}/{key}"}
@@ -447,7 +631,6 @@ class Scanner:
         record["Bucket"] = task.bucket
         record.update(item)
         self.emitter.emit(record, session_key)
-        self._inc("objects")
         return True
 
     def _object_tags(self, client, bucket, key):
@@ -463,7 +646,7 @@ class Scanner:
         return tags_to_map(response.get("TagSet"))
 
     def _emit_prefix(self, prefix, task, delimiter, session_key):
-        if not self._count_emit():
+        if not self._count_emit("emitted_prefixes"):
             return False
         self.emitter.emit(
             {
@@ -600,6 +783,9 @@ def build_scan_parser():
     parser.add_argument("--no-progress", action="store_true", default=False,
                         help="disable the live progress line (auto-disabled when "
                         "stderr is not a terminal)")
+    parser.add_argument("--no-fast", action="store_true", default=False,
+                        help="list via boto3 instead of the raw signed HTTP fast "
+                        "path (slower; escape hatch for exotic setups)")
     parser.add_argument("--failed-out", default=None, metavar="FILE",
                         help="write failed tasks as JSONL seeds for re-running "
                         "via --params-json")
@@ -633,6 +819,9 @@ def build_list_parser():
     parser.add_argument("--no-progress", action="store_true", default=False,
                         help="disable the live progress line (auto-disabled when "
                         "stderr is not a terminal)")
+    parser.add_argument("--no-fast", action="store_true", default=False,
+                        help="list via boto3 instead of the raw signed HTTP fast "
+                        "path (slower; escape hatch for exotic setups)")
     parser.add_argument("--failed-out", default=None, metavar="FILE",
                         help="write failed listings as JSONL seeds")
     return parser
@@ -698,6 +887,7 @@ def run_scan(runner, emitter, options, tokens):
         workers=options.workers,
         verbose=options.verbose,
         progress=_show_progress(scan_options),
+        fast=not scan_options.no_fast,
         name="scan",
     )
     started = time.time()
@@ -732,6 +922,7 @@ def run_list(runner, emitter, options, tokens):
         workers=options.workers,
         verbose=options.verbose,
         progress=_show_progress(list_options),
+        fast=not list_options.no_fast,
         name="list",
     )
     started = time.time()
