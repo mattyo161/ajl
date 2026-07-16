@@ -37,6 +37,9 @@ credentials; the test suite does not.
   `output.resources` configs; module docstring documents the config schema.
 - `src/ajl/pagination.py` — botocore paginators first, marker-loop fallback
   from model `input.markers`/`output.markers`.
+- `src/ajl/scan.py` — `ajl s3 scan`: queue/worker-pool bucket inventory with
+  delimiter fan-out and pluggable range splitters (radix leapfrog default);
+  module docstring documents the task/splitter contracts.
 - `src/ajl/tags.py` — `--fetch-tags` batching (100 ARNs/call) via the
   Resource Groups Tagging API, background threads, submission-order emit.
 - `src/ajl/modelconfig.py` — loads packaged models; `AJL_MODELS_DIR` env var

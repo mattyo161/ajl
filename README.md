@@ -60,7 +60,40 @@ ajl s3 list-buckets --fetch-tags
 ajl s3 list-objects-v2 --bucket my-bucket --delimiter / \
   | jq -c 'select(.Type == "s3:prefix")' \
   | ajl s3 list-objects-v2 --params-json - --workers 16
+
+# post-shaping jq on any command (empty output drops, strings print raw)
+ajl ec2 describe-instances --jq 'select(.State.Name == "running") | .Uri // .Arn'
+
+# stamp records with Profile/Region/Account so later stages reuse the session
+ajl s3 list-buckets --profile prod --stamp-session
+
+# inventory a whole bucket: delimiter fan-out + adaptive range splitting
+ajl s3 scan s3://my-bucket --delimiters '/ / /' --workers 64 \
+  --failed-out failed.jsonl
+ajl s3 scan --params-json failed.jsonl --workers 64   # re-run only the misses
+
+# batch the stream into delete-objects calls, 1000 keys per request
+ajl s3 scan s3://my-bucket/tmp/ \
+  | parallel --pipe -N1000 "jq -sc '{Delete: {Objects: map({Key: .Id}), Quiet: true}}'" \
+  | ajl s3 delete-objects --bucket my-bucket --params-json -
 ```
+
+### `ajl s3 scan`
+
+`scan` inventories buckets orders of magnitude faster than `list-objects-v2
+--recursive`-style listings by turning the keyspace into parallel work: one
+bounded worker pool (`--workers`) drains a queue of listings, `CommonPrefixes`
+found via the `--delimiters` schedule go back into the queue, and "hot"
+prefixes that keep paginating past `--split-after` pages are carved into
+parallel key ranges by a splitter. The default `radix` splitter discovers the
+key alphabet actually in use with StartAfter leapfrog probes (it descends long
+shared hash prefixes instead of scanning them serially); fixed splitters
+(`--split hex2|hex3|alnum2|b64-2`) cut at precomputed boundaries; and
+`--split-class package.module:ClassName` drops in your own strategy for
+tomorrow's pathological bucket. A delimiter level that over-shatters (more
+than `--max-fan` child prefixes) automatically falls back to range splitting.
+Failed listings stream to `--failed-out` as re-runnable `--params-json` seeds,
+and every record carries a `Uri` (`s3://bucket/key`) so streams compose.
 
 Records emitted by `ajl` can be piped straight back into `--params-json -`:
 params that the target operation does not accept (like `Type`, `Arn`, `Tags`)

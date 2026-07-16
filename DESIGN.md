@@ -144,6 +144,69 @@ Python ≥ 3.10. `orjson` is used for serialization speed (with `default=str`
 so datetimes from boto3 never crash a stream). Dev tools (`aws`, `uv`, `jq`,
 `yq`) are pinned via `mise.toml`.
 
+## CLI contract (continued)
+
+### Global `--jq` post-filter, applied as an emitter wrapper
+`--jq PROGRAM` runs on every record after shaping (and after `--stamp-session`
+stamping, before `--fetch-tags` buffering, so filtered-out records never cost
+a tagging call). Empty output drops the record, multiple outputs emit multiple
+lines, string outputs print raw (jq `-r` style). The program gets no `$vars` —
+records that need account/region context should be stamped first, which puts
+those values in the record itself.
+
+### `--stamp-session`: records carry their credentials
+Opt-in stamping adds `Profile`/`Region`/`Account` to every record, and
+`--params-json` accepts the PascalCase forms as session routing fields
+(popped, never sent to the API). This closes the multi-account loop: a stream
+mixing sessions can be piped back in and each line routes to the session that
+produced it.
+
+### `Uri` on s3 records
+All curated s3 shapes (and `ajl s3 scan`) emit `Uri: s3://bucket/key` right
+after `Tags`, via a declarative `uri_format` template (same variables as
+`arn_format`). URIs are the composable s3 addressing scheme: seeds for
+`scan`, input to other s3 tooling, and unambiguous across buckets.
+
+## s3 scan
+
+### Fan-out is a scheduler, not a pipe depth
+`ajl s3 scan` replaces N-deep `--params-json` pipelines for bucket inventory:
+one bounded worker pool drains a queue of listing tasks, discovered prefixes
+re-enter the queue with the remaining `--delimiters` schedule, and results
+stream as they arrive. One pool means no per-stage idle workers, bounded
+memory, and end-of-run completeness accounting (stats on stderr; failed tasks
+stream to `--failed-out` as re-runnable seeds with `StartAfter` advanced to
+the last emitted key). Tasks are `(bucket, prefix, start_after, end_at)`
+slices with exclusive start / inclusive end, so adjacent slices partition the
+keyspace with no gaps and no dups — the correctness invariant every splitter
+must preserve.
+
+### Adaptive splitting: radix leapfrog default, fixed ranges opt-in, classes drop-in
+A task that keeps paginating past `--split-after` pages asks its splitter to
+carve the remaining range into parallel slices; a delimiter fan exceeding
+`--max-fan` abandons the delimiter and requeues the remainder for the same
+splitter path (50k prefixes × 10 objects costs 50k calls as a fan-out but
+~520 as ranges). The default `radix` splitter discovers the live key alphabet
+with `StartAfter` leapfrog probes (`MaxKeys=1`, then jump past the branch via
+a max-code-point sentinel; S3 keys cap at 1024 bytes) and descends
+single-branch levels, so a 15-character shared hash prefix costs ~30 probes
+instead of hours of serial pages — no assumption that keys are hex or base64.
+Fixed splitters (`hex2`, `hex3`, `alnum2`, `b64-2`) exist for keyspaces where
+the alphabet is known; `--split-class package.module:ClassName` loads any
+object with `split(ctx) -> [{"start_after", "end_at"}] | None` for shapes not
+yet imagined (e.g. boundaries sampled from a database's primary keys).
+
+### s3 clients use adaptive retries
+`scan` builds its s3 clients with botocore's adaptive retry mode
+(`max_attempts=10`) so throughput self-tunes to the bucket index's SlowDown
+responses instead of failing or hammering.
+
+### Future: generalize the queue to parent→child API walks
+The scheduler pattern (queue + bounded pool + child tasks) applies beyond s3:
+ecs cluster → services → tasks, route53 zones → record sets, org accounts →
+anything. When a second walker shows up, extract the Scanner core rather than
+cloning it.
+
 ### Version derived from git tags (setuptools-scm)
 The package version comes from git tags (`v0.2.0` → `0.2.0`) via
 setuptools-scm instead of a hand-bumped field — the version previously lived
