@@ -107,6 +107,66 @@ SQS_LIST_QUEUES_JQ = """\
  Tags: {}, QueueUrl: $url}"""
 
 CONFIGS = {
+    "acm": {
+        "resources": {
+            "ListCertificates": [r(["CertificateSummaryList"], "acm:certificate", name="DomainName", arn="CertificateArn")],
+        },
+    },
+    "cloud9": {
+        "resources": {
+            "ListEnvironments": [r(["environmentIds"], "cloud9:environment", "environmentId", arn_format="arn:{partition}:cloud9:{region}:{account}:environment:{environmentId}", scalar_as="environmentId")],
+            "DescribeEnvironments": [r(["environments"], "cloud9:environment", "id", name="name", arn="arn")],
+        },
+    },
+    "cloudformation": {
+        "resources": {
+            "ListStacks": [r(["StackSummaries"], "cloudformation:stack", "StackName", name="StackName", arn="StackId")],
+            "DescribeStacks": [r(["Stacks"], "cloudformation:stack", "StackName", name="StackName", arn="StackId", tags="Tags")],
+        },
+    },
+    "cloudtrail": {
+        "resources": {
+            "ListTrails": [r(["Trails"], "cloudtrail:trail", "Name", name="Name", arn="TrailARN")],
+            "DescribeTrails": [r(["trailList"], "cloudtrail:trail", "Name", name="Name", arn="TrailARN")],
+        },
+    },
+    "cloudwatch": {
+        "resources": {
+            "DescribeAlarms": [
+                r(["MetricAlarms"], "cloudwatch:alarm", "AlarmName", name="AlarmName", arn="AlarmArn"),
+                r(["CompositeAlarms"], "cloudwatch:alarm", "AlarmName", name="AlarmName", arn="AlarmArn"),
+            ],
+        },
+    },
+    "events": {
+        "resources": {
+            "ListRules": [r(["Rules"], "events:rule", "Name", name="Name", arn="Arn")],
+        },
+    },
+    "logs": {
+        "resources": {
+            "DescribeLogGroups": [r(["logGroups"], "logs:log-group", "logGroupName", name="logGroupName", arn_format="arn:{partition}:logs:{region}:{account}:log-group:{logGroupName}")],
+        },
+    },
+    "sagemaker": {
+        "resources": {
+            "ListModels": [r(["Models"], "sagemaker:model", "ModelName", name="ModelName", arn="ModelArn")],
+            "ListEndpointConfigs": [r(["EndpointConfigs"], "sagemaker:endpoint-config", "EndpointConfigName", name="EndpointConfigName", arn="EndpointConfigArn")],
+            "ListActions": [r(["ActionSummaries"], "sagemaker:action", "ActionName", name="ActionName", arn="ActionArn")],
+            "ListContexts": [r(["ContextSummaries"], "sagemaker:context", "ContextName", name="ContextName", arn="ContextArn")],
+        },
+    },
+    "servicediscovery": {
+        "resources": {
+            "ListNamespaces": [r(["Namespaces"], "servicediscovery:namespace", "Id", name="Name", arn="Arn")],
+            "ListServices": [r(["Services"], "servicediscovery:service", "Id", name="Name", arn="Arn")],
+        },
+    },
+    "transfer": {
+        "resources": {
+            "ListServers": [r(["Servers"], "transfer:server", "ServerId", name="ServerId", arn="Arn")],
+        },
+    },
     "ec2": {
         "jq": {
             "DescribeInstances": EC2_DESCRIBE_INSTANCES_JQ,
@@ -133,6 +193,7 @@ CONFIGS = {
             "DescribeVpnConnections": [r(["VpnConnections"], "ec2:vpn-connection", "VpnConnectionId", arn_format=EC2_ARN + ":{account}:vpn-connection/{VpnConnectionId}", tags="Tags")],
             "DescribeCustomerGateways": [r(["CustomerGateways"], "ec2:customer-gateway", "CustomerGatewayId", arn_format=EC2_ARN + ":{account}:customer-gateway/{CustomerGatewayId}", tags="Tags")],
             "DescribeTransitGateways": [r(["TransitGateways"], "ec2:transit-gateway", "TransitGatewayId", arn="TransitGatewayArn", tags="Tags")],
+            "DescribeClientVpnEndpoints": [r(["ClientVpnEndpoints"], "ec2:client-vpn-endpoint", "ClientVpnEndpointId", arn_format=EC2_ARN + ":{account}:client-vpn-endpoint/{ClientVpnEndpointId}", tags="Tags")],
         },
     },
     "lambda": {
@@ -149,6 +210,7 @@ CONFIGS = {
             "ListGroups": [r(["Groups"], "iam:group", "GroupId", name="GroupName", arn="Arn")],
             "ListPolicies": [r(["Policies"], "iam:policy", "PolicyId", name="PolicyName", arn="Arn")],
             "ListInstanceProfiles": [r(["InstanceProfiles"], "iam:instance-profile", "InstanceProfileId", name="InstanceProfileName", arn="Arn")],
+            "ListOpenIDConnectProviders": [r(["OpenIDConnectProviderList"], "iam:oidc-provider", arn="Arn")],
         },
     },
     "route53": {
@@ -169,6 +231,8 @@ CONFIGS = {
         "resources": {
             "DescribeLoadBalancers": [r(["LoadBalancers"], "elasticloadbalancing:loadbalancer", "LoadBalancerName", name="LoadBalancerName", arn="LoadBalancerArn")],
             "DescribeTargetGroups": [r(["TargetGroups"], "elasticloadbalancing:targetgroup", "TargetGroupName", name="TargetGroupName", arn="TargetGroupArn")],
+            "DescribeListeners": [r(["Listeners"], "elasticloadbalancing:listener", arn="ListenerArn")],
+            "DescribeRules": [r(["Rules"], "elasticloadbalancing:listener-rule", arn="RuleArn")],
         },
     },
     "ecs": {
@@ -178,6 +242,9 @@ CONFIGS = {
             "ListServices": [r(["serviceArns"], "ecs:service", arn="serviceArn", scalar_as="serviceArn")],
             "DescribeServices": [r(["services"], "ecs:service", "serviceName", name="serviceName", arn="serviceArn", tags="tags")],
             "ListTaskDefinitions": [r(["taskDefinitionArns"], "ecs:task-definition", arn="taskDefinitionArn", scalar_as="taskDefinitionArn")],
+            "DescribeCapacityProviders": [r(["capacityProviders"], "ecs:capacity-provider", "name", name="name", arn="capacityProviderArn", tags="tags")],
+            "ListTasks": [r(["taskArns"], "ecs:task", arn="taskArn", scalar_as="taskArn")],
+            "DescribeTasks": [r(["tasks"], "ecs:task", arn="taskArn", tags="tags")],
         },
     },
     "athena": {
@@ -190,6 +257,8 @@ CONFIGS = {
             "ListBackupVaults": [r(["BackupVaultList"], "backup:backup-vault", "BackupVaultName", name="BackupVaultName", arn="BackupVaultArn")],
             "ListBackupPlans": [r(["BackupPlansList"], "backup:backup-plan", "BackupPlanId", name="BackupPlanName", arn="BackupPlanArn")],
             "ListProtectedResources": [r(["Results"], "backup:protected-resource", name="ResourceName", arn="ResourceArn")],
+            "ListRecoveryPointsByBackupVault": [r(["RecoveryPoints"], "backup:recovery-point", arn="RecoveryPointArn")],
+            "ListRecoveryPointsByResource": [r(["RecoveryPoints"], "backup:recovery-point", arn="RecoveryPointArn")],
         },
     },
     "cloudfront": {
@@ -219,6 +288,11 @@ CONFIGS = {
         "resources": {
             "ListClusters": [r(["clusters"], "eks:cluster", "name", name="name", arn_format="arn:{partition}:eks:{region}:{account}:cluster/{name}", scalar_as="name")],
             "DescribeCluster": [r(["cluster"], "eks:cluster", "name", name="name", arn="arn", tags="tags")],
+            "ListAccessEntries": [r(["accessEntries"], "eks:access-entry", arn="accessEntryArn", scalar_as="accessEntryArn")],
+            "ListAddons": [r(["addons"], "eks:addon", "addonName", name="addonName", scalar_as="addonName")],
+            "DescribeAddon": [r(["addon"], "eks:addon", "addonName", name="addonName", arn="addonArn", tags="tags")],
+            "ListNodegroups": [r(["nodegroups"], "eks:nodegroup", "nodegroupName", name="nodegroupName", scalar_as="nodegroupName")],
+            "DescribeNodegroup": [r(["nodegroup"], "eks:nodegroup", "nodegroupName", name="nodegroupName", arn="nodegroupArn", tags="tags")],
         },
     },
     "kms": {
@@ -308,6 +382,7 @@ CONFIGS = {
             "ListDocuments": [r(["DocumentIdentifiers"], "ssm:document", "Name", name="Name", arn_format="arn:{partition}:ssm:{region}:{account}:document/{Name}", tags="Tags")],
             "DescribeMaintenanceWindows": [r(["WindowIdentities"], "ssm:maintenancewindow", "WindowId", name="Name", arn_format="arn:{partition}:ssm:{region}:{account}:maintenancewindow/{WindowId}")],
             "ListAssociations": [r(["Associations"], "ssm:association", "AssociationId", name="AssociationName", arn_format="arn:{partition}:ssm:{region}:{account}:association/{AssociationId}")],
+            "DescribeSessions": [r(["Sessions"], "ssm:session", "SessionId", arn_format="arn:{partition}:ssm:{region}:{account}:session/{SessionId}")],
         },
     },
     "dynamodb": {

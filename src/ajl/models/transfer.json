@@ -1,0 +1,3138 @@
+{
+  "metadata": {
+    "apiVersion": "2018-11-05",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "transfer",
+    "jsonVersion": "1.1",
+    "protocol": "json",
+    "protocols": [
+      "json"
+    ],
+    "serviceAbbreviation": "AWS Transfer",
+    "serviceFullName": "AWS Transfer Family",
+    "serviceId": "Transfer",
+    "signatureVersion": "v4",
+    "signingName": "transfer",
+    "targetPrefix": "TransferService",
+    "uid": "transfer-2018-11-05"
+  },
+  "name": "transfer",
+  "operations": {
+    "CreateAccess": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ExternalId": {
+            "name": "ExternalId",
+            "shape_name": "ExternalId",
+            "type": "string"
+          },
+          "HomeDirectory": {
+            "name": "HomeDirectory",
+            "shape_name": "HomeDirectory",
+            "type": "string"
+          },
+          "HomeDirectoryMappings": {
+            "name": "HomeDirectoryMappings",
+            "shape_name": "HomeDirectoryMappings",
+            "type": "list"
+          },
+          "HomeDirectoryType": {
+            "name": "HomeDirectoryType",
+            "shape_name": "HomeDirectoryType",
+            "type": "string"
+          },
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "Policy",
+            "type": "string"
+          },
+          "PosixProfile": {
+            "name": "PosixProfile",
+            "shape_name": "PosixProfile",
+            "type": "structure"
+          },
+          "Role": {
+            "name": "Role",
+            "shape_name": "Role",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Role",
+          "ServerId",
+          "ExternalId"
+        ]
+      },
+      "name": "CreateAccess",
+      "output": {
+        "markers": null,
+        "members": {
+          "ExternalId": {
+            "name": "ExternalId",
+            "shape_name": "ExternalId",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "ExternalId"
+        ]
+      }
+    },
+    "CreateAgreement": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AccessRole": {
+            "name": "AccessRole",
+            "shape_name": "Role",
+            "type": "string"
+          },
+          "BaseDirectory": {
+            "name": "BaseDirectory",
+            "shape_name": "HomeDirectory",
+            "type": "string"
+          },
+          "CustomDirectories": {
+            "name": "CustomDirectories",
+            "shape_name": "CustomDirectoriesType",
+            "type": "structure"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "Description",
+            "type": "string"
+          },
+          "EnforceMessageSigning": {
+            "name": "EnforceMessageSigning",
+            "shape_name": "EnforceMessageSigningType",
+            "type": "string"
+          },
+          "LocalProfileId": {
+            "name": "LocalProfileId",
+            "shape_name": "ProfileId",
+            "type": "string"
+          },
+          "PartnerProfileId": {
+            "name": "PartnerProfileId",
+            "shape_name": "ProfileId",
+            "type": "string"
+          },
+          "PreserveFilename": {
+            "name": "PreserveFilename",
+            "shape_name": "PreserveFilenameType",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "AgreementStatusType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ServerId",
+          "LocalProfileId",
+          "PartnerProfileId",
+          "AccessRole"
+        ]
+      },
+      "name": "CreateAgreement",
+      "output": {
+        "markers": null,
+        "members": {
+          "AgreementId": {
+            "name": "AgreementId",
+            "shape_name": "AgreementId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AgreementId"
+        ]
+      }
+    },
+    "CreateConnector": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AccessRole": {
+            "name": "AccessRole",
+            "shape_name": "Role",
+            "type": "string"
+          },
+          "As2Config": {
+            "name": "As2Config",
+            "shape_name": "As2ConnectorConfig",
+            "type": "structure"
+          },
+          "LoggingRole": {
+            "name": "LoggingRole",
+            "shape_name": "Role",
+            "type": "string"
+          },
+          "SecurityPolicyName": {
+            "name": "SecurityPolicyName",
+            "shape_name": "ConnectorSecurityPolicyName",
+            "type": "string"
+          },
+          "SftpConfig": {
+            "name": "SftpConfig",
+            "shape_name": "SftpConnectorConfig",
+            "type": "structure"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "Url": {
+            "name": "Url",
+            "shape_name": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Url",
+          "AccessRole"
+        ]
+      },
+      "name": "CreateConnector",
+      "output": {
+        "markers": null,
+        "members": {
+          "ConnectorId": {
+            "name": "ConnectorId",
+            "shape_name": "ConnectorId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ConnectorId"
+        ]
+      }
+    },
+    "CreateProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "As2Id": {
+            "name": "As2Id",
+            "shape_name": "As2Id",
+            "type": "string"
+          },
+          "CertificateIds": {
+            "name": "CertificateIds",
+            "shape_name": "CertificateIds",
+            "type": "list"
+          },
+          "ProfileType": {
+            "name": "ProfileType",
+            "shape_name": "ProfileType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          }
+        },
+        "required": [
+          "As2Id",
+          "ProfileType"
+        ]
+      },
+      "name": "CreateProfile",
+      "output": {
+        "markers": null,
+        "members": {
+          "ProfileId": {
+            "name": "ProfileId",
+            "shape_name": "ProfileId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ProfileId"
+        ]
+      }
+    },
+    "CreateServer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Certificate": {
+            "name": "Certificate",
+            "shape_name": "Certificate",
+            "type": "string"
+          },
+          "Domain": {
+            "name": "Domain",
+            "shape_name": "Domain",
+            "type": "string"
+          },
+          "EndpointDetails": {
+            "name": "EndpointDetails",
+            "shape_name": "EndpointDetails",
+            "type": "structure"
+          },
+          "EndpointType": {
+            "name": "EndpointType",
+            "shape_name": "EndpointType",
+            "type": "string"
+          },
+          "HostKey": {
+            "name": "HostKey",
+            "shape_name": "HostKey",
+            "type": "string"
+          },
+          "IdentityProviderDetails": {
+            "name": "IdentityProviderDetails",
+            "shape_name": "IdentityProviderDetails",
+            "type": "structure"
+          },
+          "IdentityProviderType": {
+            "name": "IdentityProviderType",
+            "shape_name": "IdentityProviderType",
+            "type": "string"
+          },
+          "IpAddressType": {
+            "name": "IpAddressType",
+            "shape_name": "IpAddressType",
+            "type": "string"
+          },
+          "LoggingRole": {
+            "name": "LoggingRole",
+            "shape_name": "NullableRole",
+            "type": "string"
+          },
+          "PostAuthenticationLoginBanner": {
+            "name": "PostAuthenticationLoginBanner",
+            "shape_name": "PostAuthenticationLoginBanner",
+            "type": "string"
+          },
+          "PreAuthenticationLoginBanner": {
+            "name": "PreAuthenticationLoginBanner",
+            "shape_name": "PreAuthenticationLoginBanner",
+            "type": "string"
+          },
+          "ProtocolDetails": {
+            "name": "ProtocolDetails",
+            "shape_name": "ProtocolDetails",
+            "type": "structure"
+          },
+          "Protocols": {
+            "name": "Protocols",
+            "shape_name": "Protocols",
+            "type": "list"
+          },
+          "S3StorageOptions": {
+            "name": "S3StorageOptions",
+            "shape_name": "S3StorageOptions",
+            "type": "structure"
+          },
+          "SecurityPolicyName": {
+            "name": "SecurityPolicyName",
+            "shape_name": "SecurityPolicyName",
+            "type": "string"
+          },
+          "StructuredLogDestinations": {
+            "name": "StructuredLogDestinations",
+            "shape_name": "StructuredLogDestinations",
+            "type": "list"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "WorkflowDetails": {
+            "name": "WorkflowDetails",
+            "shape_name": "WorkflowDetails",
+            "type": "structure"
+          }
+        },
+        "required": null
+      },
+      "name": "CreateServer",
+      "output": {
+        "markers": null,
+        "members": {
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId"
+        ]
+      }
+    },
+    "CreateUser": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HomeDirectory": {
+            "name": "HomeDirectory",
+            "shape_name": "HomeDirectory",
+            "type": "string"
+          },
+          "HomeDirectoryMappings": {
+            "name": "HomeDirectoryMappings",
+            "shape_name": "HomeDirectoryMappings",
+            "type": "list"
+          },
+          "HomeDirectoryType": {
+            "name": "HomeDirectoryType",
+            "shape_name": "HomeDirectoryType",
+            "type": "string"
+          },
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "Policy",
+            "type": "string"
+          },
+          "PosixProfile": {
+            "name": "PosixProfile",
+            "shape_name": "PosixProfile",
+            "type": "structure"
+          },
+          "Role": {
+            "name": "Role",
+            "shape_name": "Role",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          },
+          "SshPublicKeyBody": {
+            "name": "SshPublicKeyBody",
+            "shape_name": "SshPublicKeyBody",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "UserName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Role",
+          "ServerId",
+          "UserName"
+        ]
+      },
+      "name": "CreateUser",
+      "output": {
+        "markers": null,
+        "members": {
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "UserName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "UserName"
+        ]
+      }
+    },
+    "CreateWebApp": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AccessEndpoint": {
+            "name": "AccessEndpoint",
+            "shape_name": "WebAppAccessEndpoint",
+            "type": "string"
+          },
+          "IdentityProviderDetails": {
+            "name": "IdentityProviderDetails",
+            "shape_name": "WebAppIdentityProviderDetails",
+            "type": "structure"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "WebAppEndpointPolicy": {
+            "name": "WebAppEndpointPolicy",
+            "shape_name": "WebAppEndpointPolicy",
+            "type": "string"
+          },
+          "WebAppUnits": {
+            "name": "WebAppUnits",
+            "shape_name": "WebAppUnits",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "IdentityProviderDetails"
+        ]
+      },
+      "name": "CreateWebApp",
+      "output": {
+        "markers": null,
+        "members": {
+          "WebAppId": {
+            "name": "WebAppId",
+            "shape_name": "WebAppId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WebAppId"
+        ]
+      }
+    },
+    "CreateWorkflow": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "WorkflowDescription",
+            "type": "string"
+          },
+          "OnExceptionSteps": {
+            "name": "OnExceptionSteps",
+            "shape_name": "WorkflowSteps",
+            "type": "list"
+          },
+          "Steps": {
+            "name": "Steps",
+            "shape_name": "WorkflowSteps",
+            "type": "list"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Steps"
+        ]
+      },
+      "name": "CreateWorkflow",
+      "output": {
+        "markers": null,
+        "members": {
+          "WorkflowId": {
+            "name": "WorkflowId",
+            "shape_name": "WorkflowId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkflowId"
+        ]
+      }
+    },
+    "DeleteAccess": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ExternalId": {
+            "name": "ExternalId",
+            "shape_name": "ExternalId",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "ExternalId"
+        ]
+      },
+      "name": "DeleteAccess",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteAgreement": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AgreementId": {
+            "name": "AgreementId",
+            "shape_name": "AgreementId",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AgreementId",
+          "ServerId"
+        ]
+      },
+      "name": "DeleteAgreement",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CertificateId": {
+            "name": "CertificateId",
+            "shape_name": "CertificateId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CertificateId"
+        ]
+      },
+      "name": "DeleteCertificate",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteConnector": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConnectorId": {
+            "name": "ConnectorId",
+            "shape_name": "ConnectorId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ConnectorId"
+        ]
+      },
+      "name": "DeleteConnector",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteHostKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HostKeyId": {
+            "name": "HostKeyId",
+            "shape_name": "HostKeyId",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "HostKeyId"
+        ]
+      },
+      "name": "DeleteHostKey",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ProfileId": {
+            "name": "ProfileId",
+            "shape_name": "ProfileId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ProfileId"
+        ]
+      },
+      "name": "DeleteProfile",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteServer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId"
+        ]
+      },
+      "name": "DeleteServer",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteSshPublicKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          },
+          "SshPublicKeyId": {
+            "name": "SshPublicKeyId",
+            "shape_name": "SshPublicKeyId",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "UserName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "SshPublicKeyId",
+          "UserName"
+        ]
+      },
+      "name": "DeleteSshPublicKey",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteUser": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "UserName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "UserName"
+        ]
+      },
+      "name": "DeleteUser",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteWebApp": {
+      "input": {
+        "markers": null,
+        "members": {
+          "WebAppId": {
+            "name": "WebAppId",
+            "shape_name": "WebAppId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WebAppId"
+        ]
+      },
+      "name": "DeleteWebApp",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteWebAppCustomization": {
+      "input": {
+        "markers": null,
+        "members": {
+          "WebAppId": {
+            "name": "WebAppId",
+            "shape_name": "WebAppId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WebAppId"
+        ]
+      },
+      "name": "DeleteWebAppCustomization",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteWorkflow": {
+      "input": {
+        "markers": null,
+        "members": {
+          "WorkflowId": {
+            "name": "WorkflowId",
+            "shape_name": "WorkflowId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkflowId"
+        ]
+      },
+      "name": "DeleteWorkflow",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DescribeAccess": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ExternalId": {
+            "name": "ExternalId",
+            "shape_name": "ExternalId",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "ExternalId"
+        ]
+      },
+      "name": "DescribeAccess",
+      "output": {
+        "markers": null,
+        "members": {
+          "Access": {
+            "name": "Access",
+            "shape_name": "DescribedAccess",
+            "type": "structure"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "Access"
+        ]
+      }
+    },
+    "DescribeAgreement": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AgreementId": {
+            "name": "AgreementId",
+            "shape_name": "AgreementId",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AgreementId",
+          "ServerId"
+        ]
+      },
+      "name": "DescribeAgreement",
+      "output": {
+        "markers": null,
+        "members": {
+          "Agreement": {
+            "name": "Agreement",
+            "shape_name": "DescribedAgreement",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Agreement"
+        ]
+      }
+    },
+    "DescribeCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CertificateId": {
+            "name": "CertificateId",
+            "shape_name": "CertificateId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CertificateId"
+        ]
+      },
+      "name": "DescribeCertificate",
+      "output": {
+        "markers": null,
+        "members": {
+          "Certificate": {
+            "name": "Certificate",
+            "shape_name": "DescribedCertificate",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Certificate"
+        ]
+      }
+    },
+    "DescribeConnector": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConnectorId": {
+            "name": "ConnectorId",
+            "shape_name": "ConnectorId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ConnectorId"
+        ]
+      },
+      "name": "DescribeConnector",
+      "output": {
+        "markers": null,
+        "members": {
+          "Connector": {
+            "name": "Connector",
+            "shape_name": "DescribedConnector",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Connector"
+        ]
+      }
+    },
+    "DescribeExecution": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ExecutionId": {
+            "name": "ExecutionId",
+            "shape_name": "ExecutionId",
+            "type": "string"
+          },
+          "WorkflowId": {
+            "name": "WorkflowId",
+            "shape_name": "WorkflowId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ExecutionId",
+          "WorkflowId"
+        ]
+      },
+      "name": "DescribeExecution",
+      "output": {
+        "markers": null,
+        "members": {
+          "Execution": {
+            "name": "Execution",
+            "shape_name": "DescribedExecution",
+            "type": "structure"
+          },
+          "WorkflowId": {
+            "name": "WorkflowId",
+            "shape_name": "WorkflowId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkflowId",
+          "Execution"
+        ]
+      }
+    },
+    "DescribeHostKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HostKeyId": {
+            "name": "HostKeyId",
+            "shape_name": "HostKeyId",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "HostKeyId"
+        ]
+      },
+      "name": "DescribeHostKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "HostKey": {
+            "name": "HostKey",
+            "shape_name": "DescribedHostKey",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "HostKey"
+        ]
+      }
+    },
+    "DescribeProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ProfileId": {
+            "name": "ProfileId",
+            "shape_name": "ProfileId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ProfileId"
+        ]
+      },
+      "name": "DescribeProfile",
+      "output": {
+        "markers": null,
+        "members": {
+          "Profile": {
+            "name": "Profile",
+            "shape_name": "DescribedProfile",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Profile"
+        ]
+      }
+    },
+    "DescribeSecurityPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SecurityPolicyName": {
+            "name": "SecurityPolicyName",
+            "shape_name": "SecurityPolicyName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SecurityPolicyName"
+        ]
+      },
+      "name": "DescribeSecurityPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "SecurityPolicy": {
+            "name": "SecurityPolicy",
+            "shape_name": "DescribedSecurityPolicy",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "SecurityPolicy"
+        ]
+      }
+    },
+    "DescribeServer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId"
+        ]
+      },
+      "name": "DescribeServer",
+      "output": {
+        "markers": null,
+        "members": {
+          "Server": {
+            "name": "Server",
+            "shape_name": "DescribedServer",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Server"
+        ]
+      }
+    },
+    "DescribeUser": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "UserName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "UserName"
+        ]
+      },
+      "name": "DescribeUser",
+      "output": {
+        "markers": null,
+        "members": {
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          },
+          "User": {
+            "name": "User",
+            "shape_name": "DescribedUser",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ServerId",
+          "User"
+        ]
+      }
+    },
+    "DescribeWebApp": {
+      "input": {
+        "markers": null,
+        "members": {
+          "WebAppId": {
+            "name": "WebAppId",
+            "shape_name": "WebAppId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WebAppId"
+        ]
+      },
+      "name": "DescribeWebApp",
+      "output": {
+        "markers": null,
+        "members": {
+          "WebApp": {
+            "name": "WebApp",
+            "shape_name": "DescribedWebApp",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "WebApp"
+        ]
+      }
+    },
+    "DescribeWebAppCustomization": {
+      "input": {
+        "markers": null,
+        "members": {
+          "WebAppId": {
+            "name": "WebAppId",
+            "shape_name": "WebAppId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WebAppId"
+        ]
+      },
+      "name": "DescribeWebAppCustomization",
+      "output": {
+        "markers": null,
+        "members": {
+          "WebAppCustomization": {
+            "name": "WebAppCustomization",
+            "shape_name": "DescribedWebAppCustomization",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "WebAppCustomization"
+        ]
+      }
+    },
+    "DescribeWorkflow": {
+      "input": {
+        "markers": null,
+        "members": {
+          "WorkflowId": {
+            "name": "WorkflowId",
+            "shape_name": "WorkflowId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkflowId"
+        ]
+      },
+      "name": "DescribeWorkflow",
+      "output": {
+        "markers": null,
+        "members": {
+          "Workflow": {
+            "name": "Workflow",
+            "shape_name": "DescribedWorkflow",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Workflow"
+        ]
+      }
+    },
+    "ImportCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ActiveDate": {
+            "name": "ActiveDate",
+            "shape_name": "CertDate",
+            "type": "timestamp"
+          },
+          "Certificate": {
+            "name": "Certificate",
+            "shape_name": "CertificateBodyType",
+            "type": "string"
+          },
+          "CertificateChain": {
+            "name": "CertificateChain",
+            "shape_name": "CertificateChainType",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "Description",
+            "type": "string"
+          },
+          "InactiveDate": {
+            "name": "InactiveDate",
+            "shape_name": "CertDate",
+            "type": "timestamp"
+          },
+          "PrivateKey": {
+            "name": "PrivateKey",
+            "shape_name": "PrivateKeyType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "Usage": {
+            "name": "Usage",
+            "shape_name": "CertificateUsageType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Usage",
+          "Certificate"
+        ]
+      },
+      "name": "ImportCertificate",
+      "output": {
+        "markers": null,
+        "members": {
+          "CertificateId": {
+            "name": "CertificateId",
+            "shape_name": "CertificateId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CertificateId"
+        ]
+      }
+    },
+    "ImportHostKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "HostKeyDescription",
+            "type": "string"
+          },
+          "HostKeyBody": {
+            "name": "HostKeyBody",
+            "shape_name": "HostKey",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ServerId",
+          "HostKeyBody"
+        ]
+      },
+      "name": "ImportHostKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "HostKeyId": {
+            "name": "HostKeyId",
+            "shape_name": "HostKeyId",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "HostKeyId"
+        ]
+      }
+    },
+    "ImportSshPublicKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          },
+          "SshPublicKeyBody": {
+            "name": "SshPublicKeyBody",
+            "shape_name": "SshPublicKeyBody",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "UserName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "SshPublicKeyBody",
+          "UserName"
+        ]
+      },
+      "name": "ImportSshPublicKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          },
+          "SshPublicKeyId": {
+            "name": "SshPublicKeyId",
+            "shape_name": "SshPublicKeyId",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "UserName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "SshPublicKeyId",
+          "UserName"
+        ]
+      }
+    },
+    "ListAccesses": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId"
+        ]
+      },
+      "name": "ListAccesses",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Accesses": {
+            "name": "Accesses",
+            "shape_name": "ListedAccesses",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "Accesses"
+        ]
+      }
+    },
+    "ListAgreements": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId"
+        ]
+      },
+      "name": "ListAgreements",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Agreements": {
+            "name": "Agreements",
+            "shape_name": "ListedAgreements",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Agreements"
+        ]
+      }
+    },
+    "ListCertificates": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListCertificates",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Certificates": {
+            "name": "Certificates",
+            "shape_name": "ListedCertificates",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Certificates"
+        ]
+      }
+    },
+    "ListConnectors": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListConnectors",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Connectors": {
+            "name": "Connectors",
+            "shape_name": "ListedConnectors",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Connectors"
+        ]
+      }
+    },
+    "ListExecutions": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "WorkflowId": {
+            "name": "WorkflowId",
+            "shape_name": "WorkflowId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkflowId"
+        ]
+      },
+      "name": "ListExecutions",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Executions": {
+            "name": "Executions",
+            "shape_name": "ListedExecutions",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "WorkflowId": {
+            "name": "WorkflowId",
+            "shape_name": "WorkflowId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkflowId",
+          "Executions"
+        ]
+      }
+    },
+    "ListFileTransferResults": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "ConnectorId": {
+            "name": "ConnectorId",
+            "shape_name": "ConnectorId",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "TransferId": {
+            "name": "TransferId",
+            "shape_name": "TransferId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ConnectorId",
+          "TransferId"
+        ]
+      },
+      "name": "ListFileTransferResults",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "FileTransferResults": {
+            "name": "FileTransferResults",
+            "shape_name": "ConnectorFileTransferResults",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "FileTransferResults"
+        ]
+      }
+    },
+    "ListHostKeys": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId"
+        ]
+      },
+      "name": "ListHostKeys",
+      "output": {
+        "markers": null,
+        "members": {
+          "HostKeys": {
+            "name": "HostKeys",
+            "shape_name": "ListedHostKeys",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "HostKeys"
+        ]
+      }
+    },
+    "ListProfiles": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "ProfileType": {
+            "name": "ProfileType",
+            "shape_name": "ProfileType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListProfiles",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Profiles": {
+            "name": "Profiles",
+            "shape_name": "ListedProfiles",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Profiles"
+        ]
+      }
+    },
+    "ListSecurityPolicies": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListSecurityPolicies",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "SecurityPolicyNames": {
+            "name": "SecurityPolicyNames",
+            "shape_name": "SecurityPolicyNames",
+            "type": "list"
+          }
+        },
+        "required": [
+          "SecurityPolicyNames"
+        ]
+      }
+    },
+    "ListServers": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListServers",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Servers": {
+            "name": "Servers",
+            "shape_name": "ListedServers",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Servers"
+        ],
+        "resources": [
+          {
+            "arn": "Arn",
+            "id": "ServerId",
+            "name": "ServerId",
+            "path": [
+              "Servers"
+            ],
+            "type": "transfer:server"
+          }
+        ]
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Arn"
+        ]
+      },
+      "name": "ListTagsForResource",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListUsers": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId"
+        ]
+      },
+      "name": "ListUsers",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          },
+          "Users": {
+            "name": "Users",
+            "shape_name": "ListedUsers",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ServerId",
+          "Users"
+        ]
+      }
+    },
+    "ListWebApps": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListWebApps",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "WebApps": {
+            "name": "WebApps",
+            "shape_name": "ListedWebApps",
+            "type": "list"
+          }
+        },
+        "required": [
+          "WebApps"
+        ]
+      }
+    },
+    "ListWorkflows": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListWorkflows",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Workflows": {
+            "name": "Workflows",
+            "shape_name": "ListedWorkflows",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Workflows"
+        ]
+      }
+    },
+    "SendWorkflowStepState": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ExecutionId": {
+            "name": "ExecutionId",
+            "shape_name": "ExecutionId",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "CustomStepStatus",
+            "type": "string"
+          },
+          "Token": {
+            "name": "Token",
+            "shape_name": "CallbackToken",
+            "type": "string"
+          },
+          "WorkflowId": {
+            "name": "WorkflowId",
+            "shape_name": "WorkflowId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkflowId",
+          "ExecutionId",
+          "Token",
+          "Status"
+        ]
+      },
+      "name": "SendWorkflowStepState",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "StartDirectoryListing": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConnectorId": {
+            "name": "ConnectorId",
+            "shape_name": "ConnectorId",
+            "type": "string"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "MaxItems",
+            "type": "integer"
+          },
+          "OutputDirectoryPath": {
+            "name": "OutputDirectoryPath",
+            "shape_name": "FilePath",
+            "type": "string"
+          },
+          "RemoteDirectoryPath": {
+            "name": "RemoteDirectoryPath",
+            "shape_name": "FilePath",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ConnectorId",
+          "RemoteDirectoryPath",
+          "OutputDirectoryPath"
+        ]
+      },
+      "name": "StartDirectoryListing",
+      "output": {
+        "markers": null,
+        "members": {
+          "ListingId": {
+            "name": "ListingId",
+            "shape_name": "ListingId",
+            "type": "string"
+          },
+          "OutputFileName": {
+            "name": "OutputFileName",
+            "shape_name": "OutputFileName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ListingId",
+          "OutputFileName"
+        ]
+      }
+    },
+    "StartFileTransfer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConnectorId": {
+            "name": "ConnectorId",
+            "shape_name": "ConnectorId",
+            "type": "string"
+          },
+          "LocalDirectoryPath": {
+            "name": "LocalDirectoryPath",
+            "shape_name": "FilePath",
+            "type": "string"
+          },
+          "RemoteDirectoryPath": {
+            "name": "RemoteDirectoryPath",
+            "shape_name": "FilePath",
+            "type": "string"
+          },
+          "RetrieveFilePaths": {
+            "name": "RetrieveFilePaths",
+            "shape_name": "FilePaths",
+            "type": "list"
+          },
+          "SendFilePaths": {
+            "name": "SendFilePaths",
+            "shape_name": "FilePaths",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ConnectorId"
+        ]
+      },
+      "name": "StartFileTransfer",
+      "output": {
+        "markers": null,
+        "members": {
+          "TransferId": {
+            "name": "TransferId",
+            "shape_name": "TransferId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TransferId"
+        ]
+      }
+    },
+    "StartRemoteDelete": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConnectorId": {
+            "name": "ConnectorId",
+            "shape_name": "ConnectorId",
+            "type": "string"
+          },
+          "DeletePath": {
+            "name": "DeletePath",
+            "shape_name": "FilePath",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ConnectorId",
+          "DeletePath"
+        ]
+      },
+      "name": "StartRemoteDelete",
+      "output": {
+        "markers": null,
+        "members": {
+          "DeleteId": {
+            "name": "DeleteId",
+            "shape_name": "DeleteId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DeleteId"
+        ]
+      }
+    },
+    "StartRemoteMove": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConnectorId": {
+            "name": "ConnectorId",
+            "shape_name": "ConnectorId",
+            "type": "string"
+          },
+          "SourcePath": {
+            "name": "SourcePath",
+            "shape_name": "FilePath",
+            "type": "string"
+          },
+          "TargetPath": {
+            "name": "TargetPath",
+            "shape_name": "FilePath",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ConnectorId",
+          "SourcePath",
+          "TargetPath"
+        ]
+      },
+      "name": "StartRemoteMove",
+      "output": {
+        "markers": null,
+        "members": {
+          "MoveId": {
+            "name": "MoveId",
+            "shape_name": "MoveId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "MoveId"
+        ]
+      }
+    },
+    "StartServer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId"
+        ]
+      },
+      "name": "StartServer",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "StopServer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId"
+        ]
+      },
+      "name": "StopServer",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Arn",
+          "Tags"
+        ]
+      },
+      "name": "TagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TestConnection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConnectorId": {
+            "name": "ConnectorId",
+            "shape_name": "ConnectorId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ConnectorId"
+        ]
+      },
+      "name": "TestConnection",
+      "output": {
+        "markers": null,
+        "members": {
+          "ConnectorId": {
+            "name": "ConnectorId",
+            "shape_name": "ConnectorId",
+            "type": "string"
+          },
+          "SftpConnectionDetails": {
+            "name": "SftpConnectionDetails",
+            "shape_name": "SftpConnectorConnectionDetails",
+            "type": "structure"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "Status",
+            "type": "string"
+          },
+          "StatusMessage": {
+            "name": "StatusMessage",
+            "shape_name": "Message",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "TestIdentityProvider": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          },
+          "ServerProtocol": {
+            "name": "ServerProtocol",
+            "shape_name": "Protocol",
+            "type": "string"
+          },
+          "SourceIp": {
+            "name": "SourceIp",
+            "shape_name": "SourceIp",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "UserName",
+            "type": "string"
+          },
+          "UserPassword": {
+            "name": "UserPassword",
+            "shape_name": "UserPassword",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "UserName"
+        ]
+      },
+      "name": "TestIdentityProvider",
+      "output": {
+        "markers": null,
+        "members": {
+          "Message": {
+            "name": "Message",
+            "shape_name": "Message",
+            "type": "string"
+          },
+          "Response": {
+            "name": "Response",
+            "shape_name": "Response",
+            "type": "string"
+          },
+          "StatusCode": {
+            "name": "StatusCode",
+            "shape_name": "StatusCode",
+            "type": "integer"
+          },
+          "Url": {
+            "name": "Url",
+            "shape_name": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StatusCode",
+          "Url"
+        ]
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "TagKeys",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Arn",
+          "TagKeys"
+        ]
+      },
+      "name": "UntagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateAccess": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ExternalId": {
+            "name": "ExternalId",
+            "shape_name": "ExternalId",
+            "type": "string"
+          },
+          "HomeDirectory": {
+            "name": "HomeDirectory",
+            "shape_name": "HomeDirectory",
+            "type": "string"
+          },
+          "HomeDirectoryMappings": {
+            "name": "HomeDirectoryMappings",
+            "shape_name": "HomeDirectoryMappings",
+            "type": "list"
+          },
+          "HomeDirectoryType": {
+            "name": "HomeDirectoryType",
+            "shape_name": "HomeDirectoryType",
+            "type": "string"
+          },
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "Policy",
+            "type": "string"
+          },
+          "PosixProfile": {
+            "name": "PosixProfile",
+            "shape_name": "PosixProfile",
+            "type": "structure"
+          },
+          "Role": {
+            "name": "Role",
+            "shape_name": "Role",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "ExternalId"
+        ]
+      },
+      "name": "UpdateAccess",
+      "output": {
+        "markers": null,
+        "members": {
+          "ExternalId": {
+            "name": "ExternalId",
+            "shape_name": "ExternalId",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "ExternalId"
+        ]
+      }
+    },
+    "UpdateAgreement": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AccessRole": {
+            "name": "AccessRole",
+            "shape_name": "Role",
+            "type": "string"
+          },
+          "AgreementId": {
+            "name": "AgreementId",
+            "shape_name": "AgreementId",
+            "type": "string"
+          },
+          "BaseDirectory": {
+            "name": "BaseDirectory",
+            "shape_name": "HomeDirectory",
+            "type": "string"
+          },
+          "CustomDirectories": {
+            "name": "CustomDirectories",
+            "shape_name": "CustomDirectoriesType",
+            "type": "structure"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "Description",
+            "type": "string"
+          },
+          "EnforceMessageSigning": {
+            "name": "EnforceMessageSigning",
+            "shape_name": "EnforceMessageSigningType",
+            "type": "string"
+          },
+          "LocalProfileId": {
+            "name": "LocalProfileId",
+            "shape_name": "ProfileId",
+            "type": "string"
+          },
+          "PartnerProfileId": {
+            "name": "PartnerProfileId",
+            "shape_name": "ProfileId",
+            "type": "string"
+          },
+          "PreserveFilename": {
+            "name": "PreserveFilename",
+            "shape_name": "PreserveFilenameType",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "AgreementStatusType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AgreementId",
+          "ServerId"
+        ]
+      },
+      "name": "UpdateAgreement",
+      "output": {
+        "markers": null,
+        "members": {
+          "AgreementId": {
+            "name": "AgreementId",
+            "shape_name": "AgreementId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AgreementId"
+        ]
+      }
+    },
+    "UpdateCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ActiveDate": {
+            "name": "ActiveDate",
+            "shape_name": "CertDate",
+            "type": "timestamp"
+          },
+          "CertificateId": {
+            "name": "CertificateId",
+            "shape_name": "CertificateId",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "Description",
+            "type": "string"
+          },
+          "InactiveDate": {
+            "name": "InactiveDate",
+            "shape_name": "CertDate",
+            "type": "timestamp"
+          }
+        },
+        "required": [
+          "CertificateId"
+        ]
+      },
+      "name": "UpdateCertificate",
+      "output": {
+        "markers": null,
+        "members": {
+          "CertificateId": {
+            "name": "CertificateId",
+            "shape_name": "CertificateId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CertificateId"
+        ]
+      }
+    },
+    "UpdateConnector": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AccessRole": {
+            "name": "AccessRole",
+            "shape_name": "Role",
+            "type": "string"
+          },
+          "As2Config": {
+            "name": "As2Config",
+            "shape_name": "As2ConnectorConfig",
+            "type": "structure"
+          },
+          "ConnectorId": {
+            "name": "ConnectorId",
+            "shape_name": "ConnectorId",
+            "type": "string"
+          },
+          "LoggingRole": {
+            "name": "LoggingRole",
+            "shape_name": "Role",
+            "type": "string"
+          },
+          "SecurityPolicyName": {
+            "name": "SecurityPolicyName",
+            "shape_name": "ConnectorSecurityPolicyName",
+            "type": "string"
+          },
+          "SftpConfig": {
+            "name": "SftpConfig",
+            "shape_name": "SftpConnectorConfig",
+            "type": "structure"
+          },
+          "Url": {
+            "name": "Url",
+            "shape_name": "Url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ConnectorId"
+        ]
+      },
+      "name": "UpdateConnector",
+      "output": {
+        "markers": null,
+        "members": {
+          "ConnectorId": {
+            "name": "ConnectorId",
+            "shape_name": "ConnectorId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ConnectorId"
+        ]
+      }
+    },
+    "UpdateHostKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "HostKeyDescription",
+            "type": "string"
+          },
+          "HostKeyId": {
+            "name": "HostKeyId",
+            "shape_name": "HostKeyId",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "HostKeyId",
+          "Description"
+        ]
+      },
+      "name": "UpdateHostKey",
+      "output": {
+        "markers": null,
+        "members": {
+          "HostKeyId": {
+            "name": "HostKeyId",
+            "shape_name": "HostKeyId",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "HostKeyId"
+        ]
+      }
+    },
+    "UpdateProfile": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CertificateIds": {
+            "name": "CertificateIds",
+            "shape_name": "CertificateIds",
+            "type": "list"
+          },
+          "ProfileId": {
+            "name": "ProfileId",
+            "shape_name": "ProfileId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ProfileId"
+        ]
+      },
+      "name": "UpdateProfile",
+      "output": {
+        "markers": null,
+        "members": {
+          "ProfileId": {
+            "name": "ProfileId",
+            "shape_name": "ProfileId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ProfileId"
+        ]
+      }
+    },
+    "UpdateServer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Certificate": {
+            "name": "Certificate",
+            "shape_name": "Certificate",
+            "type": "string"
+          },
+          "EndpointDetails": {
+            "name": "EndpointDetails",
+            "shape_name": "EndpointDetails",
+            "type": "structure"
+          },
+          "EndpointType": {
+            "name": "EndpointType",
+            "shape_name": "EndpointType",
+            "type": "string"
+          },
+          "HostKey": {
+            "name": "HostKey",
+            "shape_name": "HostKey",
+            "type": "string"
+          },
+          "IdentityProviderDetails": {
+            "name": "IdentityProviderDetails",
+            "shape_name": "IdentityProviderDetails",
+            "type": "structure"
+          },
+          "IpAddressType": {
+            "name": "IpAddressType",
+            "shape_name": "IpAddressType",
+            "type": "string"
+          },
+          "LoggingRole": {
+            "name": "LoggingRole",
+            "shape_name": "NullableRole",
+            "type": "string"
+          },
+          "PostAuthenticationLoginBanner": {
+            "name": "PostAuthenticationLoginBanner",
+            "shape_name": "PostAuthenticationLoginBanner",
+            "type": "string"
+          },
+          "PreAuthenticationLoginBanner": {
+            "name": "PreAuthenticationLoginBanner",
+            "shape_name": "PreAuthenticationLoginBanner",
+            "type": "string"
+          },
+          "ProtocolDetails": {
+            "name": "ProtocolDetails",
+            "shape_name": "ProtocolDetails",
+            "type": "structure"
+          },
+          "Protocols": {
+            "name": "Protocols",
+            "shape_name": "Protocols",
+            "type": "list"
+          },
+          "S3StorageOptions": {
+            "name": "S3StorageOptions",
+            "shape_name": "S3StorageOptions",
+            "type": "structure"
+          },
+          "SecurityPolicyName": {
+            "name": "SecurityPolicyName",
+            "shape_name": "SecurityPolicyName",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          },
+          "StructuredLogDestinations": {
+            "name": "StructuredLogDestinations",
+            "shape_name": "StructuredLogDestinations",
+            "type": "list"
+          },
+          "WorkflowDetails": {
+            "name": "WorkflowDetails",
+            "shape_name": "WorkflowDetails",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ServerId"
+        ]
+      },
+      "name": "UpdateServer",
+      "output": {
+        "markers": null,
+        "members": {
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId"
+        ]
+      }
+    },
+    "UpdateUser": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HomeDirectory": {
+            "name": "HomeDirectory",
+            "shape_name": "HomeDirectory",
+            "type": "string"
+          },
+          "HomeDirectoryMappings": {
+            "name": "HomeDirectoryMappings",
+            "shape_name": "HomeDirectoryMappings",
+            "type": "list"
+          },
+          "HomeDirectoryType": {
+            "name": "HomeDirectoryType",
+            "shape_name": "HomeDirectoryType",
+            "type": "string"
+          },
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "Policy",
+            "type": "string"
+          },
+          "PosixProfile": {
+            "name": "PosixProfile",
+            "shape_name": "PosixProfile",
+            "type": "structure"
+          },
+          "Role": {
+            "name": "Role",
+            "shape_name": "Role",
+            "type": "string"
+          },
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "UserName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "UserName"
+        ]
+      },
+      "name": "UpdateUser",
+      "output": {
+        "markers": null,
+        "members": {
+          "ServerId": {
+            "name": "ServerId",
+            "shape_name": "ServerId",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "UserName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerId",
+          "UserName"
+        ]
+      }
+    },
+    "UpdateWebApp": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AccessEndpoint": {
+            "name": "AccessEndpoint",
+            "shape_name": "WebAppAccessEndpoint",
+            "type": "string"
+          },
+          "IdentityProviderDetails": {
+            "name": "IdentityProviderDetails",
+            "shape_name": "UpdateWebAppIdentityProviderDetails",
+            "type": "structure"
+          },
+          "WebAppId": {
+            "name": "WebAppId",
+            "shape_name": "WebAppId",
+            "type": "string"
+          },
+          "WebAppUnits": {
+            "name": "WebAppUnits",
+            "shape_name": "WebAppUnits",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "WebAppId"
+        ]
+      },
+      "name": "UpdateWebApp",
+      "output": {
+        "markers": null,
+        "members": {
+          "WebAppId": {
+            "name": "WebAppId",
+            "shape_name": "WebAppId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WebAppId"
+        ]
+      }
+    },
+    "UpdateWebAppCustomization": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FaviconFile": {
+            "name": "FaviconFile",
+            "shape_name": "WebAppFaviconFile",
+            "type": "blob"
+          },
+          "LogoFile": {
+            "name": "LogoFile",
+            "shape_name": "WebAppLogoFile",
+            "type": "blob"
+          },
+          "Title": {
+            "name": "Title",
+            "shape_name": "WebAppTitle",
+            "type": "string"
+          },
+          "WebAppId": {
+            "name": "WebAppId",
+            "shape_name": "WebAppId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WebAppId"
+        ]
+      },
+      "name": "UpdateWebAppCustomization",
+      "output": {
+        "markers": null,
+        "members": {
+          "WebAppId": {
+            "name": "WebAppId",
+            "shape_name": "WebAppId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WebAppId"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,2835 @@
+{
+  "metadata": {
+    "apiVersion": "2015-10-07",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "events",
+    "jsonVersion": "1.1",
+    "protocol": "json",
+    "protocols": [
+      "json"
+    ],
+    "serviceFullName": "Amazon EventBridge",
+    "serviceId": "EventBridge",
+    "signatureVersion": "v4",
+    "targetPrefix": "AWSEvents",
+    "uid": "eventbridge-2015-10-07"
+  },
+  "name": "events",
+  "operations": {
+    "ActivateEventSource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "EventSourceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "ActivateEventSource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CancelReplay": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ReplayName": {
+            "name": "ReplayName",
+            "shape_name": "ReplayName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ReplayName"
+        ]
+      },
+      "name": "CancelReplay",
+      "output": {
+        "markers": null,
+        "members": {
+          "ReplayArn": {
+            "name": "ReplayArn",
+            "shape_name": "ReplayArn",
+            "type": "string"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "ReplayState",
+            "type": "string"
+          },
+          "StateReason": {
+            "name": "StateReason",
+            "shape_name": "ReplayStateReason",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateApiDestination": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConnectionArn": {
+            "name": "ConnectionArn",
+            "shape_name": "ConnectionArn",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "ApiDestinationDescription",
+            "type": "string"
+          },
+          "HttpMethod": {
+            "name": "HttpMethod",
+            "shape_name": "ApiDestinationHttpMethod",
+            "type": "string"
+          },
+          "InvocationEndpoint": {
+            "name": "InvocationEndpoint",
+            "shape_name": "HttpsEndpoint",
+            "type": "string"
+          },
+          "InvocationRateLimitPerSecond": {
+            "name": "InvocationRateLimitPerSecond",
+            "shape_name": "ApiDestinationInvocationRateLimitPerSecond",
+            "type": "integer"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "ApiDestinationName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "ConnectionArn",
+          "InvocationEndpoint",
+          "HttpMethod"
+        ]
+      },
+      "name": "CreateApiDestination",
+      "output": {
+        "markers": null,
+        "members": {
+          "ApiDestinationArn": {
+            "name": "ApiDestinationArn",
+            "shape_name": "ApiDestinationArn",
+            "type": "string"
+          },
+          "ApiDestinationState": {
+            "name": "ApiDestinationState",
+            "shape_name": "ApiDestinationState",
+            "type": "string"
+          },
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "LastModifiedTime": {
+            "name": "LastModifiedTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateArchive": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ArchiveName": {
+            "name": "ArchiveName",
+            "shape_name": "ArchiveName",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "ArchiveDescription",
+            "type": "string"
+          },
+          "EventPattern": {
+            "name": "EventPattern",
+            "shape_name": "EventPattern",
+            "type": "string"
+          },
+          "EventSourceArn": {
+            "name": "EventSourceArn",
+            "shape_name": "EventBusArn",
+            "type": "string"
+          },
+          "KmsKeyIdentifier": {
+            "name": "KmsKeyIdentifier",
+            "shape_name": "KmsKeyIdentifier",
+            "type": "string"
+          },
+          "RetentionDays": {
+            "name": "RetentionDays",
+            "shape_name": "RetentionDays",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "ArchiveName",
+          "EventSourceArn"
+        ]
+      },
+      "name": "CreateArchive",
+      "output": {
+        "markers": null,
+        "members": {
+          "ArchiveArn": {
+            "name": "ArchiveArn",
+            "shape_name": "ArchiveArn",
+            "type": "string"
+          },
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "ArchiveState",
+            "type": "string"
+          },
+          "StateReason": {
+            "name": "StateReason",
+            "shape_name": "ArchiveStateReason",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateConnection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AuthParameters": {
+            "name": "AuthParameters",
+            "shape_name": "CreateConnectionAuthRequestParameters",
+            "type": "structure"
+          },
+          "AuthorizationType": {
+            "name": "AuthorizationType",
+            "shape_name": "ConnectionAuthorizationType",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "ConnectionDescription",
+            "type": "string"
+          },
+          "InvocationConnectivityParameters": {
+            "name": "InvocationConnectivityParameters",
+            "shape_name": "ConnectivityResourceParameters",
+            "type": "structure"
+          },
+          "KmsKeyIdentifier": {
+            "name": "KmsKeyIdentifier",
+            "shape_name": "KmsKeyIdentifier",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "ConnectionName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "AuthorizationType",
+          "AuthParameters"
+        ]
+      },
+      "name": "CreateConnection",
+      "output": {
+        "markers": null,
+        "members": {
+          "ConnectionArn": {
+            "name": "ConnectionArn",
+            "shape_name": "ConnectionArn",
+            "type": "string"
+          },
+          "ConnectionState": {
+            "name": "ConnectionState",
+            "shape_name": "ConnectionState",
+            "type": "string"
+          },
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "LastModifiedTime": {
+            "name": "LastModifiedTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateEndpoint": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "EndpointDescription",
+            "type": "string"
+          },
+          "EventBuses": {
+            "name": "EventBuses",
+            "shape_name": "EndpointEventBusList",
+            "type": "list"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EndpointName",
+            "type": "string"
+          },
+          "ReplicationConfig": {
+            "name": "ReplicationConfig",
+            "shape_name": "ReplicationConfig",
+            "type": "structure"
+          },
+          "RoleArn": {
+            "name": "RoleArn",
+            "shape_name": "IamRoleArn",
+            "type": "string"
+          },
+          "RoutingConfig": {
+            "name": "RoutingConfig",
+            "shape_name": "RoutingConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Name",
+          "RoutingConfig",
+          "EventBuses"
+        ]
+      },
+      "name": "CreateEndpoint",
+      "output": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "EndpointArn",
+            "type": "string"
+          },
+          "EventBuses": {
+            "name": "EventBuses",
+            "shape_name": "EndpointEventBusList",
+            "type": "list"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EndpointName",
+            "type": "string"
+          },
+          "ReplicationConfig": {
+            "name": "ReplicationConfig",
+            "shape_name": "ReplicationConfig",
+            "type": "structure"
+          },
+          "RoleArn": {
+            "name": "RoleArn",
+            "shape_name": "IamRoleArn",
+            "type": "string"
+          },
+          "RoutingConfig": {
+            "name": "RoutingConfig",
+            "shape_name": "RoutingConfig",
+            "type": "structure"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "EndpointState",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateEventBus": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DeadLetterConfig": {
+            "name": "DeadLetterConfig",
+            "shape_name": "DeadLetterConfig",
+            "type": "structure"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "EventBusDescription",
+            "type": "string"
+          },
+          "EventSourceName": {
+            "name": "EventSourceName",
+            "shape_name": "EventSourceName",
+            "type": "string"
+          },
+          "KmsKeyIdentifier": {
+            "name": "KmsKeyIdentifier",
+            "shape_name": "KmsKeyIdentifier",
+            "type": "string"
+          },
+          "LogConfig": {
+            "name": "LogConfig",
+            "shape_name": "LogConfig",
+            "type": "structure"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EventBusName",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "CreateEventBus",
+      "output": {
+        "markers": null,
+        "members": {
+          "DeadLetterConfig": {
+            "name": "DeadLetterConfig",
+            "shape_name": "DeadLetterConfig",
+            "type": "structure"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "EventBusDescription",
+            "type": "string"
+          },
+          "EventBusArn": {
+            "name": "EventBusArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "KmsKeyIdentifier": {
+            "name": "KmsKeyIdentifier",
+            "shape_name": "KmsKeyIdentifier",
+            "type": "string"
+          },
+          "LogConfig": {
+            "name": "LogConfig",
+            "shape_name": "LogConfig",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreatePartnerEventSource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Account": {
+            "name": "Account",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EventSourceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Account"
+        ]
+      },
+      "name": "CreatePartnerEventSource",
+      "output": {
+        "markers": null,
+        "members": {
+          "EventSourceArn": {
+            "name": "EventSourceArn",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeactivateEventSource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "EventSourceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "DeactivateEventSource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeauthorizeConnection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "ConnectionName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "DeauthorizeConnection",
+      "output": {
+        "markers": null,
+        "members": {
+          "ConnectionArn": {
+            "name": "ConnectionArn",
+            "shape_name": "ConnectionArn",
+            "type": "string"
+          },
+          "ConnectionState": {
+            "name": "ConnectionState",
+            "shape_name": "ConnectionState",
+            "type": "string"
+          },
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "LastAuthorizedTime": {
+            "name": "LastAuthorizedTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "LastModifiedTime": {
+            "name": "LastModifiedTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteApiDestination": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "ApiDestinationName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "DeleteApiDestination",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteArchive": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ArchiveName": {
+            "name": "ArchiveName",
+            "shape_name": "ArchiveName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ArchiveName"
+        ]
+      },
+      "name": "DeleteArchive",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteConnection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "ConnectionName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "DeleteConnection",
+      "output": {
+        "markers": null,
+        "members": {
+          "ConnectionArn": {
+            "name": "ConnectionArn",
+            "shape_name": "ConnectionArn",
+            "type": "string"
+          },
+          "ConnectionState": {
+            "name": "ConnectionState",
+            "shape_name": "ConnectionState",
+            "type": "string"
+          },
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "LastAuthorizedTime": {
+            "name": "LastAuthorizedTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "LastModifiedTime": {
+            "name": "LastModifiedTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteEndpoint": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "EndpointName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "DeleteEndpoint",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteEventBus": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "EventBusName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "DeleteEventBus",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeletePartnerEventSource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Account": {
+            "name": "Account",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EventSourceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Account"
+        ]
+      },
+      "name": "DeletePartnerEventSource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteRule": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventBusName": {
+            "name": "EventBusName",
+            "shape_name": "EventBusNameOrArn",
+            "type": "string"
+          },
+          "Force": {
+            "name": "Force",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "RuleName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "DeleteRule",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DescribeApiDestination": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "ApiDestinationName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "DescribeApiDestination",
+      "output": {
+        "markers": null,
+        "members": {
+          "ApiDestinationArn": {
+            "name": "ApiDestinationArn",
+            "shape_name": "ApiDestinationArn",
+            "type": "string"
+          },
+          "ApiDestinationState": {
+            "name": "ApiDestinationState",
+            "shape_name": "ApiDestinationState",
+            "type": "string"
+          },
+          "ConnectionArn": {
+            "name": "ConnectionArn",
+            "shape_name": "ConnectionArn",
+            "type": "string"
+          },
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "ApiDestinationDescription",
+            "type": "string"
+          },
+          "HttpMethod": {
+            "name": "HttpMethod",
+            "shape_name": "ApiDestinationHttpMethod",
+            "type": "string"
+          },
+          "InvocationEndpoint": {
+            "name": "InvocationEndpoint",
+            "shape_name": "HttpsEndpoint",
+            "type": "string"
+          },
+          "InvocationRateLimitPerSecond": {
+            "name": "InvocationRateLimitPerSecond",
+            "shape_name": "ApiDestinationInvocationRateLimitPerSecond",
+            "type": "integer"
+          },
+          "LastModifiedTime": {
+            "name": "LastModifiedTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "ApiDestinationName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeArchive": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ArchiveName": {
+            "name": "ArchiveName",
+            "shape_name": "ArchiveName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ArchiveName"
+        ]
+      },
+      "name": "DescribeArchive",
+      "output": {
+        "markers": null,
+        "members": {
+          "ArchiveArn": {
+            "name": "ArchiveArn",
+            "shape_name": "ArchiveArn",
+            "type": "string"
+          },
+          "ArchiveName": {
+            "name": "ArchiveName",
+            "shape_name": "ArchiveName",
+            "type": "string"
+          },
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "ArchiveDescription",
+            "type": "string"
+          },
+          "EventCount": {
+            "name": "EventCount",
+            "shape_name": "Long",
+            "type": "long"
+          },
+          "EventPattern": {
+            "name": "EventPattern",
+            "shape_name": "EventPattern",
+            "type": "string"
+          },
+          "EventSourceArn": {
+            "name": "EventSourceArn",
+            "shape_name": "EventBusArn",
+            "type": "string"
+          },
+          "KmsKeyIdentifier": {
+            "name": "KmsKeyIdentifier",
+            "shape_name": "KmsKeyIdentifier",
+            "type": "string"
+          },
+          "RetentionDays": {
+            "name": "RetentionDays",
+            "shape_name": "RetentionDays",
+            "type": "integer"
+          },
+          "SizeBytes": {
+            "name": "SizeBytes",
+            "shape_name": "Long",
+            "type": "long"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "ArchiveState",
+            "type": "string"
+          },
+          "StateReason": {
+            "name": "StateReason",
+            "shape_name": "ArchiveStateReason",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeConnection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "ConnectionName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "DescribeConnection",
+      "output": {
+        "markers": null,
+        "members": {
+          "AuthParameters": {
+            "name": "AuthParameters",
+            "shape_name": "ConnectionAuthResponseParameters",
+            "type": "structure"
+          },
+          "AuthorizationType": {
+            "name": "AuthorizationType",
+            "shape_name": "ConnectionAuthorizationType",
+            "type": "string"
+          },
+          "ConnectionArn": {
+            "name": "ConnectionArn",
+            "shape_name": "ConnectionArn",
+            "type": "string"
+          },
+          "ConnectionState": {
+            "name": "ConnectionState",
+            "shape_name": "ConnectionState",
+            "type": "string"
+          },
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "ConnectionDescription",
+            "type": "string"
+          },
+          "InvocationConnectivityParameters": {
+            "name": "InvocationConnectivityParameters",
+            "shape_name": "DescribeConnectionConnectivityParameters",
+            "type": "structure"
+          },
+          "KmsKeyIdentifier": {
+            "name": "KmsKeyIdentifier",
+            "shape_name": "KmsKeyIdentifier",
+            "type": "string"
+          },
+          "LastAuthorizedTime": {
+            "name": "LastAuthorizedTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "LastModifiedTime": {
+            "name": "LastModifiedTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "ConnectionName",
+            "type": "string"
+          },
+          "SecretArn": {
+            "name": "SecretArn",
+            "shape_name": "SecretsManagerSecretArn",
+            "type": "string"
+          },
+          "StateReason": {
+            "name": "StateReason",
+            "shape_name": "ConnectionStateReason",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeEndpoint": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HomeRegion": {
+            "name": "HomeRegion",
+            "shape_name": "HomeRegion",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EndpointName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "DescribeEndpoint",
+      "output": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "EndpointArn",
+            "type": "string"
+          },
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "EndpointDescription",
+            "type": "string"
+          },
+          "EndpointId": {
+            "name": "EndpointId",
+            "shape_name": "EndpointId",
+            "type": "string"
+          },
+          "EndpointUrl": {
+            "name": "EndpointUrl",
+            "shape_name": "EndpointUrl",
+            "type": "string"
+          },
+          "EventBuses": {
+            "name": "EventBuses",
+            "shape_name": "EndpointEventBusList",
+            "type": "list"
+          },
+          "LastModifiedTime": {
+            "name": "LastModifiedTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EndpointName",
+            "type": "string"
+          },
+          "ReplicationConfig": {
+            "name": "ReplicationConfig",
+            "shape_name": "ReplicationConfig",
+            "type": "structure"
+          },
+          "RoleArn": {
+            "name": "RoleArn",
+            "shape_name": "IamRoleArn",
+            "type": "string"
+          },
+          "RoutingConfig": {
+            "name": "RoutingConfig",
+            "shape_name": "RoutingConfig",
+            "type": "structure"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "EndpointState",
+            "type": "string"
+          },
+          "StateReason": {
+            "name": "StateReason",
+            "shape_name": "EndpointStateReason",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeEventBus": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "EventBusNameOrArn",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeEventBus",
+      "output": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "DeadLetterConfig": {
+            "name": "DeadLetterConfig",
+            "shape_name": "DeadLetterConfig",
+            "type": "structure"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "EventBusDescription",
+            "type": "string"
+          },
+          "KmsKeyIdentifier": {
+            "name": "KmsKeyIdentifier",
+            "shape_name": "KmsKeyIdentifier",
+            "type": "string"
+          },
+          "LastModifiedTime": {
+            "name": "LastModifiedTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "LogConfig": {
+            "name": "LogConfig",
+            "shape_name": "LogConfig",
+            "type": "structure"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeEventSource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "EventSourceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "DescribeEventSource",
+      "output": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CreatedBy": {
+            "name": "CreatedBy",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "ExpirationTime": {
+            "name": "ExpirationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "EventSourceState",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribePartnerEventSource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "EventSourceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "DescribePartnerEventSource",
+      "output": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeReplay": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ReplayName": {
+            "name": "ReplayName",
+            "shape_name": "ReplayName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ReplayName"
+        ]
+      },
+      "name": "DescribeReplay",
+      "output": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "ReplayDescription",
+            "type": "string"
+          },
+          "Destination": {
+            "name": "Destination",
+            "shape_name": "ReplayDestination",
+            "type": "structure"
+          },
+          "EventEndTime": {
+            "name": "EventEndTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "EventLastReplayedTime": {
+            "name": "EventLastReplayedTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "EventSourceArn": {
+            "name": "EventSourceArn",
+            "shape_name": "ArchiveArn",
+            "type": "string"
+          },
+          "EventStartTime": {
+            "name": "EventStartTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "ReplayArn": {
+            "name": "ReplayArn",
+            "shape_name": "ReplayArn",
+            "type": "string"
+          },
+          "ReplayEndTime": {
+            "name": "ReplayEndTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "ReplayName": {
+            "name": "ReplayName",
+            "shape_name": "ReplayName",
+            "type": "string"
+          },
+          "ReplayStartTime": {
+            "name": "ReplayStartTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "ReplayState",
+            "type": "string"
+          },
+          "StateReason": {
+            "name": "StateReason",
+            "shape_name": "ReplayStateReason",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeRule": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventBusName": {
+            "name": "EventBusName",
+            "shape_name": "EventBusNameOrArn",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "RuleName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "DescribeRule",
+      "output": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "RuleArn",
+            "type": "string"
+          },
+          "CreatedBy": {
+            "name": "CreatedBy",
+            "shape_name": "CreatedBy",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "RuleDescription",
+            "type": "string"
+          },
+          "EventBusName": {
+            "name": "EventBusName",
+            "shape_name": "EventBusName",
+            "type": "string"
+          },
+          "EventPattern": {
+            "name": "EventPattern",
+            "shape_name": "EventPattern",
+            "type": "string"
+          },
+          "ManagedBy": {
+            "name": "ManagedBy",
+            "shape_name": "ManagedBy",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "RuleName",
+            "type": "string"
+          },
+          "RoleArn": {
+            "name": "RoleArn",
+            "shape_name": "RoleArn",
+            "type": "string"
+          },
+          "ScheduleExpression": {
+            "name": "ScheduleExpression",
+            "shape_name": "ScheduleExpression",
+            "type": "string"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "RuleState",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DisableRule": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventBusName": {
+            "name": "EventBusName",
+            "shape_name": "EventBusNameOrArn",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "RuleName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "DisableRule",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "EnableRule": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventBusName": {
+            "name": "EventBusName",
+            "shape_name": "EventBusNameOrArn",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "RuleName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "EnableRule",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ListApiDestinations": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConnectionArn": {
+            "name": "ConnectionArn",
+            "shape_name": "ConnectionArn",
+            "type": "string"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "LimitMax100",
+            "type": "integer"
+          },
+          "NamePrefix": {
+            "name": "NamePrefix",
+            "shape_name": "ApiDestinationName",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListApiDestinations",
+      "output": {
+        "markers": null,
+        "members": {
+          "ApiDestinations": {
+            "name": "ApiDestinations",
+            "shape_name": "ApiDestinationResponseList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListArchives": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventSourceArn": {
+            "name": "EventSourceArn",
+            "shape_name": "EventBusArn",
+            "type": "string"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "LimitMax100",
+            "type": "integer"
+          },
+          "NamePrefix": {
+            "name": "NamePrefix",
+            "shape_name": "ArchiveName",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "ArchiveState",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListArchives",
+      "output": {
+        "markers": null,
+        "members": {
+          "Archives": {
+            "name": "Archives",
+            "shape_name": "ArchiveResponseList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListConnections": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConnectionState": {
+            "name": "ConnectionState",
+            "shape_name": "ConnectionState",
+            "type": "string"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "LimitMax100",
+            "type": "integer"
+          },
+          "NamePrefix": {
+            "name": "NamePrefix",
+            "shape_name": "ConnectionName",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListConnections",
+      "output": {
+        "markers": null,
+        "members": {
+          "Connections": {
+            "name": "Connections",
+            "shape_name": "ConnectionResponseList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListEndpoints": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HomeRegion": {
+            "name": "HomeRegion",
+            "shape_name": "HomeRegion",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "LimitMax100",
+            "type": "integer"
+          },
+          "NamePrefix": {
+            "name": "NamePrefix",
+            "shape_name": "EndpointName",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListEndpoints",
+      "output": {
+        "markers": null,
+        "members": {
+          "Endpoints": {
+            "name": "Endpoints",
+            "shape_name": "EndpointList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListEventBuses": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "LimitMax100",
+            "type": "integer"
+          },
+          "NamePrefix": {
+            "name": "NamePrefix",
+            "shape_name": "EventBusName",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListEventBuses",
+      "output": {
+        "markers": null,
+        "members": {
+          "EventBuses": {
+            "name": "EventBuses",
+            "shape_name": "EventBusList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListEventSources": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "LimitMax100",
+            "type": "integer"
+          },
+          "NamePrefix": {
+            "name": "NamePrefix",
+            "shape_name": "EventSourceNamePrefix",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListEventSources",
+      "output": {
+        "markers": null,
+        "members": {
+          "EventSources": {
+            "name": "EventSources",
+            "shape_name": "EventSourceList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListPartnerEventSourceAccounts": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventSourceName": {
+            "name": "EventSourceName",
+            "shape_name": "EventSourceName",
+            "type": "string"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "LimitMax100",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "EventSourceName"
+        ]
+      },
+      "name": "ListPartnerEventSourceAccounts",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "PartnerEventSourceAccounts": {
+            "name": "PartnerEventSourceAccounts",
+            "shape_name": "PartnerEventSourceAccountList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListPartnerEventSources": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "LimitMax100",
+            "type": "integer"
+          },
+          "NamePrefix": {
+            "name": "NamePrefix",
+            "shape_name": "PartnerEventSourceNamePrefix",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "NamePrefix"
+        ]
+      },
+      "name": "ListPartnerEventSources",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "PartnerEventSources": {
+            "name": "PartnerEventSources",
+            "shape_name": "PartnerEventSourceList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListReplays": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventSourceArn": {
+            "name": "EventSourceArn",
+            "shape_name": "ArchiveArn",
+            "type": "string"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "LimitMax100",
+            "type": "integer"
+          },
+          "NamePrefix": {
+            "name": "NamePrefix",
+            "shape_name": "ReplayName",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "ReplayState",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListReplays",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Replays": {
+            "name": "Replays",
+            "shape_name": "ReplayList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListRuleNamesByTarget": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "EventBusName": {
+            "name": "EventBusName",
+            "shape_name": "EventBusNameOrArn",
+            "type": "string"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "LimitMax100",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "TargetArn": {
+            "name": "TargetArn",
+            "shape_name": "TargetArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TargetArn"
+        ]
+      },
+      "name": "ListRuleNamesByTarget",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "RuleNames": {
+            "name": "RuleNames",
+            "shape_name": "RuleNameList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListRules": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "EventBusName": {
+            "name": "EventBusName",
+            "shape_name": "EventBusNameOrArn",
+            "type": "string"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "LimitMax100",
+            "type": "integer"
+          },
+          "NamePrefix": {
+            "name": "NamePrefix",
+            "shape_name": "RuleName",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListRules",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Rules": {
+            "name": "Rules",
+            "shape_name": "RuleResponseList",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "Arn",
+            "id": "Name",
+            "name": "Name",
+            "path": [
+              "Rules"
+            ],
+            "type": "events:rule"
+          }
+        ]
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceARN": {
+            "name": "ResourceARN",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceARN"
+        ]
+      },
+      "name": "ListTagsForResource",
+      "output": {
+        "markers": null,
+        "members": {
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTargetsByRule": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "EventBusName": {
+            "name": "EventBusName",
+            "shape_name": "EventBusNameOrArn",
+            "type": "string"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "LimitMax100",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Rule": {
+            "name": "Rule",
+            "shape_name": "RuleName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Rule"
+        ]
+      },
+      "name": "ListTargetsByRule",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Targets": {
+            "name": "Targets",
+            "shape_name": "TargetList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutEvents": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EndpointId": {
+            "name": "EndpointId",
+            "shape_name": "EndpointId",
+            "type": "string"
+          },
+          "Entries": {
+            "name": "Entries",
+            "shape_name": "PutEventsRequestEntryList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Entries"
+        ]
+      },
+      "name": "PutEvents",
+      "output": {
+        "markers": null,
+        "members": {
+          "Entries": {
+            "name": "Entries",
+            "shape_name": "PutEventsResultEntryList",
+            "type": "list"
+          },
+          "FailedEntryCount": {
+            "name": "FailedEntryCount",
+            "shape_name": "Integer",
+            "type": "integer"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutPartnerEvents": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Entries": {
+            "name": "Entries",
+            "shape_name": "PutPartnerEventsRequestEntryList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Entries"
+        ]
+      },
+      "name": "PutPartnerEvents",
+      "output": {
+        "markers": null,
+        "members": {
+          "Entries": {
+            "name": "Entries",
+            "shape_name": "PutPartnerEventsResultEntryList",
+            "type": "list"
+          },
+          "FailedEntryCount": {
+            "name": "FailedEntryCount",
+            "shape_name": "Integer",
+            "type": "integer"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutPermission": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Action": {
+            "name": "Action",
+            "shape_name": "Action",
+            "type": "string"
+          },
+          "Condition": {
+            "name": "Condition",
+            "shape_name": "Condition",
+            "type": "structure"
+          },
+          "EventBusName": {
+            "name": "EventBusName",
+            "shape_name": "NonPartnerEventBusName",
+            "type": "string"
+          },
+          "Policy": {
+            "name": "Policy",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Principal": {
+            "name": "Principal",
+            "shape_name": "Principal",
+            "type": "string"
+          },
+          "StatementId": {
+            "name": "StatementId",
+            "shape_name": "StatementId",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "PutPermission",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "PutRule": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "RuleDescription",
+            "type": "string"
+          },
+          "EventBusName": {
+            "name": "EventBusName",
+            "shape_name": "EventBusNameOrArn",
+            "type": "string"
+          },
+          "EventPattern": {
+            "name": "EventPattern",
+            "shape_name": "EventPattern",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "RuleName",
+            "type": "string"
+          },
+          "RoleArn": {
+            "name": "RoleArn",
+            "shape_name": "RoleArn",
+            "type": "string"
+          },
+          "ScheduleExpression": {
+            "name": "ScheduleExpression",
+            "shape_name": "ScheduleExpression",
+            "type": "string"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "RuleState",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "PutRule",
+      "output": {
+        "markers": null,
+        "members": {
+          "RuleArn": {
+            "name": "RuleArn",
+            "shape_name": "RuleArn",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutTargets": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventBusName": {
+            "name": "EventBusName",
+            "shape_name": "EventBusNameOrArn",
+            "type": "string"
+          },
+          "Rule": {
+            "name": "Rule",
+            "shape_name": "RuleName",
+            "type": "string"
+          },
+          "Targets": {
+            "name": "Targets",
+            "shape_name": "TargetList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Rule",
+          "Targets"
+        ]
+      },
+      "name": "PutTargets",
+      "output": {
+        "markers": null,
+        "members": {
+          "FailedEntries": {
+            "name": "FailedEntries",
+            "shape_name": "PutTargetsResultEntryList",
+            "type": "list"
+          },
+          "FailedEntryCount": {
+            "name": "FailedEntryCount",
+            "shape_name": "Integer",
+            "type": "integer"
+          }
+        },
+        "required": null
+      }
+    },
+    "RemovePermission": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventBusName": {
+            "name": "EventBusName",
+            "shape_name": "NonPartnerEventBusName",
+            "type": "string"
+          },
+          "RemoveAllPermissions": {
+            "name": "RemoveAllPermissions",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "StatementId": {
+            "name": "StatementId",
+            "shape_name": "StatementId",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "RemovePermission",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RemoveTargets": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventBusName": {
+            "name": "EventBusName",
+            "shape_name": "EventBusNameOrArn",
+            "type": "string"
+          },
+          "Force": {
+            "name": "Force",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "Ids": {
+            "name": "Ids",
+            "shape_name": "TargetIdList",
+            "type": "list"
+          },
+          "Rule": {
+            "name": "Rule",
+            "shape_name": "RuleName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Rule",
+          "Ids"
+        ]
+      },
+      "name": "RemoveTargets",
+      "output": {
+        "markers": null,
+        "members": {
+          "FailedEntries": {
+            "name": "FailedEntries",
+            "shape_name": "RemoveTargetsResultEntryList",
+            "type": "list"
+          },
+          "FailedEntryCount": {
+            "name": "FailedEntryCount",
+            "shape_name": "Integer",
+            "type": "integer"
+          }
+        },
+        "required": null
+      }
+    },
+    "StartReplay": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "ReplayDescription",
+            "type": "string"
+          },
+          "Destination": {
+            "name": "Destination",
+            "shape_name": "ReplayDestination",
+            "type": "structure"
+          },
+          "EventEndTime": {
+            "name": "EventEndTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "EventSourceArn": {
+            "name": "EventSourceArn",
+            "shape_name": "ArchiveArn",
+            "type": "string"
+          },
+          "EventStartTime": {
+            "name": "EventStartTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "ReplayName": {
+            "name": "ReplayName",
+            "shape_name": "ReplayName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ReplayName",
+          "EventSourceArn",
+          "EventStartTime",
+          "EventEndTime",
+          "Destination"
+        ]
+      },
+      "name": "StartReplay",
+      "output": {
+        "markers": null,
+        "members": {
+          "ReplayArn": {
+            "name": "ReplayArn",
+            "shape_name": "ReplayArn",
+            "type": "string"
+          },
+          "ReplayStartTime": {
+            "name": "ReplayStartTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "ReplayState",
+            "type": "string"
+          },
+          "StateReason": {
+            "name": "StateReason",
+            "shape_name": "ReplayStateReason",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "TagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceARN": {
+            "name": "ResourceARN",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceARN",
+          "Tags"
+        ]
+      },
+      "name": "TagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TestEventPattern": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Event": {
+            "name": "Event",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "EventPattern": {
+            "name": "EventPattern",
+            "shape_name": "EventPattern",
+            "type": "string"
+          }
+        },
+        "required": [
+          "EventPattern",
+          "Event"
+        ]
+      },
+      "name": "TestEventPattern",
+      "output": {
+        "markers": null,
+        "members": {
+          "Result": {
+            "name": "Result",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          }
+        },
+        "required": null
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceARN": {
+            "name": "ResourceARN",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "TagKeyList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceARN",
+          "TagKeys"
+        ]
+      },
+      "name": "UntagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateApiDestination": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConnectionArn": {
+            "name": "ConnectionArn",
+            "shape_name": "ConnectionArn",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "ApiDestinationDescription",
+            "type": "string"
+          },
+          "HttpMethod": {
+            "name": "HttpMethod",
+            "shape_name": "ApiDestinationHttpMethod",
+            "type": "string"
+          },
+          "InvocationEndpoint": {
+            "name": "InvocationEndpoint",
+            "shape_name": "HttpsEndpoint",
+            "type": "string"
+          },
+          "InvocationRateLimitPerSecond": {
+            "name": "InvocationRateLimitPerSecond",
+            "shape_name": "ApiDestinationInvocationRateLimitPerSecond",
+            "type": "integer"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "ApiDestinationName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "UpdateApiDestination",
+      "output": {
+        "markers": null,
+        "members": {
+          "ApiDestinationArn": {
+            "name": "ApiDestinationArn",
+            "shape_name": "ApiDestinationArn",
+            "type": "string"
+          },
+          "ApiDestinationState": {
+            "name": "ApiDestinationState",
+            "shape_name": "ApiDestinationState",
+            "type": "string"
+          },
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "LastModifiedTime": {
+            "name": "LastModifiedTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateArchive": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ArchiveName": {
+            "name": "ArchiveName",
+            "shape_name": "ArchiveName",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "ArchiveDescription",
+            "type": "string"
+          },
+          "EventPattern": {
+            "name": "EventPattern",
+            "shape_name": "EventPattern",
+            "type": "string"
+          },
+          "KmsKeyIdentifier": {
+            "name": "KmsKeyIdentifier",
+            "shape_name": "KmsKeyIdentifier",
+            "type": "string"
+          },
+          "RetentionDays": {
+            "name": "RetentionDays",
+            "shape_name": "RetentionDays",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "ArchiveName"
+        ]
+      },
+      "name": "UpdateArchive",
+      "output": {
+        "markers": null,
+        "members": {
+          "ArchiveArn": {
+            "name": "ArchiveArn",
+            "shape_name": "ArchiveArn",
+            "type": "string"
+          },
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "ArchiveState",
+            "type": "string"
+          },
+          "StateReason": {
+            "name": "StateReason",
+            "shape_name": "ArchiveStateReason",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateConnection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AuthParameters": {
+            "name": "AuthParameters",
+            "shape_name": "UpdateConnectionAuthRequestParameters",
+            "type": "structure"
+          },
+          "AuthorizationType": {
+            "name": "AuthorizationType",
+            "shape_name": "ConnectionAuthorizationType",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "ConnectionDescription",
+            "type": "string"
+          },
+          "InvocationConnectivityParameters": {
+            "name": "InvocationConnectivityParameters",
+            "shape_name": "ConnectivityResourceParameters",
+            "type": "structure"
+          },
+          "KmsKeyIdentifier": {
+            "name": "KmsKeyIdentifier",
+            "shape_name": "KmsKeyIdentifier",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "ConnectionName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "UpdateConnection",
+      "output": {
+        "markers": null,
+        "members": {
+          "ConnectionArn": {
+            "name": "ConnectionArn",
+            "shape_name": "ConnectionArn",
+            "type": "string"
+          },
+          "ConnectionState": {
+            "name": "ConnectionState",
+            "shape_name": "ConnectionState",
+            "type": "string"
+          },
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "LastAuthorizedTime": {
+            "name": "LastAuthorizedTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "LastModifiedTime": {
+            "name": "LastModifiedTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateEndpoint": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "EndpointDescription",
+            "type": "string"
+          },
+          "EventBuses": {
+            "name": "EventBuses",
+            "shape_name": "EndpointEventBusList",
+            "type": "list"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EndpointName",
+            "type": "string"
+          },
+          "ReplicationConfig": {
+            "name": "ReplicationConfig",
+            "shape_name": "ReplicationConfig",
+            "type": "structure"
+          },
+          "RoleArn": {
+            "name": "RoleArn",
+            "shape_name": "IamRoleArn",
+            "type": "string"
+          },
+          "RoutingConfig": {
+            "name": "RoutingConfig",
+            "shape_name": "RoutingConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "UpdateEndpoint",
+      "output": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "EndpointArn",
+            "type": "string"
+          },
+          "EndpointId": {
+            "name": "EndpointId",
+            "shape_name": "EndpointId",
+            "type": "string"
+          },
+          "EndpointUrl": {
+            "name": "EndpointUrl",
+            "shape_name": "EndpointUrl",
+            "type": "string"
+          },
+          "EventBuses": {
+            "name": "EventBuses",
+            "shape_name": "EndpointEventBusList",
+            "type": "list"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EndpointName",
+            "type": "string"
+          },
+          "ReplicationConfig": {
+            "name": "ReplicationConfig",
+            "shape_name": "ReplicationConfig",
+            "type": "structure"
+          },
+          "RoleArn": {
+            "name": "RoleArn",
+            "shape_name": "IamRoleArn",
+            "type": "string"
+          },
+          "RoutingConfig": {
+            "name": "RoutingConfig",
+            "shape_name": "RoutingConfig",
+            "type": "structure"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "EndpointState",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateEventBus": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DeadLetterConfig": {
+            "name": "DeadLetterConfig",
+            "shape_name": "DeadLetterConfig",
+            "type": "structure"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "EventBusDescription",
+            "type": "string"
+          },
+          "KmsKeyIdentifier": {
+            "name": "KmsKeyIdentifier",
+            "shape_name": "KmsKeyIdentifier",
+            "type": "string"
+          },
+          "LogConfig": {
+            "name": "LogConfig",
+            "shape_name": "LogConfig",
+            "type": "structure"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EventBusName",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "UpdateEventBus",
+      "output": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DeadLetterConfig": {
+            "name": "DeadLetterConfig",
+            "shape_name": "DeadLetterConfig",
+            "type": "structure"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "EventBusDescription",
+            "type": "string"
+          },
+          "KmsKeyIdentifier": {
+            "name": "KmsKeyIdentifier",
+            "shape_name": "KmsKeyIdentifier",
+            "type": "string"
+          },
+          "LogConfig": {
+            "name": "LogConfig",
+            "shape_name": "LogConfig",
+            "type": "structure"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EventBusName",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    }
+  }
+}

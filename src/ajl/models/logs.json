@@ -1,0 +1,3544 @@
+{
+  "metadata": {
+    "apiVersion": "2014-03-28",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "logs",
+    "jsonVersion": "1.1",
+    "protocol": "json",
+    "protocols": [
+      "json"
+    ],
+    "serviceFullName": "Amazon CloudWatch Logs",
+    "serviceId": "CloudWatch Logs",
+    "signatureVersion": "v4",
+    "targetPrefix": "Logs_20140328",
+    "uid": "logs-2014-03-28"
+  },
+  "name": "logs",
+  "operations": {
+    "AssociateKmsKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "kmsKeyId": {
+            "name": "kmsKeyId",
+            "shape_name": "KmsKeyId",
+            "type": "string"
+          },
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "resourceIdentifier": {
+            "name": "resourceIdentifier",
+            "shape_name": "ResourceIdentifier",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kmsKeyId"
+        ]
+      },
+      "name": "AssociateKmsKey",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CancelExportTask": {
+      "input": {
+        "markers": null,
+        "members": {
+          "taskId": {
+            "name": "taskId",
+            "shape_name": "ExportTaskId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "taskId"
+        ]
+      },
+      "name": "CancelExportTask",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateDelivery": {
+      "input": {
+        "markers": null,
+        "members": {
+          "deliveryDestinationArn": {
+            "name": "deliveryDestinationArn",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "deliverySourceName": {
+            "name": "deliverySourceName",
+            "shape_name": "DeliverySourceName",
+            "type": "string"
+          },
+          "fieldDelimiter": {
+            "name": "fieldDelimiter",
+            "shape_name": "FieldDelimiter",
+            "type": "string"
+          },
+          "recordFields": {
+            "name": "recordFields",
+            "shape_name": "RecordFields",
+            "type": "list"
+          },
+          "s3DeliveryConfiguration": {
+            "name": "s3DeliveryConfiguration",
+            "shape_name": "S3DeliveryConfiguration",
+            "type": "structure"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "map"
+          }
+        },
+        "required": [
+          "deliverySourceName",
+          "deliveryDestinationArn"
+        ]
+      },
+      "name": "CreateDelivery",
+      "output": {
+        "markers": null,
+        "members": {
+          "delivery": {
+            "name": "delivery",
+            "shape_name": "Delivery",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateExportTask": {
+      "input": {
+        "markers": null,
+        "members": {
+          "destination": {
+            "name": "destination",
+            "shape_name": "ExportDestinationBucket",
+            "type": "string"
+          },
+          "destinationPrefix": {
+            "name": "destinationPrefix",
+            "shape_name": "ExportDestinationPrefix",
+            "type": "string"
+          },
+          "from": {
+            "name": "from",
+            "shape_name": "Timestamp",
+            "type": "long"
+          },
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "logStreamNamePrefix": {
+            "name": "logStreamNamePrefix",
+            "shape_name": "LogStreamName",
+            "type": "string"
+          },
+          "taskName": {
+            "name": "taskName",
+            "shape_name": "ExportTaskName",
+            "type": "string"
+          },
+          "to": {
+            "name": "to",
+            "shape_name": "Timestamp",
+            "type": "long"
+          }
+        },
+        "required": [
+          "logGroupName",
+          "from",
+          "to",
+          "destination"
+        ]
+      },
+      "name": "CreateExportTask",
+      "output": {
+        "markers": null,
+        "members": {
+          "taskId": {
+            "name": "taskId",
+            "shape_name": "ExportTaskId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateLogAnomalyDetector": {
+      "input": {
+        "markers": null,
+        "members": {
+          "anomalyVisibilityTime": {
+            "name": "anomalyVisibilityTime",
+            "shape_name": "AnomalyVisibilityTime",
+            "type": "long"
+          },
+          "detectorName": {
+            "name": "detectorName",
+            "shape_name": "DetectorName",
+            "type": "string"
+          },
+          "evaluationFrequency": {
+            "name": "evaluationFrequency",
+            "shape_name": "EvaluationFrequency",
+            "type": "string"
+          },
+          "filterPattern": {
+            "name": "filterPattern",
+            "shape_name": "FilterPattern",
+            "type": "string"
+          },
+          "kmsKeyId": {
+            "name": "kmsKeyId",
+            "shape_name": "DetectorKmsKeyArn",
+            "type": "string"
+          },
+          "logGroupArnList": {
+            "name": "logGroupArnList",
+            "shape_name": "LogGroupArnList",
+            "type": "list"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "map"
+          }
+        },
+        "required": [
+          "logGroupArnList"
+        ]
+      },
+      "name": "CreateLogAnomalyDetector",
+      "output": {
+        "markers": null,
+        "members": {
+          "anomalyDetectorArn": {
+            "name": "anomalyDetectorArn",
+            "shape_name": "AnomalyDetectorArn",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateLogGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "kmsKeyId": {
+            "name": "kmsKeyId",
+            "shape_name": "KmsKeyId",
+            "type": "string"
+          },
+          "logGroupClass": {
+            "name": "logGroupClass",
+            "shape_name": "LogGroupClass",
+            "type": "string"
+          },
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "map"
+          }
+        },
+        "required": [
+          "logGroupName"
+        ]
+      },
+      "name": "CreateLogGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateLogStream": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "logStreamName": {
+            "name": "logStreamName",
+            "shape_name": "LogStreamName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "logGroupName",
+          "logStreamName"
+        ]
+      },
+      "name": "CreateLogStream",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteAccountPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "policyName": {
+            "name": "policyName",
+            "shape_name": "PolicyName",
+            "type": "string"
+          },
+          "policyType": {
+            "name": "policyType",
+            "shape_name": "PolicyType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "policyName",
+          "policyType"
+        ]
+      },
+      "name": "DeleteAccountPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteDataProtectionPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logGroupIdentifier": {
+            "name": "logGroupIdentifier",
+            "shape_name": "LogGroupIdentifier",
+            "type": "string"
+          }
+        },
+        "required": [
+          "logGroupIdentifier"
+        ]
+      },
+      "name": "DeleteDataProtectionPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteDelivery": {
+      "input": {
+        "markers": null,
+        "members": {
+          "id": {
+            "name": "id",
+            "shape_name": "DeliveryId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "name": "DeleteDelivery",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteDeliveryDestination": {
+      "input": {
+        "markers": null,
+        "members": {
+          "name": {
+            "name": "name",
+            "shape_name": "DeliveryDestinationName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "name": "DeleteDeliveryDestination",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteDeliveryDestinationPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "deliveryDestinationName": {
+            "name": "deliveryDestinationName",
+            "shape_name": "DeliveryDestinationName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "deliveryDestinationName"
+        ]
+      },
+      "name": "DeleteDeliveryDestinationPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteDeliverySource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "name": {
+            "name": "name",
+            "shape_name": "DeliverySourceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "name": "DeleteDeliverySource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteDestination": {
+      "input": {
+        "markers": null,
+        "members": {
+          "destinationName": {
+            "name": "destinationName",
+            "shape_name": "DestinationName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "destinationName"
+        ]
+      },
+      "name": "DeleteDestination",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteIndexPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logGroupIdentifier": {
+            "name": "logGroupIdentifier",
+            "shape_name": "LogGroupIdentifier",
+            "type": "string"
+          }
+        },
+        "required": [
+          "logGroupIdentifier"
+        ]
+      },
+      "name": "DeleteIndexPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteIntegration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "force": {
+            "name": "force",
+            "shape_name": "Force",
+            "type": "boolean"
+          },
+          "integrationName": {
+            "name": "integrationName",
+            "shape_name": "IntegrationName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "integrationName"
+        ]
+      },
+      "name": "DeleteIntegration",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteLogAnomalyDetector": {
+      "input": {
+        "markers": null,
+        "members": {
+          "anomalyDetectorArn": {
+            "name": "anomalyDetectorArn",
+            "shape_name": "AnomalyDetectorArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "anomalyDetectorArn"
+        ]
+      },
+      "name": "DeleteLogAnomalyDetector",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteLogGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "logGroupName"
+        ]
+      },
+      "name": "DeleteLogGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteLogStream": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "logStreamName": {
+            "name": "logStreamName",
+            "shape_name": "LogStreamName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "logGroupName",
+          "logStreamName"
+        ]
+      },
+      "name": "DeleteLogStream",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteMetricFilter": {
+      "input": {
+        "markers": null,
+        "members": {
+          "filterName": {
+            "name": "filterName",
+            "shape_name": "FilterName",
+            "type": "string"
+          },
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "logGroupName",
+          "filterName"
+        ]
+      },
+      "name": "DeleteMetricFilter",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteQueryDefinition": {
+      "input": {
+        "markers": null,
+        "members": {
+          "queryDefinitionId": {
+            "name": "queryDefinitionId",
+            "shape_name": "QueryId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "queryDefinitionId"
+        ]
+      },
+      "name": "DeleteQueryDefinition",
+      "output": {
+        "markers": null,
+        "members": {
+          "success": {
+            "name": "success",
+            "shape_name": "Success",
+            "type": "boolean"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteResourcePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "expectedRevisionId": {
+            "name": "expectedRevisionId",
+            "shape_name": "ExpectedRevisionId",
+            "type": "string"
+          },
+          "policyName": {
+            "name": "policyName",
+            "shape_name": "PolicyName",
+            "type": "string"
+          },
+          "resourceArn": {
+            "name": "resourceArn",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DeleteResourcePolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteRetentionPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "logGroupName"
+        ]
+      },
+      "name": "DeleteRetentionPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteSubscriptionFilter": {
+      "input": {
+        "markers": null,
+        "members": {
+          "filterName": {
+            "name": "filterName",
+            "shape_name": "FilterName",
+            "type": "string"
+          },
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "logGroupName",
+          "filterName"
+        ]
+      },
+      "name": "DeleteSubscriptionFilter",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteTransformer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logGroupIdentifier": {
+            "name": "logGroupIdentifier",
+            "shape_name": "LogGroupIdentifier",
+            "type": "string"
+          }
+        },
+        "required": [
+          "logGroupIdentifier"
+        ]
+      },
+      "name": "DeleteTransformer",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DescribeAccountPolicies": {
+      "input": {
+        "markers": null,
+        "members": {
+          "accountIdentifiers": {
+            "name": "accountIdentifiers",
+            "shape_name": "AccountIds",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "policyName": {
+            "name": "policyName",
+            "shape_name": "PolicyName",
+            "type": "string"
+          },
+          "policyType": {
+            "name": "policyType",
+            "shape_name": "PolicyType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "policyType"
+        ]
+      },
+      "name": "DescribeAccountPolicies",
+      "output": {
+        "markers": null,
+        "members": {
+          "accountPolicies": {
+            "name": "accountPolicies",
+            "shape_name": "AccountPolicies",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeConfigurationTemplates": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "deliveryDestinationTypes": {
+            "name": "deliveryDestinationTypes",
+            "shape_name": "DeliveryDestinationTypes",
+            "type": "list"
+          },
+          "limit": {
+            "name": "limit",
+            "shape_name": "DescribeLimit",
+            "type": "integer"
+          },
+          "logTypes": {
+            "name": "logTypes",
+            "shape_name": "LogTypes",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "resourceTypes": {
+            "name": "resourceTypes",
+            "shape_name": "ResourceTypes",
+            "type": "list"
+          },
+          "service": {
+            "name": "service",
+            "shape_name": "Service",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeConfigurationTemplates",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "configurationTemplates": {
+            "name": "configurationTemplates",
+            "shape_name": "ConfigurationTemplates",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeDeliveries": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "limit": {
+            "name": "limit",
+            "shape_name": "DescribeLimit",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeDeliveries",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "deliveries": {
+            "name": "deliveries",
+            "shape_name": "Deliveries",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeDeliveryDestinations": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "limit": {
+            "name": "limit",
+            "shape_name": "DescribeLimit",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeDeliveryDestinations",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "deliveryDestinations": {
+            "name": "deliveryDestinations",
+            "shape_name": "DeliveryDestinations",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeDeliverySources": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "limit": {
+            "name": "limit",
+            "shape_name": "DescribeLimit",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeDeliverySources",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "deliverySources": {
+            "name": "deliverySources",
+            "shape_name": "DeliverySources",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeDestinations": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "DestinationNamePrefix": {
+            "name": "DestinationNamePrefix",
+            "shape_name": "DestinationName",
+            "type": "string"
+          },
+          "limit": {
+            "name": "limit",
+            "shape_name": "DescribeLimit",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeDestinations",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "destinations": {
+            "name": "destinations",
+            "shape_name": "Destinations",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeExportTasks": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "limit": {
+            "name": "limit",
+            "shape_name": "DescribeLimit",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "statusCode": {
+            "name": "statusCode",
+            "shape_name": "ExportTaskStatusCode",
+            "type": "string"
+          },
+          "taskId": {
+            "name": "taskId",
+            "shape_name": "ExportTaskId",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeExportTasks",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "exportTasks": {
+            "name": "exportTasks",
+            "shape_name": "ExportTasks",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeFieldIndexes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logGroupIdentifiers": {
+            "name": "logGroupIdentifiers",
+            "shape_name": "DescribeFieldIndexesLogGroupIdentifiers",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "logGroupIdentifiers"
+        ]
+      },
+      "name": "DescribeFieldIndexes",
+      "output": {
+        "markers": null,
+        "members": {
+          "fieldIndexes": {
+            "name": "fieldIndexes",
+            "shape_name": "FieldIndexes",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeIndexPolicies": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logGroupIdentifiers": {
+            "name": "logGroupIdentifiers",
+            "shape_name": "DescribeIndexPoliciesLogGroupIdentifiers",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "logGroupIdentifiers"
+        ]
+      },
+      "name": "DescribeIndexPolicies",
+      "output": {
+        "markers": null,
+        "members": {
+          "indexPolicies": {
+            "name": "indexPolicies",
+            "shape_name": "IndexPolicies",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeLogGroups": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "accountIdentifiers": {
+            "name": "accountIdentifiers",
+            "shape_name": "AccountIds",
+            "type": "list"
+          },
+          "includeLinkedAccounts": {
+            "name": "includeLinkedAccounts",
+            "shape_name": "IncludeLinkedAccounts",
+            "type": "boolean"
+          },
+          "limit": {
+            "name": "limit",
+            "shape_name": "DescribeLimit",
+            "type": "integer"
+          },
+          "logGroupClass": {
+            "name": "logGroupClass",
+            "shape_name": "LogGroupClass",
+            "type": "string"
+          },
+          "logGroupIdentifiers": {
+            "name": "logGroupIdentifiers",
+            "shape_name": "DescribeLogGroupsLogGroupIdentifiers",
+            "type": "list"
+          },
+          "logGroupNamePattern": {
+            "name": "logGroupNamePattern",
+            "shape_name": "LogGroupNamePattern",
+            "type": "string"
+          },
+          "logGroupNamePrefix": {
+            "name": "logGroupNamePrefix",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeLogGroups",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "logGroups": {
+            "name": "logGroups",
+            "shape_name": "LogGroups",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:logs:{region}:{account}:log-group:{logGroupName}",
+            "id": "logGroupName",
+            "name": "logGroupName",
+            "path": [
+              "logGroups"
+            ],
+            "type": "logs:log-group"
+          }
+        ]
+      }
+    },
+    "DescribeLogStreams": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "descending": {
+            "name": "descending",
+            "shape_name": "Descending",
+            "type": "boolean"
+          },
+          "limit": {
+            "name": "limit",
+            "shape_name": "DescribeLimit",
+            "type": "integer"
+          },
+          "logGroupIdentifier": {
+            "name": "logGroupIdentifier",
+            "shape_name": "LogGroupIdentifier",
+            "type": "string"
+          },
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "logStreamNamePrefix": {
+            "name": "logStreamNamePrefix",
+            "shape_name": "LogStreamName",
+            "type": "string"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "orderBy": {
+            "name": "orderBy",
+            "shape_name": "OrderBy",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeLogStreams",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "logStreams": {
+            "name": "logStreams",
+            "shape_name": "LogStreams",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeMetricFilters": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "filterNamePrefix": {
+            "name": "filterNamePrefix",
+            "shape_name": "FilterName",
+            "type": "string"
+          },
+          "limit": {
+            "name": "limit",
+            "shape_name": "DescribeLimit",
+            "type": "integer"
+          },
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "metricName": {
+            "name": "metricName",
+            "shape_name": "MetricName",
+            "type": "string"
+          },
+          "metricNamespace": {
+            "name": "metricNamespace",
+            "shape_name": "MetricNamespace",
+            "type": "string"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeMetricFilters",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "metricFilters": {
+            "name": "metricFilters",
+            "shape_name": "MetricFilters",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeQueries": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "DescribeQueriesMaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "queryLanguage": {
+            "name": "queryLanguage",
+            "shape_name": "QueryLanguage",
+            "type": "string"
+          },
+          "status": {
+            "name": "status",
+            "shape_name": "QueryStatus",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeQueries",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "queries": {
+            "name": "queries",
+            "shape_name": "QueryInfoList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeQueryDefinitions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "QueryListMaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "queryDefinitionNamePrefix": {
+            "name": "queryDefinitionNamePrefix",
+            "shape_name": "QueryDefinitionName",
+            "type": "string"
+          },
+          "queryLanguage": {
+            "name": "queryLanguage",
+            "shape_name": "QueryLanguage",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeQueryDefinitions",
+      "output": {
+        "markers": null,
+        "members": {
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "queryDefinitions": {
+            "name": "queryDefinitions",
+            "shape_name": "QueryDefinitionList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeResourcePolicies": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "limit": {
+            "name": "limit",
+            "shape_name": "DescribeLimit",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "policyScope": {
+            "name": "policyScope",
+            "shape_name": "PolicyScope",
+            "type": "string"
+          },
+          "resourceArn": {
+            "name": "resourceArn",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeResourcePolicies",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "resourcePolicies": {
+            "name": "resourcePolicies",
+            "shape_name": "ResourcePolicies",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeSubscriptionFilters": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "filterNamePrefix": {
+            "name": "filterNamePrefix",
+            "shape_name": "FilterName",
+            "type": "string"
+          },
+          "limit": {
+            "name": "limit",
+            "shape_name": "DescribeLimit",
+            "type": "integer"
+          },
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "logGroupName"
+        ]
+      },
+      "name": "DescribeSubscriptionFilters",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "subscriptionFilters": {
+            "name": "subscriptionFilters",
+            "shape_name": "SubscriptionFilters",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DisassociateKmsKey": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "resourceIdentifier": {
+            "name": "resourceIdentifier",
+            "shape_name": "ResourceIdentifier",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DisassociateKmsKey",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "FilterLogEvents": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "endTime": {
+            "name": "endTime",
+            "shape_name": "Timestamp",
+            "type": "long"
+          },
+          "filterPattern": {
+            "name": "filterPattern",
+            "shape_name": "FilterPattern",
+            "type": "string"
+          },
+          "interleaved": {
+            "name": "interleaved",
+            "shape_name": "Interleaved",
+            "type": "boolean"
+          },
+          "limit": {
+            "name": "limit",
+            "shape_name": "EventsLimit",
+            "type": "integer"
+          },
+          "logGroupIdentifier": {
+            "name": "logGroupIdentifier",
+            "shape_name": "LogGroupIdentifier",
+            "type": "string"
+          },
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "logStreamNamePrefix": {
+            "name": "logStreamNamePrefix",
+            "shape_name": "LogStreamName",
+            "type": "string"
+          },
+          "logStreamNames": {
+            "name": "logStreamNames",
+            "shape_name": "InputLogStreamNames",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "startTime": {
+            "name": "startTime",
+            "shape_name": "Timestamp",
+            "type": "long"
+          },
+          "unmask": {
+            "name": "unmask",
+            "shape_name": "Unmask",
+            "type": "boolean"
+          }
+        },
+        "required": null
+      },
+      "name": "FilterLogEvents",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "events": {
+            "name": "events",
+            "shape_name": "FilteredLogEvents",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "searchedLogStreams": {
+            "name": "searchedLogStreams",
+            "shape_name": "SearchedLogStreams",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetDataProtectionPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logGroupIdentifier": {
+            "name": "logGroupIdentifier",
+            "shape_name": "LogGroupIdentifier",
+            "type": "string"
+          }
+        },
+        "required": [
+          "logGroupIdentifier"
+        ]
+      },
+      "name": "GetDataProtectionPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "lastUpdatedTime": {
+            "name": "lastUpdatedTime",
+            "shape_name": "Timestamp",
+            "type": "long"
+          },
+          "logGroupIdentifier": {
+            "name": "logGroupIdentifier",
+            "shape_name": "LogGroupIdentifier",
+            "type": "string"
+          },
+          "policyDocument": {
+            "name": "policyDocument",
+            "shape_name": "DataProtectionPolicyDocument",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetDelivery": {
+      "input": {
+        "markers": null,
+        "members": {
+          "id": {
+            "name": "id",
+            "shape_name": "DeliveryId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "name": "GetDelivery",
+      "output": {
+        "markers": null,
+        "members": {
+          "delivery": {
+            "name": "delivery",
+            "shape_name": "Delivery",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetDeliveryDestination": {
+      "input": {
+        "markers": null,
+        "members": {
+          "name": {
+            "name": "name",
+            "shape_name": "DeliveryDestinationName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "name": "GetDeliveryDestination",
+      "output": {
+        "markers": null,
+        "members": {
+          "deliveryDestination": {
+            "name": "deliveryDestination",
+            "shape_name": "DeliveryDestination",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetDeliveryDestinationPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "deliveryDestinationName": {
+            "name": "deliveryDestinationName",
+            "shape_name": "DeliveryDestinationName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "deliveryDestinationName"
+        ]
+      },
+      "name": "GetDeliveryDestinationPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "policy": {
+            "name": "policy",
+            "shape_name": "Policy",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetDeliverySource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "name": {
+            "name": "name",
+            "shape_name": "DeliverySourceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "name": "GetDeliverySource",
+      "output": {
+        "markers": null,
+        "members": {
+          "deliverySource": {
+            "name": "deliverySource",
+            "shape_name": "DeliverySource",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetIntegration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "integrationName": {
+            "name": "integrationName",
+            "shape_name": "IntegrationName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "integrationName"
+        ]
+      },
+      "name": "GetIntegration",
+      "output": {
+        "markers": null,
+        "members": {
+          "integrationDetails": {
+            "name": "integrationDetails",
+            "shape_name": "IntegrationDetails",
+            "type": "structure"
+          },
+          "integrationName": {
+            "name": "integrationName",
+            "shape_name": "IntegrationName",
+            "type": "string"
+          },
+          "integrationStatus": {
+            "name": "integrationStatus",
+            "shape_name": "IntegrationStatus",
+            "type": "string"
+          },
+          "integrationType": {
+            "name": "integrationType",
+            "shape_name": "IntegrationType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetLogAnomalyDetector": {
+      "input": {
+        "markers": null,
+        "members": {
+          "anomalyDetectorArn": {
+            "name": "anomalyDetectorArn",
+            "shape_name": "AnomalyDetectorArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "anomalyDetectorArn"
+        ]
+      },
+      "name": "GetLogAnomalyDetector",
+      "output": {
+        "markers": null,
+        "members": {
+          "anomalyDetectorStatus": {
+            "name": "anomalyDetectorStatus",
+            "shape_name": "AnomalyDetectorStatus",
+            "type": "string"
+          },
+          "anomalyVisibilityTime": {
+            "name": "anomalyVisibilityTime",
+            "shape_name": "AnomalyVisibilityTime",
+            "type": "long"
+          },
+          "creationTimeStamp": {
+            "name": "creationTimeStamp",
+            "shape_name": "EpochMillis",
+            "type": "long"
+          },
+          "detectorName": {
+            "name": "detectorName",
+            "shape_name": "DetectorName",
+            "type": "string"
+          },
+          "evaluationFrequency": {
+            "name": "evaluationFrequency",
+            "shape_name": "EvaluationFrequency",
+            "type": "string"
+          },
+          "filterPattern": {
+            "name": "filterPattern",
+            "shape_name": "FilterPattern",
+            "type": "string"
+          },
+          "kmsKeyId": {
+            "name": "kmsKeyId",
+            "shape_name": "KmsKeyId",
+            "type": "string"
+          },
+          "lastModifiedTimeStamp": {
+            "name": "lastModifiedTimeStamp",
+            "shape_name": "EpochMillis",
+            "type": "long"
+          },
+          "logGroupArnList": {
+            "name": "logGroupArnList",
+            "shape_name": "LogGroupArnList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetLogEvents": {
+      "input": {
+        "markers": null,
+        "members": {
+          "endTime": {
+            "name": "endTime",
+            "shape_name": "Timestamp",
+            "type": "long"
+          },
+          "limit": {
+            "name": "limit",
+            "shape_name": "EventsLimit",
+            "type": "integer"
+          },
+          "logGroupIdentifier": {
+            "name": "logGroupIdentifier",
+            "shape_name": "LogGroupIdentifier",
+            "type": "string"
+          },
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "logStreamName": {
+            "name": "logStreamName",
+            "shape_name": "LogStreamName",
+            "type": "string"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "startFromHead": {
+            "name": "startFromHead",
+            "shape_name": "StartFromHead",
+            "type": "boolean"
+          },
+          "startTime": {
+            "name": "startTime",
+            "shape_name": "Timestamp",
+            "type": "long"
+          },
+          "unmask": {
+            "name": "unmask",
+            "shape_name": "Unmask",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "logStreamName"
+        ]
+      },
+      "name": "GetLogEvents",
+      "output": {
+        "markers": null,
+        "members": {
+          "events": {
+            "name": "events",
+            "shape_name": "OutputLogEvents",
+            "type": "list"
+          },
+          "nextBackwardToken": {
+            "name": "nextBackwardToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "nextForwardToken": {
+            "name": "nextForwardToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetLogGroupFields": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logGroupIdentifier": {
+            "name": "logGroupIdentifier",
+            "shape_name": "LogGroupIdentifier",
+            "type": "string"
+          },
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "time": {
+            "name": "time",
+            "shape_name": "Timestamp",
+            "type": "long"
+          }
+        },
+        "required": null
+      },
+      "name": "GetLogGroupFields",
+      "output": {
+        "markers": null,
+        "members": {
+          "logGroupFields": {
+            "name": "logGroupFields",
+            "shape_name": "LogGroupFieldList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetLogObject": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logObjectPointer": {
+            "name": "logObjectPointer",
+            "shape_name": "LogObjectPointer",
+            "type": "string"
+          },
+          "unmask": {
+            "name": "unmask",
+            "shape_name": "Unmask",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "logObjectPointer"
+        ]
+      },
+      "name": "GetLogObject",
+      "output": {
+        "markers": null,
+        "members": {
+          "fieldStream": {
+            "name": "fieldStream",
+            "shape_name": "GetLogObjectResponseStream",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetLogRecord": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logRecordPointer": {
+            "name": "logRecordPointer",
+            "shape_name": "LogRecordPointer",
+            "type": "string"
+          },
+          "unmask": {
+            "name": "unmask",
+            "shape_name": "Unmask",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "logRecordPointer"
+        ]
+      },
+      "name": "GetLogRecord",
+      "output": {
+        "markers": null,
+        "members": {
+          "logRecord": {
+            "name": "logRecord",
+            "shape_name": "LogRecord",
+            "type": "map"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetQueryResults": {
+      "input": {
+        "markers": null,
+        "members": {
+          "queryId": {
+            "name": "queryId",
+            "shape_name": "QueryId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "queryId"
+        ]
+      },
+      "name": "GetQueryResults",
+      "output": {
+        "markers": null,
+        "members": {
+          "encryptionKey": {
+            "name": "encryptionKey",
+            "shape_name": "EncryptionKey",
+            "type": "string"
+          },
+          "queryLanguage": {
+            "name": "queryLanguage",
+            "shape_name": "QueryLanguage",
+            "type": "string"
+          },
+          "results": {
+            "name": "results",
+            "shape_name": "QueryResults",
+            "type": "list"
+          },
+          "statistics": {
+            "name": "statistics",
+            "shape_name": "QueryStatistics",
+            "type": "structure"
+          },
+          "status": {
+            "name": "status",
+            "shape_name": "QueryStatus",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetTransformer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logGroupIdentifier": {
+            "name": "logGroupIdentifier",
+            "shape_name": "LogGroupIdentifier",
+            "type": "string"
+          }
+        },
+        "required": [
+          "logGroupIdentifier"
+        ]
+      },
+      "name": "GetTransformer",
+      "output": {
+        "markers": null,
+        "members": {
+          "creationTime": {
+            "name": "creationTime",
+            "shape_name": "Timestamp",
+            "type": "long"
+          },
+          "lastModifiedTime": {
+            "name": "lastModifiedTime",
+            "shape_name": "Timestamp",
+            "type": "long"
+          },
+          "logGroupIdentifier": {
+            "name": "logGroupIdentifier",
+            "shape_name": "LogGroupIdentifier",
+            "type": "string"
+          },
+          "transformerConfig": {
+            "name": "transformerConfig",
+            "shape_name": "Processors",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListAnomalies": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "anomalyDetectorArn": {
+            "name": "anomalyDetectorArn",
+            "shape_name": "AnomalyDetectorArn",
+            "type": "string"
+          },
+          "limit": {
+            "name": "limit",
+            "shape_name": "ListAnomaliesLimit",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "suppressionState": {
+            "name": "suppressionState",
+            "shape_name": "SuppressionState",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListAnomalies",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "anomalies": {
+            "name": "anomalies",
+            "shape_name": "Anomalies",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListIntegrations": {
+      "input": {
+        "markers": null,
+        "members": {
+          "integrationNamePrefix": {
+            "name": "integrationNamePrefix",
+            "shape_name": "IntegrationNamePrefix",
+            "type": "string"
+          },
+          "integrationStatus": {
+            "name": "integrationStatus",
+            "shape_name": "IntegrationStatus",
+            "type": "string"
+          },
+          "integrationType": {
+            "name": "integrationType",
+            "shape_name": "IntegrationType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListIntegrations",
+      "output": {
+        "markers": null,
+        "members": {
+          "integrationSummaries": {
+            "name": "integrationSummaries",
+            "shape_name": "IntegrationSummaries",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListLogAnomalyDetectors": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "filterLogGroupArn": {
+            "name": "filterLogGroupArn",
+            "shape_name": "LogGroupArn",
+            "type": "string"
+          },
+          "limit": {
+            "name": "limit",
+            "shape_name": "ListLogAnomalyDetectorsLimit",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListLogAnomalyDetectors",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "anomalyDetectors": {
+            "name": "anomalyDetectors",
+            "shape_name": "AnomalyDetectors",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListLogGroups": {
+      "input": {
+        "markers": null,
+        "members": {
+          "accountIdentifiers": {
+            "name": "accountIdentifiers",
+            "shape_name": "AccountIds",
+            "type": "list"
+          },
+          "includeLinkedAccounts": {
+            "name": "includeLinkedAccounts",
+            "shape_name": "IncludeLinkedAccounts",
+            "type": "boolean"
+          },
+          "limit": {
+            "name": "limit",
+            "shape_name": "ListLimit",
+            "type": "integer"
+          },
+          "logGroupClass": {
+            "name": "logGroupClass",
+            "shape_name": "LogGroupClass",
+            "type": "string"
+          },
+          "logGroupNamePattern": {
+            "name": "logGroupNamePattern",
+            "shape_name": "LogGroupNameRegexPattern",
+            "type": "string"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListLogGroups",
+      "output": {
+        "markers": null,
+        "members": {
+          "logGroups": {
+            "name": "logGroups",
+            "shape_name": "LogGroupSummaries",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListLogGroupsForQuery": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "ListLogGroupsForQueryMaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "queryId": {
+            "name": "queryId",
+            "shape_name": "QueryId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "queryId"
+        ]
+      },
+      "name": "ListLogGroupsForQuery",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "logGroupIdentifiers": {
+            "name": "logGroupIdentifiers",
+            "shape_name": "LogGroupIdentifiers",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "resourceArn": {
+            "name": "resourceArn",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "resourceArn"
+        ]
+      },
+      "name": "ListTagsForResource",
+      "output": {
+        "markers": null,
+        "members": {
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "map"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTagsLogGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "logGroupName"
+        ]
+      },
+      "name": "ListTagsLogGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "map"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutAccountPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "policyDocument": {
+            "name": "policyDocument",
+            "shape_name": "AccountPolicyDocument",
+            "type": "string"
+          },
+          "policyName": {
+            "name": "policyName",
+            "shape_name": "PolicyName",
+            "type": "string"
+          },
+          "policyType": {
+            "name": "policyType",
+            "shape_name": "PolicyType",
+            "type": "string"
+          },
+          "scope": {
+            "name": "scope",
+            "shape_name": "Scope",
+            "type": "string"
+          },
+          "selectionCriteria": {
+            "name": "selectionCriteria",
+            "shape_name": "SelectionCriteria",
+            "type": "string"
+          }
+        },
+        "required": [
+          "policyName",
+          "policyDocument",
+          "policyType"
+        ]
+      },
+      "name": "PutAccountPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "accountPolicy": {
+            "name": "accountPolicy",
+            "shape_name": "AccountPolicy",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutDataProtectionPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logGroupIdentifier": {
+            "name": "logGroupIdentifier",
+            "shape_name": "LogGroupIdentifier",
+            "type": "string"
+          },
+          "policyDocument": {
+            "name": "policyDocument",
+            "shape_name": "DataProtectionPolicyDocument",
+            "type": "string"
+          }
+        },
+        "required": [
+          "logGroupIdentifier",
+          "policyDocument"
+        ]
+      },
+      "name": "PutDataProtectionPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "lastUpdatedTime": {
+            "name": "lastUpdatedTime",
+            "shape_name": "Timestamp",
+            "type": "long"
+          },
+          "logGroupIdentifier": {
+            "name": "logGroupIdentifier",
+            "shape_name": "LogGroupIdentifier",
+            "type": "string"
+          },
+          "policyDocument": {
+            "name": "policyDocument",
+            "shape_name": "DataProtectionPolicyDocument",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutDeliveryDestination": {
+      "input": {
+        "markers": null,
+        "members": {
+          "deliveryDestinationConfiguration": {
+            "name": "deliveryDestinationConfiguration",
+            "shape_name": "DeliveryDestinationConfiguration",
+            "type": "structure"
+          },
+          "deliveryDestinationType": {
+            "name": "deliveryDestinationType",
+            "shape_name": "DeliveryDestinationType",
+            "type": "string"
+          },
+          "name": {
+            "name": "name",
+            "shape_name": "DeliveryDestinationName",
+            "type": "string"
+          },
+          "outputFormat": {
+            "name": "outputFormat",
+            "shape_name": "OutputFormat",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "map"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "name": "PutDeliveryDestination",
+      "output": {
+        "markers": null,
+        "members": {
+          "deliveryDestination": {
+            "name": "deliveryDestination",
+            "shape_name": "DeliveryDestination",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutDeliveryDestinationPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "deliveryDestinationName": {
+            "name": "deliveryDestinationName",
+            "shape_name": "DeliveryDestinationName",
+            "type": "string"
+          },
+          "deliveryDestinationPolicy": {
+            "name": "deliveryDestinationPolicy",
+            "shape_name": "DeliveryDestinationPolicy",
+            "type": "string"
+          }
+        },
+        "required": [
+          "deliveryDestinationName",
+          "deliveryDestinationPolicy"
+        ]
+      },
+      "name": "PutDeliveryDestinationPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "policy": {
+            "name": "policy",
+            "shape_name": "Policy",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutDeliverySource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logType": {
+            "name": "logType",
+            "shape_name": "LogType",
+            "type": "string"
+          },
+          "name": {
+            "name": "name",
+            "shape_name": "DeliverySourceName",
+            "type": "string"
+          },
+          "resourceArn": {
+            "name": "resourceArn",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "map"
+          }
+        },
+        "required": [
+          "name",
+          "resourceArn",
+          "logType"
+        ]
+      },
+      "name": "PutDeliverySource",
+      "output": {
+        "markers": null,
+        "members": {
+          "deliverySource": {
+            "name": "deliverySource",
+            "shape_name": "DeliverySource",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutDestination": {
+      "input": {
+        "markers": null,
+        "members": {
+          "destinationName": {
+            "name": "destinationName",
+            "shape_name": "DestinationName",
+            "type": "string"
+          },
+          "roleArn": {
+            "name": "roleArn",
+            "shape_name": "RoleArn",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "map"
+          },
+          "targetArn": {
+            "name": "targetArn",
+            "shape_name": "TargetArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "destinationName",
+          "targetArn",
+          "roleArn"
+        ]
+      },
+      "name": "PutDestination",
+      "output": {
+        "markers": null,
+        "members": {
+          "destination": {
+            "name": "destination",
+            "shape_name": "Destination",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutDestinationPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "accessPolicy": {
+            "name": "accessPolicy",
+            "shape_name": "AccessPolicy",
+            "type": "string"
+          },
+          "destinationName": {
+            "name": "destinationName",
+            "shape_name": "DestinationName",
+            "type": "string"
+          },
+          "forceUpdate": {
+            "name": "forceUpdate",
+            "shape_name": "ForceUpdate",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "destinationName",
+          "accessPolicy"
+        ]
+      },
+      "name": "PutDestinationPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "PutIndexPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logGroupIdentifier": {
+            "name": "logGroupIdentifier",
+            "shape_name": "LogGroupIdentifier",
+            "type": "string"
+          },
+          "policyDocument": {
+            "name": "policyDocument",
+            "shape_name": "PolicyDocument",
+            "type": "string"
+          }
+        },
+        "required": [
+          "logGroupIdentifier",
+          "policyDocument"
+        ]
+      },
+      "name": "PutIndexPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "indexPolicy": {
+            "name": "indexPolicy",
+            "shape_name": "IndexPolicy",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutIntegration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "integrationName": {
+            "name": "integrationName",
+            "shape_name": "IntegrationName",
+            "type": "string"
+          },
+          "integrationType": {
+            "name": "integrationType",
+            "shape_name": "IntegrationType",
+            "type": "string"
+          },
+          "resourceConfig": {
+            "name": "resourceConfig",
+            "shape_name": "ResourceConfig",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "integrationName",
+          "resourceConfig",
+          "integrationType"
+        ]
+      },
+      "name": "PutIntegration",
+      "output": {
+        "markers": null,
+        "members": {
+          "integrationName": {
+            "name": "integrationName",
+            "shape_name": "IntegrationName",
+            "type": "string"
+          },
+          "integrationStatus": {
+            "name": "integrationStatus",
+            "shape_name": "IntegrationStatus",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutLogEvents": {
+      "input": {
+        "markers": null,
+        "members": {
+          "entity": {
+            "name": "entity",
+            "shape_name": "Entity",
+            "type": "structure"
+          },
+          "logEvents": {
+            "name": "logEvents",
+            "shape_name": "InputLogEvents",
+            "type": "list"
+          },
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "logStreamName": {
+            "name": "logStreamName",
+            "shape_name": "LogStreamName",
+            "type": "string"
+          },
+          "sequenceToken": {
+            "name": "sequenceToken",
+            "shape_name": "SequenceToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "logGroupName",
+          "logStreamName",
+          "logEvents"
+        ]
+      },
+      "name": "PutLogEvents",
+      "output": {
+        "markers": null,
+        "members": {
+          "nextSequenceToken": {
+            "name": "nextSequenceToken",
+            "shape_name": "SequenceToken",
+            "type": "string"
+          },
+          "rejectedEntityInfo": {
+            "name": "rejectedEntityInfo",
+            "shape_name": "RejectedEntityInfo",
+            "type": "structure"
+          },
+          "rejectedLogEventsInfo": {
+            "name": "rejectedLogEventsInfo",
+            "shape_name": "RejectedLogEventsInfo",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutMetricFilter": {
+      "input": {
+        "markers": null,
+        "members": {
+          "applyOnTransformedLogs": {
+            "name": "applyOnTransformedLogs",
+            "shape_name": "ApplyOnTransformedLogs",
+            "type": "boolean"
+          },
+          "filterName": {
+            "name": "filterName",
+            "shape_name": "FilterName",
+            "type": "string"
+          },
+          "filterPattern": {
+            "name": "filterPattern",
+            "shape_name": "FilterPattern",
+            "type": "string"
+          },
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "metricTransformations": {
+            "name": "metricTransformations",
+            "shape_name": "MetricTransformations",
+            "type": "list"
+          }
+        },
+        "required": [
+          "logGroupName",
+          "filterName",
+          "filterPattern",
+          "metricTransformations"
+        ]
+      },
+      "name": "PutMetricFilter",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "PutQueryDefinition": {
+      "input": {
+        "markers": null,
+        "members": {
+          "clientToken": {
+            "name": "clientToken",
+            "shape_name": "ClientToken",
+            "type": "string"
+          },
+          "logGroupNames": {
+            "name": "logGroupNames",
+            "shape_name": "LogGroupNames",
+            "type": "list"
+          },
+          "name": {
+            "name": "name",
+            "shape_name": "QueryDefinitionName",
+            "type": "string"
+          },
+          "queryDefinitionId": {
+            "name": "queryDefinitionId",
+            "shape_name": "QueryId",
+            "type": "string"
+          },
+          "queryLanguage": {
+            "name": "queryLanguage",
+            "shape_name": "QueryLanguage",
+            "type": "string"
+          },
+          "queryString": {
+            "name": "queryString",
+            "shape_name": "QueryDefinitionString",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "queryString"
+        ]
+      },
+      "name": "PutQueryDefinition",
+      "output": {
+        "markers": null,
+        "members": {
+          "queryDefinitionId": {
+            "name": "queryDefinitionId",
+            "shape_name": "QueryId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutResourcePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "expectedRevisionId": {
+            "name": "expectedRevisionId",
+            "shape_name": "ExpectedRevisionId",
+            "type": "string"
+          },
+          "policyDocument": {
+            "name": "policyDocument",
+            "shape_name": "PolicyDocument",
+            "type": "string"
+          },
+          "policyName": {
+            "name": "policyName",
+            "shape_name": "PolicyName",
+            "type": "string"
+          },
+          "resourceArn": {
+            "name": "resourceArn",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "PutResourcePolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "resourcePolicy": {
+            "name": "resourcePolicy",
+            "shape_name": "ResourcePolicy",
+            "type": "structure"
+          },
+          "revisionId": {
+            "name": "revisionId",
+            "shape_name": "ExpectedRevisionId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutRetentionPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "retentionInDays": {
+            "name": "retentionInDays",
+            "shape_name": "Days",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "logGroupName",
+          "retentionInDays"
+        ]
+      },
+      "name": "PutRetentionPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "PutSubscriptionFilter": {
+      "input": {
+        "markers": null,
+        "members": {
+          "applyOnTransformedLogs": {
+            "name": "applyOnTransformedLogs",
+            "shape_name": "ApplyOnTransformedLogs",
+            "type": "boolean"
+          },
+          "destinationArn": {
+            "name": "destinationArn",
+            "shape_name": "DestinationArn",
+            "type": "string"
+          },
+          "distribution": {
+            "name": "distribution",
+            "shape_name": "Distribution",
+            "type": "string"
+          },
+          "filterName": {
+            "name": "filterName",
+            "shape_name": "FilterName",
+            "type": "string"
+          },
+          "filterPattern": {
+            "name": "filterPattern",
+            "shape_name": "FilterPattern",
+            "type": "string"
+          },
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "roleArn": {
+            "name": "roleArn",
+            "shape_name": "RoleArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "logGroupName",
+          "filterName",
+          "filterPattern",
+          "destinationArn"
+        ]
+      },
+      "name": "PutSubscriptionFilter",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "PutTransformer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logGroupIdentifier": {
+            "name": "logGroupIdentifier",
+            "shape_name": "LogGroupIdentifier",
+            "type": "string"
+          },
+          "transformerConfig": {
+            "name": "transformerConfig",
+            "shape_name": "Processors",
+            "type": "list"
+          }
+        },
+        "required": [
+          "logGroupIdentifier",
+          "transformerConfig"
+        ]
+      },
+      "name": "PutTransformer",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "StartLiveTail": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logEventFilterPattern": {
+            "name": "logEventFilterPattern",
+            "shape_name": "FilterPattern",
+            "type": "string"
+          },
+          "logGroupIdentifiers": {
+            "name": "logGroupIdentifiers",
+            "shape_name": "StartLiveTailLogGroupIdentifiers",
+            "type": "list"
+          },
+          "logStreamNamePrefixes": {
+            "name": "logStreamNamePrefixes",
+            "shape_name": "InputLogStreamNames",
+            "type": "list"
+          },
+          "logStreamNames": {
+            "name": "logStreamNames",
+            "shape_name": "InputLogStreamNames",
+            "type": "list"
+          }
+        },
+        "required": [
+          "logGroupIdentifiers"
+        ]
+      },
+      "name": "StartLiveTail",
+      "output": {
+        "markers": null,
+        "members": {
+          "responseStream": {
+            "name": "responseStream",
+            "shape_name": "StartLiveTailResponseStream",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "StartQuery": {
+      "input": {
+        "markers": null,
+        "members": {
+          "endTime": {
+            "name": "endTime",
+            "shape_name": "Timestamp",
+            "type": "long"
+          },
+          "limit": {
+            "name": "limit",
+            "shape_name": "EventsLimit",
+            "type": "integer"
+          },
+          "logGroupIdentifiers": {
+            "name": "logGroupIdentifiers",
+            "shape_name": "LogGroupIdentifiers",
+            "type": "list"
+          },
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "logGroupNames": {
+            "name": "logGroupNames",
+            "shape_name": "LogGroupNames",
+            "type": "list"
+          },
+          "queryLanguage": {
+            "name": "queryLanguage",
+            "shape_name": "QueryLanguage",
+            "type": "string"
+          },
+          "queryString": {
+            "name": "queryString",
+            "shape_name": "QueryString",
+            "type": "string"
+          },
+          "startTime": {
+            "name": "startTime",
+            "shape_name": "Timestamp",
+            "type": "long"
+          }
+        },
+        "required": [
+          "startTime",
+          "endTime",
+          "queryString"
+        ]
+      },
+      "name": "StartQuery",
+      "output": {
+        "markers": null,
+        "members": {
+          "queryId": {
+            "name": "queryId",
+            "shape_name": "QueryId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "StopQuery": {
+      "input": {
+        "markers": null,
+        "members": {
+          "queryId": {
+            "name": "queryId",
+            "shape_name": "QueryId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "queryId"
+        ]
+      },
+      "name": "StopQuery",
+      "output": {
+        "markers": null,
+        "members": {
+          "success": {
+            "name": "success",
+            "shape_name": "Success",
+            "type": "boolean"
+          }
+        },
+        "required": null
+      }
+    },
+    "TagLogGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "map"
+          }
+        },
+        "required": [
+          "logGroupName",
+          "tags"
+        ]
+      },
+      "name": "TagLogGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "resourceArn": {
+            "name": "resourceArn",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "Tags",
+            "type": "map"
+          }
+        },
+        "required": [
+          "resourceArn",
+          "tags"
+        ]
+      },
+      "name": "TagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TestMetricFilter": {
+      "input": {
+        "markers": null,
+        "members": {
+          "filterPattern": {
+            "name": "filterPattern",
+            "shape_name": "FilterPattern",
+            "type": "string"
+          },
+          "logEventMessages": {
+            "name": "logEventMessages",
+            "shape_name": "TestEventMessages",
+            "type": "list"
+          }
+        },
+        "required": [
+          "filterPattern",
+          "logEventMessages"
+        ]
+      },
+      "name": "TestMetricFilter",
+      "output": {
+        "markers": null,
+        "members": {
+          "matches": {
+            "name": "matches",
+            "shape_name": "MetricFilterMatches",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "TestTransformer": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logEventMessages": {
+            "name": "logEventMessages",
+            "shape_name": "TestEventMessages",
+            "type": "list"
+          },
+          "transformerConfig": {
+            "name": "transformerConfig",
+            "shape_name": "Processors",
+            "type": "list"
+          }
+        },
+        "required": [
+          "transformerConfig",
+          "logEventMessages"
+        ]
+      },
+      "name": "TestTransformer",
+      "output": {
+        "markers": null,
+        "members": {
+          "transformedLogs": {
+            "name": "transformedLogs",
+            "shape_name": "TransformedLogs",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "UntagLogGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "logGroupName": {
+            "name": "logGroupName",
+            "shape_name": "LogGroupName",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "logGroupName",
+          "tags"
+        ]
+      },
+      "name": "UntagLogGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "resourceArn": {
+            "name": "resourceArn",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          },
+          "tagKeys": {
+            "name": "tagKeys",
+            "shape_name": "TagKeyList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "resourceArn",
+          "tagKeys"
+        ]
+      },
+      "name": "UntagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateAnomaly": {
+      "input": {
+        "markers": null,
+        "members": {
+          "anomalyDetectorArn": {
+            "name": "anomalyDetectorArn",
+            "shape_name": "AnomalyDetectorArn",
+            "type": "string"
+          },
+          "anomalyId": {
+            "name": "anomalyId",
+            "shape_name": "AnomalyId",
+            "type": "string"
+          },
+          "baseline": {
+            "name": "baseline",
+            "shape_name": "Baseline",
+            "type": "boolean"
+          },
+          "patternId": {
+            "name": "patternId",
+            "shape_name": "PatternId",
+            "type": "string"
+          },
+          "suppressionPeriod": {
+            "name": "suppressionPeriod",
+            "shape_name": "SuppressionPeriod",
+            "type": "structure"
+          },
+          "suppressionType": {
+            "name": "suppressionType",
+            "shape_name": "SuppressionType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "anomalyDetectorArn"
+        ]
+      },
+      "name": "UpdateAnomaly",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateDeliveryConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "fieldDelimiter": {
+            "name": "fieldDelimiter",
+            "shape_name": "FieldDelimiter",
+            "type": "string"
+          },
+          "id": {
+            "name": "id",
+            "shape_name": "DeliveryId",
+            "type": "string"
+          },
+          "recordFields": {
+            "name": "recordFields",
+            "shape_name": "RecordFields",
+            "type": "list"
+          },
+          "s3DeliveryConfiguration": {
+            "name": "s3DeliveryConfiguration",
+            "shape_name": "S3DeliveryConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      },
+      "name": "UpdateDeliveryConfiguration",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateLogAnomalyDetector": {
+      "input": {
+        "markers": null,
+        "members": {
+          "anomalyDetectorArn": {
+            "name": "anomalyDetectorArn",
+            "shape_name": "AnomalyDetectorArn",
+            "type": "string"
+          },
+          "anomalyVisibilityTime": {
+            "name": "anomalyVisibilityTime",
+            "shape_name": "AnomalyVisibilityTime",
+            "type": "long"
+          },
+          "enabled": {
+            "name": "enabled",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "evaluationFrequency": {
+            "name": "evaluationFrequency",
+            "shape_name": "EvaluationFrequency",
+            "type": "string"
+          },
+          "filterPattern": {
+            "name": "filterPattern",
+            "shape_name": "FilterPattern",
+            "type": "string"
+          }
+        },
+        "required": [
+          "anomalyDetectorArn",
+          "enabled"
+        ]
+      },
+      "name": "UpdateLogAnomalyDetector",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    }
+  }
+}

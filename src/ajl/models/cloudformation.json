@@ -1,0 +1,4511 @@
+{
+  "metadata": {
+    "apiVersion": "2010-05-15",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "cloudformation",
+    "protocol": "query",
+    "protocols": [
+      "query"
+    ],
+    "serviceFullName": "AWS CloudFormation",
+    "serviceId": "CloudFormation",
+    "signatureVersion": "v4",
+    "uid": "cloudformation-2010-05-15",
+    "xmlNamespace": "http://cloudformation.amazonaws.com/doc/2010-05-15/"
+  },
+  "name": "cloudformation",
+  "operations": {
+    "ActivateOrganizationsAccess": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "ActivateOrganizationsAccess",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ActivateType": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AutoUpdate": {
+            "name": "AutoUpdate",
+            "shape_name": "AutoUpdate",
+            "type": "boolean"
+          },
+          "ExecutionRoleArn": {
+            "name": "ExecutionRoleArn",
+            "shape_name": "RoleArn",
+            "type": "string"
+          },
+          "LoggingConfig": {
+            "name": "LoggingConfig",
+            "shape_name": "LoggingConfig",
+            "type": "structure"
+          },
+          "MajorVersion": {
+            "name": "MajorVersion",
+            "shape_name": "MajorVersion",
+            "type": "long"
+          },
+          "PublicTypeArn": {
+            "name": "PublicTypeArn",
+            "shape_name": "ThirdPartyTypeArn",
+            "type": "string"
+          },
+          "PublisherId": {
+            "name": "PublisherId",
+            "shape_name": "PublisherId",
+            "type": "string"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "ThirdPartyType",
+            "type": "string"
+          },
+          "TypeName": {
+            "name": "TypeName",
+            "shape_name": "TypeName",
+            "type": "string"
+          },
+          "TypeNameAlias": {
+            "name": "TypeNameAlias",
+            "shape_name": "TypeName",
+            "type": "string"
+          },
+          "VersionBump": {
+            "name": "VersionBump",
+            "shape_name": "VersionBump",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ActivateType",
+      "output": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "PrivateTypeArn",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "BatchDescribeTypeConfigurations": {
+      "input": {
+        "markers": null,
+        "members": {
+          "TypeConfigurationIdentifiers": {
+            "name": "TypeConfigurationIdentifiers",
+            "shape_name": "TypeConfigurationIdentifiers",
+            "type": "list"
+          }
+        },
+        "required": [
+          "TypeConfigurationIdentifiers"
+        ]
+      },
+      "name": "BatchDescribeTypeConfigurations",
+      "output": {
+        "markers": null,
+        "members": {
+          "Errors": {
+            "name": "Errors",
+            "shape_name": "BatchDescribeTypeConfigurationsErrors",
+            "type": "list"
+          },
+          "TypeConfigurations": {
+            "name": "TypeConfigurations",
+            "shape_name": "TypeConfigurationDetailsList",
+            "type": "list"
+          },
+          "UnprocessedTypeConfigurations": {
+            "name": "UnprocessedTypeConfigurations",
+            "shape_name": "UnprocessedTypeConfigurations",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "CancelUpdateStack": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackName"
+        ]
+      },
+      "name": "CancelUpdateStack",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ContinueUpdateRollback": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "ResourcesToSkip": {
+            "name": "ResourcesToSkip",
+            "shape_name": "ResourcesToSkip",
+            "type": "list"
+          },
+          "RoleARN": {
+            "name": "RoleARN",
+            "shape_name": "RoleARN",
+            "type": "string"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackNameOrId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackName"
+        ]
+      },
+      "name": "ContinueUpdateRollback",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateChangeSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Capabilities": {
+            "name": "Capabilities",
+            "shape_name": "Capabilities",
+            "type": "list"
+          },
+          "ChangeSetName": {
+            "name": "ChangeSetName",
+            "shape_name": "ChangeSetName",
+            "type": "string"
+          },
+          "ChangeSetType": {
+            "name": "ChangeSetType",
+            "shape_name": "ChangeSetType",
+            "type": "string"
+          },
+          "ClientToken": {
+            "name": "ClientToken",
+            "shape_name": "ClientToken",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "Description",
+            "type": "string"
+          },
+          "ImportExistingResources": {
+            "name": "ImportExistingResources",
+            "shape_name": "ImportExistingResources",
+            "type": "boolean"
+          },
+          "IncludeNestedStacks": {
+            "name": "IncludeNestedStacks",
+            "shape_name": "IncludeNestedStacks",
+            "type": "boolean"
+          },
+          "NotificationARNs": {
+            "name": "NotificationARNs",
+            "shape_name": "NotificationARNs",
+            "type": "list"
+          },
+          "OnStackFailure": {
+            "name": "OnStackFailure",
+            "shape_name": "OnStackFailure",
+            "type": "string"
+          },
+          "Parameters": {
+            "name": "Parameters",
+            "shape_name": "Parameters",
+            "type": "list"
+          },
+          "ResourceTypes": {
+            "name": "ResourceTypes",
+            "shape_name": "ResourceTypes",
+            "type": "list"
+          },
+          "ResourcesToImport": {
+            "name": "ResourcesToImport",
+            "shape_name": "ResourcesToImport",
+            "type": "list"
+          },
+          "RoleARN": {
+            "name": "RoleARN",
+            "shape_name": "RoleARN",
+            "type": "string"
+          },
+          "RollbackConfiguration": {
+            "name": "RollbackConfiguration",
+            "shape_name": "RollbackConfiguration",
+            "type": "structure"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackNameOrId",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "TemplateBody": {
+            "name": "TemplateBody",
+            "shape_name": "TemplateBody",
+            "type": "string"
+          },
+          "TemplateURL": {
+            "name": "TemplateURL",
+            "shape_name": "TemplateURL",
+            "type": "string"
+          },
+          "UsePreviousTemplate": {
+            "name": "UsePreviousTemplate",
+            "shape_name": "UsePreviousTemplate",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "StackName",
+          "ChangeSetName"
+        ]
+      },
+      "name": "CreateChangeSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "ChangeSetId",
+            "type": "string"
+          },
+          "StackId": {
+            "name": "StackId",
+            "shape_name": "StackId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateGeneratedTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GeneratedTemplateName": {
+            "name": "GeneratedTemplateName",
+            "shape_name": "GeneratedTemplateName",
+            "type": "string"
+          },
+          "Resources": {
+            "name": "Resources",
+            "shape_name": "ResourceDefinitions",
+            "type": "list"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackName",
+            "type": "string"
+          },
+          "TemplateConfiguration": {
+            "name": "TemplateConfiguration",
+            "shape_name": "TemplateConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "GeneratedTemplateName"
+        ]
+      },
+      "name": "CreateGeneratedTemplate",
+      "output": {
+        "markers": null,
+        "members": {
+          "GeneratedTemplateId": {
+            "name": "GeneratedTemplateId",
+            "shape_name": "GeneratedTemplateId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateStack": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Capabilities": {
+            "name": "Capabilities",
+            "shape_name": "Capabilities",
+            "type": "list"
+          },
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "DisableRollback": {
+            "name": "DisableRollback",
+            "shape_name": "DisableRollback",
+            "type": "boolean"
+          },
+          "EnableTerminationProtection": {
+            "name": "EnableTerminationProtection",
+            "shape_name": "EnableTerminationProtection",
+            "type": "boolean"
+          },
+          "NotificationARNs": {
+            "name": "NotificationARNs",
+            "shape_name": "NotificationARNs",
+            "type": "list"
+          },
+          "OnFailure": {
+            "name": "OnFailure",
+            "shape_name": "OnFailure",
+            "type": "string"
+          },
+          "Parameters": {
+            "name": "Parameters",
+            "shape_name": "Parameters",
+            "type": "list"
+          },
+          "ResourceTypes": {
+            "name": "ResourceTypes",
+            "shape_name": "ResourceTypes",
+            "type": "list"
+          },
+          "RetainExceptOnCreate": {
+            "name": "RetainExceptOnCreate",
+            "shape_name": "RetainExceptOnCreate",
+            "type": "boolean"
+          },
+          "RoleARN": {
+            "name": "RoleARN",
+            "shape_name": "RoleARN",
+            "type": "string"
+          },
+          "RollbackConfiguration": {
+            "name": "RollbackConfiguration",
+            "shape_name": "RollbackConfiguration",
+            "type": "structure"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackName",
+            "type": "string"
+          },
+          "StackPolicyBody": {
+            "name": "StackPolicyBody",
+            "shape_name": "StackPolicyBody",
+            "type": "string"
+          },
+          "StackPolicyURL": {
+            "name": "StackPolicyURL",
+            "shape_name": "StackPolicyURL",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "TemplateBody": {
+            "name": "TemplateBody",
+            "shape_name": "TemplateBody",
+            "type": "string"
+          },
+          "TemplateURL": {
+            "name": "TemplateURL",
+            "shape_name": "TemplateURL",
+            "type": "string"
+          },
+          "TimeoutInMinutes": {
+            "name": "TimeoutInMinutes",
+            "shape_name": "TimeoutMinutes",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "StackName"
+        ]
+      },
+      "name": "CreateStack",
+      "output": {
+        "markers": null,
+        "members": {
+          "StackId": {
+            "name": "StackId",
+            "shape_name": "StackId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateStackInstances": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Accounts": {
+            "name": "Accounts",
+            "shape_name": "AccountList",
+            "type": "list"
+          },
+          "CallAs": {
+            "name": "CallAs",
+            "shape_name": "CallAs",
+            "type": "string"
+          },
+          "DeploymentTargets": {
+            "name": "DeploymentTargets",
+            "shape_name": "DeploymentTargets",
+            "type": "structure"
+          },
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "OperationPreferences": {
+            "name": "OperationPreferences",
+            "shape_name": "StackSetOperationPreferences",
+            "type": "structure"
+          },
+          "ParameterOverrides": {
+            "name": "ParameterOverrides",
+            "shape_name": "Parameters",
+            "type": "list"
+          },
+          "Regions": {
+            "name": "Regions",
+            "shape_name": "RegionList",
+            "type": "list"
+          },
+          "StackSetName": {
+            "name": "StackSetName",
+            "shape_name": "StackSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackSetName",
+          "Regions"
+        ]
+      },
+      "name": "CreateStackInstances",
+      "output": {
+        "markers": null,
+        "members": {
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateStackRefactor": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "Description",
+            "type": "string"
+          },
+          "EnableStackCreation": {
+            "name": "EnableStackCreation",
+            "shape_name": "EnableStackCreation",
+            "type": "boolean"
+          },
+          "ResourceMappings": {
+            "name": "ResourceMappings",
+            "shape_name": "ResourceMappings",
+            "type": "list"
+          },
+          "StackDefinitions": {
+            "name": "StackDefinitions",
+            "shape_name": "StackDefinitions",
+            "type": "list"
+          }
+        },
+        "required": [
+          "StackDefinitions"
+        ]
+      },
+      "name": "CreateStackRefactor",
+      "output": {
+        "markers": null,
+        "members": {
+          "StackRefactorId": {
+            "name": "StackRefactorId",
+            "shape_name": "StackRefactorId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackRefactorId"
+        ]
+      }
+    },
+    "CreateStackSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AdministrationRoleARN": {
+            "name": "AdministrationRoleARN",
+            "shape_name": "RoleARN",
+            "type": "string"
+          },
+          "AutoDeployment": {
+            "name": "AutoDeployment",
+            "shape_name": "AutoDeployment",
+            "type": "structure"
+          },
+          "CallAs": {
+            "name": "CallAs",
+            "shape_name": "CallAs",
+            "type": "string"
+          },
+          "Capabilities": {
+            "name": "Capabilities",
+            "shape_name": "Capabilities",
+            "type": "list"
+          },
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "Description",
+            "type": "string"
+          },
+          "ExecutionRoleName": {
+            "name": "ExecutionRoleName",
+            "shape_name": "ExecutionRoleName",
+            "type": "string"
+          },
+          "ManagedExecution": {
+            "name": "ManagedExecution",
+            "shape_name": "ManagedExecution",
+            "type": "structure"
+          },
+          "Parameters": {
+            "name": "Parameters",
+            "shape_name": "Parameters",
+            "type": "list"
+          },
+          "PermissionModel": {
+            "name": "PermissionModel",
+            "shape_name": "PermissionModels",
+            "type": "string"
+          },
+          "StackId": {
+            "name": "StackId",
+            "shape_name": "StackId",
+            "type": "string"
+          },
+          "StackSetName": {
+            "name": "StackSetName",
+            "shape_name": "StackSetName",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "TemplateBody": {
+            "name": "TemplateBody",
+            "shape_name": "TemplateBody",
+            "type": "string"
+          },
+          "TemplateURL": {
+            "name": "TemplateURL",
+            "shape_name": "TemplateURL",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackSetName"
+        ]
+      },
+      "name": "CreateStackSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "StackSetId": {
+            "name": "StackSetId",
+            "shape_name": "StackSetId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeactivateOrganizationsAccess": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "DeactivateOrganizationsAccess",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeactivateType": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "PrivateTypeArn",
+            "type": "string"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "ThirdPartyType",
+            "type": "string"
+          },
+          "TypeName": {
+            "name": "TypeName",
+            "shape_name": "TypeName",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DeactivateType",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteChangeSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ChangeSetName": {
+            "name": "ChangeSetName",
+            "shape_name": "ChangeSetNameOrId",
+            "type": "string"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackNameOrId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ChangeSetName"
+        ]
+      },
+      "name": "DeleteChangeSet",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteGeneratedTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GeneratedTemplateName": {
+            "name": "GeneratedTemplateName",
+            "shape_name": "GeneratedTemplateName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GeneratedTemplateName"
+        ]
+      },
+      "name": "DeleteGeneratedTemplate",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteStack": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "DeletionMode": {
+            "name": "DeletionMode",
+            "shape_name": "DeletionMode",
+            "type": "string"
+          },
+          "RetainResources": {
+            "name": "RetainResources",
+            "shape_name": "RetainResources",
+            "type": "list"
+          },
+          "RoleARN": {
+            "name": "RoleARN",
+            "shape_name": "RoleARN",
+            "type": "string"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackName"
+        ]
+      },
+      "name": "DeleteStack",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteStackInstances": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Accounts": {
+            "name": "Accounts",
+            "shape_name": "AccountList",
+            "type": "list"
+          },
+          "CallAs": {
+            "name": "CallAs",
+            "shape_name": "CallAs",
+            "type": "string"
+          },
+          "DeploymentTargets": {
+            "name": "DeploymentTargets",
+            "shape_name": "DeploymentTargets",
+            "type": "structure"
+          },
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "OperationPreferences": {
+            "name": "OperationPreferences",
+            "shape_name": "StackSetOperationPreferences",
+            "type": "structure"
+          },
+          "Regions": {
+            "name": "Regions",
+            "shape_name": "RegionList",
+            "type": "list"
+          },
+          "RetainStacks": {
+            "name": "RetainStacks",
+            "shape_name": "RetainStacks",
+            "type": "boolean"
+          },
+          "StackSetName": {
+            "name": "StackSetName",
+            "shape_name": "StackSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackSetName",
+          "Regions",
+          "RetainStacks"
+        ]
+      },
+      "name": "DeleteStackInstances",
+      "output": {
+        "markers": null,
+        "members": {
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteStackSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CallAs": {
+            "name": "CallAs",
+            "shape_name": "CallAs",
+            "type": "string"
+          },
+          "StackSetName": {
+            "name": "StackSetName",
+            "shape_name": "StackSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackSetName"
+        ]
+      },
+      "name": "DeleteStackSet",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeregisterType": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "PrivateTypeArn",
+            "type": "string"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "RegistryType",
+            "type": "string"
+          },
+          "TypeName": {
+            "name": "TypeName",
+            "shape_name": "TypeName",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "TypeVersionId",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DeregisterType",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DescribeAccountLimits": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeAccountLimits",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "AccountLimits": {
+            "name": "AccountLimits",
+            "shape_name": "AccountLimitList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeChangeSet": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "ChangeSetName": {
+            "name": "ChangeSetName",
+            "shape_name": "ChangeSetNameOrId",
+            "type": "string"
+          },
+          "IncludePropertyValues": {
+            "name": "IncludePropertyValues",
+            "shape_name": "IncludePropertyValues",
+            "type": "boolean"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackNameOrId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ChangeSetName"
+        ]
+      },
+      "name": "DescribeChangeSet",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Capabilities": {
+            "name": "Capabilities",
+            "shape_name": "Capabilities",
+            "type": "list"
+          },
+          "ChangeSetId": {
+            "name": "ChangeSetId",
+            "shape_name": "ChangeSetId",
+            "type": "string"
+          },
+          "ChangeSetName": {
+            "name": "ChangeSetName",
+            "shape_name": "ChangeSetName",
+            "type": "string"
+          },
+          "Changes": {
+            "name": "Changes",
+            "shape_name": "Changes",
+            "type": "list"
+          },
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "CreationTime",
+            "type": "timestamp"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "Description",
+            "type": "string"
+          },
+          "ExecutionStatus": {
+            "name": "ExecutionStatus",
+            "shape_name": "ExecutionStatus",
+            "type": "string"
+          },
+          "ImportExistingResources": {
+            "name": "ImportExistingResources",
+            "shape_name": "ImportExistingResources",
+            "type": "boolean"
+          },
+          "IncludeNestedStacks": {
+            "name": "IncludeNestedStacks",
+            "shape_name": "IncludeNestedStacks",
+            "type": "boolean"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "NotificationARNs": {
+            "name": "NotificationARNs",
+            "shape_name": "NotificationARNs",
+            "type": "list"
+          },
+          "OnStackFailure": {
+            "name": "OnStackFailure",
+            "shape_name": "OnStackFailure",
+            "type": "string"
+          },
+          "Parameters": {
+            "name": "Parameters",
+            "shape_name": "Parameters",
+            "type": "list"
+          },
+          "ParentChangeSetId": {
+            "name": "ParentChangeSetId",
+            "shape_name": "ChangeSetId",
+            "type": "string"
+          },
+          "RollbackConfiguration": {
+            "name": "RollbackConfiguration",
+            "shape_name": "RollbackConfiguration",
+            "type": "structure"
+          },
+          "RootChangeSetId": {
+            "name": "RootChangeSetId",
+            "shape_name": "ChangeSetId",
+            "type": "string"
+          },
+          "StackId": {
+            "name": "StackId",
+            "shape_name": "StackId",
+            "type": "string"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackName",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "ChangeSetStatus",
+            "type": "string"
+          },
+          "StatusReason": {
+            "name": "StatusReason",
+            "shape_name": "ChangeSetStatusReason",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeChangeSetHooks": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ChangeSetName": {
+            "name": "ChangeSetName",
+            "shape_name": "ChangeSetNameOrId",
+            "type": "string"
+          },
+          "LogicalResourceId": {
+            "name": "LogicalResourceId",
+            "shape_name": "LogicalResourceId",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackNameOrId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ChangeSetName"
+        ]
+      },
+      "name": "DescribeChangeSetHooks",
+      "output": {
+        "markers": null,
+        "members": {
+          "ChangeSetId": {
+            "name": "ChangeSetId",
+            "shape_name": "ChangeSetId",
+            "type": "string"
+          },
+          "ChangeSetName": {
+            "name": "ChangeSetName",
+            "shape_name": "ChangeSetName",
+            "type": "string"
+          },
+          "Hooks": {
+            "name": "Hooks",
+            "shape_name": "ChangeSetHooks",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "StackId": {
+            "name": "StackId",
+            "shape_name": "StackId",
+            "type": "string"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackName",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "ChangeSetHooksStatus",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeGeneratedTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GeneratedTemplateName": {
+            "name": "GeneratedTemplateName",
+            "shape_name": "GeneratedTemplateName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GeneratedTemplateName"
+        ]
+      },
+      "name": "DescribeGeneratedTemplate",
+      "output": {
+        "markers": null,
+        "members": {
+          "CreationTime": {
+            "name": "CreationTime",
+            "shape_name": "CreationTime",
+            "type": "timestamp"
+          },
+          "GeneratedTemplateId": {
+            "name": "GeneratedTemplateId",
+            "shape_name": "GeneratedTemplateId",
+            "type": "string"
+          },
+          "GeneratedTemplateName": {
+            "name": "GeneratedTemplateName",
+            "shape_name": "GeneratedTemplateName",
+            "type": "string"
+          },
+          "LastUpdatedTime": {
+            "name": "LastUpdatedTime",
+            "shape_name": "LastUpdatedTime",
+            "type": "timestamp"
+          },
+          "Progress": {
+            "name": "Progress",
+            "shape_name": "TemplateProgress",
+            "type": "structure"
+          },
+          "Resources": {
+            "name": "Resources",
+            "shape_name": "ResourceDetails",
+            "type": "list"
+          },
+          "StackId": {
+            "name": "StackId",
+            "shape_name": "StackId",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "GeneratedTemplateStatus",
+            "type": "string"
+          },
+          "StatusReason": {
+            "name": "StatusReason",
+            "shape_name": "TemplateStatusReason",
+            "type": "string"
+          },
+          "TemplateConfiguration": {
+            "name": "TemplateConfiguration",
+            "shape_name": "TemplateConfiguration",
+            "type": "structure"
+          },
+          "TotalWarnings": {
+            "name": "TotalWarnings",
+            "shape_name": "TotalWarnings",
+            "type": "integer"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeOrganizationsAccess": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CallAs": {
+            "name": "CallAs",
+            "shape_name": "CallAs",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeOrganizationsAccess",
+      "output": {
+        "markers": null,
+        "members": {
+          "Status": {
+            "name": "Status",
+            "shape_name": "OrganizationStatus",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribePublisher": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PublisherId": {
+            "name": "PublisherId",
+            "shape_name": "PublisherId",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribePublisher",
+      "output": {
+        "markers": null,
+        "members": {
+          "IdentityProvider": {
+            "name": "IdentityProvider",
+            "shape_name": "IdentityProvider",
+            "type": "string"
+          },
+          "PublisherId": {
+            "name": "PublisherId",
+            "shape_name": "PublisherId",
+            "type": "string"
+          },
+          "PublisherProfile": {
+            "name": "PublisherProfile",
+            "shape_name": "PublisherProfile",
+            "type": "string"
+          },
+          "PublisherStatus": {
+            "name": "PublisherStatus",
+            "shape_name": "PublisherStatus",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeResourceScan": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceScanId": {
+            "name": "ResourceScanId",
+            "shape_name": "ResourceScanId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceScanId"
+        ]
+      },
+      "name": "DescribeResourceScan",
+      "output": {
+        "markers": null,
+        "members": {
+          "EndTime": {
+            "name": "EndTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "PercentageCompleted": {
+            "name": "PercentageCompleted",
+            "shape_name": "PercentageCompleted",
+            "type": "double"
+          },
+          "ResourceScanId": {
+            "name": "ResourceScanId",
+            "shape_name": "ResourceScanId",
+            "type": "string"
+          },
+          "ResourceTypes": {
+            "name": "ResourceTypes",
+            "shape_name": "ResourceTypes",
+            "type": "list"
+          },
+          "ResourcesRead": {
+            "name": "ResourcesRead",
+            "shape_name": "ResourcesRead",
+            "type": "integer"
+          },
+          "ResourcesScanned": {
+            "name": "ResourcesScanned",
+            "shape_name": "ResourcesScanned",
+            "type": "integer"
+          },
+          "ScanFilters": {
+            "name": "ScanFilters",
+            "shape_name": "ScanFilters",
+            "type": "list"
+          },
+          "StartTime": {
+            "name": "StartTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "ResourceScanStatus",
+            "type": "string"
+          },
+          "StatusReason": {
+            "name": "StatusReason",
+            "shape_name": "ResourceScanStatusReason",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeStackDriftDetectionStatus": {
+      "input": {
+        "markers": null,
+        "members": {
+          "StackDriftDetectionId": {
+            "name": "StackDriftDetectionId",
+            "shape_name": "StackDriftDetectionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackDriftDetectionId"
+        ]
+      },
+      "name": "DescribeStackDriftDetectionStatus",
+      "output": {
+        "markers": null,
+        "members": {
+          "DetectionStatus": {
+            "name": "DetectionStatus",
+            "shape_name": "StackDriftDetectionStatus",
+            "type": "string"
+          },
+          "DetectionStatusReason": {
+            "name": "DetectionStatusReason",
+            "shape_name": "StackDriftDetectionStatusReason",
+            "type": "string"
+          },
+          "DriftedStackResourceCount": {
+            "name": "DriftedStackResourceCount",
+            "shape_name": "BoxedInteger",
+            "type": "integer"
+          },
+          "StackDriftDetectionId": {
+            "name": "StackDriftDetectionId",
+            "shape_name": "StackDriftDetectionId",
+            "type": "string"
+          },
+          "StackDriftStatus": {
+            "name": "StackDriftStatus",
+            "shape_name": "StackDriftStatus",
+            "type": "string"
+          },
+          "StackId": {
+            "name": "StackId",
+            "shape_name": "StackId",
+            "type": "string"
+          },
+          "Timestamp": {
+            "name": "Timestamp",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          }
+        },
+        "required": [
+          "StackId",
+          "StackDriftDetectionId",
+          "DetectionStatus",
+          "Timestamp"
+        ]
+      }
+    },
+    "DescribeStackEvents": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackName",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeStackEvents",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "StackEvents": {
+            "name": "StackEvents",
+            "shape_name": "StackEvents",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeStackInstance": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CallAs": {
+            "name": "CallAs",
+            "shape_name": "CallAs",
+            "type": "string"
+          },
+          "StackInstanceAccount": {
+            "name": "StackInstanceAccount",
+            "shape_name": "Account",
+            "type": "string"
+          },
+          "StackInstanceRegion": {
+            "name": "StackInstanceRegion",
+            "shape_name": "Region",
+            "type": "string"
+          },
+          "StackSetName": {
+            "name": "StackSetName",
+            "shape_name": "StackSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackSetName",
+          "StackInstanceAccount",
+          "StackInstanceRegion"
+        ]
+      },
+      "name": "DescribeStackInstance",
+      "output": {
+        "markers": null,
+        "members": {
+          "StackInstance": {
+            "name": "StackInstance",
+            "shape_name": "StackInstance",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeStackRefactor": {
+      "input": {
+        "markers": null,
+        "members": {
+          "StackRefactorId": {
+            "name": "StackRefactorId",
+            "shape_name": "StackRefactorId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackRefactorId"
+        ]
+      },
+      "name": "DescribeStackRefactor",
+      "output": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "Description",
+            "type": "string"
+          },
+          "ExecutionStatus": {
+            "name": "ExecutionStatus",
+            "shape_name": "StackRefactorExecutionStatus",
+            "type": "string"
+          },
+          "ExecutionStatusReason": {
+            "name": "ExecutionStatusReason",
+            "shape_name": "ExecutionStatusReason",
+            "type": "string"
+          },
+          "StackIds": {
+            "name": "StackIds",
+            "shape_name": "StackIds",
+            "type": "list"
+          },
+          "StackRefactorId": {
+            "name": "StackRefactorId",
+            "shape_name": "StackRefactorId",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "StackRefactorStatus",
+            "type": "string"
+          },
+          "StatusReason": {
+            "name": "StatusReason",
+            "shape_name": "StackRefactorStatusReason",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeStackResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LogicalResourceId": {
+            "name": "LogicalResourceId",
+            "shape_name": "LogicalResourceId",
+            "type": "string"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackName",
+          "LogicalResourceId"
+        ]
+      },
+      "name": "DescribeStackResource",
+      "output": {
+        "markers": null,
+        "members": {
+          "StackResourceDetail": {
+            "name": "StackResourceDetail",
+            "shape_name": "StackResourceDetail",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeStackResourceDrifts": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "BoxedMaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackNameOrId",
+            "type": "string"
+          },
+          "StackResourceDriftStatusFilters": {
+            "name": "StackResourceDriftStatusFilters",
+            "shape_name": "StackResourceDriftStatusFilters",
+            "type": "list"
+          }
+        },
+        "required": [
+          "StackName"
+        ]
+      },
+      "name": "DescribeStackResourceDrifts",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "StackResourceDrifts": {
+            "name": "StackResourceDrifts",
+            "shape_name": "StackResourceDrifts",
+            "type": "list"
+          }
+        },
+        "required": [
+          "StackResourceDrifts"
+        ]
+      }
+    },
+    "DescribeStackResources": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LogicalResourceId": {
+            "name": "LogicalResourceId",
+            "shape_name": "LogicalResourceId",
+            "type": "string"
+          },
+          "PhysicalResourceId": {
+            "name": "PhysicalResourceId",
+            "shape_name": "PhysicalResourceId",
+            "type": "string"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackName",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeStackResources",
+      "output": {
+        "markers": null,
+        "members": {
+          "StackResources": {
+            "name": "StackResources",
+            "shape_name": "StackResources",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeStackSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CallAs": {
+            "name": "CallAs",
+            "shape_name": "CallAs",
+            "type": "string"
+          },
+          "StackSetName": {
+            "name": "StackSetName",
+            "shape_name": "StackSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackSetName"
+        ]
+      },
+      "name": "DescribeStackSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "StackSet": {
+            "name": "StackSet",
+            "shape_name": "StackSet",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeStackSetOperation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CallAs": {
+            "name": "CallAs",
+            "shape_name": "CallAs",
+            "type": "string"
+          },
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "StackSetName": {
+            "name": "StackSetName",
+            "shape_name": "StackSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackSetName",
+          "OperationId"
+        ]
+      },
+      "name": "DescribeStackSetOperation",
+      "output": {
+        "markers": null,
+        "members": {
+          "StackSetOperation": {
+            "name": "StackSetOperation",
+            "shape_name": "StackSetOperation",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeStacks": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackName",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeStacks",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Stacks": {
+            "name": "Stacks",
+            "shape_name": "Stacks",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "StackId",
+            "id": "StackName",
+            "name": "StackName",
+            "path": [
+              "Stacks"
+            ],
+            "tags": "Tags",
+            "type": "cloudformation:stack"
+          }
+        ]
+      }
+    },
+    "DescribeType": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "TypeArn",
+            "type": "string"
+          },
+          "PublicVersionNumber": {
+            "name": "PublicVersionNumber",
+            "shape_name": "PublicVersionNumber",
+            "type": "string"
+          },
+          "PublisherId": {
+            "name": "PublisherId",
+            "shape_name": "PublisherId",
+            "type": "string"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "RegistryType",
+            "type": "string"
+          },
+          "TypeName": {
+            "name": "TypeName",
+            "shape_name": "TypeName",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "TypeVersionId",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeType",
+      "output": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "TypeArn",
+            "type": "string"
+          },
+          "AutoUpdate": {
+            "name": "AutoUpdate",
+            "shape_name": "AutoUpdate",
+            "type": "boolean"
+          },
+          "ConfigurationSchema": {
+            "name": "ConfigurationSchema",
+            "shape_name": "ConfigurationSchema",
+            "type": "string"
+          },
+          "DefaultVersionId": {
+            "name": "DefaultVersionId",
+            "shape_name": "TypeVersionId",
+            "type": "string"
+          },
+          "DeprecatedStatus": {
+            "name": "DeprecatedStatus",
+            "shape_name": "DeprecatedStatus",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "Description",
+            "type": "string"
+          },
+          "DocumentationUrl": {
+            "name": "DocumentationUrl",
+            "shape_name": "OptionalSecureUrl",
+            "type": "string"
+          },
+          "ExecutionRoleArn": {
+            "name": "ExecutionRoleArn",
+            "shape_name": "RoleArn",
+            "type": "string"
+          },
+          "IsActivated": {
+            "name": "IsActivated",
+            "shape_name": "IsActivated",
+            "type": "boolean"
+          },
+          "IsDefaultVersion": {
+            "name": "IsDefaultVersion",
+            "shape_name": "IsDefaultVersion",
+            "type": "boolean"
+          },
+          "LastUpdated": {
+            "name": "LastUpdated",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "LatestPublicVersion": {
+            "name": "LatestPublicVersion",
+            "shape_name": "PublicVersionNumber",
+            "type": "string"
+          },
+          "LoggingConfig": {
+            "name": "LoggingConfig",
+            "shape_name": "LoggingConfig",
+            "type": "structure"
+          },
+          "OriginalTypeArn": {
+            "name": "OriginalTypeArn",
+            "shape_name": "TypeArn",
+            "type": "string"
+          },
+          "OriginalTypeName": {
+            "name": "OriginalTypeName",
+            "shape_name": "TypeName",
+            "type": "string"
+          },
+          "ProvisioningType": {
+            "name": "ProvisioningType",
+            "shape_name": "ProvisioningType",
+            "type": "string"
+          },
+          "PublicVersionNumber": {
+            "name": "PublicVersionNumber",
+            "shape_name": "PublicVersionNumber",
+            "type": "string"
+          },
+          "PublisherId": {
+            "name": "PublisherId",
+            "shape_name": "PublisherId",
+            "type": "string"
+          },
+          "RequiredActivatedTypes": {
+            "name": "RequiredActivatedTypes",
+            "shape_name": "RequiredActivatedTypes",
+            "type": "list"
+          },
+          "Schema": {
+            "name": "Schema",
+            "shape_name": "TypeSchema",
+            "type": "string"
+          },
+          "SourceUrl": {
+            "name": "SourceUrl",
+            "shape_name": "OptionalSecureUrl",
+            "type": "string"
+          },
+          "TimeCreated": {
+            "name": "TimeCreated",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "RegistryType",
+            "type": "string"
+          },
+          "TypeName": {
+            "name": "TypeName",
+            "shape_name": "TypeName",
+            "type": "string"
+          },
+          "TypeTestsStatus": {
+            "name": "TypeTestsStatus",
+            "shape_name": "TypeTestsStatus",
+            "type": "string"
+          },
+          "TypeTestsStatusDescription": {
+            "name": "TypeTestsStatusDescription",
+            "shape_name": "TypeTestsStatusDescription",
+            "type": "string"
+          },
+          "Visibility": {
+            "name": "Visibility",
+            "shape_name": "Visibility",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeTypeRegistration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RegistrationToken": {
+            "name": "RegistrationToken",
+            "shape_name": "RegistrationToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "RegistrationToken"
+        ]
+      },
+      "name": "DescribeTypeRegistration",
+      "output": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "Description",
+            "type": "string"
+          },
+          "ProgressStatus": {
+            "name": "ProgressStatus",
+            "shape_name": "RegistrationStatus",
+            "type": "string"
+          },
+          "TypeArn": {
+            "name": "TypeArn",
+            "shape_name": "TypeArn",
+            "type": "string"
+          },
+          "TypeVersionArn": {
+            "name": "TypeVersionArn",
+            "shape_name": "TypeArn",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DetectStackDrift": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LogicalResourceIds": {
+            "name": "LogicalResourceIds",
+            "shape_name": "LogicalResourceIds",
+            "type": "list"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackNameOrId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackName"
+        ]
+      },
+      "name": "DetectStackDrift",
+      "output": {
+        "markers": null,
+        "members": {
+          "StackDriftDetectionId": {
+            "name": "StackDriftDetectionId",
+            "shape_name": "StackDriftDetectionId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackDriftDetectionId"
+        ]
+      }
+    },
+    "DetectStackResourceDrift": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LogicalResourceId": {
+            "name": "LogicalResourceId",
+            "shape_name": "LogicalResourceId",
+            "type": "string"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackNameOrId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackName",
+          "LogicalResourceId"
+        ]
+      },
+      "name": "DetectStackResourceDrift",
+      "output": {
+        "markers": null,
+        "members": {
+          "StackResourceDrift": {
+            "name": "StackResourceDrift",
+            "shape_name": "StackResourceDrift",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "StackResourceDrift"
+        ]
+      }
+    },
+    "DetectStackSetDrift": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CallAs": {
+            "name": "CallAs",
+            "shape_name": "CallAs",
+            "type": "string"
+          },
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "OperationPreferences": {
+            "name": "OperationPreferences",
+            "shape_name": "StackSetOperationPreferences",
+            "type": "structure"
+          },
+          "StackSetName": {
+            "name": "StackSetName",
+            "shape_name": "StackSetNameOrId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackSetName"
+        ]
+      },
+      "name": "DetectStackSetDrift",
+      "output": {
+        "markers": null,
+        "members": {
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "EstimateTemplateCost": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Parameters": {
+            "name": "Parameters",
+            "shape_name": "Parameters",
+            "type": "list"
+          },
+          "TemplateBody": {
+            "name": "TemplateBody",
+            "shape_name": "TemplateBody",
+            "type": "string"
+          },
+          "TemplateURL": {
+            "name": "TemplateURL",
+            "shape_name": "TemplateURL",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "EstimateTemplateCost",
+      "output": {
+        "markers": null,
+        "members": {
+          "Url": {
+            "name": "Url",
+            "shape_name": "Url",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ExecuteChangeSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ChangeSetName": {
+            "name": "ChangeSetName",
+            "shape_name": "ChangeSetNameOrId",
+            "type": "string"
+          },
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "DisableRollback": {
+            "name": "DisableRollback",
+            "shape_name": "DisableRollback",
+            "type": "boolean"
+          },
+          "RetainExceptOnCreate": {
+            "name": "RetainExceptOnCreate",
+            "shape_name": "RetainExceptOnCreate",
+            "type": "boolean"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackNameOrId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ChangeSetName"
+        ]
+      },
+      "name": "ExecuteChangeSet",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ExecuteStackRefactor": {
+      "input": {
+        "markers": null,
+        "members": {
+          "StackRefactorId": {
+            "name": "StackRefactorId",
+            "shape_name": "StackRefactorId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackRefactorId"
+        ]
+      },
+      "name": "ExecuteStackRefactor",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "GetGeneratedTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Format": {
+            "name": "Format",
+            "shape_name": "TemplateFormat",
+            "type": "string"
+          },
+          "GeneratedTemplateName": {
+            "name": "GeneratedTemplateName",
+            "shape_name": "GeneratedTemplateName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GeneratedTemplateName"
+        ]
+      },
+      "name": "GetGeneratedTemplate",
+      "output": {
+        "markers": null,
+        "members": {
+          "Status": {
+            "name": "Status",
+            "shape_name": "GeneratedTemplateStatus",
+            "type": "string"
+          },
+          "TemplateBody": {
+            "name": "TemplateBody",
+            "shape_name": "TemplateBody",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetStackPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackName"
+        ]
+      },
+      "name": "GetStackPolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "StackPolicyBody": {
+            "name": "StackPolicyBody",
+            "shape_name": "StackPolicyBody",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ChangeSetName": {
+            "name": "ChangeSetName",
+            "shape_name": "ChangeSetNameOrId",
+            "type": "string"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackName",
+            "type": "string"
+          },
+          "TemplateStage": {
+            "name": "TemplateStage",
+            "shape_name": "TemplateStage",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "GetTemplate",
+      "output": {
+        "markers": null,
+        "members": {
+          "StagesAvailable": {
+            "name": "StagesAvailable",
+            "shape_name": "StageList",
+            "type": "list"
+          },
+          "TemplateBody": {
+            "name": "TemplateBody",
+            "shape_name": "TemplateBody",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetTemplateSummary": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CallAs": {
+            "name": "CallAs",
+            "shape_name": "CallAs",
+            "type": "string"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackNameOrId",
+            "type": "string"
+          },
+          "StackSetName": {
+            "name": "StackSetName",
+            "shape_name": "StackSetNameOrId",
+            "type": "string"
+          },
+          "TemplateBody": {
+            "name": "TemplateBody",
+            "shape_name": "TemplateBody",
+            "type": "string"
+          },
+          "TemplateSummaryConfig": {
+            "name": "TemplateSummaryConfig",
+            "shape_name": "TemplateSummaryConfig",
+            "type": "structure"
+          },
+          "TemplateURL": {
+            "name": "TemplateURL",
+            "shape_name": "TemplateURL",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "GetTemplateSummary",
+      "output": {
+        "markers": null,
+        "members": {
+          "Capabilities": {
+            "name": "Capabilities",
+            "shape_name": "Capabilities",
+            "type": "list"
+          },
+          "CapabilitiesReason": {
+            "name": "CapabilitiesReason",
+            "shape_name": "CapabilitiesReason",
+            "type": "string"
+          },
+          "DeclaredTransforms": {
+            "name": "DeclaredTransforms",
+            "shape_name": "TransformsList",
+            "type": "list"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "Description",
+            "type": "string"
+          },
+          "Metadata": {
+            "name": "Metadata",
+            "shape_name": "Metadata",
+            "type": "string"
+          },
+          "Parameters": {
+            "name": "Parameters",
+            "shape_name": "ParameterDeclarations",
+            "type": "list"
+          },
+          "ResourceIdentifierSummaries": {
+            "name": "ResourceIdentifierSummaries",
+            "shape_name": "ResourceIdentifierSummaries",
+            "type": "list"
+          },
+          "ResourceTypes": {
+            "name": "ResourceTypes",
+            "shape_name": "ResourceTypes",
+            "type": "list"
+          },
+          "Version": {
+            "name": "Version",
+            "shape_name": "Version",
+            "type": "string"
+          },
+          "Warnings": {
+            "name": "Warnings",
+            "shape_name": "Warnings",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ImportStacksToStackSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CallAs": {
+            "name": "CallAs",
+            "shape_name": "CallAs",
+            "type": "string"
+          },
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "OperationPreferences": {
+            "name": "OperationPreferences",
+            "shape_name": "StackSetOperationPreferences",
+            "type": "structure"
+          },
+          "OrganizationalUnitIds": {
+            "name": "OrganizationalUnitIds",
+            "shape_name": "OrganizationalUnitIdList",
+            "type": "list"
+          },
+          "StackIds": {
+            "name": "StackIds",
+            "shape_name": "StackIdList",
+            "type": "list"
+          },
+          "StackIdsUrl": {
+            "name": "StackIdsUrl",
+            "shape_name": "StackIdsUrl",
+            "type": "string"
+          },
+          "StackSetName": {
+            "name": "StackSetName",
+            "shape_name": "StackSetNameOrId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackSetName"
+        ]
+      },
+      "name": "ImportStacksToStackSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListChangeSets": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackNameOrId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackName"
+        ]
+      },
+      "name": "ListChangeSets",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Summaries": {
+            "name": "Summaries",
+            "shape_name": "ChangeSetSummaries",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListExports": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListExports",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Exports": {
+            "name": "Exports",
+            "shape_name": "Exports",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListGeneratedTemplates": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListGeneratedTemplates",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Summaries": {
+            "name": "Summaries",
+            "shape_name": "TemplateSummaries",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListHookResults": {
+      "input": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "TargetId": {
+            "name": "TargetId",
+            "shape_name": "HookResultId",
+            "type": "string"
+          },
+          "TargetType": {
+            "name": "TargetType",
+            "shape_name": "ListHookResultsTargetType",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TargetType",
+          "TargetId"
+        ]
+      },
+      "name": "ListHookResults",
+      "output": {
+        "markers": null,
+        "members": {
+          "HookResults": {
+            "name": "HookResults",
+            "shape_name": "HookResultSummaries",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "TargetId": {
+            "name": "TargetId",
+            "shape_name": "HookResultId",
+            "type": "string"
+          },
+          "TargetType": {
+            "name": "TargetType",
+            "shape_name": "ListHookResultsTargetType",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListImports": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "ExportName": {
+            "name": "ExportName",
+            "shape_name": "ExportName",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ExportName"
+        ]
+      },
+      "name": "ListImports",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Imports": {
+            "name": "Imports",
+            "shape_name": "Imports",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListResourceScanRelatedResources": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "BoxedMaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "ResourceScanId": {
+            "name": "ResourceScanId",
+            "shape_name": "ResourceScanId",
+            "type": "string"
+          },
+          "Resources": {
+            "name": "Resources",
+            "shape_name": "ScannedResourceIdentifiers",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceScanId",
+          "Resources"
+        ]
+      },
+      "name": "ListResourceScanRelatedResources",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "RelatedResources": {
+            "name": "RelatedResources",
+            "shape_name": "RelatedResources",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListResourceScanResources": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "ResourceScannerMaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "ResourceIdentifier": {
+            "name": "ResourceIdentifier",
+            "shape_name": "ResourceIdentifier",
+            "type": "string"
+          },
+          "ResourceScanId": {
+            "name": "ResourceScanId",
+            "shape_name": "ResourceScanId",
+            "type": "string"
+          },
+          "ResourceTypePrefix": {
+            "name": "ResourceTypePrefix",
+            "shape_name": "ResourceTypePrefix",
+            "type": "string"
+          },
+          "TagKey": {
+            "name": "TagKey",
+            "shape_name": "TagKey",
+            "type": "string"
+          },
+          "TagValue": {
+            "name": "TagValue",
+            "shape_name": "TagValue",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceScanId"
+        ]
+      },
+      "name": "ListResourceScanResources",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Resources": {
+            "name": "Resources",
+            "shape_name": "ScannedResources",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListResourceScans": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "ResourceScannerMaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "ScanTypeFilter": {
+            "name": "ScanTypeFilter",
+            "shape_name": "ScanType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListResourceScans",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "ResourceScanSummaries": {
+            "name": "ResourceScanSummaries",
+            "shape_name": "ResourceScanSummaries",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListStackInstanceResourceDrifts": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CallAs": {
+            "name": "CallAs",
+            "shape_name": "CallAs",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "StackInstanceAccount": {
+            "name": "StackInstanceAccount",
+            "shape_name": "Account",
+            "type": "string"
+          },
+          "StackInstanceRegion": {
+            "name": "StackInstanceRegion",
+            "shape_name": "Region",
+            "type": "string"
+          },
+          "StackInstanceResourceDriftStatuses": {
+            "name": "StackInstanceResourceDriftStatuses",
+            "shape_name": "StackResourceDriftStatusFilters",
+            "type": "list"
+          },
+          "StackSetName": {
+            "name": "StackSetName",
+            "shape_name": "StackSetNameOrId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackSetName",
+          "StackInstanceAccount",
+          "StackInstanceRegion",
+          "OperationId"
+        ]
+      },
+      "name": "ListStackInstanceResourceDrifts",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Summaries": {
+            "name": "Summaries",
+            "shape_name": "StackInstanceResourceDriftsSummaries",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListStackInstances": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "CallAs": {
+            "name": "CallAs",
+            "shape_name": "CallAs",
+            "type": "string"
+          },
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "StackInstanceFilters",
+            "type": "list"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "StackInstanceAccount": {
+            "name": "StackInstanceAccount",
+            "shape_name": "Account",
+            "type": "string"
+          },
+          "StackInstanceRegion": {
+            "name": "StackInstanceRegion",
+            "shape_name": "Region",
+            "type": "string"
+          },
+          "StackSetName": {
+            "name": "StackSetName",
+            "shape_name": "StackSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackSetName"
+        ]
+      },
+      "name": "ListStackInstances",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Summaries": {
+            "name": "Summaries",
+            "shape_name": "StackInstanceSummaries",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListStackRefactorActions": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "StackRefactorId": {
+            "name": "StackRefactorId",
+            "shape_name": "StackRefactorId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackRefactorId"
+        ]
+      },
+      "name": "ListStackRefactorActions",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "StackRefactorActions": {
+            "name": "StackRefactorActions",
+            "shape_name": "StackRefactorActions",
+            "type": "list"
+          }
+        },
+        "required": [
+          "StackRefactorActions"
+        ]
+      }
+    },
+    "ListStackRefactors": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "ExecutionStatusFilter": {
+            "name": "ExecutionStatusFilter",
+            "shape_name": "StackRefactorExecutionStatusFilter",
+            "type": "list"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListStackRefactors",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "StackRefactorSummaries": {
+            "name": "StackRefactorSummaries",
+            "shape_name": "StackRefactorSummaries",
+            "type": "list"
+          }
+        },
+        "required": [
+          "StackRefactorSummaries"
+        ]
+      }
+    },
+    "ListStackResources": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackName"
+        ]
+      },
+      "name": "ListStackResources",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "StackResourceSummaries": {
+            "name": "StackResourceSummaries",
+            "shape_name": "StackResourceSummaries",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListStackSetAutoDeploymentTargets": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CallAs": {
+            "name": "CallAs",
+            "shape_name": "CallAs",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "StackSetName": {
+            "name": "StackSetName",
+            "shape_name": "StackSetNameOrId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackSetName"
+        ]
+      },
+      "name": "ListStackSetAutoDeploymentTargets",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Summaries": {
+            "name": "Summaries",
+            "shape_name": "StackSetAutoDeploymentTargetSummaries",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListStackSetOperationResults": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "CallAs": {
+            "name": "CallAs",
+            "shape_name": "CallAs",
+            "type": "string"
+          },
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "OperationResultFilters",
+            "type": "list"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "StackSetName": {
+            "name": "StackSetName",
+            "shape_name": "StackSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackSetName",
+          "OperationId"
+        ]
+      },
+      "name": "ListStackSetOperationResults",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Summaries": {
+            "name": "Summaries",
+            "shape_name": "StackSetOperationResultSummaries",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListStackSetOperations": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "CallAs": {
+            "name": "CallAs",
+            "shape_name": "CallAs",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "StackSetName": {
+            "name": "StackSetName",
+            "shape_name": "StackSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackSetName"
+        ]
+      },
+      "name": "ListStackSetOperations",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Summaries": {
+            "name": "Summaries",
+            "shape_name": "StackSetOperationSummaries",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListStackSets": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "CallAs": {
+            "name": "CallAs",
+            "shape_name": "CallAs",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "StackSetStatus",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListStackSets",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Summaries": {
+            "name": "Summaries",
+            "shape_name": "StackSetSummaries",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListStacks": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "StackStatusFilter": {
+            "name": "StackStatusFilter",
+            "shape_name": "StackStatusFilter",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "ListStacks",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "StackSummaries": {
+            "name": "StackSummaries",
+            "shape_name": "StackSummaries",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "StackId",
+            "id": "StackName",
+            "name": "StackName",
+            "path": [
+              "StackSummaries"
+            ],
+            "type": "cloudformation:stack"
+          }
+        ]
+      }
+    },
+    "ListTypeRegistrations": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "RegistrationStatusFilter": {
+            "name": "RegistrationStatusFilter",
+            "shape_name": "RegistrationStatus",
+            "type": "string"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "RegistryType",
+            "type": "string"
+          },
+          "TypeArn": {
+            "name": "TypeArn",
+            "shape_name": "TypeArn",
+            "type": "string"
+          },
+          "TypeName": {
+            "name": "TypeName",
+            "shape_name": "TypeName",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListTypeRegistrations",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "RegistrationTokenList": {
+            "name": "RegistrationTokenList",
+            "shape_name": "RegistrationTokenList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTypeVersions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "TypeArn",
+            "type": "string"
+          },
+          "DeprecatedStatus": {
+            "name": "DeprecatedStatus",
+            "shape_name": "DeprecatedStatus",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "PublisherId": {
+            "name": "PublisherId",
+            "shape_name": "PublisherId",
+            "type": "string"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "RegistryType",
+            "type": "string"
+          },
+          "TypeName": {
+            "name": "TypeName",
+            "shape_name": "TypeName",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListTypeVersions",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "TypeVersionSummaries": {
+            "name": "TypeVersionSummaries",
+            "shape_name": "TypeVersionSummaries",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTypes": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "DeprecatedStatus": {
+            "name": "DeprecatedStatus",
+            "shape_name": "DeprecatedStatus",
+            "type": "string"
+          },
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "TypeFilters",
+            "type": "structure"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "ProvisioningType": {
+            "name": "ProvisioningType",
+            "shape_name": "ProvisioningType",
+            "type": "string"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "RegistryType",
+            "type": "string"
+          },
+          "Visibility": {
+            "name": "Visibility",
+            "shape_name": "Visibility",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListTypes",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "TypeSummaries": {
+            "name": "TypeSummaries",
+            "shape_name": "TypeSummaries",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "PublishType": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "PrivateTypeArn",
+            "type": "string"
+          },
+          "PublicVersionNumber": {
+            "name": "PublicVersionNumber",
+            "shape_name": "PublicVersionNumber",
+            "type": "string"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "ThirdPartyType",
+            "type": "string"
+          },
+          "TypeName": {
+            "name": "TypeName",
+            "shape_name": "TypeName",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "PublishType",
+      "output": {
+        "markers": null,
+        "members": {
+          "PublicTypeArn": {
+            "name": "PublicTypeArn",
+            "shape_name": "TypeArn",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "RecordHandlerProgress": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BearerToken": {
+            "name": "BearerToken",
+            "shape_name": "ClientToken",
+            "type": "string"
+          },
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "CurrentOperationStatus": {
+            "name": "CurrentOperationStatus",
+            "shape_name": "OperationStatus",
+            "type": "string"
+          },
+          "ErrorCode": {
+            "name": "ErrorCode",
+            "shape_name": "HandlerErrorCode",
+            "type": "string"
+          },
+          "OperationStatus": {
+            "name": "OperationStatus",
+            "shape_name": "OperationStatus",
+            "type": "string"
+          },
+          "ResourceModel": {
+            "name": "ResourceModel",
+            "shape_name": "ResourceModel",
+            "type": "string"
+          },
+          "StatusMessage": {
+            "name": "StatusMessage",
+            "shape_name": "StatusMessage",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BearerToken",
+          "OperationStatus"
+        ]
+      },
+      "name": "RecordHandlerProgress",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RegisterPublisher": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AcceptTermsAndConditions": {
+            "name": "AcceptTermsAndConditions",
+            "shape_name": "AcceptTermsAndConditions",
+            "type": "boolean"
+          },
+          "ConnectionArn": {
+            "name": "ConnectionArn",
+            "shape_name": "ConnectionArn",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "RegisterPublisher",
+      "output": {
+        "markers": null,
+        "members": {
+          "PublisherId": {
+            "name": "PublisherId",
+            "shape_name": "PublisherId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "RegisterType": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "RequestToken",
+            "type": "string"
+          },
+          "ExecutionRoleArn": {
+            "name": "ExecutionRoleArn",
+            "shape_name": "RoleArn",
+            "type": "string"
+          },
+          "LoggingConfig": {
+            "name": "LoggingConfig",
+            "shape_name": "LoggingConfig",
+            "type": "structure"
+          },
+          "SchemaHandlerPackage": {
+            "name": "SchemaHandlerPackage",
+            "shape_name": "S3Url",
+            "type": "string"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "RegistryType",
+            "type": "string"
+          },
+          "TypeName": {
+            "name": "TypeName",
+            "shape_name": "TypeName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TypeName",
+          "SchemaHandlerPackage"
+        ]
+      },
+      "name": "RegisterType",
+      "output": {
+        "markers": null,
+        "members": {
+          "RegistrationToken": {
+            "name": "RegistrationToken",
+            "shape_name": "RegistrationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "RollbackStack": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "RetainExceptOnCreate": {
+            "name": "RetainExceptOnCreate",
+            "shape_name": "RetainExceptOnCreate",
+            "type": "boolean"
+          },
+          "RoleARN": {
+            "name": "RoleARN",
+            "shape_name": "RoleARN",
+            "type": "string"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackNameOrId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackName"
+        ]
+      },
+      "name": "RollbackStack",
+      "output": {
+        "markers": null,
+        "members": {
+          "StackId": {
+            "name": "StackId",
+            "shape_name": "StackId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "SetStackPolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackName",
+            "type": "string"
+          },
+          "StackPolicyBody": {
+            "name": "StackPolicyBody",
+            "shape_name": "StackPolicyBody",
+            "type": "string"
+          },
+          "StackPolicyURL": {
+            "name": "StackPolicyURL",
+            "shape_name": "StackPolicyURL",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackName"
+        ]
+      },
+      "name": "SetStackPolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SetTypeConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Configuration": {
+            "name": "Configuration",
+            "shape_name": "TypeConfiguration",
+            "type": "string"
+          },
+          "ConfigurationAlias": {
+            "name": "ConfigurationAlias",
+            "shape_name": "TypeConfigurationAlias",
+            "type": "string"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "ThirdPartyType",
+            "type": "string"
+          },
+          "TypeArn": {
+            "name": "TypeArn",
+            "shape_name": "TypeArn",
+            "type": "string"
+          },
+          "TypeName": {
+            "name": "TypeName",
+            "shape_name": "TypeName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Configuration"
+        ]
+      },
+      "name": "SetTypeConfiguration",
+      "output": {
+        "markers": null,
+        "members": {
+          "ConfigurationArn": {
+            "name": "ConfigurationArn",
+            "shape_name": "TypeConfigurationArn",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "SetTypeDefaultVersion": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "PrivateTypeArn",
+            "type": "string"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "RegistryType",
+            "type": "string"
+          },
+          "TypeName": {
+            "name": "TypeName",
+            "shape_name": "TypeName",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "TypeVersionId",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "SetTypeDefaultVersion",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "SignalResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LogicalResourceId": {
+            "name": "LogicalResourceId",
+            "shape_name": "LogicalResourceId",
+            "type": "string"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackNameOrId",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "ResourceSignalStatus",
+            "type": "string"
+          },
+          "UniqueId": {
+            "name": "UniqueId",
+            "shape_name": "ResourceSignalUniqueId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackName",
+          "LogicalResourceId",
+          "UniqueId",
+          "Status"
+        ]
+      },
+      "name": "SignalResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "StartResourceScan": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "ScanFilters": {
+            "name": "ScanFilters",
+            "shape_name": "ScanFilters",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "StartResourceScan",
+      "output": {
+        "markers": null,
+        "members": {
+          "ResourceScanId": {
+            "name": "ResourceScanId",
+            "shape_name": "ResourceScanId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "StopStackSetOperation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CallAs": {
+            "name": "CallAs",
+            "shape_name": "CallAs",
+            "type": "string"
+          },
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "StackSetName": {
+            "name": "StackSetName",
+            "shape_name": "StackSetName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackSetName",
+          "OperationId"
+        ]
+      },
+      "name": "StopStackSetOperation",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TestType": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Arn": {
+            "name": "Arn",
+            "shape_name": "TypeArn",
+            "type": "string"
+          },
+          "LogDeliveryBucket": {
+            "name": "LogDeliveryBucket",
+            "shape_name": "S3Bucket",
+            "type": "string"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "ThirdPartyType",
+            "type": "string"
+          },
+          "TypeName": {
+            "name": "TypeName",
+            "shape_name": "TypeName",
+            "type": "string"
+          },
+          "VersionId": {
+            "name": "VersionId",
+            "shape_name": "TypeVersionId",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "TestType",
+      "output": {
+        "markers": null,
+        "members": {
+          "TypeVersionArn": {
+            "name": "TypeVersionArn",
+            "shape_name": "TypeArn",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateGeneratedTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AddResources": {
+            "name": "AddResources",
+            "shape_name": "ResourceDefinitions",
+            "type": "list"
+          },
+          "GeneratedTemplateName": {
+            "name": "GeneratedTemplateName",
+            "shape_name": "GeneratedTemplateName",
+            "type": "string"
+          },
+          "NewGeneratedTemplateName": {
+            "name": "NewGeneratedTemplateName",
+            "shape_name": "GeneratedTemplateName",
+            "type": "string"
+          },
+          "RefreshAllResources": {
+            "name": "RefreshAllResources",
+            "shape_name": "RefreshAllResources",
+            "type": "boolean"
+          },
+          "RemoveResources": {
+            "name": "RemoveResources",
+            "shape_name": "JazzLogicalResourceIds",
+            "type": "list"
+          },
+          "TemplateConfiguration": {
+            "name": "TemplateConfiguration",
+            "shape_name": "TemplateConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "GeneratedTemplateName"
+        ]
+      },
+      "name": "UpdateGeneratedTemplate",
+      "output": {
+        "markers": null,
+        "members": {
+          "GeneratedTemplateId": {
+            "name": "GeneratedTemplateId",
+            "shape_name": "GeneratedTemplateId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateStack": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Capabilities": {
+            "name": "Capabilities",
+            "shape_name": "Capabilities",
+            "type": "list"
+          },
+          "ClientRequestToken": {
+            "name": "ClientRequestToken",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "DisableRollback": {
+            "name": "DisableRollback",
+            "shape_name": "DisableRollback",
+            "type": "boolean"
+          },
+          "NotificationARNs": {
+            "name": "NotificationARNs",
+            "shape_name": "NotificationARNs",
+            "type": "list"
+          },
+          "Parameters": {
+            "name": "Parameters",
+            "shape_name": "Parameters",
+            "type": "list"
+          },
+          "ResourceTypes": {
+            "name": "ResourceTypes",
+            "shape_name": "ResourceTypes",
+            "type": "list"
+          },
+          "RetainExceptOnCreate": {
+            "name": "RetainExceptOnCreate",
+            "shape_name": "RetainExceptOnCreate",
+            "type": "boolean"
+          },
+          "RoleARN": {
+            "name": "RoleARN",
+            "shape_name": "RoleARN",
+            "type": "string"
+          },
+          "RollbackConfiguration": {
+            "name": "RollbackConfiguration",
+            "shape_name": "RollbackConfiguration",
+            "type": "structure"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackName",
+            "type": "string"
+          },
+          "StackPolicyBody": {
+            "name": "StackPolicyBody",
+            "shape_name": "StackPolicyBody",
+            "type": "string"
+          },
+          "StackPolicyDuringUpdateBody": {
+            "name": "StackPolicyDuringUpdateBody",
+            "shape_name": "StackPolicyDuringUpdateBody",
+            "type": "string"
+          },
+          "StackPolicyDuringUpdateURL": {
+            "name": "StackPolicyDuringUpdateURL",
+            "shape_name": "StackPolicyDuringUpdateURL",
+            "type": "string"
+          },
+          "StackPolicyURL": {
+            "name": "StackPolicyURL",
+            "shape_name": "StackPolicyURL",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "TemplateBody": {
+            "name": "TemplateBody",
+            "shape_name": "TemplateBody",
+            "type": "string"
+          },
+          "TemplateURL": {
+            "name": "TemplateURL",
+            "shape_name": "TemplateURL",
+            "type": "string"
+          },
+          "UsePreviousTemplate": {
+            "name": "UsePreviousTemplate",
+            "shape_name": "UsePreviousTemplate",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "StackName"
+        ]
+      },
+      "name": "UpdateStack",
+      "output": {
+        "markers": null,
+        "members": {
+          "StackId": {
+            "name": "StackId",
+            "shape_name": "StackId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateStackInstances": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Accounts": {
+            "name": "Accounts",
+            "shape_name": "AccountList",
+            "type": "list"
+          },
+          "CallAs": {
+            "name": "CallAs",
+            "shape_name": "CallAs",
+            "type": "string"
+          },
+          "DeploymentTargets": {
+            "name": "DeploymentTargets",
+            "shape_name": "DeploymentTargets",
+            "type": "structure"
+          },
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "OperationPreferences": {
+            "name": "OperationPreferences",
+            "shape_name": "StackSetOperationPreferences",
+            "type": "structure"
+          },
+          "ParameterOverrides": {
+            "name": "ParameterOverrides",
+            "shape_name": "Parameters",
+            "type": "list"
+          },
+          "Regions": {
+            "name": "Regions",
+            "shape_name": "RegionList",
+            "type": "list"
+          },
+          "StackSetName": {
+            "name": "StackSetName",
+            "shape_name": "StackSetNameOrId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "StackSetName",
+          "Regions"
+        ]
+      },
+      "name": "UpdateStackInstances",
+      "output": {
+        "markers": null,
+        "members": {
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateStackSet": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Accounts": {
+            "name": "Accounts",
+            "shape_name": "AccountList",
+            "type": "list"
+          },
+          "AdministrationRoleARN": {
+            "name": "AdministrationRoleARN",
+            "shape_name": "RoleARN",
+            "type": "string"
+          },
+          "AutoDeployment": {
+            "name": "AutoDeployment",
+            "shape_name": "AutoDeployment",
+            "type": "structure"
+          },
+          "CallAs": {
+            "name": "CallAs",
+            "shape_name": "CallAs",
+            "type": "string"
+          },
+          "Capabilities": {
+            "name": "Capabilities",
+            "shape_name": "Capabilities",
+            "type": "list"
+          },
+          "DeploymentTargets": {
+            "name": "DeploymentTargets",
+            "shape_name": "DeploymentTargets",
+            "type": "structure"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "Description",
+            "type": "string"
+          },
+          "ExecutionRoleName": {
+            "name": "ExecutionRoleName",
+            "shape_name": "ExecutionRoleName",
+            "type": "string"
+          },
+          "ManagedExecution": {
+            "name": "ManagedExecution",
+            "shape_name": "ManagedExecution",
+            "type": "structure"
+          },
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "OperationPreferences": {
+            "name": "OperationPreferences",
+            "shape_name": "StackSetOperationPreferences",
+            "type": "structure"
+          },
+          "Parameters": {
+            "name": "Parameters",
+            "shape_name": "Parameters",
+            "type": "list"
+          },
+          "PermissionModel": {
+            "name": "PermissionModel",
+            "shape_name": "PermissionModels",
+            "type": "string"
+          },
+          "Regions": {
+            "name": "Regions",
+            "shape_name": "RegionList",
+            "type": "list"
+          },
+          "StackSetName": {
+            "name": "StackSetName",
+            "shape_name": "StackSetName",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "Tags",
+            "type": "list"
+          },
+          "TemplateBody": {
+            "name": "TemplateBody",
+            "shape_name": "TemplateBody",
+            "type": "string"
+          },
+          "TemplateURL": {
+            "name": "TemplateURL",
+            "shape_name": "TemplateURL",
+            "type": "string"
+          },
+          "UsePreviousTemplate": {
+            "name": "UsePreviousTemplate",
+            "shape_name": "UsePreviousTemplate",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "StackSetName"
+        ]
+      },
+      "name": "UpdateStackSet",
+      "output": {
+        "markers": null,
+        "members": {
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateTerminationProtection": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EnableTerminationProtection": {
+            "name": "EnableTerminationProtection",
+            "shape_name": "EnableTerminationProtection",
+            "type": "boolean"
+          },
+          "StackName": {
+            "name": "StackName",
+            "shape_name": "StackNameOrId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "EnableTerminationProtection",
+          "StackName"
+        ]
+      },
+      "name": "UpdateTerminationProtection",
+      "output": {
+        "markers": null,
+        "members": {
+          "StackId": {
+            "name": "StackId",
+            "shape_name": "StackId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ValidateTemplate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "TemplateBody": {
+            "name": "TemplateBody",
+            "shape_name": "TemplateBody",
+            "type": "string"
+          },
+          "TemplateURL": {
+            "name": "TemplateURL",
+            "shape_name": "TemplateURL",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ValidateTemplate",
+      "output": {
+        "markers": null,
+        "members": {
+          "Capabilities": {
+            "name": "Capabilities",
+            "shape_name": "Capabilities",
+            "type": "list"
+          },
+          "CapabilitiesReason": {
+            "name": "CapabilitiesReason",
+            "shape_name": "CapabilitiesReason",
+            "type": "string"
+          },
+          "DeclaredTransforms": {
+            "name": "DeclaredTransforms",
+            "shape_name": "TransformsList",
+            "type": "list"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "Description",
+            "type": "string"
+          },
+          "Parameters": {
+            "name": "Parameters",
+            "shape_name": "TemplateParameters",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    }
+  }
+}

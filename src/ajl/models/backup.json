@@ -3343,7 +3343,16 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "RecoveryPointArn",
+            "path": [
+              "RecoveryPoints"
+            ],
+            "type": "backup:recovery-point"
+          }
+        ]
       }
     },
     "ListRecoveryPointsByLegalHold": {
@@ -3440,7 +3449,16 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "RecoveryPointArn",
+            "path": [
+              "RecoveryPoints"
+            ],
+            "type": "backup:recovery-point"
+          }
+        ]
       }
     },
     "ListReportJobs": {

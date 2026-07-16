@@ -12292,7 +12292,18 @@
             "shape_name": "NextToken",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:ec2:{region}:{account}:client-vpn-endpoint/{ClientVpnEndpointId}",
+            "id": "ClientVpnEndpointId",
+            "path": [
+              "ClientVpnEndpoints"
+            ],
+            "tags": "Tags",
+            "type": "ec2:client-vpn-endpoint"
+          }
+        ]
       }
     },
     "DescribeClientVpnRoutes": {

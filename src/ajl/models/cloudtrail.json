@@ -1,0 +1,3167 @@
+{
+  "metadata": {
+    "apiVersion": "2013-11-01",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "cloudtrail",
+    "jsonVersion": "1.1",
+    "protocol": "json",
+    "protocols": [
+      "json"
+    ],
+    "serviceAbbreviation": "CloudTrail",
+    "serviceFullName": "AWS CloudTrail",
+    "serviceId": "CloudTrail",
+    "signatureVersion": "v4",
+    "targetPrefix": "com.amazonaws.cloudtrail.v20131101.CloudTrail_20131101",
+    "uid": "cloudtrail-2013-11-01"
+  },
+  "name": "cloudtrail",
+  "operations": {
+    "AddTags": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "TagsList": {
+            "name": "TagsList",
+            "shape_name": "TagsList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceId",
+          "TagsList"
+        ]
+      },
+      "name": "AddTags",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CancelQuery": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventDataStore": {
+            "name": "EventDataStore",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "EventDataStoreOwnerAccountId": {
+            "name": "EventDataStoreOwnerAccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "QueryId": {
+            "name": "QueryId",
+            "shape_name": "UUID",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueryId"
+        ]
+      },
+      "name": "CancelQuery",
+      "output": {
+        "markers": null,
+        "members": {
+          "EventDataStoreOwnerAccountId": {
+            "name": "EventDataStoreOwnerAccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "QueryId": {
+            "name": "QueryId",
+            "shape_name": "UUID",
+            "type": "string"
+          },
+          "QueryStatus": {
+            "name": "QueryStatus",
+            "shape_name": "QueryStatus",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueryId",
+          "QueryStatus"
+        ]
+      }
+    },
+    "CreateChannel": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Destinations": {
+            "name": "Destinations",
+            "shape_name": "Destinations",
+            "type": "list"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "ChannelName",
+            "type": "string"
+          },
+          "Source": {
+            "name": "Source",
+            "shape_name": "Source",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagsList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Name",
+          "Source",
+          "Destinations"
+        ]
+      },
+      "name": "CreateChannel",
+      "output": {
+        "markers": null,
+        "members": {
+          "ChannelArn": {
+            "name": "ChannelArn",
+            "shape_name": "ChannelArn",
+            "type": "string"
+          },
+          "Destinations": {
+            "name": "Destinations",
+            "shape_name": "Destinations",
+            "type": "list"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "ChannelName",
+            "type": "string"
+          },
+          "Source": {
+            "name": "Source",
+            "shape_name": "Source",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagsList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateDashboard": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "DashboardName",
+            "type": "string"
+          },
+          "RefreshSchedule": {
+            "name": "RefreshSchedule",
+            "shape_name": "RefreshSchedule",
+            "type": "structure"
+          },
+          "TagsList": {
+            "name": "TagsList",
+            "shape_name": "TagsList",
+            "type": "list"
+          },
+          "TerminationProtectionEnabled": {
+            "name": "TerminationProtectionEnabled",
+            "shape_name": "TerminationProtectionEnabled",
+            "type": "boolean"
+          },
+          "Widgets": {
+            "name": "Widgets",
+            "shape_name": "RequestWidgetList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "CreateDashboard",
+      "output": {
+        "markers": null,
+        "members": {
+          "DashboardArn": {
+            "name": "DashboardArn",
+            "shape_name": "DashboardArn",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "DashboardName",
+            "type": "string"
+          },
+          "RefreshSchedule": {
+            "name": "RefreshSchedule",
+            "shape_name": "RefreshSchedule",
+            "type": "structure"
+          },
+          "TagsList": {
+            "name": "TagsList",
+            "shape_name": "TagsList",
+            "type": "list"
+          },
+          "TerminationProtectionEnabled": {
+            "name": "TerminationProtectionEnabled",
+            "shape_name": "TerminationProtectionEnabled",
+            "type": "boolean"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "DashboardType",
+            "type": "string"
+          },
+          "Widgets": {
+            "name": "Widgets",
+            "shape_name": "WidgetList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateEventDataStore": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AdvancedEventSelectors": {
+            "name": "AdvancedEventSelectors",
+            "shape_name": "AdvancedEventSelectors",
+            "type": "list"
+          },
+          "BillingMode": {
+            "name": "BillingMode",
+            "shape_name": "BillingMode",
+            "type": "string"
+          },
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "EventDataStoreKmsKeyId",
+            "type": "string"
+          },
+          "MultiRegionEnabled": {
+            "name": "MultiRegionEnabled",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EventDataStoreName",
+            "type": "string"
+          },
+          "OrganizationEnabled": {
+            "name": "OrganizationEnabled",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "RetentionPeriod": {
+            "name": "RetentionPeriod",
+            "shape_name": "RetentionPeriod",
+            "type": "integer"
+          },
+          "StartIngestion": {
+            "name": "StartIngestion",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "TagsList": {
+            "name": "TagsList",
+            "shape_name": "TagsList",
+            "type": "list"
+          },
+          "TerminationProtectionEnabled": {
+            "name": "TerminationProtectionEnabled",
+            "shape_name": "TerminationProtectionEnabled",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "CreateEventDataStore",
+      "output": {
+        "markers": null,
+        "members": {
+          "AdvancedEventSelectors": {
+            "name": "AdvancedEventSelectors",
+            "shape_name": "AdvancedEventSelectors",
+            "type": "list"
+          },
+          "BillingMode": {
+            "name": "BillingMode",
+            "shape_name": "BillingMode",
+            "type": "string"
+          },
+          "CreatedTimestamp": {
+            "name": "CreatedTimestamp",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "EventDataStoreArn": {
+            "name": "EventDataStoreArn",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "EventDataStoreKmsKeyId",
+            "type": "string"
+          },
+          "MultiRegionEnabled": {
+            "name": "MultiRegionEnabled",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EventDataStoreName",
+            "type": "string"
+          },
+          "OrganizationEnabled": {
+            "name": "OrganizationEnabled",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "RetentionPeriod": {
+            "name": "RetentionPeriod",
+            "shape_name": "RetentionPeriod",
+            "type": "integer"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "EventDataStoreStatus",
+            "type": "string"
+          },
+          "TagsList": {
+            "name": "TagsList",
+            "shape_name": "TagsList",
+            "type": "list"
+          },
+          "TerminationProtectionEnabled": {
+            "name": "TerminationProtectionEnabled",
+            "shape_name": "TerminationProtectionEnabled",
+            "type": "boolean"
+          },
+          "UpdatedTimestamp": {
+            "name": "UpdatedTimestamp",
+            "shape_name": "Date",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateTrail": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CloudWatchLogsLogGroupArn": {
+            "name": "CloudWatchLogsLogGroupArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CloudWatchLogsRoleArn": {
+            "name": "CloudWatchLogsRoleArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "EnableLogFileValidation": {
+            "name": "EnableLogFileValidation",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "IncludeGlobalServiceEvents": {
+            "name": "IncludeGlobalServiceEvents",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "IsMultiRegionTrail": {
+            "name": "IsMultiRegionTrail",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "IsOrganizationTrail": {
+            "name": "IsOrganizationTrail",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "S3BucketName": {
+            "name": "S3BucketName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "S3KeyPrefix": {
+            "name": "S3KeyPrefix",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SnsTopicName": {
+            "name": "SnsTopicName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "TagsList": {
+            "name": "TagsList",
+            "shape_name": "TagsList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Name",
+          "S3BucketName"
+        ]
+      },
+      "name": "CreateTrail",
+      "output": {
+        "markers": null,
+        "members": {
+          "CloudWatchLogsLogGroupArn": {
+            "name": "CloudWatchLogsLogGroupArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CloudWatchLogsRoleArn": {
+            "name": "CloudWatchLogsRoleArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "IncludeGlobalServiceEvents": {
+            "name": "IncludeGlobalServiceEvents",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "IsMultiRegionTrail": {
+            "name": "IsMultiRegionTrail",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "IsOrganizationTrail": {
+            "name": "IsOrganizationTrail",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "LogFileValidationEnabled": {
+            "name": "LogFileValidationEnabled",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "S3BucketName": {
+            "name": "S3BucketName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "S3KeyPrefix": {
+            "name": "S3KeyPrefix",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SnsTopicARN": {
+            "name": "SnsTopicARN",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SnsTopicName": {
+            "name": "SnsTopicName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "TrailARN": {
+            "name": "TrailARN",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteChannel": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Channel": {
+            "name": "Channel",
+            "shape_name": "ChannelArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Channel"
+        ]
+      },
+      "name": "DeleteChannel",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteDashboard": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DashboardId": {
+            "name": "DashboardId",
+            "shape_name": "DashboardArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DashboardId"
+        ]
+      },
+      "name": "DeleteDashboard",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteEventDataStore": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventDataStore": {
+            "name": "EventDataStore",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "EventDataStore"
+        ]
+      },
+      "name": "DeleteEventDataStore",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteResourcePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      },
+      "name": "DeleteResourcePolicy",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteTrail": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "DeleteTrail",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeregisterOrganizationDelegatedAdmin": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DelegatedAdminAccountId": {
+            "name": "DelegatedAdminAccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DelegatedAdminAccountId"
+        ]
+      },
+      "name": "DeregisterOrganizationDelegatedAdmin",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DescribeQuery": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventDataStore": {
+            "name": "EventDataStore",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "EventDataStoreOwnerAccountId": {
+            "name": "EventDataStoreOwnerAccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "QueryAlias": {
+            "name": "QueryAlias",
+            "shape_name": "QueryAlias",
+            "type": "string"
+          },
+          "QueryId": {
+            "name": "QueryId",
+            "shape_name": "UUID",
+            "type": "string"
+          },
+          "RefreshId": {
+            "name": "RefreshId",
+            "shape_name": "RefreshId",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeQuery",
+      "output": {
+        "markers": null,
+        "members": {
+          "DeliveryS3Uri": {
+            "name": "DeliveryS3Uri",
+            "shape_name": "DeliveryS3Uri",
+            "type": "string"
+          },
+          "DeliveryStatus": {
+            "name": "DeliveryStatus",
+            "shape_name": "DeliveryStatus",
+            "type": "string"
+          },
+          "ErrorMessage": {
+            "name": "ErrorMessage",
+            "shape_name": "ErrorMessage",
+            "type": "string"
+          },
+          "EventDataStoreOwnerAccountId": {
+            "name": "EventDataStoreOwnerAccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "Prompt": {
+            "name": "Prompt",
+            "shape_name": "Prompt",
+            "type": "string"
+          },
+          "QueryId": {
+            "name": "QueryId",
+            "shape_name": "UUID",
+            "type": "string"
+          },
+          "QueryStatistics": {
+            "name": "QueryStatistics",
+            "shape_name": "QueryStatisticsForDescribeQuery",
+            "type": "structure"
+          },
+          "QueryStatus": {
+            "name": "QueryStatus",
+            "shape_name": "QueryStatus",
+            "type": "string"
+          },
+          "QueryString": {
+            "name": "QueryString",
+            "shape_name": "QueryStatement",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeTrails": {
+      "input": {
+        "markers": null,
+        "members": {
+          "includeShadowTrails": {
+            "name": "includeShadowTrails",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "trailNameList": {
+            "name": "trailNameList",
+            "shape_name": "TrailNameList",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeTrails",
+      "output": {
+        "markers": null,
+        "members": {
+          "trailList": {
+            "name": "trailList",
+            "shape_name": "TrailList",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "TrailARN",
+            "id": "Name",
+            "name": "Name",
+            "path": [
+              "trailList"
+            ],
+            "type": "cloudtrail:trail"
+          }
+        ]
+      }
+    },
+    "DisableFederation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventDataStore": {
+            "name": "EventDataStore",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "EventDataStore"
+        ]
+      },
+      "name": "DisableFederation",
+      "output": {
+        "markers": null,
+        "members": {
+          "EventDataStoreArn": {
+            "name": "EventDataStoreArn",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "FederationStatus": {
+            "name": "FederationStatus",
+            "shape_name": "FederationStatus",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "EnableFederation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventDataStore": {
+            "name": "EventDataStore",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "FederationRoleArn": {
+            "name": "FederationRoleArn",
+            "shape_name": "FederationRoleArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "EventDataStore",
+          "FederationRoleArn"
+        ]
+      },
+      "name": "EnableFederation",
+      "output": {
+        "markers": null,
+        "members": {
+          "EventDataStoreArn": {
+            "name": "EventDataStoreArn",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "FederationRoleArn": {
+            "name": "FederationRoleArn",
+            "shape_name": "FederationRoleArn",
+            "type": "string"
+          },
+          "FederationStatus": {
+            "name": "FederationStatus",
+            "shape_name": "FederationStatus",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GenerateQuery": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventDataStores": {
+            "name": "EventDataStores",
+            "shape_name": "EventDataStoreList",
+            "type": "list"
+          },
+          "Prompt": {
+            "name": "Prompt",
+            "shape_name": "Prompt",
+            "type": "string"
+          }
+        },
+        "required": [
+          "EventDataStores",
+          "Prompt"
+        ]
+      },
+      "name": "GenerateQuery",
+      "output": {
+        "markers": null,
+        "members": {
+          "EventDataStoreOwnerAccountId": {
+            "name": "EventDataStoreOwnerAccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "QueryAlias": {
+            "name": "QueryAlias",
+            "shape_name": "QueryAlias",
+            "type": "string"
+          },
+          "QueryStatement": {
+            "name": "QueryStatement",
+            "shape_name": "QueryStatement",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetChannel": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Channel": {
+            "name": "Channel",
+            "shape_name": "ChannelArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Channel"
+        ]
+      },
+      "name": "GetChannel",
+      "output": {
+        "markers": null,
+        "members": {
+          "ChannelArn": {
+            "name": "ChannelArn",
+            "shape_name": "ChannelArn",
+            "type": "string"
+          },
+          "Destinations": {
+            "name": "Destinations",
+            "shape_name": "Destinations",
+            "type": "list"
+          },
+          "IngestionStatus": {
+            "name": "IngestionStatus",
+            "shape_name": "IngestionStatus",
+            "type": "structure"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "ChannelName",
+            "type": "string"
+          },
+          "Source": {
+            "name": "Source",
+            "shape_name": "Source",
+            "type": "string"
+          },
+          "SourceConfig": {
+            "name": "SourceConfig",
+            "shape_name": "SourceConfig",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetDashboard": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DashboardId": {
+            "name": "DashboardId",
+            "shape_name": "DashboardArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DashboardId"
+        ]
+      },
+      "name": "GetDashboard",
+      "output": {
+        "markers": null,
+        "members": {
+          "CreatedTimestamp": {
+            "name": "CreatedTimestamp",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "DashboardArn": {
+            "name": "DashboardArn",
+            "shape_name": "DashboardArn",
+            "type": "string"
+          },
+          "LastRefreshFailureReason": {
+            "name": "LastRefreshFailureReason",
+            "shape_name": "ErrorMessage",
+            "type": "string"
+          },
+          "LastRefreshId": {
+            "name": "LastRefreshId",
+            "shape_name": "RefreshId",
+            "type": "string"
+          },
+          "RefreshSchedule": {
+            "name": "RefreshSchedule",
+            "shape_name": "RefreshSchedule",
+            "type": "structure"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "DashboardStatus",
+            "type": "string"
+          },
+          "TerminationProtectionEnabled": {
+            "name": "TerminationProtectionEnabled",
+            "shape_name": "TerminationProtectionEnabled",
+            "type": "boolean"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "DashboardType",
+            "type": "string"
+          },
+          "UpdatedTimestamp": {
+            "name": "UpdatedTimestamp",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "Widgets": {
+            "name": "Widgets",
+            "shape_name": "WidgetList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetEventConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventDataStore": {
+            "name": "EventDataStore",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "GetEventConfiguration",
+      "output": {
+        "markers": null,
+        "members": {
+          "ContextKeySelectors": {
+            "name": "ContextKeySelectors",
+            "shape_name": "ContextKeySelectors",
+            "type": "list"
+          },
+          "EventDataStoreArn": {
+            "name": "EventDataStoreArn",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "MaxEventSize": {
+            "name": "MaxEventSize",
+            "shape_name": "MaxEventSize",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetEventDataStore": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventDataStore": {
+            "name": "EventDataStore",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "EventDataStore"
+        ]
+      },
+      "name": "GetEventDataStore",
+      "output": {
+        "markers": null,
+        "members": {
+          "AdvancedEventSelectors": {
+            "name": "AdvancedEventSelectors",
+            "shape_name": "AdvancedEventSelectors",
+            "type": "list"
+          },
+          "BillingMode": {
+            "name": "BillingMode",
+            "shape_name": "BillingMode",
+            "type": "string"
+          },
+          "CreatedTimestamp": {
+            "name": "CreatedTimestamp",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "EventDataStoreArn": {
+            "name": "EventDataStoreArn",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "FederationRoleArn": {
+            "name": "FederationRoleArn",
+            "shape_name": "FederationRoleArn",
+            "type": "string"
+          },
+          "FederationStatus": {
+            "name": "FederationStatus",
+            "shape_name": "FederationStatus",
+            "type": "string"
+          },
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "EventDataStoreKmsKeyId",
+            "type": "string"
+          },
+          "MultiRegionEnabled": {
+            "name": "MultiRegionEnabled",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EventDataStoreName",
+            "type": "string"
+          },
+          "OrganizationEnabled": {
+            "name": "OrganizationEnabled",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "PartitionKeys": {
+            "name": "PartitionKeys",
+            "shape_name": "PartitionKeyList",
+            "type": "list"
+          },
+          "RetentionPeriod": {
+            "name": "RetentionPeriod",
+            "shape_name": "RetentionPeriod",
+            "type": "integer"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "EventDataStoreStatus",
+            "type": "string"
+          },
+          "TerminationProtectionEnabled": {
+            "name": "TerminationProtectionEnabled",
+            "shape_name": "TerminationProtectionEnabled",
+            "type": "boolean"
+          },
+          "UpdatedTimestamp": {
+            "name": "UpdatedTimestamp",
+            "shape_name": "Date",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetEventSelectors": {
+      "input": {
+        "markers": null,
+        "members": {
+          "TrailName": {
+            "name": "TrailName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TrailName"
+        ]
+      },
+      "name": "GetEventSelectors",
+      "output": {
+        "markers": null,
+        "members": {
+          "AdvancedEventSelectors": {
+            "name": "AdvancedEventSelectors",
+            "shape_name": "AdvancedEventSelectors",
+            "type": "list"
+          },
+          "EventSelectors": {
+            "name": "EventSelectors",
+            "shape_name": "EventSelectors",
+            "type": "list"
+          },
+          "TrailARN": {
+            "name": "TrailARN",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetImport": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ImportId": {
+            "name": "ImportId",
+            "shape_name": "UUID",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ImportId"
+        ]
+      },
+      "name": "GetImport",
+      "output": {
+        "markers": null,
+        "members": {
+          "CreatedTimestamp": {
+            "name": "CreatedTimestamp",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "Destinations": {
+            "name": "Destinations",
+            "shape_name": "ImportDestinations",
+            "type": "list"
+          },
+          "EndEventTime": {
+            "name": "EndEventTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "ImportId": {
+            "name": "ImportId",
+            "shape_name": "UUID",
+            "type": "string"
+          },
+          "ImportSource": {
+            "name": "ImportSource",
+            "shape_name": "ImportSource",
+            "type": "structure"
+          },
+          "ImportStatistics": {
+            "name": "ImportStatistics",
+            "shape_name": "ImportStatistics",
+            "type": "structure"
+          },
+          "ImportStatus": {
+            "name": "ImportStatus",
+            "shape_name": "ImportStatus",
+            "type": "string"
+          },
+          "StartEventTime": {
+            "name": "StartEventTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "UpdatedTimestamp": {
+            "name": "UpdatedTimestamp",
+            "shape_name": "Date",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetInsightSelectors": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventDataStore": {
+            "name": "EventDataStore",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "TrailName": {
+            "name": "TrailName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "GetInsightSelectors",
+      "output": {
+        "markers": null,
+        "members": {
+          "EventDataStoreArn": {
+            "name": "EventDataStoreArn",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "InsightSelectors": {
+            "name": "InsightSelectors",
+            "shape_name": "InsightSelectors",
+            "type": "list"
+          },
+          "InsightsDestination": {
+            "name": "InsightsDestination",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "TrailARN": {
+            "name": "TrailARN",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetQueryResults": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventDataStore": {
+            "name": "EventDataStore",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "EventDataStoreOwnerAccountId": {
+            "name": "EventDataStoreOwnerAccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "MaxQueryResults": {
+            "name": "MaxQueryResults",
+            "shape_name": "MaxQueryResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "QueryId": {
+            "name": "QueryId",
+            "shape_name": "UUID",
+            "type": "string"
+          }
+        },
+        "required": [
+          "QueryId"
+        ]
+      },
+      "name": "GetQueryResults",
+      "output": {
+        "markers": null,
+        "members": {
+          "ErrorMessage": {
+            "name": "ErrorMessage",
+            "shape_name": "ErrorMessage",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "QueryResultRows": {
+            "name": "QueryResultRows",
+            "shape_name": "QueryResultRows",
+            "type": "list"
+          },
+          "QueryStatistics": {
+            "name": "QueryStatistics",
+            "shape_name": "QueryStatistics",
+            "type": "structure"
+          },
+          "QueryStatus": {
+            "name": "QueryStatus",
+            "shape_name": "QueryStatus",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetResourcePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn"
+        ]
+      },
+      "name": "GetResourcePolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "DelegatedAdminResourcePolicy": {
+            "name": "DelegatedAdminResourcePolicy",
+            "shape_name": "ResourcePolicy",
+            "type": "string"
+          },
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          },
+          "ResourcePolicy": {
+            "name": "ResourcePolicy",
+            "shape_name": "ResourcePolicy",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetTrail": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "GetTrail",
+      "output": {
+        "markers": null,
+        "members": {
+          "Trail": {
+            "name": "Trail",
+            "shape_name": "Trail",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetTrailStatus": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "GetTrailStatus",
+      "output": {
+        "markers": null,
+        "members": {
+          "IsLogging": {
+            "name": "IsLogging",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "LatestCloudWatchLogsDeliveryError": {
+            "name": "LatestCloudWatchLogsDeliveryError",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "LatestCloudWatchLogsDeliveryTime": {
+            "name": "LatestCloudWatchLogsDeliveryTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "LatestDeliveryAttemptSucceeded": {
+            "name": "LatestDeliveryAttemptSucceeded",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "LatestDeliveryAttemptTime": {
+            "name": "LatestDeliveryAttemptTime",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "LatestDeliveryError": {
+            "name": "LatestDeliveryError",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "LatestDeliveryTime": {
+            "name": "LatestDeliveryTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "LatestDigestDeliveryError": {
+            "name": "LatestDigestDeliveryError",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "LatestDigestDeliveryTime": {
+            "name": "LatestDigestDeliveryTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "LatestNotificationAttemptSucceeded": {
+            "name": "LatestNotificationAttemptSucceeded",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "LatestNotificationAttemptTime": {
+            "name": "LatestNotificationAttemptTime",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "LatestNotificationError": {
+            "name": "LatestNotificationError",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "LatestNotificationTime": {
+            "name": "LatestNotificationTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "StartLoggingTime": {
+            "name": "StartLoggingTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "StopLoggingTime": {
+            "name": "StopLoggingTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "TimeLoggingStarted": {
+            "name": "TimeLoggingStarted",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "TimeLoggingStopped": {
+            "name": "TimeLoggingStopped",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListChannels": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "ListChannelsMaxResultsCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListChannels",
+      "output": {
+        "markers": null,
+        "members": {
+          "Channels": {
+            "name": "Channels",
+            "shape_name": "Channels",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListDashboards": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "ListDashboardsMaxResultsCount",
+            "type": "integer"
+          },
+          "NamePrefix": {
+            "name": "NamePrefix",
+            "shape_name": "DashboardName",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "DashboardType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListDashboards",
+      "output": {
+        "markers": null,
+        "members": {
+          "Dashboards": {
+            "name": "Dashboards",
+            "shape_name": "Dashboards",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListEventDataStores": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "ListEventDataStoresMaxResultsCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListEventDataStores",
+      "output": {
+        "markers": null,
+        "members": {
+          "EventDataStores": {
+            "name": "EventDataStores",
+            "shape_name": "EventDataStores",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListImportFailures": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "ImportId": {
+            "name": "ImportId",
+            "shape_name": "UUID",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "ListImportFailuresMaxResultsCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ImportId"
+        ]
+      },
+      "name": "ListImportFailures",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Failures": {
+            "name": "Failures",
+            "shape_name": "ImportFailureList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListImports": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Destination": {
+            "name": "Destination",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "ImportStatus": {
+            "name": "ImportStatus",
+            "shape_name": "ImportStatus",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "ListImportsMaxResultsCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListImports",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Imports": {
+            "name": "Imports",
+            "shape_name": "ImportsList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListInsightsMetricData": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DataType": {
+            "name": "DataType",
+            "shape_name": "InsightsMetricDataType",
+            "type": "string"
+          },
+          "EndTime": {
+            "name": "EndTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "ErrorCode": {
+            "name": "ErrorCode",
+            "shape_name": "ErrorCode",
+            "type": "string"
+          },
+          "EventName": {
+            "name": "EventName",
+            "shape_name": "EventName",
+            "type": "string"
+          },
+          "EventSource": {
+            "name": "EventSource",
+            "shape_name": "EventSource",
+            "type": "string"
+          },
+          "InsightType": {
+            "name": "InsightType",
+            "shape_name": "InsightType",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "InsightsMetricMaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "InsightsMetricNextToken",
+            "type": "string"
+          },
+          "Period": {
+            "name": "Period",
+            "shape_name": "InsightsMetricPeriod",
+            "type": "integer"
+          },
+          "StartTime": {
+            "name": "StartTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          }
+        },
+        "required": [
+          "EventSource",
+          "EventName",
+          "InsightType"
+        ]
+      },
+      "name": "ListInsightsMetricData",
+      "output": {
+        "markers": null,
+        "members": {
+          "ErrorCode": {
+            "name": "ErrorCode",
+            "shape_name": "ErrorCode",
+            "type": "string"
+          },
+          "EventName": {
+            "name": "EventName",
+            "shape_name": "EventName",
+            "type": "string"
+          },
+          "EventSource": {
+            "name": "EventSource",
+            "shape_name": "EventSource",
+            "type": "string"
+          },
+          "InsightType": {
+            "name": "InsightType",
+            "shape_name": "InsightType",
+            "type": "string"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "InsightsMetricNextToken",
+            "type": "string"
+          },
+          "Timestamps": {
+            "name": "Timestamps",
+            "shape_name": "Timestamps",
+            "type": "list"
+          },
+          "Values": {
+            "name": "Values",
+            "shape_name": "InsightsMetricValues",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListPublicKeys": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "EndTime": {
+            "name": "EndTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "StartTime": {
+            "name": "StartTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      },
+      "name": "ListPublicKeys",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PublicKeyList": {
+            "name": "PublicKeyList",
+            "shape_name": "PublicKeyList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListQueries": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EndTime": {
+            "name": "EndTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "EventDataStore": {
+            "name": "EventDataStore",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "ListQueriesMaxResultsCount",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "QueryStatus": {
+            "name": "QueryStatus",
+            "shape_name": "QueryStatus",
+            "type": "string"
+          },
+          "StartTime": {
+            "name": "StartTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          }
+        },
+        "required": [
+          "EventDataStore"
+        ]
+      },
+      "name": "ListQueries",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "Queries": {
+            "name": "Queries",
+            "shape_name": "Queries",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTags": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ResourceIdList": {
+            "name": "ResourceIdList",
+            "shape_name": "ResourceIdList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceIdList"
+        ]
+      },
+      "name": "ListTags",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ResourceTagList": {
+            "name": "ResourceTagList",
+            "shape_name": "ResourceTagList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTrails": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListTrails",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Trails": {
+            "name": "Trails",
+            "shape_name": "Trails",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "TrailARN",
+            "id": "Name",
+            "name": "Name",
+            "path": [
+              "Trails"
+            ],
+            "type": "cloudtrail:trail"
+          }
+        ]
+      }
+    },
+    "LookupEvents": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "EndTime": {
+            "name": "EndTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "EventCategory": {
+            "name": "EventCategory",
+            "shape_name": "EventCategory",
+            "type": "string"
+          },
+          "LookupAttributes": {
+            "name": "LookupAttributes",
+            "shape_name": "LookupAttributesList",
+            "type": "list"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "StartTime": {
+            "name": "StartTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      },
+      "name": "LookupEvents",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Events": {
+            "name": "Events",
+            "shape_name": "EventsList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutEventConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ContextKeySelectors": {
+            "name": "ContextKeySelectors",
+            "shape_name": "ContextKeySelectors",
+            "type": "list"
+          },
+          "EventDataStore": {
+            "name": "EventDataStore",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxEventSize": {
+            "name": "MaxEventSize",
+            "shape_name": "MaxEventSize",
+            "type": "string"
+          }
+        },
+        "required": [
+          "MaxEventSize",
+          "ContextKeySelectors"
+        ]
+      },
+      "name": "PutEventConfiguration",
+      "output": {
+        "markers": null,
+        "members": {
+          "ContextKeySelectors": {
+            "name": "ContextKeySelectors",
+            "shape_name": "ContextKeySelectors",
+            "type": "list"
+          },
+          "EventDataStoreArn": {
+            "name": "EventDataStoreArn",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "MaxEventSize": {
+            "name": "MaxEventSize",
+            "shape_name": "MaxEventSize",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutEventSelectors": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AdvancedEventSelectors": {
+            "name": "AdvancedEventSelectors",
+            "shape_name": "AdvancedEventSelectors",
+            "type": "list"
+          },
+          "EventSelectors": {
+            "name": "EventSelectors",
+            "shape_name": "EventSelectors",
+            "type": "list"
+          },
+          "TrailName": {
+            "name": "TrailName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TrailName"
+        ]
+      },
+      "name": "PutEventSelectors",
+      "output": {
+        "markers": null,
+        "members": {
+          "AdvancedEventSelectors": {
+            "name": "AdvancedEventSelectors",
+            "shape_name": "AdvancedEventSelectors",
+            "type": "list"
+          },
+          "EventSelectors": {
+            "name": "EventSelectors",
+            "shape_name": "EventSelectors",
+            "type": "list"
+          },
+          "TrailARN": {
+            "name": "TrailARN",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutInsightSelectors": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventDataStore": {
+            "name": "EventDataStore",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "InsightSelectors": {
+            "name": "InsightSelectors",
+            "shape_name": "InsightSelectors",
+            "type": "list"
+          },
+          "InsightsDestination": {
+            "name": "InsightsDestination",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "TrailName": {
+            "name": "TrailName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "InsightSelectors"
+        ]
+      },
+      "name": "PutInsightSelectors",
+      "output": {
+        "markers": null,
+        "members": {
+          "EventDataStoreArn": {
+            "name": "EventDataStoreArn",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "InsightSelectors": {
+            "name": "InsightSelectors",
+            "shape_name": "InsightSelectors",
+            "type": "list"
+          },
+          "InsightsDestination": {
+            "name": "InsightsDestination",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "TrailARN": {
+            "name": "TrailARN",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutResourcePolicy": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          },
+          "ResourcePolicy": {
+            "name": "ResourcePolicy",
+            "shape_name": "ResourcePolicy",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceArn",
+          "ResourcePolicy"
+        ]
+      },
+      "name": "PutResourcePolicy",
+      "output": {
+        "markers": null,
+        "members": {
+          "DelegatedAdminResourcePolicy": {
+            "name": "DelegatedAdminResourcePolicy",
+            "shape_name": "ResourcePolicy",
+            "type": "string"
+          },
+          "ResourceArn": {
+            "name": "ResourceArn",
+            "shape_name": "ResourceArn",
+            "type": "string"
+          },
+          "ResourcePolicy": {
+            "name": "ResourcePolicy",
+            "shape_name": "ResourcePolicy",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "RegisterOrganizationDelegatedAdmin": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MemberAccountId": {
+            "name": "MemberAccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "MemberAccountId"
+        ]
+      },
+      "name": "RegisterOrganizationDelegatedAdmin",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RemoveTags": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "TagsList": {
+            "name": "TagsList",
+            "shape_name": "TagsList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceId",
+          "TagsList"
+        ]
+      },
+      "name": "RemoveTags",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RestoreEventDataStore": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventDataStore": {
+            "name": "EventDataStore",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "EventDataStore"
+        ]
+      },
+      "name": "RestoreEventDataStore",
+      "output": {
+        "markers": null,
+        "members": {
+          "AdvancedEventSelectors": {
+            "name": "AdvancedEventSelectors",
+            "shape_name": "AdvancedEventSelectors",
+            "type": "list"
+          },
+          "BillingMode": {
+            "name": "BillingMode",
+            "shape_name": "BillingMode",
+            "type": "string"
+          },
+          "CreatedTimestamp": {
+            "name": "CreatedTimestamp",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "EventDataStoreArn": {
+            "name": "EventDataStoreArn",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "EventDataStoreKmsKeyId",
+            "type": "string"
+          },
+          "MultiRegionEnabled": {
+            "name": "MultiRegionEnabled",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EventDataStoreName",
+            "type": "string"
+          },
+          "OrganizationEnabled": {
+            "name": "OrganizationEnabled",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "RetentionPeriod": {
+            "name": "RetentionPeriod",
+            "shape_name": "RetentionPeriod",
+            "type": "integer"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "EventDataStoreStatus",
+            "type": "string"
+          },
+          "TerminationProtectionEnabled": {
+            "name": "TerminationProtectionEnabled",
+            "shape_name": "TerminationProtectionEnabled",
+            "type": "boolean"
+          },
+          "UpdatedTimestamp": {
+            "name": "UpdatedTimestamp",
+            "shape_name": "Date",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      }
+    },
+    "SearchSampleQueries": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "SearchSampleQueriesMaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "SearchPhrase": {
+            "name": "SearchPhrase",
+            "shape_name": "SearchSampleQueriesSearchPhrase",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SearchPhrase"
+        ]
+      },
+      "name": "SearchSampleQueries",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "SearchResults": {
+            "name": "SearchResults",
+            "shape_name": "SearchSampleQueriesSearchResults",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "StartDashboardRefresh": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DashboardId": {
+            "name": "DashboardId",
+            "shape_name": "DashboardArn",
+            "type": "string"
+          },
+          "QueryParameterValues": {
+            "name": "QueryParameterValues",
+            "shape_name": "QueryParameterValues",
+            "type": "map"
+          }
+        },
+        "required": [
+          "DashboardId"
+        ]
+      },
+      "name": "StartDashboardRefresh",
+      "output": {
+        "markers": null,
+        "members": {
+          "RefreshId": {
+            "name": "RefreshId",
+            "shape_name": "RefreshId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "StartEventDataStoreIngestion": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventDataStore": {
+            "name": "EventDataStore",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "EventDataStore"
+        ]
+      },
+      "name": "StartEventDataStoreIngestion",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "StartImport": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Destinations": {
+            "name": "Destinations",
+            "shape_name": "ImportDestinations",
+            "type": "list"
+          },
+          "EndEventTime": {
+            "name": "EndEventTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "ImportId": {
+            "name": "ImportId",
+            "shape_name": "UUID",
+            "type": "string"
+          },
+          "ImportSource": {
+            "name": "ImportSource",
+            "shape_name": "ImportSource",
+            "type": "structure"
+          },
+          "StartEventTime": {
+            "name": "StartEventTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      },
+      "name": "StartImport",
+      "output": {
+        "markers": null,
+        "members": {
+          "CreatedTimestamp": {
+            "name": "CreatedTimestamp",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "Destinations": {
+            "name": "Destinations",
+            "shape_name": "ImportDestinations",
+            "type": "list"
+          },
+          "EndEventTime": {
+            "name": "EndEventTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "ImportId": {
+            "name": "ImportId",
+            "shape_name": "UUID",
+            "type": "string"
+          },
+          "ImportSource": {
+            "name": "ImportSource",
+            "shape_name": "ImportSource",
+            "type": "structure"
+          },
+          "ImportStatus": {
+            "name": "ImportStatus",
+            "shape_name": "ImportStatus",
+            "type": "string"
+          },
+          "StartEventTime": {
+            "name": "StartEventTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "UpdatedTimestamp": {
+            "name": "UpdatedTimestamp",
+            "shape_name": "Date",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      }
+    },
+    "StartLogging": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "StartLogging",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "StartQuery": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DeliveryS3Uri": {
+            "name": "DeliveryS3Uri",
+            "shape_name": "DeliveryS3Uri",
+            "type": "string"
+          },
+          "EventDataStoreOwnerAccountId": {
+            "name": "EventDataStoreOwnerAccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "QueryAlias": {
+            "name": "QueryAlias",
+            "shape_name": "QueryAlias",
+            "type": "string"
+          },
+          "QueryParameters": {
+            "name": "QueryParameters",
+            "shape_name": "QueryParameters",
+            "type": "list"
+          },
+          "QueryStatement": {
+            "name": "QueryStatement",
+            "shape_name": "QueryStatement",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "StartQuery",
+      "output": {
+        "markers": null,
+        "members": {
+          "EventDataStoreOwnerAccountId": {
+            "name": "EventDataStoreOwnerAccountId",
+            "shape_name": "AccountId",
+            "type": "string"
+          },
+          "QueryId": {
+            "name": "QueryId",
+            "shape_name": "UUID",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "StopEventDataStoreIngestion": {
+      "input": {
+        "markers": null,
+        "members": {
+          "EventDataStore": {
+            "name": "EventDataStore",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "EventDataStore"
+        ]
+      },
+      "name": "StopEventDataStoreIngestion",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "StopImport": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ImportId": {
+            "name": "ImportId",
+            "shape_name": "UUID",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ImportId"
+        ]
+      },
+      "name": "StopImport",
+      "output": {
+        "markers": null,
+        "members": {
+          "CreatedTimestamp": {
+            "name": "CreatedTimestamp",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "Destinations": {
+            "name": "Destinations",
+            "shape_name": "ImportDestinations",
+            "type": "list"
+          },
+          "EndEventTime": {
+            "name": "EndEventTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "ImportId": {
+            "name": "ImportId",
+            "shape_name": "UUID",
+            "type": "string"
+          },
+          "ImportSource": {
+            "name": "ImportSource",
+            "shape_name": "ImportSource",
+            "type": "structure"
+          },
+          "ImportStatistics": {
+            "name": "ImportStatistics",
+            "shape_name": "ImportStatistics",
+            "type": "structure"
+          },
+          "ImportStatus": {
+            "name": "ImportStatus",
+            "shape_name": "ImportStatus",
+            "type": "string"
+          },
+          "StartEventTime": {
+            "name": "StartEventTime",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "UpdatedTimestamp": {
+            "name": "UpdatedTimestamp",
+            "shape_name": "Date",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      }
+    },
+    "StopLogging": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "StopLogging",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateChannel": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Channel": {
+            "name": "Channel",
+            "shape_name": "ChannelArn",
+            "type": "string"
+          },
+          "Destinations": {
+            "name": "Destinations",
+            "shape_name": "Destinations",
+            "type": "list"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "ChannelName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Channel"
+        ]
+      },
+      "name": "UpdateChannel",
+      "output": {
+        "markers": null,
+        "members": {
+          "ChannelArn": {
+            "name": "ChannelArn",
+            "shape_name": "ChannelArn",
+            "type": "string"
+          },
+          "Destinations": {
+            "name": "Destinations",
+            "shape_name": "Destinations",
+            "type": "list"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "ChannelName",
+            "type": "string"
+          },
+          "Source": {
+            "name": "Source",
+            "shape_name": "Source",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateDashboard": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DashboardId": {
+            "name": "DashboardId",
+            "shape_name": "DashboardArn",
+            "type": "string"
+          },
+          "RefreshSchedule": {
+            "name": "RefreshSchedule",
+            "shape_name": "RefreshSchedule",
+            "type": "structure"
+          },
+          "TerminationProtectionEnabled": {
+            "name": "TerminationProtectionEnabled",
+            "shape_name": "TerminationProtectionEnabled",
+            "type": "boolean"
+          },
+          "Widgets": {
+            "name": "Widgets",
+            "shape_name": "RequestWidgetList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "DashboardId"
+        ]
+      },
+      "name": "UpdateDashboard",
+      "output": {
+        "markers": null,
+        "members": {
+          "CreatedTimestamp": {
+            "name": "CreatedTimestamp",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "DashboardArn": {
+            "name": "DashboardArn",
+            "shape_name": "DashboardArn",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "DashboardName",
+            "type": "string"
+          },
+          "RefreshSchedule": {
+            "name": "RefreshSchedule",
+            "shape_name": "RefreshSchedule",
+            "type": "structure"
+          },
+          "TerminationProtectionEnabled": {
+            "name": "TerminationProtectionEnabled",
+            "shape_name": "TerminationProtectionEnabled",
+            "type": "boolean"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "DashboardType",
+            "type": "string"
+          },
+          "UpdatedTimestamp": {
+            "name": "UpdatedTimestamp",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "Widgets": {
+            "name": "Widgets",
+            "shape_name": "WidgetList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateEventDataStore": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AdvancedEventSelectors": {
+            "name": "AdvancedEventSelectors",
+            "shape_name": "AdvancedEventSelectors",
+            "type": "list"
+          },
+          "BillingMode": {
+            "name": "BillingMode",
+            "shape_name": "BillingMode",
+            "type": "string"
+          },
+          "EventDataStore": {
+            "name": "EventDataStore",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "EventDataStoreKmsKeyId",
+            "type": "string"
+          },
+          "MultiRegionEnabled": {
+            "name": "MultiRegionEnabled",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EventDataStoreName",
+            "type": "string"
+          },
+          "OrganizationEnabled": {
+            "name": "OrganizationEnabled",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "RetentionPeriod": {
+            "name": "RetentionPeriod",
+            "shape_name": "RetentionPeriod",
+            "type": "integer"
+          },
+          "TerminationProtectionEnabled": {
+            "name": "TerminationProtectionEnabled",
+            "shape_name": "TerminationProtectionEnabled",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "EventDataStore"
+        ]
+      },
+      "name": "UpdateEventDataStore",
+      "output": {
+        "markers": null,
+        "members": {
+          "AdvancedEventSelectors": {
+            "name": "AdvancedEventSelectors",
+            "shape_name": "AdvancedEventSelectors",
+            "type": "list"
+          },
+          "BillingMode": {
+            "name": "BillingMode",
+            "shape_name": "BillingMode",
+            "type": "string"
+          },
+          "CreatedTimestamp": {
+            "name": "CreatedTimestamp",
+            "shape_name": "Date",
+            "type": "timestamp"
+          },
+          "EventDataStoreArn": {
+            "name": "EventDataStoreArn",
+            "shape_name": "EventDataStoreArn",
+            "type": "string"
+          },
+          "FederationRoleArn": {
+            "name": "FederationRoleArn",
+            "shape_name": "FederationRoleArn",
+            "type": "string"
+          },
+          "FederationStatus": {
+            "name": "FederationStatus",
+            "shape_name": "FederationStatus",
+            "type": "string"
+          },
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "EventDataStoreKmsKeyId",
+            "type": "string"
+          },
+          "MultiRegionEnabled": {
+            "name": "MultiRegionEnabled",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "EventDataStoreName",
+            "type": "string"
+          },
+          "OrganizationEnabled": {
+            "name": "OrganizationEnabled",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "RetentionPeriod": {
+            "name": "RetentionPeriod",
+            "shape_name": "RetentionPeriod",
+            "type": "integer"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "EventDataStoreStatus",
+            "type": "string"
+          },
+          "TerminationProtectionEnabled": {
+            "name": "TerminationProtectionEnabled",
+            "shape_name": "TerminationProtectionEnabled",
+            "type": "boolean"
+          },
+          "UpdatedTimestamp": {
+            "name": "UpdatedTimestamp",
+            "shape_name": "Date",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateTrail": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CloudWatchLogsLogGroupArn": {
+            "name": "CloudWatchLogsLogGroupArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CloudWatchLogsRoleArn": {
+            "name": "CloudWatchLogsRoleArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "EnableLogFileValidation": {
+            "name": "EnableLogFileValidation",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "IncludeGlobalServiceEvents": {
+            "name": "IncludeGlobalServiceEvents",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "IsMultiRegionTrail": {
+            "name": "IsMultiRegionTrail",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "IsOrganizationTrail": {
+            "name": "IsOrganizationTrail",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "S3BucketName": {
+            "name": "S3BucketName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "S3KeyPrefix": {
+            "name": "S3KeyPrefix",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SnsTopicName": {
+            "name": "SnsTopicName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "UpdateTrail",
+      "output": {
+        "markers": null,
+        "members": {
+          "CloudWatchLogsLogGroupArn": {
+            "name": "CloudWatchLogsLogGroupArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CloudWatchLogsRoleArn": {
+            "name": "CloudWatchLogsRoleArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "IncludeGlobalServiceEvents": {
+            "name": "IncludeGlobalServiceEvents",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "IsMultiRegionTrail": {
+            "name": "IsMultiRegionTrail",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "IsOrganizationTrail": {
+            "name": "IsOrganizationTrail",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "LogFileValidationEnabled": {
+            "name": "LogFileValidationEnabled",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "S3BucketName": {
+            "name": "S3BucketName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "S3KeyPrefix": {
+            "name": "S3KeyPrefix",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SnsTopicARN": {
+            "name": "SnsTopicARN",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SnsTopicName": {
+            "name": "SnsTopicName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "TrailARN": {
+            "name": "TrailARN",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    }
+  }
+}

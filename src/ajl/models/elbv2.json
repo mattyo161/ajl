@@ -820,7 +820,16 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "ListenerArn",
+            "path": [
+              "Listeners"
+            ],
+            "type": "elasticloadbalancing:listener"
+          }
+        ]
       }
     },
     "DescribeLoadBalancerAttributes": {
@@ -956,7 +965,16 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "RuleArn",
+            "path": [
+              "Rules"
+            ],
+            "type": "elasticloadbalancing:listener-rule"
+          }
+        ]
       }
     },
     "DescribeSSLPolicies": {

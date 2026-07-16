@@ -1,0 +1,523 @@
+{
+  "metadata": {
+    "apiVersion": "2017-09-23",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "cloud9",
+    "jsonVersion": "1.1",
+    "protocol": "json",
+    "protocols": [
+      "json"
+    ],
+    "serviceFullName": "AWS Cloud9",
+    "serviceId": "Cloud9",
+    "signatureVersion": "v4",
+    "targetPrefix": "AWSCloud9WorkspaceManagementService",
+    "uid": "cloud9-2017-09-23"
+  },
+  "name": "cloud9",
+  "operations": {
+    "CreateEnvironmentEC2": {
+      "input": {
+        "markers": null,
+        "members": {
+          "automaticStopTimeMinutes": {
+            "name": "automaticStopTimeMinutes",
+            "shape_name": "AutomaticStopTimeMinutes",
+            "type": "integer"
+          },
+          "clientRequestToken": {
+            "name": "clientRequestToken",
+            "shape_name": "ClientRequestToken",
+            "type": "string"
+          },
+          "connectionType": {
+            "name": "connectionType",
+            "shape_name": "ConnectionType",
+            "type": "string"
+          },
+          "description": {
+            "name": "description",
+            "shape_name": "EnvironmentDescription",
+            "type": "string"
+          },
+          "dryRun": {
+            "name": "dryRun",
+            "shape_name": "NullableBoolean",
+            "type": "boolean"
+          },
+          "imageId": {
+            "name": "imageId",
+            "shape_name": "ImageId",
+            "type": "string"
+          },
+          "instanceType": {
+            "name": "instanceType",
+            "shape_name": "InstanceType",
+            "type": "string"
+          },
+          "name": {
+            "name": "name",
+            "shape_name": "EnvironmentName",
+            "type": "string"
+          },
+          "ownerArn": {
+            "name": "ownerArn",
+            "shape_name": "UserArn",
+            "type": "string"
+          },
+          "subnetId": {
+            "name": "subnetId",
+            "shape_name": "SubnetId",
+            "type": "string"
+          },
+          "tags": {
+            "name": "tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "name",
+          "instanceType",
+          "imageId"
+        ]
+      },
+      "name": "CreateEnvironmentEC2",
+      "output": {
+        "markers": null,
+        "members": {
+          "environmentId": {
+            "name": "environmentId",
+            "shape_name": "EnvironmentId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateEnvironmentMembership": {
+      "input": {
+        "markers": null,
+        "members": {
+          "environmentId": {
+            "name": "environmentId",
+            "shape_name": "EnvironmentId",
+            "type": "string"
+          },
+          "permissions": {
+            "name": "permissions",
+            "shape_name": "MemberPermissions",
+            "type": "string"
+          },
+          "userArn": {
+            "name": "userArn",
+            "shape_name": "UserArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "environmentId",
+          "userArn",
+          "permissions"
+        ]
+      },
+      "name": "CreateEnvironmentMembership",
+      "output": {
+        "markers": null,
+        "members": {
+          "membership": {
+            "name": "membership",
+            "shape_name": "EnvironmentMember",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "membership"
+        ]
+      }
+    },
+    "DeleteEnvironment": {
+      "input": {
+        "markers": null,
+        "members": {
+          "environmentId": {
+            "name": "environmentId",
+            "shape_name": "EnvironmentId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "environmentId"
+        ]
+      },
+      "name": "DeleteEnvironment",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteEnvironmentMembership": {
+      "input": {
+        "markers": null,
+        "members": {
+          "environmentId": {
+            "name": "environmentId",
+            "shape_name": "EnvironmentId",
+            "type": "string"
+          },
+          "userArn": {
+            "name": "userArn",
+            "shape_name": "UserArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "environmentId",
+          "userArn"
+        ]
+      },
+      "name": "DeleteEnvironmentMembership",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DescribeEnvironmentMemberships": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "environmentId": {
+            "name": "environmentId",
+            "shape_name": "EnvironmentId",
+            "type": "string"
+          },
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "permissions": {
+            "name": "permissions",
+            "shape_name": "PermissionsList",
+            "type": "list"
+          },
+          "userArn": {
+            "name": "userArn",
+            "shape_name": "UserArn",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeEnvironmentMemberships",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "memberships": {
+            "name": "memberships",
+            "shape_name": "EnvironmentMembersList",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeEnvironmentStatus": {
+      "input": {
+        "markers": null,
+        "members": {
+          "environmentId": {
+            "name": "environmentId",
+            "shape_name": "EnvironmentId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "environmentId"
+        ]
+      },
+      "name": "DescribeEnvironmentStatus",
+      "output": {
+        "markers": null,
+        "members": {
+          "message": {
+            "name": "message",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "status": {
+            "name": "status",
+            "shape_name": "EnvironmentStatus",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "message"
+        ]
+      }
+    },
+    "DescribeEnvironments": {
+      "input": {
+        "markers": null,
+        "members": {
+          "environmentIds": {
+            "name": "environmentIds",
+            "shape_name": "BoundedEnvironmentIdList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "environmentIds"
+        ]
+      },
+      "name": "DescribeEnvironments",
+      "output": {
+        "markers": null,
+        "members": {
+          "environments": {
+            "name": "environments",
+            "shape_name": "EnvironmentList",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "arn",
+            "id": "id",
+            "name": "name",
+            "path": [
+              "environments"
+            ],
+            "type": "cloud9:environment"
+          }
+        ]
+      }
+    },
+    "ListEnvironments": {
+      "input": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "maxResults": {
+            "name": "maxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListEnvironments",
+      "output": {
+        "markers": [
+          "nextToken"
+        ],
+        "members": {
+          "environmentIds": {
+            "name": "environmentIds",
+            "shape_name": "EnvironmentIdList",
+            "type": "list"
+          },
+          "nextToken": {
+            "name": "nextToken",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:cloud9:{region}:{account}:environment:{environmentId}",
+            "id": "environmentId",
+            "path": [
+              "environmentIds"
+            ],
+            "scalar_as": "environmentId",
+            "type": "cloud9:environment"
+          }
+        ]
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceARN": {
+            "name": "ResourceARN",
+            "shape_name": "EnvironmentArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceARN"
+        ]
+      },
+      "name": "ListTagsForResource",
+      "output": {
+        "markers": null,
+        "members": {
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "TagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceARN": {
+            "name": "ResourceARN",
+            "shape_name": "EnvironmentArn",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceARN",
+          "Tags"
+        ]
+      },
+      "name": "TagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceARN": {
+            "name": "ResourceARN",
+            "shape_name": "EnvironmentArn",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "TagKeyList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceARN",
+          "TagKeys"
+        ]
+      },
+      "name": "UntagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateEnvironment": {
+      "input": {
+        "markers": null,
+        "members": {
+          "description": {
+            "name": "description",
+            "shape_name": "EnvironmentDescription",
+            "type": "string"
+          },
+          "environmentId": {
+            "name": "environmentId",
+            "shape_name": "EnvironmentId",
+            "type": "string"
+          },
+          "managedCredentialsAction": {
+            "name": "managedCredentialsAction",
+            "shape_name": "ManagedCredentialsAction",
+            "type": "string"
+          },
+          "name": {
+            "name": "name",
+            "shape_name": "EnvironmentName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "environmentId"
+        ]
+      },
+      "name": "UpdateEnvironment",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateEnvironmentMembership": {
+      "input": {
+        "markers": null,
+        "members": {
+          "environmentId": {
+            "name": "environmentId",
+            "shape_name": "EnvironmentId",
+            "type": "string"
+          },
+          "permissions": {
+            "name": "permissions",
+            "shape_name": "MemberPermissions",
+            "type": "string"
+          },
+          "userArn": {
+            "name": "userArn",
+            "shape_name": "UserArn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "environmentId",
+          "userArn",
+          "permissions"
+        ]
+      },
+      "name": "UpdateEnvironmentMembership",
+      "output": {
+        "markers": null,
+        "members": {
+          "membership": {
+            "name": "membership",
+            "shape_name": "EnvironmentMember",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    }
+  }
+}

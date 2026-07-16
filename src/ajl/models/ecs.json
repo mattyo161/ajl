@@ -695,7 +695,19 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "capacityProviderArn",
+            "id": "name",
+            "name": "name",
+            "path": [
+              "capacityProviders"
+            ],
+            "tags": "tags",
+            "type": "ecs:capacity-provider"
+          }
+        ]
       }
     },
     "DescribeClusters": {
@@ -1029,7 +1041,17 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "taskArn",
+            "path": [
+              "tasks"
+            ],
+            "tags": "tags",
+            "type": "ecs:task"
+          }
+        ]
       }
     },
     "DiscoverPollEndpoint": {
@@ -1784,7 +1806,17 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "taskArn",
+            "path": [
+              "taskArns"
+            ],
+            "scalar_as": "taskArn",
+            "type": "ecs:task"
+          }
+        ]
       }
     },
     "PutAccountSetting": {

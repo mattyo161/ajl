@@ -3779,7 +3779,17 @@
             "shape_name": "SessionList",
             "type": "list"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:ssm:{region}:{account}:session/{SessionId}",
+            "id": "SessionId",
+            "path": [
+              "Sessions"
+            ],
+            "type": "ssm:session"
+          }
+        ]
       }
     },
     "DisassociateOpsItemRelatedItem": {

@@ -1,0 +1,1176 @@
+{
+  "metadata": {
+    "apiVersion": "2017-03-14",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "servicediscovery",
+    "jsonVersion": "1.1",
+    "protocol": "json",
+    "protocols": [
+      "json"
+    ],
+    "serviceAbbreviation": "ServiceDiscovery",
+    "serviceFullName": "AWS Cloud Map",
+    "serviceId": "ServiceDiscovery",
+    "signatureVersion": "v4",
+    "targetPrefix": "Route53AutoNaming_v20170314",
+    "uid": "servicediscovery-2017-03-14"
+  },
+  "name": "servicediscovery",
+  "operations": {
+    "CreateHttpNamespace": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CreatorRequestId": {
+            "name": "CreatorRequestId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "ResourceDescription",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "NamespaceNameHttp",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "CreateHttpNamespace",
+      "output": {
+        "markers": null,
+        "members": {
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "OperationId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreatePrivateDnsNamespace": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CreatorRequestId": {
+            "name": "CreatorRequestId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "ResourceDescription",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "NamespaceNamePrivate",
+            "type": "string"
+          },
+          "Properties": {
+            "name": "Properties",
+            "shape_name": "PrivateDnsNamespaceProperties",
+            "type": "structure"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "Vpc": {
+            "name": "Vpc",
+            "shape_name": "ResourceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Vpc"
+        ]
+      },
+      "name": "CreatePrivateDnsNamespace",
+      "output": {
+        "markers": null,
+        "members": {
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "OperationId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreatePublicDnsNamespace": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CreatorRequestId": {
+            "name": "CreatorRequestId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "ResourceDescription",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "NamespaceNamePublic",
+            "type": "string"
+          },
+          "Properties": {
+            "name": "Properties",
+            "shape_name": "PublicDnsNamespaceProperties",
+            "type": "structure"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "CreatePublicDnsNamespace",
+      "output": {
+        "markers": null,
+        "members": {
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "OperationId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateService": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CreatorRequestId": {
+            "name": "CreatorRequestId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "ResourceDescription",
+            "type": "string"
+          },
+          "DnsConfig": {
+            "name": "DnsConfig",
+            "shape_name": "DnsConfig",
+            "type": "structure"
+          },
+          "HealthCheckConfig": {
+            "name": "HealthCheckConfig",
+            "shape_name": "HealthCheckConfig",
+            "type": "structure"
+          },
+          "HealthCheckCustomConfig": {
+            "name": "HealthCheckCustomConfig",
+            "shape_name": "HealthCheckCustomConfig",
+            "type": "structure"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "ServiceName",
+            "type": "string"
+          },
+          "NamespaceId": {
+            "name": "NamespaceId",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "Type": {
+            "name": "Type",
+            "shape_name": "ServiceTypeOption",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name"
+        ]
+      },
+      "name": "CreateService",
+      "output": {
+        "markers": null,
+        "members": {
+          "Service": {
+            "name": "Service",
+            "shape_name": "Service",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteNamespace": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DeleteNamespace",
+      "output": {
+        "markers": null,
+        "members": {
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "OperationId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteService": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "DeleteService",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteServiceAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "ServiceAttributeKeyList",
+            "type": "list"
+          },
+          "ServiceId": {
+            "name": "ServiceId",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServiceId",
+          "Attributes"
+        ]
+      },
+      "name": "DeleteServiceAttributes",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeregisterInstance": {
+      "input": {
+        "markers": null,
+        "members": {
+          "InstanceId": {
+            "name": "InstanceId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "ServiceId": {
+            "name": "ServiceId",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServiceId",
+          "InstanceId"
+        ]
+      },
+      "name": "DeregisterInstance",
+      "output": {
+        "markers": null,
+        "members": {
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "OperationId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DiscoverInstances": {
+      "input": {
+        "markers": null,
+        "members": {
+          "HealthStatus": {
+            "name": "HealthStatus",
+            "shape_name": "HealthStatusFilter",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "DiscoverMaxResults",
+            "type": "integer"
+          },
+          "NamespaceName": {
+            "name": "NamespaceName",
+            "shape_name": "NamespaceName",
+            "type": "string"
+          },
+          "OptionalParameters": {
+            "name": "OptionalParameters",
+            "shape_name": "Attributes",
+            "type": "map"
+          },
+          "OwnerAccount": {
+            "name": "OwnerAccount",
+            "shape_name": "AWSAccountId",
+            "type": "string"
+          },
+          "QueryParameters": {
+            "name": "QueryParameters",
+            "shape_name": "Attributes",
+            "type": "map"
+          },
+          "ServiceName": {
+            "name": "ServiceName",
+            "shape_name": "ServiceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "NamespaceName",
+          "ServiceName"
+        ]
+      },
+      "name": "DiscoverInstances",
+      "output": {
+        "markers": null,
+        "members": {
+          "Instances": {
+            "name": "Instances",
+            "shape_name": "HttpInstanceSummaryList",
+            "type": "list"
+          },
+          "InstancesRevision": {
+            "name": "InstancesRevision",
+            "shape_name": "Revision",
+            "type": "long"
+          }
+        },
+        "required": null
+      }
+    },
+    "DiscoverInstancesRevision": {
+      "input": {
+        "markers": null,
+        "members": {
+          "NamespaceName": {
+            "name": "NamespaceName",
+            "shape_name": "NamespaceName",
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "name": "OwnerAccount",
+            "shape_name": "AWSAccountId",
+            "type": "string"
+          },
+          "ServiceName": {
+            "name": "ServiceName",
+            "shape_name": "ServiceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "NamespaceName",
+          "ServiceName"
+        ]
+      },
+      "name": "DiscoverInstancesRevision",
+      "output": {
+        "markers": null,
+        "members": {
+          "InstancesRevision": {
+            "name": "InstancesRevision",
+            "shape_name": "Revision",
+            "type": "long"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetInstance": {
+      "input": {
+        "markers": null,
+        "members": {
+          "InstanceId": {
+            "name": "InstanceId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "ServiceId": {
+            "name": "ServiceId",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServiceId",
+          "InstanceId"
+        ]
+      },
+      "name": "GetInstance",
+      "output": {
+        "markers": null,
+        "members": {
+          "Instance": {
+            "name": "Instance",
+            "shape_name": "Instance",
+            "type": "structure"
+          },
+          "ResourceOwner": {
+            "name": "ResourceOwner",
+            "shape_name": "AWSAccountId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetInstancesHealthStatus": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Instances": {
+            "name": "Instances",
+            "shape_name": "InstanceIdList",
+            "type": "list"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "ServiceId": {
+            "name": "ServiceId",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServiceId"
+        ]
+      },
+      "name": "GetInstancesHealthStatus",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "InstanceHealthStatusMap",
+            "type": "map"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetNamespace": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetNamespace",
+      "output": {
+        "markers": null,
+        "members": {
+          "Namespace": {
+            "name": "Namespace",
+            "shape_name": "Namespace",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetOperation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "OperationId",
+            "type": "string"
+          },
+          "OwnerAccount": {
+            "name": "OwnerAccount",
+            "shape_name": "AWSAccountId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "OperationId"
+        ]
+      },
+      "name": "GetOperation",
+      "output": {
+        "markers": null,
+        "members": {
+          "Operation": {
+            "name": "Operation",
+            "shape_name": "Operation",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetService": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id"
+        ]
+      },
+      "name": "GetService",
+      "output": {
+        "markers": null,
+        "members": {
+          "Service": {
+            "name": "Service",
+            "shape_name": "Service",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetServiceAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ServiceId": {
+            "name": "ServiceId",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServiceId"
+        ]
+      },
+      "name": "GetServiceAttributes",
+      "output": {
+        "markers": null,
+        "members": {
+          "ServiceAttributes": {
+            "name": "ServiceAttributes",
+            "shape_name": "ServiceAttributes",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListInstances": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "ServiceId": {
+            "name": "ServiceId",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServiceId"
+        ]
+      },
+      "name": "ListInstances",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Instances": {
+            "name": "Instances",
+            "shape_name": "InstanceSummaryList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "ResourceOwner": {
+            "name": "ResourceOwner",
+            "shape_name": "AWSAccountId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListNamespaces": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "NamespaceFilters",
+            "type": "list"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListNamespaces",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Namespaces": {
+            "name": "Namespaces",
+            "shape_name": "NamespaceSummariesList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "Arn",
+            "id": "Id",
+            "name": "Name",
+            "path": [
+              "Namespaces"
+            ],
+            "type": "servicediscovery:namespace"
+          }
+        ]
+      }
+    },
+    "ListOperations": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "OperationFilters",
+            "type": "list"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListOperations",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Operations": {
+            "name": "Operations",
+            "shape_name": "OperationSummaryList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListServices": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "ServiceFilters",
+            "type": "list"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "MaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListServices",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "Services": {
+            "name": "Services",
+            "shape_name": "ServiceSummariesList",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "Arn",
+            "id": "Id",
+            "name": "Name",
+            "path": [
+              "Services"
+            ],
+            "type": "servicediscovery:service"
+          }
+        ]
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceARN": {
+            "name": "ResourceARN",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceARN"
+        ]
+      },
+      "name": "ListTagsForResource",
+      "output": {
+        "markers": null,
+        "members": {
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "RegisterInstance": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "Attributes",
+            "type": "map"
+          },
+          "CreatorRequestId": {
+            "name": "CreatorRequestId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "InstanceId": {
+            "name": "InstanceId",
+            "shape_name": "InstanceId",
+            "type": "string"
+          },
+          "ServiceId": {
+            "name": "ServiceId",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServiceId",
+          "InstanceId",
+          "Attributes"
+        ]
+      },
+      "name": "RegisterInstance",
+      "output": {
+        "markers": null,
+        "members": {
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "OperationId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "TagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceARN": {
+            "name": "ResourceARN",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceARN",
+          "Tags"
+        ]
+      },
+      "name": "TagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UntagResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceARN": {
+            "name": "ResourceARN",
+            "shape_name": "AmazonResourceName",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "TagKeyList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceARN",
+          "TagKeys"
+        ]
+      },
+      "name": "UntagResource",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateHttpNamespace": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "Namespace": {
+            "name": "Namespace",
+            "shape_name": "HttpNamespaceChange",
+            "type": "structure"
+          },
+          "UpdaterRequestId": {
+            "name": "UpdaterRequestId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id",
+          "Namespace"
+        ]
+      },
+      "name": "UpdateHttpNamespace",
+      "output": {
+        "markers": null,
+        "members": {
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "OperationId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateInstanceCustomHealthStatus": {
+      "input": {
+        "markers": null,
+        "members": {
+          "InstanceId": {
+            "name": "InstanceId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          },
+          "ServiceId": {
+            "name": "ServiceId",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "CustomHealthStatus",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServiceId",
+          "InstanceId",
+          "Status"
+        ]
+      },
+      "name": "UpdateInstanceCustomHealthStatus",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdatePrivateDnsNamespace": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "Namespace": {
+            "name": "Namespace",
+            "shape_name": "PrivateDnsNamespaceChange",
+            "type": "structure"
+          },
+          "UpdaterRequestId": {
+            "name": "UpdaterRequestId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id",
+          "Namespace"
+        ]
+      },
+      "name": "UpdatePrivateDnsNamespace",
+      "output": {
+        "markers": null,
+        "members": {
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "OperationId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdatePublicDnsNamespace": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "Namespace": {
+            "name": "Namespace",
+            "shape_name": "PublicDnsNamespaceChange",
+            "type": "structure"
+          },
+          "UpdaterRequestId": {
+            "name": "UpdaterRequestId",
+            "shape_name": "ResourceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Id",
+          "Namespace"
+        ]
+      },
+      "name": "UpdatePublicDnsNamespace",
+      "output": {
+        "markers": null,
+        "members": {
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "OperationId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateService": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Id": {
+            "name": "Id",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "Service": {
+            "name": "Service",
+            "shape_name": "ServiceChange",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "Id",
+          "Service"
+        ]
+      },
+      "name": "UpdateService",
+      "output": {
+        "markers": null,
+        "members": {
+          "OperationId": {
+            "name": "OperationId",
+            "shape_name": "OperationId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateServiceAttributes": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Attributes": {
+            "name": "Attributes",
+            "shape_name": "ServiceAttributesMap",
+            "type": "map"
+          },
+          "ServiceId": {
+            "name": "ServiceId",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServiceId",
+          "Attributes"
+        ]
+      },
+      "name": "UpdateServiceAttributes",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    }
+  }
+}

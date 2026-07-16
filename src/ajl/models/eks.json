@@ -1010,7 +1010,19 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "addonArn",
+            "id": "addonName",
+            "name": "addonName",
+            "path": [
+              "addon"
+            ],
+            "tags": "tags",
+            "type": "eks:addon"
+          }
+        ]
       }
     },
     "DescribeAddonConfiguration": {
@@ -1389,7 +1401,19 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "nodegroupArn",
+            "id": "nodegroupName",
+            "name": "nodegroupName",
+            "path": [
+              "nodegroup"
+            ],
+            "tags": "tags",
+            "type": "eks:nodegroup"
+          }
+        ]
       }
     },
     "DescribePodIdentityAssociation": {
@@ -1587,7 +1611,17 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "accessEntryArn",
+            "path": [
+              "accessEntries"
+            ],
+            "scalar_as": "accessEntryArn",
+            "type": "eks:access-entry"
+          }
+        ]
       }
     },
     "ListAccessPolicies": {
@@ -1672,7 +1706,18 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "addonName",
+            "name": "addonName",
+            "path": [
+              "addons"
+            ],
+            "scalar_as": "addonName",
+            "type": "eks:addon"
+          }
+        ]
       }
     },
     "ListAssociatedAccessPolicies": {
@@ -2023,7 +2068,18 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "nodegroupName",
+            "name": "nodegroupName",
+            "path": [
+              "nodegroups"
+            ],
+            "scalar_as": "nodegroupName",
+            "type": "eks:nodegroup"
+          }
+        ]
       }
     },
     "ListPodIdentityAssociations": {

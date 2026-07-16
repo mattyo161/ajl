@@ -3565,7 +3565,16 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "Arn",
+            "path": [
+              "OpenIDConnectProviderList"
+            ],
+            "type": "iam:oidc-provider"
+          }
+        ]
       }
     },
     "ListOrganizationsFeatures": {

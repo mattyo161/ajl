@@ -1,0 +1,576 @@
+{
+  "metadata": {
+    "apiVersion": "2015-12-08",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "acm",
+    "jsonVersion": "1.1",
+    "protocol": "json",
+    "protocols": [
+      "json"
+    ],
+    "serviceAbbreviation": "ACM",
+    "serviceFullName": "AWS Certificate Manager",
+    "serviceId": "ACM",
+    "signatureVersion": "v4",
+    "signingName": "acm",
+    "targetPrefix": "CertificateManager",
+    "uid": "acm-2015-12-08"
+  },
+  "name": "acm",
+  "operations": {
+    "AddTagsToCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CertificateArn": {
+            "name": "CertificateArn",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "CertificateArn",
+          "Tags"
+        ]
+      },
+      "name": "AddTagsToCertificate",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CertificateArn": {
+            "name": "CertificateArn",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CertificateArn"
+        ]
+      },
+      "name": "DeleteCertificate",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DescribeCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CertificateArn": {
+            "name": "CertificateArn",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CertificateArn"
+        ]
+      },
+      "name": "DescribeCertificate",
+      "output": {
+        "markers": null,
+        "members": {
+          "Certificate": {
+            "name": "Certificate",
+            "shape_name": "CertificateDetail",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ExportCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CertificateArn": {
+            "name": "CertificateArn",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "Passphrase": {
+            "name": "Passphrase",
+            "shape_name": "PassphraseBlob",
+            "type": "blob"
+          }
+        },
+        "required": [
+          "CertificateArn",
+          "Passphrase"
+        ]
+      },
+      "name": "ExportCertificate",
+      "output": {
+        "markers": null,
+        "members": {
+          "Certificate": {
+            "name": "Certificate",
+            "shape_name": "CertificateBody",
+            "type": "string"
+          },
+          "CertificateChain": {
+            "name": "CertificateChain",
+            "shape_name": "CertificateChain",
+            "type": "string"
+          },
+          "PrivateKey": {
+            "name": "PrivateKey",
+            "shape_name": "PrivateKey",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetAccountConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "GetAccountConfiguration",
+      "output": {
+        "markers": null,
+        "members": {
+          "ExpiryEvents": {
+            "name": "ExpiryEvents",
+            "shape_name": "ExpiryEventsConfiguration",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CertificateArn": {
+            "name": "CertificateArn",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CertificateArn"
+        ]
+      },
+      "name": "GetCertificate",
+      "output": {
+        "markers": null,
+        "members": {
+          "Certificate": {
+            "name": "Certificate",
+            "shape_name": "CertificateBody",
+            "type": "string"
+          },
+          "CertificateChain": {
+            "name": "CertificateChain",
+            "shape_name": "CertificateChain",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ImportCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Certificate": {
+            "name": "Certificate",
+            "shape_name": "CertificateBodyBlob",
+            "type": "blob"
+          },
+          "CertificateArn": {
+            "name": "CertificateArn",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "CertificateChain": {
+            "name": "CertificateChain",
+            "shape_name": "CertificateChainBlob",
+            "type": "blob"
+          },
+          "PrivateKey": {
+            "name": "PrivateKey",
+            "shape_name": "PrivateKeyBlob",
+            "type": "blob"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Certificate",
+          "PrivateKey"
+        ]
+      },
+      "name": "ImportCertificate",
+      "output": {
+        "markers": null,
+        "members": {
+          "CertificateArn": {
+            "name": "CertificateArn",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListCertificates": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "CertificateStatuses": {
+            "name": "CertificateStatuses",
+            "shape_name": "CertificateStatuses",
+            "type": "list"
+          },
+          "Includes": {
+            "name": "Includes",
+            "shape_name": "Filters",
+            "type": "structure"
+          },
+          "MaxItems": {
+            "name": "MaxItems",
+            "shape_name": "MaxItems",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          },
+          "SortBy": {
+            "name": "SortBy",
+            "shape_name": "SortBy",
+            "type": "string"
+          },
+          "SortOrder": {
+            "name": "SortOrder",
+            "shape_name": "SortOrder",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListCertificates",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "CertificateSummaryList": {
+            "name": "CertificateSummaryList",
+            "shape_name": "CertificateSummaryList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "NextToken",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "CertificateArn",
+            "name": "DomainName",
+            "path": [
+              "CertificateSummaryList"
+            ],
+            "type": "acm:certificate"
+          }
+        ]
+      }
+    },
+    "ListTagsForCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CertificateArn": {
+            "name": "CertificateArn",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CertificateArn"
+        ]
+      },
+      "name": "ListTagsForCertificate",
+      "output": {
+        "markers": null,
+        "members": {
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "PutAccountConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ExpiryEvents": {
+            "name": "ExpiryEvents",
+            "shape_name": "ExpiryEventsConfiguration",
+            "type": "structure"
+          },
+          "IdempotencyToken": {
+            "name": "IdempotencyToken",
+            "shape_name": "IdempotencyToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "IdempotencyToken"
+        ]
+      },
+      "name": "PutAccountConfiguration",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RemoveTagsFromCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CertificateArn": {
+            "name": "CertificateArn",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "CertificateArn",
+          "Tags"
+        ]
+      },
+      "name": "RemoveTagsFromCertificate",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RenewCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CertificateArn": {
+            "name": "CertificateArn",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CertificateArn"
+        ]
+      },
+      "name": "RenewCertificate",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RequestCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CertificateAuthorityArn": {
+            "name": "CertificateAuthorityArn",
+            "shape_name": "PcaArn",
+            "type": "string"
+          },
+          "DomainName": {
+            "name": "DomainName",
+            "shape_name": "DomainNameString",
+            "type": "string"
+          },
+          "DomainValidationOptions": {
+            "name": "DomainValidationOptions",
+            "shape_name": "DomainValidationOptionList",
+            "type": "list"
+          },
+          "IdempotencyToken": {
+            "name": "IdempotencyToken",
+            "shape_name": "IdempotencyToken",
+            "type": "string"
+          },
+          "KeyAlgorithm": {
+            "name": "KeyAlgorithm",
+            "shape_name": "KeyAlgorithm",
+            "type": "string"
+          },
+          "ManagedBy": {
+            "name": "ManagedBy",
+            "shape_name": "CertificateManagedBy",
+            "type": "string"
+          },
+          "Options": {
+            "name": "Options",
+            "shape_name": "CertificateOptions",
+            "type": "structure"
+          },
+          "SubjectAlternativeNames": {
+            "name": "SubjectAlternativeNames",
+            "shape_name": "DomainList",
+            "type": "list"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "ValidationMethod": {
+            "name": "ValidationMethod",
+            "shape_name": "ValidationMethod",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DomainName"
+        ]
+      },
+      "name": "RequestCertificate",
+      "output": {
+        "markers": null,
+        "members": {
+          "CertificateArn": {
+            "name": "CertificateArn",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ResendValidationEmail": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CertificateArn": {
+            "name": "CertificateArn",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "Domain": {
+            "name": "Domain",
+            "shape_name": "DomainNameString",
+            "type": "string"
+          },
+          "ValidationDomain": {
+            "name": "ValidationDomain",
+            "shape_name": "DomainNameString",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CertificateArn",
+          "Domain",
+          "ValidationDomain"
+        ]
+      },
+      "name": "ResendValidationEmail",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RevokeCertificate": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CertificateArn": {
+            "name": "CertificateArn",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "RevocationReason": {
+            "name": "RevocationReason",
+            "shape_name": "RevocationReason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CertificateArn",
+          "RevocationReason"
+        ]
+      },
+      "name": "RevokeCertificate",
+      "output": {
+        "markers": null,
+        "members": {
+          "CertificateArn": {
+            "name": "CertificateArn",
+            "shape_name": "Arn",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "UpdateCertificateOptions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CertificateArn": {
+            "name": "CertificateArn",
+            "shape_name": "Arn",
+            "type": "string"
+          },
+          "Options": {
+            "name": "Options",
+            "shape_name": "CertificateOptions",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "CertificateArn",
+          "Options"
+        ]
+      },
+      "name": "UpdateCertificateOptions",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    }
+  }
+}
