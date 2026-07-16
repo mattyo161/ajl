@@ -1,7 +1,6 @@
 import io
 import json
 
-import pytest
 
 from ajl.main import (
     Emitter,
@@ -213,3 +212,53 @@ def test_shape_page_ecs_scalar_arn_list():
     assert record["Type"] == "ecs:cluster"
     assert record["Id"] == "prod"
     assert record["Arn"] == page["clusterArns"][0]
+
+
+def test_jq_emitter_filters_drops_and_explodes():
+    from ajl.main import JqEmitter
+
+    out = io.StringIO()
+    emitter = JqEmitter(Emitter(stream=out), 'select(.Keep) | del(.Noise)')
+    emitter.emit({"Keep": True, "Noise": 1, "Id": "a"})
+    emitter.emit({"Keep": False, "Id": "b"})
+    emitter.flush()
+    records = [json.loads(line) for line in out.getvalue().splitlines()]
+    assert records == [{"Keep": True, "Id": "a"}]
+
+    out = io.StringIO()
+    emitter = JqEmitter(Emitter(stream=out), '.Items[]')
+    emitter.emit({"Items": [{"A": 1}, {"A": 2}]})
+    assert len(out.getvalue().splitlines()) == 2
+
+
+def test_jq_emitter_string_output_prints_raw():
+    from ajl.main import JqEmitter
+
+    out = io.StringIO()
+    JqEmitter(Emitter(stream=out), '.Key').emit({"Key": "a/b.txt"})
+    assert out.getvalue() == "a/b.txt\n"
+
+
+def test_stamp_emitter_adds_session_fields():
+    from ajl.main import StampEmitter
+
+    out = io.StringIO()
+    runner = Runner(default_profile="dev", default_region="us-east-1")
+    runner._accounts[("dev", "us-east-1")] = "111122223333"
+    emitter = StampEmitter(Emitter(stream=out), runner)
+    emitter.emit({"Id": "x"}, ("dev", "us-east-1"))
+    (record,) = [json.loads(line) for line in out.getvalue().splitlines()]
+    assert record["Profile"] == "dev"
+    assert record["Region"] == "us-east-1"
+    assert record["Account"] == "111122223333"
+
+
+def test_pop_session_fields_accepts_both_cases():
+    from ajl.main import pop_session_fields
+
+    line = {"Profile": "p1", "Region": "eu-west-1", "Bucket": "b"}
+    assert pop_session_fields(line) == ("p1", "eu-west-1")
+    assert line == {"Bucket": "b"}
+    line = {"profile": "p2", "region": "us-east-2"}
+    assert pop_session_fields(line) == ("p2", "us-east-2")
+    assert pop_session_fields({}) == (None, None)

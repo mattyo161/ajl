@@ -10,7 +10,6 @@ service model's input member types (integers, booleans, lists, JSON).
 """
 
 import argparse
-import json
 import os
 import sys
 import threading
@@ -22,7 +21,7 @@ import jq as jqlib
 import jsonlines
 import orjson
 
-from .modelconfig import get_operation_config, load_service_model
+from .modelconfig import get_operation_config
 from .normalize import iter_configured_resources, iter_default_resources
 from .pagination import iter_pages
 from .tags import TagMergeEmitter
@@ -51,6 +50,12 @@ def build_parser():
                         help="stop after emitting this many resources per request")
     parser.add_argument("--fetch-tags", action="store_true", default=False,
                         help="batch-fetch missing Tags via the Resource Groups Tagging API")
+    parser.add_argument("--jq", type=str, default=None, metavar="PROGRAM",
+                        help="post-shaping jq filter applied to every record; empty "
+                        "output drops the record, multiple outputs emit multiple lines")
+    parser.add_argument("--stamp-session", action="store_true", default=False,
+                        help="add Profile/Region/Account to every record so piped "
+                        "--params-json stages reuse the same credentials")
     parser.add_argument("--workers", type=int, default=8,
                         help="parallel requests in --params-json mode (default 8; "
                         "use 1 to preserve input order)")
@@ -169,21 +174,25 @@ class Runner:
         self._clients = {}
         self._accounts = {}
         self._jq_cache = {}
-        self._lock = threading.Lock()
+        self._lock = threading.RLock()
 
     def session_key(self, profile=None, region=None):
         return (profile or self.default_profile, region or self.default_region)
+
+    def session(self, session_key):
+        with self._lock:
+            session = self._sessions.get(session_key)
+            if session is None:
+                profile, region = session_key
+                session = boto3.Session(profile_name=profile, region_name=region)
+                self._sessions[session_key] = session
+            return session
 
     def client(self, session_key, service):
         with self._lock:
             key = (session_key, service)
             if key not in self._clients:
-                profile, region = session_key
-                session = self._sessions.get(session_key)
-                if session is None:
-                    session = boto3.Session(profile_name=profile, region_name=region)
-                    self._sessions[session_key] = session
-                self._clients[key] = session.client(service)
+                self._clients[key] = self.session(session_key).client(service)
             return self._clients[key]
 
     def account(self, session_key):
@@ -206,6 +215,53 @@ class Runner:
             if key not in self._jq_cache:
                 self._jq_cache[key] = jqlib.compile(program, args=jq_args)
             return self._jq_cache[key]
+
+
+class JqEmitter:
+    """Emitter wrapper applying a global --jq filter to every record.
+
+    Empty jq output drops the record; multiple outputs emit multiple lines;
+    string outputs print raw (like jq -r), handy for extracting single fields.
+    """
+
+    def __init__(self, emitter, program_text):
+        self.emitter = emitter
+        self.program = jqlib.compile(program_text)
+
+    def emit(self, record, session_key=None):
+        for out in self.program.input_text(dumps(record)):
+            self.emitter.emit(out, session_key)
+
+    def flush(self):
+        self.emitter.flush()
+
+
+class StampEmitter:
+    """Emitter wrapper adding Profile/Region/Account to every record so a
+    downstream --params-json stage routes back to the same session."""
+
+    def __init__(self, emitter, runner):
+        self.emitter = emitter
+        self.runner = runner
+
+    def emit(self, record, session_key=None):
+        if isinstance(record, dict):
+            profile, region = session_key or self.runner.session_key()
+            record["Profile"] = profile or ""
+            record["Region"] = region or ""
+            record["Account"] = self.runner.account(session_key or self.runner.session_key())
+        self.emitter.emit(record, session_key)
+
+    def flush(self):
+        self.emitter.flush()
+
+
+def pop_session_fields(line_params):
+    """Pop the session routing fields from a --params-json line (both the
+    lowercase form and the PascalCase form written by --stamp-session)."""
+    profile = line_params.pop("profile", None) or line_params.pop("Profile", None)
+    region = line_params.pop("region", None) or line_params.pop("Region", None)
+    return profile or None, region or None
 
 
 def shape_page(page, operation_cfg, context, runner, session_key):
@@ -290,8 +346,7 @@ def run_params_json(runner, emitter, options, service, operation, base_params):
         nonlocal errors
         line_service = line_params.pop("client", None) or line_params.pop("service", None) or service
         line_operation = line_params.pop("operation", None) or operation
-        profile = line_params.pop("profile", None)
-        region = line_params.pop("region", None)
+        profile, region = pop_session_fields(line_params)
         session_key = runner.session_key(profile, region)
         try:
             if not line_service or not line_operation:
@@ -326,6 +381,12 @@ def run_params_json(runner, emitter, options, service, operation, base_params):
 
 
 def main(argv=None):
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if argv[:2] == ["s3", "scan"] and any(flag in argv for flag in ("-h", "--help")):
+        # route help to the scan subparser before the root parser eats it
+        from .scan import build_scan_parser
+
+        build_scan_parser().parse_args(["--help"])
     parser = build_parser()
     options, passthrough = parser.parse_known_args(argv)
 
@@ -335,7 +396,6 @@ def main(argv=None):
         service = passthrough.pop(0)
     if passthrough and not passthrough[0].startswith("-"):
         operation = passthrough.pop(0)
-    extra_options = parse_extra_options(passthrough, verbose=options.verbose)
 
     runner = Runner(
         default_profile=options.profile or DEFAULT_PROFILE,
@@ -349,15 +409,25 @@ def main(argv=None):
             emitter,
             lambda session_key: runner.client(session_key, "resourcegroupstaggingapi"),
         )
+    if options.jq:
+        emitter = JqEmitter(emitter, options.jq)
+    if options.stamp_session:
+        emitter = StampEmitter(emitter, runner)
 
     exit_code = 0
     try:
-        if options.params_json:
+        if service == "s3" and operation == "scan":
+            from .scan import run_scan
+
+            exit_code = run_scan(runner, emitter, options, passthrough)
+        elif options.params_json:
+            extra_options = parse_extra_options(passthrough, verbose=options.verbose)
             errors = run_params_json(runner, emitter, options, service, operation, extra_options)
             exit_code = 1 if errors else 0
         else:
             if not service or not operation:
                 parser.error("a <service> and <operation> are required (or use --params-json)")
+            extra_options = parse_extra_options(passthrough, verbose=options.verbose)
             session_key = runner.session_key()
             params = coerce_params(extra_options, service, caseconverter.pascalcase(operation))
             try:
