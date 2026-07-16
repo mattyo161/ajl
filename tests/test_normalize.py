@@ -127,3 +127,20 @@ def test_normalize_resource_preserves_colliding_fields():
     result = normalize_resource(item, cfg, CONTEXT, {})
     assert result["Type"] == "ec2:vpn-gateway"
     assert result["OriginalType"] == "ipsec.1"
+
+
+def test_uri_format_adds_uri_after_tags():
+    cfg = {
+        "path": ["Buckets"],
+        "type": "s3:bucket",
+        "id": "Name",
+        "name": "Name",
+        "arn_format": "arn:{partition}:s3:::{Name}",
+        "uri_format": "s3://{Name}",
+    }
+    record = normalize_resource({"Name": "my-bucket"}, cfg, {"partition": "aws"}, {})
+    assert record["Uri"] == "s3://my-bucket"
+    assert list(record)[:6] == ["Type", "Id", "Name", "Arn", "Tags", "Uri"]
+    # missing template variable -> Uri omitted entirely, not empty
+    record = normalize_resource({"Other": "x"}, cfg, {"partition": "aws"}, {})
+    assert "Uri" not in record

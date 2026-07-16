@@ -19,7 +19,8 @@ import sys
 MODELS_DIR = os.path.join(os.path.dirname(__file__), "..", "src", "ajl", "models")
 
 
-def r(path, type_, id_=None, name=None, arn=None, arn_format=None, tags=None, scalar_as=None):
+def r(path, type_, id_=None, name=None, arn=None, arn_format=None, tags=None, scalar_as=None,
+      uri=None):
     cfg = {"path": path, "type": type_}
     if id_:
         cfg["id"] = id_
@@ -33,6 +34,8 @@ def r(path, type_, id_=None, name=None, arn=None, arn_format=None, tags=None, sc
         cfg["tags"] = tags
     if scalar_as:
         cfg["scalar_as"] = scalar_as
+    if uri:
+        cfg["uri_format"] = uri
     return cfg
 
 
@@ -62,10 +65,12 @@ S3_LIST_OBJECTS_JQ = """\
 ((.CommonPrefixes//[])[] |
   {Type: "s3:prefix", Id: .Prefix, Name: .Prefix,
    Arn: "arn:\\($partition//"aws"):s3:::\\($r.Name)/\\(.Prefix)", Tags: {},
+   Uri: "s3://\\($r.Name)/\\(.Prefix)",
    Bucket: $r.Name, Delimiter: $r.Delimiter} + .),
 ((.Contents//[])[] |
   {Type: "s3:object", Id: .Key, Name: .Key,
    Arn: "arn:\\($partition//"aws"):s3:::\\($r.Name)/\\(.Key)", Tags: {},
+   Uri: "s3://\\($r.Name)/\\(.Key)",
    Bucket: $r.Name} + .)"""
 
 S3_LIST_OBJECT_VERSIONS_JQ = """\
@@ -73,14 +78,17 @@ S3_LIST_OBJECT_VERSIONS_JQ = """\
 ((.CommonPrefixes//[])[] |
   {Type: "s3:prefix", Id: .Prefix, Name: .Prefix,
    Arn: "arn:\\($partition//"aws"):s3:::\\($r.Name)/\\(.Prefix)", Tags: {},
+   Uri: "s3://\\($r.Name)/\\(.Prefix)",
    Bucket: $r.Name, Delimiter: $r.Delimiter} + .),
 ((.Versions//[])[] |
   {Type: "s3:object-version", Id: .Key, Name: .Key,
    Arn: "arn:\\($partition//"aws"):s3:::\\($r.Name)/\\(.Key)", Tags: {},
+   Uri: "s3://\\($r.Name)/\\(.Key)",
    Bucket: $r.Name} + .),
 ((.DeleteMarkers//[])[] |
   {Type: "s3:delete-marker", Id: .Key, Name: .Key,
    Arn: "arn:\\($partition//"aws"):s3:::\\($r.Name)/\\(.Key)", Tags: {},
+   Uri: "s3://\\($r.Name)/\\(.Key)",
    Bucket: $r.Name} + .)"""
 
 # Hosted zone Ids come back as "/hostedzone/Z123..."; strip the prefix so Id
@@ -275,10 +283,10 @@ CONFIGS = {
         },
         "remove_jq": ["ListBuckets"],
         "resources": {
-            "ListBuckets": [r(["Buckets"], "s3:bucket", "Name", name="Name", arn_format="arn:{partition}:s3:::{Name}")],
+            "ListBuckets": [r(["Buckets"], "s3:bucket", "Name", name="Name", arn_format="arn:{partition}:s3:::{Name}", uri="s3://{Name}")],
             "ListMultipartUploads": [
-                r(["CommonPrefixes"], "s3:prefix", "Prefix", name="Prefix", arn_format="arn:{partition}:s3:::{root_Bucket}/{Prefix}"),
-                r(["Uploads"], "s3:multipart-upload", "UploadId", name="Key", arn_format="arn:{partition}:s3:::{root_Bucket}/{Key}"),
+                r(["CommonPrefixes"], "s3:prefix", "Prefix", name="Prefix", arn_format="arn:{partition}:s3:::{root_Bucket}/{Prefix}", uri="s3://{root_Bucket}/{Prefix}"),
+                r(["Uploads"], "s3:multipart-upload", "UploadId", name="Key", arn_format="arn:{partition}:s3:::{root_Bucket}/{Key}", uri="s3://{root_Bucket}/{Key}"),
             ],
         },
     },

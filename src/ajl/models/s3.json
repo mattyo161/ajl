@@ -3766,7 +3766,8 @@
             "path": [
               "Buckets"
             ],
-            "type": "s3:bucket"
+            "type": "s3:bucket",
+            "uri_format": "s3://{Name}"
           }
         ]
       }
@@ -3988,7 +3989,8 @@
             "path": [
               "CommonPrefixes"
             ],
-            "type": "s3:prefix"
+            "type": "s3:prefix",
+            "uri_format": "s3://{root_Bucket}/{Prefix}"
           },
           {
             "arn_format": "arn:{partition}:s3:::{root_Bucket}/{Key}",
@@ -3997,7 +3999,8 @@
             "path": [
               "Uploads"
             ],
-            "type": "s3:multipart-upload"
+            "type": "s3:multipart-upload",
+            "uri_format": "s3://{root_Bucket}/{Key}"
           }
         ]
       }
@@ -4066,7 +4069,7 @@
       },
       "name": "ListObjectVersions",
       "output": {
-        "jq": ". as $r |\n((.CommonPrefixes//[])[] |\n  {Type: \"s3:prefix\", Id: .Prefix, Name: .Prefix,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Prefix)\", Tags: {},\n   Bucket: $r.Name, Delimiter: $r.Delimiter} + .),\n((.Versions//[])[] |\n  {Type: \"s3:object-version\", Id: .Key, Name: .Key,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Key)\", Tags: {},\n   Bucket: $r.Name} + .),\n((.DeleteMarkers//[])[] |\n  {Type: \"s3:delete-marker\", Id: .Key, Name: .Key,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Key)\", Tags: {},\n   Bucket: $r.Name} + .)",
+        "jq": ". as $r |\n((.CommonPrefixes//[])[] |\n  {Type: \"s3:prefix\", Id: .Prefix, Name: .Prefix,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Prefix)\", Tags: {},\n   Uri: \"s3://\\($r.Name)/\\(.Prefix)\",\n   Bucket: $r.Name, Delimiter: $r.Delimiter} + .),\n((.Versions//[])[] |\n  {Type: \"s3:object-version\", Id: .Key, Name: .Key,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Key)\", Tags: {},\n   Uri: \"s3://\\($r.Name)/\\(.Key)\",\n   Bucket: $r.Name} + .),\n((.DeleteMarkers//[])[] |\n  {Type: \"s3:delete-marker\", Id: .Key, Name: .Key,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Key)\", Tags: {},\n   Uri: \"s3://\\($r.Name)/\\(.Key)\",\n   Bucket: $r.Name} + .)",
         "lists": {
           "CommonPrefixes": {
             "all_fields": [
@@ -4249,7 +4252,7 @@
       },
       "name": "ListObjects",
       "output": {
-        "jq": ". as $r |\n((.CommonPrefixes//[])[] |\n  {Type: \"s3:prefix\", Id: .Prefix, Name: .Prefix,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Prefix)\", Tags: {},\n   Bucket: $r.Name, Delimiter: $r.Delimiter} + .),\n((.Contents//[])[] |\n  {Type: \"s3:object\", Id: .Key, Name: .Key,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Key)\", Tags: {},\n   Bucket: $r.Name} + .)",
+        "jq": ". as $r |\n((.CommonPrefixes//[])[] |\n  {Type: \"s3:prefix\", Id: .Prefix, Name: .Prefix,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Prefix)\", Tags: {},\n   Uri: \"s3://\\($r.Name)/\\(.Prefix)\",\n   Bucket: $r.Name, Delimiter: $r.Delimiter} + .),\n((.Contents//[])[] |\n  {Type: \"s3:object\", Id: .Key, Name: .Key,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Key)\", Tags: {},\n   Uri: \"s3://\\($r.Name)/\\(.Key)\",\n   Bucket: $r.Name} + .)",
         "lists": {
           "CommonPrefixes": {
             "all_fields": [
@@ -4406,7 +4409,7 @@
       },
       "name": "ListObjectsV2",
       "output": {
-        "jq": ". as $r |\n((.CommonPrefixes//[])[] |\n  {Type: \"s3:prefix\", Id: .Prefix, Name: .Prefix,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Prefix)\", Tags: {},\n   Bucket: $r.Name, Delimiter: $r.Delimiter} + .),\n((.Contents//[])[] |\n  {Type: \"s3:object\", Id: .Key, Name: .Key,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Key)\", Tags: {},\n   Bucket: $r.Name} + .)",
+        "jq": ". as $r |\n((.CommonPrefixes//[])[] |\n  {Type: \"s3:prefix\", Id: .Prefix, Name: .Prefix,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Prefix)\", Tags: {},\n   Uri: \"s3://\\($r.Name)/\\(.Prefix)\",\n   Bucket: $r.Name, Delimiter: $r.Delimiter} + .),\n((.Contents//[])[] |\n  {Type: \"s3:object\", Id: .Key, Name: .Key,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Key)\", Tags: {},\n   Uri: \"s3://\\($r.Name)/\\(.Key)\",\n   Bucket: $r.Name} + .)",
         "lists": {
           "CommonPrefixes": {
             "all_fields": [

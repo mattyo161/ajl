@@ -31,6 +31,8 @@ is descended into. ``scalar_as`` wraps scalar list items (e.g. dynamodb
 ListTables' TableNames) into ``{scalar_as: value}`` objects. ``arn_format``
 may reference ``{partition}``, ``{region}``, ``{account}``, any field of the
 resource, and any scalar field of the response root as ``{root_<Field>}``.
+``uri_format`` (same template variables) adds a ``Uri`` property right after
+``Tags`` — used by the s3 configs for pipeable ``s3://bucket/key`` uris.
 
 A hand-written ``output.jq`` program on the operation always wins over the
 declarative config (the escape hatch for odd APIs).
@@ -103,20 +105,30 @@ def normalize_resource(item, cfg, context, root):
         tags_field = "Tags"
     tags = tags_to_map(item.get(tags_field)) if tags_field else {}
 
-    arn = ""
-    arn_field = cfg.get("arn")
-    if arn_field:
-        arn = item.get(arn_field) or ""
-    elif cfg.get("arn_format"):
+    arn_vars = None
+    if cfg.get("arn_format") or cfg.get("uri_format"):
         arn_vars = _ArnVars(context)
         for key, value in (root or {}).items():
             if not isinstance(value, (dict, list)):
                 arn_vars[f"root_{key}"] = value
         arn_vars.update(item)
+
+    arn = ""
+    arn_field = cfg.get("arn")
+    if arn_field:
+        arn = item.get(arn_field) or ""
+    elif cfg.get("arn_format"):
         try:
             arn = cfg["arn_format"].format_map(arn_vars)
         except (KeyError, IndexError):
             arn = ""
+
+    uri = ""
+    if cfg.get("uri_format"):
+        try:
+            uri = cfg["uri_format"].format_map(arn_vars)
+        except (KeyError, IndexError):
+            uri = ""
 
     resource_id = ""
     if cfg.get("id"):
@@ -137,6 +149,8 @@ def normalize_resource(item, cfg, context, root):
         "Arn": arn,
         "Tags": tags,
     }
+    if uri:
+        result["Uri"] = uri
     for key, value in item.items():
         if key == tags_field:
             continue  # replaced by the Tags map
