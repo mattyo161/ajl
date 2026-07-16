@@ -503,12 +503,13 @@ class Scanner:
 
             bar = tqdm(desc=f"ajl s3 {self.name}", unit=" obj", file=sys.stderr,
                        dynamic_ncols=True)
-        interval = 0.5 if bar else 5
+        # a total-less tqdm raises TypeError on bool(), so compare to None
+        interval = 0.5 if bar is not None else 5
         while not stop.wait(interval):
             with self.cond:
                 stats = dict(self.stats)
                 queued = len(self.queue)
-            if bar:
+            if bar is not None:
                 bar.n = stats["objects"]
                 bar.set_postfix(
                     tasks=stats["tasks"], queued=queued, prefixes=stats["prefixes"],
@@ -518,7 +519,7 @@ class Scanner:
             if self.verbose:
                 line = " ".join(f"{k}={v}" for k, v in stats.items())
                 print(f"ajl: {self.name} progress {line} queued={queued}", file=sys.stderr)
-        if bar:
+        if bar is not None:
             bar.n = self.stats["objects"]
             bar.refresh()
             bar.close()

@@ -347,3 +347,23 @@ def test_seed_task_single_delimiter_field():
     assert task.delimiters == ("/",)
     task = seed_task({"Bucket": "b", "Delimiter": "-"}, ("/", "/"))
     assert task.delimiters == ("/", "/")
+
+
+def test_progress_monitor_handles_totalless_tqdm():
+    # tqdm with no iterable/total raises TypeError on bool(); the monitor
+    # must never truth-test the bar (regression: crashed every progress run)
+    import threading
+
+    out = io.StringIO()
+    scanner = Scanner(Runner(default_region="us-east-1"), Emitter(stream=out),
+                      progress=True)
+    stop = threading.Event()
+    stop.set()  # exercise setup and the close path without looping
+    scanner._monitor(stop)
+
+
+def test_progress_monitor_updates_and_closes():
+
+    keys = [f"k{i}" for i in range(5)]
+    records, _, _ = run_scan_over(keys, progress=True)
+    assert_exactly_once(records, keys)
