@@ -17,7 +17,8 @@ def make_options(tmp_path, monkeypatch, **overrides):
         monkeypatch.delenv(var, raising=False)
     defaults = dict(cache="15m", refresh=False, rm_after=None, params_json=None,
                     profile=None, region=None, no_parse=False, no_paginate=False,
-                    max_items=None, fetch_tags=False, jq=None, stamp_session=False)
+                    max_items=None, fetch_tags=False, jq=None, stamp_session=False,
+                    all=False, all_profiles=False, all_regions=False)
     defaults.update(overrides)
     return SimpleNamespace(**defaults)
 
@@ -213,3 +214,11 @@ def test_no_learn_overrides_env_default(monkeypatch):
     assert learn.enabled(SimpleNamespace(learn=False, no_learn=False))
     assert not learn.enabled(SimpleNamespace(learn=False, no_learn=True))
     assert not learn.enabled(SimpleNamespace(learn=True, no_learn=True))
+
+
+def test_fanout_flags_change_cache_key(tmp_path, monkeypatch):
+    base = make_options(tmp_path, monkeypatch)  # all* default False
+    k = ResultCache(base).key(base, "ssm", "params", [])
+    for flag in ("all", "all_profiles", "all_regions"):
+        variant = make_options(tmp_path, monkeypatch, **{flag: True})
+        assert ResultCache(variant).key(variant, "ssm", "params", []) != k, flag

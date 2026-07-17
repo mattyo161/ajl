@@ -183,6 +183,11 @@ class ResultCache:
             "tokens": list(tokens),
             "profile": options.profile,
             "region": options.region,
+            # fan-out flags are root-level, so they aren't in tokens — without
+            # these, `x --all-regions` and `x --all-profiles` collide on one key
+            "all": options.all,
+            "all_profiles": options.all_profiles,
+            "all_regions": options.all_regions,
             "no_parse": options.no_parse,
             "no_paginate": options.no_paginate,
             "max_items": options.max_items,

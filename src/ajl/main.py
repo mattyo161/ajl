@@ -561,7 +561,7 @@ def main(argv=None):
 
                 if fanning:
                     from .fanout import run_fanout
-                    exit_code = run_fanout(runner, emitter, options, describe)
+                    exit_code = run_fanout(runner, emitter, options, describe, "ssm")
                 else:
                     try:
                         describe(runner.session_key())
@@ -591,7 +591,7 @@ def main(argv=None):
 
                 if fanning:
                     from .fanout import run_fanout
-                    exit_code = run_fanout(runner, emitter, options, one)
+                    exit_code = run_fanout(runner, emitter, options, one, service)
                 else:
                     try:
                         one(runner.session_key())

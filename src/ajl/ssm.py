@@ -56,6 +56,9 @@ def build_get_parser():
                         "the sealed default for --names/--path)")
     parser.add_argument("--encrypt", action="store_true", default=False,
                         help="seal SecureString values even for a single --name")
+    parser.add_argument("--raw", action="store_true", default=False,
+                        help="output just the value(s), one per line, not the JSON "
+                        "record — e.g. PW=$(ajl ssm get --name /db/pw --raw)")
     return parser
 
 
@@ -82,8 +85,9 @@ def run_get(runner, emitter, options, tokens, report=None):
 
     with_decryption = not opts.no_decryption
     single = opts.name is not None
-    # single -> plaintext unless --encrypt; bulk -> sealed unless --decrypt
-    do_seal = (opts.encrypt or not single) and not opts.decrypt
+    # single -> plaintext unless --encrypt; bulk -> sealed unless --decrypt.
+    # --raw means "give me the value" so it never seals.
+    do_seal = (opts.encrypt or not single) and not opts.decrypt and not opts.raw
     if do_seal and not seal.sealing_available():
         print("ajl: ssm get seals SecureString values — configure AJL_AGE_IDENTITY "
               "(or AJL_AGE_RECIPIENTS/AJL_AGE_PASSPHRASE), or pass --decrypt for "
@@ -96,6 +100,10 @@ def run_get(runner, emitter, options, tokens, report=None):
 
     def emit(param):
         record = _shape(param)
+        if opts.raw:
+            emitter.emit(record.get("Value") or "", session_key)  # value only, one per line
+            counts["parameters"] += 1
+            return
         if do_seal and record.get("ParameterType") == "SecureString" and record.get("Value"):
             record["Value"] = seal.seal_value(record["Value"])
             counts["sealed"] += 1

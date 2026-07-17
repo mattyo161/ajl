@@ -268,3 +268,21 @@ def test_write_streaming_params_json(monkeypatch):
     code, records, client = run_write(store, [], "put", params_json="-")
     assert code == 0 and len(records) == 3
     assert set(store) == {"/n/0", "/n/1", "/n/2"}
+
+
+def test_raw_value_text():
+    runner = Runner(default_region="us-east-1")
+    runner._clients[(runner.session_key(), "ssm")] = FakeSSM(PARAMS)
+    out = io.StringIO()
+    ssm.run_get(runner, Emitter(stream=out), SimpleNamespace(workers=1),
+                ["--name", "/app/db/host", "--raw"])
+    assert out.getvalue() == "db.example.com\n"
+
+
+def test_raw_bulk_values_one_per_line():
+    runner = Runner(default_region="us-east-1")
+    runner._clients[(runner.session_key(), "ssm")] = FakeSSM(PARAMS)
+    out = io.StringIO()
+    ssm.run_get(runner, Emitter(stream=out), SimpleNamespace(workers=1),
+                ["--names", "/app/db/host", "/app/db/password", "--raw"])
+    assert set(out.getvalue().splitlines()) == {"db.example.com", "s3cr3t"}
