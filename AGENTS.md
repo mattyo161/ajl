@@ -32,7 +32,8 @@ credentials; the test suite does not.
 - `src/ajl/main.py` — entry point: arg parsing (`--` params are kebab-case →
   PascalCase, coerced from model input types), `Runner` (boto3 session/client
   cache per profile+region), `Emitter` (line-atomic stdout), `--params-json`
-  worker-pool fan-out.
+  worker-pool fan-out, `--version` (`runtime_version()`: live git-describe
+  when run from a source checkout, packaged version otherwise).
 - `src/ajl/normalize.py` — the generic normalizer driven by declarative
   `output.resources` configs; module docstring documents the config schema.
 - `src/ajl/pagination.py` — botocore paginators first, marker-loop fallback
@@ -56,6 +57,10 @@ credentials; the test suite does not.
   sealing) and the `ssm params` describe alias.
 - `src/ajl/learn.py` — `--learn` / `AJL_LEARN=1`: aws-cli-equivalent stderr
   line + JSONL audit record per invocation.
+- `src/ajl/apilog.py` — `--api-log` / `AJL_APILOG=1`: one JSONL record per
+  underlying botocore call (duration, HTTP status, retry attempts, item
+  count, outcome), via before-call/after-call event hooks registered per
+  client in `Runner.client()`.
 - `src/ajl/debug.py` — `AJL_DEBUG_CACHE=1` internal-cache hit diagnostics.
 - `src/ajl/models/*.json` — per-service models. **Generated files.**
 - `tools/apply-resource-configs.py` — the real home of curated output

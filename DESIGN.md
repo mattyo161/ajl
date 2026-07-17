@@ -378,6 +378,36 @@ can never be mistaken for releases. `ajl.__version__` reads the generated
 `src/ajl/_version.py` (gitignored), with a dev fallback for uninstalled
 source trees.
 
+### Per-API-call telemetry via botocore event hooks, not a wrapper layer
+`--api-log`/`AJL_APILOG=1` (`apilog.py`) logs one JSONL record per underlying
+botocore call by registering `before-call`/`after-call`/`after-call-error`
+handlers on each client in `Runner.client()`, instead of wrapping/timing
+`run_operation`'s call sites. botocore's event emitter is hierarchical, so
+one registration on the bare event name catches every operation a client
+makes, at the layer closest to the wire (HTTP status, retry attempt count
+from the same `context` dict botocore's own retry logic mutates). Measured
+limitation: each boto3 client gets its own independent copy of the event
+emitter (confirmed against botocore 1.40), so this does not see
+credential-resolution sub-clients boto3 builds internally (SSO
+`GetRoleCredentials`, an `AssumeRole` fetcher) — only calls made through
+clients `Runner.client()` itself builds. A gap in the log on an otherwise
+slow request is itself a useful signal: it points at credential resolution
+rather than the call ajl made.
+
+### `--version` asks git directly instead of trusting the baked-in version
+Discovered while building this: the setuptools-scm `_version.py` (see above)
+only regenerates on build/install, so in this repo's edit-then-`uv run`
+dev loop it silently goes stale — observed reporting a commit 10 commits
+behind actual `HEAD` with no reinstall in between. `--version`
+(`runtime_version()` in `main.py`) instead walks up from `main.py`'s own
+file location looking for a `.git` directory; when found (an editable
+install pointed at this checkout) it shells out to `git describe --tags
+--always --dirty` for a live, always-accurate answer (tag, commits-since,
+short sha, `-dirty` if uncommitted). Falls back to the packaged
+`__version__` when there's no adjacent `.git` — a real installed
+distribution, where the baked-in version isn't stale because there's no
+"ahead of the last build" state to drift from.
+
 ---
 
 ## Decision log template

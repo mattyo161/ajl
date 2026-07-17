@@ -2,6 +2,7 @@ import io
 import json
 
 
+from ajl import main as ajl_main
 from ajl.main import (
     Emitter,
     Runner,
@@ -10,8 +11,37 @@ from ajl.main import (
     dumps,
     parse_extra_options,
     run_operation,
+    runtime_version,
     shape_page,
 )
+
+
+def test_runtime_version_falls_back_without_a_repo(monkeypatch):
+    monkeypatch.setattr(ajl_main, "_find_repo_root", lambda: None)
+    assert runtime_version() == ajl_main.__version__
+
+
+def test_runtime_version_falls_back_when_git_is_unavailable(monkeypatch, tmp_path):
+    (tmp_path / ".git").mkdir()
+    monkeypatch.setattr(ajl_main, "_find_repo_root", lambda: tmp_path)
+
+    def fake_run(*args, **kwargs):
+        raise FileNotFoundError("no git binary")
+
+    monkeypatch.setattr(ajl_main.subprocess, "run", fake_run)
+    assert runtime_version() == ajl_main.__version__
+
+
+def test_runtime_version_uses_git_describe_when_available(monkeypatch, tmp_path):
+    (tmp_path / ".git").mkdir()
+    monkeypatch.setattr(ajl_main, "_find_repo_root", lambda: tmp_path)
+
+    class FakeCompleted:
+        returncode = 0
+        stdout = "v0.2.0-18-g1671e69-dirty\n"
+
+    monkeypatch.setattr(ajl_main.subprocess, "run", lambda *a, **k: FakeCompleted())
+    assert runtime_version() == "v0.2.0-18-g1671e69-dirty"
 
 
 def test_parse_extra_options_kebab_to_pascal():

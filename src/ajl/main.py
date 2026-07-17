@@ -12,6 +12,8 @@ service model's input member types (integers, booleans, lists, JSON).
 import argparse
 import contextlib
 import os
+import pathlib
+import subprocess
 import sys
 import threading
 import time
@@ -24,7 +26,7 @@ import jsonlines
 import orjson
 from botocore.config import Config as BotoConfig
 
-from . import learn
+from . import __version__, apilog, learn
 from .cache import ResultCache, run_cache_command
 from .debug import cache_hit
 from .modelconfig import get_operation_config
@@ -36,6 +38,40 @@ DEFAULT_PROFILE = os.environ.get("AWS_PROFILE", os.environ.get("AWS_DEFAULT_PROF
 DEFAULT_REGION = os.environ.get("AWS_REGION", os.environ.get("AWS_DEFAULT_REGION", "us-east-1"))
 
 
+def _find_repo_root():
+    path = pathlib.Path(__file__).resolve().parent
+    for candidate in (path, *path.parents):
+        if (candidate / ".git").exists():
+            return candidate
+    return None
+
+
+def runtime_version():
+    """The version actually running, not just the packaged one.
+
+    setuptools-scm bakes __version__ into _version.py at build/install time;
+    in this repo's edit-without-reinstalling dev loop that file goes stale
+    the moment a new commit lands, so it can silently under-report what's
+    checked out. When the running code lives in a git checkout (an editable
+    install pointed at source), ask git directly instead — always current,
+    includes the commit and a -dirty marker for uncommitted changes. Falls
+    back to the packaged version for a real installed distribution, where
+    there's no adjacent .git and the baked-in version is accurate.
+    """
+    repo_root = _find_repo_root()
+    if repo_root is not None:
+        try:
+            described = subprocess.run(
+                ["git", "-C", str(repo_root), "describe", "--tags", "--always", "--dirty"],
+                capture_output=True, text=True, timeout=2,
+            )
+            if described.returncode == 0 and described.stdout.strip():
+                return described.stdout.strip()
+        except (OSError, subprocess.SubprocessError):
+            pass
+    return __version__
+
+
 def build_parser():
     parser = argparse.ArgumentParser(
         prog="ajl",
@@ -43,6 +79,11 @@ def build_parser():
         "Type/Id/Name/Arn/Tags properties.",
         allow_abbrev=False,
     )
+    parser.add_argument("--version", action="store_true", default=False,
+                        help="print the running version and exit — git-derived "
+                        "(tag/commit count/short sha, +dirty if uncommitted) "
+                        "when run from a source checkout, so it stays accurate "
+                        "between installs; the packaged version otherwise")
     parser.add_argument("--profile", type=str, default=None)
     parser.add_argument("--region", type=str, default=None)
     parser.add_argument("--params-json", type=str, metavar="FILE|-",
@@ -100,6 +141,15 @@ def build_parser():
     parser.add_argument("--no-learn", action="store_true", default=False,
                         help="disable the learn log for this run, overriding an "
                         "AJL_LEARN default")
+    parser.add_argument("--api-log", action="store_true", default=False,
+                        help="append one JSONL record per underlying AWS API call "
+                        "(service, operation, duration, HTTP status, retry "
+                        "attempts, outcome) to AJL_APILOG_FILE (default "
+                        "~/.local/state/ajl/apilog.jsonl); AJL_APILOG=1 enables "
+                        "globally")
+    parser.add_argument("--no-api-log", action="store_true", default=False,
+                        help="disable the api-log for this run, overriding an "
+                        "AJL_APILOG default")
     parser.add_argument("--verbose", action="store_true", default=False)
     return parser
 
@@ -220,10 +270,12 @@ class Runner:
     """Caches boto3 sessions/clients per (profile, region) for reuse and
     thread safety."""
 
-    def __init__(self, default_profile=None, default_region=None, verbose=False):
+    def __init__(self, default_profile=None, default_region=None, verbose=False,
+                 api_log=False):
         self.default_profile = default_profile
         self.default_region = default_region
         self.verbose = verbose
+        self.api_log = api_log
         self._sessions = {}
         self._clients = {}
         self._accounts = {}
@@ -257,7 +309,11 @@ class Runner:
                     connect_timeout=float(os.environ.get("AJL_CONNECT_TIMEOUT", "5")),
                     read_timeout=float(os.environ.get("AJL_READ_TIMEOUT", "30")),
                 )
-                self._clients[key] = self.session(session_key).client(service, config=config)
+                client = self.session(session_key).client(service, config=config)
+                if self.api_log:
+                    profile, region = session_key
+                    apilog.attach(client, service, profile, region)
+                self._clients[key] = client
             else:
                 cache_hit("client", key)
             return self._clients[key]
@@ -484,6 +540,10 @@ def _run(argv=None):
     parser = build_parser()
     options, passthrough = parser.parse_known_args(argv)
 
+    if options.version:
+        print(runtime_version())
+        return 0
+
     service = None
     operation = None
     if passthrough and not passthrough[0].startswith("-"):
@@ -533,10 +593,16 @@ def _run(argv=None):
                 return 0
             learn_record["Cache"] = "miss"
 
+        if apilog.enabled(options):
+            apilog.announce()
+            api_logging = True
+        else:
+            api_logging = False
         runner = Runner(
             default_profile=options.profile or DEFAULT_PROFILE,
             default_region=options.region or DEFAULT_REGION,
             verbose=options.verbose,
+            api_log=api_logging,
         )
 
         fanning = bool(options.all or options.all_profiles or options.all_regions
