@@ -94,9 +94,11 @@ def run_get(runner, emitter, options, tokens, report=None):
     # --encrypt; --decrypt never seals.
     do_seal = (opts.encrypt or (not single and not opts.raw)) and not opts.decrypt
     if do_seal and not seal.sealing_available():
-        print("ajl: ssm get seals SecureString values — configure AJL_AGE_IDENTITY "
-              "(or AJL_AGE_RECIPIENTS/AJL_AGE_PASSPHRASE), or pass --decrypt for "
-              "plaintext output", file=sys.stderr)
+        print("ajl: ssm get seals SecureString values by default — no age identity "
+              "configured", file=sys.stderr)
+        print(seal.setup_hint(), file=sys.stderr)
+        print("ajl: or skip sealing for this run: pass --decrypt for plaintext output",
+              file=sys.stderr)
         return 2
 
     session_key = runner.session_key()

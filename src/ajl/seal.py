@@ -33,6 +33,13 @@ def sealing_available():
     return encryption_mode() is not None
 
 
+def setup_hint():
+    """The actionable "how do I fix this" line every AJL_AGE_* guard shares."""
+    return ("ajl: set one up: export AJL_AGE_IDENTITY=$(ajl cache keygen | tail -1) "
+            "— add that to your shell profile to persist it (or use "
+            "AJL_AGE_RECIPIENTS/AJL_AGE_PASSPHRASE instead)")
+
+
 def is_sealed(value):
     return isinstance(value, str) and value.startswith(PREFIX)
 

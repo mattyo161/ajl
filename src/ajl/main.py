@@ -26,7 +26,7 @@ import jsonlines
 import orjson
 from botocore.config import Config as BotoConfig
 
-from . import __version__, apilog, learn
+from . import __version__, apilog, learn, seal
 from .cache import ResultCache, run_cache_command
 from .debug import cache_hit
 from .modelconfig import get_operation_config
@@ -575,9 +575,10 @@ def _run(argv=None):
         from .cache import encryption_mode
 
         if not encryption_mode():
-            print(f"ajl: caching {service} requires encryption — set AJL_AGE_IDENTITY "
-                  "(or AJL_AGE_RECIPIENTS/AJL_AGE_PASSPHRASE), or drop --cache",
-                  file=sys.stderr)
+            print(f"ajl: caching {service} requires encryption — no age identity "
+                  "configured", file=sys.stderr)
+            print(seal.setup_hint(), file=sys.stderr)
+            print("ajl: or skip caching for this run: drop --cache", file=sys.stderr)
             return 2
     try:
         cache_key = None
