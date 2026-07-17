@@ -84,6 +84,36 @@ ajl s3 scan s3://my-bucket/tmp/ \
   | ajl s3 delete-objects --bucket my-bucket --params-json -
 ```
 
+### `ajl ssm get`
+
+```shell
+ajl ssm get --name /app/db/host                 # one param (plaintext)
+ajl ssm get --names /a /b /c ...                 # many (chunked 10/call, parallel)
+cat names.txt | ajl ssm get --names -            # names from stdin, streamed
+ajl ssm get --path /app --recursive              # a whole hierarchy
+ajl ssm params --cache 15m                       # describe-parameters, throttle-proof + cached
+```
+
+The API is chosen by the argument (`get-parameter` / `get-parameters` /
+`get-parameters-by-path`); decryption is on by default (`--no-decryption` to
+disable — the flag never reaches the API). SecureString values are **sealed
+inline** so a bulk extract piped to a file never carries plaintext secrets:
+single `--name` prints plaintext (you asked for one; `--encrypt` seals it),
+`--names`/`--path` seal by default (`--decrypt` forces plaintext). Sealing
+needs an age key (`AJL_AGE_*`); use x25519 identity mode, not passphrase, for
+bulk (passphrase scrypt is deliberately slow).
+
+```shell
+# sealed on the wire — safe to save; reveal only when you mean to
+ajl ssm get --path /prod --recursive > secrets.jsonl   # SecureStrings sealed
+ajl decrypt < secrets.jsonl                             # unseal AJLSEC values inline
+```
+
+Two orthogonal protections: the **cache file** is whole-file age-encrypted
+(ssm/secretsmanager + `--cache` *requires* a key, else it refuses), and
+**output values** are field-sealed independently so the stdout stream itself
+is safe to pipe or store.
+
 ## Caching, encryption, and the learn log
 
 ```shell

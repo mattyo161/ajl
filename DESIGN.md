@@ -319,6 +319,56 @@ models and scan's s3 clients report cache hits to stderr when the env var is
 set — for debugging credential reuse surprises and confirming fan-out runs
 reuse clients rather than rebuilding per line.
 
+## ssm wrappers
+
+### `ssm get` picks the API from the argument
+`--name` → get-parameter, `--names` → get-parameters (chunked at 10, the API
+max, fanned across workers; `-` reads names from stdin), `--path` →
+get-parameters-by-path (paginated, `--recursive`). Decryption defaults on;
+`--no-decryption` sets `WithDecryption=false` and the flag itself never
+reaches the API (which has no such parameter). `ssm params` is a thin alias
+for describe-parameters, relying on the now-adaptive Runner clients to ride
+its notoriously aggressive throttle, and on `--cache` to make the slow scan a
+one-time cost. `ssm get` is a custom command (like s3 scan) so it owns its
+record shape and avoids the normalizer's Type-collision on the API's Type.
+
+### Two orthogonal secret protections: cache-at-rest and output-sealing
+Secrets are guarded on two independent axes, each simple on its own:
+- **Cache at rest** — the whole gzipped cache file is age-encrypted whenever
+  a key is configured (existing mechanism). ssm/secretsmanager + `--cache`
+  *requires* a key or the run refuses — no accidental plaintext-secret cache.
+- **Output/pipe sealing** — SecureString *values* are age-sealed inline as
+  `AJLSEC:1:<b64>` envelopes (seal.py, reusing the cache's age config), so the
+  stdout stream is safe to pipe to a file / `tiss sd` / a screen regardless of
+  caching. Independent of the cache; protects the stream itself.
+
+Because they're orthogonal, no split-tee or per-path transform is needed: the
+command seals values before emitting, the cache tee stores whatever is
+emitted, and a cache hit replays identical bytes. Default output modes:
+single `--name` plaintext (deliberate lookup; `--encrypt` to seal),
+`--names`/`--path` sealed (bulk; `--decrypt` to force plaintext). Bulk sealing
+requires a recipient or it errors toward `--decrypt`.
+
+### `ajl decrypt`: standalone unseal filter
+A pseudo-command (like `ajl cache`) that reads JSONL from stdin and unseals
+every `AJLSEC:` envelope in place — for `restored-secrets | ajl decrypt`. It's
+a command, not a `--decrypt` global flag, to avoid clashing with `ssm get`'s
+own `--decrypt`/`--encrypt` subparser flags.
+
+### Rejected: value digest/hash tags on parameters
+A `--digest` writing `sha256(value)` to a readable Tag was considered and
+dropped: tags are readable via ListTagsForResource *without* decrypt
+permission, so a hash of a low-entropy secret is an offline-guessing oracle
+that weakens SecureString. Change-detection for cache refresh needs no tag —
+SSM's native `Version`/`LastModifiedDate` cover it. Tamper-evidence, if ever
+needed, is a keyed MAC (HMAC or KMS GenerateMac/VerifyMac), not a bare hash —
+tabled for now.
+
+### Clients use adaptive retries by default
+`Runner.client` now builds every client with botocore adaptive retry mode
+(max 10 attempts), not just scan's s3 clients — throttle-heavy APIs
+(describe-parameters above all) self-tune instead of failing.
+
 ### Version derived from git tags (setuptools-scm)
 The package version comes from git tags (`v0.2.0` → `0.2.0`) via
 setuptools-scm instead of a hand-bumped field — the version previously lived

@@ -21,6 +21,7 @@ import caseconverter
 import jq as jqlib
 import jsonlines
 import orjson
+from botocore.config import Config as BotoConfig
 
 from . import learn
 from .cache import ResultCache, run_cache_command
@@ -230,7 +231,10 @@ class Runner:
         with self._lock:
             key = (session_key, service)
             if key not in self._clients:
-                self._clients[key] = self.session(session_key).client(service)
+                # adaptive retries so throttle-heavy APIs (ssm describe-parameters
+                # especially) self-tune instead of failing or hammering
+                config = BotoConfig(retries={"mode": "adaptive", "max_attempts": 10})
+                self._clients[key] = self.session(session_key).client(service, config=config)
             else:
                 cache_hit("client", key)
             return self._clients[key]
@@ -425,14 +429,16 @@ def run_params_json(runner, emitter, options, service, operation, base_params):
 
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
-    if argv[:2] in (["s3", "scan"], ["s3", "list"]) and any(
-        flag in argv for flag in ("-h", "--help")
-    ):
+    if any(flag in argv for flag in ("-h", "--help")):
         # route help to the subparser before the root parser eats it
-        from .scan import build_list_parser, build_scan_parser
+        if argv[:2] in (["s3", "scan"], ["s3", "list"]):
+            from .scan import build_list_parser, build_scan_parser
 
-        subparser = build_scan_parser() if argv[1] == "scan" else build_list_parser()
-        subparser.parse_args(["--help"])
+            (build_scan_parser() if argv[1] == "scan" else build_list_parser()).parse_args(["--help"])
+        elif argv[:2] == ["ssm", "get"]:
+            from .ssm import build_get_parser
+
+            build_get_parser().parse_args(["--help"])
     parser = build_parser()
     options, passthrough = parser.parse_known_args(argv)
 
@@ -445,6 +451,10 @@ def main(argv=None):
 
     if service == "cache":
         return run_cache_command(operation, passthrough)
+    if service == "decrypt":
+        from .ssm import run_decrypt_filter
+
+        return run_decrypt_filter(options)
 
     started = time.monotonic()
     learning = learn.enabled(options)
@@ -458,6 +468,15 @@ def main(argv=None):
     }
 
     result_cache = ResultCache(options)
+    SENSITIVE = {"ssm", "secretsmanager"}
+    if result_cache.enabled and service in SENSITIVE:
+        from .cache import encryption_mode
+
+        if not encryption_mode():
+            print(f"ajl: caching {service} requires encryption — set AJL_AGE_IDENTITY "
+                  "(or AJL_AGE_RECIPIENTS/AJL_AGE_PASSPHRASE), or drop --cache",
+                  file=sys.stderr)
+            return 2
     try:
         cache_key = None
         if result_cache.enabled:
@@ -500,6 +519,24 @@ def main(argv=None):
                     learn.announce(learn_record["Command"])
                 run = run_scan if operation == "scan" else run_list
                 exit_code = run(runner, emitter, options, passthrough, report=report)
+            elif service == "ssm" and operation == "get":
+                from .ssm import run_get
+
+                if learning:
+                    learn.announce(learn_record["Command"])
+                exit_code = run_get(runner, emitter, options, passthrough, report=report)
+            elif service == "ssm" and operation == "params":
+                # alias: describe-parameters with adaptive throttle + cache
+                if learning:
+                    learn.announce("aws ssm describe-parameters")
+                params = coerce_params(
+                    parse_extra_options(passthrough), "ssm", "DescribeParameters")
+                try:
+                    run_operation(runner, emitter, options, "ssm", "describe-parameters",
+                                  params, runner.session_key())
+                except Exception as exc:
+                    print(f"ajl: ssm.describe-parameters failed: {exc}", file=sys.stderr)
+                    exit_code = 1
             elif options.params_json:
                 extra_options = parse_extra_options(passthrough, verbose=options.verbose)
                 if learning:

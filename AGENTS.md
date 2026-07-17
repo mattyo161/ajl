@@ -50,6 +50,10 @@ credentials; the test suite does not.
 - `src/ajl/cache.py` — `--cache TTL` whole-invocation result cache (gzip +
   optional age via pyrage; env: `AJL_CACHE`, `AJL_CACHE_DIR`, `AJL_AGE_*`);
   `ajl cache keygen|ls|clear`.
+- `src/ajl/seal.py` — field-level `AJLSEC:1:` value sealing (reuses cache's
+  age config); `ajl decrypt` standalone unseal filter.
+- `src/ajl/ssm.py` — `ajl ssm get` (arg-picked API, chunked, SecureString
+  sealing) and the `ssm params` describe alias.
 - `src/ajl/learn.py` — `--learn` / `AJL_LEARN=1`: aws-cli-equivalent stderr
   line + JSONL audit record per invocation.
 - `src/ajl/debug.py` — `AJL_DEBUG_CACHE=1` internal-cache hit diagnostics.
