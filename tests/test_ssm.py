@@ -39,6 +39,26 @@ class FakeSSM:
                 invalid.append(name)
         return {"Parameters": found, "InvalidParameters": invalid}
 
+    def describe_parameters(self, ParameterFilters=None, MaxResults=10):
+        name = ParameterFilters[0]["Values"][0]
+        self.calls.append(("describe", name))
+        if name not in self.params:
+            return {"Parameters": []}
+        p = self.params[name]
+        return {"Parameters": [{"Name": name, "Type": p["Type"],
+                                "KeyId": p.get("KeyId"), "Tier": p.get("Tier"),
+                                "Version": p.get("Version")}]}
+
+    def put_parameter(self, Name, Value, Type, Overwrite=False, KeyId=None,
+                      Tier=None, Description=None):
+        self.calls.append(("put", Name, Value, Type, Overwrite, KeyId))
+        if Name in self.params and not Overwrite:
+            raise RuntimeError("ParameterAlreadyExists")
+        version = self.params.get(Name, {}).get("Version", 0) + 1
+        self.params[Name] = {"Value": Value, "Type": Type, "KeyId": KeyId,
+                             "Tier": Tier, "Version": version}
+        return {"Version": version, "Tier": Tier or "Standard"}
+
     def get_paginator(self, op):
         assert op == "get_parameters_by_path"
         return self
@@ -163,3 +183,88 @@ def test_seal_idempotent_and_passthrough():
     assert seal.seal_value(once) == once          # sealing a sealed value is a no-op
     assert seal.unseal_value("not-sealed") == "not-sealed"
     assert seal.unseal_obj({"a": [seal.seal_value("y"), "z"]}) == {"a": ["y", "z"]}
+
+
+def run_write(params_store, tokens, mode, workers=1, params_json=None):
+    runner = Runner(default_region="us-east-1")
+    client = FakeSSM(params_store)
+    runner._clients[(runner.session_key(), "ssm")] = client
+    out = io.StringIO()
+    options = SimpleNamespace(workers=workers, params_json=params_json)
+    code = ssm.run_write(runner, Emitter(stream=out), options, tokens, mode)
+    records = [json.loads(line) for line in out.getvalue().splitlines()]
+    return code, records, client
+
+
+def test_update_preserves_type_and_key():
+    store = {"/db/pw": {"Value": "old", "Type": "SecureString", "KeyId": "key-1",
+                        "Tier": "Standard", "Version": 4}}
+    code, records, client = run_write(store, ["--name", "/db/pw", "--value", "new"], "update")
+    assert code == 0
+    (record,) = records
+    assert record["Action"] == "updated"
+    put = [c for c in client.calls if c[0] == "put"][0]
+    # ("put", Name, Value, Type, Overwrite, KeyId) — type & key preserved from describe
+    assert put[3] == "SecureString" and put[4] is True and put[5] == "key-1"
+    assert store["/db/pw"]["Value"] == "new"
+
+
+def test_update_skips_unchanged():
+    store = {"/x": {"Value": "same", "Type": "String", "Version": 1}}
+    code, records, client = run_write(store, ["--name", "/x", "--value", "same"], "update")
+    assert code == 0
+    assert records[0]["Action"] == "unchanged"
+    assert not [c for c in client.calls if c[0] == "put"]  # no write
+
+
+def test_update_force_writes_unchanged():
+    store = {"/x": {"Value": "same", "Type": "String", "Version": 1}}
+    code, records, client = run_write(
+        store, ["--name", "/x", "--value", "same", "--force"], "update")
+    assert records[0]["Action"] == "updated"
+    assert [c for c in client.calls if c[0] == "put"]
+
+
+def test_update_missing_param_errors():
+    code, records, _ = run_write({}, ["--name", "/nope", "--value", "v"], "update")
+    assert code == 1
+    assert records == []
+
+
+def test_put_creates_with_explicit_type():
+    store = {}
+    code, records, client = run_write(
+        store, ["--name", "/new", "--value", "v", "--type", "SecureString",
+                "--key-id", "alias/app"], "put")
+    assert code == 0 and records[0]["Action"] == "put"
+    assert store["/new"]["Type"] == "SecureString" and store["/new"]["KeyId"] == "alias/app"
+
+
+def test_put_no_overwrite_fails_on_existing():
+    store = {"/x": {"Value": "a", "Type": "String", "Version": 1}}
+    code, records, _ = run_write(store, ["--name", "/x", "--value", "b"], "put")
+    assert code == 1  # exists, no --overwrite
+
+
+def test_put_overwrite_flag():
+    store = {"/x": {"Value": "a", "Type": "String", "Version": 1}}
+    code, records, _ = run_write(
+        store, ["--name", "/x", "--value", "b", "--overwrite"], "put")
+    assert code == 0 and store["/x"]["Value"] == "b"
+
+
+def test_write_unseals_sealed_value():
+    store = {"/db/pw": {"Value": "old", "Type": "SecureString", "KeyId": "k", "Version": 1}}
+    sealed = seal.seal_value("brand-new-secret")
+    code, records, client = run_write(store, ["--name", "/db/pw", "--value", sealed], "update")
+    assert code == 0
+    assert store["/db/pw"]["Value"] == "brand-new-secret"  # unsealed before write
+
+
+def test_write_streaming_params_json(monkeypatch):
+    store = {}
+    lines = "\n".join(json.dumps({"Name": f"/n/{i}", "Value": str(i)}) for i in range(3))
+    monkeypatch.setattr("sys.stdin", io.StringIO(lines + "\n"))
+    code, records, client = run_write(store, [], "put", params_json="-")
+    assert code == 0 and len(records) == 3
+    assert set(store) == {"/n/0", "/n/1", "/n/2"}

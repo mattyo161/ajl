@@ -29,6 +29,7 @@ from concurrent.futures import ThreadPoolExecutor
 import jsonlines
 
 from . import seal
+from ._help import GLOBAL_FLAGS
 
 CHUNK = 10  # GetParameters hard max names per call
 
@@ -38,8 +39,8 @@ def build_get_parser():
         prog="ajl ssm get",
         description="Fetch SSM parameters; the API is chosen by --name / "
         "--names / --path. SecureStrings are sealed unless --decrypt.",
-        epilog="Global flags apply: --workers, --profile/--region, --cache, "
-        "--jq, --stamp-session, --learn.",
+        epilog=GLOBAL_FLAGS,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument("--name", default=None, help="one parameter (get-parameter)")
     parser.add_argument("--names", nargs="*", default=None, metavar="NAME",
@@ -160,6 +161,117 @@ def _run_chunks(client, chunks, with_decryption, emit, counts, options):
     with ThreadPoolExecutor(max_workers=workers) as pool:
         list(pool.map(do_chunk, chunks))
     return errors
+
+
+def build_write_parser(command):
+    common = argparse.ArgumentParser(
+        prog=f"ajl ssm {command}",
+        description=(
+            "Update existing parameters by name+value, preserving Type/KeyId/"
+            "Tier (skip-if-unchanged)." if command == "update" else
+            "Create/overwrite parameters with an explicit Type/KeyId."),
+        epilog="Bulk: stream records via --params-json - ({Name, Value, ...} "
+        "per line; sealed AJLSEC values are unsealed before writing).\n\n"
+        + GLOBAL_FLAGS,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    common.add_argument("--name", default=None)
+    common.add_argument("--value", default=None, help="value, or '-' to read stdin")
+    if command == "update":
+        common.add_argument("--force", action="store_true", default=False,
+                            help="write even when the value is unchanged")
+    else:
+        common.add_argument("--type", default="String",
+                            choices=["String", "StringList", "SecureString"])
+        common.add_argument("--key-id", default=None, help="KMS key for SecureString")
+        common.add_argument("--tier", default=None,
+                            choices=["Standard", "Advanced", "Intelligent-Tiering"])
+        common.add_argument("--description", default=None)
+        common.add_argument("--overwrite", action="store_true", default=False,
+                            help="replace an existing parameter (PutParameter Overwrite)")
+    return common
+
+
+def _describe_one(client, name):
+    response = client.describe_parameters(
+        ParameterFilters=[{"Key": "Name", "Values": [name]}], MaxResults=1)
+    params = response.get("Parameters") or []
+    return params[0] if params else None
+
+
+def run_write(runner, emitter, options, tokens, mode, report=None):
+    opts = build_write_parser(mode).parse_args(tokens)
+    session_key = runner.session_key()
+    client = runner.client(session_key, "ssm")
+    counts = {"written": 0, "unchanged": 0, "errors": 0}
+    lock = __import__("threading").Lock()
+
+    def write_one(spec):
+        name = spec.get("Name") or spec.get("name")
+        value = spec.get("Value") or spec.get("value")
+        if value is not None:
+            value = seal.unseal_value(value)  # accept sealed values piped back in
+        if not name or value is None:
+            raise ValueError("each write needs a Name and Value")
+        if mode == "update":
+            existing = _describe_one(client, name)
+            if not existing:
+                raise ValueError(f"{name} does not exist — use `ssm put` to create it")
+            if not opts.force:
+                current = client.get_parameter(Name=name, WithDecryption=True)["Parameter"]
+                if current.get("Value") == value:
+                    with lock:
+                        counts["unchanged"] += 1
+                    return {"Type": "ssm:parameter", "Name": name, "Action": "unchanged",
+                            "Version": current.get("Version")}
+            put = {"Name": name, "Value": value, "Type": existing["Type"], "Overwrite": True}
+            if existing["Type"] == "SecureString" and existing.get("KeyId"):
+                put["KeyId"] = existing["KeyId"]
+            if existing.get("Tier"):
+                put["Tier"] = existing["Tier"]
+            action = "updated"
+        else:
+            put = {"Name": name, "Value": value,
+                   "Type": spec.get("Type") or spec.get("type") or opts.type,
+                   "Overwrite": bool(spec.get("Overwrite", opts.overwrite))}
+            key_id = spec.get("KeyId") or opts.key_id
+            if key_id:
+                put["KeyId"] = key_id
+            if opts.tier:
+                put["Tier"] = opts.tier
+            if opts.description:
+                put["Description"] = opts.description
+            action = "put"
+        response = client.put_parameter(**put)
+        with lock:
+            counts["written"] += 1
+        return {"Type": "ssm:parameter", "Name": name, "Action": action,
+                "Version": response.get("Version"), "Tier": response.get("Tier")}
+
+    def run_spec(spec):
+        try:
+            emitter.emit(write_one(spec), session_key)
+        except Exception as exc:
+            with lock:
+                counts["errors"] += 1
+            print(f"ajl: ssm {mode} failed ({spec.get('Name') or spec.get('name')}): {exc}",
+                  file=sys.stderr)
+
+    if options.params_json:
+        source = sys.stdin if options.params_json == "-" else open(options.params_json)
+        specs = [s for s in jsonlines.Reader(source) if isinstance(s, dict)]
+        workers = max(1, options.workers)
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            list(pool.map(run_spec, specs))
+    else:
+        value = opts.value
+        if value == "-":
+            value = sys.stdin.read().rstrip("\n")
+        run_spec({"Name": opts.name, "Value": value})
+
+    if report is not None:
+        report["Stats"] = counts
+    return 1 if counts["errors"] else 0
 
 
 def run_decrypt_filter(options):

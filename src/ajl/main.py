@@ -64,6 +64,13 @@ def build_parser():
     parser.add_argument("--workers", type=int, default=8,
                         help="parallel requests in --params-json mode (default 8; "
                         "use 1 to preserve input order)")
+    parser.add_argument("--all-profiles", action="store_true", default=False,
+                        help="run across every profile (AJL_PROFILES or ~/.aws/config), "
+                        "de-duped by account; stamps records with their session")
+    parser.add_argument("--all-regions", action="store_true", default=False,
+                        help="run across every enabled region per account")
+    parser.add_argument("--all", action="store_true", default=False,
+                        help="shorthand for --all-profiles --all-regions")
     parser.add_argument("--cache", type=str, default=None, metavar="TTL",
                         help="serve cached results younger than TTL (e.g. 15m, 2h) "
                         "and store fresh ones, gzipped (+age encrypted when "
@@ -72,7 +79,8 @@ def build_parser():
     parser.add_argument("--no-cache", action="store_true", default=False,
                         help="disable the result cache for this run, overriding "
                         "an AJL_CACHE default")
-    parser.add_argument("--refresh", action="store_true", default=False,
+    parser.add_argument("--refresh", "--recache", action="store_true", default=False,
+                        dest="refresh",
                         help="with --cache: skip reading the cache, still store "
                         "the fresh result")
     parser.add_argument("--rm-after", type=str, default=None, metavar="DUR",
@@ -439,6 +447,10 @@ def main(argv=None):
             from .ssm import build_get_parser
 
             build_get_parser().parse_args(["--help"])
+        elif argv[:2] in (["ssm", "update"], ["ssm", "put"]):
+            from .ssm import build_write_parser
+
+            build_write_parser(argv[1]).parse_args(["--help"])
     parser = build_parser()
     options, passthrough = parser.parse_known_args(argv)
 
@@ -497,6 +509,10 @@ def main(argv=None):
             verbose=options.verbose,
         )
 
+        fanning = options.all or options.all_profiles or options.all_regions
+        if fanning:
+            options.stamp_session = True  # so records carry their origin session
+
         writer = result_cache.open_writer(cache_key, argv) if result_cache.enabled else None
         emitter = Emitter(stream=writer)
         if options.fetch_tags:
@@ -525,18 +541,33 @@ def main(argv=None):
                 if learning:
                     learn.announce(learn_record["Command"])
                 exit_code = run_get(runner, emitter, options, passthrough, report=report)
+            elif service == "ssm" and operation in ("update", "put"):
+                from .ssm import run_write
+
+                if learning:
+                    learn.announce(f"aws ssm put-parameter ({operation})")
+                exit_code = run_write(runner, emitter, options, passthrough, operation,
+                                      report=report)
             elif service == "ssm" and operation == "params":
                 # alias: describe-parameters with adaptive throttle + cache
                 if learning:
                     learn.announce("aws ssm describe-parameters")
                 params = coerce_params(
                     parse_extra_options(passthrough), "ssm", "DescribeParameters")
-                try:
+
+                def describe(session_key):
                     run_operation(runner, emitter, options, "ssm", "describe-parameters",
-                                  params, runner.session_key())
-                except Exception as exc:
-                    print(f"ajl: ssm.describe-parameters failed: {exc}", file=sys.stderr)
-                    exit_code = 1
+                                  params, session_key)
+
+                if fanning:
+                    from .fanout import run_fanout
+                    exit_code = run_fanout(runner, emitter, options, describe)
+                else:
+                    try:
+                        describe(runner.session_key())
+                    except Exception as exc:
+                        print(f"ajl: ssm.describe-parameters failed: {exc}", file=sys.stderr)
+                        exit_code = 1
             elif options.params_json:
                 extra_options = parse_extra_options(passthrough, verbose=options.verbose)
                 if learning:
@@ -547,7 +578,6 @@ def main(argv=None):
                 if not service or not operation:
                     parser.error("a <service> and <operation> are required (or use --params-json)")
                 extra_options = parse_extra_options(passthrough, verbose=options.verbose)
-                session_key = runner.session_key()
                 params = coerce_params(extra_options, service, caseconverter.pascalcase(operation))
                 learn_record["AwsEquivalent"] = learn.aws_equivalent(
                     service, operation, params,
@@ -555,11 +585,19 @@ def main(argv=None):
                 )
                 if learning:
                     learn.announce(learn_record["AwsEquivalent"])
-                try:
+
+                def one(session_key):
                     run_operation(runner, emitter, options, service, operation, params, session_key)
-                except Exception as exc:
-                    print(f"ajl: {service}.{operation} failed: {exc}", file=sys.stderr)
-                    exit_code = 1
+
+                if fanning:
+                    from .fanout import run_fanout
+                    exit_code = run_fanout(runner, emitter, options, one)
+                else:
+                    try:
+                        one(runner.session_key())
+                    except Exception as exc:
+                        print(f"ajl: {service}.{operation} failed: {exc}", file=sys.stderr)
+                        exit_code = 1
         finally:
             emitter.flush()
             if writer:

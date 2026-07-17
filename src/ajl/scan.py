@@ -59,6 +59,7 @@ from botocore.auth import S3SigV4Auth
 from botocore.awsrequest import AWSRequest
 from botocore.config import Config
 
+from ._help import GLOBAL_FLAGS
 from .debug import cache_hit
 from .normalize import tags_to_map
 
@@ -757,9 +758,8 @@ def build_scan_parser():
         prog="ajl s3 scan",
         description="Inventory buckets/prefixes with a delimiter fan-out "
         "worker pool and adaptive range splitting.",
-        epilog="The global ajl flags also apply: --workers (pool size), "
-        "--profile/--region, --max-items, --jq, --stamp-session, --fetch-tags, "
-        "--params-json (seed tasks from JSONL) and --verbose (progress lines).",
+        epilog=GLOBAL_FLAGS,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument("uris", nargs="*", metavar="s3://bucket/prefix")
     parser.add_argument("--uri", action="append", default=[], dest="uri_flags",
@@ -806,9 +806,8 @@ def build_list_parser():
         "s3:prefix records pipe straight back into the next `ajl s3 list "
         "--params-json -` (each line repeats its own Delimiter until a --jq "
         "'del(.Delimiter)' makes the final stage recursive).",
-        epilog="The global ajl flags also apply: --workers (pool size), "
-        "--profile/--region, --max-items, --jq, --stamp-session, "
-        "--params-json (seed listings from JSONL) and --verbose.",
+        epilog=GLOBAL_FLAGS,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument("uris", nargs="*", metavar="s3://bucket/prefix")
     parser.add_argument("--uri", action="append", default=[], dest="uri_flags",
