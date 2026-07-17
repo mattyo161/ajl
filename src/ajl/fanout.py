@@ -107,25 +107,42 @@ def run_fanout(runner, emitter, options, run_one, service):
     bar = tqdm(total=len(sessions), desc="ajl fanout", unit=" session",
                file=sys.stderr, dynamic_ncols=True) if show else None
 
+    def warn(msg):
+        # tqdm.write scrolls the line cleanly above a live bar; plain stderr otherwise
+        if bar is not None:
+            tqdm.write(msg, file=sys.stderr)
+        else:
+            print(msg, file=sys.stderr)
+
     def do(session_key):
         nonlocal errors
+        label = f"{session_key[0] or 'default'}/{session_key[1]}"
         try:
             run_one(session_key)
         except Exception as exc:
             with lock:
                 errors += 1
-            msg = str(exc).split("\n")[0][:160]
-            print(f"ajl: {session_key[0]}/{session_key[1]} skipped: {msg}", file=sys.stderr)
+            warn(f"ajl: {label} skipped: {str(exc).splitlines()[0][:140]}")
         finally:
             if bar is not None:
                 with lock:
                     bar.update(1)
                     bar.set_postfix(errors=errors, refresh=False)
 
-    with ThreadPoolExecutor(max_workers=max(1, options.workers)) as pool:
+    pool = ThreadPoolExecutor(max_workers=max(1, options.workers))
+    try:
         list(pool.map(do, sessions))
+    except KeyboardInterrupt:
+        pool.shutdown(wait=False, cancel_futures=True)
+        if bar is not None:
+            bar.close()
+        raise
+    pool.shutdown(wait=True)
     if bar is not None:
         bar.close()
-    print(f"ajl: fanout done — {len(sessions) - errors}/{len(sessions)} sessions ok",
-          file=sys.stderr)
-    return 1 if errors else 0
+    ok = len(sessions) - errors
+    skipped = f", {errors} skipped" if errors else ""
+    print(f"ajl: fanout done — {ok}/{len(sessions)} sessions ok{skipped}", file=sys.stderr)
+    # best-effort: a few unreachable regions/accounts shouldn't fail the run;
+    # only error out if *nothing* was reachable
+    return 0 if ok else 1

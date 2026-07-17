@@ -58,7 +58,9 @@ def build_get_parser():
                         help="seal SecureString values even for a single --name")
     parser.add_argument("--raw", action="store_true", default=False,
                         help="output just the value(s), one per line, not the JSON "
-                        "record — e.g. PW=$(ajl ssm get --name /db/pw --raw)")
+                        "record (this is the default for a single --name)")
+    parser.add_argument("--json", action="store_true", default=False,
+                        help="output the full JSON record even for a single --name")
     return parser
 
 
@@ -85,9 +87,12 @@ def run_get(runner, emitter, options, tokens, report=None):
 
     with_decryption = not opts.no_decryption
     single = opts.name is not None
-    # single -> plaintext unless --encrypt; bulk -> sealed unless --decrypt.
-    # --raw means "give me the value" so it never seals.
-    do_seal = (opts.encrypt or not single) and not opts.decrypt and not opts.raw
+    # a single --name gives you the bare value (you asked for one thing);
+    # --json forces the record, --raw forces values for bulk too.
+    raw_output = opts.raw or (single and not opts.json)
+    # bulk records seal SecureStrings by default; single/raw seal only with
+    # --encrypt; --decrypt never seals.
+    do_seal = (opts.encrypt or (not single and not opts.raw)) and not opts.decrypt
     if do_seal and not seal.sealing_available():
         print("ajl: ssm get seals SecureString values — configure AJL_AGE_IDENTITY "
               "(or AJL_AGE_RECIPIENTS/AJL_AGE_PASSPHRASE), or pass --decrypt for "
@@ -100,14 +105,12 @@ def run_get(runner, emitter, options, tokens, report=None):
 
     def emit(param):
         record = _shape(param)
-        if opts.raw:
-            emitter.emit(record.get("Value") or "", session_key)  # value only, one per line
-            counts["parameters"] += 1
-            return
-        if do_seal and record.get("ParameterType") == "SecureString" and record.get("Value"):
-            record["Value"] = seal.seal_value(record["Value"])
+        value = record.get("Value")
+        if do_seal and record.get("ParameterType") == "SecureString" and value:
+            value = seal.seal_value(value)
+            record["Value"] = value
             counts["sealed"] += 1
-        emitter.emit(record, session_key)
+        emitter.emit(value or "" if raw_output else record, session_key)
         counts["parameters"] += 1
 
     try:

@@ -69,7 +69,7 @@ def test_round_trip_plaintext(tmp_path, monkeypatch, capfd):
     assert meta is not None and meta["lines"] == 2
     stdout.buffer.seek(0)
     assert stdout.buffer.read().decode() == '{"Id":"a"}\n{"Id":"b"}\n'
-    assert "cache hit" in capfd.readouterr().err
+    assert "[CACHE] hit" in capfd.readouterr().err
 
 
 def test_stale_entry_misses_and_sweep_removes(tmp_path, monkeypatch):

@@ -79,7 +79,13 @@ def run_get(params_store, tokens, workers=4):
     out = io.StringIO()
     options = SimpleNamespace(workers=workers)
     code = ssm.run_get(runner, Emitter(stream=out), options, tokens)
-    records = [json.loads(line) for line in out.getvalue().splitlines()]
+    lines = out.getvalue().splitlines()
+    records = []  # raw lines pass through unparsed (--name/--raw emit bare values)
+    for line in lines:
+        try:
+            records.append(json.loads(line))
+        except json.JSONDecodeError:
+            records.append(line)
     return code, records, client
 
 
@@ -91,20 +97,24 @@ PARAMS = {
 }
 
 
-def test_single_name_plaintext_by_default():
+def test_single_name_returns_raw_value():
     code, records, client = run_get(PARAMS, ["--name", "/app/db/password"])
     assert code == 0
-    (record,) = records
-    assert record["Type"] == "ssm:parameter"
-    assert record["Value"] == "s3cr3t"  # single --name -> plaintext
+    assert records == ["s3cr3t"]  # single --name -> the bare value, not a record
     assert client.calls[0] == ("get_parameter", "/app/db/password", True)
 
 
-def test_single_name_encrypt_seals():
-    code, records, _ = run_get(PARAMS, ["--name", "/app/db/password", "--encrypt"])
+def test_single_name_json_returns_record():
+    code, records, _ = run_get(PARAMS, ["--name", "/app/db/password", "--json"])
     (record,) = records
-    assert seal.is_sealed(record["Value"])
-    assert seal.unseal_value(record["Value"]) == "s3cr3t"
+    assert record["Type"] == "ssm:parameter" and record["Value"] == "s3cr3t"
+
+
+def test_single_name_encrypt_seals_raw_value():
+    code, records, _ = run_get(PARAMS, ["--name", "/app/db/password", "--encrypt"])
+    (sealed,) = records  # raw sealed string
+    assert seal.is_sealed(sealed)
+    assert seal.unseal_value(sealed) == "s3cr3t"
 
 
 def test_no_decryption_flag_not_sent_as_param():

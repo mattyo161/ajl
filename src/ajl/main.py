@@ -10,6 +10,7 @@ service model's input member types (integers, booleans, lists, JSON).
 """
 
 import argparse
+import contextlib
 import os
 import sys
 import threading
@@ -203,7 +204,7 @@ class Emitter:
                 self._last_flush = now
 
     def flush(self):
-        with self.lock:
+        with self.lock, contextlib.suppress(BrokenPipeError):
             self.stream.flush()
 
 
@@ -436,6 +437,21 @@ def run_params_json(runner, emitter, options, service, operation, base_params):
 
 
 def main(argv=None):
+    """Entry point wrapper: exit cleanly on a closed pipe (head/wc) or Ctrl-C,
+    the way a well-behaved Unix filter does, instead of dumping a traceback."""
+    try:
+        return _run(argv)
+    except BrokenPipeError:
+        # downstream closed the pipe; silence the interpreter's flush-on-exit
+        with contextlib.suppress(Exception):
+            os.dup2(os.open(os.devnull, os.O_WRONLY), sys.stdout.fileno())
+        return 0
+    except KeyboardInterrupt:
+        print("ajl: interrupted", file=sys.stderr)
+        return 130
+
+
+def _run(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
     if any(flag in argv for flag in ("-h", "--help")):
         # route help to the subparser before the root parser eats it

@@ -229,10 +229,12 @@ class ResultCache:
             if os.path.exists(encrypted):
                 with open(encrypted, "rb") as fp:
                     payload = gzip.decompress(decrypt_bytes(fp.read()))
+                self._announce(age, meta, key)  # only after we can read it
                 sys.stdout.buffer.write(payload)
                 sys.stdout.flush()
             elif os.path.exists(plain):
                 with gzip.open(plain, "rb") as src:
+                    self._announce(age, meta, key)
                     shutil.copyfileobj(src, sys.stdout.buffer)
                 sys.stdout.flush()
             else:
@@ -240,12 +242,17 @@ class ResultCache:
         except Exception as exc:  # bad key, corrupt file: rerun instead
             print(f"ajl: cache unreadable ({exc}); re-running", file=sys.stderr)
             return None
-        print(
-            f"ajl: cache hit (age {_human_age(age)}, {meta.get('lines', '?')} lines, "
-            f"saved {meta.get('duration', 0):.1f}s) {meta_path[:-10]}",
-            file=sys.stderr,
-        )
         return meta
+
+    @staticmethod
+    def _announce(age, meta, key):
+        # announced before the payload streams (so it can't trail the data on
+        # stdout); loud + cyan on a TTY so a cache hit stands out
+        notice = (f"[CACHE] hit — age {_human_age(age)}, {meta.get('lines', '?')} lines, "
+                  f"saved {meta.get('duration', 0):.1f}s ({key[:12]})")
+        if sys.stderr.isatty():
+            notice = f"\033[1;36m{notice}\033[0m"  # bright cyan
+        print(notice, file=sys.stderr, flush=True)
 
     # -- write side ----------------------------------------------------------
 

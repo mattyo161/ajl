@@ -67,8 +67,23 @@ def test_run_fanout_contains_failures(monkeypatch):
         emitter.emit({"from": session_key[0]}, session_key)
 
     code = fanout.run_fanout(runner, emitter, opts(all_profiles=True), run_one, "ssm")
-    assert code == 1  # a failure -> non-zero
+    assert code == 0  # partial success — one region reached is still a win
     assert [json.loads(line)["from"] for line in out.getvalue().splitlines()] == ["ok"]
+
+
+def test_run_fanout_all_failed_is_error(monkeypatch):
+    monkeypatch.setenv("AJL_PROFILES", "a b")
+    runner = Runner(default_region="us-east-1")
+    runner.account = lambda sk: sk[0]
+    monkeypatch.setattr(fanout, "resolve_regions", lambda r, sk, svc: ["us-east-1"])
+    out = io.StringIO()
+
+    def run_one(session_key):
+        raise RuntimeError("AccessDenied")
+
+    code = fanout.run_fanout(runner, Emitter(stream=out), opts(all_profiles=True),
+                             run_one, "ssm")
+    assert code == 1  # nothing reachable -> error
 
 
 def test_resolve_regions_env_override(monkeypatch):
