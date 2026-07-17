@@ -951,7 +951,18 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "taskDefinitionArn",
+            "id": "family",
+            "name": "family",
+            "path": [
+              "taskDefinition"
+            ],
+            "type": "ecs:task-definition"
+          }
+        ]
       }
     },
     "DescribeTaskSets": {

@@ -408,6 +408,26 @@ short sha, `-dirty` if uncommitted). Falls back to the packaged
 distribution, where the baked-in version isn't stale because there's no
 "ahead of the last build" state to drift from.
 
+### `--params-json` always stamps the session; input keys remap to the model's real casing
+Found chaining a 3-stage `ecs` pipeline (`list-clusters --all-regions | ... |
+list-tasks --params-json - | ... | describe-tasks --params-json -`): the
+Profile/Region/Account stamp a fan-out stage attaches only survived one hop.
+`--stamp-session` was opt-in per invocation, so every *middle* stage of a
+piped chain silently dropped the session info its own input carried unless
+the user remembered `--stamp-session` at every single stage. Fixed by
+`should_stamp_session()`: a `--params-json` stage is by definition
+mid-pipeline, so it now stamps by default too (fan-out still originates it;
+`--no-stamp-session` opts back out).
+
+Same investigation surfaced a second, independent bug: `coerce_params`
+always guessed a request param's real name by PascalCasing the CLI flag
+(`--cluster` -> `Cluster`), which boto3 rejects outright for the handful of
+APIs — ecs among them — whose input members are lowerCamelCase (`cluster`,
+`tasks`). Fixed by remapping every incoming key to the operation's actual
+member casing (case-insensitive lookup) before coercion/filtering, so both a
+direct `--cluster` flag and a piped record's field resolve regardless of
+which casing convention the target API uses.
+
 ---
 
 ## Decision log template

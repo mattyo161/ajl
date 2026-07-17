@@ -102,7 +102,12 @@ def build_parser():
                         "output drops the record, multiple outputs emit multiple lines")
     parser.add_argument("--stamp-session", action="store_true", default=False,
                         help="add Profile/Region/Account to every record so piped "
-                        "--params-json stages reuse the same credentials")
+                        "--params-json stages reuse the same credentials — on by "
+                        "default for fan-out (--all/...) and for --params-json "
+                        "itself, so the stamp propagates through a multi-stage pipe")
+    parser.add_argument("--no-stamp-session", action="store_true", default=False,
+                        help="disable the Profile/Region/Account stamp for this run, "
+                        "overriding the fan-out/--params-json default")
     parser.add_argument("--workers", type=int, default=8,
                         help="parallel requests in --params-json mode (default 8; "
                         "use 1 to preserve input order)")
@@ -212,9 +217,17 @@ def coerce_param(value, member):
 def coerce_params(params, service, operation_pascal, filter_to_input=False):
     """Coerce param values; optionally drop params the operation doesn't
     accept (used in --params-json mode so records emitted by a previous ajl
-    stage — with Type/Id/Name/Arn/Tags etc. — can be piped back in as-is)."""
+    stage — with Type/Id/Name/Arn/Tags etc. — can be piped back in as-is).
+
+    Keys are remapped to the model's actual member casing first: most boto3
+    operations use PascalCase (matching the guess `--kebab-flag` -> PascalCase
+    makes), but a few APIs — ecs among them — define lowerCamelCase members
+    (`cluster`, `tasks`), which boto3 rejects verbatim if handed `Cluster`."""
     operation_cfg = get_operation_config(service, operation_pascal) or {}
     members = (operation_cfg.get("input") or {}).get("members") or {}
+    if members:
+        members_by_lower = {name.lower(): name for name in members}
+        params = {members_by_lower.get(key.lower(), key): value for key, value in params.items()}
     if filter_to_input and members:
         params = {key: value for key, value in params.items() if key in members}
     return {
@@ -380,6 +393,17 @@ class StampEmitter:
 
     def flush(self):
         self.emitter.flush()
+
+
+def should_stamp_session(options, fanning):
+    """Whether records get the Profile/Region/Account stamp: on for fan-out
+    (--all/...), which originates it, and for --params-json, which is always
+    mid-pipeline — otherwise the stamp a fan-out stage attached silently
+    drops after one hop and a multi-stage --all | ... | ... chain can never
+    reach its last stage. --no-stamp-session forces it off regardless."""
+    if options.no_stamp_session:
+        return False
+    return bool(fanning or options.params_json or options.stamp_session)
 
 
 def pop_session_fields(line_params):
@@ -608,8 +632,7 @@ def _run(argv=None):
 
         fanning = bool(options.all or options.all_profiles or options.all_regions
                        or options.profiles is not None or options.regions is not None)
-        if fanning:
-            options.stamp_session = True  # so records carry their origin session
+        options.stamp_session = should_stamp_session(options, fanning)
 
         writer = result_cache.open_writer(cache_key, argv) if result_cache.enabled else None
         emitter = Emitter(stream=writer)

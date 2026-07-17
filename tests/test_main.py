@@ -80,6 +80,21 @@ def test_coerce_params_uses_model_and_filters():
     assert params == {"Bucket": "b", "Prefix": "p/"}
 
 
+def test_coerce_params_remaps_lower_camel_case_members():
+    # ecs is one of the few APIs whose input members are lowerCamelCase
+    # (cluster, tasks, ...), not PascalCase; a guessed "--cluster" -> "Cluster"
+    # CLI flag, or a piped record's field, must still resolve.
+    params = coerce_params({"Cluster": "my-cluster"}, "ecs", "ListTasks")
+    assert params == {"cluster": "my-cluster"}
+    params = coerce_params(
+        {"Cluster": "my-cluster", "Type": "ecs:cluster", "Arn": "arn:...", "Tags": {}},
+        "ecs",
+        "DescribeTasks",
+        filter_to_input=True,
+    )
+    assert params == {"cluster": "my-cluster"}
+
+
 def test_dumps_handles_datetime():
     import datetime
 
@@ -281,6 +296,32 @@ def test_stamp_emitter_adds_session_fields():
     assert record["Profile"] == "dev"
     assert record["Region"] == "us-east-1"
     assert record["Account"] == "111122223333"
+
+
+class StampOptions:
+    def __init__(self, params_json=None, stamp_session=False, no_stamp_session=False):
+        self.params_json = params_json
+        self.stamp_session = stamp_session
+        self.no_stamp_session = no_stamp_session
+
+
+def test_should_stamp_session_propagates_through_params_json():
+    from ajl.main import should_stamp_session
+
+    # plain single call: no stamp unless asked for
+    assert should_stamp_session(StampOptions(), fanning=False) is False
+    # --all (or --profiles/--regions) originates the stamp
+    assert should_stamp_session(StampOptions(), fanning=True) is True
+    # a --params-json stage is always mid-pipeline: keep the stamp flowing
+    # even though *this* invocation isn't itself fanning out
+    assert should_stamp_session(StampOptions(params_json="-"), fanning=False) is True
+    # explicit --stamp-session still works standalone
+    assert should_stamp_session(StampOptions(stamp_session=True), fanning=False) is True
+    # --no-stamp-session overrides all of the above
+    assert should_stamp_session(
+        StampOptions(params_json="-", stamp_session=True, no_stamp_session=True),
+        fanning=True,
+    ) is False
 
 
 def test_pop_session_fields_accepts_both_cases():

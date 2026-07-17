@@ -242,6 +242,7 @@ CONFIGS = {
             "ListServices": [r(["serviceArns"], "ecs:service", arn="serviceArn", scalar_as="serviceArn")],
             "DescribeServices": [r(["services"], "ecs:service", "serviceName", name="serviceName", arn="serviceArn", tags="tags")],
             "ListTaskDefinitions": [r(["taskDefinitionArns"], "ecs:task-definition", arn="taskDefinitionArn", scalar_as="taskDefinitionArn")],
+            "DescribeTaskDefinition": [r(["taskDefinition"], "ecs:task-definition", "family", name="family", arn="taskDefinitionArn")],
             "DescribeCapacityProviders": [r(["capacityProviders"], "ecs:capacity-provider", "name", name="name", arn="capacityProviderArn", tags="tags")],
             "ListTasks": [r(["taskArns"], "ecs:task", arn="taskArn", scalar_as="taskArn")],
             "DescribeTasks": [r(["tasks"], "ecs:task", arn="taskArn", tags="tags")],
