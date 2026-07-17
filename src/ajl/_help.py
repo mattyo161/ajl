@@ -8,7 +8,8 @@ subparser sets this as its epilog with RawDescriptionHelpFormatter.
 GLOBAL_FLAGS = """\
 global ajl flags (accepted by every command, parsed before the subcommand):
   --profile P / --region R   target account / region
-  --all-profiles/--all-regions/--all   fan out across profiles/regions
+  --profiles P... / --regions R...   fan out across exactly these
+  --all-profiles/--all-regions/--all   fan out across all (opt-in regions excluded)
   --workers N                parallel requests (default 8)
   --cache TTL                serve+store cached results, e.g. 15m, 2h (AJL_CACHE sets a default)
   --refresh / --recache      with --cache: skip the read, still store fresh

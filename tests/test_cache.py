@@ -18,7 +18,8 @@ def make_options(tmp_path, monkeypatch, **overrides):
     defaults = dict(cache="15m", refresh=False, rm_after=None, params_json=None,
                     profile=None, region=None, no_parse=False, no_paginate=False,
                     max_items=None, fetch_tags=False, jq=None, stamp_session=False,
-                    all=False, all_profiles=False, all_regions=False)
+                    all=False, all_profiles=False, all_regions=False,
+                    profiles=None, regions=None)
     defaults.update(overrides)
     return SimpleNamespace(**defaults)
 

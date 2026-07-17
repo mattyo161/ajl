@@ -72,6 +72,12 @@ def build_parser():
                         help="run across every enabled region per account")
     parser.add_argument("--all", action="store_true", default=False,
                         help="shorthand for --all-profiles --all-regions")
+    parser.add_argument("--regions", nargs="*", default=None, metavar="REGION",
+                        help="run across exactly these regions (space or comma "
+                        "separated); opt-in regions allowed when named here")
+    parser.add_argument("--profiles", nargs="*", default=None, metavar="PROFILE",
+                        help="run across exactly these profiles (space or comma "
+                        "separated)")
     parser.add_argument("--cache", type=str, default=None, metavar="TTL",
                         help="serve cached results younger than TTL (e.g. 15m, 2h) "
                         "and store fresh ones, gzipped (+age encrypted when "
@@ -80,8 +86,8 @@ def build_parser():
     parser.add_argument("--no-cache", action="store_true", default=False,
                         help="disable the result cache for this run, overriding "
                         "an AJL_CACHE default")
-    parser.add_argument("--refresh", "--recache", action="store_true", default=False,
-                        dest="refresh",
+    parser.add_argument("--refresh", "--recache", "--re-cache", action="store_true",
+                        default=False, dest="refresh",
                         help="with --cache: skip reading the cache, still store "
                         "the fresh result")
     parser.add_argument("--rm-after", type=str, default=None, metavar="DUR",
@@ -196,7 +202,9 @@ class Emitter:
 
     def emit(self, obj, session_key=None):
         line = obj if isinstance(obj, str) else dumps(obj)
-        with self.lock:
+        with self.lock, contextlib.suppress(BrokenPipeError, ValueError):
+            # ValueError = write after the stream closed during teardown; a
+            # late worker thread emitting then is harmless, not an error
             self.stream.write(line + "\n")
             now = time.monotonic()
             if now - self._last_flush >= self.flush_interval:
@@ -531,7 +539,8 @@ def _run(argv=None):
             verbose=options.verbose,
         )
 
-        fanning = options.all or options.all_profiles or options.all_regions
+        fanning = bool(options.all or options.all_profiles or options.all_regions
+                       or options.profiles is not None or options.regions is not None)
         if fanning:
             options.stamp_session = True  # so records carry their origin session
 
@@ -620,13 +629,22 @@ def _run(argv=None):
                     except Exception as exc:
                         print(f"ajl: {service}.{operation} failed: {exc}", file=sys.stderr)
                         exit_code = 1
+        except BaseException:
+            # interrupt / broken pipe / error: discard any partial cache so a
+            # killed run can never be replayed as if it were complete
+            if writer is not None:
+                writer.abort()
+                writer = None
+            raise
         finally:
-            emitter.flush()
-            if writer:
-                if exit_code == 0:
-                    writer.commit(time.monotonic() - started)
-                else:
-                    writer.abort()
+            with contextlib.suppress(BrokenPipeError, ValueError):
+                emitter.flush()
+        # reached only on normal completion — cache only a clean (exit 0) run
+        if writer is not None:
+            if exit_code == 0:
+                writer.commit(time.monotonic() - started)
+            else:
+                writer.abort()
         if learning:
             learn_record.update(report)
             learn.log({**learn_record, "ExitCode": exit_code,

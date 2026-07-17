@@ -20,6 +20,7 @@ import sys
 import threading
 from concurrent.futures import ThreadPoolExecutor
 
+from botocore.exceptions import ParamValidationError
 from tqdm import tqdm
 
 # Regions disabled by default (require explicit account opt-in). Fanning into
@@ -70,15 +71,45 @@ def resolve_regions(runner, session_key, service):
     return sorted(regions) or [session_key[1]]
 
 
-def plan_sessions(runner, options, service):
-    """Return a de-duped list of (profile, region) session keys to fan across."""
-    want_profiles = options.all or options.all_profiles
-    want_regions = options.all or options.all_regions
-    profiles = resolve_profiles() if want_profiles else [options.profile]
+def _split(values):
+    """Flatten a nargs list, splitting comma-joined tokens: returns None if
+    the flag wasn't given, else the flat list."""
+    if values is None:
+        return None
+    out = []
+    for value in values:
+        out.extend(v for v in value.replace(",", " ").split() if v)
+    return out
 
-    # resolve accounts in parallel for dedup / dead-credential detection
+
+def plan_sessions(runner, options, service):
+    """Return the list of (profile, region) session keys to fan across.
+
+    Explicit --profiles / --regions win and are taken verbatim (no dedup, no
+    opt-in filtering — you named them, you meant them). --all-profiles /
+    --all-regions discover from config/botocore and de-dupe profiles by account.
+    """
+    explicit_profiles = _split(getattr(options, "profiles", None))
+    explicit_regions = _split(getattr(options, "regions", None))
+    discover_profiles = options.all or options.all_profiles
+    discover_regions = options.all or options.all_regions
+
+    if explicit_profiles is not None:
+        profiles, dedup = explicit_profiles, False
+    elif discover_profiles:
+        profiles, dedup = resolve_profiles(), True
+    else:
+        profiles, dedup = [options.profile], False
+
+    def regions_for(base):
+        if explicit_regions is not None:
+            return explicit_regions
+        if discover_regions:
+            return resolve_regions(runner, base, service)
+        return [base[1]]
+
     accounts = {}
-    if want_profiles:
+    if dedup:  # resolve accounts in parallel for dedup / dead-credential detection
         def probe(profile):
             return profile, runner.account(runner.session_key(profile, options.region))
         with ThreadPoolExecutor(max_workers=min(16, len(profiles) or 1)) as pool:
@@ -87,7 +118,7 @@ def plan_sessions(runner, options, service):
     sessions = []
     seen_accounts = set()
     for profile in profiles:
-        if want_profiles:
+        if dedup:
             account = accounts.get(profile)
             if not account:
                 print(f"ajl: skipping profile {profile!r} — could not resolve credentials",
@@ -97,8 +128,7 @@ def plan_sessions(runner, options, service):
                 continue  # a second profile for an account already covered
             seen_accounts.add(account)
         base = runner.session_key(profile, options.region)
-        regions = resolve_regions(runner, base, service) if want_regions else [base[1]]
-        for region in regions:
+        for region in regions_for(base):
             sessions.append(runner.session_key(profile, region))
     return sessions
 
@@ -116,6 +146,8 @@ def run_fanout(runner, emitter, options, run_one, service):
 
     errors = 0
     seen = {}  # error signature -> count; print each distinct error once
+    abort = threading.Event()  # set on a deterministic (same-everywhere) error
+    abort_error = [None]
     lock = threading.Lock()
     tty = sys.stderr.isatty()
     show = tty and not getattr(options, "no_progress", False)
@@ -137,9 +169,15 @@ def run_fanout(runner, emitter, options, run_one, service):
 
     def do(session_key):
         nonlocal errors
+        if abort.is_set():
+            return  # a deterministic error already fired; skip the rest fast
         label = f"{session_key[0] or 'default'}/{session_key[1]}"
         try:
             run_one(session_key)
+        except ParamValidationError as exc:
+            # bad request shape — fails identically everywhere, so stop now
+            abort_error[0] = exc
+            abort.set()
         except Exception as exc:
             sig = signature(exc)
             with lock:
@@ -165,12 +203,16 @@ def run_fanout(runner, emitter, options, run_one, service):
     pool.shutdown(wait=True)
     if bar is not None:
         bar.close()
+    if abort.is_set():
+        print(f"ajl: aborted fan-out — request is invalid for every session: "
+              f"{str(abort_error[0]).splitlines()[0]}", file=sys.stderr)
+        return 2
     ok = len(sessions) - errors
     if seen:  # collapse repeats: one summary line per distinct error, with counts
         breakdown = ", ".join(f"{sig}x{n}" for sig, n in sorted(seen.items(),
                                                                 key=lambda kv: -kv[1]))
         warn(f"ajl: {errors} sessions skipped — {breakdown}")
     print(f"ajl: fanout done — {ok}/{len(sessions)} sessions ok", file=sys.stderr)
-    # best-effort: a few unreachable regions/accounts shouldn't fail the run;
-    # only error out if *nothing* was reachable
-    return 0 if ok else 1
+    # exit 0 only on a fully clean sweep — a partial (some sessions errored)
+    # run stays out of the cache (its output would be misleadingly incomplete)
+    return 0 if errors == 0 else 1

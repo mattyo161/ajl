@@ -188,6 +188,8 @@ class ResultCache:
             "all": options.all,
             "all_profiles": options.all_profiles,
             "all_regions": options.all_regions,
+            "profiles": getattr(options, "profiles", None),
+            "regions": getattr(options, "regions", None),
             "no_parse": options.no_parse,
             "no_paginate": options.no_paginate,
             "max_items": options.max_items,

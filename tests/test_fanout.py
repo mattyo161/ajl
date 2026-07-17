@@ -8,6 +8,7 @@ from ajl import fanout
 
 def opts(**kw):
     base = dict(all=False, all_profiles=False, all_regions=False,
+                profiles=None, regions=None,
                 profile=None, region="us-east-1", workers=4, verbose=False)
     base.update(kw)
     return SimpleNamespace(**base)
@@ -67,7 +68,7 @@ def test_run_fanout_contains_failures(monkeypatch):
         emitter.emit({"from": session_key[0]}, session_key)
 
     code = fanout.run_fanout(runner, emitter, opts(all_profiles=True), run_one, "ssm")
-    assert code == 0  # partial success — one region reached is still a win
+    assert code == 1  # partial (some errored) -> nonzero so it isn't cached
     assert [json.loads(line)["from"] for line in out.getvalue().splitlines()] == ["ok"]
 
 
@@ -122,3 +123,48 @@ def test_opt_in_regions_included_when_named(monkeypatch):
     regions = fanout.resolve_regions(Runner(default_region="us-east-1"),
                                      ("p", "us-east-1"), "ssm")
     assert regions == ["us-east-1", "me-south-1"]  # explicit list overrides the filter
+
+
+def test_param_validation_aborts_fanout(monkeypatch):
+    from botocore.exceptions import ParamValidationError
+
+    monkeypatch.setenv("AJL_PROFILES", "a b c")
+    monkeypatch.setenv("AJL_REGIONS", "us-east-1 us-west-2")
+    runner = Runner(default_region="us-east-1")
+    runner.account = lambda sk: sk[0]
+    calls = []
+
+    def run_one(session_key):
+        calls.append(session_key)
+        raise ParamValidationError(report="unknown parameter ReCache")
+
+    code = fanout.run_fanout(runner, Emitter(stream=io.StringIO()),
+                             opts(all=True), run_one, "ssm")
+    assert code == 2  # deterministic bad request -> abort, not 6 retries
+    assert len(calls) < 6  # short-circuited well before all sessions ran
+
+
+def test_explicit_regions_taken_verbatim(monkeypatch):
+    monkeypatch.delenv("AJL_REGIONS", raising=False)
+    runner = Runner(default_region="us-east-1")
+    # explicit --regions includes opt-in regions and skips discovery/dedup
+    sessions = fanout.plan_sessions(
+        runner, opts(regions=["us-east-1,us-east-2", "me-south-1"]), "ssm")
+    assert sorted(s[1] for s in sessions) == ["me-south-1", "us-east-1", "us-east-2"]
+    assert all(s[0] is None for s in sessions)  # default profile
+
+
+def test_explicit_profiles_no_dedup(monkeypatch):
+    runner = Runner(default_region="us-east-1")
+    # both profiles same account, but explicit --profiles keeps both (no dedup)
+    runner.account = lambda sk: "111"
+    sessions = fanout.plan_sessions(
+        runner, opts(profiles=["ro", "admin"], regions=["us-east-1"]), "ssm")
+    assert [s[0] for s in sessions] == ["ro", "admin"]
+
+
+def test_explicit_profiles_and_regions_cross_product():
+    runner = Runner(default_region="us-east-1")
+    sessions = fanout.plan_sessions(
+        runner, opts(profiles=["a", "b"], regions=["us-east-1", "us-west-2"]), "ssm")
+    assert len(sessions) == 4  # 2 profiles x 2 regions
