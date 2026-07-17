@@ -22,6 +22,17 @@ from concurrent.futures import ThreadPoolExecutor
 
 from tqdm import tqdm
 
+# Regions disabled by default (require explicit account opt-in). Fanning into
+# them without enablement just yields UnrecognizedClientException — or, worse,
+# a 60s STS/endpoint connect-timeout hang. Excluded from --all-regions unless
+# the user names regions explicitly via AJL_REGIONS.
+OPT_IN_REGIONS = frozenset({
+    "af-south-1", "ap-east-1", "ap-east-2", "ap-south-2", "ap-southeast-3",
+    "ap-southeast-4", "ap-southeast-5", "ap-southeast-6", "ap-southeast-7",
+    "ca-west-1", "eu-central-2", "eu-south-1", "eu-south-2", "il-central-1",
+    "me-central-1", "me-south-1", "mx-central-1",
+})
+
 
 def resolve_profiles():
     env = os.environ.get("AJL_PROFILES", "")
@@ -49,11 +60,13 @@ def resolve_regions(runner, session_key, service):
     env = os.environ.get("AJL_REGIONS", "")
     listed = [r for r in env.replace(",", " ").split() if r]
     if listed:
-        return listed
+        return listed  # explicit list wins, opt-in regions included if named
     try:
         regions = runner.session(session_key).get_available_regions(service)
     except Exception:
         regions = []
+    # skip opt-in-by-default regions the account probably hasn't enabled
+    regions = [r for r in regions if r not in OPT_IN_REGIONS]
     return sorted(regions) or [session_key[1]]
 
 
@@ -102,17 +115,25 @@ def run_fanout(runner, emitter, options, run_one, service):
           f"({profiles} accounts x regions)", file=sys.stderr)
 
     errors = 0
+    seen = {}  # error signature -> count; print each distinct error once
     lock = threading.Lock()
-    show = sys.stderr.isatty() and not getattr(options, "no_progress", False)
+    tty = sys.stderr.isatty()
+    show = tty and not getattr(options, "no_progress", False)
     bar = tqdm(total=len(sessions), desc="ajl fanout", unit=" session",
                file=sys.stderr, dynamic_ncols=True) if show else None
 
     def warn(msg):
-        # tqdm.write scrolls the line cleanly above a live bar; plain stderr otherwise
+        line = f"\033[33m{msg}\033[0m" if tty else msg  # yellow on a TTY
         if bar is not None:
-            tqdm.write(msg, file=sys.stderr)
+            tqdm.write(line, file=sys.stderr)  # scrolls cleanly above the bar
         else:
-            print(msg, file=sys.stderr)
+            print(line, file=sys.stderr)
+
+    def signature(exc):
+        try:
+            return exc.response["Error"]["Code"]  # botocore ClientError code
+        except (AttributeError, KeyError, TypeError):
+            return str(exc).splitlines()[0][:60]
 
     def do(session_key):
         nonlocal errors
@@ -120,9 +141,13 @@ def run_fanout(runner, emitter, options, run_one, service):
         try:
             run_one(session_key)
         except Exception as exc:
+            sig = signature(exc)
             with lock:
                 errors += 1
-            warn(f"ajl: {label} skipped: {str(exc).splitlines()[0][:140]}")
+                first = sig not in seen
+                seen[sig] = seen.get(sig, 0) + 1
+            if first:  # only the first occurrence of each distinct error prints
+                warn(f"ajl: {label} skipped: {str(exc).splitlines()[0][:140]}")
         finally:
             if bar is not None:
                 with lock:
@@ -141,8 +166,11 @@ def run_fanout(runner, emitter, options, run_one, service):
     if bar is not None:
         bar.close()
     ok = len(sessions) - errors
-    skipped = f", {errors} skipped" if errors else ""
-    print(f"ajl: fanout done — {ok}/{len(sessions)} sessions ok{skipped}", file=sys.stderr)
+    if seen:  # collapse repeats: one summary line per distinct error, with counts
+        breakdown = ", ".join(f"{sig}x{n}" for sig, n in sorted(seen.items(),
+                                                                key=lambda kv: -kv[1]))
+        warn(f"ajl: {errors} sessions skipped — {breakdown}")
+    print(f"ajl: fanout done — {ok}/{len(sessions)} sessions ok", file=sys.stderr)
     # best-effort: a few unreachable regions/accounts shouldn't fail the run;
     # only error out if *nothing* was reachable
     return 0 if ok else 1

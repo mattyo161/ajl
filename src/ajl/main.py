@@ -241,8 +241,14 @@ class Runner:
             key = (session_key, service)
             if key not in self._clients:
                 # adaptive retries so throttle-heavy APIs (ssm describe-parameters
-                # especially) self-tune instead of failing or hammering
-                config = BotoConfig(retries={"mode": "adaptive", "max_attempts": 10})
+                # especially) self-tune; bounded timeouts so an unreachable
+                # endpoint (e.g. a disabled opt-in region) fails in seconds
+                # instead of hanging on botocore's 60s default connect timeout
+                config = BotoConfig(
+                    retries={"mode": "adaptive", "max_attempts": 10},
+                    connect_timeout=float(os.environ.get("AJL_CONNECT_TIMEOUT", "5")),
+                    read_timeout=float(os.environ.get("AJL_READ_TIMEOUT", "30")),
+                )
                 self._clients[key] = self.session(session_key).client(service, config=config)
             else:
                 cache_hit("client", key)

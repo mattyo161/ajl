@@ -107,3 +107,18 @@ def test_plan_skips_dead_credential_profiles(monkeypatch):
     runner.account = lambda sk: "111" if sk[0] == "good" else ""  # dead: no account
     sessions = fanout.plan_sessions(runner, opts(all_profiles=True), "ssm")
     assert [s[0] for s in sessions] == ["good"]  # dead profile dropped
+
+
+def test_opt_in_regions_excluded_by_default(monkeypatch):
+    monkeypatch.delenv("AJL_REGIONS", raising=False)
+    runner = Runner(default_region="us-east-1")
+    regions = fanout.resolve_regions(runner, ("default", "us-east-1"), "ssm")
+    assert "us-east-1" in regions
+    assert "me-south-1" not in regions and "af-south-1" not in regions  # opt-in excluded
+
+
+def test_opt_in_regions_included_when_named(monkeypatch):
+    monkeypatch.setenv("AJL_REGIONS", "us-east-1 me-south-1")
+    regions = fanout.resolve_regions(Runner(default_region="us-east-1"),
+                                     ("p", "us-east-1"), "ssm")
+    assert regions == ["us-east-1", "me-south-1"]  # explicit list overrides the filter
