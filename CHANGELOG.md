@@ -5,6 +5,29 @@ Notable changes to `ajl`, release by release. Format loosely follows
 [Semantic Versioning](https://semver.org/). See [DESIGN.md](DESIGN.md) for
 the reasoning behind these changes, not just the summary.
 
+## [0.6.0] - 2026-07-18
+
+### Added
+- Curated `Type`/`Id`/`Name`/`Arn`/`Tags` output shaping for cloudfront
+  (distributions, streaming distributions, invalidations, functions,
+  origin access controls, public keys, key groups, field-level-encryption
+  configs/profiles, realtime log configs, continuous deployment policies,
+  cache/origin-request/response-headers policies) and elasticache (cache
+  clusters, replication groups, subnet/parameter groups, snapshots,
+  serverless caches, users, user groups) — both new.
+- `--describe` pairing for `opensearch.ListDomainNames` → `DescribeDomains`
+  (was missing from the original curation pass).
+- `tools/inventory.sh`: kms, plus a batch of already-curated services that
+  had never been wired in — cloudformation, cloudtrail, cloudwatch,
+  events, logs, sagemaker, servicediscovery, transfer, secretsmanager,
+  opensearch. 37 services total now covered.
+
+### Fixed
+- Cross-checked coverage against an older aws-cli+jq inventory tool and
+  closed the gap it surfaced: elasticache had no curation at all, and a
+  real ElastiCache Redis cluster on the reference account was invisible
+  to the inventory until this release.
+
 ## [0.5.0] - 2026-07-18
 
 ### Added
