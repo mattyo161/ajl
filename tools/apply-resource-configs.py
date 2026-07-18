@@ -506,6 +506,18 @@ CONFIGS = {
             "DescribeMountTargets": [r(["MountTargets"], "elasticfilesystem:mount-target", "MountTargetId")],
         },
     },
+    "elasticache": {
+        "resources": {
+            "DescribeCacheClusters": [r(["CacheClusters"], "elasticache:cache-cluster", "CacheClusterId", arn="ARN")],
+            "DescribeReplicationGroups": [r(["ReplicationGroups"], "elasticache:replication-group", "ReplicationGroupId", arn="ARN")],
+            "DescribeCacheSubnetGroups": [r(["CacheSubnetGroups"], "elasticache:subnet-group", "CacheSubnetGroupName", name="CacheSubnetGroupName", arn="ARN")],
+            "DescribeCacheParameterGroups": [r(["CacheParameterGroups"], "elasticache:parameter-group", "CacheParameterGroupName", name="CacheParameterGroupName", arn="ARN")],
+            "DescribeSnapshots": [r(["Snapshots"], "elasticache:snapshot", "SnapshotName", name="SnapshotName", arn="ARN")],
+            "DescribeServerlessCaches": [r(["ServerlessCaches"], "elasticache:serverless-cache", "ServerlessCacheName", name="ServerlessCacheName", arn="ARN")],
+            "DescribeUsers": [r(["Users"], "elasticache:user", "UserId", name="UserName", arn="ARN")],
+            "DescribeUserGroups": [r(["UserGroups"], "elasticache:user-group", "UserGroupId", arn="ARN")],
+        },
+    },
     "eks": {
         "resources": {
             "ListClusters": [r(["clusters"], "eks:cluster", "name", name="name", arn_format="arn:{partition}:eks:{region}:{account}:cluster/{name}", scalar_as="name")],
@@ -554,6 +566,10 @@ CONFIGS = {
             "ListVpcEndpoints": [r(["VpcEndpointSummaryList"], "es:vpc-endpoint", "VpcEndpointId", arn="DomainArn")],
         },
         "describe": {
+            # DescribeDomains takes DomainNames (array) not a scalar name;
+            # AWS docs cap it at 5 per call, not stated in the model
+            "ListDomainNames": d("DescribeDomains", id_field="Id", param="DomainNames",
+                                 kind="array", batch_size=5),
             "ListDataSources": d("GetDataSource", id_field="Id", param="Name", scope=["DomainName"]),
             # conservative batch size — OpenSearch VPC endpoints per domain
             # are typically few, and the real documented max isn't in the model

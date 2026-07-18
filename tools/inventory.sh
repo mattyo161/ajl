@@ -476,6 +476,184 @@ ajl workspaces describe-connection-aliases --all --stamp-session --describe \
 
 
 #####################
+### CLOUDFORMATION
+#####################
+# describe-stacks (not list-stacks) — richer detail for free (Parameters,
+# Capabilities, Tags), same shape otherwise. list-type-registrations needs
+# an ARN or TypeName input (custom-resource-type registry lookup, not a
+# parameter-free "list everything" op) — not called here.
+ajl cloudformation describe-stacks --all --stamp-session \
+> "${DATA_DIR}/cloudformation-stacks.jsonl"
+
+
+#####################
+### CLOUDTRAIL
+#####################
+# describe-trails (not list-trails) — richer detail for free (S3BucketName,
+# IsMultiRegionTrail, IsOrganizationTrail, ...), same shape otherwise.
+ajl cloudtrail describe-trails --all --stamp-session \
+> "${DATA_DIR}/cloudtrail-trails.jsonl"
+
+
+#####################
+### CLOUDWATCH
+#####################
+ajl cloudwatch describe-alarms --all --stamp-session \
+> "${DATA_DIR}/cloudwatch-alarms.jsonl"
+
+ajl cloudwatch list-dashboards --all --stamp-session --describe \
+> "${DATA_DIR}/cloudwatch-dashboards.jsonl"
+
+
+#####################
+### EVENTS (EventBridge)
+#####################
+# list-partner-event-sources requires --name-prefix (not a parameter-free
+# "list everything" op — it's a partner-integration lookup) — not called here.
+ajl events list-rules --all --stamp-session \
+> "${DATA_DIR}/events-rules.jsonl"
+
+
+#####################
+### LOGS (CloudWatch Logs)
+#####################
+ajl logs describe-log-groups --all --stamp-session \
+> "${DATA_DIR}/logs-log-groups.jsonl"
+
+ajl logs list-integrations --all --stamp-session --describe \
+> "${DATA_DIR}/logs-integrations.jsonl"
+
+
+#####################
+### SAGEMAKER
+#####################
+ajl sagemaker list-models --all --stamp-session \
+> "${DATA_DIR}/sagemaker-models.jsonl"
+
+ajl sagemaker list-endpoint-configs --all --stamp-session \
+> "${DATA_DIR}/sagemaker-endpoint-configs.jsonl"
+
+ajl sagemaker list-actions --all --stamp-session \
+> "${DATA_DIR}/sagemaker-actions.jsonl"
+
+ajl sagemaker list-contexts --all --stamp-session \
+> "${DATA_DIR}/sagemaker-contexts.jsonl"
+
+ajl sagemaker list-data-quality-job-definitions --all --stamp-session --describe \
+> "${DATA_DIR}/sagemaker-data-quality-job-definitions.jsonl"
+
+ajl sagemaker list-device-fleets --all --stamp-session --describe \
+> "${DATA_DIR}/sagemaker-device-fleets.jsonl"
+
+ajl sagemaker list-human-task-uis --all --stamp-session --describe \
+> "${DATA_DIR}/sagemaker-human-task-uis.jsonl"
+
+ajl sagemaker list-model-bias-job-definitions --all --stamp-session --describe \
+> "${DATA_DIR}/sagemaker-model-bias-job-definitions.jsonl"
+
+ajl sagemaker list-model-explainability-job-definitions --all --stamp-session --describe \
+> "${DATA_DIR}/sagemaker-model-explainability-job-definitions.jsonl"
+
+ajl sagemaker list-model-quality-job-definitions --all --stamp-session --describe \
+> "${DATA_DIR}/sagemaker-model-quality-job-definitions.jsonl"
+
+ajl sagemaker list-notebook-instance-lifecycle-configs --all --stamp-session --describe \
+> "${DATA_DIR}/sagemaker-notebook-instance-lifecycle-configs.jsonl"
+
+
+#####################
+### SERVICEDISCOVERY (Cloud Map)
+#####################
+ajl servicediscovery list-namespaces --all --stamp-session \
+> "${DATA_DIR}/servicediscovery-namespaces.jsonl"
+
+ajl servicediscovery list-services --all --stamp-session \
+| tee "${DATA_DIR}/servicediscovery-services.jsonl" \
+| jq -rc '{Profile,Region,ServiceId:.Id}' \
+| ajl servicediscovery list-instances --params-json - --stamp-session --describe \
+> "${DATA_DIR}/servicediscovery-instances.jsonl"
+
+ajl servicediscovery list-operations --all --stamp-session --describe \
+> "${DATA_DIR}/servicediscovery-operations.jsonl"
+
+
+#####################
+### TRANSFER (AWS Transfer Family)
+#####################
+# list-accesses errors on SERVICE_MANAGED-IdP servers ("Cannot list accesses
+# on server with IdP type: SERVICE_MANAGED") — a real API restriction (only
+# custom-IdP servers support it), not an ajl bug; per-item error containment
+# reports it and keeps going for servers where it's actually valid.
+ajl transfer list-servers --all --stamp-session \
+| tee "${DATA_DIR}/transfer-servers.jsonl" \
+| jq -rc '{Profile,Region,ServerId:.Id}' \
+| ajl transfer list-accesses --params-json - --stamp-session --describe \
+> "${DATA_DIR}/transfer-accesses.jsonl"
+
+ajl transfer list-connectors --all --stamp-session --describe \
+> "${DATA_DIR}/transfer-connectors.jsonl"
+
+ajl transfer list-profiles --all --stamp-session --describe \
+> "${DATA_DIR}/transfer-profiles.jsonl"
+
+ajl transfer list-security-policies --all --stamp-session --describe \
+> "${DATA_DIR}/transfer-security-policies.jsonl"
+
+ajl transfer list-web-apps --all --stamp-session --describe \
+> "${DATA_DIR}/transfer-web-apps.jsonl"
+
+ajl transfer list-workflows --all --stamp-session \
+| tee "${DATA_DIR}/transfer-workflows.jsonl" \
+| jq -rc '{Profile,Region,WorkflowId:.Id}' \
+| ajl transfer list-executions --params-json - --stamp-session --describe \
+> "${DATA_DIR}/transfer-executions.jsonl"
+
+
+#####################
+### SECRETSMANAGER
+#####################
+# metadata only (Name/Arn/rotation/last-accessed/last-changed) — never
+# GetSecretValue here, same "list, don't read" boundary as ssm params.
+ajl secretsmanager list-secrets --all --stamp-session \
+> "${DATA_DIR}/secretsmanager-secrets.jsonl"
+
+
+#####################
+### OPENSEARCH
+#####################
+ajl opensearch list-domain-names --all --stamp-session --describe \
+| tee "${DATA_DIR}/opensearch-domains.jsonl" \
+| jq -rc '{Profile,Region,DomainName:.Id}' \
+| ajl opensearch list-data-sources --params-json - --stamp-session --describe \
+> "${DATA_DIR}/opensearch-data-sources.jsonl"
+
+ajl opensearch list-vpc-endpoints --all --stamp-session --describe \
+> "${DATA_DIR}/opensearch-vpc-endpoints.jsonl"
+
+
+#####################
+### ELASTICACHE
+#####################
+ajl elasticache describe-cache-clusters --show-cache-node-info --all --stamp-session \
+> "${DATA_DIR}/elasticache-cache-clusters.jsonl"
+
+ajl elasticache describe-replication-groups --all --stamp-session \
+> "${DATA_DIR}/elasticache-replication-groups.jsonl"
+
+ajl elasticache describe-cache-subnet-groups --all --stamp-session \
+> "${DATA_DIR}/elasticache-cache-subnet-groups.jsonl"
+
+ajl elasticache describe-cache-parameter-groups --all --stamp-session \
+> "${DATA_DIR}/elasticache-cache-parameter-groups.jsonl"
+
+ajl elasticache describe-snapshots --all --stamp-session \
+> "${DATA_DIR}/elasticache-snapshots.jsonl"
+
+ajl elasticache describe-serverless-caches --all --stamp-session \
+> "${DATA_DIR}/elasticache-serverless-caches.jsonl"
+
+
+#####################
 ### CLOUDFRONT
 #####################
 # global service: one pass is enough, no --all fan-out across regions needed.
@@ -524,6 +702,21 @@ ajl cloudfront list-realtime-log-configs --stamp-session \
 
 ajl cloudfront list-continuous-deployment-policies --stamp-session \
 > "${DATA_DIR}/cloudfront-continuous-deployment-policies.jsonl"
+
+
+#####################
+### KMS
+#####################
+ajl kms list-keys --all --stamp-session --describe \
+> "${DATA_DIR}/kms-keys.jsonl"
+
+ajl kms list-aliases --all --stamp-session \
+> "${DATA_DIR}/kms-aliases.jsonl"
+
+ajl kms list-keys --all --stamp-session \
+| jq -rc '{Profile,Region,KeyId:.Id}' \
+| ajl kms list-key-policies --params-json - --stamp-session --describe \
+> "${DATA_DIR}/kms-key-policies.jsonl"
 
 
 #####################

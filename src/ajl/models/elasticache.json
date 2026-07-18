@@ -1,0 +1,4128 @@
+{
+  "metadata": {
+    "apiVersion": "2015-02-02",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "elasticache",
+    "protocol": "query",
+    "protocols": [
+      "query"
+    ],
+    "serviceFullName": "Amazon ElastiCache",
+    "serviceId": "ElastiCache",
+    "signatureVersion": "v4",
+    "uid": "elasticache-2015-02-02",
+    "xmlNamespace": "http://elasticache.amazonaws.com/doc/2015-02-02/"
+  },
+  "name": "elasticache",
+  "operations": {
+    "AddTagsToResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceName": {
+            "name": "ResourceName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceName",
+          "Tags"
+        ]
+      },
+      "name": "AddTagsToResource",
+      "output": {
+        "markers": null,
+        "members": {
+          "TagList": {
+            "name": "TagList",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "AuthorizeCacheSecurityGroupIngress": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CacheSecurityGroupName": {
+            "name": "CacheSecurityGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "EC2SecurityGroupName": {
+            "name": "EC2SecurityGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "EC2SecurityGroupOwnerId": {
+            "name": "EC2SecurityGroupOwnerId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CacheSecurityGroupName",
+          "EC2SecurityGroupName",
+          "EC2SecurityGroupOwnerId"
+        ]
+      },
+      "name": "AuthorizeCacheSecurityGroupIngress",
+      "output": {
+        "markers": null,
+        "members": {
+          "CacheSecurityGroup": {
+            "name": "CacheSecurityGroup",
+            "shape_name": "CacheSecurityGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "BatchApplyUpdateAction": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CacheClusterIds": {
+            "name": "CacheClusterIds",
+            "shape_name": "CacheClusterIdList",
+            "type": "list"
+          },
+          "ReplicationGroupIds": {
+            "name": "ReplicationGroupIds",
+            "shape_name": "ReplicationGroupIdList",
+            "type": "list"
+          },
+          "ServiceUpdateName": {
+            "name": "ServiceUpdateName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServiceUpdateName"
+        ]
+      },
+      "name": "BatchApplyUpdateAction",
+      "output": {
+        "markers": null,
+        "members": {
+          "ProcessedUpdateActions": {
+            "name": "ProcessedUpdateActions",
+            "shape_name": "ProcessedUpdateActionList",
+            "type": "list"
+          },
+          "UnprocessedUpdateActions": {
+            "name": "UnprocessedUpdateActions",
+            "shape_name": "UnprocessedUpdateActionList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "BatchStopUpdateAction": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CacheClusterIds": {
+            "name": "CacheClusterIds",
+            "shape_name": "CacheClusterIdList",
+            "type": "list"
+          },
+          "ReplicationGroupIds": {
+            "name": "ReplicationGroupIds",
+            "shape_name": "ReplicationGroupIdList",
+            "type": "list"
+          },
+          "ServiceUpdateName": {
+            "name": "ServiceUpdateName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServiceUpdateName"
+        ]
+      },
+      "name": "BatchStopUpdateAction",
+      "output": {
+        "markers": null,
+        "members": {
+          "ProcessedUpdateActions": {
+            "name": "ProcessedUpdateActions",
+            "shape_name": "ProcessedUpdateActionList",
+            "type": "list"
+          },
+          "UnprocessedUpdateActions": {
+            "name": "UnprocessedUpdateActions",
+            "shape_name": "UnprocessedUpdateActionList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "CompleteMigration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Force": {
+            "name": "Force",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "ReplicationGroupId": {
+            "name": "ReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ReplicationGroupId"
+        ]
+      },
+      "name": "CompleteMigration",
+      "output": {
+        "markers": null,
+        "members": {
+          "ReplicationGroup": {
+            "name": "ReplicationGroup",
+            "shape_name": "ReplicationGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CopyServerlessCacheSnapshot": {
+      "input": {
+        "markers": null,
+        "members": {
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SourceServerlessCacheSnapshotName": {
+            "name": "SourceServerlessCacheSnapshotName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "TargetServerlessCacheSnapshotName": {
+            "name": "TargetServerlessCacheSnapshotName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SourceServerlessCacheSnapshotName",
+          "TargetServerlessCacheSnapshotName"
+        ]
+      },
+      "name": "CopyServerlessCacheSnapshot",
+      "output": {
+        "markers": null,
+        "members": {
+          "ServerlessCacheSnapshot": {
+            "name": "ServerlessCacheSnapshot",
+            "shape_name": "ServerlessCacheSnapshot",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CopySnapshot": {
+      "input": {
+        "markers": null,
+        "members": {
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SourceSnapshotName": {
+            "name": "SourceSnapshotName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "TargetBucket": {
+            "name": "TargetBucket",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "TargetSnapshotName": {
+            "name": "TargetSnapshotName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SourceSnapshotName",
+          "TargetSnapshotName"
+        ]
+      },
+      "name": "CopySnapshot",
+      "output": {
+        "markers": null,
+        "members": {
+          "Snapshot": {
+            "name": "Snapshot",
+            "shape_name": "Snapshot",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateCacheCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AZMode": {
+            "name": "AZMode",
+            "shape_name": "AZMode",
+            "type": "string"
+          },
+          "AuthToken": {
+            "name": "AuthToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "AutoMinorVersionUpgrade": {
+            "name": "AutoMinorVersionUpgrade",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "CacheClusterId": {
+            "name": "CacheClusterId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CacheNodeType": {
+            "name": "CacheNodeType",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CacheParameterGroupName": {
+            "name": "CacheParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CacheSecurityGroupNames": {
+            "name": "CacheSecurityGroupNames",
+            "shape_name": "CacheSecurityGroupNameList",
+            "type": "list"
+          },
+          "CacheSubnetGroupName": {
+            "name": "CacheSubnetGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "EngineVersion": {
+            "name": "EngineVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "IpDiscovery": {
+            "name": "IpDiscovery",
+            "shape_name": "IpDiscovery",
+            "type": "string"
+          },
+          "LogDeliveryConfigurations": {
+            "name": "LogDeliveryConfigurations",
+            "shape_name": "LogDeliveryConfigurationRequestList",
+            "type": "list"
+          },
+          "NetworkType": {
+            "name": "NetworkType",
+            "shape_name": "NetworkType",
+            "type": "string"
+          },
+          "NotificationTopicArn": {
+            "name": "NotificationTopicArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "NumCacheNodes": {
+            "name": "NumCacheNodes",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "OutpostMode": {
+            "name": "OutpostMode",
+            "shape_name": "OutpostMode",
+            "type": "string"
+          },
+          "Port": {
+            "name": "Port",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "PreferredAvailabilityZone": {
+            "name": "PreferredAvailabilityZone",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PreferredAvailabilityZones": {
+            "name": "PreferredAvailabilityZones",
+            "shape_name": "PreferredAvailabilityZoneList",
+            "type": "list"
+          },
+          "PreferredMaintenanceWindow": {
+            "name": "PreferredMaintenanceWindow",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PreferredOutpostArn": {
+            "name": "PreferredOutpostArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PreferredOutpostArns": {
+            "name": "PreferredOutpostArns",
+            "shape_name": "PreferredOutpostArnList",
+            "type": "list"
+          },
+          "ReplicationGroupId": {
+            "name": "ReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SecurityGroupIds": {
+            "name": "SecurityGroupIds",
+            "shape_name": "SecurityGroupIdsList",
+            "type": "list"
+          },
+          "SnapshotArns": {
+            "name": "SnapshotArns",
+            "shape_name": "SnapshotArnsList",
+            "type": "list"
+          },
+          "SnapshotName": {
+            "name": "SnapshotName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SnapshotRetentionLimit": {
+            "name": "SnapshotRetentionLimit",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "SnapshotWindow": {
+            "name": "SnapshotWindow",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "TransitEncryptionEnabled": {
+            "name": "TransitEncryptionEnabled",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "CacheClusterId"
+        ]
+      },
+      "name": "CreateCacheCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "CacheCluster": {
+            "name": "CacheCluster",
+            "shape_name": "CacheCluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateCacheParameterGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CacheParameterGroupFamily": {
+            "name": "CacheParameterGroupFamily",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CacheParameterGroupName": {
+            "name": "CacheParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "CacheParameterGroupName",
+          "CacheParameterGroupFamily",
+          "Description"
+        ]
+      },
+      "name": "CreateCacheParameterGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "CacheParameterGroup": {
+            "name": "CacheParameterGroup",
+            "shape_name": "CacheParameterGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateCacheSecurityGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CacheSecurityGroupName": {
+            "name": "CacheSecurityGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "CacheSecurityGroupName",
+          "Description"
+        ]
+      },
+      "name": "CreateCacheSecurityGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "CacheSecurityGroup": {
+            "name": "CacheSecurityGroup",
+            "shape_name": "CacheSecurityGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateCacheSubnetGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CacheSubnetGroupDescription": {
+            "name": "CacheSubnetGroupDescription",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CacheSubnetGroupName": {
+            "name": "CacheSubnetGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SubnetIds": {
+            "name": "SubnetIds",
+            "shape_name": "SubnetIdentifierList",
+            "type": "list"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "CacheSubnetGroupName",
+          "CacheSubnetGroupDescription",
+          "SubnetIds"
+        ]
+      },
+      "name": "CreateCacheSubnetGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "CacheSubnetGroup": {
+            "name": "CacheSubnetGroup",
+            "shape_name": "CacheSubnetGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateGlobalReplicationGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GlobalReplicationGroupDescription": {
+            "name": "GlobalReplicationGroupDescription",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "GlobalReplicationGroupIdSuffix": {
+            "name": "GlobalReplicationGroupIdSuffix",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PrimaryReplicationGroupId": {
+            "name": "PrimaryReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GlobalReplicationGroupIdSuffix",
+          "PrimaryReplicationGroupId"
+        ]
+      },
+      "name": "CreateGlobalReplicationGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "GlobalReplicationGroup": {
+            "name": "GlobalReplicationGroup",
+            "shape_name": "GlobalReplicationGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateReplicationGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AtRestEncryptionEnabled": {
+            "name": "AtRestEncryptionEnabled",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "AuthToken": {
+            "name": "AuthToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "AutoMinorVersionUpgrade": {
+            "name": "AutoMinorVersionUpgrade",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "AutomaticFailoverEnabled": {
+            "name": "AutomaticFailoverEnabled",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "CacheNodeType": {
+            "name": "CacheNodeType",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CacheParameterGroupName": {
+            "name": "CacheParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CacheSecurityGroupNames": {
+            "name": "CacheSecurityGroupNames",
+            "shape_name": "CacheSecurityGroupNameList",
+            "type": "list"
+          },
+          "CacheSubnetGroupName": {
+            "name": "CacheSubnetGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ClusterMode": {
+            "name": "ClusterMode",
+            "shape_name": "ClusterMode",
+            "type": "string"
+          },
+          "DataTieringEnabled": {
+            "name": "DataTieringEnabled",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "EngineVersion": {
+            "name": "EngineVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "GlobalReplicationGroupId": {
+            "name": "GlobalReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "IpDiscovery": {
+            "name": "IpDiscovery",
+            "shape_name": "IpDiscovery",
+            "type": "string"
+          },
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "LogDeliveryConfigurations": {
+            "name": "LogDeliveryConfigurations",
+            "shape_name": "LogDeliveryConfigurationRequestList",
+            "type": "list"
+          },
+          "MultiAZEnabled": {
+            "name": "MultiAZEnabled",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "NetworkType": {
+            "name": "NetworkType",
+            "shape_name": "NetworkType",
+            "type": "string"
+          },
+          "NodeGroupConfiguration": {
+            "name": "NodeGroupConfiguration",
+            "shape_name": "NodeGroupConfigurationList",
+            "type": "list"
+          },
+          "NotificationTopicArn": {
+            "name": "NotificationTopicArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "NumCacheClusters": {
+            "name": "NumCacheClusters",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "NumNodeGroups": {
+            "name": "NumNodeGroups",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "Port": {
+            "name": "Port",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "PreferredCacheClusterAZs": {
+            "name": "PreferredCacheClusterAZs",
+            "shape_name": "AvailabilityZonesList",
+            "type": "list"
+          },
+          "PreferredMaintenanceWindow": {
+            "name": "PreferredMaintenanceWindow",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PrimaryClusterId": {
+            "name": "PrimaryClusterId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ReplicasPerNodeGroup": {
+            "name": "ReplicasPerNodeGroup",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "ReplicationGroupDescription": {
+            "name": "ReplicationGroupDescription",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ReplicationGroupId": {
+            "name": "ReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SecurityGroupIds": {
+            "name": "SecurityGroupIds",
+            "shape_name": "SecurityGroupIdsList",
+            "type": "list"
+          },
+          "ServerlessCacheSnapshotName": {
+            "name": "ServerlessCacheSnapshotName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SnapshotArns": {
+            "name": "SnapshotArns",
+            "shape_name": "SnapshotArnsList",
+            "type": "list"
+          },
+          "SnapshotName": {
+            "name": "SnapshotName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SnapshotRetentionLimit": {
+            "name": "SnapshotRetentionLimit",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "SnapshotWindow": {
+            "name": "SnapshotWindow",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "TransitEncryptionEnabled": {
+            "name": "TransitEncryptionEnabled",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "TransitEncryptionMode": {
+            "name": "TransitEncryptionMode",
+            "shape_name": "TransitEncryptionMode",
+            "type": "string"
+          },
+          "UserGroupIds": {
+            "name": "UserGroupIds",
+            "shape_name": "UserGroupIdListInput",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ReplicationGroupId",
+          "ReplicationGroupDescription"
+        ]
+      },
+      "name": "CreateReplicationGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "ReplicationGroup": {
+            "name": "ReplicationGroup",
+            "shape_name": "ReplicationGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateServerlessCache": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CacheUsageLimits": {
+            "name": "CacheUsageLimits",
+            "shape_name": "CacheUsageLimits",
+            "type": "structure"
+          },
+          "DailySnapshotTime": {
+            "name": "DailySnapshotTime",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MajorEngineVersion": {
+            "name": "MajorEngineVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SecurityGroupIds": {
+            "name": "SecurityGroupIds",
+            "shape_name": "SecurityGroupIdsList",
+            "type": "list"
+          },
+          "ServerlessCacheName": {
+            "name": "ServerlessCacheName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SnapshotArnsToRestore": {
+            "name": "SnapshotArnsToRestore",
+            "shape_name": "SnapshotArnsList",
+            "type": "list"
+          },
+          "SnapshotRetentionLimit": {
+            "name": "SnapshotRetentionLimit",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "SubnetIds": {
+            "name": "SubnetIds",
+            "shape_name": "SubnetIdsList",
+            "type": "list"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "UserGroupId": {
+            "name": "UserGroupId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerlessCacheName",
+          "Engine"
+        ]
+      },
+      "name": "CreateServerlessCache",
+      "output": {
+        "markers": null,
+        "members": {
+          "ServerlessCache": {
+            "name": "ServerlessCache",
+            "shape_name": "ServerlessCache",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateServerlessCacheSnapshot": {
+      "input": {
+        "markers": null,
+        "members": {
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ServerlessCacheName": {
+            "name": "ServerlessCacheName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ServerlessCacheSnapshotName": {
+            "name": "ServerlessCacheSnapshotName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ServerlessCacheSnapshotName",
+          "ServerlessCacheName"
+        ]
+      },
+      "name": "CreateServerlessCacheSnapshot",
+      "output": {
+        "markers": null,
+        "members": {
+          "ServerlessCacheSnapshot": {
+            "name": "ServerlessCacheSnapshot",
+            "shape_name": "ServerlessCacheSnapshot",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateSnapshot": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CacheClusterId": {
+            "name": "CacheClusterId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "KmsKeyId": {
+            "name": "KmsKeyId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ReplicationGroupId": {
+            "name": "ReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SnapshotName": {
+            "name": "SnapshotName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "SnapshotName"
+        ]
+      },
+      "name": "CreateSnapshot",
+      "output": {
+        "markers": null,
+        "members": {
+          "Snapshot": {
+            "name": "Snapshot",
+            "shape_name": "Snapshot",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateUser": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AccessString": {
+            "name": "AccessString",
+            "shape_name": "AccessString",
+            "type": "string"
+          },
+          "AuthenticationMode": {
+            "name": "AuthenticationMode",
+            "shape_name": "AuthenticationMode",
+            "type": "structure"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "EngineType",
+            "type": "string"
+          },
+          "NoPasswordRequired": {
+            "name": "NoPasswordRequired",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "Passwords": {
+            "name": "Passwords",
+            "shape_name": "PasswordListInput",
+            "type": "list"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "UserId": {
+            "name": "UserId",
+            "shape_name": "UserId",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "UserName",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserId",
+          "UserName",
+          "Engine",
+          "AccessString"
+        ]
+      },
+      "name": "CreateUser",
+      "output": {
+        "markers": null,
+        "members": {
+          "ARN": {
+            "name": "ARN",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "AccessString": {
+            "name": "AccessString",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Authentication": {
+            "name": "Authentication",
+            "shape_name": "Authentication",
+            "type": "structure"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "EngineType",
+            "type": "string"
+          },
+          "MinimumEngineVersion": {
+            "name": "MinimumEngineVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "UserGroupIds": {
+            "name": "UserGroupIds",
+            "shape_name": "UserGroupIdList",
+            "type": "list"
+          },
+          "UserId": {
+            "name": "UserId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateUserGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "EngineType",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "UserGroupId": {
+            "name": "UserGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "UserIds": {
+            "name": "UserIds",
+            "shape_name": "UserIdListInput",
+            "type": "list"
+          }
+        },
+        "required": [
+          "UserGroupId",
+          "Engine"
+        ]
+      },
+      "name": "CreateUserGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "ARN": {
+            "name": "ARN",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "EngineType",
+            "type": "string"
+          },
+          "MinimumEngineVersion": {
+            "name": "MinimumEngineVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PendingChanges": {
+            "name": "PendingChanges",
+            "shape_name": "UserGroupPendingChanges",
+            "type": "structure"
+          },
+          "ReplicationGroups": {
+            "name": "ReplicationGroups",
+            "shape_name": "UGReplicationGroupIdList",
+            "type": "list"
+          },
+          "ServerlessCaches": {
+            "name": "ServerlessCaches",
+            "shape_name": "UGServerlessCacheIdList",
+            "type": "list"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "UserGroupId": {
+            "name": "UserGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "UserIds": {
+            "name": "UserIds",
+            "shape_name": "UserIdList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DecreaseNodeGroupsInGlobalReplicationGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ApplyImmediately": {
+            "name": "ApplyImmediately",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "GlobalNodeGroupsToRemove": {
+            "name": "GlobalNodeGroupsToRemove",
+            "shape_name": "GlobalNodeGroupIdList",
+            "type": "list"
+          },
+          "GlobalNodeGroupsToRetain": {
+            "name": "GlobalNodeGroupsToRetain",
+            "shape_name": "GlobalNodeGroupIdList",
+            "type": "list"
+          },
+          "GlobalReplicationGroupId": {
+            "name": "GlobalReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "NodeGroupCount": {
+            "name": "NodeGroupCount",
+            "shape_name": "Integer",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "GlobalReplicationGroupId",
+          "NodeGroupCount",
+          "ApplyImmediately"
+        ]
+      },
+      "name": "DecreaseNodeGroupsInGlobalReplicationGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "GlobalReplicationGroup": {
+            "name": "GlobalReplicationGroup",
+            "shape_name": "GlobalReplicationGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DecreaseReplicaCount": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ApplyImmediately": {
+            "name": "ApplyImmediately",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "NewReplicaCount": {
+            "name": "NewReplicaCount",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "ReplicaConfiguration": {
+            "name": "ReplicaConfiguration",
+            "shape_name": "ReplicaConfigurationList",
+            "type": "list"
+          },
+          "ReplicasToRemove": {
+            "name": "ReplicasToRemove",
+            "shape_name": "RemoveReplicasList",
+            "type": "list"
+          },
+          "ReplicationGroupId": {
+            "name": "ReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ReplicationGroupId",
+          "ApplyImmediately"
+        ]
+      },
+      "name": "DecreaseReplicaCount",
+      "output": {
+        "markers": null,
+        "members": {
+          "ReplicationGroup": {
+            "name": "ReplicationGroup",
+            "shape_name": "ReplicationGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteCacheCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CacheClusterId": {
+            "name": "CacheClusterId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "FinalSnapshotIdentifier": {
+            "name": "FinalSnapshotIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CacheClusterId"
+        ]
+      },
+      "name": "DeleteCacheCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "CacheCluster": {
+            "name": "CacheCluster",
+            "shape_name": "CacheCluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteCacheParameterGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CacheParameterGroupName": {
+            "name": "CacheParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CacheParameterGroupName"
+        ]
+      },
+      "name": "DeleteCacheParameterGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteCacheSecurityGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CacheSecurityGroupName": {
+            "name": "CacheSecurityGroupName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CacheSecurityGroupName"
+        ]
+      },
+      "name": "DeleteCacheSecurityGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteCacheSubnetGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CacheSubnetGroupName": {
+            "name": "CacheSubnetGroupName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CacheSubnetGroupName"
+        ]
+      },
+      "name": "DeleteCacheSubnetGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteGlobalReplicationGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GlobalReplicationGroupId": {
+            "name": "GlobalReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RetainPrimaryReplicationGroup": {
+            "name": "RetainPrimaryReplicationGroup",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "GlobalReplicationGroupId",
+          "RetainPrimaryReplicationGroup"
+        ]
+      },
+      "name": "DeleteGlobalReplicationGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "GlobalReplicationGroup": {
+            "name": "GlobalReplicationGroup",
+            "shape_name": "GlobalReplicationGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteReplicationGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FinalSnapshotIdentifier": {
+            "name": "FinalSnapshotIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ReplicationGroupId": {
+            "name": "ReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RetainPrimaryCluster": {
+            "name": "RetainPrimaryCluster",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "ReplicationGroupId"
+        ]
+      },
+      "name": "DeleteReplicationGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "ReplicationGroup": {
+            "name": "ReplicationGroup",
+            "shape_name": "ReplicationGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteServerlessCache": {
+      "input": {
+        "markers": null,
+        "members": {
+          "FinalSnapshotName": {
+            "name": "FinalSnapshotName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ServerlessCacheName": {
+            "name": "ServerlessCacheName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerlessCacheName"
+        ]
+      },
+      "name": "DeleteServerlessCache",
+      "output": {
+        "markers": null,
+        "members": {
+          "ServerlessCache": {
+            "name": "ServerlessCache",
+            "shape_name": "ServerlessCache",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteServerlessCacheSnapshot": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ServerlessCacheSnapshotName": {
+            "name": "ServerlessCacheSnapshotName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerlessCacheSnapshotName"
+        ]
+      },
+      "name": "DeleteServerlessCacheSnapshot",
+      "output": {
+        "markers": null,
+        "members": {
+          "ServerlessCacheSnapshot": {
+            "name": "ServerlessCacheSnapshot",
+            "shape_name": "ServerlessCacheSnapshot",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteSnapshot": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SnapshotName": {
+            "name": "SnapshotName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SnapshotName"
+        ]
+      },
+      "name": "DeleteSnapshot",
+      "output": {
+        "markers": null,
+        "members": {
+          "Snapshot": {
+            "name": "Snapshot",
+            "shape_name": "Snapshot",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteUser": {
+      "input": {
+        "markers": null,
+        "members": {
+          "UserId": {
+            "name": "UserId",
+            "shape_name": "UserId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserId"
+        ]
+      },
+      "name": "DeleteUser",
+      "output": {
+        "markers": null,
+        "members": {
+          "ARN": {
+            "name": "ARN",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "AccessString": {
+            "name": "AccessString",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Authentication": {
+            "name": "Authentication",
+            "shape_name": "Authentication",
+            "type": "structure"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "EngineType",
+            "type": "string"
+          },
+          "MinimumEngineVersion": {
+            "name": "MinimumEngineVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "UserGroupIds": {
+            "name": "UserGroupIds",
+            "shape_name": "UserGroupIdList",
+            "type": "list"
+          },
+          "UserId": {
+            "name": "UserId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteUserGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "UserGroupId": {
+            "name": "UserGroupId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserGroupId"
+        ]
+      },
+      "name": "DeleteUserGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "ARN": {
+            "name": "ARN",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "EngineType",
+            "type": "string"
+          },
+          "MinimumEngineVersion": {
+            "name": "MinimumEngineVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PendingChanges": {
+            "name": "PendingChanges",
+            "shape_name": "UserGroupPendingChanges",
+            "type": "structure"
+          },
+          "ReplicationGroups": {
+            "name": "ReplicationGroups",
+            "shape_name": "UGReplicationGroupIdList",
+            "type": "list"
+          },
+          "ServerlessCaches": {
+            "name": "ServerlessCaches",
+            "shape_name": "UGServerlessCacheIdList",
+            "type": "list"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "UserGroupId": {
+            "name": "UserGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "UserIds": {
+            "name": "UserIds",
+            "shape_name": "UserIdList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeCacheClusters": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CacheClusterId": {
+            "name": "CacheClusterId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "ShowCacheClustersNotInReplicationGroups": {
+            "name": "ShowCacheClustersNotInReplicationGroups",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "ShowCacheNodeInfo": {
+            "name": "ShowCacheNodeInfo",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeCacheClusters",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CacheClusters": {
+            "name": "CacheClusters",
+            "shape_name": "CacheClusterList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "CacheClusterId",
+            "path": [
+              "CacheClusters"
+            ],
+            "type": "elasticache:cache-cluster"
+          }
+        ]
+      }
+    },
+    "DescribeCacheEngineVersions": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CacheParameterGroupFamily": {
+            "name": "CacheParameterGroupFamily",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "DefaultOnly": {
+            "name": "DefaultOnly",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "EngineVersion": {
+            "name": "EngineVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeCacheEngineVersions",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CacheEngineVersions": {
+            "name": "CacheEngineVersions",
+            "shape_name": "CacheEngineVersionList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeCacheParameterGroups": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CacheParameterGroupName": {
+            "name": "CacheParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeCacheParameterGroups",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CacheParameterGroups": {
+            "name": "CacheParameterGroups",
+            "shape_name": "CacheParameterGroupList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "CacheParameterGroupName",
+            "name": "CacheParameterGroupName",
+            "path": [
+              "CacheParameterGroups"
+            ],
+            "type": "elasticache:parameter-group"
+          }
+        ]
+      }
+    },
+    "DescribeCacheParameters": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CacheParameterGroupName": {
+            "name": "CacheParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "Source": {
+            "name": "Source",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CacheParameterGroupName"
+        ]
+      },
+      "name": "DescribeCacheParameters",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CacheNodeTypeSpecificParameters": {
+            "name": "CacheNodeTypeSpecificParameters",
+            "shape_name": "CacheNodeTypeSpecificParametersList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Parameters": {
+            "name": "Parameters",
+            "shape_name": "ParametersList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeCacheSecurityGroups": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CacheSecurityGroupName": {
+            "name": "CacheSecurityGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeCacheSecurityGroups",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CacheSecurityGroups": {
+            "name": "CacheSecurityGroups",
+            "shape_name": "CacheSecurityGroups",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeCacheSubnetGroups": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CacheSubnetGroupName": {
+            "name": "CacheSubnetGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeCacheSubnetGroups",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CacheSubnetGroups": {
+            "name": "CacheSubnetGroups",
+            "shape_name": "CacheSubnetGroups",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "CacheSubnetGroupName",
+            "name": "CacheSubnetGroupName",
+            "path": [
+              "CacheSubnetGroups"
+            ],
+            "type": "elasticache:subnet-group"
+          }
+        ]
+      }
+    },
+    "DescribeEngineDefaultParameters": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CacheParameterGroupFamily": {
+            "name": "CacheParameterGroupFamily",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "CacheParameterGroupFamily"
+        ]
+      },
+      "name": "DescribeEngineDefaultParameters",
+      "output": {
+        "markers": null,
+        "members": {
+          "EngineDefaults": {
+            "name": "EngineDefaults",
+            "shape_name": "EngineDefaults",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeEvents": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Duration": {
+            "name": "Duration",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "EndTime": {
+            "name": "EndTime",
+            "shape_name": "TStamp",
+            "type": "timestamp"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "SourceIdentifier": {
+            "name": "SourceIdentifier",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SourceType": {
+            "name": "SourceType",
+            "shape_name": "SourceType",
+            "type": "string"
+          },
+          "StartTime": {
+            "name": "StartTime",
+            "shape_name": "TStamp",
+            "type": "timestamp"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeEvents",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Events": {
+            "name": "Events",
+            "shape_name": "EventList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeGlobalReplicationGroups": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "GlobalReplicationGroupId": {
+            "name": "GlobalReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "ShowMemberInfo": {
+            "name": "ShowMemberInfo",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeGlobalReplicationGroups",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "GlobalReplicationGroups": {
+            "name": "GlobalReplicationGroups",
+            "shape_name": "GlobalReplicationGroupList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeReplicationGroups": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "ReplicationGroupId": {
+            "name": "ReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeReplicationGroups",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ReplicationGroups": {
+            "name": "ReplicationGroups",
+            "shape_name": "ReplicationGroupList",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "ReplicationGroupId",
+            "path": [
+              "ReplicationGroups"
+            ],
+            "type": "elasticache:replication-group"
+          }
+        ]
+      }
+    },
+    "DescribeReservedCacheNodes": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CacheNodeType": {
+            "name": "CacheNodeType",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Duration": {
+            "name": "Duration",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "OfferingType": {
+            "name": "OfferingType",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ProductDescription": {
+            "name": "ProductDescription",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ReservedCacheNodeId": {
+            "name": "ReservedCacheNodeId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ReservedCacheNodesOfferingId": {
+            "name": "ReservedCacheNodesOfferingId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeReservedCacheNodes",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ReservedCacheNodes": {
+            "name": "ReservedCacheNodes",
+            "shape_name": "ReservedCacheNodeList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeReservedCacheNodesOfferings": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CacheNodeType": {
+            "name": "CacheNodeType",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Duration": {
+            "name": "Duration",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "OfferingType": {
+            "name": "OfferingType",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ProductDescription": {
+            "name": "ProductDescription",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ReservedCacheNodesOfferingId": {
+            "name": "ReservedCacheNodesOfferingId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeReservedCacheNodesOfferings",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ReservedCacheNodesOfferings": {
+            "name": "ReservedCacheNodesOfferings",
+            "shape_name": "ReservedCacheNodesOfferingList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeServerlessCacheSnapshots": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ServerlessCacheName": {
+            "name": "ServerlessCacheName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ServerlessCacheSnapshotName": {
+            "name": "ServerlessCacheSnapshotName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SnapshotType": {
+            "name": "SnapshotType",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeServerlessCacheSnapshots",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ServerlessCacheSnapshots": {
+            "name": "ServerlessCacheSnapshots",
+            "shape_name": "ServerlessCacheSnapshotList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeServerlessCaches": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ServerlessCacheName": {
+            "name": "ServerlessCacheName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeServerlessCaches",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ServerlessCaches": {
+            "name": "ServerlessCaches",
+            "shape_name": "ServerlessCacheList",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "ServerlessCacheName",
+            "name": "ServerlessCacheName",
+            "path": [
+              "ServerlessCaches"
+            ],
+            "type": "elasticache:serverless-cache"
+          }
+        ]
+      }
+    },
+    "DescribeServiceUpdates": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "ServiceUpdateName": {
+            "name": "ServiceUpdateName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ServiceUpdateStatus": {
+            "name": "ServiceUpdateStatus",
+            "shape_name": "ServiceUpdateStatusList",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeServiceUpdates",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ServiceUpdates": {
+            "name": "ServiceUpdates",
+            "shape_name": "ServiceUpdateList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeSnapshots": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CacheClusterId": {
+            "name": "CacheClusterId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "ReplicationGroupId": {
+            "name": "ReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ShowNodeGroupConfig": {
+            "name": "ShowNodeGroupConfig",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "SnapshotName": {
+            "name": "SnapshotName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SnapshotSource": {
+            "name": "SnapshotSource",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeSnapshots",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Snapshots": {
+            "name": "Snapshots",
+            "shape_name": "SnapshotList",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "SnapshotName",
+            "name": "SnapshotName",
+            "path": [
+              "Snapshots"
+            ],
+            "type": "elasticache:snapshot"
+          }
+        ]
+      }
+    },
+    "DescribeUpdateActions": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "CacheClusterIds": {
+            "name": "CacheClusterIds",
+            "shape_name": "CacheClusterIdList",
+            "type": "list"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "ReplicationGroupIds": {
+            "name": "ReplicationGroupIds",
+            "shape_name": "ReplicationGroupIdList",
+            "type": "list"
+          },
+          "ServiceUpdateName": {
+            "name": "ServiceUpdateName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ServiceUpdateStatus": {
+            "name": "ServiceUpdateStatus",
+            "shape_name": "ServiceUpdateStatusList",
+            "type": "list"
+          },
+          "ServiceUpdateTimeRange": {
+            "name": "ServiceUpdateTimeRange",
+            "shape_name": "TimeRangeFilter",
+            "type": "structure"
+          },
+          "ShowNodeLevelUpdateStatus": {
+            "name": "ShowNodeLevelUpdateStatus",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "UpdateActionStatus": {
+            "name": "UpdateActionStatus",
+            "shape_name": "UpdateActionStatusList",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeUpdateActions",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "UpdateActions": {
+            "name": "UpdateActions",
+            "shape_name": "UpdateActionList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeUserGroups": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "UserGroupId": {
+            "name": "UserGroupId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeUserGroups",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "UserGroups": {
+            "name": "UserGroups",
+            "shape_name": "UserGroupList",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "UserGroupId",
+            "path": [
+              "UserGroups"
+            ],
+            "type": "elasticache:user-group"
+          }
+        ]
+      }
+    },
+    "DescribeUsers": {
+      "input": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "EngineType",
+            "type": "string"
+          },
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "FilterList",
+            "type": "list"
+          },
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MaxRecords": {
+            "name": "MaxRecords",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "UserId": {
+            "name": "UserId",
+            "shape_name": "UserId",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeUsers",
+      "output": {
+        "markers": [
+          "Marker"
+        ],
+        "members": {
+          "Marker": {
+            "name": "Marker",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Users": {
+            "name": "Users",
+            "shape_name": "UserList",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "UserId",
+            "name": "UserName",
+            "path": [
+              "Users"
+            ],
+            "type": "elasticache:user"
+          }
+        ]
+      }
+    },
+    "DisassociateGlobalReplicationGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GlobalReplicationGroupId": {
+            "name": "GlobalReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ReplicationGroupId": {
+            "name": "ReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ReplicationGroupRegion": {
+            "name": "ReplicationGroupRegion",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GlobalReplicationGroupId",
+          "ReplicationGroupId",
+          "ReplicationGroupRegion"
+        ]
+      },
+      "name": "DisassociateGlobalReplicationGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "GlobalReplicationGroup": {
+            "name": "GlobalReplicationGroup",
+            "shape_name": "GlobalReplicationGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ExportServerlessCacheSnapshot": {
+      "input": {
+        "markers": null,
+        "members": {
+          "S3BucketName": {
+            "name": "S3BucketName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ServerlessCacheSnapshotName": {
+            "name": "ServerlessCacheSnapshotName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerlessCacheSnapshotName",
+          "S3BucketName"
+        ]
+      },
+      "name": "ExportServerlessCacheSnapshot",
+      "output": {
+        "markers": null,
+        "members": {
+          "ServerlessCacheSnapshot": {
+            "name": "ServerlessCacheSnapshot",
+            "shape_name": "ServerlessCacheSnapshot",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "FailoverGlobalReplicationGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GlobalReplicationGroupId": {
+            "name": "GlobalReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PrimaryRegion": {
+            "name": "PrimaryRegion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PrimaryReplicationGroupId": {
+            "name": "PrimaryReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GlobalReplicationGroupId",
+          "PrimaryRegion",
+          "PrimaryReplicationGroupId"
+        ]
+      },
+      "name": "FailoverGlobalReplicationGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "GlobalReplicationGroup": {
+            "name": "GlobalReplicationGroup",
+            "shape_name": "GlobalReplicationGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "IncreaseNodeGroupsInGlobalReplicationGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ApplyImmediately": {
+            "name": "ApplyImmediately",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "GlobalReplicationGroupId": {
+            "name": "GlobalReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "NodeGroupCount": {
+            "name": "NodeGroupCount",
+            "shape_name": "Integer",
+            "type": "integer"
+          },
+          "RegionalConfigurations": {
+            "name": "RegionalConfigurations",
+            "shape_name": "RegionalConfigurationList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "GlobalReplicationGroupId",
+          "NodeGroupCount",
+          "ApplyImmediately"
+        ]
+      },
+      "name": "IncreaseNodeGroupsInGlobalReplicationGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "GlobalReplicationGroup": {
+            "name": "GlobalReplicationGroup",
+            "shape_name": "GlobalReplicationGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "IncreaseReplicaCount": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ApplyImmediately": {
+            "name": "ApplyImmediately",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "NewReplicaCount": {
+            "name": "NewReplicaCount",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "ReplicaConfiguration": {
+            "name": "ReplicaConfiguration",
+            "shape_name": "ReplicaConfigurationList",
+            "type": "list"
+          },
+          "ReplicationGroupId": {
+            "name": "ReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ReplicationGroupId",
+          "ApplyImmediately"
+        ]
+      },
+      "name": "IncreaseReplicaCount",
+      "output": {
+        "markers": null,
+        "members": {
+          "ReplicationGroup": {
+            "name": "ReplicationGroup",
+            "shape_name": "ReplicationGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListAllowedNodeTypeModifications": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CacheClusterId": {
+            "name": "CacheClusterId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ReplicationGroupId": {
+            "name": "ReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListAllowedNodeTypeModifications",
+      "output": {
+        "markers": null,
+        "members": {
+          "ScaleDownModifications": {
+            "name": "ScaleDownModifications",
+            "shape_name": "NodeTypeList",
+            "type": "list"
+          },
+          "ScaleUpModifications": {
+            "name": "ScaleUpModifications",
+            "shape_name": "NodeTypeList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListTagsForResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceName": {
+            "name": "ResourceName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceName"
+        ]
+      },
+      "name": "ListTagsForResource",
+      "output": {
+        "markers": null,
+        "members": {
+          "TagList": {
+            "name": "TagList",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyCacheCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AZMode": {
+            "name": "AZMode",
+            "shape_name": "AZMode",
+            "type": "string"
+          },
+          "ApplyImmediately": {
+            "name": "ApplyImmediately",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "AuthToken": {
+            "name": "AuthToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "AuthTokenUpdateStrategy": {
+            "name": "AuthTokenUpdateStrategy",
+            "shape_name": "AuthTokenUpdateStrategyType",
+            "type": "string"
+          },
+          "AutoMinorVersionUpgrade": {
+            "name": "AutoMinorVersionUpgrade",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "CacheClusterId": {
+            "name": "CacheClusterId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CacheNodeIdsToRemove": {
+            "name": "CacheNodeIdsToRemove",
+            "shape_name": "CacheNodeIdsList",
+            "type": "list"
+          },
+          "CacheNodeType": {
+            "name": "CacheNodeType",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CacheParameterGroupName": {
+            "name": "CacheParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CacheSecurityGroupNames": {
+            "name": "CacheSecurityGroupNames",
+            "shape_name": "CacheSecurityGroupNameList",
+            "type": "list"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "EngineVersion": {
+            "name": "EngineVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "IpDiscovery": {
+            "name": "IpDiscovery",
+            "shape_name": "IpDiscovery",
+            "type": "string"
+          },
+          "LogDeliveryConfigurations": {
+            "name": "LogDeliveryConfigurations",
+            "shape_name": "LogDeliveryConfigurationRequestList",
+            "type": "list"
+          },
+          "NewAvailabilityZones": {
+            "name": "NewAvailabilityZones",
+            "shape_name": "PreferredAvailabilityZoneList",
+            "type": "list"
+          },
+          "NotificationTopicArn": {
+            "name": "NotificationTopicArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "NotificationTopicStatus": {
+            "name": "NotificationTopicStatus",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "NumCacheNodes": {
+            "name": "NumCacheNodes",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "PreferredMaintenanceWindow": {
+            "name": "PreferredMaintenanceWindow",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ScaleConfig": {
+            "name": "ScaleConfig",
+            "shape_name": "ScaleConfig",
+            "type": "structure"
+          },
+          "SecurityGroupIds": {
+            "name": "SecurityGroupIds",
+            "shape_name": "SecurityGroupIdsList",
+            "type": "list"
+          },
+          "SnapshotRetentionLimit": {
+            "name": "SnapshotRetentionLimit",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "SnapshotWindow": {
+            "name": "SnapshotWindow",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CacheClusterId"
+        ]
+      },
+      "name": "ModifyCacheCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "CacheCluster": {
+            "name": "CacheCluster",
+            "shape_name": "CacheCluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyCacheParameterGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CacheParameterGroupName": {
+            "name": "CacheParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ParameterNameValues": {
+            "name": "ParameterNameValues",
+            "shape_name": "ParameterNameValueList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "CacheParameterGroupName",
+          "ParameterNameValues"
+        ]
+      },
+      "name": "ModifyCacheParameterGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "CacheParameterGroupName": {
+            "name": "CacheParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyCacheSubnetGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CacheSubnetGroupDescription": {
+            "name": "CacheSubnetGroupDescription",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CacheSubnetGroupName": {
+            "name": "CacheSubnetGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SubnetIds": {
+            "name": "SubnetIds",
+            "shape_name": "SubnetIdentifierList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "CacheSubnetGroupName"
+        ]
+      },
+      "name": "ModifyCacheSubnetGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "CacheSubnetGroup": {
+            "name": "CacheSubnetGroup",
+            "shape_name": "CacheSubnetGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyGlobalReplicationGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ApplyImmediately": {
+            "name": "ApplyImmediately",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "AutomaticFailoverEnabled": {
+            "name": "AutomaticFailoverEnabled",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "CacheNodeType": {
+            "name": "CacheNodeType",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CacheParameterGroupName": {
+            "name": "CacheParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "EngineVersion": {
+            "name": "EngineVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "GlobalReplicationGroupDescription": {
+            "name": "GlobalReplicationGroupDescription",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "GlobalReplicationGroupId": {
+            "name": "GlobalReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GlobalReplicationGroupId",
+          "ApplyImmediately"
+        ]
+      },
+      "name": "ModifyGlobalReplicationGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "GlobalReplicationGroup": {
+            "name": "GlobalReplicationGroup",
+            "shape_name": "GlobalReplicationGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyReplicationGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ApplyImmediately": {
+            "name": "ApplyImmediately",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "AuthToken": {
+            "name": "AuthToken",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "AuthTokenUpdateStrategy": {
+            "name": "AuthTokenUpdateStrategy",
+            "shape_name": "AuthTokenUpdateStrategyType",
+            "type": "string"
+          },
+          "AutoMinorVersionUpgrade": {
+            "name": "AutoMinorVersionUpgrade",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "AutomaticFailoverEnabled": {
+            "name": "AutomaticFailoverEnabled",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "CacheNodeType": {
+            "name": "CacheNodeType",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CacheParameterGroupName": {
+            "name": "CacheParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CacheSecurityGroupNames": {
+            "name": "CacheSecurityGroupNames",
+            "shape_name": "CacheSecurityGroupNameList",
+            "type": "list"
+          },
+          "ClusterMode": {
+            "name": "ClusterMode",
+            "shape_name": "ClusterMode",
+            "type": "string"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "EngineVersion": {
+            "name": "EngineVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "IpDiscovery": {
+            "name": "IpDiscovery",
+            "shape_name": "IpDiscovery",
+            "type": "string"
+          },
+          "LogDeliveryConfigurations": {
+            "name": "LogDeliveryConfigurations",
+            "shape_name": "LogDeliveryConfigurationRequestList",
+            "type": "list"
+          },
+          "MultiAZEnabled": {
+            "name": "MultiAZEnabled",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "NodeGroupId": {
+            "name": "NodeGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "NotificationTopicArn": {
+            "name": "NotificationTopicArn",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "NotificationTopicStatus": {
+            "name": "NotificationTopicStatus",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PreferredMaintenanceWindow": {
+            "name": "PreferredMaintenanceWindow",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PrimaryClusterId": {
+            "name": "PrimaryClusterId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RemoveUserGroups": {
+            "name": "RemoveUserGroups",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "ReplicationGroupDescription": {
+            "name": "ReplicationGroupDescription",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ReplicationGroupId": {
+            "name": "ReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SecurityGroupIds": {
+            "name": "SecurityGroupIds",
+            "shape_name": "SecurityGroupIdsList",
+            "type": "list"
+          },
+          "SnapshotRetentionLimit": {
+            "name": "SnapshotRetentionLimit",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "SnapshotWindow": {
+            "name": "SnapshotWindow",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SnapshottingClusterId": {
+            "name": "SnapshottingClusterId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "TransitEncryptionEnabled": {
+            "name": "TransitEncryptionEnabled",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "TransitEncryptionMode": {
+            "name": "TransitEncryptionMode",
+            "shape_name": "TransitEncryptionMode",
+            "type": "string"
+          },
+          "UserGroupIdsToAdd": {
+            "name": "UserGroupIdsToAdd",
+            "shape_name": "UserGroupIdList",
+            "type": "list"
+          },
+          "UserGroupIdsToRemove": {
+            "name": "UserGroupIdsToRemove",
+            "shape_name": "UserGroupIdList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ReplicationGroupId"
+        ]
+      },
+      "name": "ModifyReplicationGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "ReplicationGroup": {
+            "name": "ReplicationGroup",
+            "shape_name": "ReplicationGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyReplicationGroupShardConfiguration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ApplyImmediately": {
+            "name": "ApplyImmediately",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "NodeGroupCount": {
+            "name": "NodeGroupCount",
+            "shape_name": "Integer",
+            "type": "integer"
+          },
+          "NodeGroupsToRemove": {
+            "name": "NodeGroupsToRemove",
+            "shape_name": "NodeGroupsToRemoveList",
+            "type": "list"
+          },
+          "NodeGroupsToRetain": {
+            "name": "NodeGroupsToRetain",
+            "shape_name": "NodeGroupsToRetainList",
+            "type": "list"
+          },
+          "ReplicationGroupId": {
+            "name": "ReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ReshardingConfiguration": {
+            "name": "ReshardingConfiguration",
+            "shape_name": "ReshardingConfigurationList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ReplicationGroupId",
+          "NodeGroupCount",
+          "ApplyImmediately"
+        ]
+      },
+      "name": "ModifyReplicationGroupShardConfiguration",
+      "output": {
+        "markers": null,
+        "members": {
+          "ReplicationGroup": {
+            "name": "ReplicationGroup",
+            "shape_name": "ReplicationGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyServerlessCache": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CacheUsageLimits": {
+            "name": "CacheUsageLimits",
+            "shape_name": "CacheUsageLimits",
+            "type": "structure"
+          },
+          "DailySnapshotTime": {
+            "name": "DailySnapshotTime",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "MajorEngineVersion": {
+            "name": "MajorEngineVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "RemoveUserGroup": {
+            "name": "RemoveUserGroup",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "SecurityGroupIds": {
+            "name": "SecurityGroupIds",
+            "shape_name": "SecurityGroupIdsList",
+            "type": "list"
+          },
+          "ServerlessCacheName": {
+            "name": "ServerlessCacheName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "SnapshotRetentionLimit": {
+            "name": "SnapshotRetentionLimit",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "UserGroupId": {
+            "name": "UserGroupId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ServerlessCacheName"
+        ]
+      },
+      "name": "ModifyServerlessCache",
+      "output": {
+        "markers": null,
+        "members": {
+          "ServerlessCache": {
+            "name": "ServerlessCache",
+            "shape_name": "ServerlessCache",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyUser": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AccessString": {
+            "name": "AccessString",
+            "shape_name": "AccessString",
+            "type": "string"
+          },
+          "AppendAccessString": {
+            "name": "AppendAccessString",
+            "shape_name": "AccessString",
+            "type": "string"
+          },
+          "AuthenticationMode": {
+            "name": "AuthenticationMode",
+            "shape_name": "AuthenticationMode",
+            "type": "structure"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "EngineType",
+            "type": "string"
+          },
+          "NoPasswordRequired": {
+            "name": "NoPasswordRequired",
+            "shape_name": "BooleanOptional",
+            "type": "boolean"
+          },
+          "Passwords": {
+            "name": "Passwords",
+            "shape_name": "PasswordListInput",
+            "type": "list"
+          },
+          "UserId": {
+            "name": "UserId",
+            "shape_name": "UserId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "UserId"
+        ]
+      },
+      "name": "ModifyUser",
+      "output": {
+        "markers": null,
+        "members": {
+          "ARN": {
+            "name": "ARN",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "AccessString": {
+            "name": "AccessString",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Authentication": {
+            "name": "Authentication",
+            "shape_name": "Authentication",
+            "type": "structure"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "EngineType",
+            "type": "string"
+          },
+          "MinimumEngineVersion": {
+            "name": "MinimumEngineVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "UserGroupIds": {
+            "name": "UserGroupIds",
+            "shape_name": "UserGroupIdList",
+            "type": "list"
+          },
+          "UserId": {
+            "name": "UserId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyUserGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "EngineType",
+            "type": "string"
+          },
+          "UserGroupId": {
+            "name": "UserGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "UserIdsToAdd": {
+            "name": "UserIdsToAdd",
+            "shape_name": "UserIdListInput",
+            "type": "list"
+          },
+          "UserIdsToRemove": {
+            "name": "UserIdsToRemove",
+            "shape_name": "UserIdListInput",
+            "type": "list"
+          }
+        },
+        "required": [
+          "UserGroupId"
+        ]
+      },
+      "name": "ModifyUserGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "ARN": {
+            "name": "ARN",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Engine": {
+            "name": "Engine",
+            "shape_name": "EngineType",
+            "type": "string"
+          },
+          "MinimumEngineVersion": {
+            "name": "MinimumEngineVersion",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "PendingChanges": {
+            "name": "PendingChanges",
+            "shape_name": "UserGroupPendingChanges",
+            "type": "structure"
+          },
+          "ReplicationGroups": {
+            "name": "ReplicationGroups",
+            "shape_name": "UGReplicationGroupIdList",
+            "type": "list"
+          },
+          "ServerlessCaches": {
+            "name": "ServerlessCaches",
+            "shape_name": "UGServerlessCacheIdList",
+            "type": "list"
+          },
+          "Status": {
+            "name": "Status",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "UserGroupId": {
+            "name": "UserGroupId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "UserIds": {
+            "name": "UserIds",
+            "shape_name": "UserIdList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "PurchaseReservedCacheNodesOffering": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CacheNodeCount": {
+            "name": "CacheNodeCount",
+            "shape_name": "IntegerOptional",
+            "type": "integer"
+          },
+          "ReservedCacheNodeId": {
+            "name": "ReservedCacheNodeId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ReservedCacheNodesOfferingId": {
+            "name": "ReservedCacheNodesOfferingId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ReservedCacheNodesOfferingId"
+        ]
+      },
+      "name": "PurchaseReservedCacheNodesOffering",
+      "output": {
+        "markers": null,
+        "members": {
+          "ReservedCacheNode": {
+            "name": "ReservedCacheNode",
+            "shape_name": "ReservedCacheNode",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "RebalanceSlotsInGlobalReplicationGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ApplyImmediately": {
+            "name": "ApplyImmediately",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          },
+          "GlobalReplicationGroupId": {
+            "name": "GlobalReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GlobalReplicationGroupId",
+          "ApplyImmediately"
+        ]
+      },
+      "name": "RebalanceSlotsInGlobalReplicationGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "GlobalReplicationGroup": {
+            "name": "GlobalReplicationGroup",
+            "shape_name": "GlobalReplicationGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "RebootCacheCluster": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CacheClusterId": {
+            "name": "CacheClusterId",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "CacheNodeIdsToReboot": {
+            "name": "CacheNodeIdsToReboot",
+            "shape_name": "CacheNodeIdsList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "CacheClusterId",
+          "CacheNodeIdsToReboot"
+        ]
+      },
+      "name": "RebootCacheCluster",
+      "output": {
+        "markers": null,
+        "members": {
+          "CacheCluster": {
+            "name": "CacheCluster",
+            "shape_name": "CacheCluster",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "RemoveTagsFromResource": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceName": {
+            "name": "ResourceName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "KeyList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceName",
+          "TagKeys"
+        ]
+      },
+      "name": "RemoveTagsFromResource",
+      "output": {
+        "markers": null,
+        "members": {
+          "TagList": {
+            "name": "TagList",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "ResetCacheParameterGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CacheParameterGroupName": {
+            "name": "CacheParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "ParameterNameValues": {
+            "name": "ParameterNameValues",
+            "shape_name": "ParameterNameValueList",
+            "type": "list"
+          },
+          "ResetAllParameters": {
+            "name": "ResetAllParameters",
+            "shape_name": "Boolean",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "CacheParameterGroupName"
+        ]
+      },
+      "name": "ResetCacheParameterGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "CacheParameterGroupName": {
+            "name": "CacheParameterGroupName",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "RevokeCacheSecurityGroupIngress": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CacheSecurityGroupName": {
+            "name": "CacheSecurityGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "EC2SecurityGroupName": {
+            "name": "EC2SecurityGroupName",
+            "shape_name": "String",
+            "type": "string"
+          },
+          "EC2SecurityGroupOwnerId": {
+            "name": "EC2SecurityGroupOwnerId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "CacheSecurityGroupName",
+          "EC2SecurityGroupName",
+          "EC2SecurityGroupOwnerId"
+        ]
+      },
+      "name": "RevokeCacheSecurityGroupIngress",
+      "output": {
+        "markers": null,
+        "members": {
+          "CacheSecurityGroup": {
+            "name": "CacheSecurityGroup",
+            "shape_name": "CacheSecurityGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "StartMigration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CustomerNodeEndpointList": {
+            "name": "CustomerNodeEndpointList",
+            "shape_name": "CustomerNodeEndpointList",
+            "type": "list"
+          },
+          "ReplicationGroupId": {
+            "name": "ReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ReplicationGroupId",
+          "CustomerNodeEndpointList"
+        ]
+      },
+      "name": "StartMigration",
+      "output": {
+        "markers": null,
+        "members": {
+          "ReplicationGroup": {
+            "name": "ReplicationGroup",
+            "shape_name": "ReplicationGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "TestFailover": {
+      "input": {
+        "markers": null,
+        "members": {
+          "NodeGroupId": {
+            "name": "NodeGroupId",
+            "shape_name": "AllowedNodeGroupId",
+            "type": "string"
+          },
+          "ReplicationGroupId": {
+            "name": "ReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ReplicationGroupId",
+          "NodeGroupId"
+        ]
+      },
+      "name": "TestFailover",
+      "output": {
+        "markers": null,
+        "members": {
+          "ReplicationGroup": {
+            "name": "ReplicationGroup",
+            "shape_name": "ReplicationGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "TestMigration": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CustomerNodeEndpointList": {
+            "name": "CustomerNodeEndpointList",
+            "shape_name": "CustomerNodeEndpointList",
+            "type": "list"
+          },
+          "ReplicationGroupId": {
+            "name": "ReplicationGroupId",
+            "shape_name": "String",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ReplicationGroupId",
+          "CustomerNodeEndpointList"
+        ]
+      },
+      "name": "TestMigration",
+      "output": {
+        "markers": null,
+        "members": {
+          "ReplicationGroup": {
+            "name": "ReplicationGroup",
+            "shape_name": "ReplicationGroup",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    }
+  }
+}

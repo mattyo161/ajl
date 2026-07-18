@@ -2198,6 +2198,13 @@
       },
       "name": "ListDomainNames",
       "output": {
+        "describe": {
+          "batch_size": 5,
+          "id_field": "Id",
+          "kind": "array",
+          "operation": "DescribeDomains",
+          "param": "DomainNames"
+        },
         "markers": null,
         "members": {
           "DomainNames": {

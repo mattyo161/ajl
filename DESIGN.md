@@ -677,6 +677,56 @@ cache/origin-request/response-headers policies.
   the catalog-pollution finding above is independent of that and confirmed
   by the managed-vs-custom quantity comparison regardless.
 
+### Baseline validation, round 4: kms + cross-check against the aws-cli/jq reference tool
+Matt asked to add kms and then double-check `tools/inventory.sh` against the
+prior aws-cli+jq inventory tool
+(`terraform/nri-terraform-infrastructure/scratch/inventory/aws`) for missed
+services. kms turned out to already be fully curated (`ListKeys`→
+`DescribeKey`, `ListAliases`, `ListKeyPolicies`→`GetKeyPolicy`, all via
+`--describe`) from the original 62-pairing curation pass — just needed
+live re-verification and wiring in, no new curation.
+
+The cross-check (`gap-classify.jq`'s canonical service list, the curated
+collectors in `aws-inventory.sh`, and `console-url.jq`) turned up two
+categories of gap:
+
+- **A whole batch already curated from the original `--describe` pass but
+  never wired into `inventory.sh`**: cloudformation, cloudtrail,
+  cloudwatch, events, logs, sagemaker, servicediscovery, transfer,
+  secretsmanager, opensearch. All ten re-verified live against the real
+  account and added. Found and fixed one real gap while re-verifying:
+  `opensearch.ListDomainNames` had no `--describe` pairing to
+  `DescribeDomains` at all — added one (`kind="array"`, since
+  `DescribeDomains` takes `DomainNames` as a batch, not a scalar name;
+  AWS docs cap it at 5, not stated in the model). Also found two
+  operations that are curated but not parameter-free "list everything"
+  calls, so they're deliberately not invoked bare in `inventory.sh`:
+  `cloudformation.ListTypeRegistrations` needs an ARN or TypeName input
+  (custom-resource-type registry lookup), and
+  `events.ListPartnerEventSources` requires `NamePrefix`. And confirmed
+  `describe-stacks`/`describe-trails` return strictly more detail than
+  `list-stacks`/`list-trails` for the same resources (Parameters/
+  Capabilities/Tags; S3BucketName/IsMultiRegionTrail) — used the Describe
+  form directly in `inventory.sh` instead of adding a redundant
+  `--describe` pairing.
+- **One genuine new gap: `elasticache`**, not curated anywhere. Curated
+  from scratch (cache clusters, replication groups, subnet groups,
+  parameter groups, snapshots, serverless caches, users, user groups) —
+  every resource has a native `ARN` field, no guessing needed. Live
+  verification found this account actually has a real ElastiCache Redis
+  cluster (`develop-k8s-redis-001`) that was completely invisible to the
+  inventory before this — the exact kind of gap this baseline exercise
+  exists to catch.
+
+Two more real-API quirks found live, neither an ajl bug: `transfer.
+ListAccesses` rejects `SERVICE_MANAGED`-IdP servers ("Cannot list accesses
+on server with IdP type: SERVICE_MANAGED") — only custom-IdP servers
+support it, contained per-item like any other error; and `sagemaker.
+ListDeviceFleets` throttled persistently on this account/region even after
+backing off — AWS-side rate limiting on a rarely-used API, correctly
+caught and reported by ajl's existing error containment rather than
+crashing the run.
+
 ---
 
 ## Decision log template
