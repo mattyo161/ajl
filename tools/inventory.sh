@@ -476,6 +476,57 @@ ajl workspaces describe-connection-aliases --all --stamp-session --describe \
 
 
 #####################
+### CLOUDFRONT
+#####################
+# global service: one pass is enough, no --all fan-out across regions needed.
+# list-{cache,origin-request,response-headers}-policies WITHOUT --type custom
+# return AWS's managed-policy catalog too (15/8/5 managed vs 0/0/0 actually
+# customer-created on this account) — the same catalog-pollution trap as
+# ec2 describe-images, iam list-policies, docdb, and workspaces bundles/images.
+ajl cloudfront list-distributions --stamp-session --describe \
+| tee "${DATA_DIR}/cloudfront-distributions.jsonl" \
+| jq -rc '{Profile,Region,DistributionId:.Id}' \
+| ajl cloudfront list-invalidations --params-json - --stamp-session \
+> "${DATA_DIR}/cloudfront-invalidations.jsonl"
+
+ajl cloudfront list-streaming-distributions --stamp-session \
+> "${DATA_DIR}/cloudfront-streaming-distributions.jsonl"
+
+ajl cloudfront list-cache-policies --type custom --stamp-session \
+> "${DATA_DIR}/cloudfront-cache-policies.jsonl"
+
+ajl cloudfront list-origin-request-policies --type custom --stamp-session \
+> "${DATA_DIR}/cloudfront-origin-request-policies.jsonl"
+
+ajl cloudfront list-response-headers-policies --type custom --stamp-session \
+> "${DATA_DIR}/cloudfront-response-headers-policies.jsonl"
+
+ajl cloudfront list-functions --stamp-session \
+> "${DATA_DIR}/cloudfront-functions.jsonl"
+
+ajl cloudfront list-origin-access-controls --stamp-session \
+> "${DATA_DIR}/cloudfront-origin-access-controls.jsonl"
+
+ajl cloudfront list-public-keys --stamp-session \
+> "${DATA_DIR}/cloudfront-public-keys.jsonl"
+
+ajl cloudfront list-key-groups --stamp-session \
+> "${DATA_DIR}/cloudfront-key-groups.jsonl"
+
+ajl cloudfront list-field-level-encryption-configs --stamp-session \
+> "${DATA_DIR}/cloudfront-field-level-encryption-configs.jsonl"
+
+ajl cloudfront list-field-level-encryption-profiles --stamp-session \
+> "${DATA_DIR}/cloudfront-field-level-encryption-profiles.jsonl"
+
+ajl cloudfront list-realtime-log-configs --stamp-session \
+> "${DATA_DIR}/cloudfront-realtime-log-configs.jsonl"
+
+ajl cloudfront list-continuous-deployment-policies --stamp-session \
+> "${DATA_DIR}/cloudfront-continuous-deployment-policies.jsonl"
+
+
+#####################
 ### S3
 #####################
 ajl s3 list-buckets --stamp-session \

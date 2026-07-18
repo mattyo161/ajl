@@ -2169,7 +2169,18 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "Id",
+            "name": "DomainName",
+            "path": [
+              "Distribution"
+            ],
+            "type": "cloudfront:distribution"
+          }
+        ]
       }
     },
     "GetDistributionConfig": {
@@ -3066,7 +3077,18 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Id",
+            "path": [
+              "CachePolicyList",
+              "Items",
+              "CachePolicy"
+            ],
+            "type": "cloudfront:cache-policy"
+          }
+        ]
       }
     },
     "ListCloudFrontOriginAccessIdentities": {
@@ -3215,7 +3237,18 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Id",
+            "path": [
+              "ContinuousDeploymentPolicyList",
+              "Items",
+              "ContinuousDeploymentPolicy"
+            ],
+            "type": "cloudfront:continuous-deployment-policy"
+          }
+        ]
       }
     },
     "ListDistributionTenants": {
@@ -3332,6 +3365,12 @@
       },
       "name": "ListDistributions",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "GetDistribution",
+          "param": "Id"
+        },
         "markers": null,
         "members": {
           "DistributionList": {
@@ -3772,7 +3811,17 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Id",
+            "path": [
+              "FieldLevelEncryptionList",
+              "Items"
+            ],
+            "type": "cloudfront:field-level-encryption-config"
+          }
+        ]
       }
     },
     "ListFieldLevelEncryptionProfiles": {
@@ -3802,7 +3851,18 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Id",
+            "name": "Name",
+            "path": [
+              "FieldLevelEncryptionProfileList",
+              "Items"
+            ],
+            "type": "cloudfront:field-level-encryption-profile"
+          }
+        ]
       }
     },
     "ListFunctions": {
@@ -3837,7 +3897,18 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Name",
+            "name": "Name",
+            "path": [
+              "FunctionList",
+              "Items"
+            ],
+            "type": "cloudfront:function"
+          }
+        ]
       }
     },
     "ListInvalidations": {
@@ -3876,7 +3947,17 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Id",
+            "path": [
+              "InvalidationList",
+              "Items"
+            ],
+            "type": "cloudfront:invalidation"
+          }
+        ]
       }
     },
     "ListInvalidationsForDistributionTenant": {
@@ -3945,7 +4026,18 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Id",
+            "path": [
+              "KeyGroupList",
+              "Items",
+              "KeyGroup"
+            ],
+            "type": "cloudfront:key-group"
+          }
+        ]
       }
     },
     "ListKeyValueStores": {
@@ -4014,7 +4106,18 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Id",
+            "name": "Name",
+            "path": [
+              "OriginAccessControlList",
+              "Items"
+            ],
+            "type": "cloudfront:origin-access-control"
+          }
+        ]
       }
     },
     "ListOriginRequestPolicies": {
@@ -4049,7 +4152,18 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Id",
+            "path": [
+              "OriginRequestPolicyList",
+              "Items",
+              "OriginRequestPolicy"
+            ],
+            "type": "cloudfront:origin-request-policy"
+          }
+        ]
       }
     },
     "ListPublicKeys": {
@@ -4081,7 +4195,18 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Id",
+            "name": "Name",
+            "path": [
+              "PublicKeyList",
+              "Items"
+            ],
+            "type": "cloudfront:public-key"
+          }
+        ]
       }
     },
     "ListRealtimeLogConfigs": {
@@ -4111,7 +4236,19 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "Name",
+            "name": "Name",
+            "path": [
+              "RealtimeLogConfigs",
+              "Items"
+            ],
+            "type": "cloudfront:realtime-log-config"
+          }
+        ]
       }
     },
     "ListResponseHeadersPolicies": {
@@ -4146,7 +4283,18 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Id",
+            "path": [
+              "ResponseHeadersPolicyList",
+              "Items",
+              "ResponseHeadersPolicy"
+            ],
+            "type": "cloudfront:response-headers-policy"
+          }
+        ]
       }
     },
     "ListStreamingDistributions": {
@@ -4178,7 +4326,19 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "Id",
+            "name": "DomainName",
+            "path": [
+              "StreamingDistributionList",
+              "Items"
+            ],
+            "type": "cloudfront:streaming-distribution"
+          }
+        ]
       }
     },
     "ListTagsForResource": {

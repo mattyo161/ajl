@@ -459,6 +459,33 @@ CONFIGS = {
     "cloudfront": {
         "resources": {
             "ListDistributions": [r(["DistributionList", "Items"], "cloudfront:distribution", "Id", name="DomainName", arn="ARN")],
+            "GetDistribution": [r(["Distribution"], "cloudfront:distribution", "Id", name="DomainName", arn="ARN")],
+            "ListStreamingDistributions": [r(["StreamingDistributionList", "Items"], "cloudfront:streaming-distribution", "Id", name="DomainName", arn="ARN")],
+            "ListInvalidations": [r(["InvalidationList", "Items"], "cloudfront:invalidation", "Id")],
+            "ListRealtimeLogConfigs": [r(["RealtimeLogConfigs", "Items"], "cloudfront:realtime-log-config", "Name", name="Name", arn="ARN")],
+            "ListFunctions": [r(["FunctionList", "Items"], "cloudfront:function", "Name", name="Name")],
+            "ListOriginAccessControls": [r(["OriginAccessControlList", "Items"], "cloudfront:origin-access-control", "Id", name="Name")],
+            "ListPublicKeys": [r(["PublicKeyList", "Items"], "cloudfront:public-key", "Id", name="Name")],
+            "ListFieldLevelEncryptionConfigs": [r(["FieldLevelEncryptionList", "Items"], "cloudfront:field-level-encryption-config", "Id")],
+            "ListFieldLevelEncryptionProfiles": [r(["FieldLevelEncryptionProfileList", "Items"], "cloudfront:field-level-encryption-profile", "Id", name="Name")],
+            # These four wrap the actual resource one level deeper
+            # (Items[].CachePolicy, Items[].KeyGroup, ...) — the nested
+            # object already carries everything GetCachePolicy/GetKeyGroup/
+            # etc. would (verified: same members), so listing alone is
+            # complete; no separate Get curation or --describe pairing
+            # needed, same as iam.ListRoles already returning full detail.
+            # None of the four have an Arn/ARN field at any level, and none
+            # accept a CloudFront-namespace ARN via ListTagsForResource
+            # (verified live: "InvalidArgument ... resource type: cache-policy
+            # is invalid") — Arn is left blank rather than guessed.
+            "ListCachePolicies": [r(["CachePolicyList", "Items", "CachePolicy"], "cloudfront:cache-policy", "Id")],
+            "ListOriginRequestPolicies": [r(["OriginRequestPolicyList", "Items", "OriginRequestPolicy"], "cloudfront:origin-request-policy", "Id")],
+            "ListResponseHeadersPolicies": [r(["ResponseHeadersPolicyList", "Items", "ResponseHeadersPolicy"], "cloudfront:response-headers-policy", "Id")],
+            "ListKeyGroups": [r(["KeyGroupList", "Items", "KeyGroup"], "cloudfront:key-group", "Id")],
+            "ListContinuousDeploymentPolicies": [r(["ContinuousDeploymentPolicyList", "Items", "ContinuousDeploymentPolicy"], "cloudfront:continuous-deployment-policy", "Id")],
+        },
+        "describe": {
+            "ListDistributions": d("GetDistribution", id_field="Id", param="Id"),
         },
     },
     "docdb": {

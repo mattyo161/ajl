@@ -637,6 +637,46 @@ every new gap was closed either with curation (`r()`/`d()` in
 sessions (the ecs `cluster`-scope stamping, the eks/ecr multi-field-id
 punt-to-jq precedent).
 
+### Baseline validation, round 3: cloudfront
+Added cloudfront: distributions (with `--describe` to `GetDistribution`),
+streaming distributions, invalidations (per-distribution fan-out, same
+`cluster`-scope-stamping pattern as ecs), functions, origin access
+controls, public keys, key groups, field-level-encryption configs/
+profiles, realtime log configs, continuous deployment policies, and
+cache/origin-request/response-headers policies.
+
+- **A fifth catalog-pollution trap**, same shape as ec2/iam/docdb/
+  workspaces above: `ListCachePolicies`/`ListOriginRequestPolicies`/
+  `ListResponseHeadersPolicies` without `--type custom` return AWS's own
+  managed-policy catalog (15/8/5 observed) instead of the account's own
+  (0/0/0 on this account) — confirmed live by comparing both call forms.
+  Fixed with `--type custom` in `inventory.sh`, not an ajl change.
+- **`ListCachePolicies`/`ListOriginRequestPolicies`/
+  `ListResponseHeadersPolicies`/`ListKeyGroups`/
+  `ListContinuousDeploymentPolicies` wrap the actual resource one level
+  deeper** (`Items[].CachePolicy`, `Items[].KeyGroup`, ...) — curated by
+  pathing straight through to the nested object rather than adding a
+  redundant `GetCachePolicy`/`GetKeyGroup` curation + `--describe` pairing,
+  since the nested object already carries everything the singular Get
+  call would (verified: identical members) — same "List already returns
+  full detail, no pairing needed" case as `iam.ListRoles`.
+- **Confirmed via a live API call, not assumed**: cache/origin-request/
+  response-headers policies, key groups, and continuous-deployment
+  policies have no `Arn`/`ARN` field at any nesting level, and CloudFront's
+  `ListTagsForResource` explicitly rejects a guessed
+  `arn:aws:cloudfront::{account}:cache-policy/{id}` ARN
+  ("`InvalidArgument`: resource type: cache-policy is invalid") — these
+  resources simply aren't addressable by ARN through that API, so `Arn` is
+  curated blank rather than fabricated (STYLE_GUIDE's "arn_format
+  templates must produce real ARNs" rule, applied by testing a guess
+  against the real API and rejecting it on failure rather than shipping
+  it unverified).
+- This account has zero CloudFront resources of any kind (0 distributions,
+  0 streaming distributions, 0 OACs, 0 key groups, ...) — every base list
+  call verified as genuinely empty (no error) rather than a curation bug;
+  the catalog-pollution finding above is independent of that and confirmed
+  by the managed-vs-custom quantity comparison regardless.
+
 ---
 
 ## Decision log template
