@@ -428,6 +428,19 @@ member casing (case-insensitive lookup) before coercion/filtering, so both a
 direct `--cluster` flag and a piped record's field resolve regardless of
 which casing convention the target API uses.
 
+### `--stamp-session` also carries the request params a response doesn't echo back
+Continuing the ecs pipeline work: `list-tasks --cluster my-cluster` streams
+task ARNs, and the response never repeats which cluster they came from — a
+downstream `--params-json` stage (or storage) had no way to know without
+re-parsing it out of the task ARN. `run_operation` now merges the resolved
+request params onto every emitted record when `--stamp-session` is active
+(`_stamp_params()`, `main.py`), using `setdefault` so a genuine response
+field is never clobbered by a same-named request param. Kept as one flag
+rather than a second one, since both are the same idea — attach whatever
+context a bare response doesn't carry — and the request already asked for
+`--stamp-session` to fix exactly this class of problem for Profile/Region/
+Account.
+
 ---
 
 ## Decision log template

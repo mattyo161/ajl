@@ -117,36 +117,53 @@ Shaped records go through `Emitter` (line-atomic stdout), optionally wrapped
 by `TagMergeEmitter` (`--fetch-tags`), `JqEmitter` (`--jq`), and
 `StampEmitter` (`--stamp-session`) — each wrapper adds one concern and passes
 through to the next. `StampEmitter` adds `Profile`/`Region`/`Account` to
-every record. `should_stamp_session()` turns this on automatically for
-fan-out (`--all`/...) *and* for any `--params-json` stage (it's always
-mid-pipeline, so it re-stamps whatever session info its own input carried) —
+every record; separately, back in `run_operation` (before the record ever
+reaches an emitter), `--stamp-session` also merges the resolved request
+params onto it via `_stamp_params()` — a response often doesn't echo back
+what it was asked for (`ecs.ListTasks` returns task ARNs, never the
+`cluster` you asked about), so without this a downstream stage has to claw
+the context back out of an ARN. `setdefault` means a genuine response field
+always wins over a same-named request param. `should_stamp_session()` turns
+all of this on automatically for fan-out (`--all`/...) *and* for any
+`--params-json` stage (it's always mid-pipeline, so it re-stamps whatever
+session info and request context its own input carried) —
 `--no-stamp-session` opts out.
 
 ## 6. Chaining into `--params-json -`: what propagates, what doesn't
 
 A record piped into `--params-json -` re-enters at step 1 as one line's
-`line_params`. Two things now propagate automatically (fixed together, see
-DESIGN.md): the model-casing remap (step 1) and the session stamp (step 5).
-**One thing does not, and has no generic fix**: there is no automatic
-mapping from a shaped record's `Id`/`Arn`/`clusterArn` fields to whatever
-literal parameter name the *next* operation expects. That mapping is
-API-specific and has to be a `--jq` reshape today:
+`line_params`. Three things now propagate automatically (fixed together,
+see DESIGN.md): the model-casing remap (step 1), the session stamp, and the
+request-param context `--stamp-session` merges on in step 5. That last one
+compounds nicely across hops: once a `cluster` value is stamped onto a
+`list-tasks` stage's task records, it's already sitting there under the
+exact key name `ecs.DescribeTasks` expects, so it needs *no* `--jq` reshape
+at all for a third hop — `filter_to_input` picks it straight up.
+
+**What still has no generic fix**: there is no automatic mapping from a
+shaped record's own identity fields (`Id`/`Arn`/`clusterArn`) to whatever
+the *first* downstream operation calls its input — that first hop always
+requires knowing the target operation's actual parameter name, which is
+API-specific and has to be a `--jq` reshape:
 
 ```shell
 ajl ecs list-clusters --all-regions --profile nri-customer --stamp-session \
-  | jq -c '{cluster: .clusterArn, Profile, Region, Account}' \
-  | ajl ecs list-tasks --params-json -
+  | jq -c '{cluster: .Id, Profile, Region, Account}' \
+  | ajl ecs list-tasks --params-json - --stamp-session   # cluster now rides the rest of the way for free
 ```
 
 It gets more API-specific still: `ecs.ListTasks`/`DescribeServices` take a
 *singular* `cluster` (one call per cluster — fits the `--params-json`
-one-line-per-call model directly), but `ecs.DescribeClusters` takes a
-*plural* `clusters` array (one call describes many — a batch-describe shape,
-the same pattern `ssm get --names` chunks 10-at-a-time in `ssm.py`). No
-amount of generic field-name guessing resolves that difference; it's a
-property of each operation's shape. A `--describe` flag that automatically
-follows a List* call with its paired batch-Describe call (chunking
-identifiers the way `ssm.py` already does) has been discussed as a cleaner
-answer than teaching `--params-json` more input formats — not yet built;
+one-line-per-call model directly), but `ecs.DescribeClusters`/`DescribeTasks`
+also take a *plural* array (`clusters`/`tasks` — one call describes many, a
+batch-describe shape, the same pattern `ssm get --names` chunks 10-at-a-time
+in `ssm.py`). No amount of generic field-name guessing resolves that
+difference; it's a property of each operation's shape, and it's exactly why
+that hop still needs a `group_by(...) | nwise(10)`-style `--jq` reshape
+(worked through live getting this ecs pipeline running) rather than piping
+straight through. A `--describe` flag that automatically follows a List*
+call with its paired batch-Describe call (chunking identifiers the way
+`ssm.py` already does) has been discussed as a cleaner answer than teaching
+`--params-json` more input formats — not yet built;
 it would slot in right after step 4, before the record ever reaches the
 emitter.

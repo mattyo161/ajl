@@ -101,13 +101,16 @@ def build_parser():
                         help="post-shaping jq filter applied to every record; empty "
                         "output drops the record, multiple outputs emit multiple lines")
     parser.add_argument("--stamp-session", action="store_true", default=False,
-                        help="add Profile/Region/Account to every record so piped "
-                        "--params-json stages reuse the same credentials — on by "
-                        "default for fan-out (--all/...) and for --params-json "
-                        "itself, so the stamp propagates through a multi-stage pipe")
+                        help="add Profile/Region/Account plus the resolved request "
+                        "params (e.g. the 'cluster' a response doesn't echo back) to "
+                        "every record, so piped --params-json stages reuse the same "
+                        "credentials and keep the context a bare response drops — on "
+                        "by default for fan-out (--all/...) and for --params-json "
+                        "itself, so it propagates through a multi-stage pipe")
     parser.add_argument("--no-stamp-session", action="store_true", default=False,
-                        help="disable the Profile/Region/Account stamp for this run, "
-                        "overriding the fan-out/--params-json default")
+                        help="disable the Profile/Region/Account + request-param "
+                        "stamp for this run, overriding the fan-out/--params-json "
+                        "default")
     parser.add_argument("--workers", type=int, default=8,
                         help="parallel requests in --params-json mode (default 8; "
                         "use 1 to preserve input order)")
@@ -445,6 +448,18 @@ def shape_page(page, operation_cfg, context, runner, session_key):
     yield from iter_default_resources(page)
 
 
+def _stamp_params(record, params):
+    """Merge the resolved request params onto a record (--stamp-session):
+    a response often doesn't echo back what it was asked for (ecs ListTasks
+    returns task ARNs, never the cluster you asked about), so a downstream
+    --params-json stage — or just storage — would otherwise lose that
+    context. setdefault so a real response field never gets clobbered."""
+    if isinstance(record, dict):
+        for key, value in params.items():
+            record.setdefault(key, value)
+    return record
+
+
 def run_operation(runner, emitter, options, service, operation, params, session_key):
     """Execute one (possibly paginated) API call and emit its resources."""
     operation_snake = caseconverter.snakecase(operation)
@@ -473,9 +488,13 @@ def run_operation(runner, emitter, options, service, operation, params, session_
     ):
         page = strip_metadata(page)
         if options.no_parse:
+            if options.stamp_session:
+                _stamp_params(page, params)
             emitter.emit(page, session_key)
             continue
         for record in shape_page(page, operation_cfg, context, runner, session_key):
+            if options.stamp_session:
+                _stamp_params(record, params)
             emitter.emit(record, session_key)
             emitted += 1
             if options.max_items and emitted >= options.max_items:

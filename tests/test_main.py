@@ -146,6 +146,7 @@ class Options:
     fetch_tags = False
     workers = 1
     verbose = False
+    stamp_session = False
 
 
 def make_runner(client):
@@ -176,6 +177,24 @@ def test_run_operation_paginated_and_normalized():
     assert records[0]["Name"] == "main"
     assert records[0]["Arn"] == "arn:aws:ec2:us-east-1:1:vpc/vpc-1"
     assert records[0]["Tags"] == {"Name": "main"}
+
+
+def test_run_operation_stamp_session_merges_request_params():
+    # a response often doesn't echo back what it was asked for (ecs ListTasks
+    # returns task ARNs, never the cluster you asked about) — --stamp-session
+    # should attach the resolved request params too, not just Profile/Region/Account
+    pages = [{"Vpcs": [{"VpcId": "vpc-1", "OwnerId": "1"}]}]
+    client = FakeClient(pages)
+    runner, key = make_runner(client)
+    options = Options()
+    options.stamp_session = True
+    out = io.StringIO()
+    emitter = Emitter(stream=out)
+    run_operation(runner, emitter, options, "ec2", "describe-vpcs",
+                   {"Filter": "x", "Id": "should-not-clobber"}, key)
+    records = [json.loads(line) for line in out.getvalue().splitlines()]
+    assert records[0]["Filter"] == "x"
+    assert records[0]["Id"] == "vpc-1"  # the real response field wins, never clobbered
 
 
 def test_run_operation_max_items():
