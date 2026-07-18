@@ -1357,6 +1357,13 @@
       },
       "name": "ListClusters",
       "output": {
+        "describe": {
+          "batch_size": 100,
+          "id_field": "Id",
+          "kind": "array",
+          "operation": "DescribeClusters",
+          "param": "clusters"
+        },
         "markers": [
           "nextToken"
         ],
@@ -1802,6 +1809,16 @@
       },
       "name": "ListTasks",
       "output": {
+        "describe": {
+          "batch_size": 100,
+          "id_field": "Id",
+          "kind": "array",
+          "operation": "DescribeTasks",
+          "param": "tasks",
+          "scope": [
+            "cluster"
+          ]
+        },
         "markers": [
           "nextToken"
         ],

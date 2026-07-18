@@ -67,6 +67,11 @@ ajl ec2 describe-instances --jq 'select(.State.Name == "running") | .Uri // .Arn
 # stamp records with Profile/Region/Account so later stages reuse the session
 ajl s3 list-buckets --profile prod --stamp-session
 
+# --describe: for a curated List->Describe pairing, skip the --params-json
+# reshape entirely — list, then call the paired Describe/Get per result
+ajl iam list-role-policies --role-name my-role --describe   # one GetRolePolicy per name
+ajl ecs list-clusters --all-regions --describe               # batched DescribeClusters calls
+
 # single-level listing with pipeable prefixes: the classic fan-out dance
 ajl s3 list s3://my-bucket --delimiter / \
   | ajl s3 list --params-json - \

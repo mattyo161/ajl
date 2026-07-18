@@ -97,6 +97,10 @@ def build_parser():
                         help="stop after emitting this many resources per request")
     parser.add_argument("--fetch-tags", action="store_true", default=False,
                         help="batch-fetch missing Tags via the Resource Groups Tagging API")
+    parser.add_argument("--describe", action="store_true", default=False,
+                        help="for a List operation with a curated pairing, call the "
+                        "matching Describe/Get operation for every result and emit "
+                        "those records instead — no --params-json reshape needed")
     parser.add_argument("--jq", type=str, default=None, metavar="PROGRAM",
                         help="post-shaping jq filter applied to every record; empty "
                         "output drops the record, multiple outputs emit multiple lines")
@@ -460,6 +464,24 @@ def _stamp_params(record, params):
     return record
 
 
+def _iter_operation_records(client, operation_snake, operation_cfg, params, context,
+                             runner, session_key, options):
+    """Yield one call's records: raw pages under --no-parse, else shaped resources."""
+    for page in iter_pages(
+        client,
+        operation_snake,
+        params,
+        operation_cfg,
+        paginate=not options.no_paginate,
+        verbose=runner.verbose,
+    ):
+        page = strip_metadata(page)
+        if options.no_parse:
+            yield page
+            continue
+        yield from shape_page(page, operation_cfg, context, runner, session_key)
+
+
 def run_operation(runner, emitter, options, service, operation, params, session_key):
     """Execute one (possibly paginated) API call and emit its resources."""
     operation_snake = caseconverter.snakecase(operation)
@@ -477,28 +499,86 @@ def run_operation(runner, emitter, options, service, operation, params, session_
             file=sys.stderr,
         )
 
+    describe_cfg = (operation_cfg or {}).get("output", {}).get("describe") if (
+        getattr(options, "describe", False)) else None
+    if describe_cfg:
+        run_describe_chain(runner, emitter, options, service, operation_cfg,
+                            describe_cfg, context, client, operation_snake,
+                            params, session_key)
+        return
+
     emitted = 0
-    for page in iter_pages(
-        client,
-        operation_snake,
-        params,
-        operation_cfg,
-        paginate=not options.no_paginate,
-        verbose=runner.verbose,
-    ):
-        page = strip_metadata(page)
-        if options.no_parse:
+    for record in _iter_operation_records(client, operation_snake, operation_cfg, params,
+                                           context, runner, session_key, options):
+        if options.stamp_session:
+            _stamp_params(record, params)
+        emitter.emit(record, session_key)
+        emitted += 1
+        if options.max_items and emitted >= options.max_items:
+            return
+
+
+def run_describe_chain(runner, emitter, options, service, list_operation_cfg, describe_cfg,
+                        context, client, list_operation_snake, list_params, session_key):
+    """``--describe``: list, then call the paired Describe/Get operation for
+    every result instead of emitting the (usually bare-id) list records.
+
+    ``kind: scalar`` calls the describe operation once per id (the common
+    case — most AWS List/Describe pairs have no batch form at all, so this
+    is exactly what a hand-written --params-json chain already does, just
+    generated instead of piped). ``kind: array`` chunks ids into
+    ``batch_size``-sized groups and calls once per chunk, the same pattern
+    ``ssm.py`` uses for ``get --names``. Either way, every call fans out
+    across the same worker pool --params-json uses."""
+    ids = [
+        record.get(describe_cfg["id_field"])
+        for record in _iter_operation_records(client, list_operation_snake, list_operation_cfg,
+                                               list_params, context, runner, session_key, options)
+        if isinstance(record, dict) and record.get(describe_cfg["id_field"])
+    ]
+    if not ids:
+        return
+
+    describe_operation = describe_cfg["operation"]
+    describe_operation_pascal = caseconverter.pascalcase(describe_operation)
+    describe_operation_snake = caseconverter.snakecase(describe_operation)
+    describe_operation_cfg = get_operation_config(service, describe_operation_pascal)
+    scope_params = {key: list_params[key] for key in describe_cfg.get("scope", [])
+                     if key in list_params}
+
+    if describe_cfg["kind"] == "array":
+        batch_size = describe_cfg.get("batch_size", 100)
+        id_batches = [ids[i:i + batch_size] for i in range(0, len(ids), batch_size)]
+    else:
+        id_batches = [[one_id] for one_id in ids]  # one call per id
+    param_batches = [
+        coerce_params({**scope_params, describe_cfg["param"]:
+                       batch if describe_cfg["kind"] == "array" else batch[0]},
+                      service, describe_operation_pascal, filter_to_input=True)
+        for batch in id_batches
+    ]
+    print(f"ajl: --describe: {len(ids)} id(s) -> {len(param_batches)} "
+          f"{describe_operation} call(s)", file=sys.stderr)
+
+    def run_one(describe_params):
+        for record in _iter_operation_records(client, describe_operation_snake,
+                                               describe_operation_cfg, describe_params,
+                                               context, runner, session_key, options):
             if options.stamp_session:
-                _stamp_params(page, params)
-            emitter.emit(page, session_key)
-            continue
-        for record in shape_page(page, operation_cfg, context, runner, session_key):
-            if options.stamp_session:
-                _stamp_params(record, params)
+                # only the scope (e.g. cluster), never the identifier/batch
+                # itself — a record's own fields already say who it is, and
+                # for kind="array" the identifier is the whole batch, which
+                # would otherwise get redundantly attached to every record in it
+                _stamp_params(record, scope_params)
             emitter.emit(record, session_key)
-            emitted += 1
-            if options.max_items and emitted >= options.max_items:
-                return
+
+    workers = max(1, getattr(options, "workers", 1))
+    if workers > 1 and len(param_batches) > 1:
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            list(pool.map(run_one, param_batches))
+    else:
+        for one_batch in param_batches:
+            run_one(one_batch)
 
 
 def run_params_json(runner, emitter, options, service, operation, base_params):

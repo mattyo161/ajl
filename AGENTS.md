@@ -33,7 +33,9 @@ credentials; the test suite does not.
   PascalCase, coerced from model input types), `Runner` (boto3 session/client
   cache per profile+region), `Emitter` (line-atomic stdout), `--params-json`
   worker-pool fan-out, `--version` (`runtime_version()`: live git-describe
-  when run from a source checkout, packaged version otherwise).
+  when run from a source checkout, packaged version otherwise), `--describe`
+  (`run_describe_chain()`: list then call the paired Describe/Get operation
+  per curated `output.describe` config — see docs/request-flow.md §7).
 - `src/ajl/normalize.py` — the generic normalizer driven by declarative
   `output.resources` configs; module docstring documents the config schema,
   [docs/request-flow.md](docs/request-flow.md) the end-to-end decision flow.
@@ -98,6 +100,15 @@ credentials; the test suite does not.
 jq program), run it, smoke-test with
 `AJL_MODELS_DIR=src/ajl/models uv run ajl <service> <op>`, verify the five
 leading properties and that the ARN format is real.
+
+**Pair a List op with its Describe/Get** (enables `--describe`) — add a
+`d(operation, id_field, param, kind="scalar"|"array", batch_size=, scope=)`
+entry under that service's `"describe"` dict in `apply-resource-configs.py`.
+`kind="scalar"` (no batch form, one call per id) covers most APIs; check the
+target operation's real input shape before assuming `"array"` — AWS doesn't
+mark max-items-per-call in the model, so `batch_size` has to come from the
+docs, not a guess. `scope` names List-call params the Describe call also
+needs (e.g. `RoleName`, `cluster`) that never appear in the list response.
 
 **Add a service** — `uv run python tools/generate-model.py <boto3-name>`,
 then apply-resource-configs, then curate the main list/describe operations.

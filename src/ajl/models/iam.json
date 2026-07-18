@@ -2324,6 +2324,14 @@
           "RoleName",
           "PolicyName",
           "PolicyDocument"
+        ],
+        "resources": [
+          {
+            "id": "PolicyName",
+            "name": "PolicyName",
+            "path": [],
+            "type": "iam:role-policy"
+          }
         ]
       }
     },
@@ -3858,6 +3866,15 @@
       },
       "name": "ListRolePolicies",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "GetRolePolicy",
+          "param": "PolicyName",
+          "scope": [
+            "RoleName"
+          ]
+        },
         "markers": [
           "Marker"
         ],
@@ -3880,6 +3897,16 @@
         },
         "required": [
           "PolicyNames"
+        ],
+        "resources": [
+          {
+            "id": "PolicyName",
+            "path": [
+              "PolicyNames"
+            ],
+            "scalar_as": "PolicyName",
+            "type": "iam:role-policy"
+          }
         ]
       }
     },

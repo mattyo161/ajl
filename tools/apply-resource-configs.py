@@ -39,6 +39,25 @@ def r(path, type_, id_=None, name=None, arn=None, arn_format=None, tags=None, sc
     return cfg
 
 
+def d(operation, id_field, param, kind="scalar", batch_size=None, scope=None):
+    """A ``--describe`` pairing on a List operation: after listing, call
+    ``operation`` for each result (``kind="scalar"``, one call per id — the
+    common case, no batching support needed) or in ``batch_size``-sized
+    batches (``kind="array"``, the target op takes an identifier list).
+    ``id_field`` is the field on the *shaped* list record holding the
+    identifier; ``param`` is the describe op's real input member name for
+    it. ``scope`` names input params of the *list* call (e.g. a required
+    parent id like ``RoleName``/``cluster``) that must be forwarded
+    unchanged to every describe call, since the describe op needs the same
+    scope but the list response never repeats it."""
+    cfg = {"operation": operation, "id_field": id_field, "param": param, "kind": kind}
+    if kind == "array":
+        cfg["batch_size"] = batch_size or 100
+    if scope:
+        cfg["scope"] = scope
+    return cfg
+
+
 EC2_ARN = "arn:{partition}:ec2:{region}"
 
 EC2_DESCRIBE_INSTANCES_JQ = """\
@@ -211,6 +230,12 @@ CONFIGS = {
             "ListPolicies": [r(["Policies"], "iam:policy", "PolicyId", name="PolicyName", arn="Arn")],
             "ListInstanceProfiles": [r(["InstanceProfiles"], "iam:instance-profile", "InstanceProfileId", name="InstanceProfileName", arn="Arn")],
             "ListOpenIDConnectProviders": [r(["OpenIDConnectProviderList"], "iam:oidc-provider", arn="Arn")],
+            # inline policies have no ARN (identified by RoleName+PolicyName only)
+            "ListRolePolicies": [r(["PolicyNames"], "iam:role-policy", "PolicyName", scalar_as="PolicyName")],
+            "GetRolePolicy": [r([], "iam:role-policy", "PolicyName", name="PolicyName")],
+        },
+        "describe": {
+            "ListRolePolicies": d("GetRolePolicy", id_field="Id", param="PolicyName", scope=["RoleName"]),
         },
     },
     "route53": {
@@ -246,6 +271,12 @@ CONFIGS = {
             "DescribeCapacityProviders": [r(["capacityProviders"], "ecs:capacity-provider", "name", name="name", arn="capacityProviderArn", tags="tags")],
             "ListTasks": [r(["taskArns"], "ecs:task", arn="taskArn", scalar_as="taskArn")],
             "DescribeTasks": [r(["tasks"], "ecs:task", arn="taskArn", tags="tags")],
+        },
+        "describe": {
+            "ListClusters": d("DescribeClusters", id_field="Id", param="clusters",
+                              kind="array", batch_size=100),
+            "ListTasks": d("DescribeTasks", id_field="Id", param="tasks",
+                           kind="array", batch_size=100, scope=["cluster"]),
         },
     },
     "athena": {
@@ -412,7 +443,9 @@ def main():
             output = operations[op].setdefault("output", {})
             members = output.get("members") or {}
             for cfg in resource_cfgs:
-                root = (cfg.get("path") or [None])[0]
+                if not cfg.get("path"):
+                    continue  # deliberate: the whole response is the resource
+                root = cfg["path"][0]
                 if members and root not in members:
                     print(
                         f"WARNING: {service}.{op}: path root {root!r} is not an "
@@ -420,6 +453,22 @@ def main():
                         file=sys.stderr,
                     )
             output["resources"] = resource_cfgs
+            changed.append(op)
+        for op, describe_cfg in (spec.get("describe") or {}).items():
+            target = describe_cfg["operation"]
+            if target not in operations:
+                print(f"WARNING: {service}.{op}: describe target {target!r} is not "
+                      f"a known operation", file=sys.stderr)
+            else:
+                target_members = (operations[target].get("input") or {}).get("members") or {}
+                if target_members and describe_cfg["param"] not in target_members:
+                    print(
+                        f"WARNING: {service}.{op}: describe param "
+                        f"{describe_cfg['param']!r} is not a {target!r} input "
+                        f"member ({sorted(target_members)})",
+                        file=sys.stderr,
+                    )
+            operations[op].setdefault("output", {})["describe"] = describe_cfg
             changed.append(op)
         with open(path, "w") as fp:
             json.dump(model, fp, indent=2, sort_keys=True)

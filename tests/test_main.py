@@ -147,6 +147,7 @@ class Options:
     workers = 1
     verbose = False
     stamp_session = False
+    describe = False
 
 
 def make_runner(client):
@@ -195,6 +196,121 @@ def test_run_operation_stamp_session_merges_request_params():
     records = [json.loads(line) for line in out.getvalue().splitlines()]
     assert records[0]["Filter"] == "x"
     assert records[0]["Id"] == "vpc-1"  # the real response field wins, never clobbered
+
+
+class FakeEcsDescribeClient:
+    """list_clusters + describe_clusters — the kind="array" (batch) pilot."""
+
+    meta = FakeMeta()
+
+    def __init__(self, cluster_count):
+        self.cluster_ids = [f"c{i}" for i in range(cluster_count)]
+        self.describe_calls = []
+
+    def can_paginate(self, operation):
+        return False
+
+    def list_clusters(self, **params):
+        return {"clusterArns": [f"arn:aws:ecs:us-east-1:123:cluster/{cid}"
+                                 for cid in self.cluster_ids]}
+
+    def describe_clusters(self, **params):
+        self.describe_calls.append(params)
+        return {"clusters": [
+            {"clusterArn": f"arn:aws:ecs:us-east-1:123:cluster/{name}", "clusterName": name}
+            for name in params["clusters"]
+        ]}
+
+
+def test_run_operation_describe_array_batches_ids():
+    client = FakeEcsDescribeClient(cluster_count=5)
+    runner = Runner(default_region="us-east-1")
+    key = runner.session_key()
+    runner._clients[(key, "ecs")] = client
+    runner._accounts[key] = "123456789012"
+    options = Options()
+    options.describe = True
+    out = io.StringIO()
+    run_operation(runner, Emitter(stream=out), options, "ecs", "list-clusters", {}, key)
+    records = [json.loads(line) for line in out.getvalue().splitlines()
+               if not line.startswith("ajl:")]
+    assert len(client.describe_calls) == 1  # 5 ids fit in one default-100 batch
+    assert sorted(r["Id"] for r in records) == ["c0", "c1", "c2", "c3", "c4"]
+    assert records[0]["Arn"].startswith("arn:aws:ecs:")
+    assert "clusters" not in records[0]  # the batch identifier isn't re-stamped onto records
+
+
+def test_run_operation_describe_array_respects_curated_batch_size(monkeypatch):
+    from ajl import modelconfig
+
+    client = FakeEcsDescribeClient(cluster_count=5)
+    runner = Runner(default_region="us-east-1")
+    key = runner.session_key()
+    runner._clients[(key, "ecs")] = client
+    runner._accounts[key] = "123456789012"
+    cfg = modelconfig.get_operation_config("ecs", "ListClusters")
+    monkeypatch.setitem(cfg["output"]["describe"], "batch_size", 2)
+    options = Options()
+    options.describe = True
+    out = io.StringIO()
+    run_operation(runner, Emitter(stream=out), options, "ecs", "list-clusters", {}, key)
+    assert [len(c["clusters"]) for c in client.describe_calls] == [2, 2, 1]
+
+
+class FakeIamDescribeClient:
+    """list_role_policies + get_role_policy — the kind="scalar"+scope pilot."""
+
+    meta = FakeMeta()
+
+    def __init__(self, policy_names):
+        self.policy_names = policy_names
+        self.describe_calls = []
+
+    def can_paginate(self, operation):
+        return False
+
+    def list_role_policies(self, **params):
+        return {"PolicyNames": self.policy_names, "IsTruncated": False}
+
+    def get_role_policy(self, **params):
+        self.describe_calls.append(params)
+        return {"RoleName": params["RoleName"], "PolicyName": params["PolicyName"],
+                "PolicyDocument": {"Statement": []}}
+
+
+def test_run_operation_describe_scalar_carries_scope_per_call():
+    client = FakeIamDescribeClient(["AdminAccess", "S3ReadOnly", "DenyAll"])
+    runner = Runner(default_region="us-east-1")
+    key = runner.session_key()
+    runner._clients[(key, "iam")] = client
+    runner._accounts[key] = "123456789012"
+    options = Options()
+    options.describe = True
+    options.stamp_session = True
+    out = io.StringIO()
+    run_operation(runner, Emitter(stream=out), options, "iam", "list-role-policies",
+                   {"RoleName": "my-role"}, key)
+    records = [json.loads(line) for line in out.getvalue().splitlines()
+               if not line.startswith("ajl:")]
+    assert len(client.describe_calls) == 3  # one GetRolePolicy call per policy name
+    assert all(call["RoleName"] == "my-role" for call in client.describe_calls)
+    assert sorted(r["PolicyName"] for r in records) == ["AdminAccess", "DenyAll", "S3ReadOnly"]
+    assert all(r["RoleName"] == "my-role" for r in records)  # scope stamped onto every record
+
+
+def test_run_operation_describe_no_results_makes_no_describe_calls():
+    client = FakeIamDescribeClient([])
+    runner = Runner(default_region="us-east-1")
+    key = runner.session_key()
+    runner._clients[(key, "iam")] = client
+    runner._accounts[key] = "123456789012"
+    options = Options()
+    options.describe = True
+    out = io.StringIO()
+    run_operation(runner, Emitter(stream=out), options, "iam", "list-role-policies",
+                   {"RoleName": "empty-role"}, key)
+    assert client.describe_calls == []
+    assert out.getvalue() == ""
 
 
 def test_run_operation_max_items():

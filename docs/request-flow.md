@@ -11,7 +11,10 @@ flowchart TD
     A["CLI argv\n--kebab-flag value"] --> B["parse_extra_options\nkebab -> PascalCase guess"]
     B --> C["coerce_params\nmodelconfig lookup + casing remap + type coercion"]
     C --> D["Runner.client\nboto3 session/client cache per (profile, region)"]
-    D --> E["pagination.iter_pages\npaginator, else marker-loop fallback"]
+    D --> DD{"--describe and\noutput.describe set?"}
+    DD -->|"yes"| DE["run_describe_chain\nlist, collect id_field, call Describe\nonce per id or per batch_size chunk"]
+    DE --> E
+    DD -->|"no"| E["pagination.iter_pages\npaginator, else marker-loop fallback"]
     E --> F{"shape_page decision"}
     F -->|"output.jq set"| G["jq program\n(escape hatch, always wins)"]
     F -->|"output.resources set"| H["normalize.iter_configured_resources\ndeclarative path walk"]
@@ -161,9 +164,34 @@ in `ssm.py`). No amount of generic field-name guessing resolves that
 difference; it's a property of each operation's shape, and it's exactly why
 that hop still needs a `group_by(...) | nwise(10)`-style `--jq` reshape
 (worked through live getting this ecs pipeline running) rather than piping
-straight through. A `--describe` flag that automatically follows a List*
-call with its paired batch-Describe call (chunking identifiers the way
-`ssm.py` already does) has been discussed as a cleaner answer than teaching
-`--params-json` more input formats — not yet built;
-it would slot in right after step 4, before the record ever reaches the
-emitter.
+straight through. `--describe` (below) is the answer to exactly this,
+driven by a curated `output.describe` config rather than teaching
+`--params-json` more input formats.
+
+## 7. `--describe`: skip the reshape entirely, when a pairing is curated
+
+For a List operation with a curated `output.describe` config, `--describe`
+does the List → jq-reshape → Describe dance internally: `run_operation`
+checks for the config before step 4 ever runs, and if `--describe` is
+passed, hands off to `run_describe_chain` instead of the normal shape+emit
+path. It collects `id_field` off every shaped list record, then calls the
+paired operation either once per id (`kind: scalar` — one call, no batch
+form, this is the common case: `eks`, `iam`, `sagemaker`, `transfer` are
+entirely this shape) or in `batch_size`-sized chunks (`kind: array` — `ecs`,
+`ecr`, `athena`; the same chunking `ssm.py` uses for `get --names`), fanning
+across the same worker pool `--params-json` uses either way. A `scope` list
+in the config (e.g. `RoleName` for `iam.GetRolePolicy`, `cluster` for
+`ecs.DescribeTasks`) forwards List-call params the Describe call also needs
+but the list response never repeats — taken from the *original* call's own
+params, not stamped from a record, since by then the record already *is*
+the describe result:
+
+```shell
+ajl iam list-role-policies --role-name my-role --describe   # one GetRolePolicy per policy name
+ajl ecs list-clusters --all-regions --profile nri-customer --describe | sd ecs-clusters
+```
+
+No `--jq` reshape, no `--params-json` pipe stage, no casing to get right —
+`--describe` is the same shape of fix as `--stamp-session`'s request-param
+carrying (§5): attach what a bare response leaves out, generically, instead
+of by hand each time.

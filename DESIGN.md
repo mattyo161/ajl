@@ -441,6 +441,45 @@ context a bare response doesn't carry — and the request already asked for
 `--stamp-session` to fix exactly this class of problem for Profile/Region/
 Account.
 
+### `--describe`: a declarative List→Describe pairing, not per-service magic
+Surveyed every onboarded service's real botocore models for List operations
+that only return bare ids/arns paired with a Describe/Get operation that
+takes them back. Two findings shaped this: (1) it's ~65 pairs across 20 of
+36 services — common enough to be worth a generic mechanism, not a one-off
+for ecs; (2) the *dominant* shape (~85%) is a **singular** describe — one
+call per id, no batch form at all (`eks`, `iam`, `sagemaker`, `transfer` are
+entirely this shape) — batch/array describes (`ecs`, `ecr`, `athena`,
+`cloudtrail`, `cloud9`, `opensearch`) are the minority. Neither which List
+pairs with which Describe nor a batch operation's real max-items-per-call
+is discoverable from the botocore model (checked: no `min`/`max` metadata on
+`ecs.DescribeTasks`'s `tasks` member) — both have to be curated, the same as
+`output.resources` already is.
+
+So `--describe` is driven by a new declarative `output.describe` config on
+the List operation (`{operation, id_field, param, kind: scalar|array,
+batch_size?, scope?}`), written by a new `d()` helper in
+`apply-resource-configs.py` next to `r()`. `run_operation` checks for it
+first; if present and `--describe` is passed, `run_describe_chain()` lists,
+collects `id_field` off the shaped records, and either calls the describe
+op once per id (`kind: scalar`) or chunks ids into `batch_size` groups
+(`kind: array`, same chunking `ssm.py` already does for `get --names`) —
+either way fanning across the same worker pool `--params-json` uses.
+`scope` names List-call input params (e.g. `RoleName`, `cluster`) that the
+Describe call also needs but that never appear in the list response, and
+are forwarded from the original call's own params — not stamped from a
+record, since the record IS the describe result at that point.
+
+Piloted on the two shapes surveyed: `iam.ListRolePolicies` →
+`GetRolePolicy` (scalar, needs the `RoleName` scope) and
+`ecs.ListClusters`/`ListTasks` → `DescribeClusters`/`DescribeTasks` (array,
+`ListTasks` also needs the `cluster` scope). One easy way to get this wrong
+found and fixed while piloting: naively reusing `--stamp-session`'s
+`_stamp_params()` on the describe result attaches the *entire batch's*
+identifier list to every record in it for `kind: array` — redundant and
+bloats output at scale. `run_describe_chain` stamps only `scope_params`
+(the useful, small, per-batch-constant context), never the identifier
+itself.
+
 ---
 
 ## Decision log template
