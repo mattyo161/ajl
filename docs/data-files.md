@@ -37,7 +37,7 @@ the cache key material" for what happens when one is missed).
 ```
 
 `created`/`expires` are epoch seconds (`expires` drives `--rm-after`
-cleanup — default `7d`, `AJL_CACHE_RM_AFTER`). `ajl cache ls` reads exactly
+cleanup — default `1h`, `AJL_CACHE_RM_AFTER`). `ajl cache ls` reads exactly
 this file per entry (see [commands/cache.md](commands/cache.md)).
 
 **`<key>.jsonl.gz` / `<key>.jsonl.gz.age`** — the gzipped JSONL body,

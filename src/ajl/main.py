@@ -145,7 +145,7 @@ def build_parser():
                         "the fresh result")
     parser.add_argument("--rm-after", type=str, default=None, metavar="DUR",
                         help="cache entry lifetime before automatic cleanup "
-                        "(default AJL_CACHE_RM_AFTER or 7d)")
+                        "(default AJL_CACHE_RM_AFTER or 1h)")
     parser.add_argument("--learn", action="store_true", default=False,
                         help="print the aws-cli equivalent to stderr and append "
                         "an audit record (duration, cache status, scan slices) "

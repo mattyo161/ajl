@@ -50,11 +50,11 @@ of your usual one), `--profiles a b c` is the workaround, not `AJL_PROFILES`.
 
 See [data-files.md](data-files.md) for the on-disk layout this produces.
 
-| Variable | Read by | Effect |
-|---|---|---|
+| Variable | Read by | Effect                                                                                                                       |
+|---|---|------------------------------------------------------------------------------------------------------------------------------|
 | `AJL_CACHE` | `cache.py` | Default TTL (e.g. `15m`, `2h`) when `--cache` isn't passed. `--no-cache` disables caching for one run even when this is set. |
-| `AJL_CACHE_DIR` | `cache.py` | Cache directory (default `${XDG_CACHE_HOME:-~/.cache}/ajl`). |
-| `AJL_CACHE_RM_AFTER` | `cache.py` | Default entry lifetime (default `7d`) before an opportunistic sweep deletes it; `--rm-after` overrides per run. |
+| `AJL_CACHE_DIR` | `cache.py` | Cache directory (default `${XDG_CACHE_HOME:-~/.cache}/ajl`).                                                                 |
+| `AJL_CACHE_RM_AFTER` | `cache.py` | Default entry lifetime (default `1h`) before an opportunistic sweep deletes it; `--rm-after` overrides per run.              |
 
 ## age encryption — shared by the cache and by field-level sealing
 

@@ -145,7 +145,7 @@ export AJL_AGE_IDENTITY="$(ajl cache keygen 2>/dev/null | grep AGE-SECRET-KEY)"
 ajl cache ls                # entries as JSONL: command, age, lines, encrypted
 ajl cache clear [--all]     # expired entries (default) or everything
 ajl x y --refresh           # skip reading the cache, still store fresh
-ajl x y --rm-after 1h       # entry lifetime before auto-cleanup (default 7d)
+ajl x y --rm-after 1h       # entry lifetime before auto-cleanup (default 1h)
 
 # the learn log: see the aws-cli equivalent, keep an audit/perf record
 ajl ec2 describe-instances --learn

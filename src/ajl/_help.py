@@ -13,7 +13,7 @@ global ajl flags (accepted by every command, parsed before the subcommand):
   --workers N                parallel requests (default 8)
   --cache TTL                serve+store cached results, e.g. 15m, 2h (AJL_CACHE sets a default)
   --refresh / --recache      with --cache: skip the read, still store fresh
-  --rm-after DUR             cache entry lifetime before cleanup (default 7d)
+  --rm-after DUR             cache entry lifetime before cleanup (default 1h)
   --no-cache                 disable caching for this run
   --jq PROGRAM               post-shaping jq filter (empty drops, strings raw)
   --stamp-session            add Profile/Region/Account to every record

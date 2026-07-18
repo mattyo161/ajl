@@ -289,7 +289,7 @@ hashed). Point-in-time API data rarely changes inside 15 minutes, so a hit
 replays instantly with zero API calls *and zero credentials*. Hits always
 print one stderr notice (age, lines, seconds saved) — silently serving cached
 data would invite staleness confusion. Only exit-0 runs are stored; entries
-carry an expiry (`--rm-after`, default 7d) and any cache-enabled run sweeps
+carry an expiry (`--rm-after`, default 1h) and any cache-enabled run sweeps
 expired entries. `ajl cache ls|clear|keygen` manage it.
 
 ### age encryption via pyrage, keyed from the environment

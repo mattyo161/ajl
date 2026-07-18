@@ -18,7 +18,7 @@ command runs again. Note: age encrypt/decrypt buffers the (gzipped) payload
 in memory; skip ``--cache`` for truly giant scans.
 
 Retention: every entry records an expiry (``--rm-after``, default
-``AJL_CACHE_RM_AFTER`` or 7d) and any cache-enabled invocation opportunistically
+``AJL_CACHE_RM_AFTER`` or 1h) and any cache-enabled invocation opportunistically
 deletes expired entries. ``ajl cache ls|clear|keygen`` manage the cache.
 """
 
@@ -33,7 +33,7 @@ import time
 
 import orjson
 
-DEFAULT_RM_AFTER = "7d"
+DEFAULT_RM_AFTER = "1h"
 _UNITS = {"s": 1, "m": 60, "h": 3600, "d": 86400}
 
 
