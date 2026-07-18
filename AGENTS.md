@@ -35,7 +35,8 @@ credentials; the test suite does not.
   worker-pool fan-out, `--version` (`runtime_version()`: live git-describe
   when run from a source checkout, packaged version otherwise).
 - `src/ajl/normalize.py` — the generic normalizer driven by declarative
-  `output.resources` configs; module docstring documents the config schema.
+  `output.resources` configs; module docstring documents the config schema,
+  [docs/request-flow.md](docs/request-flow.md) the end-to-end decision flow.
 - `src/ajl/pagination.py` — botocore paginators first, marker-loop fallback
   from model `input.markers`/`output.markers`.
 - `src/ajl/scan.py` — `ajl s3 scan` (recursive queue/worker-pool inventory
