@@ -62,7 +62,7 @@ Every line has a `Ts` (ISO-8601 UTC, second precision) plus:
 
 ```json
 {"Ts": "2026-07-16T22:10:03+00:00", "Command": "ajl ecs list-clusters --all-regions",
- "Service": "ecs", "Operation": "list-clusters", "Profile": "nri-customer",
+ "Service": "ecs", "Operation": "list-clusters", "Profile": "acme-dev",
  "Region": "us-east-1", "Cache": "miss", "AwsEquivalent": "aws ecs list-clusters ...",
  "ExitCode": 0, "DurationS": 1.24}
 ```

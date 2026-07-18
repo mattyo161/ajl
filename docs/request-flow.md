@@ -150,7 +150,7 @@ requires knowing the target operation's actual parameter name, which is
 API-specific and has to be a `--jq` reshape:
 
 ```shell
-ajl ecs list-clusters --all-regions --profile nri-customer --stamp-session \
+ajl ecs list-clusters --all-regions --profile acme-dev --stamp-session \
   | jq -c '{cluster: .Id, Profile, Region, Account}' \
   | ajl ecs list-tasks --params-json - --stamp-session   # cluster now rides the rest of the way for free
 ```
@@ -188,7 +188,7 @@ since by then the record already *is* the describe result:
 
 ```shell
 ajl iam list-role-policies --role-name my-role --describe   # one GetRolePolicy per policy name
-ajl ecs list-clusters --all-regions --profile nri-customer --describe | sd ecs-clusters
+ajl ecs list-clusters --all-regions --profile acme-dev --describe | sd ecs-clusters
 ```
 
 No `--jq` reshape, no `--params-json` pipe stage, no casing to get right —
