@@ -25,7 +25,8 @@ ajl ecs list-clusters --describe --stamp-session --all \
         > "${DATA_DIR}/ecs-tasks.jsonl") \
 | tee >(jq -rc '{Profile,Region,cluster:.clusterArn}' \
         | ajl ecs list-container-instances --params-json - --stamp-session --describe \
-        > "${DATA_DIR}/ecs-container-instances.jsonl")
+        > "${DATA_DIR}/ecs-container-instances.jsonl") \
+> /dev/null
 
 ajl ecs list-task-definitions --all --stamp-session \
 > "${DATA_DIR}/ecs-task-definitions.jsonl"
@@ -78,7 +79,8 @@ ajl iam list-roles --all --stamp-session \
         > "${DATA_DIR}/iam-role-policies.jsonl") \
 | tee >(jq -rc '{Profile,Region,RoleName:.RoleName}' \
         | ajl iam list-attached-role-policies --params-json - --stamp-session \
-        > "${DATA_DIR}/iam-attached-role-policies.jsonl")
+        > "${DATA_DIR}/iam-attached-role-policies.jsonl") \
+> /dev/null
 
 ajl iam list-users --all --stamp-session \
 | tee "${DATA_DIR}/iam-users.jsonl" \
@@ -90,7 +92,8 @@ ajl iam list-users --all --stamp-session \
         > "${DATA_DIR}/iam-attached-user-policies.jsonl") \
 | tee >(jq -rc '{Profile,Region,UserName:.UserName}' \
         | ajl iam list-mfa-devices --params-json - --stamp-session --describe \
-        > "${DATA_DIR}/iam-mfa-devices.jsonl")
+        > "${DATA_DIR}/iam-mfa-devices.jsonl") \
+> /dev/null
 
 ajl iam list-groups --all --stamp-session \
 | tee "${DATA_DIR}/iam-groups.jsonl" \
@@ -99,7 +102,8 @@ ajl iam list-groups --all --stamp-session \
         > "${DATA_DIR}/iam-group-policies.jsonl") \
 | tee >(jq -rc '{Profile,Region,GroupName:.GroupName}' \
         | ajl iam list-attached-group-policies --params-json - --stamp-session \
-        > "${DATA_DIR}/iam-attached-group-policies.jsonl")
+        > "${DATA_DIR}/iam-attached-group-policies.jsonl") \
+> /dev/null
 
 ajl iam list-policies --scope Local --all --stamp-session \
 | tee "${DATA_DIR}/iam-policies.jsonl" \
@@ -234,7 +238,263 @@ ajl ssm params --all --stamp-session \
 
 
 #####################
+### DOCDB
+#####################
+# docdb's DescribeDBClusters/DescribeDBInstances hit the *same*
+# rds.amazonaws.com endpoint rds itself uses and return every RDS-family
+# cluster/instance (Aurora, Neptune, ...) unfiltered — without the Engine
+# filter this silently duplicates the rds section's own Aurora clusters
+# under a "docdb" label. The Filters param is the fix, not an ajl one.
+ajl docdb describe-db-clusters --filters '[{"Name":"engine","Values":["docdb"]}]' \
+    --all --stamp-session \
+> "${DATA_DIR}/docdb-clusters.jsonl"
+ajl docdb describe-db-instances --filters '[{"Name":"engine","Values":["docdb"]}]' \
+    --all --stamp-session \
+> "${DATA_DIR}/docdb-instances.jsonl"
+
+
+#####################
+### DYNAMODB
+#####################
+ajl dynamodb list-tables --all --stamp-session --describe \
+> "${DATA_DIR}/dynamodb-tables.jsonl"
+
+ajl dynamodb list-global-tables --all --stamp-session --describe \
+> "${DATA_DIR}/dynamodb-global-tables.jsonl"
+
+ajl dynamodb list-contributor-insights --all --stamp-session --describe \
+> "${DATA_DIR}/dynamodb-contributor-insights.jsonl"
+
+ajl dynamodb list-exports --all --stamp-session --describe \
+> "${DATA_DIR}/dynamodb-exports.jsonl"
+
+
+#####################
+### ATHENA
+#####################
+ajl athena list-work-groups --all --stamp-session \
+> "${DATA_DIR}/athena-workgroups.jsonl"
+
+ajl athena list-databases --catalog-name AwsDataCatalog --all --stamp-session --describe \
+> "${DATA_DIR}/athena-databases.jsonl"
+
+ajl athena list-named-queries --all --stamp-session --describe \
+> "${DATA_DIR}/athena-named-queries.jsonl"
+
+
+#####################
+### SSM (extras beyond `ssm params`)
+#####################
+ajl ssm describe-instance-information --all --stamp-session \
+> "${DATA_DIR}/ssm-instance-information.jsonl"
+
+ajl ssm list-documents --document-filter-list '[{"key":"Owner","value":"Self"}]' \
+    --all --stamp-session \
+> "${DATA_DIR}/ssm-documents.jsonl"
+
+ajl ssm list-associations --all --stamp-session \
+> "${DATA_DIR}/ssm-associations.jsonl"
+
+ajl ssm describe-maintenance-windows --all --stamp-session \
+> "${DATA_DIR}/ssm-maintenance-windows.jsonl"
+
+
+#####################
+### SQS
+#####################
+# GetQueueAttributes with no --attribute-names returns an EMPTY attribute
+# map by default (no QueueArn, nothing) — "All" is required to get anything.
+ajl sqs list-queues --all --stamp-session \
+| tee "${DATA_DIR}/sqs-queues.jsonl" \
+| jq -rc '{Profile,Region,QueueUrl}' \
+| ajl sqs get-queue-attributes --attribute-names All --params-json - --stamp-session \
+> "${DATA_DIR}/sqs-queue-attributes.jsonl"
+
+
+#####################
+### SNS
+#####################
+ajl sns list-topics --all --stamp-session \
+| tee "${DATA_DIR}/sns-topics.jsonl" \
+| tee >(jq -rc '{Profile,Region,TopicArn:.Arn}' \
+        | ajl sns get-topic-attributes --params-json - --stamp-session \
+        > "${DATA_DIR}/sns-topic-attributes.jsonl") \
+| jq -rc '{Profile,Region,TopicArn:.Arn}' \
+| ajl sns list-subscriptions-by-topic --params-json - --stamp-session \
+> "${DATA_DIR}/sns-subscriptions.jsonl"
+
+ajl sns list-platform-applications --all --stamp-session \
+> "${DATA_DIR}/sns-platform-applications.jsonl"
+
+
+#####################
+### SES
+#####################
+# GetIdentity*Attributes return a map keyed by identity ({"VerificationAttributes":
+# {"a@b.com": {...}}}), not a list — doesn't fit --describe's list-shaped model,
+# so --no-parse + a jq to_entries reshape does it instead. --stamp-session still
+# attaches Profile/Region/Account directly onto the raw --no-parse page.
+ajl ses list-identities --all --stamp-session \
+| tee "${DATA_DIR}/ses-identities.jsonl" \
+| jq -rc '{Profile,Region,Account,Identities:[.Identity]}' \
+| tee >(ajl ses get-identity-verification-attributes --params-json - --stamp-session --no-parse \
+        | jq -c '. as $r | ($r.VerificationAttributes // {}) | to_entries[]
+                 | {Type:"ses:identity-verification", Id:.key, Tags:{}} + .value
+                 + {Profile:$r.Profile,Region:$r.Region,Account:$r.Account}' \
+        > "${DATA_DIR}/ses-identity-verification.jsonl") \
+| tee >(ajl ses get-identity-dkim-attributes --params-json - --stamp-session --no-parse \
+        | jq -c '. as $r | ($r.DkimAttributes // {}) | to_entries[]
+                 | {Type:"ses:identity-dkim", Id:.key, Tags:{}} + .value
+                 + {Profile:$r.Profile,Region:$r.Region,Account:$r.Account}' \
+        > "${DATA_DIR}/ses-identity-dkim.jsonl") \
+| ajl ses get-identity-notification-attributes --params-json - --stamp-session --no-parse \
+| jq -c '. as $r | ($r.NotificationAttributes // {}) | to_entries[]
+         | {Type:"ses:identity-notification", Id:.key, Tags:{}} + .value
+         + {Profile:$r.Profile,Region:$r.Region,Account:$r.Account}' \
+> "${DATA_DIR}/ses-identity-notification.jsonl"
+
+ajl ses list-configuration-sets --all --stamp-session --describe \
+> "${DATA_DIR}/ses-configuration-sets.jsonl"
+
+ajl ses list-receipt-rule-sets --all --stamp-session --describe \
+> "${DATA_DIR}/ses-receipt-rule-sets.jsonl"
+
+
+#####################
+### ACM
+#####################
+ajl acm list-certificates --all --stamp-session --describe \
+> "${DATA_DIR}/acm-certificates.jsonl"
+
+
+#####################
+### WAFV2
+#####################
+# Get{WebACL,IPSet,RuleGroup} need Name+Scope+Id together, which doesn't fit
+# --describe's single-id_field model — --stamp-session puts Scope (a List
+# call request param) on every list record instead, so a plain jq chain
+# reconstructs the params the Get* call needs.
+ajl wafv2 list-web-acls --scope REGIONAL --all --stamp-session \
+| tee "${DATA_DIR}/wafv2-web-acls-regional.jsonl" \
+| jq -rc '{Profile,Region,Name,Id,Scope}' \
+| ajl wafv2 get-web-acl --params-json - --stamp-session \
+> "${DATA_DIR}/wafv2-web-acl-details-regional.jsonl"
+
+ajl wafv2 list-ip-sets --scope REGIONAL --all --stamp-session \
+| tee "${DATA_DIR}/wafv2-ip-sets-regional.jsonl" \
+| jq -rc '{Profile,Region,Name,Id,Scope}' \
+| ajl wafv2 get-ip-set --params-json - --stamp-session \
+> "${DATA_DIR}/wafv2-ip-set-details-regional.jsonl"
+
+ajl wafv2 list-rule-groups --scope REGIONAL --all --stamp-session \
+| tee "${DATA_DIR}/wafv2-rule-groups-regional.jsonl" \
+| jq -rc '{Profile,Region,Name,Id,Scope}' \
+| ajl wafv2 get-rule-group --params-json - --stamp-session \
+> "${DATA_DIR}/wafv2-rule-group-details-regional.jsonl"
+
+# CLOUDFRONT scope is global but must be *queried* from us-east-1 —
+# AJL_REGIONS/--all would hit it once per configured region for identical
+# results, so pin --region explicitly instead of fanning.
+ajl wafv2 list-web-acls --scope CLOUDFRONT --region us-east-1 --stamp-session \
+| tee "${DATA_DIR}/wafv2-web-acls-cloudfront.jsonl" \
+| jq -rc '{Profile,Region,Name,Id,Scope}' \
+| ajl wafv2 get-web-acl --params-json - --region us-east-1 --stamp-session \
+> "${DATA_DIR}/wafv2-web-acl-details-cloudfront.jsonl"
+
+ajl wafv2 list-ip-sets --scope CLOUDFRONT --region us-east-1 --stamp-session \
+| tee "${DATA_DIR}/wafv2-ip-sets-cloudfront.jsonl" \
+| jq -rc '{Profile,Region,Name,Id,Scope}' \
+| ajl wafv2 get-ip-set --params-json - --region us-east-1 --stamp-session \
+> "${DATA_DIR}/wafv2-ip-set-details-cloudfront.jsonl"
+
+ajl wafv2 list-rule-groups --scope CLOUDFRONT --region us-east-1 --stamp-session \
+| tee "${DATA_DIR}/wafv2-rule-groups-cloudfront.jsonl" \
+| jq -rc '{Profile,Region,Name,Id,Scope}' \
+| ajl wafv2 get-rule-group --params-json - --region us-east-1 --stamp-session \
+> "${DATA_DIR}/wafv2-rule-group-details-cloudfront.jsonl"
+
+
+#####################
+### REDSHIFT
+#####################
+ajl redshift describe-clusters --all --stamp-session \
+> "${DATA_DIR}/redshift-clusters.jsonl"
+
+ajl redshift describe-cluster-subnet-groups --all --stamp-session \
+> "${DATA_DIR}/redshift-cluster-subnet-groups.jsonl"
+
+ajl redshift describe-cluster-parameter-groups --all --stamp-session \
+> "${DATA_DIR}/redshift-cluster-parameter-groups.jsonl"
+
+# describe-cluster-security-groups is EC2-Classic-only and AWS now rejects
+# it outright ("Amazon Redshift has discontinued cluster security groups")
+# for every VPC-based cluster — which is all of them on modern accounts.
+# Not called here; VPC security groups are already covered by ec2's own
+# describe-security-groups.
+
+ajl redshift describe-cluster-snapshots --all --stamp-session \
+> "${DATA_DIR}/redshift-cluster-snapshots.jsonl"
+
+ajl redshift describe-event-subscriptions --all --stamp-session \
+> "${DATA_DIR}/redshift-event-subscriptions.jsonl"
+
+ajl redshift describe-hsm-client-certificates --all --stamp-session \
+> "${DATA_DIR}/redshift-hsm-client-certificates.jsonl"
+
+ajl redshift describe-hsm-configurations --all --stamp-session \
+> "${DATA_DIR}/redshift-hsm-configurations.jsonl"
+
+ajl redshift describe-snapshot-schedules --all --stamp-session \
+> "${DATA_DIR}/redshift-snapshot-schedules.jsonl"
+
+ajl redshift describe-usage-limits --all --stamp-session \
+> "${DATA_DIR}/redshift-usage-limits.jsonl"
+
+
+#####################
+### WORKSPACES
+#####################
+# Owner defaults to your own account for bundles/images — passing
+# --owner AMAZON (as with ec2 AMIs / iam managed policies) pulls in AWS's
+# entire public catalog (146 bundles / 2 images observed) instead of your
+# own. Tags aren't inline on any Describe* response; DescribeTags takes a
+# single ResourceId and is chained via --describe.
+ajl workspaces describe-workspaces --all --stamp-session --describe \
+> "${DATA_DIR}/workspaces-workspaces.jsonl"
+
+ajl workspaces describe-workspace-directories --all --stamp-session --describe \
+> "${DATA_DIR}/workspaces-directories.jsonl"
+
+ajl workspaces describe-workspace-bundles --all --stamp-session --describe \
+> "${DATA_DIR}/workspaces-bundles.jsonl"
+
+ajl workspaces describe-workspace-images --all --stamp-session --describe \
+> "${DATA_DIR}/workspaces-images.jsonl"
+
+ajl workspaces describe-connection-aliases --all --stamp-session --describe \
+> "${DATA_DIR}/workspaces-connection-aliases.jsonl"
+
+
+#####################
 ### S3
 #####################
 ajl s3 list-buckets --stamp-session \
 > "${DATA_DIR}/s3-buckets.jsonl"
+
+# None of these Get* calls echo Bucket back in their response, so Id/Name/
+# Arn come back blank — --stamp-session's Bucket (from the params piped in
+# below) is the join key back to s3-buckets.jsonl. Several are EXPECTED to
+# error per-bucket when that config was never set (NoSuchBucketPolicy,
+# NoSuchCORSConfiguration, NoSuchTagSet, NoSuchWebsiteConfiguration,
+# ReplicationConfigurationNotFoundError, ObjectLockConfigurationNotFoundError)
+# — ajl's per-item error containment reports those to stderr and keeps going,
+# same as any other --params-json fan-out.
+for op in get-bucket-versioning get-bucket-encryption get-bucket-policy get-bucket-policy-status \
+          get-bucket-lifecycle-configuration get-bucket-cors get-bucket-notification-configuration \
+          get-bucket-replication get-bucket-logging get-bucket-accelerate-configuration \
+          get-bucket-ownership-controls get-bucket-tagging get-bucket-location get-bucket-request-payment \
+          get-bucket-acl get-bucket-website get-public-access-block get-object-lock-configuration; do
+  jq -rc '{Profile,Region,Bucket:.Name}' "${DATA_DIR}/s3-buckets.jsonl" \
+  | ajl s3 "$op" --params-json - --stamp-session \
+  > "${DATA_DIR}/s3-${op#get-}.jsonl"
+done

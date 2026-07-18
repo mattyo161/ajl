@@ -916,7 +916,18 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "Id",
+            "name": "Name",
+            "path": [
+              "IPSet"
+            ],
+            "type": "wafv2:ipset"
+          }
+        ]
       }
     },
     "GetLoggingConfiguration": {
@@ -1201,7 +1212,18 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "Id",
+            "name": "Name",
+            "path": [
+              "RuleGroup"
+            ],
+            "type": "wafv2:rulegroup"
+          }
+        ]
       }
     },
     "GetSampledRequests": {
@@ -1312,7 +1334,18 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "ARN",
+            "id": "Id",
+            "name": "Name",
+            "path": [
+              "WebACL"
+            ],
+            "type": "wafv2:webacl"
+          }
+        ]
       }
     },
     "GetWebACLForResource": {

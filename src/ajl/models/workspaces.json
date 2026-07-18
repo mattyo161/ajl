@@ -1,0 +1,3464 @@
+{
+  "metadata": {
+    "apiVersion": "2015-04-08",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "workspaces",
+    "jsonVersion": "1.1",
+    "protocol": "json",
+    "protocols": [
+      "json"
+    ],
+    "serviceFullName": "Amazon WorkSpaces",
+    "serviceId": "WorkSpaces",
+    "signatureVersion": "v4",
+    "targetPrefix": "WorkspacesService",
+    "uid": "workspaces-2015-04-08"
+  },
+  "name": "workspaces",
+  "operations": {
+    "AcceptAccountLinkInvitation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientToken": {
+            "name": "ClientToken",
+            "shape_name": "ClientToken",
+            "type": "string"
+          },
+          "LinkId": {
+            "name": "LinkId",
+            "shape_name": "LinkId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LinkId"
+        ]
+      },
+      "name": "AcceptAccountLinkInvitation",
+      "output": {
+        "markers": null,
+        "members": {
+          "AccountLink": {
+            "name": "AccountLink",
+            "shape_name": "AccountLink",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "AssociateConnectionAlias": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AliasId": {
+            "name": "AliasId",
+            "shape_name": "ConnectionAliasId",
+            "type": "string"
+          },
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "NonEmptyString",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AliasId",
+          "ResourceId"
+        ]
+      },
+      "name": "AssociateConnectionAlias",
+      "output": {
+        "markers": null,
+        "members": {
+          "ConnectionIdentifier": {
+            "name": "ConnectionIdentifier",
+            "shape_name": "ConnectionIdentifier",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "AssociateIpGroups": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DirectoryId": {
+            "name": "DirectoryId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          },
+          "GroupIds": {
+            "name": "GroupIds",
+            "shape_name": "IpGroupIdList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "DirectoryId",
+          "GroupIds"
+        ]
+      },
+      "name": "AssociateIpGroups",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "AssociateWorkspaceApplication": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ApplicationId": {
+            "name": "ApplicationId",
+            "shape_name": "WorkSpaceApplicationId",
+            "type": "string"
+          },
+          "WorkspaceId": {
+            "name": "WorkspaceId",
+            "shape_name": "WorkspaceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkspaceId",
+          "ApplicationId"
+        ]
+      },
+      "name": "AssociateWorkspaceApplication",
+      "output": {
+        "markers": null,
+        "members": {
+          "Association": {
+            "name": "Association",
+            "shape_name": "WorkspaceResourceAssociation",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "AuthorizeIpRules": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GroupId": {
+            "name": "GroupId",
+            "shape_name": "IpGroupId",
+            "type": "string"
+          },
+          "UserRules": {
+            "name": "UserRules",
+            "shape_name": "IpRuleList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "GroupId",
+          "UserRules"
+        ]
+      },
+      "name": "AuthorizeIpRules",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CopyWorkspaceImage": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "WorkspaceImageDescription",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "WorkspaceImageName",
+            "type": "string"
+          },
+          "SourceImageId": {
+            "name": "SourceImageId",
+            "shape_name": "WorkspaceImageId",
+            "type": "string"
+          },
+          "SourceRegion": {
+            "name": "SourceRegion",
+            "shape_name": "Region",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Name",
+          "SourceImageId",
+          "SourceRegion"
+        ]
+      },
+      "name": "CopyWorkspaceImage",
+      "output": {
+        "markers": null,
+        "members": {
+          "ImageId": {
+            "name": "ImageId",
+            "shape_name": "WorkspaceImageId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateAccountLinkInvitation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientToken": {
+            "name": "ClientToken",
+            "shape_name": "ClientToken",
+            "type": "string"
+          },
+          "TargetAccountId": {
+            "name": "TargetAccountId",
+            "shape_name": "AwsAccount",
+            "type": "string"
+          }
+        },
+        "required": [
+          "TargetAccountId"
+        ]
+      },
+      "name": "CreateAccountLinkInvitation",
+      "output": {
+        "markers": null,
+        "members": {
+          "AccountLink": {
+            "name": "AccountLink",
+            "shape_name": "AccountLink",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateConnectClientAddIn": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Name": {
+            "name": "Name",
+            "shape_name": "AddInName",
+            "type": "string"
+          },
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          },
+          "URL": {
+            "name": "URL",
+            "shape_name": "AddInUrl",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceId",
+          "Name",
+          "URL"
+        ]
+      },
+      "name": "CreateConnectClientAddIn",
+      "output": {
+        "markers": null,
+        "members": {
+          "AddInId": {
+            "name": "AddInId",
+            "shape_name": "AmazonUuid",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateConnectionAlias": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ConnectionString": {
+            "name": "ConnectionString",
+            "shape_name": "ConnectionString",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ConnectionString"
+        ]
+      },
+      "name": "CreateConnectionAlias",
+      "output": {
+        "markers": null,
+        "members": {
+          "AliasId": {
+            "name": "AliasId",
+            "shape_name": "ConnectionAliasId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateIpGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GroupDesc": {
+            "name": "GroupDesc",
+            "shape_name": "IpGroupDesc",
+            "type": "string"
+          },
+          "GroupName": {
+            "name": "GroupName",
+            "shape_name": "IpGroupName",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "UserRules": {
+            "name": "UserRules",
+            "shape_name": "IpRuleList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "GroupName"
+        ]
+      },
+      "name": "CreateIpGroup",
+      "output": {
+        "markers": null,
+        "members": {
+          "GroupId": {
+            "name": "GroupId",
+            "shape_name": "IpGroupId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateStandbyWorkspaces": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PrimaryRegion": {
+            "name": "PrimaryRegion",
+            "shape_name": "Region",
+            "type": "string"
+          },
+          "StandbyWorkspaces": {
+            "name": "StandbyWorkspaces",
+            "shape_name": "StandbyWorkspacesList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "PrimaryRegion",
+          "StandbyWorkspaces"
+        ]
+      },
+      "name": "CreateStandbyWorkspaces",
+      "output": {
+        "markers": null,
+        "members": {
+          "FailedStandbyRequests": {
+            "name": "FailedStandbyRequests",
+            "shape_name": "FailedCreateStandbyWorkspacesRequestList",
+            "type": "list"
+          },
+          "PendingStandbyRequests": {
+            "name": "PendingStandbyRequests",
+            "shape_name": "PendingCreateStandbyWorkspacesRequestList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateTags": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "NonEmptyString",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceId",
+          "Tags"
+        ]
+      },
+      "name": "CreateTags",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "CreateUpdatedWorkspaceImage": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "WorkspaceImageDescription",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "WorkspaceImageName",
+            "type": "string"
+          },
+          "SourceImageId": {
+            "name": "SourceImageId",
+            "shape_name": "WorkspaceImageId",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Name",
+          "Description",
+          "SourceImageId"
+        ]
+      },
+      "name": "CreateUpdatedWorkspaceImage",
+      "output": {
+        "markers": null,
+        "members": {
+          "ImageId": {
+            "name": "ImageId",
+            "shape_name": "WorkspaceImageId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateWorkspaceBundle": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BundleDescription": {
+            "name": "BundleDescription",
+            "shape_name": "WorkspaceBundleDescription",
+            "type": "string"
+          },
+          "BundleName": {
+            "name": "BundleName",
+            "shape_name": "WorkspaceBundleName",
+            "type": "string"
+          },
+          "ComputeType": {
+            "name": "ComputeType",
+            "shape_name": "ComputeType",
+            "type": "structure"
+          },
+          "ImageId": {
+            "name": "ImageId",
+            "shape_name": "WorkspaceImageId",
+            "type": "string"
+          },
+          "RootStorage": {
+            "name": "RootStorage",
+            "shape_name": "RootStorage",
+            "type": "structure"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "UserStorage": {
+            "name": "UserStorage",
+            "shape_name": "UserStorage",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "BundleName",
+          "BundleDescription",
+          "ImageId",
+          "ComputeType",
+          "UserStorage"
+        ]
+      },
+      "name": "CreateWorkspaceBundle",
+      "output": {
+        "markers": null,
+        "members": {
+          "WorkspaceBundle": {
+            "name": "WorkspaceBundle",
+            "shape_name": "WorkspaceBundle",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateWorkspaceImage": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Description": {
+            "name": "Description",
+            "shape_name": "WorkspaceImageDescription",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "WorkspaceImageName",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "WorkspaceId": {
+            "name": "WorkspaceId",
+            "shape_name": "WorkspaceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "Name",
+          "Description",
+          "WorkspaceId"
+        ]
+      },
+      "name": "CreateWorkspaceImage",
+      "output": {
+        "markers": null,
+        "members": {
+          "Created": {
+            "name": "Created",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "WorkspaceImageDescription",
+            "type": "string"
+          },
+          "ImageId": {
+            "name": "ImageId",
+            "shape_name": "WorkspaceImageId",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "WorkspaceImageName",
+            "type": "string"
+          },
+          "OperatingSystem": {
+            "name": "OperatingSystem",
+            "shape_name": "OperatingSystem",
+            "type": "structure"
+          },
+          "OwnerAccountId": {
+            "name": "OwnerAccountId",
+            "shape_name": "AwsAccount",
+            "type": "string"
+          },
+          "RequiredTenancy": {
+            "name": "RequiredTenancy",
+            "shape_name": "WorkspaceImageRequiredTenancy",
+            "type": "string"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "WorkspaceImageState",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateWorkspaces": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Workspaces": {
+            "name": "Workspaces",
+            "shape_name": "WorkspaceRequestList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Workspaces"
+        ]
+      },
+      "name": "CreateWorkspaces",
+      "output": {
+        "markers": null,
+        "members": {
+          "FailedRequests": {
+            "name": "FailedRequests",
+            "shape_name": "FailedCreateWorkspaceRequests",
+            "type": "list"
+          },
+          "PendingRequests": {
+            "name": "PendingRequests",
+            "shape_name": "WorkspaceList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "CreateWorkspacesPool": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ApplicationSettings": {
+            "name": "ApplicationSettings",
+            "shape_name": "ApplicationSettingsRequest",
+            "type": "structure"
+          },
+          "BundleId": {
+            "name": "BundleId",
+            "shape_name": "BundleId",
+            "type": "string"
+          },
+          "Capacity": {
+            "name": "Capacity",
+            "shape_name": "Capacity",
+            "type": "structure"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "UpdateDescription",
+            "type": "string"
+          },
+          "DirectoryId": {
+            "name": "DirectoryId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          },
+          "PoolName": {
+            "name": "PoolName",
+            "shape_name": "WorkspacesPoolName",
+            "type": "string"
+          },
+          "RunningMode": {
+            "name": "RunningMode",
+            "shape_name": "PoolsRunningMode",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "TimeoutSettings": {
+            "name": "TimeoutSettings",
+            "shape_name": "TimeoutSettings",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "PoolName",
+          "Description",
+          "BundleId",
+          "DirectoryId",
+          "Capacity"
+        ]
+      },
+      "name": "CreateWorkspacesPool",
+      "output": {
+        "markers": null,
+        "members": {
+          "WorkspacesPool": {
+            "name": "WorkspacesPool",
+            "shape_name": "WorkspacesPool",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteAccountLinkInvitation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientToken": {
+            "name": "ClientToken",
+            "shape_name": "ClientToken",
+            "type": "string"
+          },
+          "LinkId": {
+            "name": "LinkId",
+            "shape_name": "LinkId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LinkId"
+        ]
+      },
+      "name": "DeleteAccountLinkInvitation",
+      "output": {
+        "markers": null,
+        "members": {
+          "AccountLink": {
+            "name": "AccountLink",
+            "shape_name": "AccountLink",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeleteClientBranding": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Platforms": {
+            "name": "Platforms",
+            "shape_name": "ClientDeviceTypeList",
+            "type": "list"
+          },
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceId",
+          "Platforms"
+        ]
+      },
+      "name": "DeleteClientBranding",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteConnectClientAddIn": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AddInId": {
+            "name": "AddInId",
+            "shape_name": "AmazonUuid",
+            "type": "string"
+          },
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AddInId",
+          "ResourceId"
+        ]
+      },
+      "name": "DeleteConnectClientAddIn",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteConnectionAlias": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AliasId": {
+            "name": "AliasId",
+            "shape_name": "ConnectionAliasId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AliasId"
+        ]
+      },
+      "name": "DeleteConnectionAlias",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteIpGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GroupId": {
+            "name": "GroupId",
+            "shape_name": "IpGroupId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "GroupId"
+        ]
+      },
+      "name": "DeleteIpGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteTags": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "NonEmptyString",
+            "type": "string"
+          },
+          "TagKeys": {
+            "name": "TagKeys",
+            "shape_name": "TagKeyList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceId",
+          "TagKeys"
+        ]
+      },
+      "name": "DeleteTags",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteWorkspaceBundle": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BundleId": {
+            "name": "BundleId",
+            "shape_name": "BundleId",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DeleteWorkspaceBundle",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeleteWorkspaceImage": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ImageId": {
+            "name": "ImageId",
+            "shape_name": "WorkspaceImageId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ImageId"
+        ]
+      },
+      "name": "DeleteWorkspaceImage",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DeployWorkspaceApplications": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Force": {
+            "name": "Force",
+            "shape_name": "BooleanObject",
+            "type": "boolean"
+          },
+          "WorkspaceId": {
+            "name": "WorkspaceId",
+            "shape_name": "WorkspaceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkspaceId"
+        ]
+      },
+      "name": "DeployWorkspaceApplications",
+      "output": {
+        "markers": null,
+        "members": {
+          "Deployment": {
+            "name": "Deployment",
+            "shape_name": "WorkSpaceApplicationDeployment",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DeregisterWorkspaceDirectory": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DirectoryId": {
+            "name": "DirectoryId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DirectoryId"
+        ]
+      },
+      "name": "DeregisterWorkspaceDirectory",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DescribeAccount": {
+      "input": {
+        "markers": null,
+        "members": {},
+        "required": null
+      },
+      "name": "DescribeAccount",
+      "output": {
+        "markers": null,
+        "members": {
+          "DedicatedTenancyAccountType": {
+            "name": "DedicatedTenancyAccountType",
+            "shape_name": "DedicatedTenancyAccountType",
+            "type": "string"
+          },
+          "DedicatedTenancyManagementCidrRange": {
+            "name": "DedicatedTenancyManagementCidrRange",
+            "shape_name": "DedicatedTenancyManagementCidrRange",
+            "type": "string"
+          },
+          "DedicatedTenancySupport": {
+            "name": "DedicatedTenancySupport",
+            "shape_name": "DedicatedTenancySupportResultEnum",
+            "type": "string"
+          },
+          "Message": {
+            "name": "Message",
+            "shape_name": "Message",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeAccountModifications": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeAccountModifications",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "AccountModifications": {
+            "name": "AccountModifications",
+            "shape_name": "AccountModificationList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeApplicationAssociations": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ApplicationId": {
+            "name": "ApplicationId",
+            "shape_name": "WorkSpaceApplicationId",
+            "type": "string"
+          },
+          "AssociatedResourceTypes": {
+            "name": "AssociatedResourceTypes",
+            "shape_name": "ApplicationAssociatedResourceTypeList",
+            "type": "list"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "Limit",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ApplicationId",
+          "AssociatedResourceTypes"
+        ]
+      },
+      "name": "DescribeApplicationAssociations",
+      "output": {
+        "markers": null,
+        "members": {
+          "Associations": {
+            "name": "Associations",
+            "shape_name": "ApplicationResourceAssociationList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeApplications": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ApplicationIds": {
+            "name": "ApplicationIds",
+            "shape_name": "WorkSpaceApplicationIdList",
+            "type": "list"
+          },
+          "ComputeTypeNames": {
+            "name": "ComputeTypeNames",
+            "shape_name": "ComputeList",
+            "type": "list"
+          },
+          "LicenseType": {
+            "name": "LicenseType",
+            "shape_name": "WorkSpaceApplicationLicenseType",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "Limit",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "OperatingSystemNames": {
+            "name": "OperatingSystemNames",
+            "shape_name": "OperatingSystemNameList",
+            "type": "list"
+          },
+          "Owner": {
+            "name": "Owner",
+            "shape_name": "WorkSpaceApplicationOwner",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeApplications",
+      "output": {
+        "markers": null,
+        "members": {
+          "Applications": {
+            "name": "Applications",
+            "shape_name": "WorkSpaceApplicationList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeBundleAssociations": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AssociatedResourceTypes": {
+            "name": "AssociatedResourceTypes",
+            "shape_name": "BundleAssociatedResourceTypeList",
+            "type": "list"
+          },
+          "BundleId": {
+            "name": "BundleId",
+            "shape_name": "BundleId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "BundleId",
+          "AssociatedResourceTypes"
+        ]
+      },
+      "name": "DescribeBundleAssociations",
+      "output": {
+        "markers": null,
+        "members": {
+          "Associations": {
+            "name": "Associations",
+            "shape_name": "BundleResourceAssociationList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeClientBranding": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceId"
+        ]
+      },
+      "name": "DescribeClientBranding",
+      "output": {
+        "markers": null,
+        "members": {
+          "DeviceTypeAndroid": {
+            "name": "DeviceTypeAndroid",
+            "shape_name": "DefaultClientBrandingAttributes",
+            "type": "structure"
+          },
+          "DeviceTypeIos": {
+            "name": "DeviceTypeIos",
+            "shape_name": "IosClientBrandingAttributes",
+            "type": "structure"
+          },
+          "DeviceTypeLinux": {
+            "name": "DeviceTypeLinux",
+            "shape_name": "DefaultClientBrandingAttributes",
+            "type": "structure"
+          },
+          "DeviceTypeOsx": {
+            "name": "DeviceTypeOsx",
+            "shape_name": "DefaultClientBrandingAttributes",
+            "type": "structure"
+          },
+          "DeviceTypeWeb": {
+            "name": "DeviceTypeWeb",
+            "shape_name": "DefaultClientBrandingAttributes",
+            "type": "structure"
+          },
+          "DeviceTypeWindows": {
+            "name": "DeviceTypeWindows",
+            "shape_name": "DefaultClientBrandingAttributes",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeClientProperties": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceIds": {
+            "name": "ResourceIds",
+            "shape_name": "ResourceIdList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ResourceIds"
+        ]
+      },
+      "name": "DescribeClientProperties",
+      "output": {
+        "markers": null,
+        "members": {
+          "ClientPropertiesList": {
+            "name": "ClientPropertiesList",
+            "shape_name": "ClientPropertiesList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeConnectClientAddIns": {
+      "input": {
+        "markers": null,
+        "members": {
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "Limit",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceId"
+        ]
+      },
+      "name": "DescribeConnectClientAddIns",
+      "output": {
+        "markers": null,
+        "members": {
+          "AddIns": {
+            "name": "AddIns",
+            "shape_name": "ConnectClientAddInList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeConnectionAliasPermissions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AliasId": {
+            "name": "AliasId",
+            "shape_name": "ConnectionAliasId",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "Limit",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AliasId"
+        ]
+      },
+      "name": "DescribeConnectionAliasPermissions",
+      "output": {
+        "markers": null,
+        "members": {
+          "AliasId": {
+            "name": "AliasId",
+            "shape_name": "ConnectionAliasId",
+            "type": "string"
+          },
+          "ConnectionAliasPermissions": {
+            "name": "ConnectionAliasPermissions",
+            "shape_name": "ConnectionAliasPermissions",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeConnectionAliases": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AliasIds": {
+            "name": "AliasIds",
+            "shape_name": "ConnectionAliasIdList",
+            "type": "list"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "Limit",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "NonEmptyString",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeConnectionAliases",
+      "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeTags",
+          "param": "ResourceId"
+        },
+        "markers": null,
+        "members": {
+          "ConnectionAliases": {
+            "name": "ConnectionAliases",
+            "shape_name": "ConnectionAliasList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:workspaces:{region}:{account}:connectionalias/{AliasId}",
+            "id": "AliasId",
+            "path": [
+              "ConnectionAliases"
+            ],
+            "type": "workspaces:connection-alias"
+          }
+        ]
+      }
+    },
+    "DescribeCustomWorkspaceImageImport": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ImageId": {
+            "name": "ImageId",
+            "shape_name": "WorkspaceImageId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ImageId"
+        ]
+      },
+      "name": "DescribeCustomWorkspaceImageImport",
+      "output": {
+        "markers": null,
+        "members": {
+          "Created": {
+            "name": "Created",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "ErrorDetails": {
+            "name": "ErrorDetails",
+            "shape_name": "CustomWorkspaceImageImportErrorDetailsList",
+            "type": "list"
+          },
+          "ImageBuilderInstanceId": {
+            "name": "ImageBuilderInstanceId",
+            "shape_name": "NonEmptyString",
+            "type": "string"
+          },
+          "ImageId": {
+            "name": "ImageId",
+            "shape_name": "WorkspaceImageId",
+            "type": "string"
+          },
+          "ImageSource": {
+            "name": "ImageSource",
+            "shape_name": "ImageSourceIdentifier",
+            "type": "structure"
+          },
+          "InfrastructureConfigurationArn": {
+            "name": "InfrastructureConfigurationArn",
+            "shape_name": "InfrastructureConfigurationArn",
+            "type": "string"
+          },
+          "LastUpdatedTime": {
+            "name": "LastUpdatedTime",
+            "shape_name": "Timestamp",
+            "type": "timestamp"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "CustomWorkspaceImageImportState",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeImageAssociations": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AssociatedResourceTypes": {
+            "name": "AssociatedResourceTypes",
+            "shape_name": "ImageAssociatedResourceTypeList",
+            "type": "list"
+          },
+          "ImageId": {
+            "name": "ImageId",
+            "shape_name": "WorkspaceImageId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ImageId",
+          "AssociatedResourceTypes"
+        ]
+      },
+      "name": "DescribeImageAssociations",
+      "output": {
+        "markers": null,
+        "members": {
+          "Associations": {
+            "name": "Associations",
+            "shape_name": "ImageResourceAssociationList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeIpGroups": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "GroupIds": {
+            "name": "GroupIds",
+            "shape_name": "IpGroupIdList",
+            "type": "list"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "Limit",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeIpGroups",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "Result": {
+            "name": "Result",
+            "shape_name": "WorkspacesIpGroupsList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeTags": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "NonEmptyString",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceId"
+        ]
+      },
+      "name": "DescribeTags",
+      "output": {
+        "markers": null,
+        "members": {
+          "TagList": {
+            "name": "TagList",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "id": "Key",
+            "name": "Key",
+            "path": [
+              "TagList"
+            ],
+            "type": "workspaces:tags"
+          }
+        ]
+      }
+    },
+    "DescribeWorkspaceAssociations": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AssociatedResourceTypes": {
+            "name": "AssociatedResourceTypes",
+            "shape_name": "WorkSpaceAssociatedResourceTypeList",
+            "type": "list"
+          },
+          "WorkspaceId": {
+            "name": "WorkspaceId",
+            "shape_name": "WorkspaceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkspaceId",
+          "AssociatedResourceTypes"
+        ]
+      },
+      "name": "DescribeWorkspaceAssociations",
+      "output": {
+        "markers": null,
+        "members": {
+          "Associations": {
+            "name": "Associations",
+            "shape_name": "WorkspaceResourceAssociationList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeWorkspaceBundles": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "BundleIds": {
+            "name": "BundleIds",
+            "shape_name": "BundleIdList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "Owner": {
+            "name": "Owner",
+            "shape_name": "BundleOwner",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeWorkspaceBundles",
+      "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeTags",
+          "param": "ResourceId"
+        },
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Bundles": {
+            "name": "Bundles",
+            "shape_name": "BundleList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:workspaces:{region}:{account}:workspacebundle/{BundleId}",
+            "id": "BundleId",
+            "name": "Name",
+            "path": [
+              "Bundles"
+            ],
+            "type": "workspaces:bundle"
+          }
+        ]
+      }
+    },
+    "DescribeWorkspaceDirectories": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "DirectoryIds": {
+            "name": "DirectoryIds",
+            "shape_name": "DirectoryIdList",
+            "type": "list"
+          },
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "DescribeWorkspaceDirectoriesFilterList",
+            "type": "list"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "Limit",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "WorkspaceDirectoryNames": {
+            "name": "WorkspaceDirectoryNames",
+            "shape_name": "WorkspaceDirectoryNameList",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeWorkspaceDirectories",
+      "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeTags",
+          "param": "ResourceId"
+        },
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Directories": {
+            "name": "Directories",
+            "shape_name": "DirectoryList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:workspaces:{region}:{account}:directory/{DirectoryId}",
+            "id": "DirectoryId",
+            "name": "DirectoryName",
+            "path": [
+              "Directories"
+            ],
+            "type": "workspaces:directory"
+          }
+        ]
+      }
+    },
+    "DescribeWorkspaceImagePermissions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ImageId": {
+            "name": "ImageId",
+            "shape_name": "WorkspaceImageId",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "Limit",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ImageId"
+        ]
+      },
+      "name": "DescribeWorkspaceImagePermissions",
+      "output": {
+        "markers": null,
+        "members": {
+          "ImageId": {
+            "name": "ImageId",
+            "shape_name": "WorkspaceImageId",
+            "type": "string"
+          },
+          "ImagePermissions": {
+            "name": "ImagePermissions",
+            "shape_name": "ImagePermissions",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeWorkspaceImages": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "ImageIds": {
+            "name": "ImageIds",
+            "shape_name": "WorkspaceImageIdList",
+            "type": "list"
+          },
+          "ImageType": {
+            "name": "ImageType",
+            "shape_name": "ImageType",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "Limit",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeWorkspaceImages",
+      "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeTags",
+          "param": "ResourceId"
+        },
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "Images": {
+            "name": "Images",
+            "shape_name": "WorkspaceImageList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:workspaces:{region}:{account}:workspaceimage/{ImageId}",
+            "id": "ImageId",
+            "name": "Name",
+            "path": [
+              "Images"
+            ],
+            "type": "workspaces:image"
+          }
+        ]
+      }
+    },
+    "DescribeWorkspaceSnapshots": {
+      "input": {
+        "markers": null,
+        "members": {
+          "WorkspaceId": {
+            "name": "WorkspaceId",
+            "shape_name": "WorkspaceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkspaceId"
+        ]
+      },
+      "name": "DescribeWorkspaceSnapshots",
+      "output": {
+        "markers": null,
+        "members": {
+          "RebuildSnapshots": {
+            "name": "RebuildSnapshots",
+            "shape_name": "SnapshotList",
+            "type": "list"
+          },
+          "RestoreSnapshots": {
+            "name": "RestoreSnapshots",
+            "shape_name": "SnapshotList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeWorkspaces": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "BundleId": {
+            "name": "BundleId",
+            "shape_name": "BundleId",
+            "type": "string"
+          },
+          "DirectoryId": {
+            "name": "DirectoryId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "Limit",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "UserName": {
+            "name": "UserName",
+            "shape_name": "UserName",
+            "type": "string"
+          },
+          "WorkspaceIds": {
+            "name": "WorkspaceIds",
+            "shape_name": "WorkspaceIdList",
+            "type": "list"
+          },
+          "WorkspaceName": {
+            "name": "WorkspaceName",
+            "shape_name": "WorkspaceName",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeWorkspaces",
+      "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeTags",
+          "param": "ResourceId"
+        },
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "Workspaces": {
+            "name": "Workspaces",
+            "shape_name": "WorkspaceList",
+            "type": "list"
+          }
+        },
+        "required": null,
+        "resources": [
+          {
+            "arn_format": "arn:{partition}:workspaces:{region}:{account}:workspace/{WorkspaceId}",
+            "id": "WorkspaceId",
+            "name": "WorkspaceName",
+            "path": [
+              "Workspaces"
+            ],
+            "type": "workspaces:workspace"
+          }
+        ]
+      }
+    },
+    "DescribeWorkspacesConnectionStatus": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "WorkspaceIds": {
+            "name": "WorkspaceIds",
+            "shape_name": "WorkspaceIdList",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeWorkspacesConnectionStatus",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "WorkspacesConnectionStatus": {
+            "name": "WorkspacesConnectionStatus",
+            "shape_name": "WorkspaceConnectionStatusList",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeWorkspacesPoolSessions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "Limit50",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "PoolId": {
+            "name": "PoolId",
+            "shape_name": "WorkspacesPoolId",
+            "type": "string"
+          },
+          "UserId": {
+            "name": "UserId",
+            "shape_name": "WorkspacesPoolUserId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PoolId"
+        ]
+      },
+      "name": "DescribeWorkspacesPoolSessions",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "Sessions": {
+            "name": "Sessions",
+            "shape_name": "WorkspacesPoolSessions",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DescribeWorkspacesPools": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Filters": {
+            "name": "Filters",
+            "shape_name": "DescribeWorkspacesPoolsFilters",
+            "type": "list"
+          },
+          "Limit": {
+            "name": "Limit",
+            "shape_name": "Limit",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "PoolIds": {
+            "name": "PoolIds",
+            "shape_name": "WorkspacesPoolIds",
+            "type": "list"
+          }
+        },
+        "required": null
+      },
+      "name": "DescribeWorkspacesPools",
+      "output": {
+        "markers": null,
+        "members": {
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          },
+          "WorkspacesPools": {
+            "name": "WorkspacesPools",
+            "shape_name": "WorkspacesPools",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "DisassociateConnectionAlias": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AliasId": {
+            "name": "AliasId",
+            "shape_name": "ConnectionAliasId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AliasId"
+        ]
+      },
+      "name": "DisassociateConnectionAlias",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DisassociateIpGroups": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DirectoryId": {
+            "name": "DirectoryId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          },
+          "GroupIds": {
+            "name": "GroupIds",
+            "shape_name": "IpGroupIdList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "DirectoryId",
+          "GroupIds"
+        ]
+      },
+      "name": "DisassociateIpGroups",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "DisassociateWorkspaceApplication": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ApplicationId": {
+            "name": "ApplicationId",
+            "shape_name": "WorkSpaceApplicationId",
+            "type": "string"
+          },
+          "WorkspaceId": {
+            "name": "WorkspaceId",
+            "shape_name": "WorkspaceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkspaceId",
+          "ApplicationId"
+        ]
+      },
+      "name": "DisassociateWorkspaceApplication",
+      "output": {
+        "markers": null,
+        "members": {
+          "Association": {
+            "name": "Association",
+            "shape_name": "WorkspaceResourceAssociation",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "GetAccountLink": {
+      "input": {
+        "markers": null,
+        "members": {
+          "LinkId": {
+            "name": "LinkId",
+            "shape_name": "LinkId",
+            "type": "string"
+          },
+          "LinkedAccountId": {
+            "name": "LinkedAccountId",
+            "shape_name": "AwsAccount",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "GetAccountLink",
+      "output": {
+        "markers": null,
+        "members": {
+          "AccountLink": {
+            "name": "AccountLink",
+            "shape_name": "AccountLink",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ImportClientBranding": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DeviceTypeAndroid": {
+            "name": "DeviceTypeAndroid",
+            "shape_name": "DefaultImportClientBrandingAttributes",
+            "type": "structure"
+          },
+          "DeviceTypeIos": {
+            "name": "DeviceTypeIos",
+            "shape_name": "IosImportClientBrandingAttributes",
+            "type": "structure"
+          },
+          "DeviceTypeLinux": {
+            "name": "DeviceTypeLinux",
+            "shape_name": "DefaultImportClientBrandingAttributes",
+            "type": "structure"
+          },
+          "DeviceTypeOsx": {
+            "name": "DeviceTypeOsx",
+            "shape_name": "DefaultImportClientBrandingAttributes",
+            "type": "structure"
+          },
+          "DeviceTypeWeb": {
+            "name": "DeviceTypeWeb",
+            "shape_name": "DefaultImportClientBrandingAttributes",
+            "type": "structure"
+          },
+          "DeviceTypeWindows": {
+            "name": "DeviceTypeWindows",
+            "shape_name": "DefaultImportClientBrandingAttributes",
+            "type": "structure"
+          },
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceId"
+        ]
+      },
+      "name": "ImportClientBranding",
+      "output": {
+        "markers": null,
+        "members": {
+          "DeviceTypeAndroid": {
+            "name": "DeviceTypeAndroid",
+            "shape_name": "DefaultClientBrandingAttributes",
+            "type": "structure"
+          },
+          "DeviceTypeIos": {
+            "name": "DeviceTypeIos",
+            "shape_name": "IosClientBrandingAttributes",
+            "type": "structure"
+          },
+          "DeviceTypeLinux": {
+            "name": "DeviceTypeLinux",
+            "shape_name": "DefaultClientBrandingAttributes",
+            "type": "structure"
+          },
+          "DeviceTypeOsx": {
+            "name": "DeviceTypeOsx",
+            "shape_name": "DefaultClientBrandingAttributes",
+            "type": "structure"
+          },
+          "DeviceTypeWeb": {
+            "name": "DeviceTypeWeb",
+            "shape_name": "DefaultClientBrandingAttributes",
+            "type": "structure"
+          },
+          "DeviceTypeWindows": {
+            "name": "DeviceTypeWindows",
+            "shape_name": "DefaultClientBrandingAttributes",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "ImportCustomWorkspaceImage": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ComputeType": {
+            "name": "ComputeType",
+            "shape_name": "ImageComputeType",
+            "type": "string"
+          },
+          "ImageDescription": {
+            "name": "ImageDescription",
+            "shape_name": "WorkspaceImageDescription",
+            "type": "string"
+          },
+          "ImageName": {
+            "name": "ImageName",
+            "shape_name": "WorkspaceImageName",
+            "type": "string"
+          },
+          "ImageSource": {
+            "name": "ImageSource",
+            "shape_name": "ImageSourceIdentifier",
+            "type": "structure"
+          },
+          "InfrastructureConfigurationArn": {
+            "name": "InfrastructureConfigurationArn",
+            "shape_name": "InfrastructureConfigurationArn",
+            "type": "string"
+          },
+          "OsVersion": {
+            "name": "OsVersion",
+            "shape_name": "OSVersion",
+            "type": "string"
+          },
+          "Platform": {
+            "name": "Platform",
+            "shape_name": "Platform",
+            "type": "string"
+          },
+          "Protocol": {
+            "name": "Protocol",
+            "shape_name": "CustomImageProtocol",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "ImageName",
+          "ImageDescription",
+          "ComputeType",
+          "Protocol",
+          "ImageSource",
+          "InfrastructureConfigurationArn",
+          "Platform",
+          "OsVersion"
+        ]
+      },
+      "name": "ImportCustomWorkspaceImage",
+      "output": {
+        "markers": null,
+        "members": {
+          "ImageId": {
+            "name": "ImageId",
+            "shape_name": "WorkspaceImageId",
+            "type": "string"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "CustomWorkspaceImageImportState",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ImportWorkspaceImage": {
+      "input": {
+        "markers": null,
+        "members": {
+          "Applications": {
+            "name": "Applications",
+            "shape_name": "ApplicationList",
+            "type": "list"
+          },
+          "Ec2ImageId": {
+            "name": "Ec2ImageId",
+            "shape_name": "Ec2ImageId",
+            "type": "string"
+          },
+          "ImageDescription": {
+            "name": "ImageDescription",
+            "shape_name": "WorkspaceImageDescription",
+            "type": "string"
+          },
+          "ImageName": {
+            "name": "ImageName",
+            "shape_name": "WorkspaceImageName",
+            "type": "string"
+          },
+          "IngestionProcess": {
+            "name": "IngestionProcess",
+            "shape_name": "WorkspaceImageIngestionProcess",
+            "type": "string"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "Ec2ImageId",
+          "IngestionProcess",
+          "ImageName",
+          "ImageDescription"
+        ]
+      },
+      "name": "ImportWorkspaceImage",
+      "output": {
+        "markers": null,
+        "members": {
+          "ImageId": {
+            "name": "ImageId",
+            "shape_name": "WorkspaceImageId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListAccountLinks": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "LinkStatusFilter": {
+            "name": "LinkStatusFilter",
+            "shape_name": "LinkStatusFilterList",
+            "type": "list"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "Limit",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ListAccountLinks",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "AccountLinks": {
+            "name": "AccountLinks",
+            "shape_name": "AccountLinkList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ListAvailableManagementCidrRanges": {
+      "input": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "ManagementCidrRangeConstraint": {
+            "name": "ManagementCidrRangeConstraint",
+            "shape_name": "ManagementCidrRangeConstraint",
+            "type": "string"
+          },
+          "MaxResults": {
+            "name": "MaxResults",
+            "shape_name": "ManagementCidrRangeMaxResults",
+            "type": "integer"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ManagementCidrRangeConstraint"
+        ]
+      },
+      "name": "ListAvailableManagementCidrRanges",
+      "output": {
+        "markers": [
+          "NextToken"
+        ],
+        "members": {
+          "ManagementCidrRanges": {
+            "name": "ManagementCidrRanges",
+            "shape_name": "DedicatedTenancyCidrRangeList",
+            "type": "list"
+          },
+          "NextToken": {
+            "name": "NextToken",
+            "shape_name": "PaginationToken",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "MigrateWorkspace": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BundleId": {
+            "name": "BundleId",
+            "shape_name": "BundleId",
+            "type": "string"
+          },
+          "SourceWorkspaceId": {
+            "name": "SourceWorkspaceId",
+            "shape_name": "WorkspaceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SourceWorkspaceId",
+          "BundleId"
+        ]
+      },
+      "name": "MigrateWorkspace",
+      "output": {
+        "markers": null,
+        "members": {
+          "SourceWorkspaceId": {
+            "name": "SourceWorkspaceId",
+            "shape_name": "WorkspaceId",
+            "type": "string"
+          },
+          "TargetWorkspaceId": {
+            "name": "TargetWorkspaceId",
+            "shape_name": "WorkspaceId",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyAccount": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DedicatedTenancyManagementCidrRange": {
+            "name": "DedicatedTenancyManagementCidrRange",
+            "shape_name": "DedicatedTenancyManagementCidrRange",
+            "type": "string"
+          },
+          "DedicatedTenancySupport": {
+            "name": "DedicatedTenancySupport",
+            "shape_name": "DedicatedTenancySupportEnum",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "ModifyAccount",
+      "output": {
+        "markers": null,
+        "members": {
+          "Message": {
+            "name": "Message",
+            "shape_name": "Message",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "ModifyCertificateBasedAuthProperties": {
+      "input": {
+        "markers": null,
+        "members": {
+          "CertificateBasedAuthProperties": {
+            "name": "CertificateBasedAuthProperties",
+            "shape_name": "CertificateBasedAuthProperties",
+            "type": "structure"
+          },
+          "PropertiesToDelete": {
+            "name": "PropertiesToDelete",
+            "shape_name": "DeletableCertificateBasedAuthPropertiesList",
+            "type": "list"
+          },
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceId"
+        ]
+      },
+      "name": "ModifyCertificateBasedAuthProperties",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ModifyClientProperties": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientProperties": {
+            "name": "ClientProperties",
+            "shape_name": "ClientProperties",
+            "type": "structure"
+          },
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "NonEmptyString",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ResourceId",
+          "ClientProperties"
+        ]
+      },
+      "name": "ModifyClientProperties",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ModifyEndpointEncryptionMode": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DirectoryId": {
+            "name": "DirectoryId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          },
+          "EndpointEncryptionMode": {
+            "name": "EndpointEncryptionMode",
+            "shape_name": "EndpointEncryptionMode",
+            "type": "string"
+          }
+        },
+        "required": [
+          "DirectoryId",
+          "EndpointEncryptionMode"
+        ]
+      },
+      "name": "ModifyEndpointEncryptionMode",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ModifySamlProperties": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PropertiesToDelete": {
+            "name": "PropertiesToDelete",
+            "shape_name": "DeletableSamlPropertiesList",
+            "type": "list"
+          },
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          },
+          "SamlProperties": {
+            "name": "SamlProperties",
+            "shape_name": "SamlProperties",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ResourceId"
+        ]
+      },
+      "name": "ModifySamlProperties",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ModifySelfservicePermissions": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          },
+          "SelfservicePermissions": {
+            "name": "SelfservicePermissions",
+            "shape_name": "SelfservicePermissions",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ResourceId",
+          "SelfservicePermissions"
+        ]
+      },
+      "name": "ModifySelfservicePermissions",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ModifyStreamingProperties": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          },
+          "StreamingProperties": {
+            "name": "StreamingProperties",
+            "shape_name": "StreamingProperties",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ResourceId"
+        ]
+      },
+      "name": "ModifyStreamingProperties",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ModifyWorkspaceAccessProperties": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          },
+          "WorkspaceAccessProperties": {
+            "name": "WorkspaceAccessProperties",
+            "shape_name": "WorkspaceAccessProperties",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ResourceId",
+          "WorkspaceAccessProperties"
+        ]
+      },
+      "name": "ModifyWorkspaceAccessProperties",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ModifyWorkspaceCreationProperties": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          },
+          "WorkspaceCreationProperties": {
+            "name": "WorkspaceCreationProperties",
+            "shape_name": "WorkspaceCreationProperties",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "ResourceId",
+          "WorkspaceCreationProperties"
+        ]
+      },
+      "name": "ModifyWorkspaceCreationProperties",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ModifyWorkspaceProperties": {
+      "input": {
+        "markers": null,
+        "members": {
+          "DataReplication": {
+            "name": "DataReplication",
+            "shape_name": "DataReplication",
+            "type": "string"
+          },
+          "WorkspaceId": {
+            "name": "WorkspaceId",
+            "shape_name": "WorkspaceId",
+            "type": "string"
+          },
+          "WorkspaceProperties": {
+            "name": "WorkspaceProperties",
+            "shape_name": "WorkspaceProperties",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "WorkspaceId"
+        ]
+      },
+      "name": "ModifyWorkspaceProperties",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "ModifyWorkspaceState": {
+      "input": {
+        "markers": null,
+        "members": {
+          "WorkspaceId": {
+            "name": "WorkspaceId",
+            "shape_name": "WorkspaceId",
+            "type": "string"
+          },
+          "WorkspaceState": {
+            "name": "WorkspaceState",
+            "shape_name": "TargetWorkspaceState",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkspaceId",
+          "WorkspaceState"
+        ]
+      },
+      "name": "ModifyWorkspaceState",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RebootWorkspaces": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RebootWorkspaceRequests": {
+            "name": "RebootWorkspaceRequests",
+            "shape_name": "RebootWorkspaceRequests",
+            "type": "list"
+          }
+        },
+        "required": [
+          "RebootWorkspaceRequests"
+        ]
+      },
+      "name": "RebootWorkspaces",
+      "output": {
+        "markers": null,
+        "members": {
+          "FailedRequests": {
+            "name": "FailedRequests",
+            "shape_name": "FailedRebootWorkspaceRequests",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "RebuildWorkspaces": {
+      "input": {
+        "markers": null,
+        "members": {
+          "RebuildWorkspaceRequests": {
+            "name": "RebuildWorkspaceRequests",
+            "shape_name": "RebuildWorkspaceRequests",
+            "type": "list"
+          }
+        },
+        "required": [
+          "RebuildWorkspaceRequests"
+        ]
+      },
+      "name": "RebuildWorkspaces",
+      "output": {
+        "markers": null,
+        "members": {
+          "FailedRequests": {
+            "name": "FailedRequests",
+            "shape_name": "FailedRebuildWorkspaceRequests",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "RegisterWorkspaceDirectory": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ActiveDirectoryConfig": {
+            "name": "ActiveDirectoryConfig",
+            "shape_name": "ActiveDirectoryConfig",
+            "type": "structure"
+          },
+          "DirectoryId": {
+            "name": "DirectoryId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          },
+          "EnableSelfService": {
+            "name": "EnableSelfService",
+            "shape_name": "BooleanObject",
+            "type": "boolean"
+          },
+          "IdcInstanceArn": {
+            "name": "IdcInstanceArn",
+            "shape_name": "ARN",
+            "type": "string"
+          },
+          "MicrosoftEntraConfig": {
+            "name": "MicrosoftEntraConfig",
+            "shape_name": "MicrosoftEntraConfig",
+            "type": "structure"
+          },
+          "SubnetIds": {
+            "name": "SubnetIds",
+            "shape_name": "SubnetIds",
+            "type": "list"
+          },
+          "Tags": {
+            "name": "Tags",
+            "shape_name": "TagList",
+            "type": "list"
+          },
+          "Tenancy": {
+            "name": "Tenancy",
+            "shape_name": "Tenancy",
+            "type": "string"
+          },
+          "UserIdentityType": {
+            "name": "UserIdentityType",
+            "shape_name": "UserIdentityType",
+            "type": "string"
+          },
+          "WorkspaceDirectoryDescription": {
+            "name": "WorkspaceDirectoryDescription",
+            "shape_name": "WorkspaceDirectoryDescription",
+            "type": "string"
+          },
+          "WorkspaceDirectoryName": {
+            "name": "WorkspaceDirectoryName",
+            "shape_name": "WorkspaceDirectoryName",
+            "type": "string"
+          },
+          "WorkspaceType": {
+            "name": "WorkspaceType",
+            "shape_name": "WorkspaceType",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "RegisterWorkspaceDirectory",
+      "output": {
+        "markers": null,
+        "members": {
+          "DirectoryId": {
+            "name": "DirectoryId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          },
+          "State": {
+            "name": "State",
+            "shape_name": "WorkspaceDirectoryState",
+            "type": "string"
+          }
+        },
+        "required": null
+      }
+    },
+    "RejectAccountLinkInvitation": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ClientToken": {
+            "name": "ClientToken",
+            "shape_name": "ClientToken",
+            "type": "string"
+          },
+          "LinkId": {
+            "name": "LinkId",
+            "shape_name": "LinkId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "LinkId"
+        ]
+      },
+      "name": "RejectAccountLinkInvitation",
+      "output": {
+        "markers": null,
+        "members": {
+          "AccountLink": {
+            "name": "AccountLink",
+            "shape_name": "AccountLink",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    },
+    "RestoreWorkspace": {
+      "input": {
+        "markers": null,
+        "members": {
+          "WorkspaceId": {
+            "name": "WorkspaceId",
+            "shape_name": "WorkspaceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "WorkspaceId"
+        ]
+      },
+      "name": "RestoreWorkspace",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "RevokeIpRules": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GroupId": {
+            "name": "GroupId",
+            "shape_name": "IpGroupId",
+            "type": "string"
+          },
+          "UserRules": {
+            "name": "UserRules",
+            "shape_name": "IpRevokedRuleList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "GroupId",
+          "UserRules"
+        ]
+      },
+      "name": "RevokeIpRules",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "StartWorkspaces": {
+      "input": {
+        "markers": null,
+        "members": {
+          "StartWorkspaceRequests": {
+            "name": "StartWorkspaceRequests",
+            "shape_name": "StartWorkspaceRequests",
+            "type": "list"
+          }
+        },
+        "required": [
+          "StartWorkspaceRequests"
+        ]
+      },
+      "name": "StartWorkspaces",
+      "output": {
+        "markers": null,
+        "members": {
+          "FailedRequests": {
+            "name": "FailedRequests",
+            "shape_name": "FailedStartWorkspaceRequests",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "StartWorkspacesPool": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PoolId": {
+            "name": "PoolId",
+            "shape_name": "WorkspacesPoolId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PoolId"
+        ]
+      },
+      "name": "StartWorkspacesPool",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "StopWorkspaces": {
+      "input": {
+        "markers": null,
+        "members": {
+          "StopWorkspaceRequests": {
+            "name": "StopWorkspaceRequests",
+            "shape_name": "StopWorkspaceRequests",
+            "type": "list"
+          }
+        },
+        "required": [
+          "StopWorkspaceRequests"
+        ]
+      },
+      "name": "StopWorkspaces",
+      "output": {
+        "markers": null,
+        "members": {
+          "FailedRequests": {
+            "name": "FailedRequests",
+            "shape_name": "FailedStopWorkspaceRequests",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "StopWorkspacesPool": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PoolId": {
+            "name": "PoolId",
+            "shape_name": "WorkspacesPoolId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PoolId"
+        ]
+      },
+      "name": "StopWorkspacesPool",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TerminateWorkspaces": {
+      "input": {
+        "markers": null,
+        "members": {
+          "TerminateWorkspaceRequests": {
+            "name": "TerminateWorkspaceRequests",
+            "shape_name": "TerminateWorkspaceRequests",
+            "type": "list"
+          }
+        },
+        "required": [
+          "TerminateWorkspaceRequests"
+        ]
+      },
+      "name": "TerminateWorkspaces",
+      "output": {
+        "markers": null,
+        "members": {
+          "FailedRequests": {
+            "name": "FailedRequests",
+            "shape_name": "FailedTerminateWorkspaceRequests",
+            "type": "list"
+          }
+        },
+        "required": null
+      }
+    },
+    "TerminateWorkspacesPool": {
+      "input": {
+        "markers": null,
+        "members": {
+          "PoolId": {
+            "name": "PoolId",
+            "shape_name": "WorkspacesPoolId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "PoolId"
+        ]
+      },
+      "name": "TerminateWorkspacesPool",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "TerminateWorkspacesPoolSession": {
+      "input": {
+        "markers": null,
+        "members": {
+          "SessionId": {
+            "name": "SessionId",
+            "shape_name": "AmazonUuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "SessionId"
+        ]
+      },
+      "name": "TerminateWorkspacesPoolSession",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateConnectClientAddIn": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AddInId": {
+            "name": "AddInId",
+            "shape_name": "AmazonUuid",
+            "type": "string"
+          },
+          "Name": {
+            "name": "Name",
+            "shape_name": "AddInName",
+            "type": "string"
+          },
+          "ResourceId": {
+            "name": "ResourceId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          },
+          "URL": {
+            "name": "URL",
+            "shape_name": "AddInUrl",
+            "type": "string"
+          }
+        },
+        "required": [
+          "AddInId",
+          "ResourceId"
+        ]
+      },
+      "name": "UpdateConnectClientAddIn",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateConnectionAliasPermission": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AliasId": {
+            "name": "AliasId",
+            "shape_name": "ConnectionAliasId",
+            "type": "string"
+          },
+          "ConnectionAliasPermission": {
+            "name": "ConnectionAliasPermission",
+            "shape_name": "ConnectionAliasPermission",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "AliasId",
+          "ConnectionAliasPermission"
+        ]
+      },
+      "name": "UpdateConnectionAliasPermission",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateRulesOfIpGroup": {
+      "input": {
+        "markers": null,
+        "members": {
+          "GroupId": {
+            "name": "GroupId",
+            "shape_name": "IpGroupId",
+            "type": "string"
+          },
+          "UserRules": {
+            "name": "UserRules",
+            "shape_name": "IpRuleList",
+            "type": "list"
+          }
+        },
+        "required": [
+          "GroupId",
+          "UserRules"
+        ]
+      },
+      "name": "UpdateRulesOfIpGroup",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateWorkspaceBundle": {
+      "input": {
+        "markers": null,
+        "members": {
+          "BundleId": {
+            "name": "BundleId",
+            "shape_name": "BundleId",
+            "type": "string"
+          },
+          "ImageId": {
+            "name": "ImageId",
+            "shape_name": "WorkspaceImageId",
+            "type": "string"
+          }
+        },
+        "required": null
+      },
+      "name": "UpdateWorkspaceBundle",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateWorkspaceImagePermission": {
+      "input": {
+        "markers": null,
+        "members": {
+          "AllowCopyImage": {
+            "name": "AllowCopyImage",
+            "shape_name": "BooleanObject",
+            "type": "boolean"
+          },
+          "ImageId": {
+            "name": "ImageId",
+            "shape_name": "WorkspaceImageId",
+            "type": "string"
+          },
+          "SharedAccountId": {
+            "name": "SharedAccountId",
+            "shape_name": "AwsAccount",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ImageId",
+          "AllowCopyImage",
+          "SharedAccountId"
+        ]
+      },
+      "name": "UpdateWorkspaceImagePermission",
+      "output": {
+        "markers": null,
+        "members": {},
+        "required": null
+      }
+    },
+    "UpdateWorkspacesPool": {
+      "input": {
+        "markers": null,
+        "members": {
+          "ApplicationSettings": {
+            "name": "ApplicationSettings",
+            "shape_name": "ApplicationSettingsRequest",
+            "type": "structure"
+          },
+          "BundleId": {
+            "name": "BundleId",
+            "shape_name": "BundleId",
+            "type": "string"
+          },
+          "Capacity": {
+            "name": "Capacity",
+            "shape_name": "Capacity",
+            "type": "structure"
+          },
+          "Description": {
+            "name": "Description",
+            "shape_name": "UpdateDescription",
+            "type": "string"
+          },
+          "DirectoryId": {
+            "name": "DirectoryId",
+            "shape_name": "DirectoryId",
+            "type": "string"
+          },
+          "PoolId": {
+            "name": "PoolId",
+            "shape_name": "WorkspacesPoolId",
+            "type": "string"
+          },
+          "RunningMode": {
+            "name": "RunningMode",
+            "shape_name": "PoolsRunningMode",
+            "type": "string"
+          },
+          "TimeoutSettings": {
+            "name": "TimeoutSettings",
+            "shape_name": "TimeoutSettings",
+            "type": "structure"
+          }
+        },
+        "required": [
+          "PoolId"
+        ]
+      },
+      "name": "UpdateWorkspacesPool",
+      "output": {
+        "markers": null,
+        "members": {
+          "WorkspacesPool": {
+            "name": "WorkspacesPool",
+            "shape_name": "WorkspacesPool",
+            "type": "structure"
+          }
+        },
+        "required": null
+      }
+    }
+  }
+}

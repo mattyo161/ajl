@@ -92,7 +92,17 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "CertificateArn",
+            "name": "DomainName",
+            "path": [
+              "Certificate"
+            ],
+            "type": "acm:certificate"
+          }
+        ]
       }
     },
     "ExportCertificate": {
@@ -278,6 +288,12 @@
       },
       "name": "ListCertificates",
       "output": {
+        "describe": {
+          "id_field": "Arn",
+          "kind": "scalar",
+          "operation": "DescribeCertificate",
+          "param": "CertificateArn"
+        },
         "markers": [
           "NextToken"
         ],

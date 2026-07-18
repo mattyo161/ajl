@@ -315,7 +315,16 @@
             "type": "map"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "QueueArn",
+            "path": [
+              "Attributes"
+            ],
+            "type": "sqs:queue-attributes"
+          }
+        ]
       }
     },
     "GetQueueUrl": {

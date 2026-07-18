@@ -1469,7 +1469,13 @@
             "shape_name": "BucketAccelerateStatus",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "path": [],
+            "type": "s3:bucket-accelerate"
+          }
+        ]
       }
     },
     "GetBucketAcl": {
@@ -1516,7 +1522,13 @@
             "shape_name": "Owner",
             "type": "structure"
           }
-        }
+        },
+        "resources": [
+          {
+            "path": [],
+            "type": "s3:bucket-acl"
+          }
+        ]
       }
     },
     "GetBucketAnalyticsConfiguration": {
@@ -1609,7 +1621,13 @@
             "shape_name": "CORSRules",
             "type": "list"
           }
-        }
+        },
+        "resources": [
+          {
+            "path": [],
+            "type": "s3:bucket-cors"
+          }
+        ]
       }
     },
     "GetBucketEncryption": {
@@ -1641,7 +1659,13 @@
             "shape_name": "ServerSideEncryptionConfiguration",
             "type": "structure"
           }
-        }
+        },
+        "resources": [
+          {
+            "path": [],
+            "type": "s3:bucket-encryption"
+          }
+        ]
       }
     },
     "GetBucketIntelligentTieringConfiguration": {
@@ -1818,7 +1842,13 @@
             "shape_name": "LifecycleRules",
             "type": "list"
           }
-        }
+        },
+        "resources": [
+          {
+            "path": [],
+            "type": "s3:bucket-lifecycle"
+          }
+        ]
       }
     },
     "GetBucketLocation": {
@@ -1850,7 +1880,13 @@
             "shape_name": "BucketLocationConstraint",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "path": [],
+            "type": "s3:bucket-location"
+          }
+        ]
       }
     },
     "GetBucketLogging": {
@@ -1882,7 +1918,13 @@
             "shape_name": "LoggingEnabled",
             "type": "structure"
           }
-        }
+        },
+        "resources": [
+          {
+            "path": [],
+            "type": "s3:bucket-logging"
+          }
+        ]
       }
     },
     "GetBucketMetricsConfiguration": {
@@ -2064,7 +2106,13 @@
             "shape_name": "TopicConfigurationList",
             "type": "list"
           }
-        }
+        },
+        "resources": [
+          {
+            "path": [],
+            "type": "s3:bucket-notification"
+          }
+        ]
       }
     },
     "GetBucketOwnershipControls": {
@@ -2096,7 +2144,13 @@
             "shape_name": "OwnershipControls",
             "type": "structure"
           }
-        }
+        },
+        "resources": [
+          {
+            "path": [],
+            "type": "s3:bucket-ownership-controls"
+          }
+        ]
       }
     },
     "GetBucketPolicy": {
@@ -2128,7 +2182,13 @@
             "shape_name": "Policy",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "path": [],
+            "type": "s3:bucket-policy"
+          }
+        ]
       }
     },
     "GetBucketPolicyStatus": {
@@ -2160,7 +2220,13 @@
             "shape_name": "PolicyStatus",
             "type": "structure"
           }
-        }
+        },
+        "resources": [
+          {
+            "path": [],
+            "type": "s3:bucket-policy-status"
+          }
+        ]
       }
     },
     "GetBucketReplication": {
@@ -2192,7 +2258,13 @@
             "shape_name": "ReplicationConfiguration",
             "type": "structure"
           }
-        }
+        },
+        "resources": [
+          {
+            "path": [],
+            "type": "s3:bucket-replication"
+          }
+        ]
       }
     },
     "GetBucketRequestPayment": {
@@ -2224,7 +2296,13 @@
             "shape_name": "Payer",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "path": [],
+            "type": "s3:bucket-request-payment"
+          }
+        ]
       }
     },
     "GetBucketTagging": {
@@ -2266,7 +2344,14 @@
             "shape_name": "TagSet",
             "type": "list"
           }
-        }
+        },
+        "resources": [
+          {
+            "path": [],
+            "tags": "TagSet",
+            "type": "s3:bucket-tagging"
+          }
+        ]
       }
     },
     "GetBucketVersioning": {
@@ -2303,7 +2388,13 @@
             "shape_name": "BucketVersioningStatus",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "path": [],
+            "type": "s3:bucket-versioning"
+          }
+        ]
       }
     },
     "GetBucketWebsite": {
@@ -2360,7 +2451,13 @@
             "shape_name": "RoutingRules",
             "type": "list"
           }
-        }
+        },
+        "resources": [
+          {
+            "path": [],
+            "type": "s3:bucket-website"
+          }
+        ]
       }
     },
     "GetObject": {
@@ -2936,7 +3033,13 @@
             "shape_name": "ObjectLockConfiguration",
             "type": "structure"
           }
-        }
+        },
+        "resources": [
+          {
+            "path": [],
+            "type": "s3:bucket-object-lock"
+          }
+        ]
       }
     },
     "GetObjectRetention": {
@@ -3127,7 +3230,13 @@
             "shape_name": "PublicAccessBlockConfiguration",
             "type": "structure"
           }
-        }
+        },
+        "resources": [
+          {
+            "path": [],
+            "type": "s3:bucket-public-access-block"
+          }
+        ]
       }
     },
     "HeadBucket": {

@@ -572,6 +572,71 @@ Matt, capitalized in his own jq) casing question — `coerce_params`'s
 casing remap already resolves either spelling to the model's real
 lowercase member before the call.
 
+### Baseline validation, round 2: 13 more services + s3/ssm depth
+Round one covered 12 services but missed real breadth Matt asked for:
+s3's per-bucket `Get*` detail calls, plus sqs, sns, ses, wafv2, workspaces,
+redshift, docdb, dynamodb, athena, acm — all added to `tools/inventory.sh`
+and curated in `tools/apply-resource-configs.py`, each verified live. New
+patterns and gaps found:
+
+- **Map-shaped API responses don't fit `output.resources`' list model.**
+  `sns.GetTopicAttributes`/`sqs.GetQueueAttributes` return a flat attribute
+  map — fits fine via `r(["Attributes"], ...)`, since a dict path descends
+  into itself as one item (`iter_path`'s existing rule). But
+  `ses.GetIdentity{Verification,Dkim,Notification}Attributes` return an
+  *identity-keyed* map (`{"VerificationAttributes": {"a@b.com": {...}}}`)
+  — no list to shape at all. Handled with `--no-parse` + a jq `to_entries`
+  reshape in `inventory.sh`; `--stamp-session` still attaches
+  Profile/Region/Account to the raw `--no-parse` page.
+- **Structured multi-field identifiers still don't fit `--describe`**
+  (same limitation as `eks.DescribeIdentityProviderConfig`/
+  `ecr.DescribeImages`, documented above): `wafv2.GetWebACL`/`GetIPSet`/
+  `GetRuleGroup` need `{Name, Scope, Id}` together. Resolved without any
+  engine change — `Scope` is a request param on the *list* call, so
+  `--stamp-session`'s existing request-param stamping puts it on every
+  list record for free; a plain jq chain in `inventory.sh` reconstructs
+  the three fields the Get* call needs.
+- **`docdb.DescribeDBClusters`/`DescribeDBInstances` hit the literal same
+  `rds.amazonaws.com` endpoint `rds` itself uses** and return every
+  RDS-family resource (Aurora, Neptune, DocumentDB, ...) unfiltered — a
+  third catalog-pollution trap alongside the ec2/iam ones above. Fixed the
+  same way: `--filters '[{"Name":"engine","Values":["docdb"]}]'` in the
+  inventory script, not an ajl change (there's no way to know "docdb-only"
+  from the operation shape).
+- **`workspaces.DescribeWorkspaceBundles`/`DescribeWorkspaceImages`** have
+  the same trap in miniature: omitting `--owner` returns your own account's
+  resources (correct default), but `--owner AMAZON` pulls in AWS's entire
+  public bundle/image catalog (146 bundles / 2 images observed on this
+  account) — documented in `inventory.sh` so nobody "completes" the script
+  by adding it.
+- **`redshift.DescribeClusterSecurityGroups` is a dead operation** for any
+  VPC-based cluster (i.e. virtually all modern ones) — AWS rejects it
+  outright ("Amazon Redshift has discontinued cluster security groups").
+  Not called in `inventory.sh`; VPC security groups are already covered by
+  `ec2 describe-security-groups`.
+- **S3's per-bucket `Get*` config calls
+  (`GetBucketVersioning`/`Encryption`/`Policy`/`Cors`/`Tagging`/`Acl`/...)
+  never echo `Bucket` back in their response** — verified via direct boto3
+  shape introspection, all 17 confirmed. Unlike `ListMultipartUploads`
+  (which does echo `Bucket`, enabling its existing `root_Bucket` arn
+  template), there's nothing in the response to build `Id`/`Name`/`Arn`
+  from, so they're curated `r([], "s3:bucket-...")` with those three
+  fields deliberately left blank rather than guessed; `--stamp-session`'s
+  `Bucket` (fed from the params piped in) is the join key back to
+  `s3-buckets.jsonl`. Several of the 17 (policy, CORS, tagging, website,
+  replication, object-lock) legitimately 404 per-bucket when that config
+  was never set on a given bucket — confirmed this is ajl's existing
+  per-item error containment working as intended, not a bug, by fanning
+  `--params-json` across several real buckets and watching 3 errors get
+  reported to stderr while 2 real results kept flowing.
+
+No `--describe`/normalizer engine changes were needed for any of this —
+every new gap was closed either with curation (`r()`/`d()` in
+`apply-resource-configs.py`) or with plain jq/`--stamp-session` chaining in
+`inventory.sh`, reusing mechanisms already built for round one and earlier
+sessions (the ecs `cluster`-scope stamping, the eks/ecr multi-field-id
+punt-to-jq precedent).
+
 ---
 
 ## Decision log template

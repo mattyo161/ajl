@@ -534,7 +534,16 @@
             "type": "map"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "TopicArn",
+            "path": [
+              "Attributes"
+            ],
+            "type": "sns:topic-attributes"
+          }
+        ]
       }
     },
     "ListEndpointsByPlatformApplication": {
@@ -816,7 +825,16 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "SubscriptionArn",
+            "path": [
+              "Subscriptions"
+            ],
+            "type": "sns:subscription"
+          }
+        ]
       }
     },
     "ListTagsForResource": {

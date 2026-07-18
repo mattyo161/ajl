@@ -129,6 +129,12 @@ CONFIGS = {
     "acm": {
         "resources": {
             "ListCertificates": [r(["CertificateSummaryList"], "acm:certificate", name="DomainName", arn="CertificateArn")],
+            # ACM tags require a separate ListTagsForCertificate call, not
+            # part of DescribeCertificate's response — not chained here
+            "DescribeCertificate": [r(["Certificate"], "acm:certificate", name="DomainName", arn="CertificateArn")],
+        },
+        "describe": {
+            "ListCertificates": d("DescribeCertificate", id_field="Arn", param="CertificateArn"),
         },
     },
     "cloud9": {
@@ -556,19 +562,72 @@ CONFIGS = {
         "resources": {
             "ListTopics": [r(["Topics"], "sns:topic", arn="TopicArn")],
             "ListSubscriptions": [r(["Subscriptions"], "sns:subscription", arn="SubscriptionArn")],
+            "ListSubscriptionsByTopic": [r(["Subscriptions"], "sns:subscription", arn="SubscriptionArn")],
             "ListPlatformApplications": [r(["PlatformApplications"], "sns:platform-application", arn="PlatformApplicationArn")],
+            # response is {"Attributes": {flat map, includes TopicArn}} — the
+            # map IS the resource, path descends into it directly (no list)
+            "GetTopicAttributes": [r(["Attributes"], "sns:topic-attributes", arn="TopicArn")],
         },
     },
     "sqs": {
         "jq": {
             "ListQueues": SQS_LIST_QUEUES_JQ,
         },
+        "resources": {
+            # same shape as sns GetTopicAttributes — a flat attribute map,
+            # not a list; QueueArn lives inside it (only present when
+            # --attribute-names All was passed — the API defaults to none)
+            "GetQueueAttributes": [r(["Attributes"], "sqs:queue-attributes", arn="QueueArn")],
+        },
     },
     "wafv2": {
         "resources": {
             "ListWebACLs": [r(["WebACLs"], "wafv2:webacl", "Id", name="Name", arn="ARN")],
+            "GetWebACL": [r(["WebACL"], "wafv2:webacl", "Id", name="Name", arn="ARN")],
             "ListIPSets": [r(["IPSets"], "wafv2:ipset", "Id", name="Name", arn="ARN")],
+            "GetIPSet": [r(["IPSet"], "wafv2:ipset", "Id", name="Name", arn="ARN")],
             "ListRuleGroups": [r(["RuleGroups"], "wafv2:rulegroup", "Id", name="Name", arn="ARN")],
+            "GetRuleGroup": [r(["RuleGroup"], "wafv2:rulegroup", "Id", name="Name", arn="ARN")],
+        },
+        # Get{WebACL,IPSet,RuleGroup} need Name+Scope+Id together, not a
+        # single scalar id — doesn't fit --describe's one-id_field model.
+        # --stamp-session already puts Scope on every list record (it was
+        # the list call's own request param), so a plain jq chain covering
+        # {Name,Id,Scope} works without inventing a multi-field describe.
+    },
+    "redshift": {
+        "resources": {
+            "DescribeClusters": [r(["Clusters"], "redshift:cluster", "ClusterIdentifier", arn="ClusterNamespaceArn", tags="Tags")],
+            "DescribeClusterSubnetGroups": [r(["ClusterSubnetGroups"], "redshift:subnet-group", "ClusterSubnetGroupName", name="ClusterSubnetGroupName", arn_format="arn:{partition}:redshift:{region}:{account}:subnetgroup:{ClusterSubnetGroupName}", tags="Tags")],
+            "DescribeClusterParameterGroups": [r(["ParameterGroups"], "redshift:parameter-group", "ParameterGroupName", name="ParameterGroupName", arn_format="arn:{partition}:redshift:{region}:{account}:parametergroup:{ParameterGroupName}", tags="Tags")],
+            "DescribeClusterSecurityGroups": [r(["ClusterSecurityGroups"], "redshift:security-group", "ClusterSecurityGroupName", name="ClusterSecurityGroupName", arn_format="arn:{partition}:redshift:{region}:{account}:securitygroup:{ClusterSecurityGroupName}", tags="Tags")],
+            "DescribeClusterSnapshots": [r(["Snapshots"], "redshift:snapshot", "SnapshotIdentifier", arn="SnapshotArn", tags="Tags")],
+            "DescribeEventSubscriptions": [r(["EventSubscriptionsList"], "redshift:event-subscription", "CustSubscriptionId", name="CustSubscriptionId", arn_format="arn:{partition}:redshift:{region}:{account}:eventsubscription:{CustSubscriptionId}", tags="Tags")],
+            "DescribeHsmClientCertificates": [r(["HsmClientCertificates"], "redshift:hsm-client-certificate", "HsmClientCertificateIdentifier", name="HsmClientCertificateIdentifier", arn_format="arn:{partition}:redshift:{region}:{account}:hsmclientcertificate:{HsmClientCertificateIdentifier}", tags="Tags")],
+            "DescribeHsmConfigurations": [r(["HsmConfigurations"], "redshift:hsm-configuration", "HsmConfigurationIdentifier", name="HsmConfigurationIdentifier", arn_format="arn:{partition}:redshift:{region}:{account}:hsmconfiguration:{HsmConfigurationIdentifier}", tags="Tags")],
+            "DescribeSnapshotSchedules": [r(["SnapshotSchedules"], "redshift:snapshot-schedule", "ScheduleIdentifier", name="ScheduleIdentifier", tags="Tags")],
+            "DescribeUsageLimits": [r(["UsageLimits"], "redshift:usage-limit", "UsageLimitId", tags="Tags")],
+        },
+    },
+    "workspaces": {
+        "resources": {
+            "DescribeWorkspaces": [r(["Workspaces"], "workspaces:workspace", "WorkspaceId", name="WorkspaceName", arn_format="arn:{partition}:workspaces:{region}:{account}:workspace/{WorkspaceId}")],
+            "DescribeWorkspaceDirectories": [r(["Directories"], "workspaces:directory", "DirectoryId", name="DirectoryName", arn_format="arn:{partition}:workspaces:{region}:{account}:directory/{DirectoryId}")],
+            "DescribeWorkspaceBundles": [r(["Bundles"], "workspaces:bundle", "BundleId", name="Name", arn_format="arn:{partition}:workspaces:{region}:{account}:workspacebundle/{BundleId}")],
+            "DescribeWorkspaceImages": [r(["Images"], "workspaces:image", "ImageId", name="Name", arn_format="arn:{partition}:workspaces:{region}:{account}:workspaceimage/{ImageId}")],
+            "DescribeConnectionAliases": [r(["ConnectionAliases"], "workspaces:connection-alias", "AliasId", arn_format="arn:{partition}:workspaces:{region}:{account}:connectionalias/{AliasId}")],
+            # Tags aren't inline on any Describe* response — DescribeTags
+            # takes a single ResourceId (any of the ARNs above) and returns
+            # a bare TagList, so it's chained via --describe rather than
+            # folded into the list resources above.
+            "DescribeTags": [r(["TagList"], "workspaces:tags", "Key", name="Key")],
+        },
+        "describe": {
+            "DescribeWorkspaces": d("DescribeTags", id_field="Id", param="ResourceId"),
+            "DescribeWorkspaceDirectories": d("DescribeTags", id_field="Id", param="ResourceId"),
+            "DescribeWorkspaceBundles": d("DescribeTags", id_field="Id", param="ResourceId"),
+            "DescribeWorkspaceImages": d("DescribeTags", id_field="Id", param="ResourceId"),
+            "DescribeConnectionAliases": d("DescribeTags", id_field="Id", param="ResourceId"),
         },
     },
     "rds": {
@@ -602,6 +661,31 @@ CONFIGS = {
             "GetBucketIntelligentTieringConfiguration": [r(["IntelligentTieringConfiguration"], "s3:intelligent-tiering-configuration", "Id")],
             "ListBucketMetricsConfigurations": [r(["MetricsConfigurationList"], "s3:metrics-configuration", "Id")],
             "GetBucketMetricsConfiguration": [r(["MetricsConfiguration"], "s3:metrics-configuration", "Id")],
+            # None of these echo Bucket back in their response (verified via
+            # boto3 shape introspection) — unlike ListMultipartUploads above,
+            # there's no root_Bucket to build an Id/Arn from. --stamp-session
+            # carries the Bucket request param onto the record instead
+            # (inventory.sh's jq chain is what supplies it, same as ecs's
+            # `cluster` scope and wafv2's `Scope`); Id/Name/Arn stay blank
+            # here rather than guessed.
+            "GetBucketVersioning": [r([], "s3:bucket-versioning")],
+            "GetBucketEncryption": [r([], "s3:bucket-encryption")],
+            "GetBucketPolicy": [r([], "s3:bucket-policy")],
+            "GetBucketPolicyStatus": [r([], "s3:bucket-policy-status")],
+            "GetBucketLifecycleConfiguration": [r([], "s3:bucket-lifecycle")],
+            "GetBucketCors": [r([], "s3:bucket-cors")],
+            "GetBucketNotificationConfiguration": [r([], "s3:bucket-notification")],
+            "GetBucketReplication": [r([], "s3:bucket-replication")],
+            "GetBucketLogging": [r([], "s3:bucket-logging")],
+            "GetBucketAccelerateConfiguration": [r([], "s3:bucket-accelerate")],
+            "GetBucketOwnershipControls": [r([], "s3:bucket-ownership-controls")],
+            "GetBucketTagging": [r([], "s3:bucket-tagging", tags="TagSet")],
+            "GetBucketLocation": [r([], "s3:bucket-location")],
+            "GetBucketRequestPayment": [r([], "s3:bucket-request-payment")],
+            "GetBucketAcl": [r([], "s3:bucket-acl")],
+            "GetBucketWebsite": [r([], "s3:bucket-website")],
+            "GetPublicAccessBlock": [r([], "s3:bucket-public-access-block")],
+            "GetObjectLockConfiguration": [r([], "s3:bucket-object-lock")],
         },
         "describe": {
             "ListBucketAnalyticsConfigurations": d("GetBucketAnalyticsConfiguration", id_field="Id", param="Id", scope=["Bucket"]),
