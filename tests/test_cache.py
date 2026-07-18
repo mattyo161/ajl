@@ -57,6 +57,18 @@ def test_key_stability_and_sensitivity(tmp_path, monkeypatch):
     assert ResultCache(options).key(options, "iam", "list-users", []) != key1
 
 
+def test_key_changes_with_describe(tmp_path, monkeypatch):
+    # --describe replaces the emitted records entirely (list -> paired
+    # describe output) — without this, list-role-policies --cache 1h and
+    # list-role-policies --cache 1h --describe collide on one cache key and
+    # replay each other's differently-shaped output
+    options = make_options(tmp_path, monkeypatch, describe=False)
+    key1 = ResultCache(options).key(options, "iam", "list-role-policies", [])
+    options.describe = True
+    key2 = ResultCache(options).key(options, "iam", "list-role-policies", [])
+    assert key1 != key2
+
+
 def test_round_trip_plaintext(tmp_path, monkeypatch, capfd):
     options = make_options(tmp_path, monkeypatch)
     cache = ResultCache(options)

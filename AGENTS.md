@@ -46,18 +46,25 @@ credentials; the test suite does not.
   (same engine, recurse off, pipeable prefixes); records here are LEAN
   (`Type`+`Uri`, no Id/Name/Arn, Tags only via --include-tags); module
   docstring documents the task/splitter contracts, docs/scan-design.md the
-  full design narrative.
+  full design narrative, [docs/commands/s3-scan.md](docs/commands/s3-scan.md)
+  / [docs/commands/s3-list.md](docs/commands/s3-list.md) the flag/usage reference.
 - `src/ajl/tags.py` — `--fetch-tags` batching (100 ARNs/call) via the
   Resource Groups Tagging API, background threads, submission-order emit.
 - `src/ajl/modelconfig.py` — loads packaged models; `AJL_MODELS_DIR` env var
   overrides for development.
 - `src/ajl/cache.py` — `--cache TTL` whole-invocation result cache (gzip +
   optional age via pyrage; env: `AJL_CACHE`, `AJL_CACHE_DIR`, `AJL_AGE_*`);
-  `ajl cache keygen|ls|clear`.
+  `ajl cache keygen|ls|clear` — see [docs/commands/cache.md](docs/commands/cache.md),
+  [docs/data-files.md](docs/data-files.md) for the on-disk layout.
 - `src/ajl/seal.py` — field-level `AJLSEC:1:` value sealing (reuses cache's
-  age config); `ajl decrypt` standalone unseal filter.
+  age config); `ajl decrypt` standalone unseal filter — see
+  [docs/commands/decrypt.md](docs/commands/decrypt.md).
 - `src/ajl/ssm.py` — `ajl ssm get` (arg-picked API, chunked, SecureString
-  sealing) and the `ssm params` describe alias.
+  sealing) and the `ssm params` describe alias — see
+  [docs/commands/ssm-get.md](docs/commands/ssm-get.md),
+  [ssm-update.md](docs/commands/ssm-update.md),
+  [ssm-put.md](docs/commands/ssm-put.md),
+  [ssm-params.md](docs/commands/ssm-params.md).
 - `src/ajl/learn.py` — `--learn` / `AJL_LEARN=1`: aws-cli-equivalent stderr
   line + JSONL audit record per invocation.
 - `src/ajl/apilog.py` — `--api-log` / `AJL_APILOG=1`: one JSONL record per

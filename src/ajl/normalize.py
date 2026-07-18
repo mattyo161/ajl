@@ -36,6 +36,13 @@ resource, and any scalar field of the response root as ``{root_<Field>}``.
 
 A hand-written ``output.jq`` program on the operation always wins over the
 declarative config (the escape hatch for odd APIs).
+
+A raw response field whose name collides with one of the five contract
+properties but means something else entirely (ssm's own parameter ``Type``
+of ``String``/``SecureString``, a VPN gateway's ``Type``) is never silently
+dropped: if its value differs from the normalized one, it's kept under
+``Original<Key>`` (``OriginalType``, ...) instead of overwriting or being
+discarded. A field whose value happens to already match needs no rename.
 """
 
 

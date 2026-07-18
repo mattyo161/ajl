@@ -7,6 +7,18 @@
 - [DESIGN.md](DESIGN.md) — design decisions and the reasoning behind them
 - [AGENTS.md](AGENTS.md) / [CLAUDE.md](CLAUDE.md) — instructions for AI coding agents
 - [tools/README.md](tools/README.md) — model generation tooling
+- [docs/request-flow.md](docs/request-flow.md) — how argv becomes a shaped
+  JSONL record, step by step
+- [docs/environment.md](docs/environment.md) — every environment variable
+  ajl reads, grouped and cross-referenced
+- [docs/data-files.md](docs/data-files.md) — every file/directory ajl reads
+  or writes (cache, learn log, api-log, model files) and how they relate
+- [docs/commands/](docs/commands/) — one reference doc per custom command:
+  [`ssm get`](docs/commands/ssm-get.md), [`ssm update`](docs/commands/ssm-update.md),
+  [`ssm put`](docs/commands/ssm-put.md), [`ssm params`](docs/commands/ssm-params.md),
+  [`s3 scan`](docs/commands/s3-scan.md), [`s3 list`](docs/commands/s3-list.md),
+  [`cache`](docs/commands/cache.md), [`decrypt`](docs/commands/decrypt.md)
+- [docs/scan-design.md](docs/scan-design.md) — the `s3 scan`/`s3 list` engine's design deep dive
 
 ## Installation
 

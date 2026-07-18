@@ -196,6 +196,7 @@ class ResultCache:
             "fetch_tags": options.fetch_tags,
             "jq": options.jq,
             "stamp_session": options.stamp_session,
+            "describe": getattr(options, "describe", False),
             "params_sha": self.params_sha,
         }
         return hashlib.sha256(orjson.dumps(material)).hexdigest()[:32]

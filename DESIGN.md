@@ -480,6 +480,20 @@ bloats output at scale. `run_describe_chain` stamps only `scope_params`
 (the useful, small, per-batch-constant context), never the identifier
 itself.
 
+### Fix: `--describe` wasn't part of the cache key material
+Found while documenting the result cache's key material (`ResultCache.key`,
+`cache.py`): `--describe` entirely replaces what a List operation emits
+(list records -> paired Describe/Get records) but was never added to the
+hashed material when it shipped. `ajl iam list-role-policies --role-name x
+--cache 1h` and the same command with `--describe` added computed the
+*identical* cache key — whichever ran first would get replayed verbatim for
+the other, silently serving the wrong shape of data. Added `"describe":
+options.describe` to the hashed material, matching how every other
+output-affecting flag (`jq`, `stamp_session`, `fetch_tags`, ...) is already
+there. A reminder that this list needs a deliberate update whenever a new
+flag changes what gets emitted — it is not derived automatically from the
+options object.
+
 ---
 
 ## Decision log template
