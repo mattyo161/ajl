@@ -499,13 +499,19 @@ def run_operation(runner, emitter, options, service, operation, params, session_
             file=sys.stderr,
         )
 
-    describe_cfg = (operation_cfg or {}).get("output", {}).get("describe") if (
-        getattr(options, "describe", False)) else None
-    if describe_cfg:
-        run_describe_chain(runner, emitter, options, service, operation_cfg,
-                            describe_cfg, context, client, operation_snake,
-                            params, session_key)
-        return
+    if getattr(options, "describe", False):
+        describe_cfg = (operation_cfg or {}).get("output", {}).get("describe")
+        if describe_cfg:
+            run_describe_chain(runner, emitter, options, service, operation_cfg,
+                                describe_cfg, context, client, operation_snake,
+                                params, session_key)
+            return
+        print(f"ajl: --describe: no curated List->Describe pairing for "
+              f"{service}.{operation_pascal} — running the plain list instead. "
+              f"Some lists (iam.ListRoles among them) already return full "
+              f"details and need no pairing; if this one doesn't, see "
+              f"AGENTS.md's \"Pair a List op with its Describe/Get\"",
+              file=sys.stderr)
 
     emitted = 0
     for record in _iter_operation_records(client, operation_snake, operation_cfg, params,
