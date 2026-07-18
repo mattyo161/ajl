@@ -123,7 +123,8 @@ A good PR:
 ## Releasing
 
 The version is derived from git tags by setuptools-scm — there is no version
-field to bump. Tag the release commit and build:
+field to bump. Add a [CHANGELOG.md](CHANGELOG.md) entry for the release,
+then tag the release commit and build:
 
 ```shell
 git tag v0.3.0

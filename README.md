@@ -2,6 +2,7 @@
 
 ## Documentation
 
+- [CHANGELOG.md](CHANGELOG.md) — notable changes per release
 - [CONTRIBUTING.md](CONTRIBUTING.md) — dev setup, model curation workflow, tests, releasing
 - [STYLE_GUIDE.md](STYLE_GUIDE.md) — code and output conventions
 - [DESIGN.md](DESIGN.md) — design decisions and the reasoning behind them
