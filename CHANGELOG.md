@@ -5,6 +5,11 @@ Notable changes to `ajl`, release by release. Format loosely follows
 [Semantic Versioning](https://semver.org/). See [DESIGN.md](DESIGN.md) for
 the reasoning behind these changes, not just the summary.
 
+## [0.4.1] - 2026-07-18
+
+### Added
+- This file — backfilled through v0.2.0 rather than starting bare.
+
 ## [0.4.0] - 2026-07-18
 
 ### Added
