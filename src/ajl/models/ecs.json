@@ -796,7 +796,17 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "containerInstanceArn",
+            "path": [
+              "containerInstances"
+            ],
+            "tags": "tags",
+            "type": "ecs:container-instance"
+          }
+        ]
       }
     },
     "DescribeServiceDeployments": {
@@ -1428,6 +1438,16 @@
       },
       "name": "ListContainerInstances",
       "output": {
+        "describe": {
+          "batch_size": 100,
+          "id_field": "Id",
+          "kind": "array",
+          "operation": "DescribeContainerInstances",
+          "param": "containerInstances",
+          "scope": [
+            "cluster"
+          ]
+        },
         "markers": [
           "nextToken"
         ],
@@ -1443,7 +1463,17 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "containerInstanceArn",
+            "path": [
+              "containerInstanceArns"
+            ],
+            "scalar_as": "containerInstanceArn",
+            "type": "ecs:container-instance"
+          }
+        ]
       }
     },
     "ListServiceDeployments": {
@@ -1539,6 +1569,16 @@
       },
       "name": "ListServices",
       "output": {
+        "describe": {
+          "batch_size": 10,
+          "id_field": "Id",
+          "kind": "array",
+          "operation": "DescribeServices",
+          "param": "services",
+          "scope": [
+            "cluster"
+          ]
+        },
         "markers": [
           "nextToken"
         ],
@@ -1725,6 +1765,12 @@
       },
       "name": "ListTaskDefinitions",
       "output": {
+        "describe": {
+          "id_field": "Arn",
+          "kind": "scalar",
+          "operation": "DescribeTaskDefinition",
+          "param": "taskDefinition"
+        },
         "markers": [
           "nextToken"
         ],

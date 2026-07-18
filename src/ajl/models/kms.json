@@ -623,7 +623,17 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "Arn",
+            "id": "KeyId",
+            "path": [
+              "KeyMetadata"
+            ],
+            "type": "kms:key"
+          }
+        ]
       }
     },
     "DisableKey": {
@@ -1222,7 +1232,15 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "PolicyName",
+            "name": "PolicyName",
+            "path": [],
+            "type": "kms:key-policy"
+          }
+        ]
       }
     },
     "GetKeyRotationStatus": {
@@ -1611,6 +1629,15 @@
       },
       "name": "ListKeyPolicies",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "GetKeyPolicy",
+          "param": "PolicyName",
+          "scope": [
+            "KeyId"
+          ]
+        },
         "markers": [
           "NextMarker"
         ],
@@ -1631,7 +1658,17 @@
             "type": "boolean"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "PolicyName",
+            "path": [
+              "PolicyNames"
+            ],
+            "scalar_as": "PolicyName",
+            "type": "kms:key-policy"
+          }
+        ]
       }
     },
     "ListKeyRotations": {
@@ -1711,6 +1748,12 @@
       },
       "name": "ListKeys",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeKey",
+          "param": "KeyId"
+        },
         "markers": [
           "NextMarker"
         ],

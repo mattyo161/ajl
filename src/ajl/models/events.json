@@ -1213,7 +1213,16 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "Arn",
+            "id": "Name",
+            "name": "Name",
+            "path": [],
+            "type": "events:partner-event-source"
+          }
+        ]
       }
     },
     "DescribeReplay": {
@@ -1760,6 +1769,12 @@
       },
       "name": "ListPartnerEventSources",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribePartnerEventSource",
+          "param": "Name"
+        },
         "markers": null,
         "members": {
           "NextToken": {
@@ -1773,7 +1788,18 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "Arn",
+            "id": "Name",
+            "name": "Name",
+            "path": [
+              "PartnerEventSources"
+            ],
+            "type": "events:partner-event-source"
+          }
+        ]
       }
     },
     "ListReplays": {

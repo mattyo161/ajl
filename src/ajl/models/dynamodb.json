@@ -657,7 +657,15 @@
             "shape_name": "TableName",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "id": "TableName",
+            "name": "TableName",
+            "path": [],
+            "type": "dynamodb:contributor-insights"
+          }
+        ]
       }
     },
     "DescribeEndpoints": {
@@ -713,7 +721,16 @@
             "shape_name": "ExportDescription",
             "type": "structure"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn": "ExportArn",
+            "path": [
+              "ExportDescription"
+            ],
+            "type": "dynamodb:export"
+          }
+        ]
       }
     },
     "DescribeGlobalTable": {
@@ -740,7 +757,18 @@
             "shape_name": "GlobalTableDescription",
             "type": "structure"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn": "GlobalTableArn",
+            "id": "GlobalTableName",
+            "name": "GlobalTableName",
+            "path": [
+              "GlobalTableDescription"
+            ],
+            "type": "dynamodb:global-table"
+          }
+        ]
       }
     },
     "DescribeGlobalTableSettings": {
@@ -1589,6 +1617,12 @@
       },
       "name": "ListContributorInsights",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeContributorInsights",
+          "param": "TableName"
+        },
         "lists": {
           "ContributorInsightsSummaries": {
             "all_fields": [
@@ -1618,7 +1652,17 @@
             "shape_name": "NextTokenString",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "id": "TableName",
+            "name": "TableName",
+            "path": [
+              "ContributorInsightsSummaries"
+            ],
+            "type": "dynamodb:contributor-insights"
+          }
+        ]
       }
     },
     "ListExports": {
@@ -1647,6 +1691,12 @@
       },
       "name": "ListExports",
       "output": {
+        "describe": {
+          "id_field": "Arn",
+          "kind": "scalar",
+          "operation": "DescribeExport",
+          "param": "ExportArn"
+        },
         "lists": {
           "ExportSummaries": {
             "all_fields": [
@@ -1675,7 +1725,16 @@
             "shape_name": "ExportNextToken",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "arn": "ExportArn",
+            "path": [
+              "ExportSummaries"
+            ],
+            "type": "dynamodb:export"
+          }
+        ]
       }
     },
     "ListGlobalTables": {
@@ -1702,6 +1761,12 @@
       },
       "name": "ListGlobalTables",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeGlobalTable",
+          "param": "GlobalTableName"
+        },
         "lists": {
           "GlobalTables": {
             "all_fields": [
@@ -1824,6 +1889,12 @@
       },
       "name": "ListTables",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeTable",
+          "param": "TableName"
+        },
         "lists": {
           "TableNames": {
             "all_fields": [],

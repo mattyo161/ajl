@@ -892,6 +892,15 @@
         "required": [
           "ServerId",
           "Access"
+        ],
+        "resources": [
+          {
+            "id": "ExternalId",
+            "path": [
+              "Access"
+            ],
+            "type": "transfer:access"
+          }
         ]
       }
     },
@@ -985,6 +994,16 @@
         },
         "required": [
           "Connector"
+        ],
+        "resources": [
+          {
+            "arn": "Arn",
+            "id": "ConnectorId",
+            "path": [
+              "Connector"
+            ],
+            "type": "transfer:connector"
+          }
         ]
       }
     },
@@ -1026,6 +1045,15 @@
         "required": [
           "WorkflowId",
           "Execution"
+        ],
+        "resources": [
+          {
+            "id": "ExecutionId",
+            "path": [
+              "Execution"
+            ],
+            "type": "transfer:execution"
+          }
         ]
       }
     },
@@ -1090,6 +1118,16 @@
         },
         "required": [
           "Profile"
+        ],
+        "resources": [
+          {
+            "arn": "Arn",
+            "id": "ProfileId",
+            "path": [
+              "Profile"
+            ],
+            "type": "transfer:profile"
+          }
         ]
       }
     },
@@ -1119,6 +1157,16 @@
         },
         "required": [
           "SecurityPolicy"
+        ],
+        "resources": [
+          {
+            "id": "SecurityPolicyName",
+            "name": "SecurityPolicyName",
+            "path": [
+              "SecurityPolicy"
+            ],
+            "type": "transfer:security-policy"
+          }
         ]
       }
     },
@@ -1218,6 +1266,16 @@
         },
         "required": [
           "WebApp"
+        ],
+        "resources": [
+          {
+            "arn": "Arn",
+            "id": "WebAppId",
+            "path": [
+              "WebApp"
+            ],
+            "type": "transfer:web-app"
+          }
         ]
       }
     },
@@ -1276,6 +1334,16 @@
         },
         "required": [
           "Workflow"
+        ],
+        "resources": [
+          {
+            "arn": "Arn",
+            "id": "WorkflowId",
+            "path": [
+              "Workflow"
+            ],
+            "type": "transfer:workflow"
+          }
         ]
       }
     },
@@ -1476,6 +1544,15 @@
       },
       "name": "ListAccesses",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeAccess",
+          "param": "ExternalId",
+          "scope": [
+            "ServerId"
+          ]
+        },
         "markers": [
           "NextToken"
         ],
@@ -1499,6 +1576,15 @@
         "required": [
           "ServerId",
           "Accesses"
+        ],
+        "resources": [
+          {
+            "id": "ExternalId",
+            "path": [
+              "Accesses"
+            ],
+            "type": "transfer:access"
+          }
         ]
       }
     },
@@ -1612,6 +1698,12 @@
       },
       "name": "ListConnectors",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeConnector",
+          "param": "ConnectorId"
+        },
         "markers": [
           "NextToken"
         ],
@@ -1629,6 +1721,16 @@
         },
         "required": [
           "Connectors"
+        ],
+        "resources": [
+          {
+            "arn": "Arn",
+            "id": "ConnectorId",
+            "path": [
+              "Connectors"
+            ],
+            "type": "transfer:connector"
+          }
         ]
       }
     },
@@ -1660,6 +1762,15 @@
       },
       "name": "ListExecutions",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeExecution",
+          "param": "ExecutionId",
+          "scope": [
+            "WorkflowId"
+          ]
+        },
         "markers": [
           "NextToken"
         ],
@@ -1683,6 +1794,15 @@
         "required": [
           "WorkflowId",
           "Executions"
+        ],
+        "resources": [
+          {
+            "id": "ExecutionId",
+            "path": [
+              "Executions"
+            ],
+            "type": "transfer:execution"
+          }
         ]
       }
     },
@@ -1816,6 +1936,12 @@
       },
       "name": "ListProfiles",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeProfile",
+          "param": "ProfileId"
+        },
         "markers": [
           "NextToken"
         ],
@@ -1833,6 +1959,16 @@
         },
         "required": [
           "Profiles"
+        ],
+        "resources": [
+          {
+            "arn": "Arn",
+            "id": "ProfileId",
+            "path": [
+              "Profiles"
+            ],
+            "type": "transfer:profile"
+          }
         ]
       }
     },
@@ -1857,6 +1993,12 @@
       },
       "name": "ListSecurityPolicies",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeSecurityPolicy",
+          "param": "SecurityPolicyName"
+        },
         "markers": [
           "NextToken"
         ],
@@ -1874,6 +2016,16 @@
         },
         "required": [
           "SecurityPolicyNames"
+        ],
+        "resources": [
+          {
+            "id": "SecurityPolicyName",
+            "path": [
+              "SecurityPolicyNames"
+            ],
+            "scalar_as": "SecurityPolicyName",
+            "type": "transfer:security-policy"
+          }
         ]
       }
     },
@@ -2055,6 +2207,12 @@
       },
       "name": "ListWebApps",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeWebApp",
+          "param": "WebAppId"
+        },
         "markers": [
           "NextToken"
         ],
@@ -2072,6 +2230,16 @@
         },
         "required": [
           "WebApps"
+        ],
+        "resources": [
+          {
+            "arn": "Arn",
+            "id": "WebAppId",
+            "path": [
+              "WebApps"
+            ],
+            "type": "transfer:web-app"
+          }
         ]
       }
     },
@@ -2096,6 +2264,12 @@
       },
       "name": "ListWorkflows",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeWorkflow",
+          "param": "WorkflowId"
+        },
         "markers": [
           "NextToken"
         ],
@@ -2113,6 +2287,16 @@
         },
         "required": [
           "Workflows"
+        ],
+        "resources": [
+          {
+            "arn": "Arn",
+            "id": "WorkflowId",
+            "path": [
+              "Workflows"
+            ],
+            "type": "transfer:workflow"
+          }
         ]
       }
     },

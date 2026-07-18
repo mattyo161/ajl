@@ -1770,7 +1770,15 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Name",
+            "name": "Name",
+            "path": [],
+            "type": "es:data-source"
+          }
+        ]
       }
     },
     "GetDirectQueryDataSource": {
@@ -2064,6 +2072,15 @@
       },
       "name": "ListDataSources",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "GetDataSource",
+          "param": "Name",
+          "scope": [
+            "DomainName"
+          ]
+        },
         "markers": null,
         "members": {
           "DataSources": {
@@ -2072,7 +2089,17 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Name",
+            "name": "Name",
+            "path": [
+              "DataSources"
+            ],
+            "type": "es:data-source"
+          }
+        ]
       }
     },
     "ListDirectQueryDataSources": {
@@ -2492,6 +2519,13 @@
       },
       "name": "ListVpcEndpoints",
       "output": {
+        "describe": {
+          "batch_size": 5,
+          "id_field": "Id",
+          "kind": "array",
+          "operation": "DescribeVpcEndpoints",
+          "param": "VpcEndpointIds"
+        },
         "markers": null,
         "members": {
           "NextToken": {
@@ -2508,6 +2542,16 @@
         "required": [
           "VpcEndpointSummaryList",
           "NextToken"
+        ],
+        "resources": [
+          {
+            "arn": "DomainArn",
+            "id": "VpcEndpointId",
+            "path": [
+              "VpcEndpointSummaryList"
+            ],
+            "type": "es:vpc-endpoint"
+          }
         ]
       }
     },

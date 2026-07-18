@@ -1554,7 +1554,16 @@
             "shape_name": "AnalyticsConfiguration",
             "type": "structure"
           }
-        }
+        },
+        "resources": [
+          {
+            "id": "Id",
+            "path": [
+              "AnalyticsConfiguration"
+            ],
+            "type": "s3:analytics-configuration"
+          }
+        ]
       }
     },
     "GetBucketCors": {
@@ -1665,7 +1674,16 @@
             "shape_name": "IntelligentTieringConfiguration",
             "type": "structure"
           }
-        }
+        },
+        "resources": [
+          {
+            "id": "Id",
+            "path": [
+              "IntelligentTieringConfiguration"
+            ],
+            "type": "s3:intelligent-tiering-configuration"
+          }
+        ]
       }
     },
     "GetBucketInventoryConfiguration": {
@@ -1902,7 +1920,16 @@
             "shape_name": "MetricsConfiguration",
             "type": "structure"
           }
-        }
+        },
+        "resources": [
+          {
+            "id": "Id",
+            "path": [
+              "MetricsConfiguration"
+            ],
+            "type": "s3:metrics-configuration"
+          }
+        ]
       }
     },
     "GetBucketNotification": {
@@ -3473,6 +3500,15 @@
       },
       "name": "ListBucketAnalyticsConfigurations",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "GetBucketAnalyticsConfiguration",
+          "param": "Id",
+          "scope": [
+            "Bucket"
+          ]
+        },
         "lists": {
           "AnalyticsConfigurationList": {
             "all_fields": [
@@ -3512,7 +3548,16 @@
             "shape_name": "NextToken",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "id": "Id",
+            "path": [
+              "AnalyticsConfigurationList"
+            ],
+            "type": "s3:analytics-configuration"
+          }
+        ]
       }
     },
     "ListBucketIntelligentTieringConfigurations": {
@@ -3538,6 +3583,15 @@
       },
       "name": "ListBucketIntelligentTieringConfigurations",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "GetBucketIntelligentTieringConfiguration",
+          "param": "Id",
+          "scope": [
+            "Bucket"
+          ]
+        },
         "lists": {
           "IntelligentTieringConfigurationList": {
             "all_fields": [
@@ -3578,7 +3632,16 @@
             "shape_name": "NextToken",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "id": "Id",
+            "path": [
+              "IntelligentTieringConfigurationList"
+            ],
+            "type": "s3:intelligent-tiering-configuration"
+          }
+        ]
       }
     },
     "ListBucketInventoryConfigurations": {
@@ -3683,6 +3746,15 @@
       },
       "name": "ListBucketMetricsConfigurations",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "GetBucketMetricsConfiguration",
+          "param": "Id",
+          "scope": [
+            "Bucket"
+          ]
+        },
         "lists": {
           "MetricsConfigurationList": {
             "all_fields": [
@@ -3721,7 +3793,16 @@
             "shape_name": "NextToken",
             "type": "string"
           }
-        }
+        },
+        "resources": [
+          {
+            "id": "Id",
+            "path": [
+              "MetricsConfigurationList"
+            ],
+            "type": "s3:metrics-configuration"
+          }
+        ]
       }
     },
     "ListBuckets": {

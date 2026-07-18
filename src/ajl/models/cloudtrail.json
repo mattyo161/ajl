@@ -1997,6 +1997,13 @@
       },
       "name": "ListTrails",
       "output": {
+        "describe": {
+          "batch_size": 10,
+          "id_field": "Id",
+          "kind": "array",
+          "operation": "DescribeTrails",
+          "param": "trailNameList"
+        },
         "markers": [
           "NextToken"
         ],

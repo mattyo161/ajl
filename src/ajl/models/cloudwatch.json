@@ -602,7 +602,15 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "DashboardName",
+            "name": "DashboardName",
+            "path": [],
+            "type": "cloudwatch:dashboard"
+          }
+        ]
       }
     },
     "GetInsightRuleReport": {
@@ -974,6 +982,12 @@
       },
       "name": "ListDashboards",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "GetDashboard",
+          "param": "DashboardName"
+        },
         "markers": [
           "NextToken"
         ],
@@ -989,7 +1003,17 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "DashboardName",
+            "name": "DashboardName",
+            "path": [
+              "DashboardEntries"
+            ],
+            "type": "cloudwatch:dashboard"
+          }
+        ]
       }
     },
     "ListManagedInsightRules": {

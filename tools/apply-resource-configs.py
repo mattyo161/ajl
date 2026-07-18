@@ -136,17 +136,33 @@ CONFIGS = {
             "ListEnvironments": [r(["environmentIds"], "cloud9:environment", "environmentId", arn_format="arn:{partition}:cloud9:{region}:{account}:environment:{environmentId}", scalar_as="environmentId")],
             "DescribeEnvironments": [r(["environments"], "cloud9:environment", "id", name="name", arn="arn")],
         },
+        "describe": {
+            # AWS docs: max 25 environment ids per DescribeEnvironments call
+            "ListEnvironments": d("DescribeEnvironments", id_field="Id", param="environmentIds",
+                                  kind="array", batch_size=25),
+        },
     },
     "cloudformation": {
         "resources": {
             "ListStacks": [r(["StackSummaries"], "cloudformation:stack", "StackName", name="StackName", arn="StackId")],
             "DescribeStacks": [r(["Stacks"], "cloudformation:stack", "StackName", name="StackName", arn="StackId", tags="Tags")],
+            "ListTypeRegistrations": [r(["RegistrationTokenList"], "cloudformation:type-registration", "RegistrationToken", scalar_as="RegistrationToken")],
+            "DescribeTypeRegistration": [r([], "cloudformation:type-registration", "RegistrationToken")],
+        },
+        "describe": {
+            "ListTypeRegistrations": d("DescribeTypeRegistration", id_field="Id", param="RegistrationToken"),
         },
     },
     "cloudtrail": {
         "resources": {
             "ListTrails": [r(["Trails"], "cloudtrail:trail", "Name", name="Name", arn="TrailARN")],
             "DescribeTrails": [r(["trailList"], "cloudtrail:trail", "Name", name="Name", arn="TrailARN")],
+        },
+        "describe": {
+            # trailNameList isn't formally required by DescribeTrails, but
+            # passing the names we already listed is exactly the point here
+            "ListTrails": d("DescribeTrails", id_field="Id", param="trailNameList",
+                            kind="array", batch_size=10),
         },
     },
     "cloudwatch": {
@@ -155,35 +171,108 @@ CONFIGS = {
                 r(["MetricAlarms"], "cloudwatch:alarm", "AlarmName", name="AlarmName", arn="AlarmArn"),
                 r(["CompositeAlarms"], "cloudwatch:alarm", "AlarmName", name="AlarmName", arn="AlarmArn"),
             ],
+            "ListDashboards": [r(["DashboardEntries"], "cloudwatch:dashboard", "DashboardName", name="DashboardName")],
+            "GetDashboard": [r([], "cloudwatch:dashboard", "DashboardName", name="DashboardName")],
+        },
+        "describe": {
+            "ListDashboards": d("GetDashboard", id_field="Id", param="DashboardName"),
         },
     },
     "events": {
         "resources": {
             "ListRules": [r(["Rules"], "events:rule", "Name", name="Name", arn="Arn")],
+            "ListPartnerEventSources": [r(["PartnerEventSources"], "events:partner-event-source", "Name", name="Name", arn="Arn")],
+            "DescribePartnerEventSource": [r([], "events:partner-event-source", "Name", name="Name", arn="Arn")],
+        },
+        "describe": {
+            "ListPartnerEventSources": d("DescribePartnerEventSource", id_field="Id", param="Name"),
         },
     },
     "logs": {
         "resources": {
             "DescribeLogGroups": [r(["logGroups"], "logs:log-group", "logGroupName", name="logGroupName", arn_format="arn:{partition}:logs:{region}:{account}:log-group:{logGroupName}")],
+            "ListIntegrations": [r(["integrationSummaries"], "logs:integration", "integrationName", name="integrationName")],
+            "GetIntegration": [r([], "logs:integration", "integrationName", name="integrationName")],
+        },
+        "describe": {
+            "ListIntegrations": d("GetIntegration", id_field="Id", param="integrationName"),
         },
     },
     "sagemaker": {
         "resources": {
             "ListModels": [r(["Models"], "sagemaker:model", "ModelName", name="ModelName", arn="ModelArn")],
+            "DescribeModel": [r([], "sagemaker:model", "ModelName", name="ModelName", arn="ModelArn")],
             "ListEndpointConfigs": [r(["EndpointConfigs"], "sagemaker:endpoint-config", "EndpointConfigName", name="EndpointConfigName", arn="EndpointConfigArn")],
+            "DescribeEndpointConfig": [r([], "sagemaker:endpoint-config", "EndpointConfigName", name="EndpointConfigName", arn="EndpointConfigArn")],
             "ListActions": [r(["ActionSummaries"], "sagemaker:action", "ActionName", name="ActionName", arn="ActionArn")],
             "ListContexts": [r(["ContextSummaries"], "sagemaker:context", "ContextName", name="ContextName", arn="ContextArn")],
+            "ListDataQualityJobDefinitions": [r(["JobDefinitionSummaries"], "sagemaker:data-quality-job-definition", "MonitoringJobDefinitionName", name="MonitoringJobDefinitionName", arn="MonitoringJobDefinitionArn")],
+            "DescribeDataQualityJobDefinition": [r([], "sagemaker:data-quality-job-definition", "JobDefinitionName", name="JobDefinitionName", arn="JobDefinitionArn")],
+            "ListDeviceFleets": [r(["DeviceFleetSummaries"], "sagemaker:device-fleet", "DeviceFleetName", name="DeviceFleetName", arn="DeviceFleetArn")],
+            "DescribeDeviceFleet": [r([], "sagemaker:device-fleet", "DeviceFleetName", name="DeviceFleetName", arn="DeviceFleetArn")],
+            "ListHumanTaskUis": [r(["HumanTaskUiSummaries"], "sagemaker:human-task-ui", "HumanTaskUiName", name="HumanTaskUiName", arn="HumanTaskUiArn")],
+            "DescribeHumanTaskUi": [r([], "sagemaker:human-task-ui", "HumanTaskUiName", name="HumanTaskUiName", arn="HumanTaskUiArn")],
+            "ListModelBiasJobDefinitions": [r(["JobDefinitionSummaries"], "sagemaker:model-bias-job-definition", "MonitoringJobDefinitionName", name="MonitoringJobDefinitionName", arn="MonitoringJobDefinitionArn")],
+            "DescribeModelBiasJobDefinition": [r([], "sagemaker:model-bias-job-definition", "JobDefinitionName", name="JobDefinitionName", arn="JobDefinitionArn")],
+            "ListModelExplainabilityJobDefinitions": [r(["JobDefinitionSummaries"], "sagemaker:model-explainability-job-definition", "MonitoringJobDefinitionName", name="MonitoringJobDefinitionName", arn="MonitoringJobDefinitionArn")],
+            "DescribeModelExplainabilityJobDefinition": [r([], "sagemaker:model-explainability-job-definition", "JobDefinitionName", name="JobDefinitionName", arn="JobDefinitionArn")],
+            "ListModelQualityJobDefinitions": [r(["JobDefinitionSummaries"], "sagemaker:model-quality-job-definition", "MonitoringJobDefinitionName", name="MonitoringJobDefinitionName", arn="MonitoringJobDefinitionArn")],
+            "DescribeModelQualityJobDefinition": [r([], "sagemaker:model-quality-job-definition", "JobDefinitionName", name="JobDefinitionName", arn="JobDefinitionArn")],
+            "ListNotebookInstanceLifecycleConfigs": [r(["NotebookInstanceLifecycleConfigs"], "sagemaker:notebook-instance-lifecycle-config", "NotebookInstanceLifecycleConfigName", name="NotebookInstanceLifecycleConfigName", arn="NotebookInstanceLifecycleConfigArn")],
+            "DescribeNotebookInstanceLifecycleConfig": [r([], "sagemaker:notebook-instance-lifecycle-config", "NotebookInstanceLifecycleConfigName", name="NotebookInstanceLifecycleConfigName", arn="NotebookInstanceLifecycleConfigArn")],
+        },
+        "describe": {
+            "ListModels": d("DescribeModel", id_field="Id", param="ModelName"),
+            "ListEndpointConfigs": d("DescribeEndpointConfig", id_field="Id", param="EndpointConfigName"),
+            "ListDataQualityJobDefinitions": d("DescribeDataQualityJobDefinition", id_field="Id", param="JobDefinitionName"),
+            "ListDeviceFleets": d("DescribeDeviceFleet", id_field="Id", param="DeviceFleetName"),
+            "ListHumanTaskUis": d("DescribeHumanTaskUi", id_field="Id", param="HumanTaskUiName"),
+            "ListModelBiasJobDefinitions": d("DescribeModelBiasJobDefinition", id_field="Id", param="JobDefinitionName"),
+            "ListModelExplainabilityJobDefinitions": d("DescribeModelExplainabilityJobDefinition", id_field="Id", param="JobDefinitionName"),
+            "ListModelQualityJobDefinitions": d("DescribeModelQualityJobDefinition", id_field="Id", param="JobDefinitionName"),
+            "ListNotebookInstanceLifecycleConfigs": d("DescribeNotebookInstanceLifecycleConfig", id_field="Id", param="NotebookInstanceLifecycleConfigName"),
         },
     },
     "servicediscovery": {
         "resources": {
             "ListNamespaces": [r(["Namespaces"], "servicediscovery:namespace", "Id", name="Name", arn="Arn")],
             "ListServices": [r(["Services"], "servicediscovery:service", "Id", name="Name", arn="Arn")],
+            "ListInstances": [r(["Instances"], "servicediscovery:instance", "Id")],
+            "GetInstance": [r(["Instance"], "servicediscovery:instance", "Id")],
+            "ListOperations": [r(["Operations"], "servicediscovery:operation", "Id")],
+            "GetOperation": [r(["Operation"], "servicediscovery:operation", "Id")],
+        },
+        "describe": {
+            "ListInstances": d("GetInstance", id_field="Id", param="InstanceId", scope=["ServiceId"]),
+            "ListOperations": d("GetOperation", id_field="Id", param="OperationId"),
         },
     },
     "transfer": {
         "resources": {
             "ListServers": [r(["Servers"], "transfer:server", "ServerId", name="ServerId", arn="Arn")],
+            "ListAccesses": [r(["Accesses"], "transfer:access", "ExternalId")],
+            "DescribeAccess": [r(["Access"], "transfer:access", "ExternalId")],
+            "ListConnectors": [r(["Connectors"], "transfer:connector", "ConnectorId", arn="Arn")],
+            "DescribeConnector": [r(["Connector"], "transfer:connector", "ConnectorId", arn="Arn")],
+            "ListExecutions": [r(["Executions"], "transfer:execution", "ExecutionId")],
+            "DescribeExecution": [r(["Execution"], "transfer:execution", "ExecutionId")],
+            "ListProfiles": [r(["Profiles"], "transfer:profile", "ProfileId", arn="Arn")],
+            "DescribeProfile": [r(["Profile"], "transfer:profile", "ProfileId", arn="Arn")],
+            "ListSecurityPolicies": [r(["SecurityPolicyNames"], "transfer:security-policy", "SecurityPolicyName", scalar_as="SecurityPolicyName")],
+            "DescribeSecurityPolicy": [r(["SecurityPolicy"], "transfer:security-policy", "SecurityPolicyName", name="SecurityPolicyName")],
+            "ListWebApps": [r(["WebApps"], "transfer:web-app", "WebAppId", arn="Arn")],
+            "DescribeWebApp": [r(["WebApp"], "transfer:web-app", "WebAppId", arn="Arn")],
+            "ListWorkflows": [r(["Workflows"], "transfer:workflow", "WorkflowId", arn="Arn")],
+            "DescribeWorkflow": [r(["Workflow"], "transfer:workflow", "WorkflowId", arn="Arn")],
+        },
+        "describe": {
+            "ListAccesses": d("DescribeAccess", id_field="Id", param="ExternalId", scope=["ServerId"]),
+            "ListConnectors": d("DescribeConnector", id_field="Id", param="ConnectorId"),
+            "ListExecutions": d("DescribeExecution", id_field="Id", param="ExecutionId", scope=["WorkflowId"]),
+            "ListProfiles": d("DescribeProfile", id_field="Id", param="ProfileId"),
+            "ListSecurityPolicies": d("DescribeSecurityPolicy", id_field="Id", param="SecurityPolicyName"),
+            "ListWebApps": d("DescribeWebApp", id_field="Id", param="WebAppId"),
+            "ListWorkflows": d("DescribeWorkflow", id_field="Id", param="WorkflowId"),
         },
     },
     "ec2": {
@@ -233,9 +322,29 @@ CONFIGS = {
             # inline policies have no ARN (identified by RoleName+PolicyName only)
             "ListRolePolicies": [r(["PolicyNames"], "iam:role-policy", "PolicyName", scalar_as="PolicyName")],
             "GetRolePolicy": [r([], "iam:role-policy", "PolicyName", name="PolicyName")],
+            "ListGroupPolicies": [r(["PolicyNames"], "iam:group-policy", "PolicyName", scalar_as="PolicyName")],
+            "GetGroupPolicy": [r([], "iam:group-policy", "PolicyName", name="PolicyName")],
+            "ListUserPolicies": [r(["PolicyNames"], "iam:user-policy", "PolicyName", scalar_as="PolicyName")],
+            "GetUserPolicy": [r([], "iam:user-policy", "PolicyName", name="PolicyName")],
+            "ListMFADevices": [r(["MFADevices"], "iam:mfa-device", "SerialNumber", name="SerialNumber")],
+            "GetMFADevice": [r([], "iam:mfa-device", "SerialNumber", name="SerialNumber")],
+            "ListPolicyVersions": [r(["Versions"], "iam:policy-version", "VersionId", name="VersionId")],
+            "GetPolicyVersion": [r(["PolicyVersion"], "iam:policy-version", "VersionId", name="VersionId")],
+            # GetSAMLProvider's response never echoes back the ARN you asked
+            # for — run_describe_chain's scalar-kind id fallback fills it in
+            "ListSAMLProviders": [r(["SAMLProviderList"], "iam:saml-provider", arn="Arn")],
+            "GetSAMLProvider": [r([], "iam:saml-provider", tags="Tags")],
         },
         "describe": {
             "ListRolePolicies": d("GetRolePolicy", id_field="Id", param="PolicyName", scope=["RoleName"]),
+            "ListGroupPolicies": d("GetGroupPolicy", id_field="Id", param="PolicyName", scope=["GroupName"]),
+            "ListUserPolicies": d("GetUserPolicy", id_field="Id", param="PolicyName", scope=["UserName"]),
+            "ListMFADevices": d("GetMFADevice", id_field="Id", param="SerialNumber", scope=["UserName"]),
+            "ListPolicyVersions": d("GetPolicyVersion", id_field="Id", param="VersionId", scope=["PolicyArn"]),
+            "ListSAMLProviders": d("GetSAMLProvider", id_field="Arn", param="SAMLProviderArn"),
+            # ListOpenIDConnectProviders/ListSSHPublicKeys skipped: their Get*
+            # counterparts need a param (Encoding, or a structured id) that
+            # isn't derivable from the list response — see AGENTS.md
         },
     },
     "route53": {
@@ -245,6 +354,14 @@ CONFIGS = {
         "resources": {
             "ListResourceRecordSets": [r(["ResourceRecordSets"], "route53:rrset", "Name", name="Name")],
             "ListHealthChecks": [r(["HealthChecks"], "route53:healthcheck", "Id", arn_format="arn:{partition}:route53:::healthcheck/{Id}")],
+            "ListQueryLoggingConfigs": [r(["QueryLoggingConfigs"], "route53:query-logging-config", "Id")],
+            "GetQueryLoggingConfig": [r(["QueryLoggingConfig"], "route53:query-logging-config", "Id")],
+            "ListReusableDelegationSets": [r(["DelegationSets"], "route53:reusable-delegation-set", "Id")],
+            "GetReusableDelegationSet": [r(["DelegationSet"], "route53:reusable-delegation-set", "Id")],
+        },
+        "describe": {
+            "ListQueryLoggingConfigs": d("GetQueryLoggingConfig", id_field="Id", param="Id"),
+            "ListReusableDelegationSets": d("GetReusableDelegationSet", id_field="Id", param="Id"),
         },
     },
     "elb": {
@@ -271,17 +388,48 @@ CONFIGS = {
             "DescribeCapacityProviders": [r(["capacityProviders"], "ecs:capacity-provider", "name", name="name", arn="capacityProviderArn", tags="tags")],
             "ListTasks": [r(["taskArns"], "ecs:task", arn="taskArn", scalar_as="taskArn")],
             "DescribeTasks": [r(["tasks"], "ecs:task", arn="taskArn", tags="tags")],
+            "ListContainerInstances": [r(["containerInstanceArns"], "ecs:container-instance", arn="containerInstanceArn", scalar_as="containerInstanceArn")],
+            "DescribeContainerInstances": [r(["containerInstances"], "ecs:container-instance", arn="containerInstanceArn", tags="tags")],
         },
         "describe": {
             "ListClusters": d("DescribeClusters", id_field="Id", param="clusters",
                               kind="array", batch_size=100),
             "ListTasks": d("DescribeTasks", id_field="Id", param="tasks",
                            kind="array", batch_size=100, scope=["cluster"]),
+            "ListServices": d("DescribeServices", id_field="Id", param="services",
+                              kind="array", batch_size=10, scope=["cluster"]),
+            "ListContainerInstances": d("DescribeContainerInstances", id_field="Id",
+                                        param="containerInstances", kind="array",
+                                        batch_size=100, scope=["cluster"]),
+            # task-def ARNs' id-from-arn-tail would be just the revision
+            # number ("3"), not usable as DescribeTaskDefinition's identifier
+            # (needs "family:revision" or the full ARN) — use Arn, not Id
+            "ListTaskDefinitions": d("DescribeTaskDefinition", id_field="Arn", param="taskDefinition"),
         },
     },
     "athena": {
         "resources": {
             "ListWorkGroups": [r(["WorkGroups"], "athena:workgroup", "Name", name="Name", arn_format="arn:{partition}:athena:{region}:{account}:workgroup/{Name}")],
+            "ListCalculationExecutions": [r(["Calculations"], "athena:calculation-execution", "CalculationExecutionId")],
+            "GetCalculationExecution": [r([], "athena:calculation-execution", "CalculationExecutionId")],
+            "ListDatabases": [r(["DatabaseList"], "athena:database", "Name", name="Name")],
+            "GetDatabase": [r(["Database"], "athena:database", "Name", name="Name")],
+            "ListNamedQueries": [r(["NamedQueryIds"], "athena:named-query", "NamedQueryId", scalar_as="NamedQueryId")],
+            "BatchGetNamedQuery": [r(["NamedQueries"], "athena:named-query", "NamedQueryId", name="Name")],
+            "ListPreparedStatements": [r(["PreparedStatements"], "athena:prepared-statement", "StatementName", name="StatementName")],
+            "BatchGetPreparedStatement": [r(["PreparedStatements"], "athena:prepared-statement", "StatementName", name="StatementName")],
+            "ListQueryExecutions": [r(["QueryExecutionIds"], "athena:query-execution", "QueryExecutionId", scalar_as="QueryExecutionId")],
+            "BatchGetQueryExecution": [r(["QueryExecutions"], "athena:query-execution", "QueryExecutionId")],
+        },
+        "describe": {
+            "ListCalculationExecutions": d("GetCalculationExecution", id_field="Id", param="CalculationExecutionId"),
+            "ListDatabases": d("GetDatabase", id_field="Id", param="DatabaseName", scope=["CatalogName"]),
+            "ListNamedQueries": d("BatchGetNamedQuery", id_field="Id", param="NamedQueryIds",
+                                  kind="array", batch_size=50),
+            "ListPreparedStatements": d("BatchGetPreparedStatement", id_field="Id", param="PreparedStatementNames",
+                                        kind="array", batch_size=50, scope=["WorkGroup"]),
+            "ListQueryExecutions": d("BatchGetQueryExecution", id_field="Id", param="QueryExecutionIds",
+                                     kind="array", batch_size=50),
         },
     },
     "backup": {
@@ -321,22 +469,54 @@ CONFIGS = {
             "ListClusters": [r(["clusters"], "eks:cluster", "name", name="name", arn_format="arn:{partition}:eks:{region}:{account}:cluster/{name}", scalar_as="name")],
             "DescribeCluster": [r(["cluster"], "eks:cluster", "name", name="name", arn="arn", tags="tags")],
             "ListAccessEntries": [r(["accessEntries"], "eks:access-entry", arn="accessEntryArn", scalar_as="accessEntryArn")],
+            "DescribeAccessEntry": [r(["accessEntry"], "eks:access-entry", arn="accessEntryArn", tags="tags")],
             "ListAddons": [r(["addons"], "eks:addon", "addonName", name="addonName", scalar_as="addonName")],
             "DescribeAddon": [r(["addon"], "eks:addon", "addonName", name="addonName", arn="addonArn", tags="tags")],
             "ListNodegroups": [r(["nodegroups"], "eks:nodegroup", "nodegroupName", name="nodegroupName", scalar_as="nodegroupName")],
             "DescribeNodegroup": [r(["nodegroup"], "eks:nodegroup", "nodegroupName", name="nodegroupName", arn="nodegroupArn", tags="tags")],
+            "ListFargateProfiles": [r(["fargateProfileNames"], "eks:fargate-profile", "fargateProfileName", scalar_as="fargateProfileName")],
+            "DescribeFargateProfile": [r(["fargateProfile"], "eks:fargate-profile", "fargateProfileName", name="fargateProfileName", arn="fargateProfileArn", tags="tags")],
+            "ListUpdates": [r(["updateIds"], "eks:update", "updateId", scalar_as="updateId")],
+            "DescribeUpdate": [r(["update"], "eks:update", "id")],
+        },
+        "describe": {
+            "ListClusters": d("DescribeCluster", id_field="Id", param="name"),
+            "ListAccessEntries": d("DescribeAccessEntry", id_field="Arn", param="principalArn", scope=["clusterName"]),
+            "ListAddons": d("DescribeAddon", id_field="Id", param="addonName", scope=["clusterName"]),
+            "ListNodegroups": d("DescribeNodegroup", id_field="Id", param="nodegroupName", scope=["clusterName"]),
+            "ListFargateProfiles": d("DescribeFargateProfile", id_field="Id", param="fargateProfileName", scope=["clusterName"]),
+            "ListUpdates": d("DescribeUpdate", id_field="Id", param="updateId", scope=["name"]),
+            # ListIdentityProviderConfigs skipped: DescribeIdentityProviderConfig
+            # needs a {type, name} structure, not a scalar id — not yet supported
         },
     },
     "kms": {
         "resources": {
             "ListKeys": [r(["Keys"], "kms:key", "KeyId", arn="KeyArn")],
             "ListAliases": [r(["Aliases"], "kms:alias", "AliasName", name="AliasName", arn="AliasArn")],
+            "ListKeyPolicies": [r(["PolicyNames"], "kms:key-policy", "PolicyName", scalar_as="PolicyName")],
+            "GetKeyPolicy": [r([], "kms:key-policy", "PolicyName", name="PolicyName")],
+            "DescribeKey": [r(["KeyMetadata"], "kms:key", "KeyId", arn="Arn")],
+        },
+        "describe": {
+            "ListKeys": d("DescribeKey", id_field="Id", param="KeyId"),
+            "ListKeyPolicies": d("GetKeyPolicy", id_field="Id", param="PolicyName", scope=["KeyId"]),
         },
     },
     "opensearch": {
         "resources": {
             "ListDomainNames": [r(["DomainNames"], "es:domain", "DomainName", name="DomainName", arn_format="arn:{partition}:es:{region}:{account}:domain/{DomainName}")],
             "DescribeDomains": [r(["DomainStatusList"], "es:domain", "DomainName", name="DomainName", arn="ARN")],
+            "ListDataSources": [r(["DataSources"], "es:data-source", "Name", name="Name")],
+            "GetDataSource": [r([], "es:data-source", "Name", name="Name")],
+            "ListVpcEndpoints": [r(["VpcEndpointSummaryList"], "es:vpc-endpoint", "VpcEndpointId", arn="DomainArn")],
+        },
+        "describe": {
+            "ListDataSources": d("GetDataSource", id_field="Id", param="Name", scope=["DomainName"]),
+            # conservative batch size — OpenSearch VPC endpoints per domain
+            # are typically few, and the real documented max isn't in the model
+            "ListVpcEndpoints": d("DescribeVpcEndpoints", id_field="Id", param="VpcEndpointIds",
+                                  kind="array", batch_size=5),
         },
     },
     "secretsmanager": {
@@ -348,6 +528,19 @@ CONFIGS = {
         "resources": {
             "ListIdentities": [r(["Identities"], "ses:identity", "Identity", name="Identity", arn_format="arn:{partition}:ses:{region}:{account}:identity/{Identity}", scalar_as="Identity")],
             "ListTemplates": [r(["TemplatesMetadata"], "ses:template", "Name", name="Name", arn_format="arn:{partition}:ses:{region}:{account}:template/{Name}")],
+            "ListConfigurationSets": [r(["ConfigurationSets"], "ses:configuration-set", "Name", name="Name")],
+            "DescribeConfigurationSet": [r(["ConfigurationSet"], "ses:configuration-set", "Name", name="Name")],
+            "ListReceiptRuleSets": [r(["RuleSets"], "ses:receipt-rule-set", "Name", name="Name")],
+            "DescribeReceiptRuleSet": [r(["Metadata"], "ses:receipt-rule-set", "Name", name="Name")],
+            "ListIdentityPolicies": [r(["PolicyNames"], "ses:identity-policy", "PolicyName", scalar_as="PolicyName")],
+        },
+        "describe": {
+            "ListConfigurationSets": d("DescribeConfigurationSet", id_field="Id", param="ConfigurationSetName"),
+            "ListReceiptRuleSets": d("DescribeReceiptRuleSet", id_field="Id", param="RuleSetName"),
+            # conservative batch size — SES per-identity policy counts are
+            # typically small, and the real documented max isn't in the model
+            "ListIdentityPolicies": d("GetIdentityPolicies", id_field="Id", param="PolicyNames",
+                                      kind="array", batch_size=10, scope=["Identity"]),
         },
     },
     "sns": {
@@ -394,6 +587,17 @@ CONFIGS = {
                 r(["CommonPrefixes"], "s3:prefix", "Prefix", name="Prefix", arn_format="arn:{partition}:s3:::{root_Bucket}/{Prefix}", uri="s3://{root_Bucket}/{Prefix}"),
                 r(["Uploads"], "s3:multipart-upload", "UploadId", name="Key", arn_format="arn:{partition}:s3:::{root_Bucket}/{Key}", uri="s3://{root_Bucket}/{Key}"),
             ],
+            "ListBucketAnalyticsConfigurations": [r(["AnalyticsConfigurationList"], "s3:analytics-configuration", "Id")],
+            "GetBucketAnalyticsConfiguration": [r(["AnalyticsConfiguration"], "s3:analytics-configuration", "Id")],
+            "ListBucketIntelligentTieringConfigurations": [r(["IntelligentTieringConfigurationList"], "s3:intelligent-tiering-configuration", "Id")],
+            "GetBucketIntelligentTieringConfiguration": [r(["IntelligentTieringConfiguration"], "s3:intelligent-tiering-configuration", "Id")],
+            "ListBucketMetricsConfigurations": [r(["MetricsConfigurationList"], "s3:metrics-configuration", "Id")],
+            "GetBucketMetricsConfiguration": [r(["MetricsConfiguration"], "s3:metrics-configuration", "Id")],
+        },
+        "describe": {
+            "ListBucketAnalyticsConfigurations": d("GetBucketAnalyticsConfiguration", id_field="Id", param="Id", scope=["Bucket"]),
+            "ListBucketIntelligentTieringConfigurations": d("GetBucketIntelligentTieringConfiguration", id_field="Id", param="Id", scope=["Bucket"]),
+            "ListBucketMetricsConfigurations": d("GetBucketMetricsConfiguration", id_field="Id", param="Id", scope=["Bucket"]),
         },
     },
     "ssm": {
@@ -422,6 +626,17 @@ CONFIGS = {
             "ListTables": [r(["TableNames"], "dynamodb:table", "TableName", name="TableName", arn_format="arn:{partition}:dynamodb:{region}:{account}:table/{TableName}", scalar_as="TableName")],
             "DescribeTable": [r(["Table"], "dynamodb:table", "TableName", name="TableName", arn="TableArn")],
             "ListGlobalTables": [r(["GlobalTables"], "dynamodb:global-table", "GlobalTableName", name="GlobalTableName", arn_format="arn:{partition}:dynamodb::{account}:global-table/{GlobalTableName}")],
+            "DescribeGlobalTable": [r(["GlobalTableDescription"], "dynamodb:global-table", "GlobalTableName", name="GlobalTableName", arn="GlobalTableArn")],
+            "ListContributorInsights": [r(["ContributorInsightsSummaries"], "dynamodb:contributor-insights", "TableName", name="TableName")],
+            "DescribeContributorInsights": [r([], "dynamodb:contributor-insights", "TableName", name="TableName")],
+            "ListExports": [r(["ExportSummaries"], "dynamodb:export", arn="ExportArn")],
+            "DescribeExport": [r(["ExportDescription"], "dynamodb:export", arn="ExportArn")],
+        },
+        "describe": {
+            "ListTables": d("DescribeTable", id_field="Id", param="TableName"),
+            "ListGlobalTables": d("DescribeGlobalTable", id_field="Id", param="GlobalTableName"),
+            "ListContributorInsights": d("DescribeContributorInsights", id_field="Id", param="TableName"),
+            "ListExports": d("DescribeExport", id_field="Arn", param="ExportArn"),
         },
     },
 }

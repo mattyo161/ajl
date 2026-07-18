@@ -494,6 +494,48 @@ there. A reminder that this list needs a deliberate update whenever a new
 flag changes what gets emitted — it is not derived automatically from the
 options object.
 
+### `--describe` curated broadly: 62 pairings across 21 services
+Extended past the iam/ecs pilot to every List->Describe/Get pairing found
+worth curating (the survey behind the original design turned up ~65
+candidates across 20 services; a few were deliberately skipped — see
+below). Two bugs surfaced by going wide rather than staying at 3 pairings,
+both fixed in `main.py`:
+
+- **Method-name resolution was wrong for any acronym-heavy operation name.**
+  `run_describe_chain` derived the boto3 client method via
+  `caseconverter.snakecase(PascalOperationName)` — fine for the pilot's
+  `DescribeClusters`/`GetRolePolicy`, but `caseconverter.snakecase("GetSAMLProvider")`
+  produces `get_samlprovider`, not the real `get_saml_provider`, because
+  consecutive capitals don't round-trip through a Pascal→snake transform the
+  way they do through the CLI's own kebab→snake path (kebab input already
+  has explicit word boundaries; Pascal input doesn't). Fixed by reversing
+  `client.meta.method_to_api_mapping` — botocore's own authoritative
+  method-name table — instead of guessing via string transforms. This bug
+  was latent in the original pilot too, just never triggered, since none of
+  `DescribeClusters`/`DescribeTasks`/`GetRolePolicy` contain an acronym run.
+- **A `Get*` that never echoes back its own identifier lost its `Id`/`Arn`
+  entirely.** `iam.GetSAMLProvider` (and others) return only metadata, never
+  the ARN you fetched them with — expected, since you already know it. Fixed
+  by having `run_describe_chain` fall back to the identifier it used, for
+  `kind: scalar` only (deterministic: exactly one id per call); when the
+  fallback lands in `Arn`, it also re-derives `Id` via the ARN tail
+  (`normalize.id_from_arn`, promoted from a normalize.py-private helper to a
+  small shared one for exactly this reuse).
+- **No per-batch error containment.** A throttled or denied call for one
+  batch would crash the entire `--describe` run — every other error path in
+  ajl contains per-item/per-session failures (`AGENTS.md` hard rule 4); this
+  one didn't yet, because the pilot's fake-client tests never exercised a
+  failure. Now caught, reported to stderr with the offending id(s), and the
+  rest of the batches still run.
+
+**Deliberately skipped** (not a gap, a limitation of the current engine —
+each needs a feature this doesn't have yet): `eks.ListIdentityProviderConfigs`
+and `ecr.ListImages`/`DescribeImages` need a *structured* identifier
+(`{type, name}` / `{imageDigest, imageTag}`), not a scalar/array of strings;
+`iam.ListSSHPublicKeys` needs a required `Encoding` param with no derivable
+source; a handful of low-confidence id-mapping cases (`cloudtrail`
+`Channels`/`Dashboards`) were left uncurated rather than guessed.
+
 ---
 
 ## Decision log template

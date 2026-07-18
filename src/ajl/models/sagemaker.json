@@ -7324,6 +7324,15 @@
           "DataQualityJobOutputConfig",
           "JobResources",
           "RoleArn"
+        ],
+        "resources": [
+          {
+            "arn": "JobDefinitionArn",
+            "id": "JobDefinitionName",
+            "name": "JobDefinitionName",
+            "path": [],
+            "type": "sagemaker:data-quality-job-definition"
+          }
         ]
       }
     },
@@ -7484,6 +7493,15 @@
           "OutputConfig",
           "CreationTime",
           "LastModifiedTime"
+        ],
+        "resources": [
+          {
+            "arn": "DeviceFleetArn",
+            "id": "DeviceFleetName",
+            "name": "DeviceFleetName",
+            "path": [],
+            "type": "sagemaker:device-fleet"
+          }
         ]
       }
     },
@@ -8000,6 +8018,15 @@
           "EndpointConfigArn",
           "ProductionVariants",
           "CreationTime"
+        ],
+        "resources": [
+          {
+            "arn": "EndpointConfigArn",
+            "id": "EndpointConfigName",
+            "name": "EndpointConfigName",
+            "path": [],
+            "type": "sagemaker:endpoint-config"
+          }
         ]
       }
     },
@@ -8626,6 +8653,15 @@
           "HumanTaskUiName",
           "CreationTime",
           "UiTemplate"
+        ],
+        "resources": [
+          {
+            "arn": "HumanTaskUiArn",
+            "id": "HumanTaskUiName",
+            "name": "HumanTaskUiName",
+            "path": [],
+            "type": "sagemaker:human-task-ui"
+          }
         ]
       }
     },
@@ -9588,6 +9624,15 @@
           "ModelName",
           "CreationTime",
           "ModelArn"
+        ],
+        "resources": [
+          {
+            "arn": "ModelArn",
+            "id": "ModelName",
+            "name": "ModelName",
+            "path": [],
+            "type": "sagemaker:model"
+          }
         ]
       }
     },
@@ -9674,6 +9719,15 @@
           "ModelBiasJobOutputConfig",
           "JobResources",
           "RoleArn"
+        ],
+        "resources": [
+          {
+            "arn": "JobDefinitionArn",
+            "id": "JobDefinitionName",
+            "name": "JobDefinitionName",
+            "path": [],
+            "type": "sagemaker:model-bias-job-definition"
+          }
         ]
       }
     },
@@ -9931,6 +9985,15 @@
           "ModelExplainabilityJobOutputConfig",
           "JobResources",
           "RoleArn"
+        ],
+        "resources": [
+          {
+            "arn": "JobDefinitionArn",
+            "id": "JobDefinitionName",
+            "name": "JobDefinitionName",
+            "path": [],
+            "type": "sagemaker:model-explainability-job-definition"
+          }
         ]
       }
     },
@@ -10253,6 +10316,15 @@
           "ModelQualityJobOutputConfig",
           "JobResources",
           "RoleArn"
+        ],
+        "resources": [
+          {
+            "arn": "JobDefinitionArn",
+            "id": "JobDefinitionName",
+            "name": "JobDefinitionName",
+            "path": [],
+            "type": "sagemaker:model-quality-job-definition"
+          }
         ]
       }
     },
@@ -10516,7 +10588,16 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "NotebookInstanceLifecycleConfigArn",
+            "id": "NotebookInstanceLifecycleConfigName",
+            "name": "NotebookInstanceLifecycleConfigName",
+            "path": [],
+            "type": "sagemaker:notebook-instance-lifecycle-config"
+          }
+        ]
       }
     },
     "DescribeOptimizationJob": {
@@ -14067,6 +14148,12 @@
       },
       "name": "ListDataQualityJobDefinitions",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeDataQualityJobDefinition",
+          "param": "JobDefinitionName"
+        },
         "markers": [
           "NextToken"
         ],
@@ -14084,6 +14171,17 @@
         },
         "required": [
           "JobDefinitionSummaries"
+        ],
+        "resources": [
+          {
+            "arn": "MonitoringJobDefinitionArn",
+            "id": "MonitoringJobDefinitionName",
+            "name": "MonitoringJobDefinitionName",
+            "path": [
+              "JobDefinitionSummaries"
+            ],
+            "type": "sagemaker:data-quality-job-definition"
+          }
         ]
       }
     },
@@ -14143,6 +14241,12 @@
       },
       "name": "ListDeviceFleets",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeDeviceFleet",
+          "param": "DeviceFleetName"
+        },
         "markers": [
           "NextToken"
         ],
@@ -14160,6 +14264,17 @@
         },
         "required": [
           "DeviceFleetSummaries"
+        ],
+        "resources": [
+          {
+            "arn": "DeviceFleetArn",
+            "id": "DeviceFleetName",
+            "name": "DeviceFleetName",
+            "path": [
+              "DeviceFleetSummaries"
+            ],
+            "type": "sagemaker:device-fleet"
+          }
         ]
       }
     },
@@ -14471,6 +14586,12 @@
       },
       "name": "ListEndpointConfigs",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeEndpointConfig",
+          "param": "EndpointConfigName"
+        },
         "markers": [
           "NextToken"
         ],
@@ -15048,6 +15169,12 @@
       },
       "name": "ListHumanTaskUis",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeHumanTaskUi",
+          "param": "HumanTaskUiName"
+        },
         "markers": [
           "NextToken"
         ],
@@ -15065,6 +15192,17 @@
         },
         "required": [
           "HumanTaskUiSummaries"
+        ],
+        "resources": [
+          {
+            "arn": "HumanTaskUiArn",
+            "id": "HumanTaskUiName",
+            "name": "HumanTaskUiName",
+            "path": [
+              "HumanTaskUiSummaries"
+            ],
+            "type": "sagemaker:human-task-ui"
+          }
         ]
       }
     },
@@ -15952,6 +16090,12 @@
       },
       "name": "ListModelBiasJobDefinitions",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeModelBiasJobDefinition",
+          "param": "JobDefinitionName"
+        },
         "markers": [
           "NextToken"
         ],
@@ -15969,6 +16113,17 @@
         },
         "required": [
           "JobDefinitionSummaries"
+        ],
+        "resources": [
+          {
+            "arn": "MonitoringJobDefinitionArn",
+            "id": "MonitoringJobDefinitionName",
+            "name": "MonitoringJobDefinitionName",
+            "path": [
+              "JobDefinitionSummaries"
+            ],
+            "type": "sagemaker:model-bias-job-definition"
+          }
         ]
       }
     },
@@ -16250,6 +16405,12 @@
       },
       "name": "ListModelExplainabilityJobDefinitions",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeModelExplainabilityJobDefinition",
+          "param": "JobDefinitionName"
+        },
         "markers": [
           "NextToken"
         ],
@@ -16267,6 +16428,17 @@
         },
         "required": [
           "JobDefinitionSummaries"
+        ],
+        "resources": [
+          {
+            "arn": "MonitoringJobDefinitionArn",
+            "id": "MonitoringJobDefinitionName",
+            "name": "MonitoringJobDefinitionName",
+            "path": [
+              "JobDefinitionSummaries"
+            ],
+            "type": "sagemaker:model-explainability-job-definition"
+          }
         ]
       }
     },
@@ -16519,6 +16691,12 @@
       },
       "name": "ListModelQualityJobDefinitions",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeModelQualityJobDefinition",
+          "param": "JobDefinitionName"
+        },
         "markers": [
           "NextToken"
         ],
@@ -16536,6 +16714,17 @@
         },
         "required": [
           "JobDefinitionSummaries"
+        ],
+        "resources": [
+          {
+            "arn": "MonitoringJobDefinitionArn",
+            "id": "MonitoringJobDefinitionName",
+            "name": "MonitoringJobDefinitionName",
+            "path": [
+              "JobDefinitionSummaries"
+            ],
+            "type": "sagemaker:model-quality-job-definition"
+          }
         ]
       }
     },
@@ -16585,6 +16774,12 @@
       },
       "name": "ListModels",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeModel",
+          "param": "ModelName"
+        },
         "markers": [
           "NextToken"
         ],
@@ -16994,6 +17189,12 @@
       },
       "name": "ListNotebookInstanceLifecycleConfigs",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeNotebookInstanceLifecycleConfig",
+          "param": "NotebookInstanceLifecycleConfigName"
+        },
         "markers": [
           "NextToken"
         ],
@@ -17009,7 +17210,18 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "NotebookInstanceLifecycleConfigArn",
+            "id": "NotebookInstanceLifecycleConfigName",
+            "name": "NotebookInstanceLifecycleConfigName",
+            "path": [
+              "NotebookInstanceLifecycleConfigs"
+            ],
+            "type": "sagemaker:notebook-instance-lifecycle-config"
+          }
+        ]
       }
     },
     "ListNotebookInstances": {

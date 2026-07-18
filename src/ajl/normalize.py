@@ -94,7 +94,11 @@ class _ArnVars(dict):
         return value
 
 
-def _id_from_arn(arn):
+def id_from_arn(arn):
+    """The resource id fallback used when a record has no id field of its
+    own: the last segment of its Arn. Public (not just an internal helper)
+    because run_describe_chain (main.py) reapplies it when a Get* response
+    doesn't echo back the identifier it was fetched with."""
     if not arn or ":" not in arn:
         return ""
     resource_part = arn.split(":", 5)[-1]
@@ -141,7 +145,7 @@ def normalize_resource(item, cfg, context, root):
     if cfg.get("id"):
         resource_id = item.get(cfg["id"]) or ""
     if not resource_id:
-        resource_id = _id_from_arn(arn)
+        resource_id = id_from_arn(arn)
 
     name = ""
     if cfg.get("name"):

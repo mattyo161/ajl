@@ -1951,6 +1951,14 @@
           "GroupName",
           "PolicyName",
           "PolicyDocument"
+        ],
+        "resources": [
+          {
+            "id": "PolicyName",
+            "name": "PolicyName",
+            "path": [],
+            "type": "iam:group-policy"
+          }
         ]
       }
     },
@@ -2056,6 +2064,14 @@
         },
         "required": [
           "SerialNumber"
+        ],
+        "resources": [
+          {
+            "id": "SerialNumber",
+            "name": "SerialNumber",
+            "path": [],
+            "type": "iam:mfa-device"
+          }
         ]
       }
     },
@@ -2248,7 +2264,17 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "VersionId",
+            "name": "VersionId",
+            "path": [
+              "PolicyVersion"
+            ],
+            "type": "iam:policy-version"
+          }
+        ]
       }
     },
     "GetRole": {
@@ -2389,7 +2415,14 @@
             "type": "timestamp"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "path": [],
+            "tags": "Tags",
+            "type": "iam:saml-provider"
+          }
+        ]
       }
     },
     "GetSSHPublicKey": {
@@ -2720,6 +2753,14 @@
           "UserName",
           "PolicyName",
           "PolicyDocument"
+        ],
+        "resources": [
+          {
+            "id": "PolicyName",
+            "name": "PolicyName",
+            "path": [],
+            "type": "iam:user-policy"
+          }
         ]
       }
     },
@@ -3092,6 +3133,15 @@
       },
       "name": "ListGroupPolicies",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "GetGroupPolicy",
+          "param": "PolicyName",
+          "scope": [
+            "GroupName"
+          ]
+        },
         "markers": [
           "Marker"
         ],
@@ -3114,6 +3164,16 @@
         },
         "required": [
           "PolicyNames"
+        ],
+        "resources": [
+          {
+            "id": "PolicyName",
+            "path": [
+              "PolicyNames"
+            ],
+            "scalar_as": "PolicyName",
+            "type": "iam:group-policy"
+          }
         ]
       }
     },
@@ -3479,6 +3539,15 @@
       },
       "name": "ListMFADevices",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "GetMFADevice",
+          "param": "SerialNumber",
+          "scope": [
+            "UserName"
+          ]
+        },
         "markers": [
           "Marker"
         ],
@@ -3501,6 +3570,16 @@
         },
         "required": [
           "MFADevices"
+        ],
+        "resources": [
+          {
+            "id": "SerialNumber",
+            "name": "SerialNumber",
+            "path": [
+              "MFADevices"
+            ],
+            "type": "iam:mfa-device"
+          }
         ]
       }
     },
@@ -3815,6 +3894,15 @@
       },
       "name": "ListPolicyVersions",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "GetPolicyVersion",
+          "param": "VersionId",
+          "scope": [
+            "PolicyArn"
+          ]
+        },
         "markers": [
           "Marker"
         ],
@@ -3835,7 +3923,17 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "VersionId",
+            "name": "VersionId",
+            "path": [
+              "Versions"
+            ],
+            "type": "iam:policy-version"
+          }
+        ]
       }
     },
     "ListRolePolicies": {
@@ -4086,6 +4184,12 @@
       },
       "name": "ListSAMLProviders",
       "output": {
+        "describe": {
+          "id_field": "Arn",
+          "kind": "scalar",
+          "operation": "GetSAMLProvider",
+          "param": "SAMLProviderArn"
+        },
         "markers": null,
         "members": {
           "SAMLProviderList": {
@@ -4094,7 +4198,16 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "Arn",
+            "path": [
+              "SAMLProviderList"
+            ],
+            "type": "iam:saml-provider"
+          }
+        ]
       }
     },
     "ListSSHPublicKeys": {
@@ -4384,6 +4497,15 @@
       },
       "name": "ListUserPolicies",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "GetUserPolicy",
+          "param": "PolicyName",
+          "scope": [
+            "UserName"
+          ]
+        },
         "markers": [
           "Marker"
         ],
@@ -4406,6 +4528,16 @@
         },
         "required": [
           "PolicyNames"
+        ],
+        "resources": [
+          {
+            "id": "PolicyName",
+            "path": [
+              "PolicyNames"
+            ],
+            "scalar_as": "PolicyName",
+            "type": "iam:user-policy"
+          }
         ]
       }
     },

@@ -2059,7 +2059,14 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "RegistrationToken",
+            "path": [],
+            "type": "cloudformation:type-registration"
+          }
+        ]
       }
     },
     "DetectStackDrift": {
@@ -3465,6 +3472,12 @@
       },
       "name": "ListTypeRegistrations",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeTypeRegistration",
+          "param": "RegistrationToken"
+        },
         "markers": null,
         "members": {
           "NextToken": {
@@ -3478,7 +3491,17 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "RegistrationToken",
+            "path": [
+              "RegistrationTokenList"
+            ],
+            "scalar_as": "RegistrationToken",
+            "type": "cloudformation:type-registration"
+          }
+        ]
       }
     },
     "ListTypeVersions": {

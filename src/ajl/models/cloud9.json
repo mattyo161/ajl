@@ -334,6 +334,13 @@
       },
       "name": "ListEnvironments",
       "output": {
+        "describe": {
+          "batch_size": 25,
+          "id_field": "Id",
+          "kind": "array",
+          "operation": "DescribeEnvironments",
+          "param": "environmentIds"
+        },
         "markers": [
           "nextToken"
         ],

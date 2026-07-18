@@ -472,7 +472,16 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Id",
+            "path": [
+              "Instance"
+            ],
+            "type": "servicediscovery:instance"
+          }
+        ]
       }
     },
     "GetInstancesHealthStatus": {
@@ -578,7 +587,16 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Id",
+            "path": [
+              "Operation"
+            ],
+            "type": "servicediscovery:operation"
+          }
+        ]
       }
     },
     "GetService": {
@@ -663,6 +681,15 @@
       },
       "name": "ListInstances",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "GetInstance",
+          "param": "InstanceId",
+          "scope": [
+            "ServiceId"
+          ]
+        },
         "markers": [
           "NextToken"
         ],
@@ -683,7 +710,16 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Id",
+            "path": [
+              "Instances"
+            ],
+            "type": "servicediscovery:instance"
+          }
+        ]
       }
     },
     "ListNamespaces": {
@@ -767,6 +803,12 @@
       },
       "name": "ListOperations",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "GetOperation",
+          "param": "OperationId"
+        },
         "markers": [
           "NextToken"
         ],
@@ -782,7 +824,16 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Id",
+            "path": [
+              "Operations"
+            ],
+            "type": "servicediscovery:operation"
+          }
+        ]
       }
     },
     "ListServices": {

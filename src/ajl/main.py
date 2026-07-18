@@ -30,7 +30,7 @@ from . import __version__, apilog, learn, seal
 from .cache import ResultCache, run_cache_command
 from .debug import cache_hit
 from .modelconfig import get_operation_config
-from .normalize import iter_configured_resources, iter_default_resources
+from .normalize import id_from_arn, iter_configured_resources, iter_default_resources
 from .pagination import iter_pages
 from .tags import TagMergeEmitter
 
@@ -545,10 +545,21 @@ def run_describe_chain(runner, emitter, options, service, list_operation_cfg, de
     if not ids:
         return
 
+    # describe_cfg["operation"] is already the real PascalCase operation name
+    # (that's what gets curated) — no kebab/Pascal round-trip needed for the
+    # model lookup. The boto3 *method* name is a different story: deriving it
+    # via caseconverter.snakecase(PascalName) mangles consecutive-capital
+    # acronyms (GetSAMLProvider -> get_samlprovider, not get_saml_provider);
+    # client.meta.method_to_api_mapping is botocore's own authoritative
+    # method-name table, so reverse it instead of guessing.
     describe_operation = describe_cfg["operation"]
-    describe_operation_pascal = caseconverter.pascalcase(describe_operation)
-    describe_operation_snake = caseconverter.snakecase(describe_operation)
-    describe_operation_cfg = get_operation_config(service, describe_operation_pascal)
+    describe_operation_cfg = get_operation_config(service, describe_operation)
+    api_to_method = {op: name for name, op in client.meta.method_to_api_mapping.items()}
+    describe_operation_snake = api_to_method.get(describe_operation)
+    if describe_operation_snake is None:
+        print(f"ajl: --describe: {service} has no operation {describe_operation!r} "
+              f"— check the curated describe config", file=sys.stderr)
+        return
     scope_params = {key: list_params[key] for key in describe_cfg.get("scope", [])
                      if key in list_params}
 
@@ -560,31 +571,45 @@ def run_describe_chain(runner, emitter, options, service, list_operation_cfg, de
     param_batches = [
         coerce_params({**scope_params, describe_cfg["param"]:
                        batch if describe_cfg["kind"] == "array" else batch[0]},
-                      service, describe_operation_pascal, filter_to_input=True)
+                      service, describe_operation, filter_to_input=True)
         for batch in id_batches
     ]
     print(f"ajl: --describe: {len(ids)} id(s) -> {len(param_batches)} "
           f"{describe_operation} call(s)", file=sys.stderr)
 
-    def run_one(describe_params):
-        for record in _iter_operation_records(client, describe_operation_snake,
-                                               describe_operation_cfg, describe_params,
-                                               context, runner, session_key, options):
-            if options.stamp_session:
-                # only the scope (e.g. cluster), never the identifier/batch
-                # itself — a record's own fields already say who it is, and
-                # for kind="array" the identifier is the whole batch, which
-                # would otherwise get redundantly attached to every record in it
-                _stamp_params(record, scope_params)
-            emitter.emit(record, session_key)
+    def run_one(id_batch, describe_params):
+        try:
+            for record in _iter_operation_records(client, describe_operation_snake,
+                                                   describe_operation_cfg, describe_params,
+                                                   context, runner, session_key, options):
+                if options.stamp_session:
+                    # only the scope (e.g. cluster), never the identifier/batch
+                    # itself — a record's own fields already say who it is, and
+                    # for kind="array" the identifier is the whole batch, which
+                    # would otherwise get redundantly attached to every record in it
+                    _stamp_params(record, scope_params)
+                if (describe_cfg["kind"] == "scalar" and isinstance(record, dict)
+                        and not record.get(describe_cfg["id_field"])):
+                    # many Get* calls don't echo back the identifier you gave
+                    # them (you already know it) — without this a described
+                    # record can come back with an empty Id/Arn entirely
+                    record[describe_cfg["id_field"]] = id_batch[0]
+                    if describe_cfg["id_field"] == "Arn" and not record.get("Id"):
+                        record["Id"] = id_from_arn(id_batch[0])
+                emitter.emit(record, session_key)
+        except Exception as exc:
+            shown = id_batch if len(id_batch) <= 3 else [*id_batch[:3], "..."]
+            print(f"ajl: --describe: {describe_operation} failed for {shown}: {exc}",
+                  file=sys.stderr)
 
     workers = max(1, getattr(options, "workers", 1))
-    if workers > 1 and len(param_batches) > 1:
+    pairs = list(zip(id_batches, param_batches))
+    if workers > 1 and len(pairs) > 1:
         with ThreadPoolExecutor(max_workers=workers) as pool:
-            list(pool.map(run_one, param_batches))
+            list(pool.map(lambda pair: run_one(*pair), pairs))
     else:
-        for one_batch in param_batches:
-            run_one(one_batch)
+        for id_batch, one_batch in pairs:
+            run_one(id_batch, one_batch)
 
 
 def run_params_json(runner, emitter, options, service, operation, base_params):

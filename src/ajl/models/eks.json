@@ -977,7 +977,17 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "accessEntryArn",
+            "path": [
+              "accessEntry"
+            ],
+            "tags": "tags",
+            "type": "eks:access-entry"
+          }
+        ]
       }
     },
     "DescribeAddon": {
@@ -1302,7 +1312,19 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "fargateProfileArn",
+            "id": "fargateProfileName",
+            "name": "fargateProfileName",
+            "path": [
+              "fargateProfile"
+            ],
+            "tags": "tags",
+            "type": "eks:fargate-profile"
+          }
+        ]
       }
     },
     "DescribeIdentityProviderConfig": {
@@ -1489,7 +1511,16 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "id",
+            "path": [
+              "update"
+            ],
+            "type": "eks:update"
+          }
+        ]
       }
     },
     "DisassociateAccessPolicy": {
@@ -1596,6 +1627,15 @@
       },
       "name": "ListAccessEntries",
       "output": {
+        "describe": {
+          "id_field": "Arn",
+          "kind": "scalar",
+          "operation": "DescribeAccessEntry",
+          "param": "principalArn",
+          "scope": [
+            "clusterName"
+          ]
+        },
         "markers": [
           "nextToken"
         ],
@@ -1691,6 +1731,15 @@
       },
       "name": "ListAddons",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeAddon",
+          "param": "addonName",
+          "scope": [
+            "clusterName"
+          ]
+        },
         "markers": [
           "nextToken"
         ],
@@ -1808,6 +1857,12 @@
       },
       "name": "ListClusters",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeCluster",
+          "param": "name"
+        },
         "markers": [
           "nextToken"
         ],
@@ -1910,6 +1965,15 @@
       },
       "name": "ListFargateProfiles",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeFargateProfile",
+          "param": "fargateProfileName",
+          "scope": [
+            "clusterName"
+          ]
+        },
         "markers": [
           "nextToken"
         ],
@@ -1925,7 +1989,17 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "fargateProfileName",
+            "path": [
+              "fargateProfileNames"
+            ],
+            "scalar_as": "fargateProfileName",
+            "type": "eks:fargate-profile"
+          }
+        ]
       }
     },
     "ListIdentityProviderConfigs": {
@@ -2053,6 +2127,15 @@
       },
       "name": "ListNodegroups",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeNodegroup",
+          "param": "nodegroupName",
+          "scope": [
+            "clusterName"
+          ]
+        },
         "markers": [
           "nextToken"
         ],
@@ -2203,6 +2286,15 @@
       },
       "name": "ListUpdates",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeUpdate",
+          "param": "updateId",
+          "scope": [
+            "name"
+          ]
+        },
         "markers": [
           "nextToken"
         ],
@@ -2218,7 +2310,17 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "updateId",
+            "path": [
+              "updateIds"
+            ],
+            "scalar_as": "updateId",
+            "type": "eks:update"
+          }
+        ]
       }
     },
     "RegisterCluster": {

@@ -1813,7 +1813,15 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "integrationName",
+            "name": "integrationName",
+            "path": [],
+            "type": "logs:integration"
+          }
+        ]
       }
     },
     "GetLogAnomalyDetector": {
@@ -2221,6 +2229,12 @@
       },
       "name": "ListIntegrations",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "GetIntegration",
+          "param": "integrationName"
+        },
         "markers": null,
         "members": {
           "integrationSummaries": {
@@ -2229,7 +2243,17 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "integrationName",
+            "name": "integrationName",
+            "path": [
+              "integrationSummaries"
+            ],
+            "type": "logs:integration"
+          }
+        ]
       }
     },
     "ListLogAnomalyDetectors": {

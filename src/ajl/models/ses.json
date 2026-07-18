@@ -589,7 +589,17 @@
             "type": "structure"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Name",
+            "name": "Name",
+            "path": [
+              "ConfigurationSet"
+            ],
+            "type": "ses:configuration-set"
+          }
+        ]
       }
     },
     "DescribeReceiptRule": {
@@ -654,7 +664,17 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Name",
+            "name": "Name",
+            "path": [
+              "Metadata"
+            ],
+            "type": "ses:receipt-rule-set"
+          }
+        ]
       }
     },
     "GetAccountSendingEnabled": {
@@ -975,6 +995,12 @@
       },
       "name": "ListConfigurationSets",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeConfigurationSet",
+          "param": "ConfigurationSetName"
+        },
         "markers": [
           "NextToken"
         ],
@@ -990,7 +1016,17 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Name",
+            "name": "Name",
+            "path": [
+              "ConfigurationSets"
+            ],
+            "type": "ses:configuration-set"
+          }
+        ]
       }
     },
     "ListCustomVerificationEmailTemplates": {
@@ -1106,6 +1142,16 @@
       },
       "name": "ListIdentityPolicies",
       "output": {
+        "describe": {
+          "batch_size": 10,
+          "id_field": "Id",
+          "kind": "array",
+          "operation": "GetIdentityPolicies",
+          "param": "PolicyNames",
+          "scope": [
+            "Identity"
+          ]
+        },
         "markers": null,
         "members": {
           "PolicyNames": {
@@ -1116,6 +1162,16 @@
         },
         "required": [
           "PolicyNames"
+        ],
+        "resources": [
+          {
+            "id": "PolicyName",
+            "path": [
+              "PolicyNames"
+            ],
+            "scalar_as": "PolicyName",
+            "type": "ses:identity-policy"
+          }
         ]
       }
     },
@@ -1154,6 +1210,12 @@
       },
       "name": "ListReceiptRuleSets",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "DescribeReceiptRuleSet",
+          "param": "RuleSetName"
+        },
         "markers": [
           "NextToken"
         ],
@@ -1169,7 +1231,17 @@
             "type": "list"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "Name",
+            "name": "Name",
+            "path": [
+              "RuleSets"
+            ],
+            "type": "ses:receipt-rule-set"
+          }
+        ]
       }
     },
     "ListTemplates": {

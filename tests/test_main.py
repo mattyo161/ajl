@@ -114,6 +114,9 @@ class FakeMeta:
     partition = "aws"
     region_name = "us-east-1"
 
+    def __init__(self, method_to_api_mapping=None):
+        self.method_to_api_mapping = method_to_api_mapping or {}
+
 
 class FakeClient:
     """Duck-typed boto3 client for run_operation tests."""
@@ -201,7 +204,7 @@ def test_run_operation_stamp_session_merges_request_params():
 class FakeEcsDescribeClient:
     """list_clusters + describe_clusters — the kind="array" (batch) pilot."""
 
-    meta = FakeMeta()
+    meta = FakeMeta({"list_clusters": "ListClusters", "describe_clusters": "DescribeClusters"})
 
     def __init__(self, cluster_count):
         self.cluster_ids = [f"c{i}" for i in range(cluster_count)]
@@ -260,7 +263,7 @@ def test_run_operation_describe_array_respects_curated_batch_size(monkeypatch):
 class FakeIamDescribeClient:
     """list_role_policies + get_role_policy — the kind="scalar"+scope pilot."""
 
-    meta = FakeMeta()
+    meta = FakeMeta({"list_role_policies": "ListRolePolicies", "get_role_policy": "GetRolePolicy"})
 
     def __init__(self, policy_names):
         self.policy_names = policy_names
@@ -311,6 +314,73 @@ def test_run_operation_describe_no_results_makes_no_describe_calls():
                    {"RoleName": "empty-role"}, key)
     assert client.describe_calls == []
     assert out.getvalue() == ""
+
+
+class FakeIamNoEchoDescribeClient:
+    """A Get* that doesn't echo back the identifier it was given — like the
+    real iam.GetSAMLProvider (only returns metadata, never the ARN you asked
+    for). Exercises the scalar-kind id-fallback stamp in run_describe_chain."""
+
+    meta = FakeMeta({"list_saml_providers": "ListSAMLProviders",
+                      "get_saml_provider": "GetSAMLProvider"})
+
+    def can_paginate(self, operation):
+        return False
+
+    def list_saml_providers(self, **params):
+        return {"SAMLProviderList": [{"Arn": "arn:aws:iam::123:saml-provider/one"},
+                                      {"Arn": "arn:aws:iam::123:saml-provider/two"}]}
+
+    def get_saml_provider(self, **params):
+        return {"CreateDate": "2026-01-01"}  # no Arn/Id back, on purpose
+
+
+def test_run_operation_describe_scalar_falls_back_to_the_id_it_fetched_with():
+    client = FakeIamNoEchoDescribeClient()
+    runner = Runner(default_region="us-east-1")
+    key = runner.session_key()
+    runner._clients[(key, "iam")] = client
+    runner._accounts[key] = "123456789012"
+    options = Options()
+    options.describe = True
+    out = io.StringIO()
+    run_operation(runner, Emitter(stream=out), options, "iam", "list-saml-providers", {}, key)
+    records = [json.loads(line) for line in out.getvalue().splitlines()
+               if not line.startswith("ajl:")]
+    assert sorted(r["Arn"] for r in records) == [
+        "arn:aws:iam::123:saml-provider/one", "arn:aws:iam::123:saml-provider/two"]
+    # id_field="Arn" for this pairing, so the fallback also re-derives Id
+    # from the Arn tail, matching normalize.py's own Id-from-Arn convention
+    assert sorted(r["Id"] for r in records) == ["one", "two"]
+
+
+class FakeEcsFlakyDescribeClient(FakeEcsDescribeClient):
+    """describe_clusters raises for one batch — the run must not crash."""
+
+    def describe_clusters(self, **params):
+        if "c2" in params["clusters"]:
+            raise RuntimeError("Throttling")
+        return super().describe_clusters(**params)
+
+
+def test_run_operation_describe_contains_a_failed_batch(monkeypatch):
+    from ajl import modelconfig
+
+    client = FakeEcsFlakyDescribeClient(cluster_count=5)
+    runner = Runner(default_region="us-east-1")
+    key = runner.session_key()
+    runner._clients[(key, "ecs")] = client
+    runner._accounts[key] = "123456789012"
+    cfg = modelconfig.get_operation_config("ecs", "ListClusters")
+    monkeypatch.setitem(cfg["output"]["describe"], "batch_size", 1)
+    options = Options()
+    options.describe = True
+    out = io.StringIO()
+    run_operation(runner, Emitter(stream=out), options, "ecs", "list-clusters", {}, key)
+    records = [json.loads(line) for line in out.getvalue().splitlines()
+               if not line.startswith("ajl:")]
+    # 5 clusters, batch_size=1 -> 5 calls; c2's call fails, the other 4 still emit
+    assert sorted(r["Id"] for r in records) == ["c0", "c1", "c3", "c4"]
 
 
 def test_run_operation_max_items():

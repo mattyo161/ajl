@@ -176,15 +176,15 @@ checks for the config before step 4 ever runs, and if `--describe` is
 passed, hands off to `run_describe_chain` instead of the normal shape+emit
 path. It collects `id_field` off every shaped list record, then calls the
 paired operation either once per id (`kind: scalar` — one call, no batch
-form, this is the common case: `eks`, `iam`, `sagemaker`, `transfer` are
-entirely this shape) or in `batch_size`-sized chunks (`kind: array` — `ecs`,
-`ecr`, `athena`; the same chunking `ssm.py` uses for `get --names`), fanning
-across the same worker pool `--params-json` uses either way. A `scope` list
-in the config (e.g. `RoleName` for `iam.GetRolePolicy`, `cluster` for
-`ecs.DescribeTasks`) forwards List-call params the Describe call also needs
-but the list response never repeats — taken from the *original* call's own
-params, not stamped from a record, since by then the record already *is*
-the describe result:
+form; the common case, curated for `eks`, `iam`, `sagemaker`, `transfer`
+among others) or in `batch_size`-sized chunks (`kind: array` — `ecs`,
+`athena`, `cloud9`, `opensearch`, `ses`; the same chunking `ssm.py` uses for
+`get --names`), fanning across the same worker pool `--params-json` uses
+either way. A `scope` list in the config (e.g. `RoleName` for
+`iam.GetRolePolicy`, `cluster` for `ecs.DescribeTasks`) forwards List-call
+params the Describe call also needs but the list response never repeats —
+taken from the *original* call's own params, not stamped from a record,
+since by then the record already *is* the describe result:
 
 ```shell
 ajl iam list-role-policies --role-name my-role --describe   # one GetRolePolicy per policy name
@@ -195,3 +195,14 @@ No `--jq` reshape, no `--params-json` pipe stage, no casing to get right —
 `--describe` is the same shape of fix as `--stamp-session`'s request-param
 carrying (§5): attach what a bare response leaves out, generically, instead
 of by hand each time.
+
+Curated broadly (62 pairings, 21 services — see DESIGN.md) after piloting
+on just `ecs`/`iam`. Two operation shapes the current engine can't express
+yet, so were deliberately left uncurated rather than forced: a
+*structured* identifier (`eks.DescribeIdentityProviderConfig` needs
+`{type, name}`, not a scalar id — same for `ecr.DescribeImages`'
+`{imageDigest, imageTag}`), and a required param with no derivable source
+(`iam.GetSSHPublicKey`'s `Encoding`). Running `--describe` on a List
+operation with no curated pairing at all isn't an error — it prints why
+and falls back to the plain list (`ajl iam list-roles --describe`: `GetRole`
+returns nothing `ListRoles` doesn't already have, so it was never curated).
