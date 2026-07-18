@@ -5,8 +5,8 @@ DATA_DIR="${SCRIPT_DIR}/../.temp/data"
 [[ ! -d "${DATA_DIR}" ]] && mkdir -p "${DATA_DIR}"
 
 #export AJL_REGIONS="${AJL_REGIONS:-us-east-1,us-east-2}"
-export AJL_CACHE=1h
-export AJL_APILOG=1
+export AJL_CACHE="${AJL_CACHE:-1h}"
+export AJL_APILOG="${AJL_APILOG:-1}"
 
 
 #####################
