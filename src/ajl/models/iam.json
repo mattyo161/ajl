@@ -2119,7 +2119,14 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "path": [],
+            "tags": "Tags",
+            "type": "iam:oidc-provider"
+          }
+        ]
       }
     },
     "GetOrganizationsAccessReport": {
@@ -2914,7 +2921,18 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "PolicyArn",
+            "id": "PolicyName",
+            "name": "PolicyName",
+            "path": [
+              "AttachedPolicies"
+            ],
+            "type": "iam:attached-group-policy"
+          }
+        ]
       }
     },
     "ListAttachedRolePolicies": {
@@ -2970,7 +2988,18 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "PolicyArn",
+            "id": "PolicyName",
+            "name": "PolicyName",
+            "path": [
+              "AttachedPolicies"
+            ],
+            "type": "iam:attached-role-policy"
+          }
+        ]
       }
     },
     "ListAttachedUserPolicies": {
@@ -3026,7 +3055,18 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "arn": "PolicyArn",
+            "id": "PolicyName",
+            "name": "PolicyName",
+            "path": [
+              "AttachedPolicies"
+            ],
+            "type": "iam:attached-user-policy"
+          }
+        ]
       }
     },
     "ListEntitiesForPolicy": {
@@ -3644,6 +3684,12 @@
       },
       "name": "ListOpenIDConnectProviders",
       "output": {
+        "describe": {
+          "id_field": "Arn",
+          "kind": "scalar",
+          "operation": "GetOpenIDConnectProvider",
+          "param": "OpenIDConnectProviderArn"
+        },
         "markers": null,
         "members": {
           "OpenIDConnectProviderList": {

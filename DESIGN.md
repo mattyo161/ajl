@@ -536,6 +536,42 @@ and `ecr.ListImages`/`DescribeImages` need a *structured* identifier
 source; a handful of low-confidence id-mapping cases (`cloudtrail`
 `Channels`/`Dashboards`) were left uncurated rather than guessed.
 
+### Baseline validation: a real 12-service inventory, before the `_ajl_` decision
+Extended `tools/inventory.sh` (started as an ecs-only mockup) to ec2, rds,
+iam, eks, route53, ecr, efs, elb/elbv2, backup, lambda, ssm, s3 — every
+section run live against a real account, not just offline fakes, explicitly
+to establish a working baseline before undertaking the `_ajl_`-namespace
+output-contract change (see the collision survey entry above). Two real
+gaps found and fixed:
+
+- **`iam.ListOpenIDConnectProviders` was wrongly grouped with
+  `ListSSHPublicKeys`'s "skipped" reasoning** in the `--describe` curation
+  pass — `GetOpenIDConnectProvider` actually only needs the ARN, no
+  structured param, no missing-required-field problem at all. It was never
+  curated for no real reason. Fixed; verified live (4 real IRSA/GitHub-OIDC
+  providers, full `Url`/`ClientIDList`/`ThumbprintList`/`Tags` detail).
+- **`ListAttachedRolePolicies`/`GroupPolicies`/`UserPolicies` had no
+  curation at all**, so they fell through to the heuristic path with no
+  `Type`/`Id`/`Arn` — inconsistent with everything else in the inventory.
+  Curated properly.
+
+Two AWS-API catalog-pollution traps found and documented (not ajl bugs —
+inherent to the underlying APIs, but exactly the kind of gap this baseline
+exercise exists to catch): `ec2 describe-images`/`describe-snapshots`
+without an owner filter return the *entire public/Marketplace catalog*
+(tens of thousands of rows) instead of the account's own resources;
+`iam list-policies` without `--scope Local` returns AWS's ~1500 managed
+policies alongside the account's actual 43. Both need an explicit filter
+flag in the inventory script — there's no way for ajl itself to default
+this safely, since "your own resources only" isn't knowable from the
+operation shape.
+
+Confirmed already-fixed by earlier session work, not a new bug: the
+`ecs.ListServiceDeployments` `service` (lowercase) vs `Service` (found by
+Matt, capitalized in his own jq) casing question — `coerce_params`'s
+casing remap already resolves either spelling to the model's real
+lowercase member before the call.
+
 ---
 
 ## Decision log template

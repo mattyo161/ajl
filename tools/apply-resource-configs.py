@@ -319,6 +319,9 @@ CONFIGS = {
             "ListPolicies": [r(["Policies"], "iam:policy", "PolicyId", name="PolicyName", arn="Arn")],
             "ListInstanceProfiles": [r(["InstanceProfiles"], "iam:instance-profile", "InstanceProfileId", name="InstanceProfileName", arn="Arn")],
             "ListOpenIDConnectProviders": [r(["OpenIDConnectProviderList"], "iam:oidc-provider", arn="Arn")],
+            # GetOpenIDConnectProvider's response never echoes back the ARN
+            # either — same id-fallback situation as GetSAMLProvider below
+            "GetOpenIDConnectProvider": [r([], "iam:oidc-provider", tags="Tags")],
             # inline policies have no ARN (identified by RoleName+PolicyName only)
             "ListRolePolicies": [r(["PolicyNames"], "iam:role-policy", "PolicyName", scalar_as="PolicyName")],
             "GetRolePolicy": [r([], "iam:role-policy", "PolicyName", name="PolicyName")],
@@ -334,6 +337,9 @@ CONFIGS = {
             # for — run_describe_chain's scalar-kind id fallback fills it in
             "ListSAMLProviders": [r(["SAMLProviderList"], "iam:saml-provider", arn="Arn")],
             "GetSAMLProvider": [r([], "iam:saml-provider", tags="Tags")],
+            "ListAttachedRolePolicies": [r(["AttachedPolicies"], "iam:attached-role-policy", "PolicyName", name="PolicyName", arn="PolicyArn")],
+            "ListAttachedGroupPolicies": [r(["AttachedPolicies"], "iam:attached-group-policy", "PolicyName", name="PolicyName", arn="PolicyArn")],
+            "ListAttachedUserPolicies": [r(["AttachedPolicies"], "iam:attached-user-policy", "PolicyName", name="PolicyName", arn="PolicyArn")],
         },
         "describe": {
             "ListRolePolicies": d("GetRolePolicy", id_field="Id", param="PolicyName", scope=["RoleName"]),
@@ -342,9 +348,12 @@ CONFIGS = {
             "ListMFADevices": d("GetMFADevice", id_field="Id", param="SerialNumber", scope=["UserName"]),
             "ListPolicyVersions": d("GetPolicyVersion", id_field="Id", param="VersionId", scope=["PolicyArn"]),
             "ListSAMLProviders": d("GetSAMLProvider", id_field="Arn", param="SAMLProviderArn"),
-            # ListOpenIDConnectProviders/ListSSHPublicKeys skipped: their Get*
-            # counterparts need a param (Encoding, or a structured id) that
-            # isn't derivable from the list response — see AGENTS.md
+            "ListOpenIDConnectProviders": d("GetOpenIDConnectProvider", id_field="Arn",
+                                            param="OpenIDConnectProviderArn"),
+            # ListSSHPublicKeys skipped: GetSSHPublicKey needs a required
+            # Encoding param that isn't derivable from the list response
+            # (found this ListOpenIDConnectProviders was wrongly grouped
+            # with it before — it has no such gap, see AGENTS.md)
         },
     },
     "route53": {
