@@ -5,6 +5,29 @@ Notable changes to `ajl`, release by release. Format loosely follows
 [Semantic Versioning](https://semver.org/). See [DESIGN.md](DESIGN.md) for
 the reasoning behind these changes, not just the summary.
 
+## [0.5.0] - 2026-07-18
+
+### Added
+- Curated `Type`/`Id`/`Name`/`Arn`/`Tags` output shaping (and, where
+  paired, `--describe`) for 10 more services: sqs, sns, ses, wafv2, acm,
+  redshift, workspaces, docdb, dynamodb, athena.
+- s3: curated all 17 per-bucket `Get*` config calls (versioning,
+  encryption, policy, policy status, lifecycle, CORS, notification,
+  replication, logging, accelerate, ownership controls, tagging,
+  location, request payment, ACL, website, public-access-block, object
+  lock) — none of these echo `Bucket` back in their response, so `Id`/
+  `Name`/`Arn` come back deliberately blank; `--stamp-session`'s `Bucket`
+  (from the request params) is the join key back to the bucket list.
+- `tools/inventory.sh`: a live, ajl-native multi-service AWS inventory
+  script (25 services total across this and the prior release), run
+  against a real account as an established regression baseline ahead of
+  the `_ajl_`-namespace output-contract decision (see DESIGN.md).
+
+### Fixed
+- `sns.GetTopicAttributes` curation used `TopicArn` as the id field,
+  putting the full ARN into `Id` instead of the short topic name — now
+  uses `arn=` so `Id` falls back to the ARN's last segment correctly.
+
 ## [0.4.1] - 2026-07-18
 
 ### Added
