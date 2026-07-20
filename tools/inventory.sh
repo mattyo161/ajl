@@ -198,7 +198,7 @@ ajl ecr describe-repositories --all --stamp-session \
 ajl efs describe-file-systems --all --stamp-session \
 | tee "${DATA_DIR}/efs-file-systems.jsonl" \
 | jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,FileSystemId:.ajl.id}' \
-| ajl efs describe-mount-targets --params-json - --stamp-session \
+| ajl efs describe-mount-targets --params-json - --stamp-session --cache 24h \
 > "${DATA_DIR}/efs-mount-targets.jsonl"
 
 
@@ -627,7 +627,11 @@ ajl transfer list-connectors --all --stamp-session --describe \
 ajl transfer list-profiles --all --stamp-session --describe \
 > "${DATA_DIR}/transfer-profiles.jsonl"
 
-ajl transfer list-security-policies --all --stamp-session --describe \
+# The named TLS/SSH security policies are a fixed, account-independent AWS
+# catalog (identical everywhere) — confirmed via CloudTrail (160 calls,
+# 0 errors, pure repetition). --cache means only the first profile/region
+# combo actually re-fetches per day; the rest of the fan-out reuses it.
+ajl transfer list-security-policies --all --stamp-session --describe --cache 24h \
 > "${DATA_DIR}/transfer-security-policies.jsonl"
 
 ajl transfer list-web-apps --all --stamp-session --describe \

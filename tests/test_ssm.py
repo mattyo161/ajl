@@ -75,7 +75,7 @@ class FakeSSM:
 def run_get(params_store, tokens, workers=4):
     runner = Runner(default_region="us-east-1")
     client = FakeSSM(params_store)
-    runner._clients[(runner.session_key(), "ssm")] = client
+    runner._clients[(runner.session_key(), "ssm", True)] = client
     out = io.StringIO()
     options = SimpleNamespace(workers=workers)
     code = ssm.run_get(runner, Emitter(stream=out), options, tokens)
@@ -198,7 +198,7 @@ def test_seal_idempotent_and_passthrough():
 def run_write(params_store, tokens, mode, workers=1, params_json=None):
     runner = Runner(default_region="us-east-1")
     client = FakeSSM(params_store)
-    runner._clients[(runner.session_key(), "ssm")] = client
+    runner._clients[(runner.session_key(), "ssm", True)] = client
     out = io.StringIO()
     options = SimpleNamespace(workers=workers, params_json=params_json)
     code = ssm.run_write(runner, Emitter(stream=out), options, tokens, mode)
@@ -282,7 +282,7 @@ def test_write_streaming_params_json(monkeypatch):
 
 def test_raw_value_text():
     runner = Runner(default_region="us-east-1")
-    runner._clients[(runner.session_key(), "ssm")] = FakeSSM(PARAMS)
+    runner._clients[(runner.session_key(), "ssm", True)] = FakeSSM(PARAMS)
     out = io.StringIO()
     ssm.run_get(runner, Emitter(stream=out), SimpleNamespace(workers=1),
                 ["--name", "/app/db/host", "--raw"])
@@ -291,7 +291,7 @@ def test_raw_value_text():
 
 def test_raw_bulk_values_one_per_line():
     runner = Runner(default_region="us-east-1")
-    runner._clients[(runner.session_key(), "ssm")] = FakeSSM(PARAMS)
+    runner._clients[(runner.session_key(), "ssm", True)] = FakeSSM(PARAMS)
     out = io.StringIO()
     ssm.run_get(runner, Emitter(stream=out), SimpleNamespace(workers=1),
                 ["--names", "/app/db/host", "/app/db/password", "--raw"])

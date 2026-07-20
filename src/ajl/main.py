@@ -26,7 +26,7 @@ import jsonlines
 import orjson
 from botocore.config import Config as BotoConfig
 
-from . import __version__, apilog, learn, seal
+from . import __version__, accountcache, apilog, learn, seal
 from .cache import ResultCache, run_cache_command
 from .debug import cache_hit
 from .modelconfig import get_operation_config
@@ -36,6 +36,27 @@ from .tags import TagMergeEmitter
 
 DEFAULT_PROFILE = os.environ.get("AWS_PROFILE", os.environ.get("AWS_DEFAULT_PROFILE"))
 DEFAULT_REGION = os.environ.get("AWS_REGION", os.environ.get("AWS_DEFAULT_REGION", "us-east-1"))
+
+# Whole services known to throttle broadly under ajl's own real-world usage
+# patterns (bulk `--all` fan-out, `s3 scan`'s heavy parallelism) -- see the
+# retry-mode comment in Runner.client() for the reasoning.
+ADAPTIVE_RETRY_SERVICES = {"ssm", "s3"}
+
+# Single operations that throttle even though the rest of their service
+# doesn't -- efs's other list/describe calls never showed a problem, only
+# describe-mount-targets did (fanned out once per file system, and one
+# real account here has 80+ file systems). Keying by (service, operation)
+# lets one throttle-prone call get adaptive retries without paying that
+# cost on every other call to the same service.
+ADAPTIVE_RETRY_OPERATIONS = {
+    ("efs", "DescribeMountTargets"),
+}
+
+
+def _wants_adaptive_retry(service, operation):
+    return service in ADAPTIVE_RETRY_SERVICES or (
+        operation is not None and (service, operation) in ADAPTIVE_RETRY_OPERATIONS
+    )
 
 
 def _find_repo_root():
@@ -316,16 +337,55 @@ class Runner:
                 cache_hit("session", session_key)
             return session
 
-    def client(self, session_key, service):
+    def client(self, session_key, service, operation=None):
+        """``operation`` (PascalCase, e.g. "DescribeMountTargets") is optional
+        -- omit it for calls not tied to one specific operation (sts,
+        resourcegroupstaggingapi). When given, it's checked against
+        ``ADAPTIVE_RETRY_OPERATIONS`` so a single throttle-prone call can get
+        adaptive retries without the whole service paying that cost; the
+        client cache key includes the resulting adaptive/standard decision
+        (not the operation itself), so every other operation on the same
+        service still shares one client.
+        """
+        adaptive = _wants_adaptive_retry(service, operation)
         with self._lock:
-            key = (session_key, service)
+            key = (session_key, service, adaptive)
             if key not in self._clients:
-                # adaptive retries so throttle-heavy APIs (ssm describe-parameters
-                # especially) self-tune; bounded timeouts so an unreachable
-                # endpoint (e.g. a disabled opt-in region) fails in seconds
-                # instead of hanging on botocore's 60s default connect timeout
+                # Adaptive mode's client-side rate limiter reacts to *observed*
+                # throttling by spacing out/retrying calls -- worth it for the
+                # services/operations that actually get throttled (ssm
+                # describe-parameters, efs describe-mount-targets on accounts
+                # with many file systems, s3 during scan's heavy parallelism),
+                # but a real cost elsewhere: a 51-session bulk-inventory run
+                # found 92/13,192 calls (0.7%) ever retried, yet those 92 ate
+                # 17.6% of total run time. Standard mode + a low cap fails
+                # fast for everything else instead of paying that tax
+                # speculatively.
+                #
+                # efs describe-mount-targets was briefly moved to the
+                # standard bucket on the strength of a CloudTrail check that
+                # found zero ThrottlingException records for it across all of
+                # 2026 -- wrong conclusion, caught by a live ThrottlingException
+                # the very next real run (32k+ calls against one
+                # heavily-multi-tenant account). AWS's rate-limit rejections
+                # for this API apparently aren't reliably showing up as
+                # CloudTrail error records, so absence of a logged error there
+                # is not proof of "never throttled" -- unlike sagemaker
+                # ListHumanTaskUis and transfer DescribeSecurityPolicy, where
+                # the CloudTrail read (genuinely low call volume / genuinely
+                # static data) held up. efs's *other* operations never showed
+                # a problem, so rather than putting the whole service back in
+                # ADAPTIVE_RETRY_SERVICES, only describe-mount-targets is
+                # pinned to adaptive via ADAPTIVE_RETRY_OPERATIONS.
+                if adaptive:
+                    retries = {"mode": "adaptive", "max_attempts": 10}
+                else:
+                    retries = {"mode": "standard", "max_attempts": 3}
+                # bounded timeouts so an unreachable endpoint (e.g. a disabled
+                # opt-in region) fails in seconds instead of hanging on
+                # botocore's 60s default connect timeout
                 config = BotoConfig(
-                    retries={"mode": "adaptive", "max_attempts": 10},
+                    retries=retries,
                     connect_timeout=float(os.environ.get("AJL_CONNECT_TIMEOUT", "5")),
                     read_timeout=float(os.environ.get("AJL_READ_TIMEOUT", "30")),
                 )
@@ -343,12 +403,21 @@ class Runner:
             if session_key in self._accounts:
                 cache_hit("account", session_key)
                 return self._accounts[session_key]
+        profile, _region = session_key
+        cached = accountcache.get(profile)
+        if cached is not None:
+            cache_hit("account", session_key)
+            with self._lock:
+                self._accounts[session_key] = cached
+            return cached
         try:
             sts = self.client(session_key, "sts")
             account = sts.get_caller_identity()["Account"]
         except Exception as exc:
             print(f"ajl: unable to resolve account id: {exc}", file=sys.stderr)
             account = ""
+        else:
+            accountcache.put(profile, account)
         with self._lock:
             self._accounts[session_key] = account
         return account
@@ -495,7 +564,7 @@ def run_operation(runner, emitter, options, service, operation, params, session_
     """Execute one (possibly paginated) API call and emit its resources."""
     operation_snake = caseconverter.snakecase(operation)
     operation_pascal = caseconverter.pascalcase(operation)
-    client = runner.client(session_key, service)
+    client = runner.client(session_key, service, operation_pascal)
     operation_cfg = get_operation_config(service, operation_pascal)
     context = {
         "partition": client.meta.partition,

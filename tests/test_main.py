@@ -156,7 +156,7 @@ class Options:
 def make_runner(client):
     runner = Runner(default_region="us-east-1")
     key = runner.session_key()
-    runner._clients[(key, "ec2")] = client
+    runner._clients[(key, "ec2", False)] = client
     runner._accounts[key] = "123456789012"
     return runner, key
 
@@ -231,7 +231,7 @@ def test_run_operation_describe_array_batches_ids():
     client = FakeEcsDescribeClient(cluster_count=5)
     runner = Runner(default_region="us-east-1")
     key = runner.session_key()
-    runner._clients[(key, "ecs")] = client
+    runner._clients[(key, "ecs", False)] = client
     runner._accounts[key] = "123456789012"
     options = Options()
     options.describe = True
@@ -252,7 +252,7 @@ def test_run_operation_describe_array_respects_curated_batch_size(monkeypatch):
     client = FakeEcsDescribeClient(cluster_count=5)
     runner = Runner(default_region="us-east-1")
     key = runner.session_key()
-    runner._clients[(key, "ecs")] = client
+    runner._clients[(key, "ecs", False)] = client
     runner._accounts[key] = "123456789012"
     cfg = modelconfig.get_operation_config("ecs", "ListClusters")
     monkeypatch.setitem(cfg["output"]["describe"], "batch_size", 2)
@@ -288,7 +288,7 @@ def test_run_operation_describe_scalar_carries_scope_per_call():
     client = FakeIamDescribeClient(["AdminAccess", "S3ReadOnly", "DenyAll"])
     runner = Runner(default_region="us-east-1")
     key = runner.session_key()
-    runner._clients[(key, "iam")] = client
+    runner._clients[(key, "iam", False)] = client
     runner._accounts[key] = "123456789012"
     options = Options()
     options.describe = True
@@ -310,7 +310,7 @@ def test_run_operation_describe_no_results_makes_no_describe_calls():
     client = FakeIamDescribeClient([])
     runner = Runner(default_region="us-east-1")
     key = runner.session_key()
-    runner._clients[(key, "iam")] = client
+    runner._clients[(key, "iam", False)] = client
     runner._accounts[key] = "123456789012"
     options = Options()
     options.describe = True
@@ -344,7 +344,7 @@ def test_run_operation_describe_scalar_falls_back_to_the_id_it_fetched_with():
     client = FakeIamNoEchoDescribeClient()
     runner = Runner(default_region="us-east-1")
     key = runner.session_key()
-    runner._clients[(key, "iam")] = client
+    runner._clients[(key, "iam", False)] = client
     runner._accounts[key] = "123456789012"
     options = Options()
     options.describe = True
@@ -374,7 +374,7 @@ def test_run_operation_describe_contains_a_failed_batch(monkeypatch):
     client = FakeEcsFlakyDescribeClient(cluster_count=5)
     runner = Runner(default_region="us-east-1")
     key = runner.session_key()
-    runner._clients[(key, "ecs")] = client
+    runner._clients[(key, "ecs", False)] = client
     runner._accounts[key] = "123456789012"
     cfg = modelconfig.get_operation_config("ecs", "ListClusters")
     monkeypatch.setitem(cfg["output"]["describe"], "batch_size", 1)
@@ -642,3 +642,76 @@ def test_shape_page_iam_oidc_provider_via_cli_casing():
     (record,) = _shape_with_model("iam", "ListOpenIdConnectProviders", page)
     assert record["ajl"]["type"] == "iam:oidc-provider"
     assert record["ajl"]["id"] == "70FF"
+
+
+def test_client_uses_adaptive_retry_for_configured_services():
+    runner = Runner(default_region="us-east-1")
+    key = runner.session_key()
+
+    ssm_client = runner.client(key, "ssm")
+    s3_client = runner.client(key, "s3")
+    ec2_client = runner.client(key, "ec2")
+
+    for adaptive_client in (ssm_client, s3_client):
+        assert adaptive_client.meta.config.retries["mode"] == "adaptive"
+        assert adaptive_client.meta.config.retries["total_max_attempts"] == 11
+    assert ec2_client.meta.config.retries["mode"] == "standard"
+    assert ec2_client.meta.config.retries["total_max_attempts"] == 4
+
+
+def test_client_uses_adaptive_retry_for_one_pinned_operation_only():
+    runner = Runner(default_region="us-east-1")
+    key = runner.session_key()
+
+    # efs's other operations never showed real throttling -- only
+    # describe-mount-targets is pinned to adaptive, via
+    # ADAPTIVE_RETRY_OPERATIONS, not the whole service.
+    mount_targets_client = runner.client(key, "efs", "DescribeMountTargets")
+    file_systems_client = runner.client(key, "efs", "DescribeFileSystems")
+    bare_efs_client = runner.client(key, "efs")  # no operation given
+
+    assert mount_targets_client.meta.config.retries["mode"] == "adaptive"
+    assert mount_targets_client.meta.config.retries["total_max_attempts"] == 11
+    assert file_systems_client.meta.config.retries["mode"] == "standard"
+    assert bare_efs_client.meta.config.retries["mode"] == "standard"
+    # the two non-pinned calls share one client; the pinned one is separate
+    assert file_systems_client is bare_efs_client
+    assert mount_targets_client is not file_systems_client
+
+
+class _FakeSTS:
+    def __init__(self, account):
+        self._account = account
+        self.calls = 0
+
+    def get_caller_identity(self):
+        self.calls += 1
+        return {"Account": self._account}
+
+
+def test_account_persists_and_is_reused_by_a_fresh_runner(tmp_path, monkeypatch):
+    monkeypatch.setenv("AJL_ACCOUNT_CACHE_FILE", str(tmp_path / "accounts.json"))
+    runner = Runner(default_profile="prod", default_region="us-east-1")
+    key = runner.session_key()
+    fake_sts = _FakeSTS("111122223333")
+    runner._clients[(key, "sts", False)] = fake_sts
+
+    assert runner.account(key) == "111122223333"
+    assert fake_sts.calls == 1
+
+    # A fresh Runner (standing in for the next short-lived `inventory.sh`
+    # process) resolves from the persistent cache -- it never needs an sts
+    # client of its own for this to succeed.
+    runner2 = Runner(default_profile="prod", default_region="us-east-1")
+    assert runner2.account(runner2.session_key()) == "111122223333"
+
+
+def test_account_does_not_persist_for_unnamed_profile(tmp_path, monkeypatch):
+    cache_path = tmp_path / "accounts.json"
+    monkeypatch.setenv("AJL_ACCOUNT_CACHE_FILE", str(cache_path))
+    runner = Runner(default_region="us-east-1")  # no --profile
+    key = runner.session_key()
+    runner._clients[(key, "sts", False)] = _FakeSTS("111122223333")
+
+    assert runner.account(key) == "111122223333"
+    assert not cache_path.exists()

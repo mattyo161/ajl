@@ -33,9 +33,20 @@ credentials; the test suite does not.
 
 - `src/ajl/main.py` — entry point: arg parsing (`--` params are kebab-case →
   PascalCase, coerced from model input types), `Runner` (boto3 session/client
-  cache per profile+region), `Emitter` (line-atomic stdout), `--params-json`
-  worker-pool fan-out, `--version` (`runtime_version()`: live git-describe
-  when run from a source checkout, packaged version otherwise), `--describe`
+  cache per profile+region; retry mode is `adaptive` only for whole
+  services in `ADAPTIVE_RETRY_SERVICES` (ssm, s3) or single operations in
+  `ADAPTIVE_RETRY_OPERATIONS` (currently just `efs.DescribeMountTargets` —
+  efs's other calls never throttled, so only this one call pays adaptive's
+  cost, not the whole service) — everything else gets `standard` + a low
+  `max_attempts`, since most services/operations don't see real throttling
+  under ajl's usage. Verify with live traffic before trusting a CloudTrail
+  absence-of-errors read alone to drop something from either set — efs
+  DescribeMountTargets was briefly dropped on exactly that basis and had
+  to go back after a live `ThrottlingException`, see the comment in
+  `Runner.client()`),
+  `Emitter` (line-atomic stdout), `--params-json` worker-pool fan-out,
+  `--version` (`runtime_version()`: live git-describe when run from a
+  source checkout, packaged version otherwise), `--describe`
   (`run_describe_chain()`: list then call the paired Describe/Get operation
   per curated `output.describe` config — see docs/request-flow.md §7).
 - `src/ajl/normalize.py` — the generic normalizer driven by declarative
@@ -74,6 +85,11 @@ credentials; the test suite does not.
   count, outcome), via before-call/after-call event hooks registered per
   client in `Runner.client()`.
 - `src/ajl/debug.py` — `AJL_DEBUG_CACHE=1` internal-cache hit diagnostics.
+- `src/ajl/accountcache.py` — persistent cross-process cache of resolved
+  account ids (`~/.local/state/ajl/accounts.json`, keyed by profile, 24h
+  TTL), used by `Runner.account()`. Collapses the redundant
+  `sts.GetCallerIdentity` calls a bulk `inventory.sh` run makes across its
+  many short-lived `ajl` processes for the same profile.
 - `src/ajl/models/*.json` — per-service models. **Generated files.**
 - `tools/apply-resource-configs.py` — the real home of curated output
   shaping (declarative configs + hand-written jq programs).
