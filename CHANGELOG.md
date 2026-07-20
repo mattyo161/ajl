@@ -5,6 +5,40 @@ Notable changes to `ajl`, release by release. Format loosely follows
 [Semantic Versioning](https://semver.org/). See [DESIGN.md](DESIGN.md) for
 the reasoning behind these changes, not just the summary.
 
+## [0.8.0] - 2026-07-20
+
+### Added
+- Persistent cross-process account-id cache (`src/ajl/accountcache.py`):
+  `Runner.account()` now checks `~/.local/state/ajl/accounts.json`
+  (keyed by named profile, 24h TTL) before calling
+  `sts.GetCallerIdentity` — collapses the redundant resolution
+  `inventory.sh`'s ~150-process-per-run fan-out was paying on every run.
+- `tools/build-duckdb.py`: standalone script (PEP 723 header, no new
+  runtime dependency of ajl itself) that loads a `tools/inventory.sh`
+  run's output, plus `--api-log` telemetry, into a DuckDB file for
+  ad-hoc analysis.
+- `tools/security-checks.sql`: 11 generic, reusable monitoring queries
+  (public EKS endpoints, expired certs, over-privileged instance
+  profiles, open security groups, CloudTrail posture, S3 versioning,
+  RDS Multi-AZ, IAM access-key rotation, Secrets Manager rotation)
+  against the schema `build-duckdb.py` produces.
+- `docs/duckdb-analysis.md`: workflow and DuckDB-specific gotchas for
+  the two tools above.
+
+### Changed
+- `Runner.client()`'s retry mode is no longer a single global default.
+  `mode: adaptive` is now scoped to services/operations with real,
+  observed throttling (`ssm`, `s3`, and `efs.DescribeMountTargets`
+  specifically) instead of applying to every service; everything else
+  uses `mode: standard` with a low `max_attempts`, so a call that was
+  never actually being throttled fails fast instead of paying adaptive's
+  retry cost speculatively.
+- `tools/inventory.sh`: dropped `sagemaker list-human-task-uis` from the
+  bulk run (confirmed zero throttling/permissions errors, just an unused
+  feature); added `--cache 24h` to `transfer list-security-policies`
+  (fixed, account-independent AWS catalog) and
+  `efs describe-mount-targets` (mount targets change rarely).
+
 ## [0.7.0] - 2026-07-19
 
 ### Changed
