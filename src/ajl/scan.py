@@ -633,11 +633,12 @@ class Scanner:
         if not self._count_emit("objects"):
             return False
         key = item["Key"]
-        record = {"Type": "s3:object", "Uri": f"s3://{task.bucket}/{key}"}
-        if self.include_tags:
-            record["Tags"] = self._object_tags(client, task.bucket, key)
-        record["Bucket"] = task.bucket
+        record = {"Bucket": task.bucket}
         record.update(item)
+        ajl = {"type": "s3:object", "uri": f"s3://{task.bucket}/{key}"}
+        if self.include_tags:
+            ajl["tags"] = self._object_tags(client, task.bucket, key)
+        record["ajl"] = ajl
         self.emitter.emit(record, session_key)
         return True
 
@@ -658,11 +659,10 @@ class Scanner:
             return False
         self.emitter.emit(
             {
-                "Type": "s3:prefix",
-                "Uri": f"s3://{task.bucket}/{prefix}",
                 "Bucket": task.bucket,
                 "Prefix": prefix,
                 "Delimiter": delimiter,
+                "ajl": {"type": "s3:prefix", "uri": f"s3://{task.bucket}/{prefix}"},
             },
             session_key,
         )
@@ -727,11 +727,13 @@ def parse_uri(uri):
 
 def seed_task(line, default_delimiters):
     """Build a Task from a --params-json line (accepts records emitted by
-    ajl itself: Bucket/Prefix or Uri, a s3:prefix record's Delimiter, plus
-    optional StartAfter/EndAt and profile/region in either case)."""
+    ajl itself: Bucket/Prefix, or ajl.uri, a s3:prefix record's Delimiter,
+    plus optional StartAfter/EndAt and profile/region in either case)."""
+    ajl_meta = line.get("ajl") or {}
+    stamp = ajl_meta.get("stamp") or {}
     bucket = line.get("Bucket") or line.get("bucket")
     prefix = line.get("Prefix") or line.get("prefix") or ""
-    uri = line.get("Uri") or line.get("uri")
+    uri = line.get("Uri") or line.get("uri") or ajl_meta.get("uri")
     if not bucket and uri:
         bucket, prefix = parse_uri(uri)
     if not bucket:
@@ -748,8 +750,8 @@ def seed_task(line, default_delimiters):
         delimiters=delimiters,
         start_after=line.get("StartAfter") or "",
         end_at=end_at,
-        profile=line.get("profile") or line.get("Profile"),
-        region=line.get("region") or line.get("Region"),
+        profile=line.get("profile") or stamp.get("profile"),
+        region=line.get("region") or stamp.get("region"),
     )
 
 

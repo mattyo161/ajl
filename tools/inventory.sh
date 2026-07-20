@@ -4,6 +4,15 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 DATA_DIR="${SCRIPT_DIR}/../.temp/data"
 [[ ! -d "${DATA_DIR}" ]] && mkdir -p "${DATA_DIR}"
 
+# Best-effort headroom for the heaviest --all fan-out points (51 sessions,
+# each opening its own botocore clients/model files) — a real run hit
+# "Too many open files" partway through transfer-security-policies and lost
+# 31/51 sessions to cascading connection failures. Harmless if the shell
+# already has more headroom than this; a no-op if the environment forbids
+# raising it (some sandboxes cap the hard limit below 65536).
+ulimit -n 65536 2>/dev/null || true
+
+export AJL_PROFILES="${AJL_PROFILES:-newton,nri-develop,nri-customer}"
 #export AJL_REGIONS="${AJL_REGIONS:-us-east-1,us-east-2}"
 export AJL_CACHE="${AJL_CACHE:-1h}"
 export AJL_APILOG="${AJL_APILOG:-1}"
@@ -14,16 +23,16 @@ export AJL_APILOG="${AJL_APILOG:-1}"
 #####################
 ajl ecs list-clusters --describe --stamp-session --all \
 | tee "${DATA_DIR}/ecs-clusters.jsonl" \
-| tee >(jq -rc '{Profile,Region,cluster:.clusterArn}' \
+| tee >(jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,cluster:.clusterArn}' \
         | ajl ecs list-services --params-json - --stamp-session --describe \
         | tee "${DATA_DIR}/ecs-services.jsonl" \
-        | jq -rc '{Profile,Region,Service:.serviceArn}' \
+        | jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,Service:.serviceArn}' \
         | ajl ecs list-service-deployments --params-json - --stamp-session \
         > "${DATA_DIR}/ecs-service-deployments.jsonl") \
-| tee >(jq -rc '{Profile,Region,cluster:.clusterArn}' \
+| tee >(jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,cluster:.clusterArn}' \
         | ajl ecs list-tasks --params-json - --stamp-session --describe \
         > "${DATA_DIR}/ecs-tasks.jsonl") \
-| tee >(jq -rc '{Profile,Region,cluster:.clusterArn}' \
+| tee >(jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,cluster:.clusterArn}' \
         | ajl ecs list-container-instances --params-json - --stamp-session --describe \
         > "${DATA_DIR}/ecs-container-instances.jsonl") \
 > /dev/null
@@ -74,40 +83,53 @@ done
 # the same catalog-pollution trap as ec2 describe-images/describe-snapshots.
 ajl iam list-roles --all --stamp-session \
 | tee "${DATA_DIR}/iam-roles.jsonl" \
-| tee >(jq -rc '{Profile,Region,RoleName:.RoleName}' \
+| tee >(jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,RoleName:.RoleName}' \
         | ajl iam list-role-policies --params-json - --stamp-session --describe \
         > "${DATA_DIR}/iam-role-policies.jsonl") \
-| tee >(jq -rc '{Profile,Region,RoleName:.RoleName}' \
+| tee >(jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,RoleName:.RoleName}' \
         | ajl iam list-attached-role-policies --params-json - --stamp-session \
         > "${DATA_DIR}/iam-attached-role-policies.jsonl") \
 > /dev/null
 
+# Access keys: --describe would replace CreateDate/Status (the age/rotation
+# signal) with GetAccessKeyLastUsed's own response, since --describe emits
+# the describe call's record, not a merge of both. Two joinable files
+# instead, same pattern as sns-topics.jsonl + sns-topic-attributes.jsonl:
+# iam-access-keys.jsonl keeps CreateDate/Status per key (join key:
+# .AccessKeyId), iam-access-key-last-used.jsonl adds LastUsedDate — its
+# response never echoes AccessKeyId back, so join on the stamped request
+# param instead: .ajl.stamp.AccessKeyId.
 ajl iam list-users --all --stamp-session \
 | tee "${DATA_DIR}/iam-users.jsonl" \
-| tee >(jq -rc '{Profile,Region,UserName:.UserName}' \
+| tee >(jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,UserName:.UserName}' \
         | ajl iam list-user-policies --params-json - --stamp-session --describe \
         > "${DATA_DIR}/iam-user-policies.jsonl") \
-| tee >(jq -rc '{Profile,Region,UserName:.UserName}' \
+| tee >(jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,UserName:.UserName}' \
         | ajl iam list-attached-user-policies --params-json - --stamp-session \
         > "${DATA_DIR}/iam-attached-user-policies.jsonl") \
-| tee >(jq -rc '{Profile,Region,UserName:.UserName}' \
+| tee >(jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,UserName:.UserName}' \
         | ajl iam list-mfa-devices --params-json - --stamp-session --describe \
         > "${DATA_DIR}/iam-mfa-devices.jsonl") \
-> /dev/null
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,UserName:.UserName}' \
+| ajl iam list-access-keys --params-json - --stamp-session \
+| tee "${DATA_DIR}/iam-access-keys.jsonl" \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,AccessKeyId:.ajl.id}' \
+| ajl iam get-access-key-last-used --params-json - --stamp-session \
+> "${DATA_DIR}/iam-access-key-last-used.jsonl"
 
 ajl iam list-groups --all --stamp-session \
 | tee "${DATA_DIR}/iam-groups.jsonl" \
-| tee >(jq -rc '{Profile,Region,GroupName:.GroupName}' \
+| tee >(jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,GroupName:.GroupName}' \
         | ajl iam list-group-policies --params-json - --stamp-session --describe \
         > "${DATA_DIR}/iam-group-policies.jsonl") \
-| tee >(jq -rc '{Profile,Region,GroupName:.GroupName}' \
+| tee >(jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,GroupName:.GroupName}' \
         | ajl iam list-attached-group-policies --params-json - --stamp-session \
         > "${DATA_DIR}/iam-attached-group-policies.jsonl") \
 > /dev/null
 
 ajl iam list-policies --scope Local --all --stamp-session \
 | tee "${DATA_DIR}/iam-policies.jsonl" \
-| jq -rc '{Profile,Region,PolicyArn:.Arn}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,PolicyArn:.ajl.arn}' \
 | ajl iam list-policy-versions --params-json - --stamp-session --describe \
 > "${DATA_DIR}/iam-policy-versions.jsonl"
 
@@ -126,16 +148,16 @@ ajl iam list-saml-providers --all --stamp-session --describe \
 #####################
 ajl eks list-clusters --all --stamp-session --describe \
 | tee "${DATA_DIR}/eks-clusters.jsonl" \
-| tee >(jq -rc '{Profile,Region,clusterName:.name}' \
+| tee >(jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,clusterName:.name}' \
         | ajl eks list-nodegroups --params-json - --stamp-session --describe \
         > "${DATA_DIR}/eks-nodegroups.jsonl") \
-| tee >(jq -rc '{Profile,Region,clusterName:.name}' \
+| tee >(jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,clusterName:.name}' \
         | ajl eks list-addons --params-json - --stamp-session --describe \
         > "${DATA_DIR}/eks-addons.jsonl") \
-| tee >(jq -rc '{Profile,Region,clusterName:.name}' \
+| tee >(jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,clusterName:.name}' \
         | ajl eks list-fargate-profiles --params-json - --stamp-session --describe \
         > "${DATA_DIR}/eks-fargate-profiles.jsonl") \
-| jq -rc '{Profile,Region,clusterName:.name}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,clusterName:.name}' \
 | ajl eks list-access-entries --params-json - --stamp-session --describe \
 > "${DATA_DIR}/eks-access-entries.jsonl"
 
@@ -146,7 +168,7 @@ ajl eks list-clusters --all --stamp-session --describe \
 # global service: one pass is enough, no --all fan-out across regions needed
 ajl route53 list-hosted-zones --stamp-session \
 | tee "${DATA_DIR}/route53-hosted-zones.jsonl" \
-| jq -rc '{Profile,Region,HostedZoneId:.Id}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,HostedZoneId:.ajl.id}' \
 | ajl route53 list-resource-record-sets --params-json - --stamp-session \
 > "${DATA_DIR}/route53-resource-record-sets.jsonl"
 
@@ -165,7 +187,7 @@ ajl route53 list-reusable-delegation-sets --stamp-session --describe \
 #####################
 ajl ecr describe-repositories --all --stamp-session \
 | tee "${DATA_DIR}/ecr-repositories.jsonl" \
-| jq -rc '{Profile,Region,repositoryName:.Name}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,repositoryName:.ajl.name}' \
 | ajl ecr describe-images --params-json - --stamp-session \
 > "${DATA_DIR}/ecr-images.jsonl"
 
@@ -175,7 +197,7 @@ ajl ecr describe-repositories --all --stamp-session \
 #####################
 ajl efs describe-file-systems --all --stamp-session \
 | tee "${DATA_DIR}/efs-file-systems.jsonl" \
-| jq -rc '{Profile,Region,FileSystemId:.Id}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,FileSystemId:.ajl.id}' \
 | ajl efs describe-mount-targets --params-json - --stamp-session \
 > "${DATA_DIR}/efs-mount-targets.jsonl"
 
@@ -188,13 +210,13 @@ ajl elb describe-load-balancers --all --stamp-session \
 
 ajl elbv2 describe-load-balancers --all --stamp-session \
 | tee "${DATA_DIR}/elbv2-load-balancers.jsonl" \
-| tee >(jq -rc '{Profile,Region,LoadBalancerArn:.Arn}' \
+| tee >(jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,LoadBalancerArn:.ajl.arn}' \
         | ajl elbv2 describe-target-groups --params-json - --stamp-session \
         > "${DATA_DIR}/elbv2-target-groups.jsonl") \
-| jq -rc '{Profile,Region,LoadBalancerArn:.Arn}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,LoadBalancerArn:.ajl.arn}' \
 | ajl elbv2 describe-listeners --params-json - --stamp-session \
 | tee "${DATA_DIR}/elbv2-listeners.jsonl" \
-| jq -rc '{Profile,Region,ListenerArn:.Arn}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,ListenerArn:.ajl.arn}' \
 | ajl elbv2 describe-rules --params-json - --stamp-session \
 > "${DATA_DIR}/elbv2-rules.jsonl"
 
@@ -204,7 +226,7 @@ ajl elbv2 describe-load-balancers --all --stamp-session \
 #####################
 ajl backup list-backup-vaults --all --stamp-session \
 | tee "${DATA_DIR}/backup-vaults.jsonl" \
-| jq -rc '{Profile,Region,BackupVaultName:.Name}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,BackupVaultName:.ajl.name}' \
 | ajl backup list-recovery-points-by-backup-vault --params-json - --stamp-session \
 > "${DATA_DIR}/backup-recovery-points.jsonl"
 
@@ -232,8 +254,13 @@ ajl lambda list-event-source-mappings --all --stamp-session \
 ### SSM
 #####################
 # metadata only (type/tier/last-modified) — see docs/commands/ssm-params.md;
-# use `ajl ssm get` separately for actual values
-ajl ssm params --all --stamp-session \
+# use `ajl ssm get` separately for actual values. --no-cache: ssm/secretsmanager
+# require an age identity to cache at all (AGENTS.md's cache-requires-key
+# guard, since a cached value could hold a real secret) — without one
+# --cache doesn't just skip caching, it refuses to run and the account's
+# entire parameter list silently comes back empty. This is metadata-only
+# and cheap enough not to need caching in a bulk sweep anyway.
+ajl ssm params --all --stamp-session --no-cache \
 > "${DATA_DIR}/ssm-parameters.jsonl"
 
 
@@ -306,7 +333,7 @@ ajl ssm describe-maintenance-windows --all --stamp-session \
 # map by default (no QueueArn, nothing) — "All" is required to get anything.
 ajl sqs list-queues --all --stamp-session \
 | tee "${DATA_DIR}/sqs-queues.jsonl" \
-| jq -rc '{Profile,Region,QueueUrl}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,QueueUrl}' \
 | ajl sqs get-queue-attributes --attribute-names All --params-json - --stamp-session \
 > "${DATA_DIR}/sqs-queue-attributes.jsonl"
 
@@ -316,10 +343,10 @@ ajl sqs list-queues --all --stamp-session \
 #####################
 ajl sns list-topics --all --stamp-session \
 | tee "${DATA_DIR}/sns-topics.jsonl" \
-| tee >(jq -rc '{Profile,Region,TopicArn:.Arn}' \
+| tee >(jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,TopicArn:.ajl.arn}' \
         | ajl sns get-topic-attributes --params-json - --stamp-session \
         > "${DATA_DIR}/sns-topic-attributes.jsonl") \
-| jq -rc '{Profile,Region,TopicArn:.Arn}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,TopicArn:.ajl.arn}' \
 | ajl sns list-subscriptions-by-topic --params-json - --stamp-session \
 > "${DATA_DIR}/sns-subscriptions.jsonl"
 
@@ -333,24 +360,24 @@ ajl sns list-platform-applications --all --stamp-session \
 # GetIdentity*Attributes return a map keyed by identity ({"VerificationAttributes":
 # {"a@b.com": {...}}}), not a list — doesn't fit --describe's list-shaped model,
 # so --no-parse + a jq to_entries reshape does it instead. --stamp-session still
-# attaches Profile/Region/Account directly onto the raw --no-parse page.
+# attaches ajl.stamp directly onto the raw --no-parse page.
 ajl ses list-identities --all --stamp-session \
 | tee "${DATA_DIR}/ses-identities.jsonl" \
-| jq -rc '{Profile,Region,Account,Identities:[.Identity]}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,account:.ajl.stamp.account,Identities:[.Identity]}' \
 | tee >(ajl ses get-identity-verification-attributes --params-json - --stamp-session --no-parse \
         | jq -c '. as $r | ($r.VerificationAttributes // {}) | to_entries[]
-                 | {Type:"ses:identity-verification", Id:.key, Tags:{}} + .value
-                 + {Profile:$r.Profile,Region:$r.Region,Account:$r.Account}' \
+                 | .value + {ajl:{type:"ses:identity-verification", id:.key, tags:{},
+                     stamp:{profile:$r.ajl.stamp.profile, region:$r.ajl.stamp.region, account:$r.ajl.stamp.account}}}' \
         > "${DATA_DIR}/ses-identity-verification.jsonl") \
 | tee >(ajl ses get-identity-dkim-attributes --params-json - --stamp-session --no-parse \
         | jq -c '. as $r | ($r.DkimAttributes // {}) | to_entries[]
-                 | {Type:"ses:identity-dkim", Id:.key, Tags:{}} + .value
-                 + {Profile:$r.Profile,Region:$r.Region,Account:$r.Account}' \
+                 | .value + {ajl:{type:"ses:identity-dkim", id:.key, tags:{},
+                     stamp:{profile:$r.ajl.stamp.profile, region:$r.ajl.stamp.region, account:$r.ajl.stamp.account}}}' \
         > "${DATA_DIR}/ses-identity-dkim.jsonl") \
 | ajl ses get-identity-notification-attributes --params-json - --stamp-session --no-parse \
 | jq -c '. as $r | ($r.NotificationAttributes // {}) | to_entries[]
-         | {Type:"ses:identity-notification", Id:.key, Tags:{}} + .value
-         + {Profile:$r.Profile,Region:$r.Region,Account:$r.Account}' \
+         | .value + {ajl:{type:"ses:identity-notification", id:.key, tags:{},
+             stamp:{profile:$r.ajl.stamp.profile, region:$r.ajl.stamp.region, account:$r.ajl.stamp.account}}}' \
 > "${DATA_DIR}/ses-identity-notification.jsonl"
 
 ajl ses list-configuration-sets --all --stamp-session --describe \
@@ -372,23 +399,23 @@ ajl acm list-certificates --all --stamp-session --describe \
 #####################
 # Get{WebACL,IPSet,RuleGroup} need Name+Scope+Id together, which doesn't fit
 # --describe's single-id_field model — --stamp-session puts Scope (a List
-# call request param) on every list record instead, so a plain jq chain
-# reconstructs the params the Get* call needs.
+# call request param) into ajl.stamp on every list record instead, so a
+# plain jq chain reconstructs the params the Get* call needs.
 ajl wafv2 list-web-acls --scope REGIONAL --all --stamp-session \
 | tee "${DATA_DIR}/wafv2-web-acls-regional.jsonl" \
-| jq -rc '{Profile,Region,Name,Id,Scope}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,Name:.ajl.name,Id:.ajl.id,Scope:.ajl.stamp.Scope}' \
 | ajl wafv2 get-web-acl --params-json - --stamp-session \
 > "${DATA_DIR}/wafv2-web-acl-details-regional.jsonl"
 
 ajl wafv2 list-ip-sets --scope REGIONAL --all --stamp-session \
 | tee "${DATA_DIR}/wafv2-ip-sets-regional.jsonl" \
-| jq -rc '{Profile,Region,Name,Id,Scope}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,Name:.ajl.name,Id:.ajl.id,Scope:.ajl.stamp.Scope}' \
 | ajl wafv2 get-ip-set --params-json - --stamp-session \
 > "${DATA_DIR}/wafv2-ip-set-details-regional.jsonl"
 
 ajl wafv2 list-rule-groups --scope REGIONAL --all --stamp-session \
 | tee "${DATA_DIR}/wafv2-rule-groups-regional.jsonl" \
-| jq -rc '{Profile,Region,Name,Id,Scope}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,Name:.ajl.name,Id:.ajl.id,Scope:.ajl.stamp.Scope}' \
 | ajl wafv2 get-rule-group --params-json - --stamp-session \
 > "${DATA_DIR}/wafv2-rule-group-details-regional.jsonl"
 
@@ -397,19 +424,19 @@ ajl wafv2 list-rule-groups --scope REGIONAL --all --stamp-session \
 # results, so pin --region explicitly instead of fanning.
 ajl wafv2 list-web-acls --scope CLOUDFRONT --region us-east-1 --stamp-session \
 | tee "${DATA_DIR}/wafv2-web-acls-cloudfront.jsonl" \
-| jq -rc '{Profile,Region,Name,Id,Scope}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,Name:.ajl.name,Id:.ajl.id,Scope:.ajl.stamp.Scope}' \
 | ajl wafv2 get-web-acl --params-json - --region us-east-1 --stamp-session \
 > "${DATA_DIR}/wafv2-web-acl-details-cloudfront.jsonl"
 
 ajl wafv2 list-ip-sets --scope CLOUDFRONT --region us-east-1 --stamp-session \
 | tee "${DATA_DIR}/wafv2-ip-sets-cloudfront.jsonl" \
-| jq -rc '{Profile,Region,Name,Id,Scope}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,Name:.ajl.name,Id:.ajl.id,Scope:.ajl.stamp.Scope}' \
 | ajl wafv2 get-ip-set --params-json - --region us-east-1 --stamp-session \
 > "${DATA_DIR}/wafv2-ip-set-details-cloudfront.jsonl"
 
 ajl wafv2 list-rule-groups --scope CLOUDFRONT --region us-east-1 --stamp-session \
 | tee "${DATA_DIR}/wafv2-rule-groups-cloudfront.jsonl" \
-| jq -rc '{Profile,Region,Name,Id,Scope}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,Name:.ajl.name,Id:.ajl.id,Scope:.ajl.stamp.Scope}' \
 | ajl wafv2 get-rule-group --params-json - --region us-east-1 --stamp-session \
 > "${DATA_DIR}/wafv2-rule-group-details-cloudfront.jsonl"
 
@@ -542,8 +569,12 @@ ajl sagemaker list-contexts --all --stamp-session \
 ajl sagemaker list-data-quality-job-definitions --all --stamp-session --describe \
 > "${DATA_DIR}/sagemaker-data-quality-job-definitions.jsonl"
 
-ajl sagemaker list-device-fleets --all --stamp-session --describe \
-> "${DATA_DIR}/sagemaker-device-fleets.jsonl"
+# list-device-fleets throttles hard and universally — confirmed across
+# every session in a real 51-session run (0/51 ok, ~8.5 minutes burned for
+# zero output). Not account-specific, not a fixable ajl-side backoff tweak
+# (already at 10 max_attempts adaptive retry); dropped from the bulk
+# inventory rather than paying that cost every run. Still curated —
+# `ajl sagemaker list-device-fleets --describe` works fine standalone.
 
 ajl sagemaker list-human-task-uis --all --stamp-session --describe \
 > "${DATA_DIR}/sagemaker-human-task-uis.jsonl"
@@ -569,7 +600,7 @@ ajl servicediscovery list-namespaces --all --stamp-session \
 
 ajl servicediscovery list-services --all --stamp-session \
 | tee "${DATA_DIR}/servicediscovery-services.jsonl" \
-| jq -rc '{Profile,Region,ServiceId:.Id}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,ServiceId:.ajl.id}' \
 | ajl servicediscovery list-instances --params-json - --stamp-session --describe \
 > "${DATA_DIR}/servicediscovery-instances.jsonl"
 
@@ -586,7 +617,7 @@ ajl servicediscovery list-operations --all --stamp-session --describe \
 # reports it and keeps going for servers where it's actually valid.
 ajl transfer list-servers --all --stamp-session \
 | tee "${DATA_DIR}/transfer-servers.jsonl" \
-| jq -rc '{Profile,Region,ServerId:.Id}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,ServerId:.ajl.id}' \
 | ajl transfer list-accesses --params-json - --stamp-session --describe \
 > "${DATA_DIR}/transfer-accesses.jsonl"
 
@@ -604,7 +635,7 @@ ajl transfer list-web-apps --all --stamp-session --describe \
 
 ajl transfer list-workflows --all --stamp-session \
 | tee "${DATA_DIR}/transfer-workflows.jsonl" \
-| jq -rc '{Profile,Region,WorkflowId:.Id}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,WorkflowId:.ajl.id}' \
 | ajl transfer list-executions --params-json - --stamp-session --describe \
 > "${DATA_DIR}/transfer-executions.jsonl"
 
@@ -614,7 +645,10 @@ ajl transfer list-workflows --all --stamp-session \
 #####################
 # metadata only (Name/Arn/rotation/last-accessed/last-changed) — never
 # GetSecretValue here, same "list, don't read" boundary as ssm params.
-ajl secretsmanager list-secrets --all --stamp-session \
+# --no-cache: same cache-requires-key guard as ssm params above — without
+# it the call refuses to run (loud stderr error) and the resulting file is
+# just empty, easy to miss among everything else this script prints.
+ajl secretsmanager list-secrets --all --stamp-session --no-cache \
 > "${DATA_DIR}/secretsmanager-secrets.jsonl"
 
 
@@ -623,7 +657,7 @@ ajl secretsmanager list-secrets --all --stamp-session \
 #####################
 ajl opensearch list-domain-names --all --stamp-session --describe \
 | tee "${DATA_DIR}/opensearch-domains.jsonl" \
-| jq -rc '{Profile,Region,DomainName:.Id}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,DomainName:.ajl.id}' \
 | ajl opensearch list-data-sources --params-json - --stamp-session --describe \
 > "${DATA_DIR}/opensearch-data-sources.jsonl"
 
@@ -663,7 +697,7 @@ ajl elasticache describe-serverless-caches --all --stamp-session \
 # ec2 describe-images, iam list-policies, docdb, and workspaces bundles/images.
 ajl cloudfront list-distributions --stamp-session --describe \
 | tee "${DATA_DIR}/cloudfront-distributions.jsonl" \
-| jq -rc '{Profile,Region,DistributionId:.Id}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,DistributionId:.ajl.id}' \
 | ajl cloudfront list-invalidations --params-json - --stamp-session \
 > "${DATA_DIR}/cloudfront-invalidations.jsonl"
 
@@ -714,7 +748,7 @@ ajl kms list-aliases --all --stamp-session \
 > "${DATA_DIR}/kms-aliases.jsonl"
 
 ajl kms list-keys --all --stamp-session \
-| jq -rc '{Profile,Region,KeyId:.Id}' \
+| jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,KeyId:.ajl.id}' \
 | ajl kms list-key-policies --params-json - --stamp-session --describe \
 > "${DATA_DIR}/kms-key-policies.jsonl"
 
@@ -725,9 +759,10 @@ ajl kms list-keys --all --stamp-session \
 ajl s3 list-buckets --stamp-session \
 > "${DATA_DIR}/s3-buckets.jsonl"
 
-# None of these Get* calls echo Bucket back in their response, so Id/Name/
-# Arn come back blank — --stamp-session's Bucket (from the params piped in
-# below) is the join key back to s3-buckets.jsonl. Several are EXPECTED to
+# None of these Get* calls echo Bucket back in their response, so ajl.id/
+# ajl.name/ajl.arn come back blank — the Bucket param piped in below (read
+# from ajl.name on the way in) is the join key back to s3-buckets.jsonl.
+# Several are EXPECTED to
 # error per-bucket when that config was never set (NoSuchBucketPolicy,
 # NoSuchCORSConfiguration, NoSuchTagSet, NoSuchWebsiteConfiguration,
 # ReplicationConfigurationNotFoundError, ObjectLockConfigurationNotFoundError)
@@ -738,7 +773,7 @@ for op in get-bucket-versioning get-bucket-encryption get-bucket-policy get-buck
           get-bucket-replication get-bucket-logging get-bucket-accelerate-configuration \
           get-bucket-ownership-controls get-bucket-tagging get-bucket-location get-bucket-request-payment \
           get-bucket-acl get-bucket-website get-public-access-block get-object-lock-configuration; do
-  jq -rc '{Profile,Region,Bucket:.Name}' "${DATA_DIR}/s3-buckets.jsonl" \
+  jq -rc '{profile:.ajl.stamp.profile,region:.ajl.stamp.region,Bucket:.ajl.name}' "${DATA_DIR}/s3-buckets.jsonl" \
   | ajl s3 "$op" --params-json - --stamp-session \
   > "${DATA_DIR}/s3-${op#get-}.jsonl"
 done

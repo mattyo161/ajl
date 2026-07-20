@@ -4259,7 +4259,7 @@
       },
       "name": "ListObjectVersions",
       "output": {
-        "jq": ". as $r |\n((.CommonPrefixes//[])[] |\n  {Type: \"s3:prefix\", Id: .Prefix, Name: .Prefix,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Prefix)\", Tags: {},\n   Uri: \"s3://\\($r.Name)/\\(.Prefix)\",\n   Bucket: $r.Name, Delimiter: $r.Delimiter} + .),\n((.Versions//[])[] |\n  {Type: \"s3:object-version\", Id: .Key, Name: .Key,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Key)\", Tags: {},\n   Uri: \"s3://\\($r.Name)/\\(.Key)\",\n   Bucket: $r.Name} + .),\n((.DeleteMarkers//[])[] |\n  {Type: \"s3:delete-marker\", Id: .Key, Name: .Key,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Key)\", Tags: {},\n   Uri: \"s3://\\($r.Name)/\\(.Key)\",\n   Bucket: $r.Name} + .)",
+        "jq": ". as $r |\n((.CommonPrefixes//[])[] |\n  . + {Bucket: $r.Name, Delimiter: $r.Delimiter,\n       ajl: {type: \"s3:prefix\", id: .Prefix, name: .Prefix,\n             arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Prefix)\",\n             uri: \"s3://\\($r.Name)/\\(.Prefix)\", tags: {}}}),\n((.Versions//[])[] |\n  . + {Bucket: $r.Name,\n       ajl: {type: \"s3:object-version\", id: .Key, name: .Key,\n             arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Key)\",\n             uri: \"s3://\\($r.Name)/\\(.Key)\", tags: {}}}),\n((.DeleteMarkers//[])[] |\n  . + {Bucket: $r.Name,\n       ajl: {type: \"s3:delete-marker\", id: .Key, name: .Key,\n             arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Key)\",\n             uri: \"s3://\\($r.Name)/\\(.Key)\", tags: {}}})",
         "lists": {
           "CommonPrefixes": {
             "all_fields": [
@@ -4442,7 +4442,7 @@
       },
       "name": "ListObjects",
       "output": {
-        "jq": ". as $r |\n((.CommonPrefixes//[])[] |\n  {Type: \"s3:prefix\", Id: .Prefix, Name: .Prefix,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Prefix)\", Tags: {},\n   Uri: \"s3://\\($r.Name)/\\(.Prefix)\",\n   Bucket: $r.Name, Delimiter: $r.Delimiter} + .),\n((.Contents//[])[] |\n  {Type: \"s3:object\", Id: .Key, Name: .Key,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Key)\", Tags: {},\n   Uri: \"s3://\\($r.Name)/\\(.Key)\",\n   Bucket: $r.Name} + .)",
+        "jq": ". as $r |\n((.CommonPrefixes//[])[] |\n  . + {Bucket: $r.Name, Delimiter: $r.Delimiter,\n       ajl: {type: \"s3:prefix\", id: .Prefix, name: .Prefix,\n             arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Prefix)\",\n             uri: \"s3://\\($r.Name)/\\(.Prefix)\", tags: {}}}),\n((.Contents//[])[] |\n  . + {Bucket: $r.Name,\n       ajl: {type: \"s3:object\", id: .Key, name: .Key,\n             arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Key)\",\n             uri: \"s3://\\($r.Name)/\\(.Key)\", tags: {}}})",
         "lists": {
           "CommonPrefixes": {
             "all_fields": [
@@ -4599,7 +4599,7 @@
       },
       "name": "ListObjectsV2",
       "output": {
-        "jq": ". as $r |\n((.CommonPrefixes//[])[] |\n  {Type: \"s3:prefix\", Id: .Prefix, Name: .Prefix,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Prefix)\", Tags: {},\n   Uri: \"s3://\\($r.Name)/\\(.Prefix)\",\n   Bucket: $r.Name, Delimiter: $r.Delimiter} + .),\n((.Contents//[])[] |\n  {Type: \"s3:object\", Id: .Key, Name: .Key,\n   Arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Key)\", Tags: {},\n   Uri: \"s3://\\($r.Name)/\\(.Key)\",\n   Bucket: $r.Name} + .)",
+        "jq": ". as $r |\n((.CommonPrefixes//[])[] |\n  . + {Bucket: $r.Name, Delimiter: $r.Delimiter,\n       ajl: {type: \"s3:prefix\", id: .Prefix, name: .Prefix,\n             arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Prefix)\",\n             uri: \"s3://\\($r.Name)/\\(.Prefix)\", tags: {}}}),\n((.Contents//[])[] |\n  . + {Bucket: $r.Name,\n       ajl: {type: \"s3:object\", id: .Key, name: .Key,\n             arn: \"arn:\\($partition//\"aws\"):s3:::\\($r.Name)/\\(.Key)\",\n             uri: \"s3://\\($r.Name)/\\(.Key)\", tags: {}}})",
         "lists": {
           "CommonPrefixes": {
             "all_fields": [

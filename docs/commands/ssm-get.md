@@ -30,18 +30,16 @@ parameter — SSM has no such parameter — it only controls this one boolean.
 
 ## Output shape
 
-Deliberately narrower than the generic `Type`/`Id`/`Name`/`Arn`/`Tags`
-contract — no `Id`, no `Tags`:
-
 ```json
-{"Type": "ssm:parameter", "Name": "...", "Arn": "...", "Value": "...",
- "ParameterType": "String", "Version": 3, "LastModifiedDate": "...", "DataType": "text"}
+{"Name": "...", "Value": "...", "Type": "String", "Version": 3,
+ "LastModifiedDate": "...", "DataType": "text",
+ "ajl": {"type": "ssm:parameter", "id": "...", "name": "...", "arn": "...", "tags": {}}}
 ```
 
-`ParameterType` (not `Type`) holds the API's own `String`/`StringList`/
-`SecureString` value — the rename exists specifically so it doesn't collide
-with ajl's own `Type` property. `Arn` falls back to `""` if the API
-response has none.
+`Type` here is the parameter's own `String`/`StringList`/`SecureString`
+value, straight from the API — no rename needed since it can't collide
+with `ajl.type` anymore. `ajl.arn` falls back to `""` if the API response
+has none; `ajl.tags` is always `{}` (SSM tags aren't fetched here).
 
 ### Single value vs. full record
 

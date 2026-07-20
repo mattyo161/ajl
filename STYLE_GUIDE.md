@@ -34,9 +34,15 @@ Conventions for code in this repo. When in doubt, match the surrounding code
 
 Two casing worlds meet in this codebase; keep them separate:
 
-- **PascalCase** for everything that faces the AWS API or the output stream:
-  request params after coercion, response fields, and the normalized
-  `Type`/`Id`/`Name`/`Arn`/`Tags` properties.
+- **PascalCase** for everything that faces the AWS API: request params after
+  coercion, response fields — every raw field passes through in whatever
+  case boto3 returned it, untouched.
+- **lowercase** for ajl's own trailing metadata, `ajl.{type,id,name,arn,
+  tags,uri}` and `ajl.stamp.{profile,region,account}` — it's ajl's
+  namespace, not AWS's, so it doesn't borrow AWS's casing convention.
+  Exception: forwarded request params inside `ajl.stamp` (e.g. `cluster`,
+  `RoleName`) keep their real AWS parameter casing — they're a verbatim
+  echo meant to be passed back into a follow-up call, not ajl's naming.
 - **kebab-case** on the CLI (`--max-items`, `describe-instances`),
   **snake_case** for boto3 method names. Conversions go through
   `caseconverter` (`pascalcase`/`snakecase`), never hand-rolled.

@@ -176,17 +176,17 @@ def test_run_operation_paginated_and_normalized():
     client = FakeClient(pages)
     runner, key = make_runner(client)
     records = collect_emitted(runner, key, client)
-    assert [r["Id"] for r in records] == ["vpc-1", "vpc-2"]
-    assert records[0]["Type"] == "ec2:vpc"
-    assert records[0]["Name"] == "main"
-    assert records[0]["Arn"] == "arn:aws:ec2:us-east-1:1:vpc/vpc-1"
-    assert records[0]["Tags"] == {"Name": "main"}
+    assert [r["ajl"]["id"] for r in records] == ["vpc-1", "vpc-2"]
+    assert records[0]["ajl"]["type"] == "ec2:vpc"
+    assert records[0]["ajl"]["name"] == "main"
+    assert records[0]["ajl"]["arn"] == "arn:aws:ec2:us-east-1:1:vpc/vpc-1"
+    assert records[0]["ajl"]["tags"] == {"Name": "main"}
 
 
 def test_run_operation_stamp_session_merges_request_params():
     # a response often doesn't echo back what it was asked for (ecs ListTasks
     # returns task ARNs, never the cluster you asked about) — --stamp-session
-    # should attach the resolved request params too, not just Profile/Region/Account
+    # should attach the resolved request params into ajl.stamp
     pages = [{"Vpcs": [{"VpcId": "vpc-1", "OwnerId": "1"}]}]
     client = FakeClient(pages)
     runner, key = make_runner(client)
@@ -195,10 +195,12 @@ def test_run_operation_stamp_session_merges_request_params():
     out = io.StringIO()
     emitter = Emitter(stream=out)
     run_operation(runner, emitter, options, "ec2", "describe-vpcs",
-                   {"Filter": "x", "Id": "should-not-clobber"}, key)
+                   {"Filter": "x"}, key)
     records = [json.loads(line) for line in out.getvalue().splitlines()]
-    assert records[0]["Filter"] == "x"
-    assert records[0]["Id"] == "vpc-1"  # the real response field wins, never clobbered
+    assert records[0]["ajl"]["stamp"]["Filter"] == "x"
+    # ajl.id (the real resource's id) lives in a separate namespace from
+    # ajl.stamp — nesting makes the old clobber risk structurally impossible
+    assert records[0]["ajl"]["id"] == "vpc-1"
 
 
 class FakeEcsDescribeClient:
@@ -238,9 +240,10 @@ def test_run_operation_describe_array_batches_ids():
     records = [json.loads(line) for line in out.getvalue().splitlines()
                if not line.startswith("ajl:")]
     assert len(client.describe_calls) == 1  # 5 ids fit in one default-100 batch
-    assert sorted(r["Id"] for r in records) == ["c0", "c1", "c2", "c3", "c4"]
-    assert records[0]["Arn"].startswith("arn:aws:ecs:")
-    assert "clusters" not in records[0]  # the batch identifier isn't re-stamped onto records
+    assert sorted(r["ajl"]["id"] for r in records) == ["c0", "c1", "c2", "c3", "c4"]
+    assert records[0]["ajl"]["arn"].startswith("arn:aws:ecs:")
+    # the batch identifier isn't re-stamped onto records
+    assert "clusters" not in records[0]["ajl"].get("stamp", {})
 
 
 def test_run_operation_describe_array_respects_curated_batch_size(monkeypatch):
@@ -298,7 +301,9 @@ def test_run_operation_describe_scalar_carries_scope_per_call():
     assert len(client.describe_calls) == 3  # one GetRolePolicy call per policy name
     assert all(call["RoleName"] == "my-role" for call in client.describe_calls)
     assert sorted(r["PolicyName"] for r in records) == ["AdminAccess", "DenyAll", "S3ReadOnly"]
-    assert all(r["RoleName"] == "my-role" for r in records)  # scope stamped onto every record
+    # RoleName here is the raw GetRolePolicy response field (it echoes the
+    # request back); --stamp-session redundantly also puts it in ajl.stamp
+    assert all(r["RoleName"] == "my-role" for r in records)
 
 
 def test_run_operation_describe_no_results_makes_no_describe_calls():
@@ -347,11 +352,11 @@ def test_run_operation_describe_scalar_falls_back_to_the_id_it_fetched_with():
     run_operation(runner, Emitter(stream=out), options, "iam", "list-saml-providers", {}, key)
     records = [json.loads(line) for line in out.getvalue().splitlines()
                if not line.startswith("ajl:")]
-    assert sorted(r["Arn"] for r in records) == [
+    assert sorted(r["ajl"]["arn"] for r in records) == [
         "arn:aws:iam::123:saml-provider/one", "arn:aws:iam::123:saml-provider/two"]
-    # id_field="Arn" for this pairing, so the fallback also re-derives Id
-    # from the Arn tail, matching normalize.py's own Id-from-Arn convention
-    assert sorted(r["Id"] for r in records) == ["one", "two"]
+    # id_field="Arn" for this pairing, so the fallback also re-derives id
+    # from the arn tail, matching normalize.py's own id-from-arn convention
+    assert sorted(r["ajl"]["id"] for r in records) == ["one", "two"]
 
 
 class FakeEcsFlakyDescribeClient(FakeEcsDescribeClient):
@@ -380,7 +385,7 @@ def test_run_operation_describe_contains_a_failed_batch(monkeypatch):
     records = [json.loads(line) for line in out.getvalue().splitlines()
                if not line.startswith("ajl:")]
     # 5 clusters, batch_size=1 -> 5 calls; c2's call fails, the other 4 still emit
-    assert sorted(r["Id"] for r in records) == ["c0", "c1", "c3", "c4"]
+    assert sorted(r["ajl"]["id"] for r in records) == ["c0", "c1", "c3", "c4"]
 
 
 def test_run_operation_max_items():
@@ -414,12 +419,13 @@ def test_shape_page_jq_escape_hatch_ec2_instances():
     records = list(shape_page(page, get_operation_config("ec2", "DescribeInstances"), context, runner, key))
     assert len(records) == 1
     record = records[0]
-    assert record["Type"] == "ec2:instance"
-    assert record["Id"] == "i-1"
-    assert record["Name"] == "web"
-    assert record["Arn"] == "arn:aws:ec2:us-east-1:111122223333:instance/i-1"
-    assert record["Tags"] == {"Name": "web"}
+    assert record["ajl"]["type"] == "ec2:instance"
+    assert record["ajl"]["id"] == "i-1"
+    assert record["ajl"]["name"] == "web"
+    assert record["ajl"]["arn"] == "arn:aws:ec2:us-east-1:111122223333:instance/i-1"
+    assert record["ajl"]["tags"] == {"Name": "web"}
     assert record["Reservation"]["ReservationId"] == "r-1"
+    assert "Tags" not in record
 
 
 def test_shape_page_default_single_list_unwrap():
@@ -443,25 +449,26 @@ def _shape_with_model(service, operation, page):
 def test_shape_page_sqs_list_queues_jq():
     page = {"QueueUrls": ["https://sqs.us-east-1.amazonaws.com/111122223333/my-queue"]}
     (record,) = _shape_with_model("sqs", "ListQueues", page)
-    assert record["Type"] == "sqs:queue"
-    assert record["Id"] == "my-queue"
-    assert record["Arn"] == "arn:aws:sqs:us-east-1:111122223333:my-queue"
+    assert record["ajl"]["type"] == "sqs:queue"
+    assert record["ajl"]["id"] == "my-queue"
+    assert record["ajl"]["arn"] == "arn:aws:sqs:us-east-1:111122223333:my-queue"
     assert record["QueueUrl"] == page["QueueUrls"][0]
 
 
 def test_shape_page_route53_hosted_zones_jq():
     page = {"HostedZones": [{"Id": "/hostedzone/Z0432432", "Name": "example.com."}]}
     (record,) = _shape_with_model("route53", "ListHostedZones", page)
-    assert record["Id"] == "Z0432432"
-    assert record["Arn"] == "arn:aws:route53:::hostedzone/Z0432432"
+    assert record["ajl"]["id"] == "Z0432432"
+    assert record["ajl"]["arn"] == "arn:aws:route53:::hostedzone/Z0432432"
+    assert record["Id"] == "Z0432432"  # the raw field is stripped, not renamed, and kept
 
 
 def test_shape_page_ecs_scalar_arn_list():
     page = {"clusterArns": ["arn:aws:ecs:us-east-1:111122223333:cluster/prod"]}
     (record,) = _shape_with_model("ecs", "ListClusters", page)
-    assert record["Type"] == "ecs:cluster"
-    assert record["Id"] == "prod"
-    assert record["Arn"] == page["clusterArns"][0]
+    assert record["ajl"]["type"] == "ecs:cluster"
+    assert record["ajl"]["id"] == "prod"
+    assert record["ajl"]["arn"] == page["clusterArns"][0]
 
 
 def test_jq_emitter_filters_drops_and_explodes():
@@ -496,11 +503,26 @@ def test_stamp_emitter_adds_session_fields():
     runner = Runner(default_profile="dev", default_region="us-east-1")
     runner._accounts[("dev", "us-east-1")] = "111122223333"
     emitter = StampEmitter(Emitter(stream=out), runner)
-    emitter.emit({"Id": "x"}, ("dev", "us-east-1"))
+    emitter.emit({"ajl": {"id": "x"}}, ("dev", "us-east-1"))
     (record,) = [json.loads(line) for line in out.getvalue().splitlines()]
-    assert record["Profile"] == "dev"
-    assert record["Region"] == "us-east-1"
-    assert record["Account"] == "111122223333"
+    stamp = record["ajl"]["stamp"]
+    assert stamp["profile"] == "dev"
+    assert stamp["region"] == "us-east-1"
+    assert stamp["account"] == "111122223333"
+    assert record["ajl"]["id"] == "x"  # existing ajl content is preserved, not clobbered
+
+
+def test_stamp_emitter_creates_ajl_on_a_raw_no_parse_page():
+    from ajl.main import StampEmitter
+
+    out = io.StringIO()
+    runner = Runner(default_profile="dev", default_region="us-east-1")
+    runner._accounts[("dev", "us-east-1")] = "111122223333"
+    emitter = StampEmitter(Emitter(stream=out), runner)
+    emitter.emit({"SomeRawField": "x"}, ("dev", "us-east-1"))
+    (record,) = [json.loads(line) for line in out.getvalue().splitlines()]
+    assert list(record) == ["SomeRawField", "ajl"]  # ajl trails even when created fresh
+    assert record["ajl"]["stamp"]["profile"] == "dev"
 
 
 class StampOptions:
@@ -529,15 +551,29 @@ def test_should_stamp_session_propagates_through_params_json():
     ) is False
 
 
-def test_pop_session_fields_accepts_both_cases():
+def test_pop_session_fields_flat_lowercase_is_the_convention():
     from ajl.main import pop_session_fields
 
-    line = {"Profile": "p1", "Region": "eu-west-1", "Bucket": "b"}
+    line = {"profile": "p1", "region": "eu-west-1", "Bucket": "b"}
     assert pop_session_fields(line) == ("p1", "eu-west-1")
     assert line == {"Bucket": "b"}
-    line = {"profile": "p2", "region": "us-east-2"}
-    assert pop_session_fields(line) == ("p2", "us-east-2")
     assert pop_session_fields({}) == (None, None)
+
+
+def test_pop_session_fields_falls_back_to_nested_ajl_stamp():
+    # a raw ajl record piped straight back in without a jq reshape
+    from ajl.main import pop_session_fields
+
+    line = {"ajl": {"stamp": {"profile": "p3", "region": "us-east-2"}}, "Bucket": "b"}
+    assert pop_session_fields(line) == ("p3", "us-east-2")
+    assert line == {"Bucket": "b"}  # the whole 'ajl' key is popped, never forwarded to boto3
+
+
+def test_pop_session_fields_flat_wins_over_nested():
+    from ajl.main import pop_session_fields
+
+    line = {"profile": "flat", "ajl": {"stamp": {"profile": "nested"}}}
+    assert pop_session_fields(line) == ("flat", None)
 
 
 def test_shape_page_cloudformation_stack():
@@ -547,10 +583,10 @@ def test_shape_page_cloudformation_stack():
         "Tags": [{"Key": "env", "Value": "prod"}],
     }]}
     (record,) = _shape_with_model("cloudformation", "DescribeStacks", page)
-    assert record["Type"] == "cloudformation:stack"
-    assert record["Id"] == "web-prod"
-    assert record["Arn"].startswith("arn:aws:cloudformation:")
-    assert record["Tags"] == {"env": "prod"}
+    assert record["ajl"]["type"] == "cloudformation:stack"
+    assert record["ajl"]["id"] == "web-prod"
+    assert record["ajl"]["arn"].startswith("arn:aws:cloudformation:")
+    assert record["ajl"]["tags"] == {"env": "prod"}
 
 
 def test_shape_page_cloudwatch_metric_and_composite_alarms():
@@ -559,22 +595,22 @@ def test_shape_page_cloudwatch_metric_and_composite_alarms():
         "CompositeAlarms": [{"AlarmName": "svc-degraded", "AlarmArn": "arn:aws:cloudwatch:us-east-1:1:alarm:svc-degraded"}],
     }
     records = _shape_with_model("cloudwatch", "DescribeAlarms", page)
-    assert [r["Id"] for r in records] == ["cpu-high", "svc-degraded"]
-    assert all(r["Type"] == "cloudwatch:alarm" for r in records)
+    assert [r["ajl"]["id"] for r in records] == ["cpu-high", "svc-degraded"]
+    assert all(r["ajl"]["type"] == "cloudwatch:alarm" for r in records)
 
 
 def test_shape_page_logs_log_group_arn_format():
     page = {"logGroups": [{"logGroupName": "/ecs/web"}]}
     (record,) = _shape_with_model("logs", "DescribeLogGroups", page)
-    assert record["Type"] == "logs:log-group"
-    assert record["Arn"] == "arn:aws:logs:us-east-1:111122223333:log-group:/ecs/web"
+    assert record["ajl"]["type"] == "logs:log-group"
+    assert record["ajl"]["arn"] == "arn:aws:logs:us-east-1:111122223333:log-group:/ecs/web"
 
 
 def test_shape_page_ecs_task_scalar_arns():
     page = {"taskArns": ["arn:aws:ecs:us-east-1:1:task/prod/abc123"]}
     (record,) = _shape_with_model("ecs", "ListTasks", page)
-    assert record["Type"] == "ecs:task"
-    assert record["Id"] == "abc123"
+    assert record["ajl"]["type"] == "ecs:task"
+    assert record["ajl"]["id"] == "abc123"
 
 
 def test_shape_page_eks_nodegroup():
@@ -584,9 +620,9 @@ def test_shape_page_eks_nodegroup():
         "tags": {"team": "platform"},
     }}
     (record,) = _shape_with_model("eks", "DescribeNodegroup", page)
-    assert record["Type"] == "eks:nodegroup"
-    assert record["Name"] == "workers"
-    assert record["Tags"] == {"team": "platform"}
+    assert record["ajl"]["type"] == "eks:nodegroup"
+    assert record["ajl"]["name"] == "workers"
+    assert record["ajl"]["tags"] == {"team": "platform"}
 
 
 def test_operation_lookup_is_case_insensitive():
@@ -604,5 +640,5 @@ def test_shape_page_iam_oidc_provider_via_cli_casing():
         {"Arn": "arn:aws:iam::111122223333:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/70FF"}
     ]}
     (record,) = _shape_with_model("iam", "ListOpenIdConnectProviders", page)
-    assert record["Type"] == "iam:oidc-provider"
-    assert record["Id"] == "70FF"
+    assert record["ajl"]["type"] == "iam:oidc-provider"
+    assert record["ajl"]["id"] == "70FF"

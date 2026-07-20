@@ -71,13 +71,13 @@ ajl s3 list-buckets --fetch-tags
 # stream request params as JSONL for 100s of parallel calls (--workers)
 # each line may set client/operation/profile/region or rely on the defaults
 ajl s3 list-objects-v2 --bucket my-bucket --delimiter / \
-  | jq -c 'select(.Type == "s3:prefix")' \
+  | jq -c 'select(.ajl.type == "s3:prefix")' \
   | ajl s3 list-objects-v2 --params-json - --workers 16
 
 # post-shaping jq on any command (empty output drops, strings print raw)
-ajl ec2 describe-instances --jq 'select(.State.Name == "running") | .Uri // .Arn'
+ajl ec2 describe-instances --jq 'select(.State.Name == "running") | .ajl.uri // .ajl.arn'
 
-# stamp records with Profile/Region/Account so later stages reuse the session
+# stamp records with ajl.stamp.{profile,region,account} so later stages reuse the session
 ajl s3 list-buckets --profile prod --stamp-session
 
 # --describe: for a curated List->Describe pairing, skip the --params-json
@@ -98,7 +98,7 @@ ajl s3 scan --params-json failed.jsonl --workers 64   # re-run only the misses
 
 # batch the stream into delete-objects calls, 1000 keys per request
 ajl s3 scan s3://my-bucket/tmp/ \
-  | parallel --pipe -N1000 "jq -sc '{Delete: {Objects: map({Key: .Id}), Quiet: true}}'" \
+  | parallel --pipe -N1000 "jq -sc '{Delete: {Objects: map({Key}), Quiet: true}}'" \
   | ajl s3 delete-objects --bucket my-bucket --params-json -
 ```
 
@@ -163,12 +163,12 @@ ids, jq programs, models) reports hits to stderr under `AJL_DEBUG_CACHE=1`.
 
 ### `ajl s3 list` and `ajl s3 scan`
 
-Both emit **lean records** built for volume: `Uri` (`s3://bucket/key`)
-replaces `Id`/`Name`/`Arn`, and `Tags` appears only under `--include-tags`
-(one `get-object-tagging` call per object). A live progress line shows on
-stderr while results stream (auto-off when stderr isn't a terminal, or with
-`--no-progress`). The generic `ajl s3 list-objects-v2` keeps the full
-five-property contract.
+Both emit **lean records** built for volume: `ajl.uri` (`s3://bucket/key`)
+replaces `ajl.id`/`ajl.name`/`ajl.arn`, and `ajl.tags` appears only under
+`--include-tags` (one `get-object-tagging` call per object). A live
+progress line shows on stderr while results stream (auto-off when stderr
+isn't a terminal, or with `--no-progress`). The generic `ajl s3
+list-objects-v2` keeps the full `ajl` object.
 
 `list` is the composable single-level primitive: one `list-objects-v2` per
 seed, `CommonPrefixes` emitted as `s3:prefix` records that pipe straight back
@@ -192,16 +192,27 @@ than `--max-fan` child prefixes) automatically falls back to range splitting.
 Failed listings stream to `--failed-out` as re-runnable `--params-json` seeds.
 
 Records emitted by `ajl` can be piped straight back into `--params-json -`:
-params that the target operation does not accept (like `Type`, `Arn`, `Tags`)
-are dropped automatically.
+the trailing `ajl` object and any params the target operation doesn't
+accept are dropped automatically.
 
 Is a wrapper for the AWS Boto3 API that is intended to be able to replicate as best as possible the `aws` cli tool with ability to stream the output as jsonline (nd-json - each line represents a JSON object). This is a very powerful abstraction that can provide some very fast processing of data from the API. On top of that it allows jsonl data to be passed to `ajl` making it possible to stream 100s/1000s of API calls per second, which is extremely useful when dealing with large data sets like S3 buckets, Tags, etc. It is also a great way to inventory an AWS account and taking the streams of JSONL and saving them into OpenSearch, DynamoDB, DocumentDB, or any other JSON schemaless store or even just saving to S3. 
 
-Objects have a consistent interface with the following properties always set first: `Type`, `Id`, `Name`, `Arn` and `Tags`. `Type` is the ARN-style resource type (e.g. `ec2:instance`, `s3:bucket`). Resource-specific fields like `SecurityGroupId`/`SecurityGroupName` are duplicated into `Id`/`Name`; when there is no `*Name` property `Name` falls back to `Tags.Name`, and `Id` falls back to the last segment of the `Arn`. Ideally the `Arn` should be globally unique value across all of AWS, `Id` and `Name` will depend on the API and how the user configured the AWS account.
+Every raw API field passes through completely untouched, in its original
+position — nothing is renamed, nothing is dropped. On top of that, ajl
+appends one trailing property, `ajl`, holding a consistent identity
+envelope: `ajl.type`, `ajl.id`, `ajl.name`, `ajl.arn`, and `ajl.tags`.
+`ajl.type` is the ARN-style resource type (e.g. `ec2:instance`,
+`s3:bucket`). When there's no `*Name` field, `ajl.name` falls back to
+`ajl.tags.Name`; `ajl.id` falls back to the last segment of `ajl.arn`.
+Ideally `ajl.arn` is a globally unique value across all of AWS; `ajl.id`
+and `ajl.name` depend on the API and how the user configured the AWS
+account. Because `ajl`'s metadata lives in its own namespace, it can never
+collide with a raw AWS field of the same name — no renaming games, no
+silently dropped data.
 
 The shaping is declarative: each operation in `src/ajl/models/<service>.json` can carry an `output.resources` config (list path, type, id/name/arn field mapping, ARN template, tags field) that a generic normalizer applies, or a hand-written `output.jq` program for APIs whose shape needs the escape hatch (the jq wins when both are present). Operations with neither are unwrapped heuristically (a response with exactly one top-level list streams its items). The configs are applied to the generated model files by `tools/apply-resource-configs.py`.
 
-The `Tags` property will be a map of all the tags for the given resource. Many APIs return the Tags in the response as `{Key:string, Value:string}` pairs which is less useful. So `ajl` will convert them from an array to a map `{Key: Value}` which will allow direct access via `jq` or other json parsers using dot notation like `.Tags.Name` for instance. For APIs that do not return the Tags `ajl` will optionally make calls to the `resourcetaggingapi` to get the tags by `Arn`. These calls will be run in parallel ensuring that responses are fast and efficient.
+`ajl.tags` is a map of all the tags for the given resource. Many APIs return the tags in the response as `{Key:string, Value:string}` pairs which is less useful. So `ajl` will convert them from an array to a map `{Key: Value}` which will allow direct access via `jq` or other json parsers using dot notation like `.ajl.tags.Name` for instance. For APIs that do not return the tags `ajl` will optionally make calls to the `resourcetaggingapi` to get the tags by `ajl.arn`. These calls will be run in parallel ensuring that responses are fast and efficient.
 
 ## Performance
 

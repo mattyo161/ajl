@@ -36,7 +36,8 @@ printf '{"Name":"/a","Value":"1"}\n{"Name":"/b","Value":"2","Type":"SecureString
 Every write emits:
 
 ```json
-{"Type": "ssm:parameter", "Name": "/app/feature-flag", "Action": "put", "Version": 1, "Tier": "Standard"}
+{"Name": "/app/feature-flag", "Action": "put", "Version": 1, "Tier": "Standard",
+ "ajl": {"type": "ssm:parameter", "id": "/app/feature-flag", "name": "/app/feature-flag", "arn": "", "tags": {}}}
 ```
 
 `Action` is always `"put"` here (unlike `update`, which distinguishes

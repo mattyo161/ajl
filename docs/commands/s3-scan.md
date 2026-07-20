@@ -32,20 +32,20 @@ Plus the [global flags](../../README.md) (`--workers`, `--cache`, `--profile`/`-
 Deliberately lean — see scan-design.md's "Records are lean by design":
 
 ```json
-{"Type": "s3:object", "Uri": "s3://my-bucket/logs/2026/07/17/x.log.gz",
- "Bucket": "my-bucket", "Key": "logs/2026/07/17/x.log.gz",
- "LastModified": "...", "ETag": "\"...\"", "Size": 8421, "StorageClass": "STANDARD"}
+{"Bucket": "my-bucket", "Key": "logs/2026/07/17/x.log.gz",
+ "LastModified": "...", "ETag": "\"...\"", "Size": 8421, "StorageClass": "STANDARD",
+ "ajl": {"type": "s3:object", "uri": "s3://my-bucket/logs/2026/07/17/x.log.gz"}}
 ```
 
-No `Id`/`Name`/`Arn` — `Uri` carries identity, and at inventory volumes
-those would just repeat it. `Tags` only appears with `--include-tags`. The
-raw `list-objects-v2` `Contents` item's own fields (`Key`, `LastModified`,
-`ETag`, `Size`, `StorageClass`, ...) are merged straight in. With
-`--emit-prefixes`, discovered prefixes also emit:
+No `ajl.id`/`ajl.name`/`ajl.arn` — `ajl.uri` carries identity, and at
+inventory volumes those would just repeat it. `ajl.tags` only appears with
+`--include-tags`. The raw `list-objects-v2` `Contents` item's own fields
+(`Key`, `LastModified`, `ETag`, `Size`, `StorageClass`, ...) are merged
+straight in. With `--emit-prefixes`, discovered prefixes also emit:
 
 ```json
-{"Type": "s3:prefix", "Uri": "s3://my-bucket/logs/2026/", "Bucket": "my-bucket",
- "Prefix": "logs/2026/", "Delimiter": "/"}
+{"Bucket": "my-bucket", "Prefix": "logs/2026/", "Delimiter": "/",
+ "ajl": {"type": "s3:prefix", "uri": "s3://my-bucket/logs/2026/"}}
 ```
 
 ## Resuming a failed run

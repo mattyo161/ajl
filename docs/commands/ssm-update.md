@@ -19,7 +19,8 @@ compares it to the one you're writing. Identical → no `PutParameter` call
 at all, and the emitted record says so:
 
 ```json
-{"Type": "ssm:parameter", "Name": "/app/db/host", "Action": "unchanged", "Version": 3}
+{"Name": "/app/db/host", "Action": "unchanged", "Version": 3,
+ "ajl": {"type": "ssm:parameter", "id": "/app/db/host", "name": "/app/db/host", "arn": "", "tags": {}}}
 ```
 
 A real write emits `"Action": "updated"` with the new `Version` and `Tier`.

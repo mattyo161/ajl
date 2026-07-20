@@ -110,7 +110,7 @@ def run_scan_over(keys, tasks=None, client=None, workers=4, **scanner_kwargs):
 
 
 def assert_exactly_once(records, keys):
-    emitted = [r["Key"] for r in records if r["Type"] == "s3:object"]
+    emitted = [r["Key"] for r in records if r["ajl"]["type"] == "s3:object"]
     assert sorted(emitted) == sorted(keys)
 
 
@@ -118,10 +118,10 @@ def test_flat_scan_small_pages():
     keys = [f"k{i:03d}" for i in range(25)]
     records, stats, _ = run_scan_over(keys, page_size=10, split_after=100)
     assert_exactly_once(records, keys)
-    # lean records: Uri replaces Id/Name/Arn, Tags only under --include-tags
+    # lean records: ajl.uri replaces id/name/arn, tags only under --include-tags
     assert records[0] == {
-        "Type": "s3:object", "Uri": "s3://b/k000", "Bucket": "b",
-        "Key": "k000", "Size": 1,
+        "Bucket": "b", "Key": "k000", "Size": 1,
+        "ajl": {"type": "s3:object", "uri": "s3://b/k000"},
     }
     assert stats["objects"] == 25
 
@@ -138,11 +138,11 @@ def test_emit_prefixes_records():
     keys = ["a/1", "b/2"]
     tasks = [Task(bucket="b", delimiters=("/",))]
     records, _, _ = run_scan_over(keys, tasks=tasks, emit_prefixes=True)
-    prefix_records = [r for r in records if r["Type"] == "s3:prefix"]
+    prefix_records = [r for r in records if r["ajl"]["type"] == "s3:prefix"]
     assert {r["Prefix"] for r in prefix_records} == {"a/", "b/"}
     assert prefix_records[0] == {
-        "Type": "s3:prefix", "Uri": "s3://b/a/", "Bucket": "b",
-        "Prefix": "a/", "Delimiter": "/",
+        "Bucket": "b", "Prefix": "a/", "Delimiter": "/",
+        "ajl": {"type": "s3:prefix", "uri": "s3://b/a/"},
     }
     assert_exactly_once(records, keys)
 
@@ -251,11 +251,13 @@ def test_parse_uri():
 
 def test_seed_task_accepts_ajl_records():
     task = seed_task(
-        {"Type": "s3:prefix", "Bucket": "b", "Prefix": "a/", "profile": "p1"},
+        {"Bucket": "b", "Prefix": "a/", "profile": "p1", "ajl": {"type": "s3:prefix"}},
         default_delimiters=("/",),
     )
     assert (task.bucket, task.prefix, task.delimiters, task.profile) == ("b", "a/", ("/",), "p1")
-    task = seed_task({"Uri": "s3://b/x/", "Region": "us-west-2"}, ())
+    # a raw ajl-emitted record, piped straight back in without a jq reshape:
+    # bucket/prefix come from ajl.uri, region from the nested ajl.stamp
+    task = seed_task({"ajl": {"uri": "s3://b/x/", "stamp": {"region": "us-west-2"}}}, ())
     assert (task.bucket, task.prefix, task.region) == ("b", "x/", "us-west-2")
     # EndAt seeds are ranges: delimiters are dropped
     task = seed_task({"Bucket": "b", "StartAfter": "a", "EndAt": "f"}, ("/",))
@@ -286,9 +288,10 @@ def test_include_tags_fetches_object_tags():
     client = FakeS3(keys, tags={"a": [{"Key": "env", "Value": "prod"}]})
     records, stats, _ = run_scan_over(keys, client=client, include_tags=True)
     by_key = {r["Key"]: r for r in records}
-    assert by_key["a"]["Tags"] == {"env": "prod"}
-    assert by_key["b"]["Tags"] == {}
-    assert list(by_key["a"])[:3] == ["Type", "Uri", "Tags"]
+    assert by_key["a"]["ajl"]["tags"] == {"env": "prod"}
+    assert by_key["b"]["ajl"]["tags"] == {}
+    assert list(by_key["a"]) == ["Bucket", "Key", "Size", "ajl"]
+    assert list(by_key["a"]["ajl"]) == ["type", "uri", "tags"]
 
 
 def test_include_tags_errors_are_best_effort():
@@ -298,7 +301,7 @@ def test_include_tags_errors_are_best_effort():
 
     keys = ["a"]
     records, stats, _ = run_scan_over(keys, client=TagFailS3(keys), include_tags=True)
-    assert records[0]["Tags"] == {}
+    assert records[0]["ajl"]["tags"] == {}
     assert stats["tag_errors"] == 1
     assert stats["failures"] == 0
 
@@ -309,8 +312,8 @@ def test_list_mode_single_level_no_recursion():
     records, stats, _ = run_scan_over(
         keys, tasks=tasks, splitter=None, recurse=False,
     )
-    objects = [r["Key"] for r in records if r["Type"] == "s3:object"]
-    prefixes = [r["Prefix"] for r in records if r["Type"] == "s3:prefix"]
+    objects = [r["Key"] for r in records if r["ajl"]["type"] == "s3:object"]
+    prefixes = [r["Prefix"] for r in records if r["ajl"]["type"] == "s3:prefix"]
     assert objects == ["top.txt"]          # no descent into a/ or b/
     assert sorted(prefixes) == ["a/", "b/"]
     assert stats["tasks"] == 1
@@ -333,8 +336,8 @@ def test_list_pipe_dance_covers_all_keys_once():
         records, _, _ = run_scan_over(
             keys, tasks=tasks, client=client, splitter=None, recurse=False,
         )
-        objects = [r for r in records if r["Type"] == "s3:object"]
-        prefixes = [r for r in records if r["Type"] == "s3:prefix"]
+        objects = [r for r in records if r["ajl"]["type"] == "s3:object"]
+        prefixes = [r for r in records if r["ajl"]["type"] == "s3:prefix"]
         return objects, prefixes
 
     objects1, prefixes1 = stage([{"Bucket": "b", "Delimiter": "/"}])

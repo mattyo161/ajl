@@ -75,8 +75,8 @@ def runtime_version():
 def build_parser():
     parser = argparse.ArgumentParser(
         prog="ajl",
-        description="Stream AWS API responses as JSON Lines with consistent "
-        "Type/Id/Name/Arn/Tags properties.",
+        description="Stream AWS API responses as JSON Lines with a "
+        "consistent trailing ajl.{type,id,name,arn,tags} object.",
         allow_abbrev=False,
     )
     parser.add_argument("--version", action="store_true", default=False,
@@ -224,7 +224,7 @@ def coerce_param(value, member):
 def coerce_params(params, service, operation_pascal, filter_to_input=False):
     """Coerce param values; optionally drop params the operation doesn't
     accept (used in --params-json mode so records emitted by a previous ajl
-    stage — with Type/Id/Name/Arn/Tags etc. — can be piped back in as-is).
+    stage — carrying a trailing ajl object — can be piped back in as-is).
 
     Keys are remapped to the model's actual member casing first: most boto3
     operations use PascalCase (matching the guess `--kebab-flag` -> PascalCase
@@ -383,8 +383,9 @@ class JqEmitter:
 
 
 class StampEmitter:
-    """Emitter wrapper adding Profile/Region/Account to every record so a
-    downstream --params-json stage routes back to the same session."""
+    """Emitter wrapper adding profile/region/account to every record's
+    trailing ``ajl.stamp`` so a downstream --params-json stage routes back
+    to the same session."""
 
     def __init__(self, emitter, runner):
         self.emitter = emitter
@@ -393,9 +394,10 @@ class StampEmitter:
     def emit(self, record, session_key=None):
         if isinstance(record, dict):
             profile, region = session_key or self.runner.session_key()
-            record["Profile"] = profile or ""
-            record["Region"] = region or ""
-            record["Account"] = self.runner.account(session_key or self.runner.session_key())
+            stamp = record.setdefault("ajl", {}).setdefault("stamp", {})
+            stamp["profile"] = profile or ""
+            stamp["region"] = region or ""
+            stamp["account"] = self.runner.account(session_key or self.runner.session_key())
         self.emitter.emit(record, session_key)
 
     def flush(self):
@@ -403,21 +405,25 @@ class StampEmitter:
 
 
 def should_stamp_session(options, fanning):
-    """Whether records get the Profile/Region/Account stamp: on for fan-out
-    (--all/...), which originates it, and for --params-json, which is always
-    mid-pipeline — otherwise the stamp a fan-out stage attached silently
-    drops after one hop and a multi-stage --all | ... | ... chain can never
-    reach its last stage. --no-stamp-session forces it off regardless."""
+    """Whether records get the ajl.stamp: on for fan-out (--all/...), which
+    originates it, and for --params-json, which is always mid-pipeline —
+    otherwise the stamp a fan-out stage attached silently drops after one
+    hop and a multi-stage --all | ... | ... chain can never reach its last
+    stage. --no-stamp-session forces it off regardless."""
     if options.no_stamp_session:
         return False
     return bool(fanning or options.params_json or options.stamp_session)
 
 
 def pop_session_fields(line_params):
-    """Pop the session routing fields from a --params-json line (both the
-    lowercase form and the PascalCase form written by --stamp-session)."""
-    profile = line_params.pop("profile", None) or line_params.pop("Profile", None)
-    region = line_params.pop("region", None) or line_params.pop("Region", None)
+    """Pop the session routing fields from a --params-json line: a flat
+    lowercase profile/region (the convention every jq reshape in
+    tools/inventory.sh uses) or, if absent, a raw ajl record's nested
+    ajl.stamp piped straight back in without a reshape. Either way, the
+    whole 'ajl' key is popped so it's never forwarded to boto3 as a param."""
+    stamp = (line_params.pop("ajl", None) or {}).get("stamp", {})
+    profile = line_params.pop("profile", None) or stamp.get("profile")
+    region = line_params.pop("region", None) or stamp.get("region")
     return profile or None, region or None
 
 
@@ -453,14 +459,17 @@ def shape_page(page, operation_cfg, context, runner, session_key):
 
 
 def _stamp_params(record, params):
-    """Merge the resolved request params onto a record (--stamp-session):
-    a response often doesn't echo back what it was asked for (ecs ListTasks
-    returns task ARNs, never the cluster you asked about), so a downstream
-    --params-json stage — or just storage — would otherwise lose that
-    context. setdefault so a real response field never gets clobbered."""
+    """Merge the resolved request params into record["ajl"]["stamp"]
+    (--stamp-session): a response often doesn't echo back what it was
+    asked for (ecs ListTasks returns task ARNs, never the cluster you
+    asked about), so a downstream --params-json stage — or just storage —
+    would otherwise lose that context. Keys keep their real AWS param
+    casing (not ajl's naming choice); setdefault so a real value already
+    in the stamp never gets clobbered."""
     if isinstance(record, dict):
+        stamp = record.setdefault("ajl", {}).setdefault("stamp", {})
         for key, value in params.items():
-            record.setdefault(key, value)
+            stamp.setdefault(key, value)
     return record
 
 
@@ -536,11 +545,14 @@ def run_describe_chain(runner, emitter, options, service, list_operation_cfg, de
     ``batch_size``-sized groups and calls once per chunk, the same pattern
     ``ssm.py`` uses for ``get --names``. Either way, every call fans out
     across the same worker pool --params-json uses."""
+    # id_field is always the curated logical name ("Id" or "Arn"); resolve
+    # it against the shaped record's ajl object, not a top-level field
+    id_key = describe_cfg["id_field"].lower()
     ids = [
-        record.get(describe_cfg["id_field"])
+        record.get("ajl", {}).get(id_key)
         for record in _iter_operation_records(client, list_operation_snake, list_operation_cfg,
                                                list_params, context, runner, session_key, options)
-        if isinstance(record, dict) and record.get(describe_cfg["id_field"])
+        if isinstance(record, dict) and record.get("ajl", {}).get(id_key)
     ]
     if not ids:
         return
@@ -588,14 +600,17 @@ def run_describe_chain(runner, emitter, options, service, list_operation_cfg, de
                     # for kind="array" the identifier is the whole batch, which
                     # would otherwise get redundantly attached to every record in it
                     _stamp_params(record, scope_params)
-                if (describe_cfg["kind"] == "scalar" and isinstance(record, dict)
-                        and not record.get(describe_cfg["id_field"])):
-                    # many Get* calls don't echo back the identifier you gave
-                    # them (you already know it) — without this a described
-                    # record can come back with an empty Id/Arn entirely
-                    record[describe_cfg["id_field"]] = id_batch[0]
-                    if describe_cfg["id_field"] == "Arn" and not record.get("Id"):
-                        record["Id"] = id_from_arn(id_batch[0])
+                if describe_cfg["kind"] == "scalar" and isinstance(record, dict):
+                    ajl_meta = record.setdefault("ajl", {})
+                    id_key = describe_cfg["id_field"].lower()
+                    if not ajl_meta.get(id_key):
+                        # many Get* calls don't echo back the identifier you
+                        # gave them (you already know it) — without this a
+                        # described record can come back with an empty
+                        # ajl.id/ajl.arn entirely
+                        ajl_meta[id_key] = id_batch[0]
+                        if id_key == "arn" and not ajl_meta.get("id"):
+                            ajl_meta["id"] = id_from_arn(id_batch[0])
                 emitter.emit(record, session_key)
         except Exception as exc:
             shown = id_batch if len(id_batch) <= 3 else [*id_batch[:3], "..."]

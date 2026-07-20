@@ -492,7 +492,7 @@
       },
       "name": "ListQueues",
       "output": {
-        "jq": "(.QueueUrls//[])[] | . as $url | ($url | split(\"/\")) as $p |\n{Type: \"sqs:queue\", Id: $p[-1], Name: $p[-1],\n Arn: \"arn:\\($partition//\"aws\"):sqs:\\($region):\\($p[-2]):\\($p[-1])\",\n Tags: {}, QueueUrl: $url}",
+        "jq": "(.QueueUrls//[])[] | . as $url | ($url | split(\"/\")) as $p |\n{QueueUrl: $url,\n ajl: {type: \"sqs:queue\", id: $p[-1], name: $p[-1],\n       arn: \"arn:\\($partition//\"aws\"):sqs:\\($region):\\($p[-2]):\\($p[-1])\", tags: {}}}",
         "markers": [
           "NextToken"
         ],

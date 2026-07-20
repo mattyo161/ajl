@@ -33,7 +33,7 @@ exercise the CLI end-to-end; the test suite runs entirely offline with fakes.
 | Path | What it is |
 |---|---|
 | `src/ajl/main.py` | CLI entry point, arg parsing, param coercion, worker pool |
-| `src/ajl/normalize.py` | Generic Type/Id/Name/Arn/Tags normalizer |
+| `src/ajl/normalize.py` | Generic normalizer — appends the trailing `ajl` object |
 | `src/ajl/pagination.py` | botocore paginators + marker-loop fallback |
 | `src/ajl/tags.py` | `--fetch-tags` batching via the Resource Groups Tagging API |
 | `src/ajl/modelconfig.py` | Loads packaged service models (`AJL_MODELS_DIR` overrides) |
@@ -55,11 +55,11 @@ shaping by hand, it will be wiped by the next regeneration.
 2. Re-apply it: `python3 tools/apply-resource-configs.py`
 3. Test against a live account, pointing at your working tree's models if
    you haven't reinstalled: `AJL_MODELS_DIR=src/ajl/models uv run ajl <service> <operation>`
-4. Check the contract: every record should lead with sensible `Type`, `Id`,
-   `Name`, `Arn`, `Tags` values. `Arn` should be real (verify the
-   `arn_format` against the [ARN reference](https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)),
-   `Tags` should be a map, and ideally the record should pipe cleanly back
-   into a related operation via `--params-json -`.
+4. Check the contract: every record should carry a trailing `ajl` object
+   with sensible `type`/`id`/`name`/`arn`/`tags` values. `ajl.arn` should be
+   real (verify the `arn_format` against the [ARN reference](https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)),
+   `ajl.tags` should be a map, and ideally the record should pipe cleanly
+   back into a related operation via `--params-json -`.
 
 ### Adding a brand-new service
 
@@ -101,8 +101,8 @@ need tests; new curated shaping is best verified with a live smoke test
   prefixed `ajl:`.
 - A failed request in fan-out mode must not kill the stream; report to
   stderr, count it, exit non-zero at the end.
-- Backwards compatibility of the output contract matters most: the leading
-  `Type`/`Id`/`Name`/`Arn`/`Tags` properties and the pipe-back-in behavior of
+- Backwards compatibility of the output contract matters most: the trailing
+  `ajl.{type,id,name,arn,tags}` object and the pipe-back-in behavior of
   `--params-json` are the public API. If a change alters either, record the
   decision in [DESIGN.md](DESIGN.md).
 

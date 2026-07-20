@@ -48,42 +48,50 @@ def test_normalize_resource_arn_format_and_tags():
         "Tags": [{"Key": "Env", "Value": "prod"}],
     }
     result = normalize_resource(item, cfg, CONTEXT, {})
-    assert result["Type"] == "ec2:security-group"
-    assert result["Id"] == "sg-123"
-    assert result["Name"] == "web"
-    assert result["Arn"] == "arn:aws:ec2:us-east-1:111122223333:security-group/sg-123"
-    assert result["Tags"] == {"Env": "prod"}
-    # originals are kept (duplicated), tag list replaced by the map
+    ajl = result["ajl"]
+    assert ajl["type"] == "ec2:security-group"
+    assert ajl["id"] == "sg-123"
+    assert ajl["name"] == "web"
+    assert ajl["arn"] == "arn:aws:ec2:us-east-1:111122223333:security-group/sg-123"
+    assert ajl["tags"] == {"Env": "prod"}
+    # raw fields pass through untouched, Tags list replaced by the map inside ajl
     assert result["GroupId"] == "sg-123"
     assert result["GroupName"] == "web"
-    assert list(result)[:5] == ["Type", "Id", "Name", "Arn", "Tags"]
+    assert "Tags" not in result
+    # ajl trails, after every raw field
+    assert list(result)[-1] == "ajl"
 
 
 def test_normalize_resource_name_falls_back_to_tag_name():
     cfg = {"type": "ec2:vpc", "id": "VpcId", "arn_format": "arn:{partition}:ec2:{region}:{OwnerId}:vpc/{VpcId}", "tags": "Tags"}
     item = {"VpcId": "vpc-1", "OwnerId": "1", "Tags": [{"Key": "Name", "Value": "main-vpc"}]}
-    assert normalize_resource(item, cfg, CONTEXT, {})["Name"] == "main-vpc"
+    assert normalize_resource(item, cfg, CONTEXT, {})["ajl"]["name"] == "main-vpc"
 
 
 def test_normalize_resource_missing_arn_var_gives_empty_arn():
     cfg = {"type": "ec2:vpc", "id": "VpcId", "arn_format": "arn:{partition}:ec2:{region}:{OwnerId}:vpc/{VpcId}"}
-    assert normalize_resource({"VpcId": "vpc-1"}, cfg, CONTEXT, {})["Arn"] == ""
+    assert normalize_resource({"VpcId": "vpc-1"}, cfg, CONTEXT, {})["ajl"]["arn"] == ""
 
 
 def test_normalize_resource_arn_field_and_id_from_arn():
     cfg = {"type": "rds:db", "arn": "DBInstanceArn"}
     item = {"DBInstanceArn": "arn:aws:rds:us-east-1:1:db:mydb"}
     result = normalize_resource(item, cfg, CONTEXT, {})
-    assert result["Arn"] == item["DBInstanceArn"]
-    assert result["Id"] == "mydb"
+    assert result["ajl"]["arn"] == item["DBInstanceArn"]
+    assert result["ajl"]["id"] == "mydb"
     assert result["DBInstanceArn"] == item["DBInstanceArn"]
 
 
-def test_normalize_resource_uppercase_arn_field_is_replaced():
+def test_normalize_resource_uppercase_arn_field_passes_through_untouched():
+    # SSM/ElastiCache/etc. return an all-caps ARN sitting next to other
+    # fields — since ajl.arn lives in its own namespace now, the raw field
+    # is no longer dropped to avoid a collision (a real bug the collision
+    # survey found: it used to be silently discarded).
     cfg = {"type": "ssm:parameter", "id": "Name", "name": "Name", "arn": "ARN"}
-    result = normalize_resource({"Name": "/app/db", "ARN": "arn:aws:ssm:us-east-1:1:parameter/app/db"}, cfg, CONTEXT, {})
-    assert result["Arn"] == "arn:aws:ssm:us-east-1:1:parameter/app/db"
-    assert "ARN" not in result
+    item = {"Name": "/app/db", "ARN": "arn:aws:ssm:us-east-1:1:parameter/app/db"}
+    result = normalize_resource(item, cfg, CONTEXT, {})
+    assert result["ajl"]["arn"] == "arn:aws:ssm:us-east-1:1:parameter/app/db"
+    assert result["ARN"] == "arn:aws:ssm:us-east-1:1:parameter/app/db"
 
 
 def test_normalize_resource_scalar_and_root_vars():
@@ -95,12 +103,12 @@ def test_normalize_resource_scalar_and_root_vars():
         "arn_format": "arn:{partition}:dynamodb:{region}:{account}:table/{TableName}",
     }
     result = normalize_resource("users", cfg, CONTEXT, {})
-    assert result["Id"] == "users"
-    assert result["Arn"] == "arn:aws:dynamodb:us-east-1:123456789012:table/users"
+    assert result["ajl"]["id"] == "users"
+    assert result["ajl"]["arn"] == "arn:aws:dynamodb:us-east-1:123456789012:table/users"
 
     cfg = {"type": "s3:object", "id": "Key", "name": "Key", "arn_format": "arn:{partition}:s3:::{root_Name}/{Key}"}
     result = normalize_resource({"Key": "a/b.txt"}, cfg, CONTEXT, {"Name": "my-bucket"})
-    assert result["Arn"] == "arn:aws:s3:::my-bucket/a/b.txt"
+    assert result["ajl"]["arn"] == "arn:aws:s3:::my-bucket/a/b.txt"
 
 
 def test_iter_default_resources():
@@ -117,19 +125,20 @@ def test_normalize_resource_auto_detects_tags_field():
     cfg = {"type": "x:y", "id": "Id2"}
     item = {"Id2": "a", "Tags": [{"Key": "Env", "Value": "dev"}]}
     result = normalize_resource(item, cfg, CONTEXT, {})
-    assert result["Tags"] == {"Env": "dev"}
+    assert result["ajl"]["tags"] == {"Env": "dev"}
 
 
-def test_normalize_resource_preserves_colliding_fields():
-    # e.g. a VPN gateway has its own Type field ("ipsec.1")
+def test_normalize_resource_colliding_field_passes_through_untouched():
+    # a VPN gateway has its own Type field ("ipsec.1") — since ajl's Type
+    # lives under ajl.type now, the raw field is never renamed/dropped
     cfg = {"type": "ec2:vpn-gateway", "id": "VpnGatewayId"}
     item = {"VpnGatewayId": "vgw-1", "Type": "ipsec.1"}
     result = normalize_resource(item, cfg, CONTEXT, {})
-    assert result["Type"] == "ec2:vpn-gateway"
-    assert result["OriginalType"] == "ipsec.1"
+    assert result["ajl"]["type"] == "ec2:vpn-gateway"
+    assert result["Type"] == "ipsec.1"
 
 
-def test_uri_format_adds_uri_after_tags():
+def test_uri_format_adds_ajl_uri():
     cfg = {
         "path": ["Buckets"],
         "type": "s3:bucket",
@@ -139,8 +148,8 @@ def test_uri_format_adds_uri_after_tags():
         "uri_format": "s3://{Name}",
     }
     record = normalize_resource({"Name": "my-bucket"}, cfg, {"partition": "aws"}, {})
-    assert record["Uri"] == "s3://my-bucket"
-    assert list(record)[:6] == ["Type", "Id", "Name", "Arn", "Tags", "Uri"]
-    # missing template variable -> Uri omitted entirely, not empty
+    assert record["ajl"]["uri"] == "s3://my-bucket"
+    assert list(record) == ["Name", "ajl"]
+    # missing template variable -> uri omitted entirely, not empty
     record = normalize_resource({"Other": "x"}, cfg, {"partition": "aws"}, {})
-    assert "Uri" not in record
+    assert "uri" not in record["ajl"]

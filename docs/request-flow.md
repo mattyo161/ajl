@@ -46,10 +46,11 @@ real input shape (see below) and:
    an integer member, a JSON string -> a parsed list/dict for a
    list/structure/map member).
 3. **With `filter_to_input=True`** (only in `--params-json` mode): drops any
-   key that isn't a real input member at all. This is what lets a full
-   `Type`/`Id`/`Name`/`Arn`/`Tags` ajl record get piped straight back into
-   `--params-json -` — the properties the next operation doesn't want are
-   silently dropped rather than erroring.
+   key that isn't a real input member at all. This is what lets a full ajl
+   record — raw fields plus the trailing `ajl` object — get piped straight
+   back into `--params-json -`: `pop_session_fields` strips `ajl` first (so
+   it's never sent to boto3 as a bogus param), and any raw field the next
+   operation doesn't want is silently dropped rather than erroring.
 
 ## 2. Finding the operation: per-service model, case-insensitive
 
@@ -83,8 +84,8 @@ shapes when a paginator isn't available).
    `normalize.iter_configured_resources`. This is the common case and is
    what `tools/apply-resource-configs.py` writes.
 3. **Neither** — `iter_default_resources` heuristic: if the response has
-   exactly one top-level list, stream its items unshaped (still gets
-   `Type`/`Id`/`Name`/`Arn`/`Tags` — see below). Otherwise the raw response
+   exactly one top-level list, stream its items unshaped (no `ajl` object —
+   there's no curated config to build one from). Otherwise the raw response
    streams as-is.
 
 ### Worked example: `ecs.ListClusters`
@@ -98,39 +99,43 @@ so the path-walk and ARN lookup have a field to read.
 That produces:
 
 ```json
-{"Type":"ecs:cluster","Id":"salesagent-freewheel","Name":"","Arn":"arn:aws:ecs:us-east-1:381492092437:cluster/salesagent-freewheel","Tags":{},"clusterArn":"arn:aws:ecs:us-east-1:381492092437:cluster/salesagent-freewheel"}
+{"clusterArn":"arn:aws:ecs:us-east-1:381492092437:cluster/salesagent-freewheel","ajl":{"type":"ecs:cluster","id":"salesagent-freewheel","name":"","arn":"arn:aws:ecs:us-east-1:381492092437:cluster/salesagent-freewheel","tags":{}}}
 ```
 
 Two things worth spelling out, since they come up every time a List*
 operation only returns identifiers:
 
-- **`Id` has no source field, so it falls back to the ARN's last path
-  segment** (`normalize.py`'s documented fallback chain) — `Id` did not come
-  from anywhere in the response *except* the ARN. Same rule everywhere: a
-  resource with no natural id and a well-formed ARN always gets a sane `Id`.
-- **`Name` is empty because `ListClusters` never returns a name** (and
-  there's no `Tags` to fall back to — the list call doesn't return tags
+- **`ajl.id` has no source field, so it falls back to the ARN's last path
+  segment** (`normalize.py`'s documented fallback chain) — `ajl.id` did not
+  come from anywhere in the response *except* the ARN. Same rule
+  everywhere: a resource with no natural id and a well-formed ARN always
+  gets a sane `ajl.id`.
+- **`ajl.name` is empty because `ListClusters` never returns a name** (and
+  there's no tags field to fall back to — the list call doesn't return tags
   either). `DescribeClusters` (the paired describe call) does return
   `clusterName` and `tags`, which is why its curated config sets
-  `name="clusterName", tags="tags"` and its output has a real `Name`.
+  `name="clusterName", tags="tags"` and its output has a real `ajl.name`.
 
 ## 5. Emitting and stamping
 
 Shaped records go through `Emitter` (line-atomic stdout), optionally wrapped
 by `TagMergeEmitter` (`--fetch-tags`), `JqEmitter` (`--jq`), and
 `StampEmitter` (`--stamp-session`) — each wrapper adds one concern and passes
-through to the next. `StampEmitter` adds `Profile`/`Region`/`Account` to
-every record; separately, back in `run_operation` (before the record ever
-reaches an emitter), `--stamp-session` also merges the resolved request
-params onto it via `_stamp_params()` — a response often doesn't echo back
-what it was asked for (`ecs.ListTasks` returns task ARNs, never the
-`cluster` you asked about), so without this a downstream stage has to claw
-the context back out of an ARN. `setdefault` means a genuine response field
-always wins over a same-named request param. `should_stamp_session()` turns
-all of this on automatically for fan-out (`--all`/...) *and* for any
-`--params-json` stage (it's always mid-pipeline, so it re-stamps whatever
-session info and request context its own input carried) —
-`--no-stamp-session` opts out.
+through to the next. `StampEmitter` adds `profile`/`region`/`account` to
+every record's `ajl.stamp` (creating `ajl` fresh, at the end of the record,
+if the record has none yet — e.g. a `--no-parse` raw page); separately,
+back in `run_operation` (before the record ever reaches an emitter),
+`--stamp-session` also merges the resolved request params into that same
+`ajl.stamp` via `_stamp_params()` — a response often doesn't echo back what
+it was asked for (`ecs.ListTasks` returns task ARNs, never the `cluster`
+you asked about), so without this a downstream stage has to claw the
+context back out of an ARN. Those forwarded params keep their real AWS
+parameter casing (not ajl's lowercase convention) since they're a verbatim
+echo, not ajl's own naming; `setdefault` means a genuine value already in
+the stamp always wins. `should_stamp_session()` turns all of this on
+automatically for fan-out (`--all`/...) *and* for any `--params-json` stage
+(it's always mid-pipeline, so it re-stamps whatever session info and
+request context its own input carried) — `--no-stamp-session` opts out.
 
 ## 6. Chaining into `--params-json -`: what propagates, what doesn't
 
@@ -144,14 +149,14 @@ exact key name `ecs.DescribeTasks` expects, so it needs *no* `--jq` reshape
 at all for a third hop — `filter_to_input` picks it straight up.
 
 **What still has no generic fix**: there is no automatic mapping from a
-shaped record's own identity fields (`Id`/`Arn`/`clusterArn`) to whatever
-the *first* downstream operation calls its input — that first hop always
-requires knowing the target operation's actual parameter name, which is
-API-specific and has to be a `--jq` reshape:
+shaped record's own identity fields (`ajl.id`/`ajl.arn`/`clusterArn`) to
+whatever the *first* downstream operation calls its input — that first hop
+always requires knowing the target operation's actual parameter name, which
+is API-specific and has to be a `--jq` reshape:
 
 ```shell
 ajl ecs list-clusters --all-regions --profile acme-dev --stamp-session \
-  | jq -c '{cluster: .Id, Profile, Region, Account}' \
+  | jq -c '{cluster: .ajl.id, profile: .ajl.stamp.profile, region: .ajl.stamp.region}' \
   | ajl ecs list-tasks --params-json - --stamp-session   # cluster now rides the rest of the way for free
 ```
 

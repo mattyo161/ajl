@@ -15,7 +15,7 @@ the tool: streams compose with `jq`, `grep`, files, and — critically — with
 `ajl` itself via `--params-json -`. Diagnostics never go to stdout; they go
 to stderr, so stdout is always machine-parseable.
 
-### Consistent leading properties: `Type`, `Id`, `Name`, `Arn`, `Tags`
+~~### Consistent leading properties: `Type`, `Id`, `Name`, `Arn`, `Tags`
 Every shaped resource starts with the same five properties, in that order,
 regardless of service. Rationale: downstream consumers (jq filters, OpenSearch
 mappings, DynamoDB items) can rely on one schema for identity and tagging
@@ -29,12 +29,78 @@ across all of AWS instead of learning each API's field names.
   root-response scalars as `{root_<Field>}`).
 - `Tags` is always a `{Key: Value}` map — AWS's `[{Key, Value}]` tag lists are
   converted so `.Tags.Name` works in jq. Lowercase (`key/value`) and
-  `TagKey/TagValue` variants are handled too.
+  `TagKey/TagValue` variants are handled too.~~ — superseded by
+["Namespace ajl's metadata under a trailing `ajl` object"](#namespace-ajls-metadata-under-a-trailing-ajl-object)
+below.
 
-### Collisions with normalized properties keep the original as `Original<Key>`
+~~### Collisions with normalized properties keep the original as `Original<Key>`
 When a resource has its own field named e.g. `Type` (a VPN gateway's `Type`)
 that differs from the normalized value, it is preserved as `OriginalType`
-rather than silently dropped or allowed to clobber the contract.
+rather than silently dropped or allowed to clobber the contract.~~ —
+superseded by the same entry: once ajl's metadata has its own namespace, no
+raw AWS field can ever collide with it, so nothing needs renaming.
+
+### Namespace ajl's metadata under a trailing `ajl` object
+Replaces the leading `Type`/`Id`/`Name`/`Arn`/`Tags` properties (and,
+separately, `--stamp-session`'s `Profile`/`Region`/`Account`) with a single
+trailing key, `ajl`, holding everything ajl computes:
+`ajl.{type,id,name,arn,tags,uri}` plus `ajl.stamp.{profile,region,account,
+...forwarded request params}`. Every raw API field now passes through
+completely untouched, in its original position — no renaming, no dropping,
+no `Original<Key>` mechanism.
+
+**Why**: a background survey this session
+([docs/collision-survey-2026-07-18.md](docs/collision-survey-2026-07-18.md))
+found the old leading-properties contract collides with AWS's own field
+names in ~50% of all boto3 services (exact-case) and near-misses
+(case-insensitive — an all-caps `ARN`/`ID` sitting right next to ajl's own)
+in another ~42%, including SSM, S3, ElastiCache, WAFV2. The one place this
+was already patched (a raw all-caps `ARN`) was patched by silently
+*dropping* the field — a real data-loss bug, not just an edge case. Giving
+ajl's metadata its own namespace makes the entire collision class
+structurally impossible rather than papering over it case by case.
+
+**Shape decisions**, in the order they were settled:
+- Everything under `ajl` is lowercase (`type`/`id`/`name`/`arn`/`tags`/`uri`),
+  matching Matt's stated preference (PascalCase was only ever chosen to echo
+  AWS's own convention, not out of preference) — and a clean signal that
+  `ajl` is *ajl's* namespace, not AWS's.
+- `ajl.stamp`'s own routing fields (`profile`/`region`/`account`) are
+  lowercase too — they're ajl's own invented concept, never sent to AWS
+  (confirmed: every existing reader already treated lowercase as at least as
+  valid as the old PascalCase). Forwarded request params inside `stamp`
+  (e.g. `cluster`, `RoleName`) keep their real AWS parameter casing
+  untouched — they're a verbatim echo meant to be passed back into a
+  follow-up call, not ajl's naming choice, and remapping them would only
+  make round-tripping harder.
+- `ajl` is appended **last**, not first (Matt, mid-session): the record
+  reads as "the boto3 response, plus one trailing metadata block" rather
+  than leading with ajl's own framing — closer to "match boto3 as best as
+  possible" than the original design was.
+- Full replace, not a transitional dual-output: the old top-level fields
+  disappear everywhere in one change. Deliberate — ajl has no external
+  consumers yet beyond this repo's own tests/tooling (TestPyPI only), so
+  there's no compatibility cost to carrying a transition period.
+
+**What this fixed for free, beyond the collision bug**: `ssm.py`'s `_shape()`
+used to alias the parameter's own `Type` field to `ParameterType` specifically
+to dodge the collision with ajl's `Type` — that alias is gone now, `Type`
+just means SSM's own `String`/`StringList`/`SecureString` value, sitting
+next to `ajl.type`. The same pattern repeats across every service that used
+to need `Original<Key>`.
+
+**Implementation**: `normalize_resource()` in `normalize.py` builds the
+result by copying every raw field through unchanged, then appending
+`result["ajl"] = {...}` last (Python dict insertion order does the rest).
+`StampEmitter`/`_stamp_params()` in `main.py` write into
+`record.setdefault("ajl", {}).setdefault("stamp", {})` instead of the record
+root. `run_describe_chain()`'s `id_field` config value (`"Id"`/`"Arn"`,
+unchanged in `tools/apply-resource-configs.py` — 71 `d()` calls, zero edits
+needed) is resolved via `.lower()` against `record["ajl"]` instead of the
+record root. The hand-written jq escape-hatch programs (ec2 instances, s3
+object/version listings, route53 hosted zones, sqs queues) got the same
+raw-fields-first-ajl-last treatment by hand, since they build their own
+shape outside `normalize_resource()` entirely.
 
 ## Output shaping
 

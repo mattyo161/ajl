@@ -1924,7 +1924,7 @@
       },
       "name": "ListHostedZones",
       "output": {
-        "jq": "(.HostedZones//[])[] |\n.Id = (.Id | sub(\"^/hostedzone/\"; \"\")) |\n{Type: \"route53:hostedzone\", Id: .Id, Name: .Name,\n Arn: \"arn:\\($partition//\"aws\"):route53:::hostedzone/\\(.Id)\", Tags: {}} + .",
+        "jq": "(.HostedZones//[])[] |\n.Id = (.Id | sub(\"^/hostedzone/\"; \"\")) |\n. + {ajl: {type: \"route53:hostedzone\", id: .Id, name: .Name,\n           arn: \"arn:\\($partition//\"aws\"):route53:::hostedzone/\\(.Id)\", tags: {}}}",
         "markers": [
           "NextMarker"
         ],

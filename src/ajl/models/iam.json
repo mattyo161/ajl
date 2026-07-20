@@ -1653,7 +1653,14 @@
             "type": "string"
           }
         },
-        "required": null
+        "required": null,
+        "resources": [
+          {
+            "id": "AccessKeyId",
+            "path": [],
+            "type": "iam:access-key"
+          }
+        ]
       }
     },
     "GetAccountAuthorizationDetails": {
@@ -2797,6 +2804,15 @@
       },
       "name": "ListAccessKeys",
       "output": {
+        "describe": {
+          "id_field": "Id",
+          "kind": "scalar",
+          "operation": "GetAccessKeyLastUsed",
+          "param": "AccessKeyId",
+          "scope": [
+            "UserName"
+          ]
+        },
         "markers": [
           "Marker"
         ],
@@ -2819,6 +2835,15 @@
         },
         "required": [
           "AccessKeyMetadata"
+        ],
+        "resources": [
+          {
+            "id": "AccessKeyId",
+            "path": [
+              "AccessKeyMetadata"
+            ],
+            "type": "iam:access-key"
+          }
         ]
       }
     },

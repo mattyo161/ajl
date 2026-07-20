@@ -53,10 +53,12 @@ class TagMergeEmitter:
         self.lock = threading.Lock()
 
     def emit(self, record, session_key=None):
+        ajl_meta = record.get("ajl") if isinstance(record, dict) else None
         if (
             not isinstance(record, dict)
-            or record.get("Tags")
-            or not record.get("Arn")
+            or not ajl_meta
+            or ajl_meta.get("tags")
+            or not ajl_meta.get("arn")
         ):
             self.emitter.emit(record)
         else:
@@ -78,13 +80,14 @@ class TagMergeEmitter:
     def _fetch_and_merge(self, session_key, batch):
         client = self.get_tagging_client(session_key)
         merged = {}
-        arns = list({record["Arn"] for record in batch})
+        arns = list({record["ajl"]["arn"] for record in batch})
         for start in range(0, len(arns), self.batch_size):
             merged.update(fetch_tags_for_arns(client, arns[start : start + self.batch_size]))
         for record in batch:
-            record["Tags"] = merged.get(record["Arn"], {})
-            if not record.get("Name") and record["Tags"].get("Name"):
-                record["Name"] = record["Tags"]["Name"]
+            ajl_meta = record["ajl"]
+            ajl_meta["tags"] = merged.get(ajl_meta["arn"], {})
+            if not ajl_meta.get("name") and ajl_meta["tags"].get("Name"):
+                ajl_meta["name"] = ajl_meta["tags"]["Name"]
         return batch
 
     def _drain(self, block):

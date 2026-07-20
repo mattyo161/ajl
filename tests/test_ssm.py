@@ -107,7 +107,7 @@ def test_single_name_returns_raw_value():
 def test_single_name_json_returns_record():
     code, records, _ = run_get(PARAMS, ["--name", "/app/db/password", "--json"])
     (record,) = records
-    assert record["Type"] == "ssm:parameter" and record["Value"] == "s3cr3t"
+    assert record["ajl"]["type"] == "ssm:parameter" and record["Value"] == "s3cr3t"
 
 
 def test_single_name_encrypt_seals_raw_value():

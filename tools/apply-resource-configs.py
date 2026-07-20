@@ -65,16 +65,20 @@ EC2_DESCRIBE_INSTANCES_JQ = """\
 .Reservations[] | {ReservationId, OwnerId, RequesterId, Groups} as $reservation |
 # Output each instance and then append the Reservation details at the end
 .Instances[] |
-# Convert Tags to a Map
-.Tags = (.Tags//[] | from_entries) |
-# Add common properties
-{
-  Type: "ec2:instance",
-  Id: .InstanceId,
-  Name: .Tags.Name//"",
-  Arn: "arn:\\($partition//"aws"):ec2:\\(.Region//$region//""):\\($reservation.OwnerId//$account//""):instance/\\(.InstanceId)",
-  Reservation: $reservation
-} + ."""
+# Convert Tags to a map for ajl.tags; the raw list form is dropped, same as
+# the generic normalizer does for every other service
+(.Tags//[] | from_entries) as $tags |
+del(.Tags) |
+. + {
+  Reservation: $reservation,
+  ajl: {
+    type: "ec2:instance",
+    id: .InstanceId,
+    name: ($tags.Name//""),
+    arn: "arn:\\($partition//"aws"):ec2:\\(.Region//$region//""):\\($reservation.OwnerId//$account//""):instance/\\(.InstanceId)",
+    tags: $tags
+  }
+}"""
 
 # Emits CommonPrefixes as s3:prefix records carrying Bucket/Prefix/Delimiter so
 # they can be piped straight back into `ajl s3 list-objects-v2 --params-json -`
@@ -82,48 +86,48 @@ EC2_DESCRIBE_INSTANCES_JQ = """\
 S3_LIST_OBJECTS_JQ = """\
 . as $r |
 ((.CommonPrefixes//[])[] |
-  {Type: "s3:prefix", Id: .Prefix, Name: .Prefix,
-   Arn: "arn:\\($partition//"aws"):s3:::\\($r.Name)/\\(.Prefix)", Tags: {},
-   Uri: "s3://\\($r.Name)/\\(.Prefix)",
-   Bucket: $r.Name, Delimiter: $r.Delimiter} + .),
+  . + {Bucket: $r.Name, Delimiter: $r.Delimiter,
+       ajl: {type: "s3:prefix", id: .Prefix, name: .Prefix,
+             arn: "arn:\\($partition//"aws"):s3:::\\($r.Name)/\\(.Prefix)",
+             uri: "s3://\\($r.Name)/\\(.Prefix)", tags: {}}}),
 ((.Contents//[])[] |
-  {Type: "s3:object", Id: .Key, Name: .Key,
-   Arn: "arn:\\($partition//"aws"):s3:::\\($r.Name)/\\(.Key)", Tags: {},
-   Uri: "s3://\\($r.Name)/\\(.Key)",
-   Bucket: $r.Name} + .)"""
+  . + {Bucket: $r.Name,
+       ajl: {type: "s3:object", id: .Key, name: .Key,
+             arn: "arn:\\($partition//"aws"):s3:::\\($r.Name)/\\(.Key)",
+             uri: "s3://\\($r.Name)/\\(.Key)", tags: {}}})"""
 
 S3_LIST_OBJECT_VERSIONS_JQ = """\
 . as $r |
 ((.CommonPrefixes//[])[] |
-  {Type: "s3:prefix", Id: .Prefix, Name: .Prefix,
-   Arn: "arn:\\($partition//"aws"):s3:::\\($r.Name)/\\(.Prefix)", Tags: {},
-   Uri: "s3://\\($r.Name)/\\(.Prefix)",
-   Bucket: $r.Name, Delimiter: $r.Delimiter} + .),
+  . + {Bucket: $r.Name, Delimiter: $r.Delimiter,
+       ajl: {type: "s3:prefix", id: .Prefix, name: .Prefix,
+             arn: "arn:\\($partition//"aws"):s3:::\\($r.Name)/\\(.Prefix)",
+             uri: "s3://\\($r.Name)/\\(.Prefix)", tags: {}}}),
 ((.Versions//[])[] |
-  {Type: "s3:object-version", Id: .Key, Name: .Key,
-   Arn: "arn:\\($partition//"aws"):s3:::\\($r.Name)/\\(.Key)", Tags: {},
-   Uri: "s3://\\($r.Name)/\\(.Key)",
-   Bucket: $r.Name} + .),
+  . + {Bucket: $r.Name,
+       ajl: {type: "s3:object-version", id: .Key, name: .Key,
+             arn: "arn:\\($partition//"aws"):s3:::\\($r.Name)/\\(.Key)",
+             uri: "s3://\\($r.Name)/\\(.Key)", tags: {}}}),
 ((.DeleteMarkers//[])[] |
-  {Type: "s3:delete-marker", Id: .Key, Name: .Key,
-   Arn: "arn:\\($partition//"aws"):s3:::\\($r.Name)/\\(.Key)", Tags: {},
-   Uri: "s3://\\($r.Name)/\\(.Key)",
-   Bucket: $r.Name} + .)"""
+  . + {Bucket: $r.Name,
+       ajl: {type: "s3:delete-marker", id: .Key, name: .Key,
+             arn: "arn:\\($partition//"aws"):s3:::\\($r.Name)/\\(.Key)",
+             uri: "s3://\\($r.Name)/\\(.Key)", tags: {}}})"""
 
 # Hosted zone Ids come back as "/hostedzone/Z123..."; strip the prefix so Id
-# and the Arn are usable directly.
+# and the arn are usable directly.
 ROUTE53_LIST_HOSTED_ZONES_JQ = """\
 (.HostedZones//[])[] |
 .Id = (.Id | sub("^/hostedzone/"; "")) |
-{Type: "route53:hostedzone", Id: .Id, Name: .Name,
- Arn: "arn:\\($partition//"aws"):route53:::hostedzone/\\(.Id)", Tags: {}} + ."""
+. + {ajl: {type: "route53:hostedzone", id: .Id, name: .Name,
+           arn: "arn:\\($partition//"aws"):route53:::hostedzone/\\(.Id)", tags: {}}}"""
 
 # ListQueues only returns URLs; derive name/account from the URL segments.
 SQS_LIST_QUEUES_JQ = """\
 (.QueueUrls//[])[] | . as $url | ($url | split("/")) as $p |
-{Type: "sqs:queue", Id: $p[-1], Name: $p[-1],
- Arn: "arn:\\($partition//"aws"):sqs:\\($region):\\($p[-2]):\\($p[-1])",
- Tags: {}, QueueUrl: $url}"""
+{QueueUrl: $url,
+ ajl: {type: "sqs:queue", id: $p[-1], name: $p[-1],
+       arn: "arn:\\($partition//"aws"):sqs:\\($region):\\($p[-2]):\\($p[-1])", tags: {}}}"""
 
 CONFIGS = {
     "acm": {
@@ -346,11 +350,15 @@ CONFIGS = {
             "ListAttachedRolePolicies": [r(["AttachedPolicies"], "iam:attached-role-policy", "PolicyName", name="PolicyName", arn="PolicyArn")],
             "ListAttachedGroupPolicies": [r(["AttachedPolicies"], "iam:attached-group-policy", "PolicyName", name="PolicyName", arn="PolicyArn")],
             "ListAttachedUserPolicies": [r(["AttachedPolicies"], "iam:attached-user-policy", "PolicyName", name="PolicyName", arn="PolicyArn")],
+            # access keys have no ARN of their own (identified by UserName+AccessKeyId)
+            "ListAccessKeys": [r(["AccessKeyMetadata"], "iam:access-key", "AccessKeyId")],
+            "GetAccessKeyLastUsed": [r([], "iam:access-key", "AccessKeyId")],
         },
         "describe": {
             "ListRolePolicies": d("GetRolePolicy", id_field="Id", param="PolicyName", scope=["RoleName"]),
             "ListGroupPolicies": d("GetGroupPolicy", id_field="Id", param="PolicyName", scope=["GroupName"]),
             "ListUserPolicies": d("GetUserPolicy", id_field="Id", param="PolicyName", scope=["UserName"]),
+            "ListAccessKeys": d("GetAccessKeyLastUsed", id_field="Id", param="AccessKeyId", scope=["UserName"]),
             "ListMFADevices": d("GetMFADevice", id_field="Id", param="SerialNumber", scope=["UserName"]),
             "ListPolicyVersions": d("GetPolicyVersion", id_field="Id", param="VersionId", scope=["PolicyArn"]),
             "ListSAMLProviders": d("GetSAMLProvider", id_field="Arn", param="SAMLProviderArn"),

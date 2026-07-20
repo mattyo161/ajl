@@ -25,27 +25,29 @@ that the generic path wouldn't give you by name alone:
 
 ## Output shape
 
-The standard contract, unlike `ssm get`'s custom narrower shape — `Id` is
-the parameter name, `Tags` is `{}` (the API doesn't return tags on this
-call):
+The standard contract, run through the generic normalizer
+(`normalize_resource` in `normalize.py`) rather than `ssm get`'s custom
+narrower `_shape()` — `ajl.id` is the parameter name, `ajl.tags` is `{}`
+(the API doesn't return tags on this call):
 
 ```json
-{"Type": "ssm:parameter", "Id": "/app/db/host", "Name": "/app/db/host",
- "Arn": "arn:aws:ssm:us-east-1:123456789012:parameter/app/db/host", "Tags": {},
- "OriginalType": "String", "Version": 3, "LastModifiedDate": "...", "Tier": "Standard"}
+{"Name": "/app/db/host",
+ "ARN": "arn:aws:ssm:us-east-1:123456789012:parameter/app/db/host",
+ "Type": "String", "Version": 3, "LastModifiedDate": "...", "Tier": "Standard",
+ "ajl": {"type": "ssm:parameter", "id": "/app/db/host", "name": "/app/db/host",
+         "arn": "arn:aws:ssm:us-east-1:123456789012:parameter/app/db/host", "tags": {}}}
 ```
 
-SSM's own response also has a field called `Type` — the parameter's
-`String`/`StringList`/`SecureString` — which collides with ajl's own `Type`
-contract property. The generic normalizer (`normalize_resource` in
-`normalize.py`) handles this generically for every service, not just here:
-a raw field whose name collides with a contract property, and whose value
-actually differs, is kept under `Original<Key>` instead of being dropped —
-so nothing is silently lost, it's just renamed. This is the same collision
-`ssm get`'s custom `_shape()` sidesteps on purpose by calling it
-`ParameterType` from the start (see [ssm-get.md](ssm-get.md)); `params`
-runs through the generic path and gets the generic `Original*` treatment
-instead.
+SSM's own response has two fields that used to collide with ajl's
+contract: `Type` (an exact match — the parameter's own `String`/
+`StringList`/`SecureString`) and the all-caps `ARN` (a case-insensitive
+near-miss ajl's old code silently dropped rather than renamed — a real
+bug the collision survey found). Now that ajl's metadata lives in its own
+trailing `ajl` object, neither collides with anything: both raw fields
+pass through exactly as the API returned them, sitting right next to
+`ajl.type`/`ajl.arn`. `ssm get`'s custom `_shape()` (see
+[ssm-get.md](ssm-get.md)) benefits from the same fix — it no longer needs
+the `ParameterType` alias it used to.
 
 ## Filtering and fan-out
 

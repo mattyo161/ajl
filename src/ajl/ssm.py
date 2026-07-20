@@ -18,8 +18,10 @@ never carries plaintext secrets:
     bulk --names/--path -> sealed output   (--decrypt to force plaintext)
 
 Sealing needs an age recipient (AJL_AGE_*); without one, bulk get errors and
-points at --decrypt. Records: Type, Name, Arn, Value, ParameterType, Version,
-LastModifiedDate, DataType.
+points at --decrypt. Records: Name, Value, Type (String/StringList/
+SecureString — the parameter's own, no longer needing an alias since it
+can't collide with ajl.type), Version, LastModifiedDate, DataType, plus
+the trailing ajl.{type,id,name,arn,tags}.
 """
 
 import argparse
@@ -67,14 +69,19 @@ def build_get_parser():
 def _shape(param):
     name = param.get("Name")
     return {
-        "Type": "ssm:parameter",
         "Name": name,
-        "Arn": param.get("ARN") or "",
         "Value": param.get("Value"),
-        "ParameterType": param.get("Type"),
+        "Type": param.get("Type"),
         "Version": param.get("Version"),
         "LastModifiedDate": param.get("LastModifiedDate"),
         "DataType": param.get("DataType"),
+        "ajl": {
+            "type": "ssm:parameter",
+            "id": name,
+            "name": name,
+            "arn": param.get("ARN") or "",
+            "tags": {},
+        },
     }
 
 
@@ -108,7 +115,7 @@ def run_get(runner, emitter, options, tokens, report=None):
     def emit(param):
         record = _shape(param)
         value = record.get("Value")
-        if do_seal and record.get("ParameterType") == "SecureString" and value:
+        if do_seal and record.get("Type") == "SecureString" and value:
             value = seal.seal_value(value)
             record["Value"] = value
             counts["sealed"] += 1
@@ -235,8 +242,10 @@ def run_write(runner, emitter, options, tokens, mode, report=None):
                 if current.get("Value") == value:
                     with lock:
                         counts["unchanged"] += 1
-                    return {"Type": "ssm:parameter", "Name": name, "Action": "unchanged",
-                            "Version": current.get("Version")}
+                    return {"Name": name, "Action": "unchanged",
+                            "Version": current.get("Version"),
+                            "ajl": {"type": "ssm:parameter", "id": name, "name": name,
+                                    "arn": "", "tags": {}}}
             put = {"Name": name, "Value": value, "Type": existing["Type"], "Overwrite": True}
             if existing["Type"] == "SecureString" and existing.get("KeyId"):
                 put["KeyId"] = existing["KeyId"]
@@ -258,8 +267,10 @@ def run_write(runner, emitter, options, tokens, mode, report=None):
         response = client.put_parameter(**put)
         with lock:
             counts["written"] += 1
-        return {"Type": "ssm:parameter", "Name": name, "Action": action,
-                "Version": response.get("Version"), "Tier": response.get("Tier")}
+        return {"Name": name, "Action": action,
+                "Version": response.get("Version"), "Tier": response.get("Tier"),
+                "ajl": {"type": "ssm:parameter", "id": name, "name": name,
+                        "arn": "", "tags": {}}}
 
     def run_spec(spec):
         try:

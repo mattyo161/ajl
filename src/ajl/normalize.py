@@ -1,12 +1,21 @@
 """Normalization of API responses into consistent JSONL resources.
 
-Every emitted resource gets a consistent set of leading properties:
+Every emitted resource carries the raw API response fields exactly as
+boto3 returned them — no renaming, no dropped fields — plus one trailing
+metadata object, ``ajl``, appended last:
 
-``Type``  - ARN-style resource type, e.g. ``ec2:instance``
-``Id``    - the resource id (falls back to the last segment of the Arn)
-``Name``  - the resource name (falls back to ``Tags.Name``)
-``Arn``   - taken from a response field or built from an ``arn_format`` template
-``Tags``  - a ``{Key: Value}`` map converted from the API's tag list
+``ajl.type``  - ARN-style resource type, e.g. ``ec2:instance``
+``ajl.id``    - the resource id (falls back to the last segment of the arn)
+``ajl.name``  - the resource name (falls back to ``Tags.Name``)
+``ajl.arn``   - taken from a response field or built from an ``arn_format`` template
+``ajl.tags``  - a ``{Key: Value}`` map converted from the API's tag list
+``ajl.uri``   - present only when ``uri_format`` is configured (s3 ``s3://bucket/key``)
+
+Because ``ajl`` is its own namespace, a raw response field can never
+collide with it — ssm's own parameter ``Type`` (``String``/
+``SecureString``), a VPN gateway's ``Type``, ElastiCache's all-caps
+``ARN`` all pass through untouched, sitting right next to ``ajl.type``/
+``ajl.arn`` with no rename needed.
 
 The shaping is driven by a declarative ``resources`` config on the operation
 in the service model file::
@@ -31,18 +40,10 @@ is descended into. ``scalar_as`` wraps scalar list items (e.g. dynamodb
 ListTables' TableNames) into ``{scalar_as: value}`` objects. ``arn_format``
 may reference ``{partition}``, ``{region}``, ``{account}``, any field of the
 resource, and any scalar field of the response root as ``{root_<Field>}``.
-``uri_format`` (same template variables) adds a ``Uri`` property right after
-``Tags`` — used by the s3 configs for pipeable ``s3://bucket/key`` uris.
+``uri_format`` (same template variables) adds ``ajl.uri``.
 
 A hand-written ``output.jq`` program on the operation always wins over the
 declarative config (the escape hatch for odd APIs).
-
-A raw response field whose name collides with one of the five contract
-properties but means something else entirely (ssm's own parameter ``Type``
-of ``String``/``SecureString``, a VPN gateway's ``Type``) is never silently
-dropped: if its value differs from the normalized one, it's kept under
-``Original<Key>`` (``OriginalType``, ...) instead of overwriting or being
-discarded. A field whose value happens to already match needs no rename.
 """
 
 
@@ -107,7 +108,7 @@ def id_from_arn(arn):
 
 
 def normalize_resource(item, cfg, context, root):
-    """Return ``item`` normalized with Type/Id/Name/Arn/Tags up front."""
+    """Return ``item`` with a trailing ``ajl`` metadata object appended."""
     if not isinstance(item, dict):
         item = {cfg.get("scalar_as") or "Value": item}
 
@@ -153,27 +154,22 @@ def normalize_resource(item, cfg, context, root):
     if not name:
         name = tags.get("Name") or ""
 
-    result = {
-        "Type": cfg.get("type") or "",
-        "Id": resource_id,
-        "Name": name,
-        "Arn": arn,
-        "Tags": tags,
+    ajl = {
+        "type": cfg.get("type") or "",
+        "id": resource_id,
+        "name": name,
+        "arn": arn,
+        "tags": tags,
     }
     if uri:
-        result["Uri"] = uri
+        ajl["uri"] = uri
+
+    result = {}
     for key, value in item.items():
         if key == tags_field:
-            continue  # replaced by the Tags map
-        if key.lower() == "arn" and key != "Arn":
-            continue  # replaced by the normalized Arn
-        if key in result:
-            # a resource field that shares a normalized property's name but
-            # means something else (e.g. a VPN gateway's Type) is kept
-            if key != "Tags" and value != result[key]:
-                result[f"Original{key}"] = value
-            continue
+            continue  # replaced by ajl.tags
         result[key] = value
+    result["ajl"] = ajl
     return result
 
 

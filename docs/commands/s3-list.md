@@ -41,17 +41,17 @@ listing (no grouping) of everything under that prefix from then on.
 ## Output shape
 
 Same lean contract as `s3 scan` (see [s3-scan.md](s3-scan.md)'s Output
-shape section) — `s3:object` records with `Uri` carrying identity, and
+shape section) — `s3:object` records with `ajl.uri` carrying identity, and
 `s3:prefix` records for each `CommonPrefixes` entry:
 
 ```json
-{"Type": "s3:prefix", "Uri": "s3://my-bucket/logs/", "Bucket": "my-bucket",
- "Prefix": "logs/", "Delimiter": "/"}
+{"Bucket": "my-bucket", "Prefix": "logs/", "Delimiter": "/",
+ "ajl": {"type": "s3:prefix", "uri": "s3://my-bucket/logs/"}}
 ```
 
 Records emitted by `ajl` pipe straight back into `--params-json -` for
-either command — params the target operation doesn't accept (`Type`,
-`Uri`, `Tags`, ...) are dropped automatically (see
+either command — the trailing `ajl` object and any params the target
+operation doesn't accept are dropped automatically (see
 [../request-flow.md](../request-flow.md) for exactly how).
 
 ## See also

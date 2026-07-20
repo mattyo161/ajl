@@ -15163,7 +15163,7 @@
       },
       "name": "DescribeInstances",
       "output": {
-        "jq": "# Save the reservation details to $reservation\n.Reservations[] | {ReservationId, OwnerId, RequesterId, Groups} as $reservation |\n# Output each instance and then append the Reservation details at the end\n.Instances[] |\n# Convert Tags to a Map\n.Tags = (.Tags//[] | from_entries) |\n# Add common properties\n{\n  Type: \"ec2:instance\",\n  Id: .InstanceId,\n  Name: .Tags.Name//\"\",\n  Arn: \"arn:\\($partition//\"aws\"):ec2:\\(.Region//$region//\"\"):\\($reservation.OwnerId//$account//\"\"):instance/\\(.InstanceId)\",\n  Reservation: $reservation\n} + .",
+        "jq": "# Save the reservation details to $reservation\n.Reservations[] | {ReservationId, OwnerId, RequesterId, Groups} as $reservation |\n# Output each instance and then append the Reservation details at the end\n.Instances[] |\n# Convert Tags to a map for ajl.tags; the raw list form is dropped, same as\n# the generic normalizer does for every other service\n(.Tags//[] | from_entries) as $tags |\ndel(.Tags) |\n. + {\n  Reservation: $reservation,\n  ajl: {\n    type: \"ec2:instance\",\n    id: .InstanceId,\n    name: ($tags.Name//\"\"),\n    arn: \"arn:\\($partition//\"aws\"):ec2:\\(.Region//$region//\"\"):\\($reservation.OwnerId//$account//\"\"):instance/\\(.InstanceId)\",\n    tags: $tags\n  }\n}",
         "lists": {
           "Reservations": {
             "all_fields": [

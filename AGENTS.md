@@ -1,9 +1,11 @@
 # Agent Guide for ajl
 
 `ajl` (AWS JSON Line) is a Python CLI that wraps boto3, streams AWS API
-responses as JSONL, and normalizes every resource to lead with
-`Type`, `Id`, `Name`, `Arn`, `Tags`. Records from one invocation can be piped
-back into another via `--params-json -` for massive parallel fan-out.
+responses as JSONL, and appends a trailing `ajl` object
+(`ajl.{type,id,name,arn,tags}`) to every resource, leaving every raw API
+field untouched in its original position. Records from one invocation can
+be piped back into another via `--params-json -` for massive parallel
+fan-out.
 
 Read [DESIGN.md](DESIGN.md) before changing architecture,
 [STYLE_GUIDE.md](STYLE_GUIDE.md) before writing code, and
@@ -44,7 +46,7 @@ credentials; the test suite does not.
 - `src/ajl/scan.py` — `ajl s3 scan` (recursive queue/worker-pool inventory
   with pluggable range splitters, radix leapfrog default) and `ajl s3 list`
   (same engine, recurse off, pipeable prefixes); records here are LEAN
-  (`Type`+`Uri`, no Id/Name/Arn, Tags only via --include-tags); module
+  (`ajl.type`+`ajl.uri`, no id/name/arn, `ajl.tags` only via --include-tags); module
   docstring documents the task/splitter contracts, docs/scan-design.md the
   full design narrative, [docs/commands/s3-scan.md](docs/commands/s3-scan.md)
   / [docs/commands/s3-list.md](docs/commands/s3-list.md) the flag/usage reference.
@@ -87,11 +89,13 @@ credentials; the test suite does not.
    `generate-model.py` run.
 2. **stdout is JSONL only.** Any diagnostic output goes to stderr prefixed
    `ajl:`. Never `print()` to stdout outside the `Emitter`.
-3. **Don't break the output contract**: leading `Type`/`Id`/`Name`/`Arn`/`Tags`
-   on every shaped record, `Tags` always a map, missing values as `""`/`{}`
-   (not null/absent), records re-pipeable via `--params-json`. Exception:
-   `s3 scan`/`s3 list` records are deliberately lean (`Type`+`Uri`). If a
-   change touches this, add an entry to DESIGN.md.
+3. **Don't break the output contract**: a trailing `ajl` object
+   (`ajl.type`/`ajl.id`/`ajl.name`/`ajl.arn`/`ajl.tags`) on every shaped
+   record, every raw API field passed through untouched, `ajl.tags` always
+   a map, missing values as `""`/`{}` (not null/absent), records re-pipeable
+   via `--params-json`. Exception: `s3 scan`/`s3 list` records are
+   deliberately lean (`ajl.type`+`ajl.uri`). If a change touches this, add
+   an entry to DESIGN.md.
 4. **Per-request errors must not kill a stream.** Catch, report to stderr,
    continue, exit 1 at the end.
 5. **Locks are held briefly and never across network calls** (see
@@ -105,8 +109,8 @@ credentials; the test suite does not.
 **Curate a service's output** — edit `tools/apply-resource-configs.py`
 (add `r(path, type, id_, name, arn/arn_format, tags, scalar_as)` entries or a
 jq program), run it, smoke-test with
-`AJL_MODELS_DIR=src/ajl/models uv run ajl <service> <op>`, verify the five
-leading properties and that the ARN format is real.
+`AJL_MODELS_DIR=src/ajl/models uv run ajl <service> <op>`, verify the
+trailing `ajl` object and that the ARN format is real.
 
 **Pair a List op with its Describe/Get** (enables `--describe`) — add a
 `d(operation, id_field, param, kind="scalar"|"array", batch_size=, scope=)`

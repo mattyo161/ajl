@@ -40,27 +40,32 @@ def records(out):
     return [json.loads(line) for line in out.getvalue().splitlines()]
 
 
+def ajl_record(id_, arn):
+    return {"ajl": {"id": id_, "arn": arn, "name": "", "tags": {}}}
+
+
 def test_tag_merge_emitter_batches_and_merges():
     emitter, client, out = make_emitter(batch_size=2)
-    emitter.emit({"Id": "1", "Arn": "arn:a:1", "Name": "", "Tags": {}})
-    emitter.emit({"Id": "2", "Arn": "arn:a:2", "Name": "", "Tags": {}})
-    emitter.emit({"Id": "9", "Arn": "arn:a:9", "Name": "", "Tags": {}})
+    emitter.emit(ajl_record("1", "arn:a:1"))
+    emitter.emit(ajl_record("2", "arn:a:2"))
+    emitter.emit(ajl_record("9", "arn:a:9"))
     emitter.flush()
 
-    result = {record["Id"]: record for record in records(out)}
+    result = {record["ajl"]["id"]: record for record in records(out)}
     assert len(result) == 3
-    assert result["1"]["Tags"] == {"Name": "name-of-1"}
-    assert result["1"]["Name"] == "name-of-1"  # Name backfilled from fetched tags
-    assert result["9"]["Tags"] == {}
+    assert result["1"]["ajl"]["tags"] == {"Name": "name-of-1"}
+    assert result["1"]["ajl"]["name"] == "name-of-1"  # name backfilled from fetched tags
+    assert result["9"]["ajl"]["tags"] == {}
     # batch of 2 submitted, then the flush remainder
     assert [len(call) for call in client.calls] == [2, 1]
 
 
 def test_tag_merge_emitter_passthrough():
     emitter, client, out = make_emitter()
-    emitter.emit({"Id": "1", "Arn": "arn:a:1", "Tags": {"Env": "prod"}})  # has tags
-    emitter.emit({"Id": "2", "Tags": {}})  # no arn
+    emitter.emit({"ajl": {"id": "1", "arn": "arn:a:1", "tags": {"Env": "prod"}}})  # has tags
+    emitter.emit({"ajl": {"id": "2", "arn": "", "tags": {}}})  # no arn
+    emitter.emit({"NoAjlKey": True})  # no ajl metadata at all
     emitter.emit("not-a-dict")
     emitter.flush()
     assert client.calls == []
-    assert len(out.getvalue().splitlines()) == 3
+    assert len(out.getvalue().splitlines()) == 4
