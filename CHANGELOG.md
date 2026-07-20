@@ -5,6 +5,34 @@ Notable changes to `ajl`, release by release. Format loosely follows
 [Semantic Versioning](https://semver.org/). See [DESIGN.md](DESIGN.md) for
 the reasoning behind these changes, not just the summary.
 
+## [0.7.0] - 2026-07-19
+
+### Changed
+- **BREAKING**: replaced the top-level `Type`/`Id`/`Name`/`Arn`/`Tags`/`Uri`
+  output shape (and, under `--stamp-session`, top-level `Profile`/`Region`/
+  `Account` + forwarded request params) with a single trailing, lowercase
+  `ajl` object: `ajl.{type,id,name,arn,tags,uri}` +
+  `ajl.stamp.{profile,region,account,...}`, appended last on every record.
+  Every raw AWS field now passes through completely untouched, in its
+  original casing, with no renaming or dropping — closes the collision
+  class documented in `docs/collision-survey-2026-07-18.md` (~50% of
+  boto3 services exact-collided, ~42% near-missed case-insensitively,
+  against the old top-level names) and the one existing data-loss bug
+  (a colliding raw `ARN` field was silently dropped). No transition
+  period; every consumer must read the new shape. See DESIGN.md.
+
+### Added
+- Curated `iam.ListAccessKeys` / `iam.GetAccessKeyLastUsed` (access-key
+  age/rotation), wired into `tools/inventory.sh` as two joinable files
+  (not `--describe`, which would have overwritten `CreateDate`/`Status`
+  with the last-used response).
+
+### Fixed
+- `tools/inventory.sh`: `ssm params` and `secretsmanager list-secrets`
+  now pass `--no-cache` — both were silently returning empty results
+  under the script's global `AJL_CACHE`, since ssm/secretsmanager calls
+  refuse to run under `--cache` without an age key configured.
+
 ## [0.6.0] - 2026-07-18
 
 ### Added
