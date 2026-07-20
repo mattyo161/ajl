@@ -94,3 +94,31 @@ with:
 ```shell
 python3 tools/apply-resource-configs.py
 ```
+
+## Analyze an inventory run with DuckDB
+
+`tools/build-duckdb.py` loads a `tools/inventory.sh` run's output (and, if
+present, `--api-log`'s telemetry) into a DuckDB file for ad-hoc SQL —
+security review, performance review, or just exploring what an account
+looks like. Standalone script, not a dependency of `ajl` itself; runs via
+its own PEP 723 header (`uv run` installs `duckdb` into an ephemeral env,
+nothing touches this project's `pyproject.toml`):
+
+```shell
+uv run bash tools/inventory.sh          # produces .temp/data/*.jsonl
+uv run tools/build-duckdb.py            # -> .temp/inventory.duckdb
+```
+
+`tools/security-checks.sql` is a set of generic, reusable monitoring
+queries against the tables this produces (open security groups, public EKS
+endpoints, expired certs, stale IAM keys, missing Multi-AZ, ...) — no
+account IDs or customer names hardcoded, safe to keep in a public repo and
+re-run after remediation work to check progress:
+
+```shell
+duckdb .temp/inventory.duckdb < tools/security-checks.sql
+```
+
+See [docs/duckdb-analysis.md](../docs/duckdb-analysis.md) for query
+patterns and gotchas (struct field casing, CloudTrail's JSON-as-string
+columns, isolating one run's slice of the cumulative apilog).
