@@ -5,6 +5,39 @@ Notable changes to `ajl`, release by release. Format loosely follows
 [Semantic Versioning](https://semver.org/). See [DESIGN.md](DESIGN.md) for
 the reasoning behind these changes, not just the summary.
 
+## [0.9.0] - 2026-07-21
+
+### Added
+- `ajl s3 list-versions` / `ajl s3 scan-versions`: the fast raw-HTTP
+  `FastLister` engine (`ajl s3 list`/`scan`) now has versioned-bucket
+  counterparts speaking `ListObjectVersions` instead of `ListObjectsV2` —
+  `s3:object-version`/`s3:delete-marker` records, per-version tag
+  fetches via `get_object_tagging(..., VersionId=...)` under
+  `--include-tags`. Separate commands rather than flags on `list`/`scan`,
+  so those existing code paths are untouched; a per-bucket
+  `get-bucket-versioning` check (resolved once per distinct bucket among
+  the seeds, `--force-versions` to skip it) means a never-versioned
+  bucket pays nothing extra. Verified live against a real 874,280-version
+  bucket: `scan-versions` in 51.3s vs. 231.4s for `list-versions`.
+
+### Fixed
+- Three correctness bugs in the new versions-mode listing path, found
+  during live verification against a real bucket (none caught by
+  offline unit tests alone — see `tests/test_scan.py`'s new 100-seed
+  randomized stress test, added specifically because it's what found two
+  of the three):
+  1. A split sub-task's range boundary was only ever wired into
+     `StartAfter`, which `list_object_versions` doesn't accept —
+     every split task silently restarted from the beginning of the
+     bucket instead of its assigned range.
+  2. A key's version list split across a page/split boundary silently
+     dropped whatever didn't fit on the page that triggered the split.
+  3. `Versions`/`DeleteMarkers` on one page were processed as two
+     separate sequential loops instead of S3's true combined key order,
+     so an `end_at` cutoff mid-`Versions` could return before the
+     `DeleteMarkers` loop for that page ever ran, silently skipping
+     in-bounds delete markers.
+
 ## [0.8.0] - 2026-07-20
 
 ### Added
