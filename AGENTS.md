@@ -61,6 +61,13 @@ credentials; the test suite does not.
   docstring documents the task/splitter contracts, docs/scan-design.md the
   full design narrative, [docs/commands/s3-scan.md](docs/commands/s3-scan.md)
   / [docs/commands/s3-list.md](docs/commands/s3-list.md) the flag/usage reference.
+  `ajl s3 scan-versions`/`ajl s3 list-versions` are the same engine speaking
+  `list-object-versions` instead of `list-objects-v2` (`Task.versions`,
+  auto-detected per bucket via `get-bucket-versioning`, `--force-versions`
+  to skip the check) — separate commands, not flags, so the plain
+  scan/list paths stay untouched; see
+  [docs/commands/s3-scan-versions.md](docs/commands/s3-scan-versions.md) /
+  [docs/commands/s3-list-versions.md](docs/commands/s3-list-versions.md).
 - `src/ajl/tags.py` — `--fetch-tags` batching (100 ARNs/call) via the
   Resource Groups Tagging API, background threads, submission-order emit.
 - `src/ajl/modelconfig.py` — loads packaged models; `AJL_MODELS_DIR` env var

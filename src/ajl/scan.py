@@ -74,12 +74,37 @@ def sentinel_after(prefix):
     return prefix + _MAX_CHAR * reps
 
 
+def _merge_by_key(versions, delete_markers):
+    """A ListObjectVersions page's ``Versions``/``DeleteMarkers`` are each
+    independently key-ordered (an S3 guarantee) but arrive as two separate
+    lists, not the single combined document order the raw response
+    actually had. Merge them back into one (kind, item) sequence in that
+    true key order, tagged with the ajl.type each should get."""
+    vi, di = 0, 0
+    while vi < len(versions) and di < len(delete_markers):
+        if versions[vi]["Key"] <= delete_markers[di]["Key"]:
+            yield "s3:object-version", versions[vi]
+            vi += 1
+        else:
+            yield "s3:delete-marker", delete_markers[di]
+            di += 1
+    for item in versions[vi:]:
+        yield "s3:object-version", item
+    for item in delete_markers[di:]:
+        yield "s3:delete-marker", item
+
+
 @dataclass
 class Task:
     """One listing over a slice of a bucket's keyspace.
 
     ``start_after`` is exclusive, ``end_at`` inclusive: a task emits keys k
-    with ``start_after < k <= end_at``.
+    with ``start_after < k <= end_at``. In versions mode, a single key can
+    have more entries than fit on one page, so a task handed off mid-key
+    (by a split or an abandon-to-ranges) needs more than just the key to
+    resume correctly -- ``version_after`` is that key's own resume point
+    (S3's own VersionIdMarker), empty when ``start_after`` is a clean key
+    boundary rather than a mid-key cut.
     """
 
     bucket: str
@@ -90,6 +115,8 @@ class Task:
     profile: str = None
     region: str = None
     no_split: bool = False
+    versions: bool = False
+    version_after: str = ""
 
     def seed(self):
         """The task as a --params-json / --failed-out JSONL line."""
@@ -104,6 +131,10 @@ class Task:
             out["profile"] = self.profile
         if self.region:
             out["region"] = self.region
+        if self.versions:
+            out["Versions"] = True
+        if self.version_after:
+            out["VersionAfter"] = self.version_after
         return out
 
 
@@ -314,6 +345,69 @@ def parse_list_xml(body):
     return response
 
 
+def _parse_version_entry(node):
+    item = {"Key": unquote(node.findtext(f"{_S3_XMLNS}Key") or "")}
+    version_id = node.findtext(f"{_S3_XMLNS}VersionId")
+    if version_id:
+        item["VersionId"] = version_id
+    item["IsLatest"] = node.findtext(f"{_S3_XMLNS}IsLatest") == "true"
+    last_modified = node.findtext(f"{_S3_XMLNS}LastModified")
+    if last_modified:
+        item["LastModified"] = last_modified
+    return item
+
+
+def parse_list_versions_xml(body):
+    """Parse a ListObjectVersions response requested with encoding-type=url.
+
+    Mirrors :func:`parse_list_xml`'s LastModified-stays-a-string tradeoff.
+    ``Version`` and ``DeleteMarker`` elements are each independently
+    key-ordered in the raw response (an S3 guarantee) but interleaved
+    together there; splitting them into two separate lists here (matching
+    the generic engine's ``S3_LIST_OBJECT_VERSIONS_JQ`` curation) loses
+    that interleaving, which costs nothing for JSONL output.
+    """
+    root = ET.fromstring(body)
+
+    def text(name, default=""):
+        return root.findtext(f"{_S3_XMLNS}{name}") or default
+
+    versions = []
+    for node in root.iter(f"{_S3_XMLNS}Version"):
+        item = _parse_version_entry(node)
+        etag = node.findtext(f"{_S3_XMLNS}ETag")
+        if etag:
+            item["ETag"] = etag
+        size = node.findtext(f"{_S3_XMLNS}Size")
+        if size is not None:
+            item["Size"] = int(size)
+        storage_class = node.findtext(f"{_S3_XMLNS}StorageClass")
+        if storage_class:
+            item["StorageClass"] = storage_class
+        versions.append(item)
+    delete_markers = [_parse_version_entry(node) for node in root.iter(f"{_S3_XMLNS}DeleteMarker")]
+    prefixes = [
+        {"Prefix": unquote(node.findtext(f"{_S3_XMLNS}Prefix") or "")}
+        for node in root.iter(f"{_S3_XMLNS}CommonPrefixes")
+    ]
+    response = {
+        "Name": text("Name"),
+        "IsTruncated": text("IsTruncated") == "true",
+        "Versions": versions,
+        "DeleteMarkers": delete_markers,
+        "CommonPrefixes": prefixes,
+    }
+    key_marker = text("NextKeyMarker")
+    if key_marker:
+        # unlike NextContinuationToken (an opaque token), NextKeyMarker
+        # echoes back a real object key, so encoding-type=url applies to it
+        response["NextKeyMarker"] = unquote(key_marker)
+    version_id_marker = text("NextVersionIdMarker")
+    if version_id_marker:
+        response["NextVersionIdMarker"] = version_id_marker
+    return response
+
+
 class FastLister:
     """ListObjectsV2 over raw SigV4-signed HTTP with C ElementTree parsing.
 
@@ -359,9 +453,29 @@ class FastLister:
             params.append(("prefix", Prefix))
         if StartAfter:
             params.append(("start-after", StartAfter))
+        return self._get_and_parse(Bucket, params, parse_list_xml)
+
+    def list_object_versions(self, Bucket, Prefix=None, Delimiter=None,
+                             KeyMarker=None, VersionIdMarker=None, MaxKeys=1000, **_):
+        params = [("versions", ""), ("encoding-type", "url"),
+                  ("max-keys", str(MaxKeys))]
+        if KeyMarker:
+            params.append(("key-marker", KeyMarker))
+        if VersionIdMarker:
+            params.append(("version-id-marker", VersionIdMarker))
+        if Delimiter:
+            params.append(("delimiter", Delimiter))
+        if Prefix:
+            params.append(("prefix", Prefix))
+        return self._get_and_parse(Bucket, params, parse_list_versions_xml)
+
+    def _get_and_parse(self, bucket, params, parse_fn):
+        """Signed GET with retries, shared by list_objects_v2 and
+        list_object_versions -- only the query params and response parser
+        differ between the two."""
         params.sort()  # canonical order: sign and send the identical string
         query = "&".join(f"{k}={quote(v, safe='')}" for k, v in params)
-        url = f"{self._base_url(Bucket)}?{query}"
+        url = f"{self._base_url(bucket)}?{query}"
         last_error = None
         for attempt in range(self.max_attempts):
             if attempt:
@@ -378,7 +492,7 @@ class FastLister:
                 last_error = exc
                 continue
             if response.status_code == 200:
-                return parse_list_xml(response.content)
+                return parse_fn(response.content)
             last_error = RuntimeError(
                 f"S3 returned {response.status_code}: {response.text[:300]}"
             )
@@ -520,27 +634,64 @@ class Scanner:
             params["Prefix"] = task.prefix
         if delimiter:
             params["Delimiter"] = delimiter
-        if task.start_after:
+        if task.start_after and not task.versions:
             params["StartAfter"] = task.start_after
         progress = task.start_after
         token = None
+        # list_object_versions has no StartAfter -- KeyMarker does that job
+        # too, so a split/resumed task's boundary has to seed it up front,
+        # not just get updated from NextKeyMarker after the first page.
+        # version_after covers the case where that boundary key itself was
+        # cut mid-version-list by a previous split/abandon (see Task's
+        # docstring) -- empty for a clean key boundary, S3's own
+        # VersionIdMarker otherwise.
+        key_marker = (task.start_after or None) if task.versions else None
+        version_id_marker = (task.version_after or None) if task.versions else None
         pages = 0
         fan = 0
         try:
             while not self.stopped:
                 call_params = dict(params)
-                if token:
-                    call_params["ContinuationToken"] = token
                 self._inc("calls")
-                response = client.list_objects_v2(**call_params)
+                if task.versions:
+                    if key_marker:
+                        call_params["KeyMarker"] = key_marker
+                    if version_id_marker:
+                        call_params["VersionIdMarker"] = version_id_marker
+                    response = client.list_object_versions(**call_params)
+                else:
+                    if token:
+                        call_params["ContinuationToken"] = token
+                    response = client.list_objects_v2(**call_params)
                 pages += 1
-                for item in response.get("Contents") or []:
-                    key = item["Key"]
-                    if task.end_at and key > task.end_at:
-                        return
-                    if not self._emit_object(item, task, client, session_key):
-                        return
-                    progress = key
+                if task.versions:
+                    # Versions and DeleteMarkers are each independently
+                    # key-ordered but arrive as two separate lists, not S3's
+                    # true combined document order -- merge them back into
+                    # one key-ordered sequence before applying the end_at
+                    # cutoff. Processing them as two flat sequential loops
+                    # instead (Versions fully, then DeleteMarkers) was a real
+                    # bug: an end_at cutoff hit partway through Versions
+                    # returned before the DeleteMarkers loop ever ran, so any
+                    # in-bounds delete markers on that same page were never
+                    # even considered, let alone emitted.
+                    for kind, item in _merge_by_key(
+                        response.get("Versions") or [], response.get("DeleteMarkers") or []
+                    ):
+                        key = item["Key"]
+                        if task.end_at and key > task.end_at:
+                            return
+                        if not self._emit_object_version(item, task, client, session_key, kind):
+                            return
+                        progress = max(progress, key)
+                else:
+                    for item in response.get("Contents") or []:
+                        key = item["Key"]
+                        if task.end_at and key > task.end_at:
+                            return
+                        if not self._emit_object(item, task, client, session_key):
+                            return
+                        progress = key
                 if delimiter:
                     for cp in response.get("CommonPrefixes") or []:
                         child = cp["Prefix"]
@@ -557,7 +708,11 @@ class Scanner:
                                 return
                 if not response.get("IsTruncated"):
                     return
-                token = response.get("NextContinuationToken")
+                if task.versions:
+                    key_marker = response.get("NextKeyMarker")
+                    version_id_marker = response.get("NextVersionIdMarker")
+                else:
+                    token = response.get("NextContinuationToken")
                 if delimiter and self.recurse and (
                     fan > self.max_fan
                     or (fan == 0 and pages >= self.split_after)
@@ -574,7 +729,8 @@ class Scanner:
                             file=sys.stderr,
                         )
                     self.add(
-                        replace(task, delimiters=(), start_after=progress)
+                        replace(task, delimiters=(), start_after=progress,
+                               version_after=(version_id_marker or "") if task.versions else "")
                     )
                     return
                 if (
@@ -583,14 +739,17 @@ class Scanner:
                     and self.splitter
                     and pages >= self.split_after
                 ):
-                    if self._split(task, client, progress):
+                    if self._split(task, client, progress,
+                                   version_id_marker if task.versions else None):
                         return
                     task.no_split = True
         except Exception:
             task.start_after = progress  # resume point for the failure record
+            if task.versions:
+                task.version_after = version_id_marker or ""
             raise
 
-    def _split(self, task, client, progress):
+    def _split(self, task, client, progress, version_id_marker=None):
         ctx = SplitContext(
             client=client,
             bucket=task.bucket,
@@ -603,12 +762,19 @@ class Scanner:
         if not ranges:
             return False
         for rng in ranges:
+            start_after = rng.get("start_after") or ""
+            # only the range that actually resumes at `progress` (not every
+            # splitter guarantees that's ranges[0], so check by value) needs
+            # the mid-key version marker -- every other range starts at a
+            # later, clean key boundary
+            version_after = (version_id_marker or "") if start_after == progress else ""
             self.add(
                 replace(
                     task,
-                    start_after=rng.get("start_after") or "",
+                    start_after=start_after,
                     end_at=rng.get("end_at") or "",
                     no_split=False,
+                    version_after=version_after,
                 )
             )
         self._inc("splits")
@@ -642,10 +808,13 @@ class Scanner:
         self.emitter.emit(record, session_key)
         return True
 
-    def _object_tags(self, client, bucket, key):
+    def _object_tags(self, client, bucket, key, version_id=None):
         self._inc("calls")
+        kwargs = {"Bucket": bucket, "Key": key}
+        if version_id:
+            kwargs["VersionId"] = version_id
         try:
-            response = client.get_object_tagging(Bucket=bucket, Key=key)
+            response = client.get_object_tagging(**kwargs)
         except Exception as exc:
             self._inc("tag_errors")
             if self.verbose:
@@ -653,6 +822,26 @@ class Scanner:
                       file=sys.stderr)
             return {}
         return tags_to_map(response.get("TagSet"))
+
+    def _emit_object_version(self, item, task, client, session_key, kind):
+        if not self._count_emit("objects"):
+            return False
+        key = item["Key"]
+        record = {"Bucket": task.bucket}
+        record.update(item)
+        ajl = {"type": kind, "uri": f"s3://{task.bucket}/{key}"}
+        if self.include_tags:
+            # A delete marker has nothing to tag -- only real object
+            # versions carry a get-object-tagging call, scoped to that
+            # specific VersionId (not just the current/latest version).
+            if kind == "s3:object-version":
+                ajl["tags"] = self._object_tags(client, task.bucket, key,
+                                                version_id=item.get("VersionId"))
+            else:
+                ajl["tags"] = {}
+        record["ajl"] = ajl
+        self.emitter.emit(record, session_key)
+        return True
 
     def _emit_prefix(self, prefix, task, delimiter, session_key):
         if not self._count_emit("emitted_prefixes"):
@@ -752,6 +941,8 @@ def seed_task(line, default_delimiters):
         end_at=end_at,
         profile=line.get("profile") or stamp.get("profile"),
         region=line.get("region") or stamp.get("region"),
+        versions=bool(line.get("Versions", False)),
+        version_after=line.get("VersionAfter") or "",
     )
 
 
@@ -939,6 +1130,146 @@ def run_list(runner, emitter, options, tokens, report=None):
     started = time.time()
     try:
         return _finish(scanner, seeds, "list", started, report)
+    finally:
+        if failed_fp:
+            failed_fp.close()
+
+
+def _detect_versioned(runner, seeds, force):
+    """Resolve, once per distinct bucket among the seeds, whether it
+    actually has versioning Enabled/Suspended -- mutates each seed Task's
+    ``.versions`` in place. A bucket that was never versioned lists via
+    the plain list-objects-v2 path automatically, at no extra cost.
+    ``force`` (--force-versions) skips the check and lists everything as
+    versions; a failed/denied check defaults to *not* versioned (fails
+    safe -- a permissions gap should be loud, not a silently incomplete
+    history) with a stderr warning pointing at the override.
+    """
+    if force:
+        for task in seeds:
+            task.versions = True
+        return
+    resolved = {}
+    for task in seeds:
+        if task.bucket not in resolved:
+            session_key = runner.session_key(task.profile, task.region)
+            client = runner.client(session_key, "s3")
+            try:
+                status = client.get_bucket_versioning(Bucket=task.bucket).get("Status")
+                resolved[task.bucket] = status in ("Enabled", "Suspended")
+            except Exception as exc:
+                print(
+                    f"ajl: could not check versioning for s3://{task.bucket}: {exc} "
+                    "— assuming not versioned (use --force-versions to override)",
+                    file=sys.stderr,
+                )
+                resolved[task.bucket] = False
+        task.versions = resolved[task.bucket]
+
+
+def build_list_versions_parser():
+    parser = build_list_parser()
+    parser.prog = "ajl s3 list-versions"
+    parser.description = (
+        "Like `ajl s3 list`, but for versioned buckets: lists object "
+        "versions and delete markers (list-object-versions) instead of "
+        "current objects only. Auto-detects whether the bucket actually "
+        "has versioning enabled and falls back to the plain "
+        "list-objects-v2 path when it doesn't."
+    )
+    parser.add_argument("--force-versions", action="store_true", default=False,
+                        help="skip the get-bucket-versioning check and always "
+                        "list as object versions")
+    return parser
+
+
+def build_scan_versions_parser():
+    parser = build_scan_parser()
+    parser.prog = "ajl s3 scan-versions"
+    parser.description = (
+        "Like `ajl s3 scan`, but for versioned buckets: inventories object "
+        "versions and delete markers instead of current objects only. "
+        "Auto-detects whether the bucket actually has versioning enabled."
+    )
+    parser.add_argument("--force-versions", action="store_true", default=False,
+                        help="skip the get-bucket-versioning check and always "
+                        "list as object versions")
+    return parser
+
+
+def run_list_versions(runner, emitter, options, tokens, report=None):
+    """Entry point from main(); tokens are the args after 'ajl s3 list-versions'."""
+    list_options = build_list_versions_parser().parse_args(tokens)
+    delimiters = (list_options.delimiter,) if list_options.delimiter else ()
+    seeds = collect_seeds(options, list_options, delimiters,
+                          start_after=list_options.start_after or "")
+    if not seeds:
+        print("ajl: s3 list-versions needs s3://bucket[/prefix] uris or --params-json",
+              file=sys.stderr)
+        return 2
+    _detect_versioned(runner, seeds, list_options.force_versions)
+
+    failed_fp = open(list_options.failed_out, "w") if list_options.failed_out else None
+    scanner = Scanner(
+        runner,
+        emitter,
+        splitter=None,
+        recurse=False,
+        page_size=list_options.page_size,
+        max_items=options.max_items,
+        include_tags=list_options.include_tags,
+        failed_out=failed_fp,
+        workers=options.workers,
+        verbose=options.verbose,
+        progress=_show_progress(list_options),
+        fast=not list_options.no_fast,
+        name="list-versions",
+    )
+    started = time.time()
+    try:
+        return _finish(scanner, seeds, "list-versions", started, report)
+    finally:
+        if failed_fp:
+            failed_fp.close()
+
+
+def run_scan_versions(runner, emitter, options, tokens, report=None):
+    """Entry point from main(); tokens are the args after 'ajl s3 scan-versions'."""
+    scan_options = build_scan_versions_parser().parse_args(tokens)
+    delimiters = tuple(d for d in re.split(r"[,\s]+", scan_options.delimiters) if d)
+    seeds = collect_seeds(options, scan_options, delimiters)
+    if not seeds:
+        print("ajl: s3 scan-versions needs s3://bucket[/prefix] uris or --params-json",
+              file=sys.stderr)
+        return 2
+    _detect_versioned(runner, seeds, scan_options.force_versions)
+
+    if scan_options.split_class:
+        splitter = load_splitter(scan_options.split_class)
+    else:
+        splitter = builtin_splitters()[scan_options.split]()
+
+    failed_fp = open(scan_options.failed_out, "w") if scan_options.failed_out else None
+    scanner = Scanner(
+        runner,
+        emitter,
+        splitter=splitter,
+        split_after=scan_options.split_after,
+        max_fan=scan_options.max_fan,
+        page_size=scan_options.page_size,
+        max_items=options.max_items,
+        emit_prefixes=scan_options.emit_prefixes,
+        include_tags=scan_options.include_tags,
+        failed_out=failed_fp,
+        workers=options.workers,
+        verbose=options.verbose,
+        progress=_show_progress(scan_options),
+        fast=not scan_options.no_fast,
+        name="scan-versions",
+    )
+    started = time.time()
+    try:
+        return _finish(scanner, seeds, "scan-versions", started, report)
     finally:
         if failed_fp:
             failed_fp.close()

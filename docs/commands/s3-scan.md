@@ -80,3 +80,4 @@ ajl s3 scan s3://my-bucket/tmp/ \
 
 - [../scan-design.md](../scan-design.md) — the engine's design: partitioning invariant, splitter contract, benchmarks
 - [s3-list.md](s3-list.md) — the composable single-level primitive `scan` is built on the same engine as
+- [s3-scan-versions.md](s3-scan-versions.md) — same command, for versioned buckets

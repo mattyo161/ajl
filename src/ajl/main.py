@@ -763,10 +763,22 @@ def _run(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
     if any(flag in argv for flag in ("-h", "--help")):
         # route help to the subparser before the root parser eats it
-        if argv[:2] in (["s3", "scan"], ["s3", "list"]):
-            from .scan import build_list_parser, build_scan_parser
+        if argv[:2] in (["s3", "scan"], ["s3", "list"],
+                       ["s3", "scan-versions"], ["s3", "list-versions"]):
+            from .scan import (
+                build_list_parser,
+                build_list_versions_parser,
+                build_scan_parser,
+                build_scan_versions_parser,
+            )
 
-            (build_scan_parser() if argv[1] == "scan" else build_list_parser()).parse_args(["--help"])
+            build_parser_fns = {
+                "scan": build_scan_parser,
+                "list": build_list_parser,
+                "scan-versions": build_scan_versions_parser,
+                "list-versions": build_list_versions_parser,
+            }
+            build_parser_fns[argv[1]]().parse_args(["--help"])
         elif argv[:2] == ["ssm", "get"]:
             from .ssm import build_get_parser
 
@@ -863,13 +875,18 @@ def _run(argv=None):
         exit_code = 0
         report = {}
         try:
-            if service == "s3" and operation in ("scan", "list"):
-                from .scan import run_list, run_scan
+            if service == "s3" and operation in ("scan", "list", "scan-versions", "list-versions"):
+                from .scan import run_list, run_list_versions, run_scan, run_scan_versions
 
                 if learning:
                     learn.announce(learn_record["Command"])
-                run = run_scan if operation == "scan" else run_list
-                exit_code = run(runner, emitter, options, passthrough, report=report)
+                run_fns = {
+                    "scan": run_scan,
+                    "list": run_list,
+                    "scan-versions": run_scan_versions,
+                    "list-versions": run_list_versions,
+                }
+                exit_code = run_fns[operation](runner, emitter, options, passthrough, report=report)
             elif service == "ssm" and operation == "get":
                 from .ssm import run_get
 

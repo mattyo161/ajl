@@ -57,4 +57,5 @@ operation doesn't accept are dropped automatically (see
 ## See also
 
 - [s3-scan.md](s3-scan.md) — the recursive version of the same engine
+- [s3-list-versions.md](s3-list-versions.md) — same command, for versioned buckets
 - [../scan-design.md](../scan-design.md) — the underlying design (applies to both commands)

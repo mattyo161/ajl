@@ -1,5 +1,6 @@
 import io
 import json
+from collections import Counter
 
 import pytest
 
@@ -80,6 +81,55 @@ class FakeS3:
         }
         if truncated:
             response["NextContinuationToken"] = marker
+        return response
+
+
+class FakeVersionedS3:
+    """In-memory list-object-versions: one entry (Version or DeleteMarker)
+    per key, paginated via KeyMarker. Doesn't model multiple versions of
+    the same key split across a page boundary (VersionIdMarker) -- ajl's
+    client code threads it through symmetrically to KeyMarker regardless
+    of whether this fake exercises that specific case."""
+
+    meta = FakeMeta()
+
+    def __init__(self, keys, delete_markers=(), tags=None):
+        self.entries = sorted(keys)
+        self.delete_markers = set(delete_markers)
+        self.tags = tags or {}
+        self.calls = 0
+        self.tag_calls = 0
+
+    def get_object_tagging(self, Bucket, Key, VersionId=None, **_):
+        self.tag_calls += 1
+        return {"TagSet": self.tags.get((Key, VersionId), [])}
+
+    def list_object_versions(self, Bucket, Prefix="", Delimiter=None, KeyMarker="",
+                             VersionIdMarker=None, MaxKeys=1000, **_):
+        self.calls += 1
+        start = KeyMarker or ""
+        keys = [k for k in self.entries if k.startswith(Prefix) and k > start]
+        versions, delete_markers = [], []
+        count = 0
+        marker = None
+        truncated = False
+        for key in keys:
+            if count >= MaxKeys:
+                truncated = True
+                break
+            entry = {"Key": key, "VersionId": f"v-{key}", "IsLatest": True}
+            if key in self.delete_markers:
+                delete_markers.append(entry)
+            else:
+                versions.append({**entry, "Size": 1, "ETag": '"etag"'})
+            count += 1
+            marker = key
+        response = {
+            "Name": Bucket, "Versions": versions, "DeleteMarkers": delete_markers,
+            "CommonPrefixes": [], "IsTruncated": truncated,
+        }
+        if truncated:
+            response["NextKeyMarker"] = marker
         return response
 
 
@@ -428,3 +478,261 @@ def test_parse_list_xml_final_page():
     assert response["Contents"] == []
     assert response["CommonPrefixes"] == []
     assert "NextContinuationToken" not in response
+
+
+def test_parse_list_versions_xml_matches_boto_shape():
+    from ajl.scan import parse_list_versions_xml
+
+    body = b"""<?xml version="1.0" encoding="UTF-8"?>
+<ListVersionsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+  <Name>my-bucket</Name>
+  <IsTruncated>true</IsTruncated>
+  <NextKeyMarker>nrn%3Aglobal%3Ax%3A00031378</NextKeyMarker>
+  <NextVersionIdMarker>abc123</NextVersionIdMarker>
+  <EncodingType>url</EncodingType>
+  <Version>
+    <Key>nrn%3Aglobal%3Ax%3A00031378</Key>
+    <VersionId>abc123</VersionId>
+    <IsLatest>true</IsLatest>
+    <LastModified>2026-07-08T00:58:32.000Z</LastModified>
+    <ETag>&quot;cf5ef4439c681795881e50298eb14099&quot;</ETag>
+    <Size>4081</Size><StorageClass>STANDARD</StorageClass>
+  </Version>
+  <Version>
+    <Key>nrn%3Aglobal%3Ax%3A00031378</Key>
+    <VersionId>older456</VersionId>
+    <IsLatest>false</IsLatest>
+    <LastModified>2026-06-01T00:00:00.000Z</LastModified>
+    <ETag>&quot;deadbeef&quot;</ETag>
+    <Size>2000</Size><StorageClass>STANDARD</StorageClass>
+  </Version>
+  <DeleteMarker>
+    <Key>removed.txt</Key>
+    <VersionId>del789</VersionId>
+    <IsLatest>true</IsLatest>
+    <LastModified>2026-07-10T00:00:00.000Z</LastModified>
+  </DeleteMarker>
+  <CommonPrefixes><Prefix>a%2Fb%2F</Prefix></CommonPrefixes>
+</ListVersionsResult>"""
+    response = parse_list_versions_xml(body)
+    assert response["IsTruncated"] is True
+    assert response["NextKeyMarker"] == "nrn:global:x:00031378"
+    assert response["NextVersionIdMarker"] == "abc123"
+    assert response["Versions"][0] == {
+        "Key": "nrn:global:x:00031378",
+        "VersionId": "abc123",
+        "IsLatest": True,
+        "LastModified": "2026-07-08T00:58:32.000Z",
+        "ETag": '"cf5ef4439c681795881e50298eb14099"',
+        "Size": 4081,
+        "StorageClass": "STANDARD",
+    }
+    assert response["Versions"][1]["IsLatest"] is False
+    assert response["DeleteMarkers"] == [{
+        "Key": "removed.txt",
+        "VersionId": "del789",
+        "IsLatest": True,
+        "LastModified": "2026-07-10T00:00:00.000Z",
+    }]
+    assert [p["Prefix"] for p in response["CommonPrefixes"]] == ["a/b/"]
+
+
+def test_parse_list_versions_xml_final_page():
+    from ajl.scan import parse_list_versions_xml
+
+    body = b"""<?xml version="1.0"?>
+<ListVersionsResult xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+  <Name>b</Name><IsTruncated>false</IsTruncated>
+</ListVersionsResult>"""
+    response = parse_list_versions_xml(body)
+    assert response["IsTruncated"] is False
+    assert response["Versions"] == []
+    assert response["DeleteMarkers"] == []
+    assert response["CommonPrefixes"] == []
+    assert "NextKeyMarker" not in response
+    assert "NextVersionIdMarker" not in response
+
+
+def test_task_seed_and_seed_task_round_trip_versions():
+    task = Task(bucket="b", prefix="a/", versions=True)
+    seed = task.seed()
+    assert seed["Versions"] is True
+    restored = seed_task(seed, default_delimiters=())
+    assert restored.versions is True
+
+    # existing behavior unaffected: no Versions key at all when unset
+    plain = Task(bucket="b").seed()
+    assert "Versions" not in plain
+    assert seed_task(plain, ()).versions is False
+
+
+def test_versions_mode_emits_object_versions_and_delete_markers():
+    keys = ["a", "b", "c"]
+    client = FakeVersionedS3(keys, delete_markers=["b"])
+    records, stats, _ = run_scan_over(
+        keys, tasks=[Task(bucket="bkt", versions=True)], client=client,
+        splitter=None, recurse=False,
+    )
+    by_key = {r["Key"]: r for r in records}
+    assert by_key["a"]["ajl"]["type"] == "s3:object-version"
+    assert by_key["a"]["VersionId"] == "v-a"
+    assert by_key["a"]["ETag"] == '"etag"'
+    assert by_key["b"]["ajl"]["type"] == "s3:delete-marker"
+    assert "ETag" not in by_key["b"]
+    assert by_key["c"]["ajl"]["type"] == "s3:object-version"
+    assert stats["objects"] == 3
+    assert sorted(r["Bucket"] for r in records) == ["bkt"] * 3
+
+
+def test_versions_mode_paginates_via_key_marker():
+    keys = [f"k{i}" for i in range(5)]
+    client = FakeVersionedS3(keys)
+    records, stats, _ = run_scan_over(
+        keys, tasks=[Task(bucket="bkt", versions=True)], client=client,
+        splitter=None, recurse=False, page_size=2,
+    )
+    assert sorted(r["Key"] for r in records) == keys
+    assert client.calls == 3  # 2 + 2 + 1 keys per page
+
+
+def test_versions_mode_tags_object_versions_not_delete_markers():
+    keys = ["a", "b"]
+    client = FakeVersionedS3(
+        keys, delete_markers=["b"],
+        tags={("a", "v-a"): [{"Key": "env", "Value": "prod"}]},
+    )
+    records, stats, _ = run_scan_over(
+        keys, tasks=[Task(bucket="bkt", versions=True)], client=client,
+        splitter=None, recurse=False, include_tags=True,
+    )
+    by_key = {r["Key"]: r for r in records}
+    assert by_key["a"]["ajl"]["tags"] == {"env": "prod"}
+    assert by_key["b"]["ajl"]["tags"] == {}
+    assert client.tag_calls == 1  # the delete marker never gets a tagging call
+
+
+def test_plain_scan_mode_is_unaffected_by_versions_field_existing():
+    # a Task built the old way (no versions kwarg at all) behaves exactly
+    # as before -- the new field's default doesn't change existing runs.
+    keys = ["a", "b"]
+    records, stats, _ = run_scan_over(keys, splitter=None, recurse=False)
+    assert sorted(r["Key"] for r in records) == keys
+    assert all(r["ajl"]["type"] == "s3:object" for r in records)
+
+
+class FakeMultiVersionS3:
+    """Like FakeVersionedS3, but a key can carry multiple versions --
+    exercises the split/abandon mid-key resume path. Unlike a plain
+    list-objects-v2 key (always fully resolved by a bare KeyMarker), a
+    version list can be cut mid-key by a page boundary, so resuming needs
+    the VersionIdMarker too."""
+
+    meta = FakeMeta()
+
+    def __init__(self, keys_versions):
+        self.keys_versions = keys_versions  # {key: [versionId, ...]}, newest first
+        self.keys = sorted(keys_versions)
+        self.calls = 0
+
+    def get_object_tagging(self, **kwargs):
+        return {"TagSet": []}
+
+    def list_objects_v2(self, Bucket, Prefix="", StartAfter="", MaxKeys=1000, **_):
+        # the splitter only ever probes the plain key alphabet with this
+        keys = [k for k in self.keys if k.startswith(Prefix) and k > StartAfter]
+        page = keys[:MaxKeys]
+        return {"Name": Bucket, "KeyCount": len(page),
+                "Contents": [{"Key": k, "Size": 1} for k in page],
+                "CommonPrefixes": [], "IsTruncated": len(keys) > MaxKeys}
+
+    def list_object_versions(self, Bucket, Prefix="", KeyMarker="", VersionIdMarker=None,
+                             MaxKeys=1000, **_):
+        self.calls += 1
+        entries = [(k, vid) for k in self.keys if k.startswith(Prefix)
+                   for vid in self.keys_versions[k]]
+        if KeyMarker:
+            resumed, skipping = [], True
+            for key, vid in entries:
+                if skipping:
+                    if key < KeyMarker:
+                        continue
+                    if key == KeyMarker:
+                        if VersionIdMarker is not None and vid == VersionIdMarker:
+                            skipping = False
+                        continue
+                    skipping = False
+                resumed.append((key, vid))
+            entries = resumed
+        page = entries[:MaxKeys]
+        versions = [
+            {"Key": k, "VersionId": vid, "IsLatest": vid == self.keys_versions[k][0],
+             "Size": 1, "ETag": '"e"'}
+            for k, vid in page
+        ]
+        truncated = len(entries) > MaxKeys
+        response = {"Name": Bucket, "Versions": versions, "DeleteMarkers": [],
+                    "CommonPrefixes": [], "IsTruncated": truncated}
+        if truncated:
+            last_key, last_vid = page[-1]
+            response["NextKeyMarker"] = last_key
+            response["NextVersionIdMarker"] = last_vid
+        return response
+
+
+def test_versions_mode_split_mid_key_drops_nothing_and_dupes_nothing():
+    # regression: a split used to hand the new sub-task `start_after` =
+    # the last KEY touched with no version marker, which either restarted
+    # the whole task from scratch (duplicates) or silently skipped
+    # whatever was left of that key's version list (data loss) depending
+    # on which bug was live. page_size=2/split_after=1 forces a split
+    # after page 1, which lands mid-key-"a" (3 versions, only 2 fit) --
+    # 8 single-version "b*" keys give the radix splitter enough branch
+    # diversity in the remaining keyspace to actually split (a single
+    # leftover key isn't enough for it to bother).
+    keys_versions = {"a": ["a-v3", "a-v2", "a-v1"]}
+    for i in range(8):
+        keys_versions[f"b{i}"] = [f"b{i}-v1"]
+    client = FakeMultiVersionS3(keys_versions)
+    records, stats, _ = run_scan_over(
+        list(keys_versions), tasks=[Task(bucket="bkt", versions=True)],
+        client=client, page_size=2, split_after=1,
+    )
+    emitted = Counter((r["Key"], r["VersionId"]) for r in records)
+    expected = {(k, vid) for k, vids in keys_versions.items() for vid in vids}
+    assert set(emitted) == expected
+    assert all(count == 1 for count in emitted.values())
+    assert stats["splits"] >= 1  # confirms the mid-key split path actually ran
+
+
+def test_versions_mode_end_at_cutoff_does_not_skip_earlier_delete_markers():
+    # regression: Versions and DeleteMarkers used to be processed as two
+    # separate sequential loops (all Versions, then all DeleteMarkers) --
+    # not S3's true combined key order. A key past end_at hit partway
+    # through the Versions loop returned immediately, so any DeleteMarkers
+    # on that same page for keys that were still in-bounds never even got
+    # reached, let alone emitted. This page deliberately puts the
+    # out-of-bounds entry in Versions and the in-bounds one in
+    # DeleteMarkers to catch exactly that ordering bug.
+    class OnePageMixedClient:
+        meta = FakeMeta()
+
+        def get_object_tagging(self, **kwargs):
+            return {"TagSet": []}
+
+        def list_object_versions(self, Bucket, **_):
+            return {
+                "Name": Bucket,
+                "Versions": [{"Key": "c", "VersionId": "c-v1", "IsLatest": True}],
+                "DeleteMarkers": [{"Key": "a", "VersionId": "a-dm1", "IsLatest": True}],
+                "CommonPrefixes": [],
+                "IsTruncated": False,
+            }
+
+    records, stats, _ = run_scan_over(
+        ["a", "c"], tasks=[Task(bucket="bkt", versions=True, end_at="b")],
+        client=OnePageMixedClient(), splitter=None, recurse=False,
+    )
+    by_key = {r["Key"]: r for r in records}
+    assert "a" in by_key
+    assert by_key["a"]["ajl"]["type"] == "s3:delete-marker"
+    assert "c" not in by_key  # beyond end_at, correctly excluded
